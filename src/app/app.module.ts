@@ -14,6 +14,18 @@ import { CoreModule } from './core/core.module';
 
 import { AuthModule } from './features/auth/auth.module';
 import { ProfileModule } from './features/profile/profile.module';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
+import { LayoutModule } from '@progress/kendo-angular-layout';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +44,19 @@ import { ProfileModule } from './features/profile/profile.module';
     CoreModule,
     SharedModule,
 
-    AppRoutingModule
+    AppRoutingModule,
+
+    InputsModule,
+
+    BrowserAnimationsModule,
+
+    ButtonsModule,
+
+    LayoutModule,
+
+    LabelModule,
+
+    DateInputsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

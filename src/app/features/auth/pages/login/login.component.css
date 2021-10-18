@@ -1,0 +1,19 @@
+.k-avatar {
+    margin-left: 80px;
+    font-size: 30px;
+}
+.login-part {
+    display: flex;
+    justify-content: center;
+}
+.k-form {
+    width: 240px;
+}
+
+.btn-login {
+    width: 100%;
+}
+
+.reg {
+    margin-top: 1em;
+}
