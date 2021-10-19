@@ -1,19 +1,63 @@
+label{
+    font-family: Montserrat;
+}
+
 .k-avatar {
     margin-left: 80px;
     font-size: 30px;
 }
-.login-part {
+
+.login-section {
     display: flex;
     justify-content: center;
 }
-.k-form {
-    width: 240px;
-}
 
-.btn-login {
-    width: 100%;
+.k-form {
+    width: 400px;
 }
 
 .reg {
     margin-top: 1em;
+}
+
+.login-section {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 3em;
+}
+
+.welcome-text {
+    font-family: Open Sans;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 30px;
+    
+    /* identical to box height */
+    
+    /* 114497 */
+    color: #114497;
+}
+
+.eproc-text {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 30px;
+    
+    /* identical to box height */
+    
+    /* 114497 */
+    color: #114497;
+}
+
+.login-forgot-password {
+    margin-bottom: 3em;
+}
+
+@media screen and (max-width: 600px) {
+    .k-form {
+        width: 300px;
+    }
 }
