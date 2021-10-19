@@ -1,12 +1,14 @@
 <div class="login-section">
     <form class="k-form login-form" [formGroup]="form">
 
-        <label class="welcome-text">Selamat datang di</label> <br>
-        <label class="eproc-text">PaDi eProc</label>
+        <div class="login-form-title">
+            <label class="welcome-text">Selamat datang di</label> <br>
+            <label class="eproc-text">PaDi eProc</label>
+        </div>
 
         <fieldset class="k-form-fieldset">
             
-            <kendo-formfield>
+            <kendo-formfield class="titi">
                 <kendo-label [for]="email" text="Alamat Email"></kendo-label>
                 <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
