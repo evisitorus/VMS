@@ -15,6 +15,7 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { CoreModule } from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ButtonsModule } from "@progress/kendo-angular-buttons";
     CommonModule,
     AuthRoutingModule,
     SharedModule,
+    CoreModule,
     
     BrowserModule,
     BrowserAnimationsModule,

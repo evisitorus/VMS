@@ -8,7 +8,7 @@
 
         <fieldset class="k-form-fieldset">
             
-            <kendo-formfield class="titi">
+            <kendo-formfield>
                 <kendo-label [for]="email" text="Alamat Email"></kendo-label>
                 <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
@@ -41,7 +41,7 @@
             </kendo-formfield> -->
             
             <div class="k-form-buttons">
-                <button class="k-button k-primary vms-btn" (click)="clearForm()">Login</button>
+                <button class="k-button k-primary vms-btn" (click)="login()">Login</button>
                 <!-- <button class="k-button" (click)="clearForm()">Clear</button> -->
             </div>
             

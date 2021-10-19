@@ -11,6 +11,10 @@
     font-weight: 600;
 }
 
+body {
+    background-image: url("/assets/images/bg.png") !important;
+}
+
 /* VMS Design Guideline */
 /* ================================ */
 
