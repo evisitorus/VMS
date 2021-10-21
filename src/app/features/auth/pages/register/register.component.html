@@ -1,1 +1,54 @@
-<p>register works!</p>
+<div class="register-section">
+    <form class="k-form login-form" [formGroup]="form">
+
+        <div class="register-form-title">
+            <label class="welcome-text">Selamat datang di</label> <br>
+            <label class="eproc-text">PaDi eProc</label>
+        </div>
+
+        <div class="register-form-title">
+            <label class="welcome-text">Registrasi Vendor</label>
+        </div>
+
+        <fieldset class="k-form-fieldset">
+            
+            <kendo-formfield>
+                <kendo-label [for]="email" text="Alamat Email"></kendo-label>
+                <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Username is required</kendo-formerror>
+            </kendo-formfield>
+            
+            <kendo-formfield>
+                <kendo-label [for]="email" text="Nama Badan Usaha"></kendo-label>
+                <kendo-textbox formControlName="namaBadanUsaha" [clearButton]="true" #namaBadanUsaha required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Nama Badan Usaha is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="npwp" text="NPWP"></kendo-label>
+                <kendo-textbox formControlName="npwp" [clearButton]="true" #npwp required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: NPWP is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="noTelp" text="Nomor Telepon"></kendo-label>
+                <kendo-textbox formControlName="noTelp" [clearButton]="true" #noTelp required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Nomor Telepon is required</kendo-formerror>
+            </kendo-formfield>
+
+            <div class="k-form-buttons">
+                <button class="k-button k-primary vms-btn">Register</button>
+            </div>
+            
+        </fieldset>
+
+        <div class="reg">
+            Sudah punya akun? <a href="login">Login</a>
+        </div>
+
+    </form>
+</div>
