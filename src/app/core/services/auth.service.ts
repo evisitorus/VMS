@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../interfaces/api-interface';
 import { LoginInterface } from '../interfaces/login-interface';
+import { RegisterInterface } from '../interfaces/register-interface';
 import { ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 
@@ -45,4 +46,22 @@ export class AuthService {
     localStorage.setItem(key, value);
   }
   
+
+  //registration
+  register(params: RegisterInterface): Observable<any> {    
+    let api_register: ApiInterface = {
+      method: 'POST',
+      url: ApiRoutes.api_register_route,
+      body: {
+        namaBadanUsaha: params.namaBadanUsaha,
+        npwp: params.npwp,
+        email: params.email,
+        namaPic: params.namaPic,
+        noTelp: params.noTelp
+      }
+    };
+
+    return this.apiService.sendRequest(api_register);
+  }
+
 }

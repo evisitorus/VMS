@@ -12,12 +12,6 @@
 
         <fieldset class="k-form-fieldset">
             
-            <kendo-formfield>
-                <kendo-label [for]="email" text="Alamat Email"></kendo-label>
-                <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
-                <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: Username is required</kendo-formerror>
-            </kendo-formfield>
             
             <kendo-formfield>
                 <kendo-label [for]="email" text="Nama Badan Usaha"></kendo-label>
@@ -28,14 +22,28 @@
 
             <kendo-formfield>
                 <kendo-label [for]="npwp" text="NPWP"></kendo-label>
-                <kendo-textbox formControlName="npwp" [clearButton]="true" #npwp required></kendo-textbox>                
-                <kendo-formhint></kendo-formhint>
+                <kendo-textbox formControlName="npwp" [clearButton]="true" #npwp required pattern="\d{10}" ></kendo-textbox>                
+                <kendo-formhint>Isi NPWP dengan format: 99.999.999.9-999.999</kendo-formhint>
                 <kendo-formerror>Error: NPWP is required</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
-                <kendo-label [for]="noTelp" text="Nomor Telepon"></kendo-label>
-                <kendo-textbox formControlName="noTelp" [clearButton]="true" #noTelp required></kendo-textbox>                
+                <kendo-label [for]="email" text="Alamat Email PIC"></kendo-label>
+                <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Email is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="namaPic" text="Nama PIC"></kendo-label>
+                <kendo-textbox formControlName="namaPic" [clearButton]="true" #namaPic required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Nama PIC is required</kendo-formerror>
+            </kendo-formfield>
+            
+            <kendo-formfield>
+                <kendo-label [for]="noTelp" text="Nomor Telepon PIC"></kendo-label>
+                <kendo-numerictextbox formControlName="noTelp" #noTelp required format="#" [spinners]="false"></kendo-numerictextbox>                
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror>Error: Nomor Telepon is required</kendo-formerror>
             </kendo-formfield>
