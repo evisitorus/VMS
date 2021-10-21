@@ -1,1 +1,55 @@
-<p>login works!</p>
+<div class="login-section">
+    <form class="k-form login-form" [formGroup]="form">
+
+        <div class="login-form-title">
+            <label class="welcome-text">Selamat datang di</label> <br>
+            <label class="eproc-text">PaDi eProc</label>
+        </div>
+
+        <fieldset class="k-form-fieldset">
+            
+            <kendo-formfield>
+                <kendo-label [for]="email" text="Alamat Email"></kendo-label>
+                <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Username is required</kendo-formerror>
+            </kendo-formfield>
+            
+            <kendo-formfield>
+                <kendo-label [for]="password" text="Kata Sandi"> </kendo-label>
+                <kendo-textbox formControlName="password" #password required [clearButton]="true">
+                    <ng-template kendoTextBoxSuffixTemplate>
+                        <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
+                    </ng-template>
+                </kendo-textbox>
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Password is required</kendo-formerror>
+            </kendo-formfield>
+
+            <div class="login-forgot-password">
+                <a href="forgot-password">
+                    <kendo-formhint>Lupa Kata Sandi?</kendo-formhint>
+                </a>
+            </div>
+            
+            <!-- <kendo-formfield>
+                <div class="k-checkbox-wrap">
+                    <input #loggedin type="checkbox" kendoCheckBox formControlName="loggedin"/>
+                    <kendo-label [for]="loggedin" class="k-checkbox-label" text="Keep me logged in"></kendo-label>
+                    <kendo-formhint> Next time, you will be logged in automatically </kendo-formhint>
+                </div>
+            </kendo-formfield> -->
+            
+            <div class="k-form-buttons">
+                <button class="k-button k-primary vms-btn" (click)="login()">Login</button>
+                <!-- <button class="k-button" (click)="clearForm()">Clear</button> -->
+            </div>
+            
+        </fieldset>
+
+        <div class="reg">
+            Belum punya akun? <a href="register"> Daftar</a>
+        </div>
+
+    </form>
+</div>
