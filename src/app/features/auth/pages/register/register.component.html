@@ -1,55 +1,67 @@
 <div class="register-section">
-    <form class="k-form login-form" [formGroup]="form">
+    <form class="k-form login-form" [formGroup]="registerForm">
 
         <div class="register-form-title">
-            <label class="welcome-text">Selamat datang di</label> <br>
-            <label class="eproc-text">PaDi eProc</label>
+            <label class="welcome-text">Vendor Management System (VMS)</label>
         </div>
 
         <div class="register-form-title">
-            <label class="welcome-text">Registrasi Vendor</label>
+            <label class="welcome-text">Form Registrasi</label>
         </div>
 
         <fieldset class="k-form-fieldset">
-            
-            
+            <legend></legend>
             <kendo-formfield>
-                <kendo-label [for]="email" text="Nama Badan Usaha"></kendo-label>
-                <kendo-textbox formControlName="namaBadanUsaha" [clearButton]="true" #namaBadanUsaha required></kendo-textbox>                
-                <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: Nama Badan Usaha is required</kendo-formerror>
-            </kendo-formfield>
-
-            <kendo-formfield>
-                <kendo-label [for]="npwp" text="NPWP"></kendo-label>
-                <kendo-textbox formControlName="npwp" [clearButton]="true" #npwp required pattern="\d{10}" ></kendo-textbox>                
+                <kendo-label [for]="npwp" text="NPWP Perusahaan"></kendo-label>           
+                <kendo-maskedtextbox #npwp formControlName="npwp" [mask]="mask" required></kendo-maskedtextbox>
                 <kendo-formhint>Isi NPWP dengan format: 99.999.999.9-999.999</kendo-formhint>
-                <kendo-formerror>Error: NPWP is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.npwp.errors?.required">Error: NPWP is required</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
-                <kendo-label [for]="email" text="Alamat Email PIC"></kendo-label>
-                <kendo-textbox formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
+                <kendo-label [for]="namaPerusahaan" text="Nama Perusahaan"></kendo-label>
+                <kendo-textbox formControlName="namaPerusahaan" #namaPerusahaan required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: Email is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.namaPerusahaan.errors?.required">Error: Nama Perusahaan is required</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
-                <kendo-label [for]="namaPic" text="Nama PIC"></kendo-label>
-                <kendo-textbox formControlName="namaPic" [clearButton]="true" #namaPic required></kendo-textbox>                
+                <kendo-label [for]="namaPic" text="Nama PIC Perusahaan"></kendo-label>
+                <kendo-textbox formControlName="namaPic" #namaPic required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: Nama PIC is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.namaPic.errors?.required">Error: Nama PIC Perusahaan is required</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="email" text="Alamat Email Perusahaan"></kendo-label>
+                <kendo-textbox formControlName="email" #email required></kendo-textbox> 
+                <kendo-formhint>*Pastikan alamat email yang anda masukan merupakan email resmi perusahaan</kendo-formhint>               
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror *ngIf="registerForm.controls.email.errors?.required">Email is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.email.errors?.email">Not a valid email format</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield>
+                <kendo-label [for]="noTelp" text="Nomor Handphone PIC Perusahaan"></kendo-label>
+                <kendo-textbox formControlName="noTelp" #noTelp required></kendo-textbox>   
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Error: Nomor Handphone PIC Perusahaan is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.noTelp.errors?.maxLength">Not a valid Nomor Handphone format</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.noTelp.errors?.pattern">Not a valid Nomor Handphone format</kendo-formerror>
+            </kendo-formfield>
+
+
+            <kendo-formfield>
+                <kendo-label [for]="disclaimer" text="*Disclaimer"></kendo-label>
+                <div class="k-checkbox-wrap">
+                  <input #disclaimer type="checkbox" kendoCheckBox formControlName="disclaimer"/>
+                  <kendo-label [for]="disclaimer" class="k-checkbox-label" text="Dengan ini kami menyatakan bahwa benar NPWP dan Email tersebut merupakan NPWP dan Email resmi dari perusahaan kami."></kendo-label>
+                </div>
+                <kendo-formerror *ngIf="registerForm.controls.disclaimer.errors?.required">Disclaimer is required</kendo-formerror>
             </kendo-formfield>
             
-            <kendo-formfield>
-                <kendo-label [for]="noTelp" text="Nomor Telepon PIC"></kendo-label>
-                <kendo-numerictextbox formControlName="noTelp" #noTelp required format="#" [spinners]="false"></kendo-numerictextbox>                
-                <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: Nomor Telepon is required</kendo-formerror>
-            </kendo-formfield>
-
             <div class="k-form-buttons">
-                <button class="k-button k-primary vms-btn" (click)="register()">Register</button>
+                <button class="k-button k-primary vms-btn" (click)="onSubmit()">Daftar</button>
             </div>
             
         </fieldset>
