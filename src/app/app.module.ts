@@ -15,6 +15,8 @@ import { CoreModule } from './core/core.module';
 
 import { AuthModule } from './features/auth/auth.module';
 import { ProfileModule } from './features/profile/profile.module';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { ProfileModule } from './features/profile/profile.module';
     SharedModule,
 
     AppRoutingModule,
+
+    DialogsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

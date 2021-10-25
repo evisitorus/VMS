@@ -1,7 +1,7 @@
 export interface RegisterInterface {
     email: string;
-    namaBadanUsaha: string;
+    namaPerusahaan: string;
     npwp: string;
-    noTelp: string;
+    noTelepon: string;
     namaPic: string;
 }

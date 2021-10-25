@@ -13,7 +13,7 @@
             <legend></legend>
             <kendo-formfield>
                 <kendo-label [for]="npwp" text="NPWP Perusahaan"></kendo-label>           
-                <kendo-maskedtextbox #npwp formControlName="npwp" [mask]="mask" required></kendo-maskedtextbox>
+                <kendo-maskedtextbox #npwp formControlName="npwp" [mask]="mask" [includeLiterals]="true" required></kendo-maskedtextbox>
                 <kendo-formhint>Isi NPWP dengan format: 99.999.999.9-999.999</kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.npwp.errors?.required">Error: NPWP is required</kendo-formerror>
             </kendo-formfield>
@@ -42,12 +42,12 @@
             </kendo-formfield>
 
             <kendo-formfield>
-                <kendo-label [for]="noTelp" text="Nomor Handphone PIC Perusahaan"></kendo-label>
-                <kendo-textbox formControlName="noTelp" #noTelp required></kendo-textbox>   
+                <kendo-label [for]="noTelepon" text="Nomor Handphone PIC Perusahaan"></kendo-label>
+                <kendo-textbox formControlName="noTelepon" #noTelepon required></kendo-textbox>   
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror>Error: Nomor Handphone PIC Perusahaan is required</kendo-formerror>
-                <kendo-formerror *ngIf="registerForm.controls.noTelp.errors?.maxLength">Not a valid Nomor Handphone format</kendo-formerror>
-                <kendo-formerror *ngIf="registerForm.controls.noTelp.errors?.pattern">Not a valid Nomor Handphone format</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.maxLength">Not a valid Nomor Handphone format</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.pattern">Not a valid Nomor Handphone format</kendo-formerror>
             </kendo-formfield>
 
 
@@ -61,7 +61,7 @@
             </kendo-formfield>
             
             <div class="k-form-buttons">
-                <button class="k-button k-primary vms-btn" (click)="onSubmit()">Daftar</button>
+                <button class="k-button k-primary vms-btn" (click)="register()">Daftar</button>
             </div>
             
         </fieldset>
@@ -72,3 +72,6 @@
 
     </form>
 </div>
+
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/'"></app-popup-message>

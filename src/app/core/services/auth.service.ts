@@ -53,11 +53,11 @@ export class AuthService {
       method: 'POST',
       url: ApiRoutes.api_register_route,
       body: {
-        namaBadanUsaha: params.namaBadanUsaha,
+        namaPerusahaan: params.namaPerusahaan,
         npwp: params.npwp,
         email: params.email,
         namaPic: params.namaPic,
-        noTelp: params.noTelp
+        noTelepon: params.noTelepon
       }
     };
 
