@@ -56,15 +56,16 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm.markAllAsTouched();
     let params: RegisterInterface= {...this.registerForm.value};
-    console.log(params);
+
     this.authService.register(params).subscribe(
       (resp) =>  { 
         this.submitted = true;
+        this.popUpMessage = resp.message;
         this.redirectOnClosePopUp = true;
         this.triggerPopUp();
       },
       (error) => { 
-        this.popUpMessage = error.statusText;
+        this.popUpMessage = error.error.message;
         this.redirectOnClosePopUp = false;
         this.triggerPopUp();
       }
