@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
         return;
     }
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 
     this.registerForm.markAllAsTouched();
     let params: RegisterInterface= {...this.registerForm.value};
