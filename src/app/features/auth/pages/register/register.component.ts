@@ -7,12 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 const messages = {
-  success: 'Selamat Datang "PT. Abadi Jaya Sentosa Selalu" di Vendor Management System (VMS) PaDi',
-  wrong_email: 'Email tidak terdaftar, silahkan inputkan email benar atau lakukan registrasi jika anda belum memiliki akun',
-  wrong_password: 'Password yang anda inputkan salah, silahkan ulangi!", #maximum input wrong password 3x',
-  locked_account: 'Akun anda terkunci, silahkan hubungi Admin di admin@vms-padi.co.id untuk melakukan recovery akun',
-  reset_password: 'Silahkan klik reset password untuk mengatur password baru anda',
-  unidentified: 'User tidak dikenali, silahkan inputkan email dan password yang benar atau lakukan registrasi jika anda belum memiliki akun !'
+  success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
 };
 
 @Component({
@@ -26,7 +21,7 @@ export class RegisterComponent implements OnInit {
   isLoggedIn: boolean = false;
   public mask: string = "99.999.999.9-999.999";
 
-  popUpTitle: string = "Informasi Login";
+  popUpTitle: string = "Informasi Registrasi Akun";
   popUpMessage: string = messages.success;
   redirectOnClosePopUp: boolean = true;
 
