@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit{
   ) { }
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedId() === 'true';
+    this.isLoggedIn = this.authService.isLoggedIn() === 'true';
     if (this.isLoggedIn) window.location.href = "/";
   }
 
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit{
 
   public toggleVisibility(): void {
     const inputEl = this.textbox.input.nativeElement;
-    inputEl.type = inputEl.typ === "password" ? "text" : "password";
+    inputEl.type = inputEl.type === "password" ? "text" : "password";
   }
 
   login(): void {

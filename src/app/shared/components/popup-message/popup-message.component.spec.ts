@@ -19,7 +19,16 @@ describe('PopupMessageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('test close function', () => {
+    // component.redirectOnClose = true;
+    component.close();
+    expect(component.opened).toBeFalse();
+    // expect(window.location.href).toBe(component.redirectUrl);
   });
+
+  it('test trigger function', () => {
+    component.trigger();
+    expect(component.opened).toBe(component.opened);
+  });
+
 });

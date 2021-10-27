@@ -19,7 +19,7 @@ export class ApiService {
       case 'PUT' || 'PATCH':
         return this.put(params);
       case 'DELETE':
-        return this.post(params);
+        return this.delete(params);
       default:
         return this.get(params)
     }

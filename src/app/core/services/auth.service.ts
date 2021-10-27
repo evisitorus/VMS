@@ -25,7 +25,7 @@ export class AuthService {
     return this.apiService.sendRequest(api_login);
   }
 
-  isLoggedId(): string | null {
+  isLoggedIn(): string | null {
     return this.getLocalStorage('isLoggedIn') ? this.getLocalStorage('isLoggedIn') : 'false';
   }
 
@@ -37,11 +37,11 @@ export class AuthService {
     this.setLocalStorage('access_token', token);
   }
 
-  private getLocalStorage(key: string): string | null {
+  getLocalStorage(key: string): string | null {
     return localStorage.getItem(key);
   }
 
-  private setLocalStorage(key: string, value: string): void {
+  setLocalStorage(key: string, value: string): void {
     localStorage.setItem(key, value);
   }
   

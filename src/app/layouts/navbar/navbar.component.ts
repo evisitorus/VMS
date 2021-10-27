@@ -13,16 +13,16 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedId() === 'true';
+    this.isLoggedIn = this.authService.isLoggedIn() === 'true';
   }
 
   logout(): void {
     this.authService.setLoggedIn(false);
-    this.goToHome();
+    this.navigateTo("/");
   }
 
-  goToHome(): void {
-    window.location.href = "/"
+  navigateTo(url: string): void {
+    window.location.href = url;
   }
 
 }
