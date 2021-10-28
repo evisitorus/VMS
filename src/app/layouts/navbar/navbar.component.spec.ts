@@ -1,8 +1,6 @@
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ApiService } from 'src/app/core/services/api/api.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-
 import { NavbarComponent } from './navbar.component';
 
 describe('NavbarComponent', () => {
@@ -13,7 +11,7 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ NavbarComponent ],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
     })
     .compileComponents();
   });
@@ -34,5 +32,13 @@ describe('NavbarComponent', () => {
     component.logout();
     expect(component.navigateTo).toHaveBeenCalled();
   });
+
+  it('test navigateTo function', () => {
+    const url = "/";
+    const navigateSpy = spyOn(component, 'navigateTo');
+    component.navigateTo(url);
+    expect(navigateSpy).toHaveBeenCalledWith(url);
+  });
+  
 
 });

@@ -26,4 +26,9 @@ describe('AuthService', () => {
     expect(service.setLocalStorage).toHaveBeenCalled();
   });
 
+  it('test isLoggedIn function', () => {
+    spyOn(service, 'getLocalStorage').and.returnValue(null);
+    expect(service.isLoggedIn()).toBe('false');
+  });
+
 });
