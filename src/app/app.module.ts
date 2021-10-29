@@ -32,7 +32,7 @@ import { ProfileModule } from './features/profile/profile.module';
     CoreModule,
     SharedModule,
 
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
