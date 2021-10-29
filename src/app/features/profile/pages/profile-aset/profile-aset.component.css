@@ -1,0 +1,13 @@
+.profile-section {
+  border-style: groove;
+}
+
+.profile-menu {
+  border-style: groove;
+  float: left;
+}
+
+.profile-content {
+  border-style: groove;
+  float: right;
+}
