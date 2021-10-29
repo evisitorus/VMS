@@ -38,11 +38,11 @@ export class AuthService {
     this.setLocalStorage('access_token', token);
   }
 
-  private getLocalStorage(key: string): string | null {
+  getLocalStorage(key: string): string | null {
     return localStorage.getItem(key);
   }
 
-  private setLocalStorage(key: string, value: string): void {
+  setLocalStorage(key: string, value: string): void {
     localStorage.setItem(key, value);
   }
   

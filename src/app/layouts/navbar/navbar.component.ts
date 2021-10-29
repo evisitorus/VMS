@@ -18,11 +18,11 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.setLoggedIn(false);
-    this.goToHome();
+    this.navigateTo("/");
   }
 
-  goToHome(): void {
-    window.location.href = "/"
+  navigateTo(url: string): void {
+    window.location.href = url;
   }
 
 }
