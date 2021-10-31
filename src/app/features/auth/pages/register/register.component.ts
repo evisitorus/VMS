@@ -53,12 +53,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm.markAllAsTouched();
 
     // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    //   this.popUpMessage = messages.default;
-    //   this.triggerPopUp();
-    //   this.redirectOnClosePopUp = true;
-    //   return;
-    // }
+    if (this.registerForm.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
 
     this.validasiForm();
 
