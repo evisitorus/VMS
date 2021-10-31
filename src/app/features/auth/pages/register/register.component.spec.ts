@@ -24,7 +24,11 @@ describe('RegisterComponent', () => {
   let authService: AuthService;
   let eventEmitterService: EventEmitterService;
 
-
+  const messages = {
+    failed: 'Field tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
+    success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
+    disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -81,11 +85,10 @@ describe('RegisterComponent', () => {
   it('test register success', () => {
     const response = {
       status: true,
-      message: "Registrasi sukses & email aktivasi terkirim",
-      data: {
-        namaPerusahaan: "PT. Abadi Jaya Sentosa Selalu"
-      }
+      message: messages.success
     };
+
+    const regFormValid = {};
 
     let obs = new Observable((subscriber) => {
         subscriber.next(response);
@@ -94,6 +97,7 @@ describe('RegisterComponent', () => {
 
     spyOn(authService, 'register').and.returnValue(obs);
     spyOn(component, 'triggerPopUp');
+    spyOn(component, 'validasiForm');
 
     component.register();
     
@@ -108,7 +112,7 @@ describe('RegisterComponent', () => {
       ok: false,
       status: 400,
       error: {
-        message: "Pastikan semua data terisi & sesuai format",
+        message: messages.failed,
         status: false
       }
     };
@@ -125,7 +129,7 @@ describe('RegisterComponent', () => {
     
     expect(component.isLoggedIn).toBe(false);
     expect(component.popUpMessage).toBe(response.error.message);
-    expect(component.redirectOnClosePopUp).toBe(false);
+    expect(component.redirectOnClosePopUp).toBe(true);
     expect(component.triggerPopUp).toHaveBeenCalled();
   });
 

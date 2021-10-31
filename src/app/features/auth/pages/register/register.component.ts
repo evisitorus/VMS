@@ -53,12 +53,14 @@ export class RegisterComponent implements OnInit {
     this.registerForm.markAllAsTouched();
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = true;
-      return;
-    }
+    // if (this.registerForm.invalid) {
+    //   this.popUpMessage = messages.default;
+    //   this.triggerPopUp();
+    //   this.redirectOnClosePopUp = true;
+    //   return;
+    // }
+
+    this.validasiForm();
 
     let params: RegisterInterface= {...this.registerForm.value};
     this.authService.register(params).subscribe(
@@ -86,4 +88,14 @@ export class RegisterComponent implements OnInit {
   triggerPopUp() {
     this.eventEmitterService.trigger();
   }
+
+  validasiForm(){
+    if (this.registerForm.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = true;
+      return;
+    }
+  }
+
 }
