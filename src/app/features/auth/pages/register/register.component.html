@@ -15,21 +15,21 @@
                 <kendo-label [for]="npwp" text="NPWP Perusahaan"></kendo-label>           
                 <kendo-maskedtextbox #npwp formControlName="npwp" [mask]="mask" [includeLiterals]="true" required></kendo-maskedtextbox>
                 <kendo-formhint>Isi NPWP dengan format: 99.999.999.9-999.999</kendo-formhint>
-                <kendo-formerror *ngIf="registerForm.controls.npwp.errors?.required">Error: NPWP is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.npwp.errors?.required">Field tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
                 <kendo-label [for]="namaPerusahaan" text="Nama Perusahaan"></kendo-label>
                 <kendo-textbox formControlName="namaPerusahaan" #namaPerusahaan required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror *ngIf="registerForm.controls.namaPerusahaan.errors?.required">Error: Nama Perusahaan is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.namaPerusahaan.errors?.required">Field tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
                 <kendo-label [for]="namaPic" text="Nama PIC Perusahaan"></kendo-label>
                 <kendo-textbox formControlName="namaPic" #namaPic required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror *ngIf="registerForm.controls.namaPic.errors?.required">Error: Nama PIC Perusahaan is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.namaPic.errors?.required">Field tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
@@ -37,7 +37,7 @@
                 <kendo-textbox formControlName="email" #email required></kendo-textbox> 
                 <kendo-formhint>*Pastikan alamat email yang anda masukan merupakan email resmi perusahaan</kendo-formhint>               
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror *ngIf="registerForm.controls.email.errors?.required">Email is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.email.errors?.required">Field tidak boleh kosong</kendo-formerror>
                 <kendo-formerror *ngIf="registerForm.controls.email.errors?.email">Not a valid email format</kendo-formerror>
             </kendo-formfield>
 
@@ -45,7 +45,7 @@
                 <kendo-label [for]="noTelepon" text="Nomor Handphone PIC Perusahaan"></kendo-label>
                 <kendo-textbox formControlName="noTelepon" #noTelepon required></kendo-textbox>   
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Error: Nomor Handphone PIC Perusahaan is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.required">Field tidak boleh kosong</kendo-formerror>
                 <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.maxLength">Not a valid Nomor Handphone format</kendo-formerror>
                 <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.pattern">Not a valid Nomor Handphone format</kendo-formerror>
             </kendo-formfield>
@@ -57,7 +57,7 @@
                   <input #disclaimer type="checkbox" kendoCheckBox formControlName="disclaimer"/>
                   <kendo-label [for]="disclaimer" class="k-checkbox-label" text="Dengan ini kami menyatakan bahwa benar NPWP dan Email tersebut merupakan NPWP dan Email resmi dari perusahaan kami."></kendo-label>
                 </div>
-                <kendo-formerror *ngIf="registerForm.controls.disclaimer.errors?.required">Disclaimer is required</kendo-formerror>
+                <kendo-formerror *ngIf="registerForm.controls.disclaimer.errors?.required">Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi</kendo-formerror>
             </kendo-formfield>
             
             <div class="k-form-buttons">

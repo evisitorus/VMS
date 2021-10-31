@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 const messages = {
-  default: 'Pastikan semua data terisi & sesuai format',
+  default: 'Field tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
   success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
   disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
 };
@@ -50,29 +50,30 @@ export class RegisterComponent implements OnInit {
   }
   
   register(): void {
-    // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    //     return;
-    // }
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-
-    this.popUpMessage = messages.default;
-
     this.registerForm.markAllAsTouched();
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = true;
+      return;
+    }
+
     let params: RegisterInterface= {...this.registerForm.value};
     this.authService.register(params).subscribe(
       (resp) =>  { 
         this.submitted = true;
         this.popUpMessage = resp.message;
-        this.redirectOnClosePopUp = true;
         this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
       },
       (error) => { 
         if(error.error.message){
           this.popUpMessage = error.error.message;
         }
-        this.redirectOnClosePopUp = false;
         this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
       }
     );
   }
