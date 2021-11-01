@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,21 +10,38 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  popUpTitle: string = "Informasi Login";
+  popUpTitle: string = "Reset Password";
   popUpMessage: string = "";
   redirectOnClosePopUp: boolean = true;
 
-  constructor() { }
+  constructor(
+    private eventEmitterService: EventEmitterService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public form: FormGroup = new FormGroup({
     email: new FormControl()
   });
 
-  resetPassword() {
+  sendEmail() {
+    this.form.markAsTouched();
+    let email = this.form.value.email;
+    this.authService.forgotPassword(email).subscribe(
+      (resp) => {
+        this.popUpMessage = resp.message;
+        this.triggerPopUp();
+      },
+      (error) => {
+        this.popUpMessage = error.error.message;
+        this.triggerPopUp();
+      }
+    );
+  }
 
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
   }
 
 }

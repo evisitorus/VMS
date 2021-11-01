@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../interfaces/api-interface';
 import { LoginInterface } from '../interfaces/login-interface';
-import { ApiRoutes } from './api/api-routes';
+import { ResetPasswordInterface } from '../interfaces/reset-password-interface';
+import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class AuthService {
 
   login(params: LoginInterface): Observable<any> {    
     let api_login: ApiInterface = {
-      method: 'POST',
+      method: ApiRouteMethods.post,
       url: ApiRoutes.api_login_route,
       body: {
         email: params.email,
@@ -23,6 +24,30 @@ export class AuthService {
     };
 
     return this.apiService.sendRequest(api_login);
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    let api_forgot_password: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_forgot_password_route,
+      body: {
+        email: email
+      }
+    };
+
+    return this.apiService.sendRequest(api_forgot_password);
+  }
+
+  resetPassword(params: ResetPasswordInterface) {
+    let api_reset_password: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_reset_password_route,
+      body: {
+        ...params
+      }
+    };
+
+    return this.apiService.sendRequest(api_reset_password);
   }
 
   isLoggedIn(): string | null {

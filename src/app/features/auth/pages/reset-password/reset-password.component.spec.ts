@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from '@progress/kendo-angular-inputs';
+import { CoreModule } from 'src/app/core/core.module';
+import { AuthModule } from '../../auth.module';
 
 import { ResetPasswordComponent } from './reset-password.component';
 
@@ -8,7 +11,12 @@ describe('ResetPasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResetPasswordComponent ]
+      declarations: [ ResetPasswordComponent ],
+      imports: [
+        CoreModule,
+        SharedModule,
+        AuthModule
+      ]
     })
     .compileComponents();
   });
@@ -22,4 +30,5 @@ describe('ResetPasswordComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
