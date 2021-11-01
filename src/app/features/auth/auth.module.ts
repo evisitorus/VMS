@@ -17,11 +17,13 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { CoreModule } from 'src/app/core/core.module';
+import { SetPasswordComponent } from './pages/set-password/set-password.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SetPasswordComponent
   ],
   imports: [
     CommonModule,

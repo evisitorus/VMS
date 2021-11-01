@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ApiInterface } from '../interfaces/api-interface';
 import { LoginInterface } from '../interfaces/login-interface';
 import { RegisterInterface } from '../interfaces/register-interface';
+import { SetPasswordInterface } from '../interfaces/setPassword-interface';
 import { ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 
@@ -58,6 +59,22 @@ export class AuthService {
         email: params.email,
         namaPic: params.namaPic,
         noTelepon: params.noTelepon
+      }
+    };
+
+    return this.apiService.sendRequest(api_register);
+  }
+
+
+  //activation set password
+  setPassword(params: SetPasswordInterface): Observable<any> {    
+    let api_register: ApiInterface = {
+      method: 'POST',
+      url: ApiRoutes.api_activate_route,
+      body: {
+        password: params.password,
+        password1: params.password1,
+        token: params.token,
       }
     };
 
