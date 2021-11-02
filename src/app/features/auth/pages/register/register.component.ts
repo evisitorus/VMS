@@ -17,6 +17,7 @@ const messages = {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({});
   submitted = false;
