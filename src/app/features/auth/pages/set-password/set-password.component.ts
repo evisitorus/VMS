@@ -21,10 +21,11 @@ const messages = {
 export class SetPasswordComponent implements OnInit {
 
   @ViewChild("password") public textbox!: TextBoxComponent;
+  @ViewChild("password1") public textbox1!: TextBoxComponent;
 
   submitted = false;
   isLoggedIn: boolean = false;
-
+  // formSetPassword = new FormGroup({});
   popUpTitle: string = "Informasi Registrasi Akun";
   redirectOnClosePopUp: boolean = true;
   popUpMessage: string = messages.success;
@@ -45,20 +46,22 @@ export class SetPasswordComponent implements OnInit {
       });
   }
 
-
-  public formSetPassword: FormGroup = new FormGroup({
-    password: new FormControl(),
-    password1: new FormControl(),
+  formSetPassword = new FormGroup({
+    password: new FormControl('', [Validators.required]),
+    password1: new FormControl('', [Validators.required]),
     token: new FormControl(),
   });
 
   public ngAfterViewInit(): void {
     this.textbox.input.nativeElement.type = "password";
+    this.textbox1.input.nativeElement.type = "password";
   }
 
   public toggleVisibility(): void {
     const inputEl = this.textbox.input.nativeElement;
     inputEl.type = inputEl.typ === "password" ? "text" : "password";
+    const inputEl1 = this.textbox1.input.nativeElement;
+    inputEl1.type = inputEl1.typ === "password" ? "text" : "password";
   }
 
   clearForm(): void {
@@ -80,7 +83,7 @@ export class SetPasswordComponent implements OnInit {
       return;
     }
 
-    this.validasiForm();
+    // this.validasiForm();
 
     let params: SetPasswordInterface= {...this.formSetPassword.value};
 
