@@ -1,7 +1,9 @@
+import { ifStmt } from '@angular/compiler/src/output/output_ast';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { CoreModule } from '../core.module';
 import { LoginInterface } from '../interfaces/login-interface';
+import { ResetPasswordInterface } from '../interfaces/reset-password-interface';
 import { ApiService } from './api/api.service';
 
 import { AuthService } from './auth.service';
@@ -44,6 +46,26 @@ describe('AuthService', () => {
 
     spyOn(apiService, 'sendRequest').and.returnValue(obs);
     service.forgotPassword("test@mail.com").subscribe(
+      (resp) => {
+        expect(resp).toBe(true);
+      }
+    );
+  });
+
+  it('test resetPassword function', () => {
+    let res = new Observable((subscriber) => {
+      subscriber.next(true);
+      subscriber.complete();
+    });
+
+    let param: ResetPasswordInterface = {
+      token: "sampletoken",
+      new_password: "testpass",
+      retype_password: "testpass"
+    };
+
+    spyOn(apiService, 'sendRequest').and.returnValue(res);
+    service.resetPassword(param).subscribe(
       (resp) => {
         expect(resp).toBe(true);
       }
