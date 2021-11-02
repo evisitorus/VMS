@@ -29,7 +29,7 @@
     "@progress/kendo-angular-buttons": "^6.0.0",
     "@progress/kendo-angular-common": "^2.0.0",
     "@progress/kendo-angular-dateinputs": "^5.2.3",
-    "@progress/kendo-angular-dialog": "^5.1.1",
+    "@progress/kendo-angular-dialog": "^5.2.0",
     "@progress/kendo-angular-inputs": "^7.4.0",
     "@progress/kendo-angular-intl": "^3.1.0",
     "@progress/kendo-angular-l10n": "^3.0.0",

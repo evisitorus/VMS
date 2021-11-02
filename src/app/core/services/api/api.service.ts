@@ -7,9 +7,9 @@ import { Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  
+
   constructor(private http: HttpClient) { }
-  
+
   sendRequest(params: ApiInterface): Observable<any> {
     switch (params.method) {
       case 'GET':
@@ -24,21 +24,21 @@ export class ApiService {
         return this.get(params)
     }
   }
-  
+
   get(params: ApiInterface) {
     return this.http.get(params.url, params.options);
   }
-  
+
   post(params: ApiInterface) {
     return this.http.post(params.url, params.body, params.options);
   }
-  
+
   put(params: ApiInterface) {
     return this.http.put(params.url, params.body, params.options)
   }
-  
+
   delete(params: ApiInterface) {
     return this.http.delete(params.url, params.options)
   }
-  
+
 }

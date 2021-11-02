@@ -1,7 +1,7 @@
 import { ifStmt } from '@angular/compiler/src/output/output_ast';
 import { TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs';
 import { CoreModule } from '../core.module';
+import { Observable } from 'rxjs';
 import { LoginInterface } from '../interfaces/login-interface';
 import { ResetPasswordInterface } from '../interfaces/reset-password-interface';
 import { ApiService } from './api/api.service';
@@ -90,5 +90,6 @@ describe('AuthService', () => {
       }
     );
   });
+
 
 });
