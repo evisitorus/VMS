@@ -15,6 +15,22 @@ body {
     background-image: url("/assets/images/bg.png") !important;
 }
 
+/* KENDO */
+/* ================================ */
+
+.k-textbox {
+    box-sizing: border-box !important;
+    border-radius: 3px !important;
+    height: 40px;
+    margin-top: 2px;
+}
+
+.k-label {
+    font-size: 12px;
+}
+
+/* ================================ */
+
 /* VMS Design Guideline */
 /* ================================ */
 
@@ -47,5 +63,13 @@ body {
     background-color: #114497 !important;
 }
 /* --- END MODAL--- */
+
+
+/* --- LABEL --- */
+label{
+    font-family: Montserrat;
+    font-size: 14px;
+}
+/* --- LABEL --- */
 
 /* ================================ */

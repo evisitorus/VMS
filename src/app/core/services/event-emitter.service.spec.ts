@@ -10,7 +10,9 @@ describe('EventEmitterService', () => {
     service = TestBed.inject(EventEmitterService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('test trigger function', () => {
+    spyOn(service.invokeFunction, 'emit');
+    service.trigger();
+    expect(service.invokeFunction.emit).toHaveBeenCalled();;
   });
 });

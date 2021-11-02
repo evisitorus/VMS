@@ -66,12 +66,12 @@ describe('LoginComponent', () => {
     expect(eventEmitterService.trigger).toHaveBeenCalled();
   });
 
-  // it('test toggleVisibility function', () => {
-  //   component.toggleVisibility();
-  //   expect(component.textbox.input.nativeElement.type).toBe('text');
-  //   component.toggleVisibility();
-  //   expect(component.textbox.input.nativeElement.type).toBe('password');
-  // });
+  it('test toggleVisibility function', () => {
+    component.toggleVisibility();
+    expect(component.textbox.input.nativeElement.type).toBe('text');
+    component.toggleVisibility();
+    expect(component.textbox.input.nativeElement.type).toBe('password');
+  });
 
   it('test login basic function', () => {
     spyOn(component.form, 'markAllAsTouched');
@@ -79,62 +79,62 @@ describe('LoginComponent', () => {
     expect(component.form.markAllAsTouched).toHaveBeenCalled();
   });
 
-  // it('test login success', () => {
-  //   const response = {
-  //     status: true,
-  //     message: "Success",
-  //     data: {
-  //       access_token: "sampletoken"
-  //     }
-  //   };
+  it('test login success', () => {
+    const response = {
+      status: true,
+      message: "Success",
+      data: {
+        access_token: "sampletoken"
+      }
+    };
 
-  //   let obs = new Observable((subscriber) => {
-  //       subscriber.next(response);
-  //       subscriber.complete();
-  //   });
+    let obs = new Observable((subscriber) => {
+        subscriber.next(response);
+        subscriber.complete();
+    });
 
-  //   spyOn(authService, 'login').and.returnValue(obs);
-  //   spyOn(authService, 'setLoggedIn');
-  //   spyOn(authService, 'setToken');
-  //   spyOn(component, 'triggerPopUp');
+    spyOn(authService, 'login').and.returnValue(obs);
+    spyOn(authService, 'setLoggedIn');
+    spyOn(authService, 'setToken');
+    spyOn(component, 'triggerPopUp');
 
-  //   component.login();
+    component.login();
     
-  //   expect(component.isLoggedIn).toBe(true);
-  //   expect(authService.setLoggedIn).toHaveBeenCalled();
-  //   expect(authService.setToken).toHaveBeenCalled();
-  //   expect(component.popUpMessage).toBe(response.message);
-  //   expect(component.redirectOnClosePopUp).toBe(true);
-  //   expect(component.triggerPopUp).toHaveBeenCalled();
-  // });
+    expect(component.isLoggedIn).toBe(true);
+    expect(authService.setLoggedIn).toHaveBeenCalled();
+    expect(authService.setToken).toHaveBeenCalled();
+    expect(component.popUpMessage).toBe(response.message);
+    expect(component.redirectOnClosePopUp).toBe(true);
+    expect(component.triggerPopUp).toHaveBeenCalled();
+  });
 
-  // it('test login failed', () => {
-  //   const response = {
-  //     ok: false,
-  //     status: 401,
-  //     statusText: "Unauthorized",
-  //     error: {
-  //       message: "Email tidak terdaftar, silahkan inputkan email benar atau lakukan registrasi jika anda belum memiliki akun.",
-  //       status: false
-  //     }
-  //   };
+  it('test login failed', () => {
+    const response = {
+      ok: false,
+      status: 401,
+      statusText: "Unauthorized",
+      error: {
+        message: "Email tidak terdaftar, silahkan inputkan email benar atau lakukan registrasi jika anda belum memiliki akun.",
+        status: false
+      }
+    };
 
-  //   let obs = new Observable((subscriber) => {
-  //       subscriber.error(response);
-  //       subscriber.complete();
-  //   });
+    let obs = new Observable((subscriber) => {
+        subscriber.error(response);
+        subscriber.complete();
+    });
 
-  //   spyOn(authService, 'login').and.returnValue(obs);
-  //   spyOn(authService, 'setLoggedIn');
-  //   spyOn(authService, 'setToken');
-  //   spyOn(component, 'triggerPopUp');
+    spyOn(authService, 'login').and.returnValue(obs);
+    spyOn(authService, 'setLoggedIn');
+    spyOn(authService, 'setToken');
+    spyOn(component, 'triggerPopUp');
 
-  //   component.login();
+    component.login();
     
-  //   expect(component.isLoggedIn).toBe(false);
-  //   expect(component.popUpMessage).toBe(response.error.message);
-  //   expect(component.redirectOnClosePopUp).toBe(false);
-  //   expect(component.triggerPopUp).toHaveBeenCalled();
-  // });
+    expect(component.isLoggedIn).toBe(false);
+    expect(component.popUpMessage).toBe(response.error.message);
+    expect(component.redirectOnClosePopUp).toBe(false);
+    expect(component.triggerPopUp).toHaveBeenCalled();
+  });
 
 });

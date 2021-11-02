@@ -39,6 +39,6 @@ describe('NavbarComponent', () => {
     component.navigateTo(url);
     expect(navigateSpy).toHaveBeenCalledWith(url);
   });
-
+  
 
 });

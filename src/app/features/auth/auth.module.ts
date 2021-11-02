@@ -18,12 +18,16 @@ import { LayoutModule } from "@progress/kendo-angular-layout";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { CoreModule } from 'src/app/core/core.module';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
