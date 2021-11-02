@@ -1,0 +1,36 @@
+.landing-carousel {
+    width: 100%;
+    min-height: 400px;
+    background-image: url("/assets/images/carousel-bg.jpg");
+    background-size: cover;
+    text-align: center;
+    display: grid;
+    color: white;
+}
+
+.content {
+    width: 100% !important;
+}
+
+.landing-carousel-content {
+    align-self: center;
+}
+
+.landing-carousel h3,p{
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.landing-carousel p {
+    max-width: 45%;
+}
+
+.landing-carousel-link-button {
+    display: inline-block;
+    line-height: 5em;
+    width: 150px;
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
