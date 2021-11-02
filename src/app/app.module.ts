@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
@@ -15,6 +16,7 @@ import { CoreModule } from './core/core.module';
 import { AuthModule } from './features/auth/auth.module';
 import { ProfileModule } from './features/profile/profile.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,7 @@ import { ProfileModule } from './features/profile/profile.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
 
     // Developed Modules
     AuthModule,
@@ -32,7 +35,7 @@ import { ProfileModule } from './features/profile/profile.module';
     CoreModule,
     SharedModule,
 
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
