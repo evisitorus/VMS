@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedId() === 'true';
+    this.isLoggedIn = this.authService.isLoggedIn() === 'true';
     if (this.isLoggedIn) window.location.href = "/";
 
     this.registerForm = this.formBuilder.group({
