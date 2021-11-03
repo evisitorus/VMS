@@ -7,6 +7,8 @@ import { SetPasswordInterface } from 'src/app/core/interfaces/setPassword-interf
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
+import { MustMatch } from './_helpers/must-match.validator';
+
 const messages = {
   success: '\r\n Selamat akun anda sudah aktif di Vendor Management System (VMS) PaDi. Silakan Login',
   default: 'Field tidak boleh kosong.',
@@ -21,7 +23,7 @@ const messages = {
 export class SetPasswordComponent implements OnInit {
 
   @ViewChild("password") public textbox!: TextBoxComponent;
-  @ViewChild("password1") public textbox1!: TextBoxComponent;
+  @ViewChild("confirmPassword") public textbox1!: TextBoxComponent;
 
   submitted = false;
   isLoggedIn: boolean = false;
@@ -44,11 +46,18 @@ export class SetPasswordComponent implements OnInit {
         console.log(token);
         this.formSetPassword.controls['token'].setValue(token);
       });
+
+      this.formSetPassword = this.formBuilder.group({
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required]
+    }, {
+        validator: MustMatch('password', 'confirmPassword')
+    });
   }
 
   formSetPassword = new FormGroup({
-    password: new FormControl('', [Validators.required]),
-    password1: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.pattern('[0-9]+')]),
+    confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.pattern('[0-9]+')]),
     token: new FormControl(),
   });
 
@@ -96,7 +105,7 @@ export class SetPasswordComponent implements OnInit {
       },
       (error) => { 
         this.isLoggedIn = false;
-        this.popUpMessage = error.statusText;
+        this.popUpMessage = error.error.message;
         this.redirectOnClosePopUp = false;
         this.triggerPopUp();
       }
