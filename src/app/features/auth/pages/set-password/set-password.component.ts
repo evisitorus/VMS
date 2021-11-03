@@ -7,9 +7,12 @@ import { SetPasswordInterface } from 'src/app/core/interfaces/setPassword-interf
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
+import { MustMatch } from './must-match.validator';
+
 const messages = {
-  success: '\r\n Selamat akun anda sudah aktif di Vendor Management System (VMS) PaDi. Silakan Login',
-  default: 'Field tidak boleh kosong.',
+  success: '\r\n Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda',
+  default: 'Periksa kembali data Anda.',
+  wrongPattern: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!'
 };
 
 @Component({
@@ -21,14 +24,18 @@ const messages = {
 export class SetPasswordComponent implements OnInit {
 
   @ViewChild("password") public textbox!: TextBoxComponent;
-  @ViewChild("password1") public textbox1!: TextBoxComponent;
+  @ViewChild("confirmPassword") public textbox1!: TextBoxComponent;
 
   submitted = false;
   isLoggedIn: boolean = false;
-  // formSetPassword = new FormGroup({});
   popUpTitle: string = "Informasi Registrasi Akun";
   redirectOnClosePopUp: boolean = true;
   popUpMessage: string = messages.success;
+  token: any;
+  public minlength = 8;
+  public maxlength = 15;
+  public charachtersCount = 0;
+  public counter = `${this.charachtersCount}/${this.maxlength}`;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -40,15 +47,21 @@ export class SetPasswordComponent implements OnInit {
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.activatedRoute.queryParams.subscribe(params => {
-        const token = params['token'];
-        console.log(token);
-        this.formSetPassword.controls['token'].setValue(token);
+        this.token = params['token'];
       });
+
+      this.formSetPassword = this.formBuilder.group({
+        password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
+        confirmPassword: ['', Validators.required],
+        token: [this.token]
+    }, {
+        validator: MustMatch('password', 'confirmPassword')
+    });
   }
 
   formSetPassword = new FormGroup({
-    password: new FormControl('', [Validators.required]),
-    password1: new FormControl('', [Validators.required]),
+    password: new FormControl(),
+    confirmPassword: new FormControl(),
     token: new FormControl(),
   });
 
@@ -59,9 +72,12 @@ export class SetPasswordComponent implements OnInit {
 
   public toggleVisibility(): void {
     const inputEl = this.textbox.input.nativeElement;
-    inputEl.type = inputEl.typ === "password" ? "text" : "password";
-    const inputEl1 = this.textbox1.input.nativeElement;
-    inputEl1.type = inputEl1.typ === "password" ? "text" : "password";
+    inputEl.type = inputEl.type === "password" ? "text" : "password";
+  }
+
+  public toggleVisibilityConfirm(): void {
+    const inputEl = this.textbox1.input.nativeElement;
+    inputEl.type = inputEl.type === "password" ? "text" : "password";
   }
 
   clearForm(): void {
@@ -70,6 +86,11 @@ export class SetPasswordComponent implements OnInit {
 
   triggerPopUp() {
     this.eventEmitterService.trigger();
+  }
+
+  public onValueChange(ev: any): void {
+    this.charachtersCount = ev.length;
+    this.counter = `${this.charachtersCount}/${this.maxlength}`;
   }
 
   activate(): void {
@@ -83,8 +104,6 @@ export class SetPasswordComponent implements OnInit {
       return;
     }
 
-    // this.validasiForm();
-
     let params: SetPasswordInterface= {...this.formSetPassword.value};
 
     this.authService.setPassword(params).subscribe(
@@ -96,7 +115,7 @@ export class SetPasswordComponent implements OnInit {
       },
       (error) => { 
         this.isLoggedIn = false;
-        this.popUpMessage = error.statusText;
+        this.popUpMessage = error.error.message;
         this.redirectOnClosePopUp = false;
         this.triggerPopUp();
       }

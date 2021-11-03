@@ -17,6 +17,7 @@ const messages = {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({});
   submitted = false;
@@ -26,6 +27,11 @@ export class RegisterComponent implements OnInit {
   popUpTitle: string = "Informasi Registrasi Akun";
   popUpMessage: string = messages.success;
   redirectOnClosePopUp: boolean = true;
+
+  public minlength = 8;
+  public maxlength = 15;
+  public charachtersCount = 0;
+  public counter = `${this.charachtersCount}/${this.maxlength}`;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -98,4 +104,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  public onValueChange(ev: any): void {
+    this.charachtersCount = ev.length;
+    this.counter = `${this.charachtersCount}/${this.maxlength}`;
+  }
 }
