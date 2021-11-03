@@ -1,7 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from '@progress/kendo-angular-inputs';
 import { Observable } from 'rxjs';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -53,9 +51,9 @@ describe('ResetPasswordComponent', () => {
     expect(component.newPass.input.nativeElement.type).toBe('password');
 
     component.toggleVisibility('retypePass');
-    expect(component.newPass.input.nativeElement.type).toBe('text');
+    expect(component.retypePass.input.nativeElement.type).toBe('text');
     component.toggleVisibility('retypePass');
-    expect(component.newPass.input.nativeElement.type).toBe('password');
+    expect(component.retypePass.input.nativeElement.type).toBe('password');
   });
 
   it('test onSubmit function success', () => {
