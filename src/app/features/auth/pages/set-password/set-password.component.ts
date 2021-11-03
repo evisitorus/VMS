@@ -32,6 +32,10 @@ export class SetPasswordComponent implements OnInit {
   redirectOnClosePopUp: boolean = true;
   popUpMessage: string = messages.success;
   token: any;
+  public minlength = 8;
+  public maxlength = 15;
+  public charachtersCount = 0;
+  public counter = `${this.charachtersCount}/${this.maxlength}`;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -44,11 +48,10 @@ export class SetPasswordComponent implements OnInit {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.activatedRoute.queryParams.subscribe(params => {
         this.token = params['token'];
-        // this.formSetPassword.controls['token'].setValue(this.token);
       });
 
       this.formSetPassword = this.formBuilder.group({
-        password: ['', [Validators.required, Validators.maxLength(15), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
+        password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
         confirmPassword: ['', Validators.required],
         token: [this.token]
     }, {
@@ -83,6 +86,11 @@ export class SetPasswordComponent implements OnInit {
 
   triggerPopUp() {
     this.eventEmitterService.trigger();
+  }
+
+  public onValueChange(ev: any): void {
+    this.charachtersCount = ev.length;
+    this.counter = `${this.charachtersCount}/${this.maxlength}`;
   }
 
   activate(): void {

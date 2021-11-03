@@ -43,7 +43,7 @@
 
             <kendo-formfield>
                 <kendo-label [for]="noTelepon" text="Nomor Handphone PIC Perusahaan"></kendo-label>
-                <kendo-textbox formControlName="noTelepon" #noTelepon required></kendo-textbox>   
+                <kendo-textbox formControlName="noTelepon" #noTelepon required [minlength]="minlength" [maxlength]="maxlength" (valueChange)="onValueChange($event)"></kendo-textbox>   
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.required">Nomor Handphone PIC tidak boleh kosong</kendo-formerror>
                 <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.maxLength">Format Nomor Handphone tidak valid</kendo-formerror>

@@ -28,6 +28,11 @@ export class RegisterComponent implements OnInit {
   popUpMessage: string = messages.success;
   redirectOnClosePopUp: boolean = true;
 
+  public minlength = 8;
+  public maxlength = 15;
+  public charachtersCount = 0;
+  public counter = `${this.charachtersCount}/${this.maxlength}`;
+
   constructor(
     private formBuilder: FormBuilder, 
     private authService: AuthService,
@@ -99,4 +104,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  public onValueChange(ev: any): void {
+    this.charachtersCount = ev.length;
+    this.counter = `${this.charachtersCount}/${this.maxlength}`;
+  }
 }
