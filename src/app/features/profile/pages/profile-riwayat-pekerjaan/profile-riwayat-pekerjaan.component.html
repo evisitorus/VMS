@@ -31,30 +31,32 @@
 
       <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()">
         <div>
-          <div>
-            <kendo-label>Nama Pekerjaan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Pemberi Pekerjaan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Nilai Pekerjaan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Tahun</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Lampiran</kendo-label>
-            <kendo-fileselect [title]="'Pilih File'"></kendo-fileselect>
-          </div>
+          <form class="k-form login-form" [formGroup]="pekerjaanForm">
+          <kendo-formfield>
+            <kendo-label [for]="namaPekerjaan">Nama Pekerjaan</kendo-label>
+            <kendo-textbox formControlName="namaPekerjaan" #namaPekerjaan placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          </kendo-formfield>
+          <kendo-formfield>
+            <kendo-label [for]="pemberiPekerjaan">Pemberi Pekerjaan</kendo-label>
+            <kendo-textbox formControlName="pemberiPekerjaan" #pemberiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          </kendo-formfield>
+          <kendo-formfield>
+            <kendo-label [for]="nilaiPekerjaan">Nilai Pekerjaan</kendo-label>
+            <kendo-textbox formControlName="nilaiPekerjaan" #nilaiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          </kendo-formfield>
+          <kendo-formfield>
+            <kendo-label [for]="tahunPekerjaan">Tahun</kendo-label>
+            <kendo-textbox formControlName="tahunPekerjaan" #tahunPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          </kendo-formfield>
+          <kendo-formfield>
+            <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
+            <kendo-fileselect  formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [title]="'Pilih File'"></kendo-fileselect>
+          </kendo-formfield>
+        </form>
         </div>
 
         <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
+          <button kendoButton (click)="submit()" [primary]="true">
             Simpan
           </button>
           <button kendoButton (click)="closeSaham()" [primary]="false">

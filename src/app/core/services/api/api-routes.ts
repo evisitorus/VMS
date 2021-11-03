@@ -6,7 +6,8 @@ export const ApiRoutes = {
     api_register_route: API_BASE_URL + "/users/register",
     api_activate_route: API_BASE_URL + "/users/activate",
     api_forgot_password_route: API_BASE_URL + "/auth/forgot-password",
-    api_reset_password_route: API_BASE_URL + "/auth/reset-password"
+    api_reset_password_route: API_BASE_URL + "/auth/reset-password",
+    api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
 };
 
 

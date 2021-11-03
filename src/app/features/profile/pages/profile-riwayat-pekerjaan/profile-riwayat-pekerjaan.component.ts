@@ -1,4 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+
+import { ApiInterface } from 'src/app/core/interfaces/api-interface';
+
+import { ApiService } from 'src/app/core/services/api/api.service';
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+
+const messages = {
+  default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
+  success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
+  disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
+};
 
 @Component({
   selector: 'app-profile-riwayat-pekerjaan',
@@ -6,10 +18,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-riwayat-pekerjaan.component.css']
 })
 export class ProfileRiwayatPekerjaanComponent implements OnInit {
+  pekerjaanForm = new FormGroup({});
+  submitted = false;
 
-  constructor() { }
+  popUpTitle: string = "Informasi Pengalaman Kerja";
+  popUpMessage: string = messages.success;
+  redirectOnClosePopUp: boolean = true;
+
+  constructor(
+    private formBuilder: FormBuilder, 
+    private apiService: ApiService,
+    private eventEmitterService: EventEmitterService
+    ) { }
+
+    get f() { return this.pekerjaanForm.controls; }
+
+
+
+  formSetPassword = new FormGroup({
+    email: new FormControl(),
+    namaPekerjaan: new FormControl(),
+    pemberiPekerjaan: new FormControl(),
+    nilaiPekerjaan: new FormControl(),
+    tahunPekerjaan: new FormControl(),
+    buktiPekerjaanFilePath: new FormControl(),
+  });
 
   ngOnInit(): void {
+    this.pekerjaanForm = this.formBuilder.group({
+      email:['tutuu@tujuh.com'],
+      namaPekerjaan: ['asd', Validators.required],
+      pemberiPekerjaan: ['asd', Validators.required],
+      nilaiPekerjaan: ['1231233', Validators.required],
+      tahunPekerjaan: ['2121', Validators.required],
+      buktiPekerjaanFilePath: ['asdas.jpg', Validators.required],
+    });
   }
 
   public opened = false;
@@ -33,4 +76,49 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.openedSaham = true;
   }
 
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
+  }
+
+  validasiForm(){
+    if (this.pekerjaanForm.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = true;
+      return;
+    }
+  }
+
+  submit(): void {
+    this.pekerjaanForm.markAllAsTouched();
+    this.popUpMessage = messages.default;
+
+    // stop here if form is invalid
+    if (this.pekerjaanForm.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
+
+    this.validasiForm();
+
+    let params: ApiInterface= {...this.pekerjaanForm.value};
+    this.apiService.post(params).subscribe(
+      (resp) =>  { 
+        this.submitted = true;
+        this.popUpMessage = messages.default;
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      },
+      (error) => { 
+        console.log("ok");
+        // if(error.error.message){
+          this.popUpMessage = error;
+        // }
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      }
+    );
+  }
 }
