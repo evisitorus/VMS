@@ -10,8 +10,9 @@ import { EventEmitterService } from 'src/app/core/services/event-emitter.service
 import { MustMatch } from './_helpers/must-match.validator';
 
 const messages = {
-  success: '\r\n Selamat akun anda sudah aktif di Vendor Management System (VMS) PaDi. Silakan Login',
-  default: 'Field tidak boleh kosong.',
+  success: '\r\n Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda',
+  default: 'Periksa kembali data Anda.',
+  wrongPattern: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!'
 };
 
 @Component({
@@ -27,10 +28,10 @@ export class SetPasswordComponent implements OnInit {
 
   submitted = false;
   isLoggedIn: boolean = false;
-  // formSetPassword = new FormGroup({});
   popUpTitle: string = "Informasi Registrasi Akun";
   redirectOnClosePopUp: boolean = true;
   popUpMessage: string = messages.success;
+  token: any;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -42,22 +43,22 @@ export class SetPasswordComponent implements OnInit {
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.activatedRoute.queryParams.subscribe(params => {
-        const token = params['token'];
-        console.log(token);
-        this.formSetPassword.controls['token'].setValue(token);
+        this.token = params['token'];
+        // this.formSetPassword.controls['token'].setValue(this.token);
       });
 
       this.formSetPassword = this.formBuilder.group({
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required]
+        password: ['', [Validators.required, Validators.maxLength(15), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
+        confirmPassword: ['', Validators.required],
+        token: [this.token]
     }, {
         validator: MustMatch('password', 'confirmPassword')
     });
   }
 
   formSetPassword = new FormGroup({
-    password: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.pattern('[0-9]+')]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(15), Validators.pattern('[0-9]+')]),
+    password: new FormControl(),
+    confirmPassword: new FormControl(),
     token: new FormControl(),
   });
 
@@ -68,9 +69,12 @@ export class SetPasswordComponent implements OnInit {
 
   public toggleVisibility(): void {
     const inputEl = this.textbox.input.nativeElement;
-    inputEl.type = inputEl.typ === "password" ? "text" : "password";
-    const inputEl1 = this.textbox1.input.nativeElement;
-    inputEl1.type = inputEl1.typ === "password" ? "text" : "password";
+    inputEl.type = inputEl.type === "password" ? "text" : "password";
+  }
+
+  public toggleVisibilityConfirm(): void {
+    const inputEl = this.textbox1.input.nativeElement;
+    inputEl.type = inputEl.type === "password" ? "text" : "password";
   }
 
   clearForm(): void {
@@ -91,8 +95,6 @@ export class SetPasswordComponent implements OnInit {
       this.redirectOnClosePopUp = false;
       return;
     }
-
-    // this.validasiForm();
 
     let params: SetPasswordInterface= {...this.formSetPassword.value};
 
