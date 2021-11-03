@@ -1,26 +1,43 @@
-const { setHeadlessWhen } = require('@codeceptjs/configure');
-
-// turn on headless mode when running with HEADLESS=true environment variable
-// export HEADLESS=true && npx codeceptjs run
-setHeadlessWhen(process.env.HEADLESS);
-
 exports.config = {
-  tests: './*_test.js',
-  output: './output',
+  output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
       url: 'http://localhost',
       show: true,
-      browser: 'chromium'
-    }
+      browser: 'chromium',
+      waitForTimeout: 10000,
+      waitForNavigation: 'networkidle',
+    },
+    Mochawesome: {
+      uniqueScreenshotNames: true
+    },
+    General: {
+      require: './tests/acceptance/_helper/general_helper.js',
+    },
+    Alias: {
+      require: './tests/acceptance/_helper/alias_helper.js',
+    },
   },
   include: {
     I: './steps_file.js'
   },
+  mocha: {
+    reporterOptions: {
+      reportDir: "./tests/acceptance/_output/",
+      reportFilename: "scenario"
+    }
+  },
   bootstrap: null,
-  mocha: {},
-  name: 'eproc-fe',
+  teardown: null,
+  hooks: [],
+  gherkin: {
+    features: './test/acceptance/features/*.feature',
+    steps: ['./test/acceptance/step_definitions/steps.js']
+  },
   plugins: {
+    screenshotOnFail: {
+      enabled: true
+    },
     pauseOnFail: {},
     retryFailedStep: {
       enabled: true
@@ -28,8 +45,12 @@ exports.config = {
     tryTo: {
       enabled: true
     },
-    screenshotOnFail: {
-      enabled: true
-    }
-  }
+    stepByStepReport: {
+      enabled: true,
+      deleteSuccessful: false,
+      fullPageScreenshots: true
+    },
+  },
+  tests: 'tests/acceptance/*_test.js',
+  name: 'eproc-fe'
 }
