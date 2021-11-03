@@ -74,4 +74,25 @@ label{
 }
 /* --- LABEL --- */
 
+/* --- SIDEBAR --- */
+.k-link{
+    background-color: #0e2456 !important;
+    color: white !important;
+}
+
+.k-link:hover{
+    background-color: #114497 !important;
+}
+
+.k-link.k-state-selected{
+    background-color: #114497 !important;
+}
+
+.k-icon.k-panelbar-toggle {
+
+    color: inherit !important;
+}
+
+/* --- SIDEBAR --- */
+
 /* ================================ */
