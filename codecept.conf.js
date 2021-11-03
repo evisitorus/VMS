@@ -10,7 +10,13 @@ exports.config = {
     },
     Mochawesome: {
       uniqueScreenshotNames: true
-    }
+    },
+    General: {
+      require: './tests/acceptance/_helper/general_helper.js',
+    },
+    Alias: {
+      require: './tests/acceptance/_helper/alias_helper.js',
+    },
   },
   include: {
     I: './steps_file.js'
