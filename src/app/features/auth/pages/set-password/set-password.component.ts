@@ -7,7 +7,7 @@ import { SetPasswordInterface } from 'src/app/core/interfaces/setPassword-interf
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
-import { MustMatch } from './_helpers/must-match.validator';
+import { MustMatch } from './must-match.validator';
 
 const messages = {
   success: '\r\n Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda',
