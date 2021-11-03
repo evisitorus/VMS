@@ -1,14 +1,9 @@
 <div class="vendor-info-section">
-  <kendo-card orientation="vertical">
+  <kendo-card orientation="vertical" style="width: 100%;">
     <kendo-card-header class="k-vstack">
       <div class="vendor-type k-hstack">
         <div class="vendor-badge">
-          <kendo-avatar
-            width="40px"
-            height="40px"
-            initials="V"
-            shape="circle"
-          ></kendo-avatar>
+          <kendo-avatar width="40px" height="40px" initials="V" shape="circle"></kendo-avatar>
         </div>
         <div class="k-vstack">
           <h1 kendoCardTitle>Vendor</h1>
@@ -20,8 +15,70 @@
       </div>
     </kendo-card-header>
     <kendo-card-body>
-
+      <div class="vendor-profile k-hstack">
+        <img kendoCardMedia
+          src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/sofia.jpg"
+          width="100px" />
+        <div class="vendor-profile-detail k-vstack">
+          <div class="v-address k-hstack">
+            <span class="k-icon k-i-home"></span>
+            <p>Jl. Jenderal Gatot Soebroto Kav 52, Kuningan Barat, Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta
+              10310</p>
+          </div>
+          <div class="v-phone">
+            <span></span>
+            <p>021-1234567</p>
+          </div>
+          <div class="v-division">
+            <span></span>
+            <p>Material Konstruksi</p>
+          </div>
+          <div class="v-address">
+            <span></span>
+            <p>Terdaftar di VMS sejak 18 Oktober 2021</p>
+          </div>
+        </div>
+      </div>
+      <div class="k-vstack">
+        <div>
+          <label>Profile Perusahaan</label>
+          <input type="checkbox" ngModel="checked" disabled/>
+          <label class="k-checkbox-label">Completed</label>
+        </div>
+        <div>
+          <label>PIC Perusahaan</label>
+          <input type="checkbox" ngModel="checked" disabled/>
+          <label class="k-checkbox-label">Completed</label>
+        </div>
+        <div>
+          <label>Dokumen</label>
+          <input type="checkbox" disabled/>
+          <label class="k-checkbox-label">Incomplete</label>
+        </div>
+        <div>
+          <label>Alamat</label>
+          <input type="checkbox" disabled/>
+          <label class="k-checkbox-label">Incomplete</label>
+        </div>
+        <div>
+          <label>Laporan Keuangan</label>
+          <input type="checkbox" disabled/>
+          <label class="k-checkbox-label">Incomplete</label>
+        </div>
+        <div>
+          <label>Riwayat Pekerjaan</label>
+          <input type="checkbox" disabled/>
+          <label class="k-checkbox-label">Incomplete</label>
+        </div>
+        <div>
+          <label>Asset</label>
+          <input type="checkbox" disabled/>
+          <label class="k-checkbox-label">Incomplete</label>
+        </div>
+      </div>
+      <button class="k-button">Lengkapi Profil</button>
     </kendo-card-body>
+    
   </kendo-card>
 
 </div>
