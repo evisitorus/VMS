@@ -12,8 +12,4 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navigate(to: string) {
-    window.location.href = to;
-  }
-
 }
