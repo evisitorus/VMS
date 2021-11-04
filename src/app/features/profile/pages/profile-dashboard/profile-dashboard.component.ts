@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileDashboardService } from 'src/app/core/services/profile-dashboard.service';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private profileService:ProfileDashboardService
+  ) { }
 
   ngOnInit(): void {
+    this.profileService.getVendorData().subscribe(
+      
+    );
   }
 
 }
