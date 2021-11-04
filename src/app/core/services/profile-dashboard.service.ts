@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ApiInterface } from '../interfaces/api-interface';
 import { ApiRoutes,ApiRouteMethods } from './api/api-routes';
 import { ApiService } from './api/api.service';
@@ -12,7 +13,7 @@ export class ProfileDashboardService {
     private apiService:ApiService
   ) { }
 
-  getVendorData() {
+  getVendorData(): Observable<any> {
     let api_dashboard_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_dashboard_vendor
