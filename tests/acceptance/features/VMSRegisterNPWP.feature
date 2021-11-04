@@ -9,7 +9,7 @@ Feature: Calon Vendor - Registrasi
   #positive scenario for registration
     Scenario: Registration Successfully
         Given The Vendor is on VMS landing page 
-        When The Vendor wants to register his/her company
+        When The Vendor wants to register his or her company
         And The Vendor goes to "Registration" form 
         And The Vendor must fill information which needed for registration on "Registration" form
         """
@@ -36,12 +36,12 @@ Feature: Calon Vendor - Registrasi
         """
         And The Vendor must selects "Yes" button
         
-        Then The Vendor already registered his/her company to VMS portal 
+        Then The Vendor already registered his or her company to VMS portal 
     
   #negative scenario for registration
     Scenario:Unclick Disclaimer
         Given The Vendor is on VMS landing page 
-        When The Vendor wants to register his/her company
+        When The Vendor wants to register his or her company
         And The Vendor goes to "Registration" form 
         And The Vendor must fill information which needed for registration on "Registration" form
         """
@@ -65,14 +65,15 @@ Feature: Calon Vendor - Registrasi
         }
         """
         And The Vendor clicks "Yes" button
-        Then The Vendor cant continue for registration due to he/she unselect "Disclaimer"
+        Then The Vendor cant continue for registration due to he or she unselect "Disclaimer"
 
  #negative scenario for registration
     Scenario:Fields Input Are Empty
         Given The Vendor is on VMS landing page 
-        When The Vendor wants to register his/her company
+        When The Vendor wants to register his or her company
         And The Vendor goes to "Registration" form 
-        And The Vendor doesnt fill anything into the form #(means give empty on each input on the form)
+        #means give empty on each input on the form
+        And The Vendor doesnt fill anything into the form
         And The Vendor clicks the "Register" button
         And The Vendor clicks "Disclaimer"
         And The Vendor clicks button "Daftar" 
@@ -82,7 +83,7 @@ Feature: Calon Vendor - Registrasi
 #Alternate Scenario for registration, to check NPWP if NPWP already registered 
     Scenario:NPWP already registered 
         Given The Vendor is on VMS landing page 
-        When The Vendor wants to register his/her company
+        When The Vendor wants to register his or her company
         And The Vendor goes to "Registration" form 
         And The Vendor fill information which needed for registration on "Registration" form
         """
@@ -105,7 +106,7 @@ Feature: Calon Vendor - Registrasi
 #Alternate Scenario for registration, to check Email if Email already registered 
     Scenario:Email already registered
         Given The Vendor is on VMS landing page 
-        When The Vendor wants to register his/her company
+        When The Vendor wants to register his or her company
         And The Vendor goes to "Registration" form 
         And The Vendor fill information which needed for registration on "Registration" form
         """
