@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 
-import { ApiInterface } from 'src/app/core/interfaces/api-interface';
+import { PekerjaanInterface } from 'src/app/core/interfaces/pekerjaan-interface';
 
-import { ApiService } from 'src/app/core/services/api/api.service';
+import { ProfileService } from 'src/app/core/services/profile.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 const messages = {
@@ -27,7 +27,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, 
-    private apiService: ApiService,
+    private profileService: ProfileService,
     private eventEmitterService: EventEmitterService
     ) { }
 
@@ -103,8 +103,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
     this.validasiForm();
 
-    let params: ApiInterface= {...this.pekerjaanForm.value};
-    this.apiService.post(params).subscribe(
+    let params: PekerjaanInterface= {...this.pekerjaanForm.value};
+    this.profileService.pekerjaan(params).subscribe(
       (resp) =>  { 
         this.submitted = true;
         this.popUpMessage = messages.default;
