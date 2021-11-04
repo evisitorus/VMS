@@ -1,12 +1,14 @@
 <div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
 
+  <div class="profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+  
+  <!-- <div class="profile-content">
+    
     <kendo-label>Asset</kendo-label>
     <br><br>
-
+    
     <div>
       <kendo-grid>
         <kendo-grid-column field="no" title="No.">
@@ -24,7 +26,7 @@
       <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
         Tambah Asset
       </button>
-
+      
       <kendo-dialog title="Tambah Asset" *ngIf="openedSaham" (close)="closeSaham()">
         <div>
           <div>
@@ -40,7 +42,7 @@
             <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
           </div>
         </div>
-
+        
         <kendo-dialog-actions>
           <button kendoButton (click)="closeSaham()" [primary]="true">
             Simpan
@@ -51,5 +53,6 @@
         </kendo-dialog-actions>
       </kendo-dialog>
     </div>
-  </div>
+  </div> -->
+  
 </div>

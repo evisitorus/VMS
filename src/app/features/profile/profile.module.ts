@@ -27,9 +27,11 @@ import {HttpClientModule} from "@angular/common/http";
 import {GridModule} from "@progress/kendo-angular-grid";
 import {UploadsModule} from "@progress/kendo-angular-upload";
 import { IntlModule } from "@progress/kendo-angular-intl";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
+    SidebarComponent,
     ProfileMenuComponent,
     ProfileVerifikasiKelengkapanComponent,
     ProfileInformasiPerusahaanComponent,
