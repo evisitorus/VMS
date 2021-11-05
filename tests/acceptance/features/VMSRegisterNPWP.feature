@@ -8,7 +8,7 @@ Feature: Calon Vendor - Registrasi
 
   #positive scenario for registration
     Scenario: Registration Successfully
-        Given The Vendor is on VMS landing page 
+        # Given The Vendor is on VMS landing page 
         When The Vendor wants to register his or her company
         And The Vendor goes to "Registration" form 
         And The Vendor must fill information which needed for registration on "Registration" form

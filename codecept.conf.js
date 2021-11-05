@@ -2,7 +2,7 @@ exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
-      url: 'http://localhost',
+      url: 'http://localhost:8000',
       show: true,
       browser: 'chromium',
       waitForTimeout: 10000,
@@ -32,7 +32,10 @@ exports.config = {
   hooks: [],
   gherkin: {
     features: './tests/acceptance/features/*.feature',
-    steps: ['./tests/acceptance/step_definitions/steps.js']
+    steps: [
+      './tests/acceptance/step_definitions/steps.js',
+      './tests/acceptance/step_definitions/VMSRegisterNPWP.step.js'
+    ]
   },
   plugins: {
     screenshotOnFail: {
