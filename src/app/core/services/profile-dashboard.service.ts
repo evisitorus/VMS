@@ -16,7 +16,7 @@ export class ProfileDashboardService {
   getVendorData(): Observable<any> {
     let api_dashboard_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_dashboard_vendor
+      url: ApiRoutes.api_dashboard_vendor_route
     }
 
     return this.apiService.sendRequest(api_dashboard_vendor);
