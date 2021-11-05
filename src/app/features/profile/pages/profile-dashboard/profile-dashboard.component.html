@@ -20,9 +20,7 @@
       </kendo-card-header>
       <kendo-card-body>
         <div class="vendor-profile k-hstack">
-          <img kendoCardMedia
-            src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/sofia.jpg"
-            width="100px" />
+          <kendo-avatar width="70px" height="70px" initials="Vendor"></kendo-avatar>
           <div class="vendor-profile-detail k-vstack">
             <div class="v-address k-hstack">
               <span class="k-icon k-i-home"></span>
@@ -38,8 +36,7 @@
               <p>Material Konstruksi</p>
             </div>
             <div class="v-address">
-              <span></span>
-              <p>Terdaftar di VMS sejak 18 Oktober 2021</p>
+              <p class="vendor-hint">Terdaftar di VMS sejak {{vendor.registereddate}}</p>
             </div>
           </div>
         </div>
@@ -49,7 +46,7 @@
             <div class="k-column k-text-left">
               <label>Profile Perusahaan</label>
             </div>
-            <div class="k-column">
+            <div class="k-column k-text-right">
               <input type="checkbox" ngModel="checked" disabled/>
               <label class="k-checkbox-label">Completed</label>
             </div>
@@ -85,8 +82,10 @@
             <label class="k-checkbox-label">Incomplete</label>
           </div>
         </div>
-        <button class="k-button">Lengkapi Profil</button>
       </kendo-card-body>
+      <kendo-card-actions class="k-card-actions-end">
+        <button class="k-button k-primary">Lengkapi Profil</button>
+      </kendo-card-actions>
       
     </kendo-card>
   
