@@ -1,0 +1,93 @@
+<div class="profile-section">
+  <div class="profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="profile-content">
+    <kendo-card orientation="vertical" style="width: 100%;">
+      <kendo-card-header class="k-vstack">
+        <div class="vendor-type k-hstack">
+          <div class="vendor-badge">
+            <kendo-avatar width="40px" height="40px" initials="V" shape="circle"></kendo-avatar>
+          </div>
+          <div class="k-vstack">
+            <h1 kendoCardTitle>Vendor</h1>
+            <p kendoCardSubtitle>Aktif</p>
+          </div>
+        </div>
+        <div class="vendor-hint">
+          <p>Perhatian: Silahkan lengkapi profil anda agar bisa berpartisipasi pada Tender BUMN</p>
+        </div>
+      </kendo-card-header>
+      <kendo-card-body>
+        <div class="vendor-profile k-hstack">
+          <kendo-avatar width="70px" height="70px" initials="Vendor"></kendo-avatar>
+          <div class="vendor-profile-detail k-vstack">
+            <div class="v-address k-hstack">
+              <span class="k-icon k-i-home"></span>
+              <p>Jl. Jenderal Gatot Soebroto Kav 52, Kuningan Barat, Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta
+                10310</p>
+            </div>
+            <div class="v-phone">
+              <span></span>
+              <p>021-1234567</p>
+            </div>
+            <div class="v-division">
+              <span></span>
+              <p>Material Konstruksi</p>
+            </div>
+            <div class="v-address">
+              <!-- <p class="vendor-hint">Terdaftar di VMS sejak {{vendor.registereddate}}</p> -->
+            </div>
+          </div>
+        </div>
+        <hr kendoCardSeparator >
+        <div class="k-vstack">
+          <div class="k-hstack vendor-steps-row">
+            <div class="k-column k-text-left">
+              <label>Profile Perusahaan</label>
+            </div>
+            <div class="k-column k-text-right">
+              <input type="checkbox" ngModel="checked" disabled/>
+              <label class="k-checkbox-label">Completed</label>
+            </div>
+          </div>
+          <div class="k-hstack vendor-steps-row">
+            <label>PIC Perusahaan</label>
+            <input type="checkbox" ngModel="checked" disabled/>
+            <label class="k-checkbox-label">Completed</label>
+          </div>
+          <div class="k-hstack vendor-steps-row">
+            <label>Dokumen</label>
+            <input type="checkbox" disabled/>
+            <label class="k-checkbox-label">Incomplete</label>
+          </div>
+          <div class="k-hstack vendor-steps-row">
+            <label>Alamat</label>
+            <input type="checkbox" disabled/>
+            <label class="k-checkbox-label">Incomplete</label>
+          </div>
+          <div class="k-hstack vendor-steps-row">
+            <label>Laporan Keuangan</label>
+            <input type="checkbox" disabled/>
+            <label class="k-checkbox-label">Incomplete</label>
+          </div>
+          <div class="k-hstack vendor-steps-row">
+            <label>Riwayat Pekerjaan</label>
+            <input type="checkbox" disabled/>
+            <label class="k-checkbox-label">Incomplete</label>
+          </div>
+          <div class="k-hstack vendor-steps-row">
+            <label>Asset</label>
+            <input type="checkbox" disabled/>
+            <label class="k-checkbox-label">Incomplete</label>
+          </div>
+        </div>
+      </kendo-card-body>
+      <kendo-card-actions class="k-card-actions-end">
+        <button class="k-button k-primary">Lengkapi Profil</button>
+      </kendo-card-actions>
+      
+    </kendo-card>
+  
+  </div>
+</div>
