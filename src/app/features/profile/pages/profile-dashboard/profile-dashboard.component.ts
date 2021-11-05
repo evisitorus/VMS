@@ -14,7 +14,12 @@ export class ProfileDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.getVendorData().subscribe(
-      
+      (resp) => {
+        console.log(resp);
+      },
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
