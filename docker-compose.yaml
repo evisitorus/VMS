@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+    angular:          
+        build:
+          context: ./
+          target: angular_prod                
+        ports:
+            - 4200:4200
+volumes: 
+    mysql_data:
