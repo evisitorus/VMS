@@ -11,21 +11,21 @@
     <br><br>
 
     <div>
-      <kendo-grid>
-        <kendo-grid-column field="no" title="No.">
+      <kendo-grid
+        [data]="gridData"
+      >
+        <kendo-grid-column title="No.">
+          <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            {{rowIndex + 1}} 
+          </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Nama Pekerjaan">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Pemberi Pekerjaan">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Nilai Pekerjaan">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Tahun">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Lampiran">
-        </kendo-grid-column>
-        <kendo-grid-column field="action" title="Action">
-          Edit | Delete
+        <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title"></kendo-grid-column>
+        <kendo-grid-column title="Action">
+          <ng-template kendoGridCellTemplate>
+            Edit
+            |
+            Delete
+          </ng-template>
         </kendo-grid-column>
       </kendo-grid>
       <br>

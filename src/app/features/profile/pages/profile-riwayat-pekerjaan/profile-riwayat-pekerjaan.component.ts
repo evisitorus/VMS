@@ -6,6 +6,7 @@ import { PekerjaanInterface } from 'src/app/core/interfaces/pekerjaan-interface'
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { samplePekerjaans } from './pekerjaan';
 
 const messages = {
   default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
@@ -26,6 +27,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   popUpMessage: string = messages.success;
   redirectOnClosePopUp: boolean = true;
   isLoggedIn: boolean = true;
+  
+  public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
+  public gridData: any = samplePekerjaans;
+  record = 0;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -49,6 +54,15 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       tahunPekerjaan: ['2121', Validators.required],
       buktiPekerjaanFilePath: ['asdas.jpg', Validators.required],
     });
+    
+    this.columns = [
+      {field: "namaPekerjaan", title:"Nama Pekerjaan"}, 
+      {field: "pemberiPekerjaan", title:"Pemberi Pekerjaan"}, 
+      {field: "nilaiPekerjaan", title:"Nilai Pekerjaan"}, 
+      {field: "tahunPekerjaan", title:"Tahun"}, 
+      {field: "buktiPekerjaanFilePath", title:"Lampiran "}
+    ];
+    this.gridData = samplePekerjaans;
   }
 
   public opened = false;
@@ -118,4 +132,5 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       }
     );
   }
+  
 }
