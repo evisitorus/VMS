@@ -5,6 +5,113 @@ const { I } = inject();
 //   // TODO: replace with your own step
 // });
 
+Given('The Vendor is on VMS landing page', () => {
+  // I.amOnPage('/landingpage');
+});
+
+When('The Vendor wants to register his or her company', () => {    
+  I.amOnPage('/register');
+});
+
+When('The Vendor goes to {string} form', (form) => {
+  I.click(form);
+});
+
+When('The Vendor must fill information which needed for registration on {string} form', () => {
+  I.fillField('npwp', '');
+  I.fillField('namaPerusahaan', '');
+  I.fillField('namaPIC', '');
+  I.fillField('emailPerusahaan', '');
+  I.fillField('noHandphonePIC', '');
+});
+
+When('The Vendor must clicks button {string}', () => {
+  I.click(form);
+});
+
+When('The Vendor will get badge as {string}', () => {
+
+});
+
+When('The Vendor data will be stored at database and will be flag as {string}', () => {
+
+});
+
+Then('The Vendor already registered his or her company to VMS portal', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":39,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor unclick {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":58,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor clicks button {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":125,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor clicks {string} button', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":67,"column":9}
+throw new Error('Not implemented yet');
+});
+
+Then('The Vendor cant continue for registration due to he or she unselect {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":68,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor doesnt fill anything into the form', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":76,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor clicks the {string} button', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":77,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor clicks {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":78,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor will get error message {string} on each object of input where found on the {string} Form', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":80,"column":9}
+throw new Error('Not implemented yet');
+});
+
+Then('The Vendor cant continue to Register due no information which given on {string} Form', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":81,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor fill information which needed for registration on {string} form', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":111,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor put same {string} with registerd {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":123,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor click {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":124,"column":9}
+throw new Error('Not implemented yet');
+});
+
+When('The Vendor will get warning message {string}', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":126,"column":9}
+throw new Error('Not implemented yet');
+});
+
+Then('The Vendor cant continue for registration due to NPWP already registered', () => {
+// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":127,"column":9}
+throw new Error('Not implemented yet');
+});
+
 Given('I have a defined step', () => {
   // From "tests/acceptance/features/basic.feature" {"line":7,"column":5}
   throw new Error('Not implemented yet');
@@ -332,5 +439,150 @@ When('The Vendor already completed information in regards to its company on VMS 
 
 When('The Vendor already verified by VMS verificator', () => {
   // From "tests/acceptance/features/VMSVendorFlagStatus.feature" {"line":27,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Given(/^The Vendor \(Basic\) already login into VMS using his or her registered company information$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":187,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor gets his or her badge on his or her vendor level on {string} as', () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":188,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants to completed his or her company profile$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":196,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must click "(.*?)" menu where found on "(.*?)" of "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":70,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see "(.*?)" form$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":71,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor must completed following inputs where found on {string} form', () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":24,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants to add information in regards to "(.*?)" on "(.*?)" which part of "(.*?)" form$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":74,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must clicks button "(.*?)" where found on the left-buttom of "(.*?)" to add records information in regards to "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":75,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see pop-up form of "(.*?)" which appear in front of "(.*?)" form$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":76,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must click "(.*?)" button to save information of "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":34,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see that pop-up form already closed when she or he clicks "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":35,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see list of "(.*?)" on "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":36,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants to add information  in regards to "(.*?)" on "(.*?)" which part of "(.*?)" form$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":131,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants to save information of "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":229,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must click "(.*?)" button where found on the left-buttom of "(.*?)" form$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":45,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see confirmation message$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":46,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must select "(.*?)" option$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":54,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see progress of upgrade level on "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":55,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) already manage her or his company information by adding "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":184,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) not define mandatory fields such as$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":199,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) not define anything on "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":228,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) warning message tooltip on each mandatory fields as "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":240,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) cant continue to process saving data of "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":242,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+Given(/^The Vendor \(Basic\) already add information in regards to "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":68,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants manage "(.*?)" from the Company$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":69,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must click "(.*?)" Tab$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":14,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) already manage her or his company information by adding Riwayat Pekerjaan from the company$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":64,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) upload document more than (\d+) MB$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":90,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) warning message tooltip on lampiran "(.*?)"$/, () => {
+  // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":91,"column":7}
   throw new Error('Not implemented yet');
 });

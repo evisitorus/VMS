@@ -34,7 +34,6 @@ exports.config = {
     features: './tests/acceptance/features/*.feature',
     steps: [
       './tests/acceptance/step_definitions/steps.js',
-      './tests/acceptance/step_definitions/VMSRegisterNPWP.step.js'
     ]
   },
   plugins: {
