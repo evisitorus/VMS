@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 import { PekerjaanInterface } from 'src/app/core/interfaces/pekerjaan-interface';
 
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 const messages = {
@@ -24,27 +25,22 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   popUpTitle: string = "Informasi Pengalaman Kerja";
   popUpMessage: string = messages.success;
   redirectOnClosePopUp: boolean = true;
+  isLoggedIn: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder, 
     private profileService: ProfileService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private authService: AuthService,
     ) { }
 
     get f() { return this.pekerjaanForm.controls; }
 
-
-
-  formSetPassword = new FormGroup({
-    email: new FormControl(),
-    namaPekerjaan: new FormControl(),
-    pemberiPekerjaan: new FormControl(),
-    nilaiPekerjaan: new FormControl(),
-    tahunPekerjaan: new FormControl(),
-    buktiPekerjaanFilePath: new FormControl(),
-  });
-
   ngOnInit(): void {
+    // this.isLoggedIn = true;
+    // this.authService.setLoggedIn(true);
+    if (!this.isLoggedIn) window.location.href = "/";
+
     this.pekerjaanForm = this.formBuilder.group({
       email:['tutuu@tujuh.com'],
       namaPekerjaan: ['asd', Validators.required],
@@ -112,7 +108,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         this.redirectOnClosePopUp = true;
       },
       (error) => { 
-        console.log("ok");
+        console.log(params);
+        console.log(console.error());
         // if(error.error.message){
           this.popUpMessage = error;
         // }

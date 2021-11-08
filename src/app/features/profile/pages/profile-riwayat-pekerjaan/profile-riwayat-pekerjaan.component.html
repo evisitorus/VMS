@@ -1,7 +1,10 @@
 <div class="profile-section">
+
   <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
+    <app-sidebar></app-sidebar>
   </div>
+  
+
   <div class="profile-content">
 
     <kendo-label>Riwayat Pekerjaan</kendo-label>
@@ -22,10 +25,11 @@
         <kendo-grid-column field="is_domestic_shareholder" title="Lampiran">
         </kendo-grid-column>
         <kendo-grid-column field="action" title="Action">
+          Edit | Delete
         </kendo-grid-column>
       </kendo-grid>
       <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
+      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="button-right">
         Tambah Riwayat Pekerjaan
       </button>
 
@@ -51,6 +55,7 @@
           <kendo-formfield>
             <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
             <kendo-fileselect  formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [title]="'Pilih File'"></kendo-fileselect>
+            <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
           </kendo-formfield>
         </form>
         </div>
