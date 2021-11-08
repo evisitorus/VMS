@@ -47,6 +47,7 @@
         "@progress/kendo-data-query": "^1.0.0",
         "@progress/kendo-drawing": "^1.5.12",
         "@progress/kendo-licensing": "^1.0.2",
+        "@progress/kendo-theme-bootstrap": "^4.42.0",
         "@progress/kendo-theme-default": "latest",
         "mochawesome": "^6.3.1",
         "rxjs": "~6.6.0",
