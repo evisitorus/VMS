@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 
-import { PekerjaanInterface } from 'src/app/core/interfaces/pekerjaan-interface';
+import { AddPekerjaanInterface } from 'src/app/core/interfaces/add-pekerjaan-interface';
 
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -31,6 +31,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
   public gridData: any = samplePekerjaans;
   record = 0;
+  access_token = "124";
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -62,7 +63,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       {field: "tahunPekerjaan", title:"Tahun"}, 
       {field: "buktiPekerjaanFilePath", title:"Lampiran "}
     ];
-    this.gridData = samplePekerjaans;
+
+    this.gridData = this.getPekerjaan();
   }
 
   public opened = false;
@@ -113,8 +115,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
     this.validasiForm();
 
-    let params: PekerjaanInterface= {...this.pekerjaanForm.value};
-    this.profileService.pekerjaan(params).subscribe(
+    let params: AddPekerjaanInterface= {...this.pekerjaanForm.value};
+    this.profileService.addPekerjaan(params).subscribe(
       (resp) =>  { 
         this.submitted = true;
         this.popUpMessage = messages.default;
@@ -133,4 +135,24 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     );
   }
   
+  getPekerjaan(){
+    this.profileService.getPekerjaan(this.access_token).subscribe(
+      (resp) =>  { 
+        this.submitted = true;
+        this.popUpMessage = messages.default;
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+        console.log(resp);
+      },
+      (error) => { 
+        console.log(this.access_token);
+        console.log(console.error());
+        // if(error.error.message){
+          this.popUpMessage = error;
+        // }
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      }
+    );
+  }
 }

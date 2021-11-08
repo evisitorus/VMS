@@ -1,4 +1,4 @@
-export interface PekerjaanInterface {
+export interface AddPekerjaanInterface {
     email: string;
     namaPekerjaan: string;
     pemberiPekerjaan: string;
