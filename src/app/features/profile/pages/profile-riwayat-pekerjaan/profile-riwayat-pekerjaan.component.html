@@ -54,8 +54,8 @@
           </kendo-formfield>
           <kendo-formfield>
             <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
-            <kendo-fileselect  formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [title]="'Pilih File'"></kendo-fileselect>
             <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
+            <kendo-fileselect  formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [restrictions]="myRestrictions" [title]="'Pilih File'"></kendo-fileselect>
           </kendo-formfield>
         </form>
         </div>

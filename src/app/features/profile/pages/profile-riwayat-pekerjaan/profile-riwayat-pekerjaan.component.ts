@@ -7,6 +7,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { samplePekerjaans } from './pekerjaan';
+import { FileRestrictions } from '@progress/kendo-angular-upload';
 
 const messages = {
   default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
@@ -32,6 +33,11 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public gridData: any = samplePekerjaans;
   record = 0;
   access_token = "124";
+
+  myRestrictions: FileRestrictions = {
+    maxFileSize: 2194304,
+    allowedExtensions: [".jpg", ".png", "pdf"]
+  };
 
   constructor(
     private formBuilder: FormBuilder, 
