@@ -24,6 +24,7 @@ describe('ProfileService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(ProfileService);
+    apiService = TestBed.inject(ApiService);
   });
 
   it('test addPekerjaan function', () => {
@@ -43,6 +44,23 @@ describe('ProfileService', () => {
 
     spyOn(apiService, 'sendRequest').and.returnValue(res);
     service.addPekerjaan(param).subscribe(
+      (resp) => {
+        expect(resp).toBe(true);
+      }
+    );
+  });
+
+
+  it('test getPekerjaan function', () => {
+    let res = new Observable((subscriber) => {
+      subscriber.next(true);
+      subscriber.complete();
+    });
+
+    let badanUsaha: string = "124";
+
+    spyOn(apiService, 'sendRequest').and.returnValue(res);
+    service.getPekerjaan(badanUsaha).subscribe(
       (resp) => {
         expect(resp).toBe(true);
       }
