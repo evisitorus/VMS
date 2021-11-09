@@ -74,12 +74,8 @@
       <div class="row align-items-center">
         <kendo-label class="col-2">BUMN Pengampu</kendo-label>
 
-        <kendo-chip class="col-md-auto" *ngFor="let contact of selectedContacts" [label]="contact.label" [removable]="true"
-          [iconClass]="contact.iconClass" (remove)="onRemove($event)">
-        </kendo-chip>
-
-        <kendo-autocomplete #contactslist [data]="contacts" class="contacts col-md-auto" valueField="label"
-          [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="To: Email Adress*"
+        <kendo-autocomplete #contactslist [data]="contacts" class="col" valueField="label"
+          [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu"
           (valueChange)="valueChange($event)">
         </kendo-autocomplete>
       </div>
@@ -87,11 +83,9 @@
 
       <div class="row align-items-center">
         <kendo-label class="col-2">Organisasi Himpunan</kendo-label>
-        <kendo-chip class="col-md-auto" *ngFor="let contact of selectedContacts" [label]="contact.label" [removable]="true"
-          [iconClass]="contact.iconClass" (remove)="onRemove($event)">
-        </kendo-chip>
-        <kendo-autocomplete #contactslist [data]="contacts" class="contacts col-md-auto" valueField="label"
-          [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="To: Email Adress*"
+
+        <kendo-autocomplete #contactslist [data]="contacts" class="col" valueField="label"
+          [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan"
           (valueChange)="valueChange($event)">
         </kendo-autocomplete>
       </div>
