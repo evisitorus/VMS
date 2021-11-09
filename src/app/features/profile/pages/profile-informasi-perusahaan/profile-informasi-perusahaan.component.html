@@ -176,32 +176,42 @@
         </button>
 
         <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
-          <div>
-            <div>
-              <kendo-label>No</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <div class="container">
+            <div class="row align-items-center">
+              <kendo-label class="col">No</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>Nama Pemegang Saham</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            <div class="row align-items-center">
+              <kendo-label class="col">Nama Pemegang Saham</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>Jenis Pemegang Saham</kendo-label>
-              <input type="radio" #terms kendoRadioButton />
-              <kendo-label class="k-radio-label" [for]="terms" text="Perseorangan"></kendo-label>
-              <input type="radio" #terms kendoRadioButton />
-              <kendo-label class="k-radio-label" [for]="terms" text="Badan Usaha"></kendo-label>
+
+            <div class="row">
+              <kendo-label class="col-md-auto">Jenis Pemegang Saham</kendo-label>
+              <div class="col-md-auto">
+                <input type="radio" #terms kendoRadioButton />
+                <kendo-label class="k-radio-label" [for]="terms" text="Perseorangan"></kendo-label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" #terms kendoRadioButton />
+                <kendo-label class="k-radio-label" [for]="terms" text="Badan Usaha"></kendo-label>
+              </div>
             </div>
-            <div>
-              <kendo-label>Pemegang Saham</kendo-label>
-              <input type="radio" #terms kendoRadioButton />
-              <kendo-label class="k-radio-label" [for]="terms" text="Lokal"></kendo-label>
-              <input type="radio" #terms kendoRadioButton />
-              <kendo-label class="k-radio-label" [for]="terms" text="Asing"></kendo-label>
+
+            <div class="row">
+              <kendo-label class="col-md-auto">Pemegang Saham</kendo-label>
+              <div class="col-md-auto">
+                <input type="radio" #terms kendoRadioButton />
+                <kendo-label class="k-radio-label" [for]="terms" text="Lokal"></kendo-label>
+              </div>
+              <div class="col-md-auto">
+                <input type="radio" #terms kendoRadioButton />
+                <kendo-label class="k-radio-label" [for]="terms" text="Asing"></kendo-label>
+              </div>
             </div>
-            <div>
-              <kendo-label>% Kepemilikan Saham</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            <div class="row align-items-center">
+              <kendo-label class="col">% Kepemilikan Saham</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
           </div>
 
