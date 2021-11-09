@@ -97,14 +97,12 @@ describe('RegisterComponent', () => {
 
     spyOn(authService, 'register').and.returnValue(obs);
     spyOn(component, 'triggerPopUp');
-    spyOn(component, 'validasiForm');
 
     component.register();
     
-    //TODO
-    // expect(component.submitted).toBe(true);
-    // expect(component.popUpMessage).toBe(response.message);
-    // expect(component.redirectOnClosePopUp).toBe(true);
+    expect(component.submitted).toBe(true);
+    expect(component.popUpMessage).toBe(response.message);
+    expect(component.redirectOnClosePopUp).toBe(true);
     expect(component.triggerPopUp).toHaveBeenCalled();
   });
 
@@ -130,7 +128,7 @@ describe('RegisterComponent', () => {
     
     expect(component.isLoggedIn).toBe(false);
     expect(component.popUpMessage).toBe(response.error.message);
-    expect(component.redirectOnClosePopUp).toBe(false);
+    expect(component.redirectOnClosePopUp).toBe(true);
     expect(component.triggerPopUp).toHaveBeenCalled();
   });
 

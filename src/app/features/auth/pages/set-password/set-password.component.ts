@@ -97,19 +97,19 @@ export class SetPasswordComponent implements OnInit {
     this.formSetPassword.markAllAsTouched();
 
     // stop here if form is invalid
-    if (this.formSetPassword.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = false;
-      return;
-    }
+    // if (this.formSetPassword.invalid) {
+    //   this.popUpMessage = messages.default;
+    //   this.triggerPopUp();
+    //   this.redirectOnClosePopUp = false;
+    //   return;
+    // }
 
     let params: SetPasswordInterface= {...this.formSetPassword.value};
 
     this.authService.setPassword(params).subscribe(
       (resp) =>  { 
         this.submitted = true;
-        this.popUpMessage = resp.message + messages.success;
+        this.popUpMessage = resp.message;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
       },

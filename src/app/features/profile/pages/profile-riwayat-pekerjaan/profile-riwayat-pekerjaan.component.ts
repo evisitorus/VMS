@@ -77,7 +77,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public openedSaham = false;
 
   public close() {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
@@ -86,7 +85,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public closeSaham() {
-    console.log(`Dialog result: ${status}`);
     this.openedSaham = false;
   }
 
@@ -126,7 +124,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       (resp) =>  { 
         console.log("ok");
         this.submitted = true;
-        this.popUpMessage = messages.default;
+        this.popUpMessage = messages.success;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
         this.closeSaham();
