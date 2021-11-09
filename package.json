@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start": "ng serve --host 0.0.0.0",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
@@ -33,6 +33,7 @@
         "@progress/kendo-angular-dropdowns": "^5.0.0",
         "@progress/kendo-angular-excel-export": "^4.0.0",
         "@progress/kendo-angular-grid": "^5.4.2",
+        "@progress/kendo-angular-icons": "^0.4.3",
         "@progress/kendo-angular-inputs": "^7.4.0",
         "@progress/kendo-angular-intl": "^3.1.0",
         "@progress/kendo-angular-l10n": "^3.0.0",

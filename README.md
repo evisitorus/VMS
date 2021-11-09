@@ -32,3 +32,23 @@ Error: error:0308010C:digital envelope routines::unsupported
 export NODE_OPTIONS=--openssl-legacy-provider
 ng test --no-watch --code-coverage
 ```
+
+## start coding
+- up service
+```
+npm update
+ng serve --open
+```
+
+## add kendo
+```
+ng add @progress/kendo-angular-layout
+```
+
+## Running Acceptance Test
+To run codecept steps and features run this command
+```
+npm run codeceptjs
+```
+
+For more detailed guide about Codecept check this [Wiki](https://gitlab.playcourt.id/b2b-squad/padi-e-proc/vms/-/wikis/Codecept-Configuration)
