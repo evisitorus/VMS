@@ -159,11 +159,11 @@
         <kendo-grid>
           <kendo-grid-column field="no" title="No.">
           </kendo-grid-column>
-          <kendo-grid-column field="shareholder_name" title="Nama Pemeganng Saham">
+          <kendo-grid-column field="shareholder_name" title="Nama Pemegang Saham">
           </kendo-grid-column>
-          <kendo-grid-column field="shareholder_type" title="Jenis Pemeganng Saham">
+          <kendo-grid-column field="shareholder_type" title="Jenis Pemegang Saham">
           </kendo-grid-column>
-          <kendo-grid-column field="is_domestic_shareholder" title="Pemeganng Saham Lokal/Asing">
+          <kendo-grid-column field="is_domestic_shareholder" title="Pemegang Saham Lokal/Asing">
           </kendo-grid-column>
           <kendo-grid-column field="ownership" title="% Kepemilikan">
           </kendo-grid-column>
@@ -251,34 +251,36 @@
         </button>
 
         <kendo-dialog title="Tambah Pegawai" *ngIf="opened" (close)="close()">
-          <div>
-            <div>
-              <kendo-label>No</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <div class="container">
+            <div class="row align-items-center">
+              <kendo-label class="col">No</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>NIK</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            <div class="row align-items-center">
+              <kendo-label class="col">NIK</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>Nama Karyawan</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            <div class="row align-items-center">
+              <kendo-label class="col">Nama Karyawan</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>Tipe Karyawan</kendo-label>
-              <kendo-splitbutton look="outline">Pilih Tipe Karyawan</kendo-splitbutton>
+            <div class="row align-items-center">
+              <kendo-label class="col">Tipe Karyawan</kendo-label>
+              <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Tipe Karyawan" [data]="listItems" [valuePrimitive]="true">
+              </kendo-dropdownlist>
             </div>
-            <div>
-              <kendo-label>Jabatan</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            <div class="row align-items-center">
+              <kendo-label class="col">Jabatan</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>Bidang Pekerjaan</kendo-label>
-              <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            <div class="row align-items-center">
+              <kendo-label class="col">Bidang Pekerjaan</kendo-label>
+              <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
             </div>
-            <div>
-              <kendo-label>Resume</kendo-label>
-              <kendo-fileselect [title]="'Pilih File'"></kendo-fileselect>
+            <div class="row align-items-center">
+              <kendo-label class="col">Resume</kendo-label>
+              <kendo-fileselect class="col-md-auto" [title]="'Pilih File'"></kendo-fileselect>
+              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
           </div>
 
