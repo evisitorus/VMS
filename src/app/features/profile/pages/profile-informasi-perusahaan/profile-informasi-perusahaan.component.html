@@ -13,11 +13,11 @@
       </div>
       <hr kendoCardSeparator class="mb-2">
       <div class="row align-items-center">
-        <kendo-label class="col-2">Nama Perusahaan</kendo-label>
+        <kendo-label class="col-3">Nama Perusahaan</kendo-label>
         <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row align-items-center">
-        <kendo-label class="col-2">Inisial Perusahaan</kendo-label>
+        <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
         <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row">
@@ -48,31 +48,31 @@
       </div>
 
       <div class="row align-items-center">
-        <kendo-label class="col-2">Tipe Badan Usaha</kendo-label>
+        <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
         <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Tipe Badan Usaha" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
       <div class="row align-items-center">
-        <kendo-label class="col-2">Kategori Badan Usaha</kendo-label>
+        <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
         <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Kategori Badan Usaha" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
       <div class="row align-items-center">
-        <kendo-label class="col-2">Jenis Kegiatan Usaha Utama</kendo-label>
+        <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
         <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
       <div class="row align-items-center">
-        <kendo-label class="col-2">Jenis Penyedia Usaha</kendo-label>
+        <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
         <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
       <div class="row align-items-center">
-        <kendo-label class="col-2">BUMN Pengampu</kendo-label>
+        <kendo-label class="col-3">BUMN Pengampu</kendo-label>
 
         <kendo-autocomplete #contactslist [data]="contacts" class="col" valueField="label"
           [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu"
@@ -82,7 +82,7 @@
 
 
       <div class="row align-items-center">
-        <kendo-label class="col-2">Organisasi Himpunan</kendo-label>
+        <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
 
         <kendo-autocomplete #contactslist [data]="contacts" class="col" valueField="label"
           [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan"
@@ -90,9 +90,9 @@
         </kendo-autocomplete>
       </div>
 
-      <div>
-        <kendo-label>Nomor Induk Berusaha (NIB)</kendo-label>
-        <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+      <div class="row align-items-center">
+        <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
+        <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
 
       <div>
