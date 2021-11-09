@@ -42,50 +42,50 @@
         </div>
       </div>
 
-      <div class="example-wrapper">
-        <kendo-label>Tipe Badan Usaha</kendo-label>
-        <kendo-dropdownlist defaultItem="Pilih Tipe Badan Usaha" [data]="listItems" [valuePrimitive]="true">
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Tipe Badan Usaha</kendo-label>
+        <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Tipe Badan Usaha" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
-      <div class="example-wrapper">
-        <kendo-label>Kategori Badan Usaha</kendo-label>
-        <kendo-dropdownlist defaultItem="Pilih Kategori Badan Usaha" [data]="listItems" [valuePrimitive]="true">
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Kategori Badan Usaha</kendo-label>
+        <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Kategori Badan Usaha" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
-      <div class="example-wrapper">
-        <kendo-label>Jenis Kegiatan Usaha Utama</kendo-label>
-        <kendo-dropdownlist defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Jenis Kegiatan Usaha Utama</kendo-label>
+        <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
-      <div class="example-wrapper">
-        <kendo-label>Jenis Penyedia Usaha</kendo-label>
-        <kendo-dropdownlist defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Jenis Penyedia Usaha</kendo-label>
+        <kendo-dropdownlist class="col-md-auto" defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
-      <div class="example-wrapper">
-        <kendo-label>BUMN Pengampu</kendo-label>
+      <div class="row align-items-center">
+        <kendo-label class="col-2">BUMN Pengampu</kendo-label>
 
-        <kendo-chip *ngFor="let contact of selectedContacts" [label]="contact.label" [removable]="true"
+        <kendo-chip class="col-md-auto" *ngFor="let contact of selectedContacts" [label]="contact.label" [removable]="true"
           [iconClass]="contact.iconClass" (remove)="onRemove($event)">
         </kendo-chip>
 
-        <kendo-autocomplete #contactslist [data]="contacts" class="contacts" valueField="label"
+        <kendo-autocomplete #contactslist [data]="contacts" class="contacts col-md-auto" valueField="label"
           [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="To: Email Adress*"
           (valueChange)="valueChange($event)">
         </kendo-autocomplete>
       </div>
 
 
-      <div class="example-wrapper">
-        <kendo-label>Organisasi Himpunan</kendo-label>
-        <kendo-chip *ngFor="let contact of selectedContacts" [label]="contact.label" [removable]="true"
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Organisasi Himpunan</kendo-label>
+        <kendo-chip class="col-md-auto" *ngFor="let contact of selectedContacts" [label]="contact.label" [removable]="true"
           [iconClass]="contact.iconClass" (remove)="onRemove($event)">
         </kendo-chip>
-        <kendo-autocomplete #contactslist [data]="contacts" class="contacts" valueField="label"
+        <kendo-autocomplete #contactslist [data]="contacts" class="contacts col-md-auto" valueField="label"
           [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="To: Email Adress*"
           (valueChange)="valueChange($event)">
         </kendo-autocomplete>
@@ -131,13 +131,13 @@
         <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
 
-      <div class="example-wrapper">
+      <div class="row">
         <kendo-label>Provinsi / Kota</kendo-label>
         <kendo-dropdownlist defaultItem="Pilih Provinsi / Kota" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
 
-      <div class="example-wrapper">
+      <div class="row">
         <kendo-label>Kecamatan / Kelurahan</kendo-label>
         <kendo-dropdownlist defaultItem="Pilih Kecamatan / Kelurahan" [data]="listItems" [valuePrimitive]="true">
         </kendo-dropdownlist>
