@@ -7,16 +7,14 @@
       <h1 kendoCardTitle>Informasi Perusahaan</h1>
     </kendo-card-header>
     <kendo-card-body>
-      <div class="row">
-        <kendo-label>Nama Perusahaan</kendo-label>
-        <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Nama Perusahaan</kendo-label>
+        <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
-
-      <div class="row">
-        <kendo-label>Inisial Perusahaan</kendo-label>
-        <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+      <div class="row align-items-center">
+        <kendo-label class="col-2">Inisial Perusahaan</kendo-label>
+        <kendo-textbox class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
-
       <div class="row">
         <kendo-label>Jenis Badan Usaha</kendo-label>
         <div class="col-md-auto">
@@ -32,15 +30,16 @@
           <kendo-label class="k-radio-label" [for]="terms" text="Lainnya"></kendo-label>
         </div>
       </div>
-
-      <div class="example-wrapper">
+      <div class="row">
         <kendo-label>Status Badan Usaha</kendo-label>
-        <br>
-        <input type="radio" #terms kendoRadioButton />
-        <kendo-label class="k-radio-label" [for]="terms" text="PKP"></kendo-label>
-        &nbsp;
-        <input type="radio" #terms kendoRadioButton />
-        <kendo-label class="k-radio-label" [for]="terms" text="Non-PKP"></kendo-label>
+        <div class="col-md-auto">
+          <input type="radio" #terms kendoRadioButton />
+          <kendo-label class="k-radio-label" [for]="terms" text="PKP"></kendo-label>
+        </div>
+        <div class="col-md-auto">
+          <input type="radio" #terms kendoRadioButton />
+          <kendo-label class="k-radio-label" [for]="terms" text="Non-PKP"></kendo-label>
+        </div>
       </div>
 
       <div class="example-wrapper">
