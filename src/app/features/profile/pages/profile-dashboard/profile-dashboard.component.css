@@ -1,0 +1,16 @@
+.vendor-steps-row{
+  margin: 0 0 1rem;
+}
+
+.vendor-profile-detail{
+  margin-left: 1em;
+}
+
+.vendor-profile{
+  margin-bottom: 1em;
+}
+
+.vendor-hint{
+  font-style: italic;
+  font-size: smaller;
+}
