@@ -586,3 +586,48 @@ Then(/^The Vendor \(Basic\) warning message tooltip on lampiran "(.*?)"$/, () =>
   // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":91,"column":7}
   throw new Error('Not implemented yet');
 });
+
+When(/^And The Vendor \(Basic\) must click "(.*?)" menu where found on "(.*?)" of "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":13,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must define avatar from his\/her account where found on "(.*?)" form$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":16,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) already manage her\/his company information by adding "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":48,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants manage "(.*?)" of VMS$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":75,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must clicks "(.*?)" menu where found on "(.*?)" of "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":76,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) define avatar not in jpg \/ jpeg \/ png extension$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":56,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will warning message tooltip on avatar input as "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":91,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) can't continue to process saving data of "(.*?)" due not suitable format on avatar$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":92,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) define avatar with size more than (\d+) MB$/, () => {
+  // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":78,"column":7}
+  throw new Error('Not implemented yet');
+});
