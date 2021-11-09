@@ -61,10 +61,11 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       {field: "pemberiPekerjaan", title:"Pemberi Pekerjaan"}, 
       {field: "nilaiPekerjaan", title:"Nilai Pekerjaan"}, 
       {field: "tahunPekerjaan", title:"Tahun"}, 
-      {field: "buktiPekerjaanFilePath", title:"Lampiran "}
+      {field: "buktiPekerjaanFilePath", title:"Lampiran"}
     ];
 
     this.gridData = this.getPekerjaan();
+    // this.gridData = samplePekerjaans;
   }
 
   public opened = false;
@@ -138,11 +139,9 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   getPekerjaan(){
     this.profileService.getPekerjaan(this.access_token).subscribe(
       (resp) =>  { 
-        this.submitted = true;
-        this.popUpMessage = messages.default;
-        this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
         console.log(resp);
+        console.log(this.access_token);
+        console.log("ok");
       },
       (error) => { 
         console.log(this.access_token);

@@ -46,7 +46,6 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     SharedModule,
 
     AppRoutingModule,
-    DialogsModule,
     LayoutModule,
   ],
   providers: [],

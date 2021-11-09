@@ -26,6 +26,12 @@ export class SetPasswordComponent implements OnInit {
   @ViewChild("password") public textbox!: TextBoxComponent;
   @ViewChild("confirmPassword") public textbox1!: TextBoxComponent;
 
+  formSetPassword = new FormGroup({
+    password: new FormControl(),
+    confirmPassword: new FormControl(),
+    token: new FormControl(),
+  });
+
   submitted = false;
   isLoggedIn: boolean = false;
   popUpTitle: string = "Informasi Registrasi Akun";
@@ -58,12 +64,6 @@ export class SetPasswordComponent implements OnInit {
         validator: MustMatch('password', 'confirmPassword')
     });
   }
-
-  formSetPassword = new FormGroup({
-    password: new FormControl(),
-    confirmPassword: new FormControl(),
-    token: new FormControl(),
-  });
 
   public ngAfterViewInit(): void {
     this.textbox.input.nativeElement.type = "password";
@@ -120,15 +120,6 @@ export class SetPasswordComponent implements OnInit {
         this.triggerPopUp();
       }
     );
-  }
-
-  validasiForm(){
-    if (this.formSetPassword.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = true;
-      return;
-    }
   }
 
 }

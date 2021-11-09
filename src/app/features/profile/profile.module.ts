@@ -7,6 +7,7 @@ import {ProfileDokumenComponent} from "./pages/profile-dokumen/profile-dokumen.c
 import {ProfileRiwayatPekerjaanComponent} from "./pages/profile-riwayat-pekerjaan/profile-riwayat-pekerjaan.component";
 import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component";
 import {ProfileLaporanKeuanganComponent} from "./pages/profile-laporan-keuangan/profile-laporan-keuangan.component";
+import {ProfileDashboardComponent} from "./pages/profile-dashboard/profile-dashboard.component";
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -22,7 +23,7 @@ import {LayoutModule} from "@progress/kendo-angular-layout";
 import {ButtonsModule} from "@progress/kendo-angular-buttons";
 import {MenusModule} from "@progress/kendo-angular-menu";
 import {DropDownsModule} from "@progress/kendo-angular-dropdowns";
-import {DialogModule} from "@progress/kendo-angular-dialog";
+import {DialogModule, WindowModule} from "@progress/kendo-angular-dialog";
 import {HttpClientModule} from "@angular/common/http";
 import {GridModule} from "@progress/kendo-angular-grid";
 import {UploadsModule} from "@progress/kendo-angular-upload";
@@ -41,6 +42,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ProfileRiwayatPekerjaanComponent,
     ProfileAlamatComponent,
     ProfileLaporanKeuanganComponent,
+    ProfileDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     GridModule,
     InputsModule,
     UploadsModule,
-    IntlModule
+    IntlModule,
+    WindowModule
   ]
 })
 export class ProfileModule {
