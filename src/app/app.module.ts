@@ -45,7 +45,6 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     SharedModule,
 
     AppRoutingModule,
-    DialogsModule,
     LayoutModule,
   ],
   providers: [],
