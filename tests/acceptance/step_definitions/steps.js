@@ -631,3 +631,13 @@ When(/^The Vendor \(Basic\) define avatar with size more than (\d+) MB$/, () => 
   // From "tests/acceptance/features/ProfilAkunPIC.feature" {"line":78,"column":7}
   throw new Error('Not implemented yet');
 });
+
+When(/^The Vendor \(Basic\) will see that pop-up form already closed when she\/he clicks "(.*?)"$/, () => {
+  // From "tests/acceptance/features/ProfilAsset.feature" {"line":34,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) already manage Asset from his\/her company$/, () => {
+  // From "tests/acceptance/features/ProfilAsset.feature" {"line":64,"column":5}
+  throw new Error('Not implemented yet');
+});
