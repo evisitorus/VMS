@@ -17,6 +17,7 @@ const messages = {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({});
   submitted = false;
@@ -24,8 +25,13 @@ export class RegisterComponent implements OnInit {
   public mask: string = "99.999.999.9-999.999";
 
   popUpTitle: string = "Informasi Registrasi Akun";
-  popUpMessage: string = messages.success;
+  popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
+
+  public minlength = 8;
+  public maxlength = 15;
+  public charachtersCount = 0;
+  public counter = `${this.charachtersCount}/${this.maxlength}`;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -53,14 +59,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm.markAllAsTouched();
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = false;
-      return;
-    }
-
-    this.validasiForm();
+    // if (this.registerForm.invalid) {
+    //   this.popUpMessage = messages.default;
+    //   this.triggerPopUp();
+    //   this.redirectOnClosePopUp = false;
+    //   return;
+    // }
 
     let params: RegisterInterface= {...this.registerForm.value};
     this.authService.register(params).subscribe(
@@ -89,13 +93,17 @@ export class RegisterComponent implements OnInit {
     this.eventEmitterService.trigger();
   }
 
-  validasiForm(){
-    if (this.registerForm.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = true;
-      return;
-    }
-  }
+  // validasiForm(){
+  //   if (this.registerForm.invalid) {
+  //     this.popUpMessage = messages.default;
+  //     this.triggerPopUp();
+  //     this.redirectOnClosePopUp = true;
+  //     return;
+  //   }
+  // }
 
+  public onValueChange(ev: any): void {
+    this.charachtersCount = ev.length;
+    this.counter = `${this.charachtersCount}/${this.maxlength}`;
+  }
 }

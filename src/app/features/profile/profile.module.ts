@@ -7,6 +7,7 @@ import {ProfileDokumenComponent} from "./pages/profile-dokumen/profile-dokumen.c
 import {ProfileRiwayatPekerjaanComponent} from "./pages/profile-riwayat-pekerjaan/profile-riwayat-pekerjaan.component";
 import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component";
 import {ProfileLaporanKeuanganComponent} from "./pages/profile-laporan-keuangan/profile-laporan-keuangan.component";
+import {ProfileDashboardComponent} from "./pages/profile-dashboard/profile-dashboard.component";
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -41,6 +42,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ProfileRiwayatPekerjaanComponent,
     ProfileAlamatComponent,
     ProfileLaporanKeuanganComponent,
+    ProfileDashboardComponent
   ],
   imports: [
     CommonModule,

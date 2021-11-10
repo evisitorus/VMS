@@ -2,8 +2,8 @@ exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
-      url: 'http://localhost',
-      show: true,
+      url: 'http://localhost:4200',
+      show: false,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
