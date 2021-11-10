@@ -83,3 +83,7 @@
 .row {
   margin-bottom: 0.5rem;
 }
+
+.k-panelbar-content {
+  padding: 1em;
+}
