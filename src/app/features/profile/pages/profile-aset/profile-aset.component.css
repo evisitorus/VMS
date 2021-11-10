@@ -1,13 +1,27 @@
-.profile-section {
+/* .profile-section {
   border-style: groove;
+} */
+
+.profile-content {
+  padding: 2em !important;
+  margin-left: 300px !important;
 }
 
 .profile-menu {
-  border-style: groove;
   float: left;
+  height: 100vh;
 }
 
-.profile-content {
-  border-style: groove;
+.profile-content-title {
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+
+.profile-content-grid-button {
   float: right;
+  margin-top: 1em;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
 }
