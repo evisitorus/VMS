@@ -17,20 +17,20 @@ When('The Vendor goes to {string} form', () => {
   I.amOnPage('/register');
 });
 
-When('The Vendor must fill information which needed for registration on {string} form', (data) => {
-  // let data = JSON.parse(raw_data.content);
-  // $data=json_decode(data, true);
-  // let form_aliases = this.helpers['Alias'].formAliases[form_name];
-  I.waitForElement('#k-9fe25d8c-6ec4-43a7-b569-0600335d361a');
-  I.fillField('#k-9fe25d8c-6ec4-43a7-b569-0600335d361a', '99.999.999.9-999.999');
-  I.fillField('#k-2fd126fd-d418-4e30-962a-6937056e91e7', 'PT. Abadi Jaya Sentosa Selalu');
-  I.fillField('#k-2fd126fd-d418-4e30-962a-6937056e91e7', 'James Bucky Barnes');
-  I.fillField('#k-c9539647-e15c-4cbe-ad52-9908427df042', 'admin@abadijaya.co.id');
-  I.fillField('#k-2b8b3d2c-23de-448e-9481-8a89a6f3f400', '0812345');
-  // I.fillFormWithHelper(form_name, raw_data);
+When('The Vendor must fill information which needed for registration on {string} form', () => {
+  I.waitForElement('#npwp input[type=text]');
+  I.fillField('#npwp input[type=text]', '99.999.999.9-999.999');
+  I.waitForElement('#namaPerusahaan input[class=k-input]');
+  I.fillField('#namaPerusahaan input[class=k-input]', 'PT. Abadi Jaya Sentosa Selalu');
+  I.waitForElement('#namaPic input[class=k-input]');
+  I.fillField('#namaPic input[class=k-input]', 'James Bucky Barnes');
+  I.waitForElement('#email input[class=k-input]');
+  I.fillField('#email input[class=k-input]', 'admin@abadijaya.co.id');
+  I.waitForElement('#noTelepon input[class=k-input]');
+  I.fillField('#noTelepon input[class=k-input]', '0812345');
 });
 
-When('The Vendor must clicks {string}', (option) => {
+When('The Vendor must clicks {string}', () => {
     // switch (button) {
     //   case "Disclaimer":
     //       I.waitForElement('#k-1d774903-56ba-43f5-baf4-6feae786a68d');
@@ -40,12 +40,14 @@ When('The Vendor must clicks {string}', (option) => {
     //       I.click(button);
     //       break;
     // }
-    I.clickWithHelper(option);
+    I.waitForElement('#disclaimer');
+    I.checkOption('#disclaimer');
 
 });
 
 When('The Vendor must clicks button {string}', () => {
-  I.click('#Daftar');
+  I.waitForElement('#register');
+  I.click('#register');
 });
 
 When('The Vendor will get badge as {string}', () => {
