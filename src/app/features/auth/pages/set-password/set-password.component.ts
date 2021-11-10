@@ -26,6 +26,12 @@ export class SetPasswordComponent implements OnInit {
   @ViewChild("password") public textbox!: TextBoxComponent;
   @ViewChild("confirmPassword") public textbox1!: TextBoxComponent;
 
+  formSetPassword = new FormGroup({
+    password: new FormControl(),
+    confirmPassword: new FormControl(),
+    token: new FormControl(),
+  });
+
   submitted = false;
   isLoggedIn: boolean = false;
   popUpTitle: string = "Informasi Registrasi Akun";
@@ -59,12 +65,6 @@ export class SetPasswordComponent implements OnInit {
     });
   }
 
-  formSetPassword = new FormGroup({
-    password: new FormControl(),
-    confirmPassword: new FormControl(),
-    token: new FormControl(),
-  });
-
   public ngAfterViewInit(): void {
     this.textbox.input.nativeElement.type = "password";
     this.textbox1.input.nativeElement.type = "password";
@@ -97,19 +97,19 @@ export class SetPasswordComponent implements OnInit {
     this.formSetPassword.markAllAsTouched();
 
     // stop here if form is invalid
-    if (this.formSetPassword.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = false;
-      return;
-    }
+    // if (this.formSetPassword.invalid) {
+    //   this.popUpMessage = messages.default;
+    //   this.triggerPopUp();
+    //   this.redirectOnClosePopUp = false;
+    //   return;
+    // }
 
     let params: SetPasswordInterface= {...this.formSetPassword.value};
 
     this.authService.setPassword(params).subscribe(
       (resp) =>  { 
         this.submitted = true;
-        this.popUpMessage = resp.message + messages.success;
+        this.popUpMessage = resp.message;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
       },
@@ -120,15 +120,6 @@ export class SetPasswordComponent implements OnInit {
         this.triggerPopUp();
       }
     );
-  }
-
-  validasiForm(){
-    if (this.formSetPassword.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = true;
-      return;
-    }
   }
 
 }

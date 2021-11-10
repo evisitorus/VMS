@@ -25,7 +25,7 @@ describe('RegisterComponent', () => {
   let eventEmitterService: EventEmitterService;
 
   const messages = {
-    failed: 'Field tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
+    default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
     success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
     disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
   };
@@ -97,14 +97,12 @@ describe('RegisterComponent', () => {
 
     spyOn(authService, 'register').and.returnValue(obs);
     spyOn(component, 'triggerPopUp');
-    spyOn(component, 'validasiForm');
 
     component.register();
     
-    //TODO
-    // expect(component.submitted).toBe(true);
-    // expect(component.popUpMessage).toBe(response.message);
-    // expect(component.redirectOnClosePopUp).toBe(true);
+    expect(component.submitted).toBe(true);
+    expect(component.popUpMessage).toBe(response.message);
+    expect(component.redirectOnClosePopUp).toBe(true);
     expect(component.triggerPopUp).toHaveBeenCalled();
   });
 
@@ -113,7 +111,7 @@ describe('RegisterComponent', () => {
       ok: false,
       status: 400,
       error: {
-        message: messages.failed,
+        message: messages.default,
         status: false
       }
     };
@@ -130,7 +128,7 @@ describe('RegisterComponent', () => {
     
     expect(component.isLoggedIn).toBe(false);
     expect(component.popUpMessage).toBe(response.error.message);
-    expect(component.redirectOnClosePopUp).toBe(false);
+    expect(component.redirectOnClosePopUp).toBe(true);
     expect(component.triggerPopUp).toHaveBeenCalled();
   });
 

@@ -1,13 +1,28 @@
-.profile-section {
+/* .profile-section {
   border-style: groove;
-}
+} */
 
-.profile-menu {
+/* .profile-menu {
   border-style: groove;
   float: left;
-}
+} */
 
+
+.profile-menu {
+  float: left;
+  height: 100vh;
+}
+/* 
 .profile-content {
   border-style: groove;
+  float: right;
+} */
+
+.profile-content {
+  padding: 40px;
+  display: table;
+}
+
+.button-right {
   float: right;
 }
