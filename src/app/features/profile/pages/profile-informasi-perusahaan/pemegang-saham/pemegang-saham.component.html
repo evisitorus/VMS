@@ -21,6 +21,8 @@
     </button>
 
     <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
+
+    <form [formGroup]="jenisSahamFormGroup">
       <div>
         <!-- <div>
           <kendo-label>No</kendo-label>
@@ -28,27 +30,58 @@
         </div> -->
         <div>
           <kendo-label>Nama Pemegang Saham</kendo-label>
-          <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <kendo-textbox id="namaPemegangSaham" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
         </div>
         <div>
           <kendo-label>Jenis Pemegang Saham</kendo-label>
-          <input type="radio" #terms kendoRadioButton/>
-          <kendo-label class="k-radio-label" [for]="terms" text="Perseorangan"></kendo-label>
-          <input type="radio" #terms kendoRadioButton/>
-          <kendo-label class="k-radio-label" [for]="terms" text="Badan Usaha"></kendo-label>
+            <input
+              id="Perseorangan"
+              type="radio"
+              required
+              value="Perseorangan"
+              formControlName="Perseorangan"
+              kendoRadioButton
+            />
+            <kendo-label class="k-radio-label"  for="Perseorangan">Perseorangan</kendo-label>
+            <input
+              id="BadanUsaha"
+              type="radio"
+              required
+              value="BadanUsaha"
+              formControlName="Perseorangan"
+              kendoRadioButton
+            />
+            <kendo-label class="k-radio-label" for="BadanUsaha">Badan Usaha</kendo-label>
+        </div>
+        <div>
         </div>
         <div>
           <kendo-label>Pemegang Saham</kendo-label>
-          <input type="radio" #terms kendoRadioButton/>
-          <kendo-label class="k-radio-label" [for]="terms" text="Lokal"></kendo-label>
-          <input type="radio" #terms kendoRadioButton/>
-          <kendo-label class="k-radio-label" [for]="terms" text="Asing"></kendo-label>
+          <input
+          id="Lokal"
+          type="radio"
+          required
+          value="Lokal"
+          formControlName="Lokal"
+          kendoRadioButton
+        />
+        <kendo-label class="k-radio-label"  for="Lokal">Lokal</kendo-label>
+        <input
+          id="Asing"
+          type="radio"
+          required
+          value="Asing"
+          formControlName="Lokal"
+          kendoRadioButton
+        />
+        <kendo-label class="k-radio-label" for="Asing">Asing</kendo-label>
         </div>
         <div>
           <kendo-label>% Kepemilikan Saham</kendo-label>
           <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
         </div>
       </div>
+    </form>
 
       <kendo-dialog-actions>
         <button kendoButton (click)="closeSaham()" [primary]="true">

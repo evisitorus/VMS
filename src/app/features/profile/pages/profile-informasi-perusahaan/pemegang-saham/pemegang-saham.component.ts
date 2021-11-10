@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-pemegang-saham',
@@ -31,5 +32,12 @@ export class PemegangSahamComponent implements OnInit {
   public openSaham() {
     this.openedSaham = true;
   }
+
+  public isRequired = true;
+
+  public jenisSahamFormGroup = new FormGroup({
+    Perseorangan: new FormControl(null, Validators.required),
+    Lokal: new FormControl(null, Validators.required),
+  });
 
 }
