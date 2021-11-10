@@ -1,9 +1,11 @@
 <div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
 
+  <div class="profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+  
+
+  <div class="profile-content">
     <div class="demo">
       <kendo-card *ngFor="let card of mediaCards" width="260px">
         <img *ngIf="card.imageSrc" kendoCardMedia [src]="card.imageSrc" />
