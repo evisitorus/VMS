@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 @Component({
   selector: 'app-profile-dokumen',
@@ -7,16 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDokumenComponent implements OnInit {
 
-  constructor() { }
+  public form!: FormGroup;
+  public gridData: any[] = [];
+  public opened: boolean = false;
+  public popUpTitle: string = "Profile Dokumen";
+  public popUpMessage: string = "";
+  public value: Date = new Date();
+  public checked: boolean = false;
+  public fileRestrictions: FileRestrictions = {
+    allowedExtensions: ["jpg", "jpeg", "png"],
+  };
+  public lampiranFiles!: Array<any>;
+
+  constructor(
+    private eventEmitterService: EventEmitterService
+  ){
+    this.form = new FormGroup({
+      nomorDokumen: new FormControl("", Validators.required),
+      namaDokumen: new FormControl("", Validators.required),
+      berlakuSampai: new FormControl("", Validators.required)
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  public opened = false;
-  public openedSaham = false;
-
   public close() {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
@@ -24,14 +43,11 @@ export class ProfileDokumenComponent implements OnInit {
     this.opened = true;
   }
 
-  public closeSaham() {
-    console.log(`Dialog result: ${status}`);
-    this.openedSaham = false;
+  public submit() {
+
   }
 
-  public openSaham() {
-    this.openedSaham = true;
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
   }
-
-  public value: Date = new Date();
 }

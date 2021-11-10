@@ -1,13 +1,8 @@
-.profile-section {
-  border-style: groove;
+.k-checkbox-wrap {
+    display: inline-flex;
+    margin-top: 1em;
 }
 
-.profile-menu {
-  border-style: groove;
-  float: left;
-}
-
-.profile-content {
-  border-style: groove;
-  float: right;
+.k-checkbox-wrap input {
+    margin-right: 5px;
 }

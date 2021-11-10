@@ -11,12 +11,6 @@ import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset
 })
 export class ProfileAsetComponent implements OnInit {
 
-  // public form: FormGroup = new FormGroup({
-  //   namaAsset: new FormControl,
-  //   jumlah: new FormControl,
-  //   tahunPembuatan: new FormControl
-  // });
-
   public form!: FormGroup;
   public gridData: any[] = [];
   public opened: boolean = false;
