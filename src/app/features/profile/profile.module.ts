@@ -29,6 +29,25 @@ import {GridModule} from "@progress/kendo-angular-grid";
 import {UploadsModule} from "@progress/kendo-angular-upload";
 import { IntlModule } from "@progress/kendo-angular-intl";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
+
+const drawerRoutes = [
+  { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
+  { title: "Kelola Akun",
+    selected: false,
+    expanded: true,
+    parent: true,
+    children: [
+      {    
+        path: 'profile-information',
+        component: ProfileInformasiPerusahaanComponent, 
+        text: 'Informasi Perusahaan' 
+      }
+    ]
+  }
+];
 
 @NgModule({
   declarations: [
@@ -42,7 +61,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ProfileRiwayatPekerjaanComponent,
     ProfileAlamatComponent,
     ProfileLaporanKeuanganComponent,
-    ProfileDashboardComponent
+    ProfileDashboardComponent,
+    DrawerComponent
   ],
   imports: [
     CommonModule,
@@ -65,8 +85,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     InputsModule,
     UploadsModule,
     IntlModule,
-    WindowModule
-  ]
+    WindowModule,
+    RouterModule.forRoot(drawerRoutes)
+  ],
+  // providers: [
+  //   {
+  //     provide: APP_BASE_HREF,
+  //     useValue: window.location.pathname
+  //   }
+  // ],
 })
 export class ProfileModule {
 }
