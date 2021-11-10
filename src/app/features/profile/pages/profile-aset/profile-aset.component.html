@@ -1,13 +1,16 @@
 <div class="profile-section">
+
   <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
+    <app-sidebar></app-sidebar>
   </div>
+  
   <div class="profile-content">
 
-    <kendo-label>Asset</kendo-label>
-    <br><br>
-
-    <div>
+    <div class="profile-content-title">
+      <kendo-label>Asset</kendo-label>
+    </div>
+    
+    <div class="profile-content-grid">
       <kendo-grid>
         <kendo-grid-column field="no" title="No.">
         </kendo-grid-column>
@@ -20,36 +23,49 @@
         <kendo-grid-column field="action" title="Action">
         </kendo-grid-column>
       </kendo-grid>
-      <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
-        Tambah Asset
-      </button>
-
-      <kendo-dialog title="Tambah Asset" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <div>
-            <kendo-label>Nama Asset</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Jumlah</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Tahun Pembuatan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-        </div>
-
-        <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
-            Simpan
-          </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
+      
+      <div class="profile-content-grid-button">
+        <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary">
+          Tambah Asset
+        </button>
+      </div>
+      
     </div>
+
+    <div class="profile-content-modal">
+      <kendo-window title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+        <form class="k-form">
+          
+          <label class="k-form-field">
+            <span>Nama Asset</span>
+            <input class="k-textbox" placeholder="" />
+          </label>
+          <label class="k-form-field">
+            <span>Jumlah</span>
+            <input class="k-textbox" placeholder="" />
+          </label>
+          <label class="k-form-field">
+            <span>Tahun Pembuatan</span>
+            <input class="k-textbox" placeholder="" />
+          </label>
+
+          <div class="k-actions k-actions-end">
+            <div class="profile-content-modal-btn">
+              <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
+                Simpan
+              </button>
+            </div>
+            <div class="profile-content-modal-btn">
+              <button type="button" class="k-button vms-btn" (click)="close()">
+                Batal
+              </button>
+            </div>
+          </div>
+        </form>
+      </kendo-window>
+
+    </div>
+
   </div>
+  
 </div>
