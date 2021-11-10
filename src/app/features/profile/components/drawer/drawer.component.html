@@ -1,8 +1,9 @@
-<div>
+<div class="demo-header">
   <button
     kendoButton
     icon="menu"
     look="flat"
+    styles="font-size: 24px;"
     (click)="drawer.toggle()"
   ></button>
 </div>
@@ -10,25 +11,16 @@
   <kendo-drawer
     #drawer
     [items]="items"
-    [mini]="true"
     mode="push"
     [(expanded)]="expanded"
-    [autoCollapse]="false"
-    (select)="onSelect($event)"
+    [miniWidth]="80"
+    [width]="175"
   >
-  <ng-template kendoDrawerItemTemplate let-item>
-    <div class="k-level-{{ item.level }}">{{ item.title }}</div>
-    <span
-      *ngIf="item.expanded && item['children']"
-      class="k-icon k-i-arrow-chevron-down"
-      style="margin-left: auto;"
-    ></span>
-    <span
-      *ngIf="!item.expanded && item['children']"
-      class="k-icon k-i-arrow-chevron-right arrow-left"
-      style="margin-left: auto"
-    ></span>
-  </ng-template>
+    <ng-template kendoDrawerItemTemplate let-item>
+      <div class="k-drawer-link" [routerLink]="item.path">
+        <span>{{ item.text }}</span>
+      </div>
+    </ng-template>
   </kendo-drawer>
 
   <kendo-drawer-content>

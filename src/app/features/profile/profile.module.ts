@@ -33,21 +33,21 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 
-const drawerRoutes = [
-  { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
-  { title: "Kelola Akun",
-    selected: false,
-    expanded: true,
-    parent: true,
-    children: [
-      {    
-        path: 'profile-information',
-        component: ProfileInformasiPerusahaanComponent, 
-        text: 'Informasi Perusahaan' 
-      }
-    ]
-  }
-];
+// const drawerRoutes = [
+//   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
+//   { title: "Kelola Akun",
+//     selected: false,
+//     expanded: true,
+//     parent: true,
+//     children: [
+//       {    
+//         path: 'profile-information',
+//         component: ProfileInformasiPerusahaanComponent, 
+//         text: 'Informasi Perusahaan' 
+//       }
+//     ]
+//   }
+// ];
 
 @NgModule({
   declarations: [
@@ -86,7 +86,7 @@ const drawerRoutes = [
     UploadsModule,
     IntlModule,
     WindowModule,
-    RouterModule.forRoot(drawerRoutes)
+    // RouterModule.forRoot(drawerRoutes)
   ],
   // providers: [
   //   {
