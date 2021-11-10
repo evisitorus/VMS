@@ -2,7 +2,7 @@ exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
-      url: 'http://localhost:8000',
+      url: 'http://localhost:4200',
       show: true,
       browser: 'chromium',
       waitForTimeout: 10000,
@@ -31,7 +31,9 @@ exports.config = {
   teardown: null,
   hooks: [],
   gherkin: {
-    features: './tests/acceptance/features/*.feature',
+    features: 
+    // './tests/acceptance/features/*.feature',
+    './tests/acceptance/features/RegisterNPWP.feature',
     steps: [
       './tests/acceptance/step_definitions/steps.js',
     ]
