@@ -78,7 +78,13 @@
         </div>
         <div>
           <kendo-label>% Kepemilikan Saham</kendo-label>
-          <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <kendo-numerictextbox
+            [min]="1"
+            [max]="100"
+            [autoCorrect]=true
+            [spinners]="false"
+          >
+          </kendo-numerictextbox>
         </div>
       </div>
     </form>
