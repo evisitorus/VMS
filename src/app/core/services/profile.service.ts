@@ -4,6 +4,7 @@ import { ApiInterface } from '../interfaces/api-interface';
 import { AddPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
+import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,19 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pekerjaan);
   }
 
+  addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
+    let api_add_pekerjaan: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_add_pengalaman_kerja,
+      body: {
+        namaPemegangSaham: params.namaPemegangSaham,
+        jenisPemegangSaham: params.jenisPemegangSaham,
+        pemegangSaham: params.pemegangSaham,
+        presentaseKepemilikan: params.presentaseKepemilikan
+      }
+    };
+
+    return this.apiService.sendRequest(api_add_pekerjaan);
+  }
 
 }

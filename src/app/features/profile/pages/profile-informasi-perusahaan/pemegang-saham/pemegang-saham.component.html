@@ -22,7 +22,7 @@
 
     <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
 
-    <form [formGroup]="jenisSahamFormGroup">
+    <form [formGroup]="pemegangSahamFormGroup">
       <div>
         <!-- <div>
           <kendo-label>No</kendo-label>
@@ -30,7 +30,7 @@
         </div> -->
         <div>
           <kendo-label>Nama Pemegang Saham</kendo-label>
-          <kendo-textbox id="namaPemegangSaham" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <kendo-textbox id="namaPemegangSaham" placeholder="Type your message here" [clearButton]="true" formControlName="namaPemegangSaham"></kendo-textbox>
         </div>
         <div>
           <kendo-label>Jenis Pemegang Saham</kendo-label>
@@ -38,8 +38,8 @@
               id="Perseorangan"
               type="radio"
               required
-              value="Perseorangan"
-              formControlName="Perseorangan"
+              [value]="true"
+              formControlName="perseorangan"
               kendoRadioButton
             />
             <kendo-label class="k-radio-label"  for="Perseorangan">Perseorangan</kendo-label>
@@ -47,8 +47,8 @@
               id="BadanUsaha"
               type="radio"
               required
-              value="BadanUsaha"
-              formControlName="Perseorangan"
+              [value]="false"
+              formControlName="perseorangan"
               kendoRadioButton
             />
             <kendo-label class="k-radio-label" for="BadanUsaha">Badan Usaha</kendo-label>
@@ -61,8 +61,8 @@
           id="Lokal"
           type="radio"
           required
-          value="Lokal"
-          formControlName="Lokal"
+          [value]="true"
+          formControlName="lokal"
           kendoRadioButton
         />
         <kendo-label class="k-radio-label"  for="Lokal">Lokal</kendo-label>
@@ -70,8 +70,8 @@
           id="Asing"
           type="radio"
           required
-          value="Asing"
-          formControlName="Lokal"
+          [value]="false"
+          formControlName="lokal"
           kendoRadioButton
         />
         <kendo-label class="k-radio-label" for="Asing">Asing</kendo-label>
@@ -83,6 +83,7 @@
             [max]="100"
             [autoCorrect]=true
             [spinners]="false"
+            formControlName="presentaseKepemilikan"
           >
           </kendo-numerictextbox>
         </div>
@@ -90,10 +91,10 @@
     </form>
 
       <kendo-dialog-actions>
-        <button kendoButton (click)="closeSaham()" [primary]="true">
+        <button id="submitPemegangSaham" kendoButton (click)="submitPemegangSaham()" [primary]="true">
           Simpan
         </button>
-        <button kendoButton (click)="closeSaham()" [primary]="false">
+        <button id="closePemegangSaham" kendoButton (click)="closeSaham()" [primary]="false">
           Batal
         </button>
       </kendo-dialog-actions>
