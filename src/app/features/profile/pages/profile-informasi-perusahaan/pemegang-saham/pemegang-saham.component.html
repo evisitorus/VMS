@@ -32,6 +32,7 @@
         <div>
           <kendo-label>Nama Pemegang Saham</kendo-label>
           <kendo-textbox id="namaPemegangSaham" placeholder="Type your message here" [clearButton]="true" formControlName="namaPemegangSaham"></kendo-textbox>
+          <kendo-formerror *ngIf="pemegangSahamFormGroup.controls.namaPemegangSaham.errors?.required">Nama Pemegang Saham tidak boleh kosong</kendo-formerror>
         </div>
         <div>
           <kendo-label>Jenis Pemegang Saham</kendo-label>
@@ -53,6 +54,7 @@
               kendoRadioButton
             />
             <kendo-label class="k-radio-label" for="BadanUsaha">Badan Usaha</kendo-label>
+            <kendo-formerror *ngIf="pemegangSahamFormGroup.controls.perseorangan.errors?.required">Jenis Pemegang Saham tidak boleh kosong</kendo-formerror>
         </div>
         <div>
         </div>
@@ -76,6 +78,7 @@
           kendoRadioButton
         />
         <kendo-label class="k-radio-label" for="Asing">Asing</kendo-label>
+        <kendo-formerror *ngIf="pemegangSahamFormGroup.controls.lokal.errors?.required">Pemegang Saham Lokal/Asing tidak boleh kosong</kendo-formerror>
         </div>
         <div>
           <kendo-label>% Kepemilikan Saham</kendo-label>
@@ -87,6 +90,7 @@
             formControlName="presentaseKepemilikan"
           >
           </kendo-numerictextbox>
+          <kendo-formerror *ngIf="pemegangSahamFormGroup.controls.presentaseKepemilikan.errors?.required">Kepemilikan Saham tidak boleh kosong</kendo-formerror>
         </div>
       </div>
     </form>
