@@ -9,42 +9,51 @@ import { DrawerSelectEvent } from "@progress/kendo-angular-layout";
 })
 export class DrawerComponent implements OnInit {
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
   }
 
-  public expanded = false;
-  public items: Array<any> = [
-    {path:"/dashboard", text:"Dashboard"},
-    {path:"/profile-aset", text:"Profile Assets"}
-  ];
+  public selected: any;
+  public items = items.parents;
+  public itemIndex: any;
 
-  constructor(private router: Router) {
-    this.items[0].selected = true;
+  public onSelect(ev: DrawerSelectEvent): void {
+    this.selected = ev.item.text;
+
+    const item = this.items.find((e, index) => {
+      this.itemIndex = index;
+      return e.text === ev.item.text;
+    });
+
+    item!.expanded ? (item!.expanded = false) : (item!.expanded = true);
+
+    if (ev.item.text === "Getting Started") {
+      item!.expanded
+        ? this.addChildren(items.gettingStarted)
+        : this.removeChildren(items.gettingStarted);
+    }
+    if (ev.item.text === "Overview") {
+      item!.expanded
+        ? this.addChildren(items.overview)
+        : this.removeChildren(items.overview);
+    }
+
+    if (ev.item.path) {
+      this.router.navigate([ev.item.path]);
+    }
+
   }
 
-  // public expanded = true;
-  // public items: Array<any> = [];
+  public addChildren(children: any) {
+    this.items.splice(this.itemIndex + 1, 0, ...children);
+  }
 
-  // constructor(private router: Router) {
-  //   this.items = this.mapItems(router.config);
-  //   this.items[0].selected = true;
-  // }
-
-  // public onSelect(ev: DrawerSelectEvent): void {
-  //   this.router.navigate([ev.item.path]);
-  // }
-
-  // public mapItems(routes: any[], path?: string): any[] {
-  //   return routes.map((item) => {
-  //     return {
-  //       text: item.text,
-  //       path: item.path ? item.path : "",
-  //     };
-  //   });
-  // }
+  public removeChildren(children: Array<any>) {
+    this.items.splice(this.itemIndex + 1, children.length);
+  }
 
 }
-
 
 export const items = {
   parents: [
@@ -78,6 +87,7 @@ export const items = {
       children: false,
       selected: false,
       level: 1,
+      path: "/profile-aset"
     },
     {
       text: "All Angular Components",
