@@ -13,24 +13,17 @@ export class ProfileAsetComponent implements OnInit {
   }
 
   public opened = false;
-  public openedSaham = false;
 
   public close() {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
   public open() {
     this.opened = true;
   }
-
-  public closeSaham() {
-    console.log(`Dialog result: ${status}`);
-    this.openedSaham = false;
-  }
-
-  public openSaham() {
-    this.openedSaham = true;
+  
+  public submit() {
+    
   }
 
 }

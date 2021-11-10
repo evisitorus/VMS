@@ -3,7 +3,7 @@ exports.config = {
   helpers: {
     Playwright: {
       url: 'http://localhost:4200',
-      show: true,
+      show: false,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
@@ -31,12 +31,8 @@ exports.config = {
   teardown: null,
   hooks: [],
   gherkin: {
-    features: 
-    // './tests/acceptance/features/*.feature',
-    './tests/acceptance/features/RegisterNPWP.feature',
-    steps: [
-      './tests/acceptance/step_definitions/steps.js',
-    ]
+    features: './tests/acceptance/features/*.feature',
+    steps: ['./tests/acceptance/step_definitions/steps.js']
   },
   plugins: {
     screenshotOnFail: {
