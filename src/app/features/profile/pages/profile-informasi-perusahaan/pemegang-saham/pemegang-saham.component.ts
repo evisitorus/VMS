@@ -103,7 +103,7 @@ export class PemegangSahamComponent implements OnInit {
 
 
   getPemegangSaham(){
-    this.profileService.getPekerjaan(this.access_token).subscribe( //TODO: change endpooint
+    this.profileService.getPemegangSaham(this.access_token).subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];
         return this.gridData;

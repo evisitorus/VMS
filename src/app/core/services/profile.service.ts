@@ -59,4 +59,17 @@ export class ProfileService {
     return this.apiService.sendRequest(api_add_pekerjaan);
   }
 
+  getPemegangSaham(badanUsaha: string): Observable<any> {    
+    let api_get_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_pemegang_saham_route,
+      options: {
+        params: {
+          badanUsaha : badanUsaha
+        }
+      }
+    };
+
+    return this.apiService.sendRequest(api_get_pemegang_saham);
+  }
 }
