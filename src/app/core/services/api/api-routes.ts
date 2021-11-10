@@ -1,5 +1,5 @@
 const API_BASE_URL = "https://localhost";
-import { environment as env} from "src/environments/environment";
+import {environment as env} from "src/environments/environment";
 
 export const ApiRoutes = {
   api_login_route: API_BASE_URL + "/auth/login",
@@ -9,8 +9,9 @@ export const ApiRoutes = {
   api_reset_password_route: API_BASE_URL + "/auth/reset-password",
   api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1",
   api_profile_pic: API_BASE_URL + "/users/profile/pic/26",
+  api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
+  api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
 };
-
 
 export const ApiRouteMethods = {
   post: 'POST',
