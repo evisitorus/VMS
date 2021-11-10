@@ -22,6 +22,10 @@ export class PemegangSahamComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
+  public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemeganng Saham"}, {field: "Pemeganng Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
+  public gridData: any = {};
+  access_token = "124";
+
   constructor(
     private formBuilder: FormBuilder, 
     private profileService: ProfileService,
@@ -29,6 +33,13 @@ export class PemegangSahamComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.gridData = this.getPemegangSaham();
+    this.columns = [
+      {field: "namaPekerjaan", title:"Nama Pemegang Saham"}, 
+      {field: "pemberiPekerjaan", title:"Jenis Pemeganng Saham"}, 
+      {field: "nilaiPekerjaan", title:"Pemeganng Saham Lokal/Asing"}, 
+      {field: "tahunPekerjaan", title:"% Kepemilikan"}
+    ];
   }
 
   public opened = false;
@@ -81,6 +92,21 @@ export class PemegangSahamComponent implements OnInit {
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
         this.closeSaham();
+      },
+      (error) => { 
+        this.popUpMessage = error;
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      }
+    );
+  }
+
+
+  getPemegangSaham(){
+    this.profileService.getPekerjaan(this.access_token).subscribe( //TODO: change endpooint
+      (resp) =>  { 
+        this.gridData = resp['hydra:member'];
+        return this.gridData;
       },
       (error) => { 
         this.popUpMessage = error;

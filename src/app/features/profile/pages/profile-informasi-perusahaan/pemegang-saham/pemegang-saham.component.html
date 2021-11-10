@@ -15,6 +15,24 @@
       <kendo-grid-column field="action" title="Action">
       </kendo-grid-column>
     </kendo-grid>
+
+    <kendo-grid
+    [data]="gridData"
+    >
+    <kendo-grid-column title="No.">
+      <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}} 
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title"></kendo-grid-column>
+    <kendo-grid-column title="Action">
+      <ng-template kendoGridCellTemplate>
+        Edit
+        |
+        Hapus
+      </ng-template>
+    </kendo-grid-column>
+    </kendo-grid>
     <br>
     <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
       Tambah Pemegang Saham
