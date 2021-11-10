@@ -29,30 +29,30 @@
         </kendo-grid-column>
       </kendo-grid>
       <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="button-right">
+      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="button-right">
         Tambah Riwayat Pekerjaan
       </button>
 
       <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()">
         <div>
           <form class="k-form login-form" [formGroup]="pekerjaanForm">
-          <kendo-formfield>
+          <kendo-formfield id="namaPekerjaan">
             <kendo-label [for]="namaPekerjaan">Nama Pekerjaan</kendo-label>
             <kendo-textbox formControlName="namaPekerjaan" #namaPekerjaan placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
           </kendo-formfield>
-          <kendo-formfield>
+          <kendo-formfield id="pemberiPekerjaan" >
             <kendo-label [for]="pemberiPekerjaan">Pemberi Pekerjaan</kendo-label>
             <kendo-textbox formControlName="pemberiPekerjaan" #pemberiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
           </kendo-formfield>
-          <kendo-formfield>
+          <kendo-formfield id="nilaiPekerjaan" >
             <kendo-label [for]="nilaiPekerjaan">Nilai Pekerjaan</kendo-label>
             <kendo-textbox formControlName="nilaiPekerjaan" #nilaiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
           </kendo-formfield>
-          <kendo-formfield>
+          <kendo-formfield id="tahunPekerjaan">
             <kendo-label [for]="tahunPekerjaan">Tahun</kendo-label>
             <kendo-textbox formControlName="tahunPekerjaan" #tahunPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
           </kendo-formfield>
-          <kendo-formfield>
+          <kendo-formfield id="buktiPekerjaanFilePath">
             <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
             <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
             <kendo-fileselect  formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [restrictions]="myRestrictions" [title]="'Pilih File'"></kendo-fileselect>
@@ -61,10 +61,10 @@
         </div>
 
         <kendo-dialog-actions>
-          <button kendoButton (click)="submit()" [primary]="true">
+          <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true">
             Simpan
           </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
+          <button id="closeButtonDialog" kendoButton (click)="closeSaham()" [primary]="false">
             Batal
           </button>
         </kendo-dialog-actions>
