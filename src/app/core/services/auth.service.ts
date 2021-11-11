@@ -98,7 +98,7 @@ export class AuthService {
       url: ApiRoutes.api_activate_route,
       body: {
         password: params.password,
-        password1: params.password1,
+        confirmPassword: params.confirmPassword,
         token: params.token,
       }
     };
