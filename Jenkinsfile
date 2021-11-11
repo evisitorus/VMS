@@ -177,7 +177,7 @@ pipeline {
                         // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
                         // sh 'docker run --rm -i -v $(pwd)/devops/k8s:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply --namespace=app -f /root/.kube/deployment.yaml'
                     } else if (env.BRANCH_NAME == 'develop') {
-                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'                        
+                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
                     }
                 }
                 sh 'sudo rm -rf docker'
