@@ -24,7 +24,7 @@ export class PemegangSahamComponent implements OnInit {
 
   public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemeganng Saham"}, {field: "Pemeganng Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
-  access_token = "124";
+  access_token = "admin@abadijaya.co.id";
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -79,7 +79,7 @@ export class PemegangSahamComponent implements OnInit {
     this.popUpMessage = messages.default;
 
     const dataPemegangSaham = {
-      email: "124",
+      email: "admin@abadijaya.co.id",
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
       perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,

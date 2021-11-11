@@ -10,7 +10,8 @@ export const ApiRoutes = {
     api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
     api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
     api_get_pemegang_saham_route: API_BASE_URL + "/pengalaman_kerjas", //TODO: change api route
-    api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1"
+    api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1",
+    api_add_pemegang_saham:  API_BASE_URL + "/api/vendors/pemegang_saham"
 };
 
 

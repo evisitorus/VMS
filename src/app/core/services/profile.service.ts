@@ -45,9 +45,9 @@ export class ProfileService {
   }
 
   addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
-    let api_add_pekerjaan: ApiInterface = {
+    let api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_add_pengalaman_kerja,
+      url: ApiRoutes.api_add_pemegang_saham,
       body: {
         email: params.email,
         namaPemegangSaham: params.namaPemegangSaham,
@@ -57,7 +57,7 @@ export class ProfileService {
       }
     };
 
-    return this.apiService.sendRequest(api_add_pekerjaan);
+    return this.apiService.sendRequest(api_add_pemegang_saham);
   }
 
   getPemegangSaham(badanUsaha: string): Observable<any> {    
