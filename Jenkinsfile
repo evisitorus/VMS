@@ -128,7 +128,7 @@ pipeline {
                             }
                             sh 'docker cp vms-test:/app/tests/acceptance/_output hasil'
                             sh 'docker rm -f vms-test'
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil', reportFiles: 'scenario.html', reportName: 'Acceptance Test Report', reportTitles: ''])
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil/_output', reportFiles: 'scenario.html', reportName: 'Acceptance Test Report', reportTitles: ''])
                         }
                     }
                 }
