@@ -4,7 +4,7 @@
   vars_files:
     - ./external_vars.yaml
   tasks: 
-    - command: "aws ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com"
+    - command: aws ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com
       name: "Login AWS ECR"
     - command: "docker run --rm -i -v /home/sysop/deploy:/deploy/fe -e VMS_IMAGE_FE={{ IMAGE_FE }} baskaraerbasakti/vms-deploy deploy-fe.py"
       name: "Update image docker compose"
