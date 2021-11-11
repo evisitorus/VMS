@@ -144,8 +144,7 @@ pipeline {
                     // } else {
                     //     sh 'printf "\nsonar.branch.name=master" >> sonar-project.properties'
                     //     sh 'docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_LOGIN="bb039f114a310a2f488d628a081f74713d1095f9" -e SONAR_PROJECT_BASE_DIR="/app" -v "${PWD}:/app" sonarsource/sonar-scanner-cli:4.6'
-                    // } 
-                    sh 'sudo rm -rf .scannerwork'                   
+                    // }                                      
                     echo "defining sonar-scanner"
                     def scannerHome = tool 'SonarScanner';
                     withSonarQubeEnv('SonarQube') {
@@ -155,13 +154,14 @@ pipeline {
                     // if (qualitygate.status != "OK") {
                     //     error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                     // }
+                    sh 'sudo rm -rf .scannerwork'  
                 }   
             }
         }
         stage('Push Image') {
             steps {
-                sh 'echo $AWS_CRED | base64 -di > ./devops/.aws/credentials'
-                sh 'docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
+                sh 'echo $AWS_CRED | base64 -di > ./docker/.aws/credentials'
+                sh 'docker run --rm -i -v $(pwd)/docker/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
                 sh 'docker images'
                 sh 'docker push $REGISTRY_NAME:$BRANCH_NAME-$TAG'
                 sh 'docker logout 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
