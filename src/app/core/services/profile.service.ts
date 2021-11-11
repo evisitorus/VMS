@@ -49,6 +49,7 @@ export class ProfileService {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pengalaman_kerja,
       body: {
+        email: params.email,
         namaPemegangSaham: params.namaPemegangSaham,
         perseorangan: params.perseorangan,
         lokal: params.lokal,
