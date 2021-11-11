@@ -1,6 +1,7 @@
 export interface AddPemegangSahamInterface {
+    email: string;
     namaPemegangSaham: string;
-    jenisPemegangSaham: boolean;
-    pemegangSaham: boolean;
+    perseorangan: boolean;
+    lokal: boolean;
     presentaseKepemilikan: number;
 }

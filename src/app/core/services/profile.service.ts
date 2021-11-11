@@ -50,8 +50,8 @@ export class ProfileService {
       url: ApiRoutes.api_add_pengalaman_kerja,
       body: {
         namaPemegangSaham: params.namaPemegangSaham,
-        jenisPemegangSaham: params.jenisPemegangSaham,
-        pemegangSaham: params.pemegangSaham,
+        perseorangan: params.perseorangan,
+        lokal: params.lokal,
         presentaseKepemilikan: params.presentaseKepemilikan
       }
     };

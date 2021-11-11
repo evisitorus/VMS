@@ -79,9 +79,10 @@ export class PemegangSahamComponent implements OnInit {
     this.popUpMessage = messages.default;
 
     const dataPemegangSaham = {
+      email: "124",
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
-      jenisPemegangSaham: this.pemegangSahamFormGroup.controls['perseorangan'].value,
-      pemegangSaham: this.pemegangSahamFormGroup.controls['lokal'].value,
+      perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
+      lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
       presentaseKepemilikan: this.pemegangSahamFormGroup.controls['presentaseKepemilikan'].value
     }
 
