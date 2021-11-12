@@ -10,30 +10,20 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 
-import { LandingRoutingModule } from './landing-routing.module';
-import { LandingPageComponent } from './pages/landing-page/landing-page.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
-import { ListTenderComponent } from './pages/tender/list-tender/list-tender.component';
-import { CardTenderComponent } from './pages/tender/card-tender/card-tender.component';
-import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
-
+import { ListTenderComponent } from './list-tender/list-tender.component';
+import { CardTenderComponent } from './card-tender/card-tender.component';
 
 
 @NgModule({
   declarations: [
-    LandingPageComponent,
-    CarouselComponent,
     ListTenderComponent,
     CardTenderComponent,
-    GridBannerComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-
-    LandingRoutingModule,
 
     BrowserModule,
     BrowserAnimationsModule,
@@ -46,8 +36,8 @@ import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
     ButtonsModule,
   ],
   exports: [
-    LandingPageComponent,
-    ListTenderComponent
+    ListTenderComponent,
+    CardTenderComponent,
   ]
 })
-export class LandingModule { }
+export class TenderModule { }
