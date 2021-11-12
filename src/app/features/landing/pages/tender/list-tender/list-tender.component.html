@@ -1,1 +1,17 @@
-<p>list-tender works!</p>
+<kendo-listview
+    [data]="tenders"
+    [style.height.px]="280"
+    [itemClass]="{ 'item-border': true }"
+>
+    <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+        {{ dataItem.cparent.name }} <br>
+        {{ dataItem.name }} <br>
+        {{ dataItem.status.name }} <br>
+        {{ dataItem.publish_at }} <br>
+        {{ dataItem.hps_total }} <br>
+        {{ dataItem.province ? dataItem.province.name : "" }} <br>
+        {{ dataItem.method.name }} <br>
+        {{ dataItem.category.name }} <br>
+
+    </ng-template>
+</kendo-listview>

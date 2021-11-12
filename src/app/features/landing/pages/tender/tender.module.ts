@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ListViewModule } from '@progress/kendo-angular-listview';
 
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { LabelModule } from "@progress/kendo-angular-label";
@@ -34,6 +35,7 @@ import { CardTenderComponent } from './card-tender/card-tender.component';
     LayoutModule,
     LabelModule,
     ButtonsModule,
+    ListViewModule
   ],
   exports: [
     ListTenderComponent,

@@ -9,6 +9,7 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { ListViewModule } from '@progress/kendo-angular-listview';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
@@ -32,6 +33,7 @@ import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    ListViewModule,
 
     LandingRoutingModule,
 

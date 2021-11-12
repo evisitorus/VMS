@@ -19,6 +19,8 @@ import { ProfileModule } from './features/profile/profile.module';
 import { LandingModule } from './features/landing/landing.module';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { ListViewModule } from '@progress/kendo-angular-listview';
+
 
 
 
@@ -45,6 +47,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 
     AppRoutingModule,
     LayoutModule,
+    ListViewModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
