@@ -1,17 +1,29 @@
-<kendo-listview
-    [data]="tenders"
-    [style.height.px]="280"
-    [itemClass]="{ 'item-border': true }"
->
-    <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
-        {{ dataItem.cparent.name }} <br>
-        {{ dataItem.name }} <br>
-        {{ dataItem.status.name }} <br>
-        {{ dataItem.publish_at }} <br>
-        {{ dataItem.hps_total }} <br>
-        {{ dataItem.province ? dataItem.province.name : "" }} <br>
-        {{ dataItem.method.name }} <br>
-        {{ dataItem.category.name }} <br>
-
-    </ng-template>
-</kendo-listview>
+<div class="demo">
+    <kendo-listview [data]="tenders" [itemClass]="{ 'item-border': true }">
+        <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+            <kendo-card-body class="k-hstack top">
+                <div class="top-avatar">
+                    <kendo-avatar [imageSrc]="avatarSrc"></kendo-avatar>
+                    <div class="k-card-titles">{{ dataItem.cparent.name }} </div>
+                </div>
+                <div class="status">{{ dataItem.status.name }} </div>
+            </kendo-card-body>
+            <kendo-card-body class="k-hstack-body">
+                <div class="tender-title">{{ dataItem.name }}</div>
+                <div class="middle">
+                    <img src="./assets/images/calendar.png" class="icon"/>
+                    <div class="mid">{{ dataItem.publish_at }}</div>
+                    <img src="./assets/images/Vector.png" class="icon"/>
+                    <div class="mid">Rp {{ dataItem.hps_total }}</div>
+                    <img src="./assets/images/pin.png" class="icon"/>
+                    <div class="mid">{{ dataItem.province ? dataItem.province.name : "Lokasi tidak ditemukan" }}</div>
+                </div>
+                <div class="middle">
+                    <div class="mid">{{ dataItem.method.name }}</div>
+                    <div class="mid" style="font-weight: bold;">{{ dataItem.category.name }}</div>
+                </div>
+                <div class="mid">{{ dataItem.publish_at  }}</div>
+            </kendo-card-body>
+        </ng-template>
+    </kendo-listview>
+</div>

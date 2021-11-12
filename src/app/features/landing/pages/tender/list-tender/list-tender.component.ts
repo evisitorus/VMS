@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { CardComponent } from "@progress/kendo-angular-layout";
+import { durationInMonths } from '@progress/kendo-date-math';
+
 
 import { TenderService } from 'src/app/core/services/tender.service';
 import { tenders } from './tender';
-import { contacts } from './contact';
 
 @Component({
   selector: 'app-list-tender',
@@ -13,11 +15,10 @@ import { contacts } from './contact';
 export class ListTenderComponent implements OnInit {
 
   public dataTenders: any = [];
-  public contacts: any[] = contacts;
-  public tenders = tenders;
+  public tenders: any[] = tenders;
 
   constructor(
-    private tenderService: TenderService,
+    private tenderService: TenderService
   ) { }
 
   ngOnInit(): void {
@@ -50,15 +51,6 @@ export class ListTenderComponent implements OnInit {
 public getMessagesText(messagesCount: number): string {
     return `${messagesCount} new message${ messagesCount > 1 ? 's' : '' }`;
 }
-
-  // @Input() public contact: {
-  //   id: number;
-  //   name: string;
-  //   email: string;
-  //   messagesCount: number;
-  // };
-
-  // @Input() public borderTop: boolean;
 
 
 }

@@ -1,8 +1,26 @@
+.demo {
+    display: flex;
+    /* justify-content: center; */
+    margin: 2em;
+    padding: 0px 200px;
+  }
 .k-listview {
     font-family: sans-serif;
-    width: 400px;
     margin: auto;
+    /* width: 400px; */
+    /* display: inline-block; */
 }
+.k-listview-item {
+    display: inline-block;
+    width: 45%;
+    padding: 20px 20px;
+    border-style: solid;
+    border-color: #dee2e6;
+    border-width: 3px;
+    margin: 40px;
+    border-radius: 8px;
+}
+
 .header, .footer {
     color: #A0A0A0;
     font-size: 16px;
@@ -11,41 +29,86 @@
 .footer {
     font-size: 14px;
 }
-.contact {
+
+.k-hstack {
+    /* height: 100px; */
+}
+
+
+.k-hstack-body {
+    /* height: 210px; */
+}
+
+.middle {
+    display: inline-block;
     width: 100%;
 }
 
-.contact{
-    display: flex;
-    height: 55px;
-    padding: 10px;
-    align-items: center;
+.mid {
+    display: inline-block;
+    padding: 10px 10px 10px 0px;
+    margin-right: 50px;
 }
-.contact.border-top {
-    border-top: solid;
-    border-color: #ECEBEB;
-    border-width: thin;
+
+.top {
+    justify-content: space-between;
 }
-.contact-details {
-    flex: 1;
-    margin-left: 10px;
+
+.k-card-titles{
+
+/* Body/Body 2 - Bold */
+
+/* font-family: Roboto; */
+font-style: normal;
+font-weight: bold;
+font-size: 20px;
+line-height: 40px;
+/* identical to box height, or 143% */
+
+letter-spacing: 0.25px;
+margin: 0px 20px;
+color: #000000;
+vertical-align: middle;
 }
-.contact-name {
-    color: #656565;
-    font-weight: bolder;
+
+.k-card-body{
+    /* margin: 10px 50px; */
 }
-.contact-email {
-    font-size: 0.7rem;
-    color: #BEBEBE;
+.status{
+/* font-family: Roboto; */
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 40px;
+vertical-align: middle;
 }
-.messages-label {
-    height: 20px;
-    width: 95px;
-    font-size: 11px;
-    line-height: 11px;
-    text-transform: none;
+
+.avatar {
+    width: 150px;
+    height: 100px;
 }
-.item-border {
-    padding: 10px;
-    border-bottom: 1px solid lightgrey;
+
+.top-avatar {
+    display: inherit;
+}
+
+.tender-title {
+    /* Body/Body 2 */
+
+/* font-family: Roboto; */
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 20px;
+/* identical to box height, or 143% */
+padding: 0px 10px 10px 0px;
+letter-spacing: 0.25px;
+}
+
+.icon{
+    margin-right: 10px;
+}
+
+.k-listview {
+    border: none !important;
 }
