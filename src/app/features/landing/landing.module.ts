@@ -19,6 +19,7 @@ import { ListTenderComponent } from './pages/list-tender/list-tender.component';
   ],
   exports: [
     LandingPageComponent,
+    ListTenderComponent
   ]
 })
 export class LandingModule { }
