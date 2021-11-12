@@ -18,7 +18,7 @@ export class TenderService {
         headers: {
           "X-App-Id" : "0MvsSnFzGmEXsl7VGcUkB3PhYScLwFwX",
           "X-App-Secret" : "yT7FOaNiNzHU2SCK2GOWjObBS86dNpBQWXii9bRX",
-          "Access-Control-Allow-Origin" : "*"
+          "Access-Control-Allow-Origin" : "https://padi-dev.tees.co.id"
         }
       }
     };

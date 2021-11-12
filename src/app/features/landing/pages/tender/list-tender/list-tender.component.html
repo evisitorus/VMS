@@ -1,5 +1,5 @@
 <div class="demo">
-    <kendo-listview [data]="tenders" [itemClass]="{ 'item-border': true }">
+    <kendo-listview [data]="tenders" [itemClass]="{ 'item-border': false }"  [pageable]="pagerSettings" [pageSize]="pageSize">
         <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
             <kendo-card-body class="k-hstack top">
                 <div class="top-avatar">

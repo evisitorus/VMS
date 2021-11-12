@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { CardComponent } from "@progress/kendo-angular-layout";
-import { durationInMonths } from '@progress/kendo-date-math';
+import { PagerSettings } from "@progress/kendo-angular-listview";
 
 
 import { TenderService } from 'src/app/core/services/tender.service';
@@ -22,8 +22,8 @@ export class ListTenderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.dataTenders = this.getListTender();
-    this.dataTenders = tenders
+    this.dataTenders = this.getListTender();
+    // this.dataTenders = tenders
 
     console.log(this.dataTenders);
   }
@@ -33,7 +33,7 @@ export class ListTenderComponent implements OnInit {
   getListTender(){
     this.tenderService.getListTender().subscribe(
       (resp) =>  { 
-        // this.gridData = resp['hydra:member'];
+        this.dataTenders = resp.data.tender;
         // return this.gridData;
         return resp.data.tenders
       },
@@ -52,5 +52,12 @@ public getMessagesText(messagesCount: number): string {
     return `${messagesCount} new message${ messagesCount > 1 ? 's' : '' }`;
 }
 
+
+public pagerSettings: PagerSettings = {
+  previousNext: false,
+  pageSizeValues: false,
+  buttonCount: 9,
+};
+public pageSize = 6;
 
 }
