@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './layouts/main/main.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { CardComponent } from './layouts/card/card.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -29,8 +28,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     AppComponent,
     MainComponent,
     FooterComponent,
-    NavbarComponent,
-    CardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
