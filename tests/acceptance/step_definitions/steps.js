@@ -657,3 +657,98 @@ Then(/^The Vendor \(Basic\) already manage Asset from his\/her company$/, () => 
   // From "tests/acceptance/features/ProfilAsset.feature" {"line":64,"column":5}
   throw new Error('Not implemented yet');
 });
+
+Then(/^The Vendor \(Basic\) already manage her\/his company information by adding another address from the company$/, () => {
+  // From "tests\acceptance\features\ProfilAlamat.feature" {"line":78,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+Given(/^The Vendor already register and activated his\/her VMS company account$/, () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":78,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor log in into the VMS page for the first time', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":8,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor will be flag as {string}', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":80,"column":8}
+  throw new Error('Not implemented yet');
+});
+
+Then('The Vendor will get notice of progress as {string} under the badge', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":74,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor log in into the VMS page', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":79,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor added information in regards to {string}', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":73,"column":8}
+  throw new Error('Not implemented yet');
+});
+
+When('The Vendor information already approved and verified by verificator', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":82,"column":8}
+  throw new Error('Not implemented yet');
+});
+
+Then('The Vendor will get badge as {string} and will get status as {string} and will get full star on the badge', () => {
+  // From "tests\acceptance\features\VendorBadgeProgress.feature" {"line":83,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+Given(/^The Vendor \(Basic\) already add all vendor information likes "(.*?)", "(.*?)", "(.*?)", "(.*?)", "(.*?)", "(.*?)" also "(.*?)"$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":91,"column":5}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) wants to send all information for verification process$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":92,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) should make sure that checklist from each part of information has been defined$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":96,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must check "(.*?)" checklist$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":68,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must click button "(.*?)"$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":116,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) will see confirmation pop-up message$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":117,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) must select button "(.*?)" which appear on pop-up message$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":124,"column":7}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) will get email which stated that data is on verification$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":45,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+Then(/^The Vendor \(Basic\) should check previous form and complete it$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":125,"column":6}
+  throw new Error('Not implemented yet');
+});
+
+When(/^The Vendor \(Basic\) uncheck "(.*?)" checklist$/, () => {
+  // From "tests\acceptance\features\VerificationRequest.feature" {"line":108,"column":7}
+  throw new Error('Not implemented yet');
+});

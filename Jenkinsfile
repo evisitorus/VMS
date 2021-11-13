@@ -84,7 +84,7 @@ pipeline {
                 script {
                     sh 'echo "test frontend"'
                     try {
-                        sh 'docker rm -f vms-fe vms-acceptancetest'
+                        sh 'docker rm -f vms-fe vms-acceptancetest vms-unittest'
                     } catch (err) {
                         echo err.getMessage()
                     }
@@ -101,18 +101,17 @@ pipeline {
                     }
                     steps {
                         echo 'unittest'
-                        // script {
-                        //     try {
-                        //         sh 'docker rm unittest'
-                        //     } catch (err) {
-                        //         echo err.getMessage()
-                        //     }
-                        // } 
-                        // sh 'docker run --name unittest acceptancetest npm run test:unit' 
-                        // sh 'docker ps -a'
-                        // sh 'docker cp unittest:/app/tests/unit/_output hasil_test'   
-                        // sh 'docker rm unittest'   
-                        // publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil_test', reportFiles: 'index.html', reportName: 'Unit Test Report', reportTitles: ''])
+                        script {
+                            try {
+                                sh 'docker run --name vms-unittest vms-acceptancetest npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage' 
+                            } catch (err) {
+                                echo err.getMessage()
+                            }
+                        }                         
+                        sh 'docker ps -a'
+                        sh 'docker cp vms-unittest:/app/coverage/eproc-fe hasil_test'   
+                        sh 'docker rm vms-unittest'   
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil_test', reportFiles: 'index.html', reportName: 'Unit Test Report', reportTitles: ''])
                     }
                 }
                 stage ('Acceptance Test') {

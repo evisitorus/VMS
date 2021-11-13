@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="profile-section">
   <div class="profile-menu">
     <app-profile-menu></app-profile-menu>
@@ -32,3 +33,85 @@
     <button kendoButton look="outline">Simpan</button>
   </div>
 </div>
+=======
+<div class="profile-section">
+  <div class="profile-menu">
+    <app-profile-menu></app-profile-menu>
+  </div>
+
+  <div class="profile-content">
+    <form class="k-form auth-form" [formGroup]="form">
+      <kendo-label>Akun Saya</kendo-label>
+      <br><br>
+      <fieldset class="k-form-fieldset">
+        <kendo-formfield>
+          <kendo-label [for]="responseName" text="Nama"></kendo-label>
+          <kendo-textbox formControlName="name" [clearButton]="true" #name required [readonly]=isDisabled
+                         [(ngModel)]="responseName"
+                         [value]=responseName></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Nama tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="responseEmail" text="E-Mail"></kendo-label>
+          <kendo-textbox formControlName="email" #email [value]="responseEmail" [readonly]="isDisabled"
+                         [(ngModel)]="responseEmail"></kendo-textbox>
+        </kendo-formfield>
+
+        <kendo-formfield>
+          <kendo-label [for]="responsePhoneNumber" text="No. Handphone"></kendo-label>
+          <kendo-textbox formControlName="phoneNumber" [clearButton]="true" #phoneNumber required
+                         [readonly]="isDisabled" [value]="responsePhoneNumber"
+                         [(ngModel)]="responsePhoneNumber"></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Nomor Handphone tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <div *ngIf="isDisabled">
+          <kendo-label>Kata Sandi</kendo-label>
+          <kendo-label>Harap ganti kata sandi secara berkala untuk meningkatkan keamanan akun</kendo-label>
+        </div>
+        <br>
+        <div *ngIf="!isDisabled">
+          <kendo-formfield>
+            <kendo-label [for]="oldPassword" text="Kata Sandi Lama"></kendo-label>
+            <kendo-textbox formControlName="oldPassword" #oldPassword required [clearButton]="true">
+              <ng-template kendoTextBoxSuffixTemplate>
+                <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
+              </ng-template>
+            </kendo-textbox>
+            <kendo-formhint></kendo-formhint>
+            <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="newPassword" text="Kata Sandi Baru"></kendo-label>
+            <kendo-textbox formControlName="newPassword" #newPassword required [clearButton]="true">
+              <ng-template kendoTextBoxSuffixTemplate>
+                <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
+              </ng-template>
+            </kendo-textbox>
+            <kendo-formhint></kendo-formhint>
+            <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield>
+            <kendo-label [for]="confirmNewPassword" text="Konfirmasi Kata Sandi Baru"></kendo-label>
+            <kendo-textbox formControlName="confirmNewPassword" #confirmNewPassword required [clearButton]="true">
+              <ng-template kendoTextBoxSuffixTemplate>
+                <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('confirmNewPassword')"></button>
+              </ng-template>
+            </kendo-textbox>
+            <kendo-formhint></kendo-formhint>
+            <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
+          </kendo-formfield>
+          <br>
+          <button kendoButton look="outline" (click)="save()">Simpan</button>
+        </div>
+      </fieldset>
+      <button kendoButton look="outline" (click)="changeIsDisabled()" *ngIf="isDisabled">Edit</button>
+    </form>
+  </div>
+</div>
+>>>>>>> 8fc650513ad4db80c5095e7df6783a7a127530cd
