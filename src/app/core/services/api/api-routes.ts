@@ -12,8 +12,7 @@ export const ApiRoutes = {
     api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
     api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
     api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1",
-
-    api_list_tender: PADI_BASE_URL + "/v1/ext/tenders"
+    api_list_tender: API_BASE_URL + "/api/tenders"
 };
 
 

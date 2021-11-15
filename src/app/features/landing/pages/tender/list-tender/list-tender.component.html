@@ -1,9 +1,9 @@
 <div class="demo">
-    <kendo-listview [data]="tenders" [itemClass]="{ 'item-border': false }"  [pageable]="pagerSettings" [pageSize]="pageSize">
+    <kendo-listview [data]="tenders.data.tenders" [itemClass]="{ 'item-border': false }"  [pageable]="pagerSettings" [pageSize]="pageSize">
         <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
             <kendo-card-body class="k-hstack top">
                 <div class="top-avatar">
-                    <kendo-avatar [imageSrc]="avatarSrc"></kendo-avatar>
+                    <kendo-avatar [imageSrc]="getAvatar(dataItem.cparent.id)"></kendo-avatar>
                     <div class="k-card-titles">{{ dataItem.cparent.name }} </div>
                 </div>
                 <div class="status">{{ dataItem.status.name }} </div>

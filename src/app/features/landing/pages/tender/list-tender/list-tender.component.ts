@@ -15,8 +15,8 @@ import { tenders } from './tender';
 export class ListTenderComponent implements OnInit {
 
   public dataTenders: any = [];
-  public tenders: any[] = tenders;
-
+  public tenders = tenders;
+  public avatarSrc= "";
   constructor(
     private tenderService: TenderService
   ) { }
@@ -26,23 +26,48 @@ export class ListTenderComponent implements OnInit {
     // this.dataTenders = tenders
 
     console.log(this.dataTenders);
+
+    this.pageSize = 123;
+
+    tenders.data.tenders.forEach(tender => {
+      if(tender.cparent.id == 95){
+        this.avatarSrc = "./assets/images/pln.png";
+      } else if (tender.cparent.id == 88) {
+        this.avatarSrc = "./assets/images/pnm.png";
+      }
+
+      
+    });
   }
-  public avatarSrc =
-  "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
+
+  // public avatarSrc =
+  // "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
+  // public logoSrc = "./assets/images/pln.png";
+
+  public pagerSettings: PagerSettings = {
+    previousNext: true,
+    pageSizeValues: false,
+    buttonCount: 9,
+  };
+  public pageSize = 16;
 
   getListTender(){
     this.tenderService.getListTender().subscribe(
       (resp) =>  { 
         this.dataTenders = resp.data.tender;
-        // return this.gridData;
+        
         return resp.data.tenders
       },
       (error) => { 
+        console.log("error");
         console.log(error);
       }
     )
   };
 
+  public getAvatar(bumn: number): string {
+      return `./assets/images/${bumn}.png`;
+  }
 
   public getImageUrl(contactId: number): string {
     return `https://www.telerik.com/kendo-angular-ui-develop/components/listview/assets/contacts/${contactId}.png`;
@@ -51,13 +76,5 @@ export class ListTenderComponent implements OnInit {
 public getMessagesText(messagesCount: number): string {
     return `${messagesCount} new message${ messagesCount > 1 ? 's' : '' }`;
 }
-
-
-public pagerSettings: PagerSettings = {
-  previousNext: false,
-  pageSizeValues: false,
-  buttonCount: 9,
-};
-public pageSize = 6;
 
 }
