@@ -20,11 +20,15 @@ body {
 /* KENDO */
 /* ================================ */
 
-.k-textbox {
+.k-textbox{
     box-sizing: border-box !important;
     border-radius: 3px !important;
     height: 40px;
     margin-top: 2px;
+}
+
+.k-numerictextbox input {
+    height: 40px !important;
 }
 
 .k-label {
