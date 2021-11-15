@@ -28,15 +28,15 @@ export class DrawerComponent implements OnInit {
 
     item!.expanded ? (item!.expanded = false) : (item!.expanded = true);
 
-    if (ev.item.text === "Getting Started") {
+    if (ev.item.text === "Kelola Akun") {
       item!.expanded
-        ? this.addChildren(items.gettingStarted)
-        : this.removeChildren(items.gettingStarted);
+        ? this.addChildren(items.kelolaAkun)
+        : this.removeChildren(items.kelolaAkun);
     }
-    if (ev.item.text === "Overview") {
+    if (ev.item.text === "Tender") {
       item!.expanded
-        ? this.addChildren(items.overview)
-        : this.removeChildren(items.overview);
+        ? this.addChildren(items.tender)
+        : this.removeChildren(items.tender);
     }
 
     if (ev.item.path) {
@@ -58,56 +58,75 @@ export class DrawerComponent implements OnInit {
 export const items = {
   parents: [
     {
-      text: "Getting Started",
-      icon: "k-i-information",
-      expanded: false,
-      children: true,
-      selected: false,
-    },
-    {
-      text: "Overview",
-      icon: "k-i-zoom",
-      expanded: false,
-      children: true,
-      selected: false,
-    },
-    {
-      text: "Most Popular Widgets",
-      icon: "k-i-star",
+      text: "Dashboard",
       expanded: false,
       children: false,
+      selected: false,
+      path: "/dashboard"
+    },
+    {
+      text: "Kelola Akun",
+      expanded: false,
+      children: true,
+      selected: false,
+    },
+    {
+      text: "Tender",
+      expanded: false,
+      children: true,
       selected: false,
     },
   ],
 
-  overview: [
+  tender: [
     {
-      text: "About Angular",
-      icon: "k-i-js",
+      text: "Informasi Tender BUMN",
       children: false,
+      selected: false,
+      level: 1,
+    }
+  ],
+
+  kelolaAkun: [
+    {
+      text: "Profil Perusahaan",
+      selected: false,
+      level: 1,
+      path: "/profile-information"
+    },
+    {
+      text: "PIC",
+      selected: false,
+      level: 1,
+    },
+    {
+      text: "Dokumen",
+      selected: false,
+      level: 1,
+    },
+    {
+      text: "Alamat",
+      selected: false,
+      level: 1,
+    },
+    {
+      text: "Laporan Keuangan",
+      selected: false,
+      level: 1,
+    },
+    {
+      text: "Riwayat Pekerjaan",
+      selected: false,
+      level: 1,
+    },
+    {
+      text: "Asset",
       selected: false,
       level: 1,
       path: "/profile-aset"
     },
     {
-      text: "All Angular Components",
-      icon: "k-i-style-builder",
-      children: false,
-      selected: false,
-      level: 1,
-    },
-  ],
-
-  gettingStarted: [
-    {
-      text: "About Kendo UI",
-      icon: "k-i-question",
-      selected: false,
-      level: 1,
-    },
-    {
-      text: "Supported Themes",
-      icon: "k-i-palette",
+      text: "Verifikasi Kelengkapan",
       selected: false,
       level: 1,
     },
