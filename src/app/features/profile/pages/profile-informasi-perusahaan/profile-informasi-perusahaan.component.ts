@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation, ViewChild} from "@angular/core";
-
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {AutoCompleteComponent} from "@progress/kendo-angular-dropdowns";
 import {ChipRemoveEvent} from "@progress/kendo-angular-buttons";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -13,7 +13,11 @@ import {DomSanitizer} from "@angular/platform-browser";
 
 export class ProfileInformasiPerusahaanComponent {
 
+  public buForm: FormGroup;
+  public sbuForm: FormGroup;
   constructor(private sanitizer: DomSanitizer) {
+    this.buForm = new FormGroup({});
+    this.sbuForm = new FormGroup({});
   }
 
   public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
