@@ -20,11 +20,15 @@ body {
 /* KENDO */
 /* ================================ */
 
-.k-textbox {
+.k-textbox{
     box-sizing: border-box !important;
     border-radius: 3px !important;
     height: 40px;
     margin-top: 2px;
+}
+
+.k-numerictextbox input {
+    height: 40px !important;
 }
 
 .k-label {
@@ -130,4 +134,8 @@ label{
   
   .profile-content-modal-btn {
     min-width: 100px !important;
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> 3b2bb0864081b90d4363fdecc7328e0165efb0be

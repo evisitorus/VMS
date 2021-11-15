@@ -1,0 +1,12 @@
+--- 
+- hosts: server-dev
+  name: "Deployment"
+  vars_files:
+    - ./external_vars.yaml
+  tasks: 
+    - shell: aws ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com
+      name: "Login AWS ECR"
+    - command: "docker run --rm -i -v /home/sysop/deploy:/deploy/server -e VMS_IMAGE_FE={{ IMAGE_FE }} baskaraerbasakti/vms-deploy deploy.py"
+      name: "Update image docker compose"
+    - command: "docker-compose -f /home/sysop/deploy/docker-compose.yaml up -d"
+      name: "Up docker compose"
