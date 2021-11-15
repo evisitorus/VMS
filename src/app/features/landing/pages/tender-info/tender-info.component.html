@@ -74,7 +74,7 @@
                                 <p>Waktu Akhir Pendaftaran</p>
                             </div>
                             <div class="col-8">
-                                <p>{{ data.registration_end ? data.registration_end : "-" }}</p>
+                                <p>{{ data.registration_end ? (data.registration_end | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
                             </div>
                         </div>
     
@@ -83,7 +83,7 @@
                                 <p>Waktu Akhir Kirim Penawaran</p>
                             </div>
                             <div class="col-8">
-                                <p>{{ data.bid_end ? data.bid_end : "-" }}</p>
+                                <p>{{ data.bid_end ? (data.bid_end | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
                             </div>
                         </div>
     
@@ -119,7 +119,7 @@
                                 <p>Tanggal diterbitkan Tender</p>
                             </div>
                             <div class="col-8">
-                                <p>{{ data.publish_at ? data.publish_at : "-" }}</p>
+                                <p>{{ data.publish_at ? (data.publish_at | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
                             </div>
                         </div>
     
