@@ -1,5 +1,5 @@
 export interface SetPasswordInterface {
     password: string;
-    password1: string;
+    confirmPassword: string;
     token: string;
 }

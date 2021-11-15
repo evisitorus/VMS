@@ -13,28 +13,28 @@
             <legend></legend>
             <kendo-formfield>
                 <kendo-label [for]="npwp" text="NPWP Perusahaan"></kendo-label>           
-                <kendo-maskedtextbox #npwp formControlName="npwp" [mask]="mask" [includeLiterals]="true" required></kendo-maskedtextbox>
+                <kendo-maskedtextbox #npwp formControlName="npwp" [mask]="mask" [includeLiterals]="true" required id="npwp"></kendo-maskedtextbox>
                 <kendo-formhint>Isi NPWP dengan format: 99.999.999.9-999.999</kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.npwp.errors?.required">NPWP tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
                 <kendo-label [for]="namaPerusahaan" text="Nama Perusahaan"></kendo-label>
-                <kendo-textbox formControlName="namaPerusahaan" #namaPerusahaan required></kendo-textbox>                
+                <kendo-textbox formControlName="namaPerusahaan" #namaPerusahaan required id="namaPerusahaan"></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.namaPerusahaan.errors?.required">Nama Perusahaan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
                 <kendo-label [for]="namaPic" text="Nama PIC Perusahaan"></kendo-label>
-                <kendo-textbox formControlName="namaPic" #namaPic required></kendo-textbox>                
+                <kendo-textbox formControlName="namaPic" #namaPic required id="namaPic"></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.namaPic.errors?.required">Nama PIC Perusahaan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
 
             <kendo-formfield>
                 <kendo-label [for]="email" text="Alamat Email Perusahaan"></kendo-label>
-                <kendo-textbox formControlName="email" #email required></kendo-textbox> 
+                <kendo-textbox formControlName="email" #email required id="email"></kendo-textbox> 
                 <kendo-formhint>*Pastikan alamat email yang anda masukan merupakan email resmi perusahaan</kendo-formhint>               
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.email.errors?.required">Email tidak boleh kosong</kendo-formerror>
@@ -43,7 +43,7 @@
 
             <kendo-formfield>
                 <kendo-label [for]="noTelepon" text="Nomor Handphone PIC Perusahaan"></kendo-label>
-                <kendo-textbox formControlName="noTelepon" #noTelepon required [minlength]="minlength" [maxlength]="maxlength" (valueChange)="onValueChange($event)"></kendo-textbox>   
+                <kendo-textbox formControlName="noTelepon" #noTelepon required [minlength]="minlength" [maxlength]="maxlength" (valueChange)="onValueChange($event)" id="noTelepon"></kendo-textbox>   
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.required">Nomor Handphone PIC tidak boleh kosong</kendo-formerror>
                 <kendo-formerror *ngIf="registerForm.controls.noTelepon.errors?.maxLength">Format Nomor Handphone tidak valid</kendo-formerror>
@@ -54,19 +54,19 @@
             <kendo-formfield>
                 <kendo-label [for]="disclaimer" text="*Disclaimer"></kendo-label>
                 <div class="k-checkbox-wrap">
-                  <input #disclaimer type="checkbox" kendoCheckBox formControlName="disclaimer"/>
+                  <input id="disclaimer" #disclaimer type="checkbox" kendoCheckBox formControlName="disclaimer"/>
                   <kendo-label [for]="disclaimer" class="k-checkbox-label" text="Dengan ini kami menyatakan bahwa benar NPWP dan Email tersebut merupakan NPWP dan Email resmi dari perusahaan kami."></kendo-label>
                 </div>
                 <kendo-formerror *ngIf="registerForm.controls.disclaimer.errors?.required">Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi</kendo-formerror>
             </kendo-formfield>
             
             <div class="k-form-buttons">
-                <button class="k-button k-primary vms-btn" (click)="register()">Daftar</button>
+                <button id="register" class="k-button k-primary vms-btn" (click)="register()">Daftar</button>
             </div>
             
         </fieldset>
 
-        <div class="reg">
+        <div class="reg" id="login">
             Sudah punya akun? <a href="login">Login</a>
         </div>
 
@@ -74,4 +74,4 @@
 </div>
 
 
-<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
+<app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
