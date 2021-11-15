@@ -1,0 +1,59 @@
+.tender-detail {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 2em;
+}
+
+.tender-title {
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.5px;    
+    color: #000000;
+}
+
+.tender-budget {
+    text-align: center;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.tender-company {
+    font-weight: bolder;
+}
+
+.tender-content {
+    border-color: #d8d8d8;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 5px;
+    margin: 0em 0.5em 1em 0.5em;
+    padding: 1em;
+}
+
+.tender-content-title {
+    font-weight: bold;
+    font-size: large;
+}
+
+.tender-content-list {
+    padding-left: 4em;
+}
+
+.breadcum > p > a {
+    text-decoration: none;
+}
+
+.breadcum {
+    font-size: smaller;
+}
+
+.container {
+    font-size: medium;
+}
+
+.body-content {
+    width: 100%;
+    background-color: #e5e5e5;
+}

@@ -1,11 +1,13 @@
 .landing-carousel {
     width: 100%;
-    min-height: 400px;
-    background-image: url("/assets/images/carousel-bg.jpg");
+    min-height: 350px;
+    /* background-image: url("/assets/images/carousel-bg.jpg"); */
+    background: linear-gradient(262.6deg, #0F2459 0%, #0092AC 100%);
     background-size: cover;
     text-align: center;
     display: grid;
     color: white;
+    margin-top: 150px;
 }
 
 .content {
@@ -14,6 +16,12 @@
 
 .landing-carousel-content {
     align-self: center;
+    padding: 0 17%;
+}
+
+.landing-carousel-content > h3 {
+    margin-bottom: 1em;
+    font-weight: bold;
 }
 
 .landing-carousel h3,p{
