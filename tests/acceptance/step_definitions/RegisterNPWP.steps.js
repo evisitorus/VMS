@@ -58,7 +58,6 @@ When('The Vendor must selects {string} button', () => {
 When('The Vendor unclick {string}', () => {
     I.waitForElement('#disclaimer');
     I.click('#register');
-    // I.uncheckOption('#disclaimer');
 });
 
 When('The Vendor clicks button {string}', () => {
