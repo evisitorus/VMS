@@ -35,7 +35,7 @@ pipeline {
                         // sh 'vault kv get --format json smb/mysooltan/master/cluster | jq -r .data.data.cluster | base64 -di > $(pwd)/devops/k8s/config'
                         // sh 'vault kv get --format json smb/mysooltan/master/fe | jq -r .data.data.env | base64 -di > .env'
                     } else if (env.BRANCH_NAME == 'develop') {
-                        sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'                        
+                        sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'
                     } else {
                         error "BRANCH TIDAK DIKETAHUI"
                     }
