@@ -25,16 +25,16 @@ Feature: Calon Vendor - Registrasi
         """
         And The Vendor must clicks "Disclaimer"
         And The Vendor must clicks button "Daftar" 
-#         And The Vendor will get badge as "Vendor Basic" 
-#         And The Vendor data will be stored at database and will be flag as "Terdaftar" 
-#         And The Vendor will see success message from the system 
-#         """
-#         {
-#             "message" : "Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun",
-#             "option"  : "Yes/No"
-#         }
-#         """
-#         And The Vendor must selects "Yes" button
+        # And The Vendor will get badge as "Vendor Basic" 
+        # And The Vendor data will be stored at database and will be flag as "Terdaftar" 
+        And The Vendor will see success message from the system 
+        """
+        {
+            "message" : "Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun",
+            "button"  : "Yes"
+        }
+        """
+        And The Vendor must selects "Yes" button
         
 #         Then The Vendor already registered his or her company to VMS portal 
     

@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import { Component} from '@angular/core';
-
-@Component({
-  selector: 'app-profile-person-in-charge',
-  templateUrl: './profile-person-in-charge.component.html',
-  styleUrls: ['./profile-person-in-charge.component.css']
-})
-export class ProfilePersonInChargeComponent {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
-=======
 import {ProfilePICService} from "../../../../core/services/profile/profile-pic/profile-pic.service";
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormGroup, FormControl} from "@angular/forms";
@@ -105,4 +88,3 @@ export class ProfilePersonInChargeComponent implements OnInit {
     )
   }
 }
->>>>>>> 8fc650513ad4db80c5095e7df6783a7a127530cd
