@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://localhost";
+const API_BASE_URL = "https://localhost:8000";
 import { environment as env} from "src/environments/environment";
 
 export const ApiRoutes = {
