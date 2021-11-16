@@ -69,10 +69,7 @@ Then('The Vendor cant continue for registration due to he or she unselect {strin
 throw new Error('Not implemented yet');
 });
 
-When('The Vendor doesnt fill anything into the form', () => {
-// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":76,"column":9}
-throw new Error('Not implemented yet');
-});
+
 
 When('The Vendor clicks the {string} button', () => {
 // From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":77,"column":9}
@@ -84,38 +81,13 @@ When('The Vendor clicks {string}', () => {
 throw new Error('Not implemented yet');
 });
 
-When('The Vendor will get error message {string} on each object of input where found on the {string} Form', () => {
-// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":80,"column":9}
-throw new Error('Not implemented yet');
-});
-
-Then('The Vendor cant continue to Register due no information which given on {string} Form', () => {
-// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":81,"column":9}
-throw new Error('Not implemented yet');
-});
-
 When('The Vendor fill information which needed for registration on {string} form', () => {
 // From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":111,"column":9}
 throw new Error('Not implemented yet');
 });
 
-When('The Vendor put same {string} with registerd {string}', () => {
-// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":123,"column":9}
-throw new Error('Not implemented yet');
-});
-
 When('The Vendor click {string}', () => {
 // From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":124,"column":9}
-throw new Error('Not implemented yet');
-});
-
-When('The Vendor will get warning message {string}', () => {
-// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":126,"column":9}
-throw new Error('Not implemented yet');
-});
-
-Then('The Vendor cant continue for registration due to NPWP already registered', () => {
-// From "tests/acceptance/features/VMSRegisterNPWP.feature" {"line":127,"column":9}
 throw new Error('Not implemented yet');
 });
 

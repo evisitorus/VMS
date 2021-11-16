@@ -5,7 +5,6 @@ Given('The Vendor is on VMS landing page', () => {
 });
 
 When('The Vendor wants to register his or her company', () => {    
-  // I.amOnPage('/register');
 });
 
 When('The Vendor goes to {string} form', () => {
@@ -14,24 +13,24 @@ When('The Vendor goes to {string} form', () => {
 
 When('The Vendor must fill information which needed for registration on {string} form', () => {
     I.waitForElement('#npwp input[type=text]');
-    I.fillField('#npwp input[type=text]', '99.999.999.9-999.992');
+    I.fillField('#npwp input[type=text]', '99.999.999.9-999.912');
     I.waitForElement('#namaPerusahaan input[class=k-input]');
     I.fillField('#namaPerusahaan input[class=k-input]', 'PT. Abadi Jaya Sentosa Selalu');
     I.waitForElement('#namaPic input[class=k-input]');
     I.fillField('#namaPic input[class=k-input]', 'James Bucky Barnes');
     I.waitForElement('#email input[class=k-input]');
-    I.fillField('#email input[class=k-input]', 'vmsac@tmpbox.co.id');
+    I.fillField('#email input[class=k-input]', 'admin@jayaabadi.co.id');
     I.waitForElement('#noTelepon input[class=k-input]');
     I.fillField('#noTelepon input[class=k-input]', '0811111222');
 });
 
-When('The Vendor must clicks {string}', () => {
+When('The Vendor clicks {string}', () => {
     I.waitForElement('#disclaimer');
     I.checkOption('#disclaimer');
 
 });
 
-When('The Vendor must clicks button {string}', () => {
+When('The Vendor clicks button {string}', () => {
     I.waitForElement('#register');
     I.click('#register');
 });
@@ -60,11 +59,43 @@ When('The Vendor unclick {string}', () => {
     I.click('#register');
 });
 
-When('The Vendor clicks button {string}', () => {
-    I.click('#register');
-    I.see('Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi');
+When('The Vendor clicks {string} button', () => {
+    // I.click('#popUpYes');
 });
 
-When('The Vendor clicks {string} button', () => {
-    I.click('');
+When('The Vendor doesnt fill anything into the form', () => {
+
+});
+
+When('The Vendor will get error message {string} on each object of input where found on the {string} Form', () => {
+    I.see('NPWP tidak boleh kosong');
+    I.see('Nama Perusahaan tidak boleh kosong');
+    I.see('Nama PIC Perusahaan tidak boleh kosong');
+    I.see('Email tidak boleh kosong');
+    I.see('Nomor Handphone PIC tidak boleh kosong');
+    I.see('Informasi Registrasi Akun')
+    I.see('[namaPerusahaan] : This value should not be blank.');
+    I.click('#popUpYes');
+});
+
+Then('The Vendor cant continue to Register due no information which given on {string} Form', () => {
+    I.seeInCurrentUrl('/register')
+});
+
+When('The Vendor put same {string} with registerd {string}', () => {
+
+});  
+
+When('The Vendor will get warning message NPWP {string}', () => {
+    I.see('NPWP yang Anda inputkan telah terdaftar');
+    I.click('#popUpYes');
+});
+
+Then('The Vendor cant continue for registration due to NPWP already registered', () => {
+    I.seeInCurrentUrl('/register')
+});
+
+When('The Vendor will get warning message Email {string}', () => {
+    I.see('Email yang Anda inputkan telah terdaftar');
+    I.click('#popUpYes');
 });
