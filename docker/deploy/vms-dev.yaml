@@ -8,5 +8,5 @@
       name: "Login AWS ECR"
     - command: "docker run --rm -i -v /home/sysop/deploy:/deploy/server -e VMS_IMAGE_FE={{ IMAGE_FE }} baskaraerbasakti/vms-deploy deploy.py"
       name: "Update image docker compose"
-    - command: "docker-compose -f /home/sysop/deploy/docker-compose.yaml up -d"
+    - command: "docker-compose -f /home/sysop/deploy/docker-compose.yaml --profile frontend up -d"
       name: "Up docker compose"
