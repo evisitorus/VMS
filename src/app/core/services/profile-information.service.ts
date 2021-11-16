@@ -15,8 +15,10 @@ export class ProfileInformationService {
     private authService: AuthService
   ) { }
 
+  token = this.authService.getLocalStorage('access_token')!;
+
   uploadImg(img: String): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
+    
     let api_profile_information: ApiInterface = {
       method: ApiRouteMethods.post,
       // url: ApiRoutes.api_profile_information,
@@ -26,10 +28,24 @@ export class ProfileInformationService {
       },
       options : {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     }
     return this.apiService.sendRequest(api_profile_information);
+  }
+
+  getJenisPenyediaUsaha(): Observable<any>{
+    let api_jenis_penyedia_usaha: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_penyedia_usaha_route,
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_jenis_penyedia_usaha);
+
   }
 }
