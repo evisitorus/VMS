@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://localhost:8000";
+const API_BASE_URL = "http://127.0.0.1:8000";
 const PADI_BASE_URL = "https://padi-dev.tees.co.id/external-app";
 
 import { environment as env} from "src/environments/environment";

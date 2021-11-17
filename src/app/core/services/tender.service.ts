@@ -16,7 +16,9 @@ export class TenderService {
       url: ApiRoutes.api_list_tender,
       options: {
         headers: {
-          "Access-Control-Allow-Origin" : "*"
+          // "X-App-Id" : "0MvsSnFzGmEXsl7VGcUkB3PhYScLwFwX",
+          // "X-App-Secret" : "yT7FOaNiNzHU2SCK2GOWjObBS86dNpBQWXii9bRX",
+          // "Access-Control-Allow-Origin" : "https://padi-dev.tees.co.id"
         }
       }
     };

@@ -14,7 +14,7 @@ import { tenders } from './tender';
 })
 export class ListTenderComponent implements OnInit {
 
-  public dataTenders: any = [];
+  public dataTenders: any;
   public tenders = tenders;
   public avatarSrc= "";
   constructor(
@@ -27,16 +27,21 @@ export class ListTenderComponent implements OnInit {
 
     console.log(this.dataTenders);
 
-    this.pageSize = 123;
+    // this.pageSize = 123;
 
+    // tenders.data.tenders.forEach(tender => {
+    //   if(tender.cparent.id == 95){
+    //     this.avatarSrc = "./assets/images/pln.png";
+    //   } else if (tender.cparent.id == 88) {
+    //     this.avatarSrc = "./assets/images/pnm.png";
+    //   }      
+    // });
     tenders.data.tenders.forEach(tender => {
       if(tender.cparent.id == 95){
         this.avatarSrc = "./assets/images/pln.png";
       } else if (tender.cparent.id == 88) {
         this.avatarSrc = "./assets/images/pnm.png";
       }
-
-      
     });
   }
 
@@ -54,9 +59,8 @@ export class ListTenderComponent implements OnInit {
   getListTender(){
     this.tenderService.getListTender().subscribe(
       (resp) =>  { 
-        this.dataTenders = resp.data.tender;
-        
-        return resp.data.tenders
+        console.log(resp.data.tenders);
+        return resp
       },
       (error) => { 
         console.log("error");
