@@ -39,8 +39,8 @@ export class ProfileAssetService {
       body: {
         name: params.namaAsset,
         jumlah: params.jumlah,
-        tahun_pembuatan: params.tahunPembuatan,
-        owner_id: "/api/vendor/".concat(this.authService.getLocalStorage("vendor_id")!)
+        tahunPembuatan: params.tahunPembuatan,
+        owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
       },
       options: {
         headers: {

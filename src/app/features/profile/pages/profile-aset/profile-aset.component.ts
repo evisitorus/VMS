@@ -35,16 +35,7 @@ export class ProfileAsetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileAssetService.getDataAsset().subscribe(
-      (resp) => {
-        this.gridData = resp['hydra:member'];
-        this.gridData = this.mapData(this.gridData);
-      },
-      (err) => {
-        this.popUpMessage = "Gagal mendapatkan data asset";
-        this.triggerPopUp();
-      }
-    );
+    this.getData();
   }
 
   public mapData(data:any[]) {
@@ -69,16 +60,30 @@ export class ProfileAsetComponent implements OnInit {
     this.opened = true;
   }
   
-  public submit(): void{
+  public submit(): void {
     this.close();
     let params: ProfileAssetInterface = {...this.form.value};
     this.profileAssetService.saveProfileAsset(params).subscribe(
       (resp) => {
         this.popUpMessage = "Berhasil menyimpan data";
         this.triggerPopUp();
+        this.getData();
       }, 
       (error) => {
         this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public getData(): void {
+    this.profileAssetService.getDataAsset().subscribe(
+      (resp) => {
+        this.gridData = resp['hydra:member'];
+        this.gridData = this.mapData(this.gridData);
+      },
+      (err) => {
+        this.popUpMessage = "Gagal mendapatkan data asset";
         this.triggerPopUp();
       }
     );
