@@ -8,9 +8,8 @@ import { TenderInfoComponent } from './pages/tender-info/tender-info.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import localeId from '@angular/common/locales/id'; 
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(localeId, 'id'); 
+import { IntlModule } from "@progress/kendo-angular-intl";
+import "@progress/kendo-angular-intl/locales/id/all";
 
 @NgModule({
   declarations: [
@@ -22,11 +21,12 @@ registerLocaleData(localeId, 'id');
     CommonModule,
     CoreModule,
     SharedModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    IntlModule
   ],
   exports: [
     LandingPageComponent,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: "id-ID" }]
+  providers: [{provide: LOCALE_ID, useValue: 'en-US' }],
 })
 export class LandingModule { }
