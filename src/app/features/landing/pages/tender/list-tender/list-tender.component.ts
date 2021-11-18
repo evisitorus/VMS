@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { CardComponent } from "@progress/kendo-angular-layout";
-import { PagerSettings } from "@progress/kendo-angular-listview";
+import { Component, OnInit, Input, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { PagerSettings, ListViewDataResult, ListViewModule, PageChangeEvent } from "@progress/kendo-angular-listview";
+import { Subscription, Observable, of } from "rxjs";
+import { finalize, delay } from "rxjs/operators";
 
 
 import { TenderService } from 'src/app/core/services/tender.service';
 import { tenders } from './tender';
+// import { ProductsService } from "./products.service";
 
 @Component({
   selector: 'app-list-tender',
@@ -12,54 +14,49 @@ import { tenders } from './tender';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./list-tender.component.css']
 })
-export class ListTenderComponent implements OnInit {
+export class ListTenderComponent implements OnInit, OnDestroy  {
 
+  public view!: ListViewDataResult;
   public dataTenders: any;
-  public tenders = tenders;
-  public avatarSrc= "";
+  public loading = false;
+
+  public skip = 0;
+  public pageSize = 20;
+
   constructor(
-    private tenderService: TenderService
+    private tenderService: TenderService,
+    // private productsService: ProductsService
   ) { }
+
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit(): void {
     this.dataTenders = this.getListTender();
-    // this.dataTenders = tenders
 
     console.log(this.dataTenders);
 
-    // this.pageSize = 123;
+    this.pageSize = 123;
 
-    // tenders.data.tenders.forEach(tender => {
-    //   if(tender.cparent.id == 95){
-    //     this.avatarSrc = "./assets/images/pln.png";
-    //   } else if (tender.cparent.id == 88) {
-    //     this.avatarSrc = "./assets/images/pnm.png";
-    //   }      
-    // });
-    tenders.data.tenders.forEach(tender => {
-      if(tender.cparent.id == 95){
-        this.avatarSrc = "./assets/images/pln.png";
-      } else if (tender.cparent.id == 88) {
-        this.avatarSrc = "./assets/images/pnm.png";
-      }
-    });
+
+    this.fetchData();
+
   }
-
-  // public avatarSrc =
-  // "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
-  // public logoSrc = "./assets/images/pln.png";
 
   public pagerSettings: PagerSettings = {
     previousNext: true,
     pageSizeValues: false,
     buttonCount: 9,
+    info: true,
   };
-  public pageSize = 16;
 
   getListTender(){
     this.tenderService.getListTender().subscribe(
       (resp) =>  { 
-        console.log(resp.data.tenders);
+        this.dataTenders = resp.data.tenders;
+        this.pageSize = resp.data.per_page;
+        // this.tender = resp;
         return resp
       },
       (error) => { 
@@ -73,12 +70,42 @@ export class ListTenderComponent implements OnInit {
       return `./assets/images/${bumn}.png`;
   }
 
-  public getImageUrl(contactId: number): string {
-    return `https://www.telerik.com/kendo-angular-ui-develop/components/listview/assets/contacts/${contactId}.png`;
-}
+  public get showPager(): boolean {
+    return this.view && this.view.total > 0;
+  }
 
-public getMessagesText(messagesCount: number): string {
-    return `${messagesCount} new message${ messagesCount > 1 ? 's' : '' }`;
-}
+  private productsSubscription = new Subscription();
 
+
+  public fetchData(): void {
+    if (this.productsSubscription) {
+      this.productsSubscription.unsubscribe();
+    }
+
+    this.loading = true;
+    this.productsSubscription = this
+      .get({ skip: this.skip, take: this.pageSize })
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((response) => (this.view = response));
+  }
+
+  public handlePageChange(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.pageSize = event.take;
+
+    this.fetchData();
+  }
+
+  public get(
+    options: { skip?: number; take?: number } = {}
+  ): Observable<ListViewDataResult> {
+    const skip = options.skip || 0;
+    const take = options.take || tenders.data.meta.total;
+    const delayTime = 1000;
+
+    return of({
+      data: tenders.data.tenders.slice(skip, skip + take).map((item) => ({ ...item })),
+      total: tenders.data.meta.total,
+    }).pipe(delay(delayTime)); // simulate remote binding delay
+  }
 }

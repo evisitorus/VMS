@@ -22,9 +22,6 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { ListViewModule } from '@progress/kendo-angular-listview';
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

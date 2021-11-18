@@ -1,0 +1,40 @@
+.product {
+    position: relative;
+    width: 110px;
+    height: 170px;
+    margin: 5px;
+    cursor: default;
+  }
+  .image,
+  .name,
+  .price {
+    margin: 0;
+  }
+  .image,
+  .price {
+    width: 110px;
+    height: 110px;
+  }
+  .name {
+    height: 50px;
+    font-size: 0.9em;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .price {
+    display: none;
+  }
+  .product:hover .price {
+    display: unset;
+    position: absolute;
+    top: 0;
+    line-height: 110px;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    transition: background 0.2s linear, color 0.2s linear;
+  }

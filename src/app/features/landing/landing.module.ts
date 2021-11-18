@@ -26,9 +26,11 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { ListTenderComponent } from './pages/tender/list-tender/list-tender.component';
 import { CardTenderComponent } from './pages/tender/card-tender/card-tender.component';
+import { TenderDataComponent } from './pages/tender/tender-data/tender-data.component'
 import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
 
 
+import { ProductsService } from "./pages/tender/card-tender/product.service";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
     CarouselComponent,
     ListTenderComponent,
     CardTenderComponent,
+    TenderDataComponent,
     GridBannerComponent
   ],
   imports: [
@@ -81,7 +84,11 @@ import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
   ],
   exports: [
     LandingPageComponent,
-    ListTenderComponent
-  ]
+    ListTenderComponent,
+    TenderDataComponent
+  ],
+  providers: [
+    ProductsService
+  ],
 })
 export class LandingModule { }

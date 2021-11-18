@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ListViewModule } from '@progress/kendo-angular-listview';
+import { GridModule } from '@progress/kendo-angular-grid';  
 
 import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
 import { LabelModule } from "@progress/kendo-angular-label";
@@ -13,12 +14,15 @@ import { ButtonsModule } from "@progress/kendo-angular-buttons";
 
 import { ListTenderComponent } from './list-tender/list-tender.component';
 import { CardTenderComponent } from './card-tender/card-tender.component';
+import { TenderDataComponent } from "./tender-data/tender-data.component";
 
+import { ProductsService } from "./card-tender/product.service";
 
 @NgModule({
   declarations: [
     ListTenderComponent,
     CardTenderComponent,
+    TenderDataComponent,
   ],
   imports: [
     CommonModule,
@@ -35,11 +39,16 @@ import { CardTenderComponent } from './card-tender/card-tender.component';
     LayoutModule,
     LabelModule,
     ButtonsModule,
-    ListViewModule
+    ListViewModule,
+    GridModule,  
   ],
   exports: [
     ListTenderComponent,
     CardTenderComponent,
-  ]
+    TenderDataComponent
+  ],
+  providers: [
+    ProductsService
+  ],
 })
 export class TenderModule { }
