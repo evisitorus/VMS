@@ -14,8 +14,6 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { TenderService } from 'src/app/core/services/tender.service';
 
-import { tenders } from './tender';
-
 @Component({
   selector: 'app-card-tender',
   templateUrl: './card-tender.component.html',
@@ -44,15 +42,10 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
   private productsSubscription = new Subscription();
 
-  constructor(private productsService: ProductsService,
-    
-    private tenderService: TenderService) {}
+  constructor(private tenderService: TenderService) {}
 
 
   ngOnInit(): void {
-
-    this.dataTenders = this.getListTender();
-    // this.getListTender();
     this.fetchData();
   }
 
@@ -98,19 +91,6 @@ export class CardTenderComponent implements OnInit, OnDestroy {
           return error;
       }
       )
-  }
-
-
-  async getListTender(){
-    this.tenderService.getListTender(1).subscribe(
-    (resp) =>  {
-        return resp;
-    },
-    (error) => { 
-        console.log(error);
-        return error;
-    }
-    )
   }
 
   getTender(options: { skip?: number, take?: number, page?:number, dataTender?:{data:{ meta: {}, tenders:[] } } } = {}): Observable<ListViewDataResult> {

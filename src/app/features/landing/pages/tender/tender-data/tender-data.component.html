@@ -1,12 +1,27 @@
-<div class="product">
+<div class="">
   <a href="tender/detail/{{tender.id}}">
-    <img
-      class="image"
-      src="https://www.telerik.com/kendo-angular-ui-develop/components/listview/assets/products/1.jpg"
-      alt="{{ tender.cparent.name }} image"
-    />
-    <!-- <h3 class="name">{{ product.productName }}</h3> -->
-    <h3 class="name">{{ tender.name }}</h3>
-    <!-- <p class="price">{{ product.unitPrice | currency }}</p> -->
+    <kendo-card-body class="k-hstack top">
+      <div class="top-avatar">
+          <kendo-avatar [imageSrc]="getAvatar(tender.cparent.id)"></kendo-avatar>
+          <div class="k-card-titles">{{ tender.cparent.name }} </div>
+      </div>
+      <div class="status">{{ tender.status.name }} </div>
+    </kendo-card-body>
+    <kendo-card-body class="k-hstack-body">
+      <div class="tender-title">{{ tender.name }}</div>
+      <div class="middle">
+          <img src="./assets/images/calendar.png" class="icon"/>
+          <div class="mid">{{ tender.publish_at }}</div>
+          <img src="./assets/images/Vector.png" class="icon"/>
+          <div class="mid">Rp {{ tender.hps_total }}</div>
+          <img src="./assets/images/pin.png" class="icon"/>
+          <div class="mid">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
+      </div>
+      <div class="middle">
+          <div class="mid">{{ tender.method.name }}</div>
+          <div class="mid" style="font-weight: bold;">{{ tender.category.name }}</div>
+      </div>
+      <div class="mid">{{ tender.publish_at  }}</div>
+    </kendo-card-body>
   </a>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'app-tender-data',
@@ -21,12 +21,39 @@ export class TenderDataComponent implements OnInit {
 
   @Input()
   tender!: {
+    category: {
+      id: number,
+      name: string
+    },
     cparent: {
         id: number,
         name: string;
     }
-    name:string;
-    id:number
+    hps_hide: number,
+    hps_total: number,
+    id: number,
+    method: {
+        desc: string,
+        id: number,
+        name: string
+    },
+    name: string,
+    province: {
+        id: number,
+        name: string
+    },
+    publish_at: Date,
+    registration_end: Date,
+    status: {
+        id: number,
+        name: string
+    },
+    winner_hide: number,
+    winners: []
   }
+
+  public getAvatar(bumn: number): string {
+    return `./assets/images/${bumn}.png`;
+}
 
 }

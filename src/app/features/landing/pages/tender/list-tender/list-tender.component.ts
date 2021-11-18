@@ -6,7 +6,6 @@ import { finalize, delay } from "rxjs/operators";
 
 import { TenderService } from 'src/app/core/services/tender.service';
 import { tenders } from './tender';
-// import { ProductsService } from "./products.service";
 
 @Component({
   selector: 'app-list-tender',
@@ -23,10 +22,7 @@ export class ListTenderComponent implements OnInit, OnDestroy  {
   public skip = 0;
   public pageSize = 20;
 
-  constructor(
-    private tenderService: TenderService,
-    // private productsService: ProductsService
-  ) { }
+  constructor(private tenderService: TenderService) { }
 
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
@@ -34,12 +30,6 @@ export class ListTenderComponent implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     this.dataTenders = this.getListTender();
-
-    // console.log(this.dataTenders);
-
-    this.pageSize = 123;
-
-
     this.fetchData();
 
   }
