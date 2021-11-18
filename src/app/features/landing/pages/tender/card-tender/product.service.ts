@@ -3,33 +3,34 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ListViewDataResult } from '@progress/kendo-angular-listview';
 
-import { products } from './products';
 import { tenders } from './tender';
 
+import { TenderService } from 'src/app/core/services/tender.service';
 /**
  * Remote binding simulation.
  */
 @Injectable()
 export class ProductsService {
-    public get(options: { skip?: number, take?: number } = {}): Observable<ListViewDataResult> {
-        const skip = options.skip || 0;
-        const take = options.take || products.length;
-        const delayTime = 1000;
 
-        return of({
-            data: products.slice(skip, skip + take).map(item => ({ ...item })),
-            total: products.length
-        }).pipe(delay(delayTime)); // simulate remote binding delay
-    }
+    public dataTenders: any;
 
-    public getTender(options: { skip?: number, take?: number } = {}): Observable<ListViewDataResult> {
+    constructor(
+        private tenderService: TenderService
+      ) { }
+
+
+    getTender(options: { skip?: number, take?: number, page?:number, dataTender?:{} } = {}): Observable<ListViewDataResult> {
         const skip = options.skip || 0;
         const take = options.take || tenders.data.meta.total;
         const delayTime = 1000;
+
+        console.log(options.dataTender);
 
         return of({
             data: tenders.data.tenders.slice(skip, skip + take).map(item => ({ ...item })),
             total: tenders.data.meta.total
         }).pipe(delay(delayTime)); // simulate remote binding delay
     }
+
+
 }

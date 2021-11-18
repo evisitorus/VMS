@@ -35,7 +35,7 @@ export class ListTenderComponent implements OnInit, OnDestroy  {
   ngOnInit(): void {
     this.dataTenders = this.getListTender();
 
-    console.log(this.dataTenders);
+    // console.log(this.dataTenders);
 
     this.pageSize = 123;
 
@@ -52,11 +52,10 @@ export class ListTenderComponent implements OnInit, OnDestroy  {
   };
 
   getListTender(){
-    this.tenderService.getListTender().subscribe(
+    this.tenderService.getListTender(1).subscribe(
       (resp) =>  { 
         this.dataTenders = resp.data.tenders;
         this.pageSize = resp.data.per_page;
-        // this.tender = resp;
         return resp
       },
       (error) => { 

@@ -20,11 +20,12 @@ export class TenderDataComponent implements OnInit {
   };
 
   @Input()
-  tenders!: {
+  tender!: {
     cparent: {
         id: number,
         name: string;
     }
+    name:string;
   }
 
 }
