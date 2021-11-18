@@ -7,15 +7,15 @@
       </div>
       <div class="status">{{ tender.status.name }} </div>
     </kendo-card-body>
-    <kendo-card-body class="k-hstack-body">
+    <kendo-card-body class="k-hstack-body" style="padding: 0px 16px;">
       <div class="tender-title">{{ tender.name }}</div>
       <div class="middle">
           <img src="./assets/images/calendar.png" class="icon"/>
-          <div class="mid">{{ tender.publish_at }}</div>
+          <div class="mid1">{{ tender.publish_at }}</div>
           <img src="./assets/images/Vector.png" class="icon"/>
-          <div class="mid">Rp {{ tender.hps_total }}</div>
+          <div class="mid1">Rp {{ tender.hps_total }}</div>
           <img src="./assets/images/pin.png" class="icon"/>
-          <div class="mid">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
+          <div class="mid1">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
       </div>
       <div class="middle">
           <div class="mid">{{ tender.method.name }}</div>

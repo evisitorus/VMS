@@ -12,7 +12,6 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 
-import { ListTenderComponent } from './list-tender/list-tender.component';
 import { CardTenderComponent } from './card-tender/card-tender.component';
 import { TenderDataComponent } from "./tender-data/tender-data.component";
 
@@ -20,7 +19,6 @@ import { ProductsService } from "./card-tender/product.service";
 
 @NgModule({
   declarations: [
-    ListTenderComponent,
     CardTenderComponent,
     TenderDataComponent,
   ],
@@ -43,7 +41,6 @@ import { ProductsService } from "./card-tender/product.service";
     GridModule,  
   ],
   exports: [
-    ListTenderComponent,
     CardTenderComponent,
     TenderDataComponent
   ],

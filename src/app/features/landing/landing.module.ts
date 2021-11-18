@@ -24,7 +24,6 @@ import { IntlModule } from "@progress/kendo-angular-intl";
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
-import { ListTenderComponent } from './pages/tender/list-tender/list-tender.component';
 import { CardTenderComponent } from './pages/tender/card-tender/card-tender.component';
 import { TenderDataComponent } from './pages/tender/tender-data/tender-data.component'
 import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
@@ -36,7 +35,6 @@ import { ProductsService } from "./pages/tender/card-tender/product.service";
   declarations: [
     LandingPageComponent,
     CarouselComponent,
-    ListTenderComponent,
     CardTenderComponent,
     TenderDataComponent,
     GridBannerComponent
@@ -84,7 +82,6 @@ import { ProductsService } from "./pages/tender/card-tender/product.service";
   ],
   exports: [
     LandingPageComponent,
-    ListTenderComponent,
     TenderDataComponent
   ],
   providers: [

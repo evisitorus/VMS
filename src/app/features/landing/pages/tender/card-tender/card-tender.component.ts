@@ -1,23 +1,20 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { Component, OnInit, Input, ViewEncapsulation, OnDestroy } from "@angular/core";
 import { finalize, delay } from "rxjs/operators";
 import { Subscription, Observable, of } from 'rxjs';
-import {
-  ListViewDataResult,
-  PageChangeEvent,
-  PagerSettings, 
-} from "@progress/kendo-angular-listview";
+import { ListViewDataResult, PageChangeEvent, PagerSettings } from "@progress/kendo-angular-listview";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
 import { ProductsService } from "./product.service";
 import { TenderDataComponent } from "../tender-data/tender-data.component";
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TenderService } from 'src/app/core/services/tender.service';
 
 @Component({
   selector: 'app-card-tender',
   templateUrl: './card-tender.component.html',
-  styleUrls: ['./card-tender.component.css']
+  styleUrls: ['./card-tender.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CardTenderComponent implements OnInit, OnDestroy {
   public view!: ListViewDataResult;
