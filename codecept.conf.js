@@ -35,6 +35,7 @@ exports.config = {
     steps: [
           // './tests/acceptance/step_definitions/steps.js'
           './tests/acceptance/step_definitions/RegisterNPWP.steps.js',
+          './tests/acceptance/step_definitions/ActivationAccount.steps.js',
         ]
   },
   plugins: {

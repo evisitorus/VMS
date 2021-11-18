@@ -39,33 +39,33 @@ Feature: Calon Vendor - Registrasi
 #         Then The Vendor already registered his or her company to VMS portal 
     
 #   #negative scenario for registration
-    # Scenario: Unclick Disclaimer
-    #     Given The Vendor is on VMS landing page 
-    #     # When The Vendor wants to register his or her company
-    #     And The Vendor goes to "Registration" form 
-    #     And The Vendor must fill information which needed for registration on "Registration" form
-    #     """
-    #     {
+    Scenario: Unclick Disclaimer
+        Given The Vendor is on VMS landing page 
+        When The Vendor wants to register his or her company
+        And The Vendor goes to "Registration" form 
+        And The Vendor must fill information which needed for registration on "Registration" form
+        """
+        {
         
-    #         "npwp" : "99.999.999.9-999.992", #format input can only filled by numeric with separator (.) and (-) pls follow the pattern
-    #                                         #can only input by 15 characters numeric, if more the object locked 
-    #         "namaPerusahaan"  : "PT. Abadi Jaya Sentosa Selalu",
-    #         "namaPIC" : "James Bucky Barnes",
-    #         "emailPICPerusahaan" : "admin@abadijaya.co.id",
-    #         "noHandphonePIC" : "0812345" #field can be filled by numeric only with lenght max 20 characters if more the text cant be typed
-    #     }
-    #     """
-    #     And The Vendor unclick "Disclaimer"
-    #     And The Vendor clicks button "Daftar" 
-    #     And The Vendor will see success message from the system 
-    #     """
-    #     {
-    #         "message" : "Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi",
-    #         "button"  : "Yes"
-    #     }
-    #     """
-        # And The Vendor clicks "Yes" button
-        # Then The Vendor cant continue for registration due to he or she unselect "Disclaimer"
+            "npwp" : "99.999.999.9-999.992", #format input can only filled by numeric with separator (.) and (-) pls follow the pattern
+                                            #can only input by 15 characters numeric, if more the object locked 
+            "namaPerusahaan"  : "PT. Abadi Jaya Sentosa Selalu",
+            "namaPIC" : "James Bucky Barnes",
+            "emailPICPerusahaan" : "admin@abadijaya.co.id",
+            "noHandphonePIC" : "0812345" #field can be filled by numeric only with lenght max 20 characters if more the text cant be typed
+        }
+        """
+        And The Vendor unclick "Disclaimer"
+        And The Vendor clicks button "Daftar" 
+        And The Vendor will see error message from the system 
+        """
+        {
+            "message" : "Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi",
+            "button"  : "Yes"
+        }
+        """
+        And The Vendor clicks "Yes" button
+        Then The Vendor cant continue for registration due to he or she unselect "Disclaimer"
 
 #  #negative scenario for registration
     # Scenario: Fields Input Are Empty

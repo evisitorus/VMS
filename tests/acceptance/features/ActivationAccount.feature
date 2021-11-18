@@ -17,7 +17,7 @@ Feature: Vendor - Activation Account
             "message" : "Selamat anda telah terdaftar sebagai Vendor pada VMS, silahkan cek email anda untuk melakukan aktivasi akun",
             "button"  : "Yes"
         }
-        """ 
+        """
         And The Vendor must selects "Yes" button
         And The Vendor must check "Activation Email" on his or her email address 
         And The Vendor already on his or her email 
@@ -70,7 +70,7 @@ Feature: Vendor - Activation Account
         """
         And The Vendor must clicks "linkActivation"
         And The Vendor will bring to "Activation Confirmation" form 
-        And The Vendor will see warning message which stated that activation activation failed
+        And The Vendor will see warning message which stated that activation failed
         """
         {
         
