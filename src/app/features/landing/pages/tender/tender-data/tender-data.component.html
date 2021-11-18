@@ -2,7 +2,7 @@
   <a href="tender/detail/{{tender.id}}">
     <kendo-card-body class="k-hstack top">
       <div class="top-avatar">
-          <kendo-avatar [imageSrc]="getAvatar(tender.cparent.id)"></kendo-avatar>
+          <kendo-avatar [imageSrc]="getAvatar(tender.cparent.id)" [shape]="shapes"></kendo-avatar>
           <div class="k-card-titles">{{ tender.cparent.name }} </div>
       </div>
       <div class="status">{{ tender.status.name }} </div>

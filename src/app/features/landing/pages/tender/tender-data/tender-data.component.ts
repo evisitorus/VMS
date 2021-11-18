@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AvatarShape } from "@progress/kendo-angular-layout";
 
 @Component({
   selector: 'app-tender-data',
@@ -56,4 +57,5 @@ export class TenderDataComponent implements OnInit {
     return `./assets/images/${bumn}.png`;
 }
 
+  public shapes: AvatarShape = "rectangle";
 }
