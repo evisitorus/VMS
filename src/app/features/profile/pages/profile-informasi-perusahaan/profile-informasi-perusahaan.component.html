@@ -25,7 +25,7 @@
             </div>
             <div class="row align-items-center">
               <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
-              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10"></kendo-textbox>
             </div>
             <div class="row">
               <kendo-label>Jenis Badan Usaha</kendo-label>
@@ -164,7 +164,7 @@
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-              <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
@@ -174,22 +174,22 @@
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
-              <kendo-textbox id="jumlahKaryawanTotalInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-numerictextbox id="jumlahKaryawanTotalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"></kendo-numerictextbox>
             </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Lokal</kendo-label>
-              <kendo-textbox id="jumlahKaryawanLokalInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"></kendo-numerictextbox>
             </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Asing</kendo-label>
-              <kendo-textbox id="jumlahKaryawanAsingInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"></kendo-numerictextbox>
             </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">No. Telepon Perusahaan</kendo-label>
-              <kendo-textbox id="noTelpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="noTelpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="20"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
@@ -199,7 +199,7 @@
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
-              <kendo-textbox id="alamatPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="alamatPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="100"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
@@ -216,7 +216,7 @@
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Kode Pos</kendo-label>
-              <kendo-textbox id="kodePosInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="kodePosInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="4"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
