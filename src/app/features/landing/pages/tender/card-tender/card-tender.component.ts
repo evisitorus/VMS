@@ -4,6 +4,7 @@ import { Subscription, Observable, of } from 'rxjs';
 import {
   ListViewDataResult,
   PageChangeEvent,
+  PagerSettings, 
 } from "@progress/kendo-angular-listview";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 
@@ -33,6 +34,13 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public get showPager(): boolean {
     return this.view && this.view.total > 0;
   }
+
+  public pagerSettings: PagerSettings = {
+    previousNext: true,
+    pageSizeValues: false,
+    buttonCount: 5,
+    info: true,
+  };
 
   private productsSubscription = new Subscription();
 

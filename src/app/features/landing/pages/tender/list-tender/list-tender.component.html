@@ -1,29 +1,4 @@
 <div class="demo">
-    <!-- <kendo-listview
-      [data]="view"
-      [loading]="loading"
-      [itemStyle]="{
-        display: 'inline-flex'
-      }"
-      [pageable]="showPager"
-      [pageSize]="pageSize"
-      [skip]="skip"
-      (pageChange)="handlePageChange($event)"
-    >
-      <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
-        <div class="product">
-            <img
-              class="image"
-              src="https://www.telerik.com/kendo-angular-ui-develop/components/listview/assets/products/{{
-                dataItem.productID
-              }}.jpg"
-              alt="{{ dataItem.productName }} image"
-            />
-            <h3 class="name">{{ dataItem.productName }}</h3>
-            <p class="price">{{ dataItem.unitPrice | currency }}</p>
-          </div>
-      </ng-template>
-    </kendo-listview> -->
     <kendo-listview [data]="dataTenders" [loading]="loading" [itemClass]="{ 'item-border': false }"  [pageable]="pagerSettings" [pageSize]="pageSize" 
     [skip]="skip"
     (pageChange)="handlePageChange($event)">\
