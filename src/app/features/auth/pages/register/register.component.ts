@@ -59,12 +59,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm.markAllAsTouched();
 
     // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    //   this.popUpMessage = messages.default;
-    //   this.triggerPopUp();
-    //   this.redirectOnClosePopUp = false;
-    //   return;
-    // }
+    if (this.registerForm.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
 
     let params: RegisterInterface= {...this.registerForm.value};
     this.authService.register(params).subscribe(

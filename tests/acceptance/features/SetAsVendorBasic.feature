@@ -30,11 +30,9 @@ Feature: Vendor - Set As Vendor Basic
        }
        """
        And The Vendor must selects "Yes"
-       And The Vendor will see badge "Vendor Basic" on his/her profile
-    Then The Vendor already test his/her account by log-in to the app
+       And The Vendor will see badge "Vendor Basic" on his or her profile
+    Then The Vendor already test his or her account by log-in to the app
     #Completing profile will be describe on another scenario 
-
-#================================================================================================================================================
 
  #negative scenario, wrong password 
   Scenario:
@@ -61,9 +59,6 @@ Feature: Vendor - Set As Vendor Basic
        And The Vendor must selects "Yes"
     Then The Vendor must type right password on "Password" input-type on "Login" Form 
 
-
-#================================================================================================================================================
-
  #negative scenario, wrong email 
   Scenario:
     Given The Vendor already finished activation process 
@@ -88,8 +83,6 @@ Feature: Vendor - Set As Vendor Basic
        """
        And The Vendor must selects "Yes"
     Then The Vendor must type registered email on "Email" input-type on "Login" Form 
-
-#================================================================================================================================================
 
  #negative scenario, wrong email and password
   Scenario:
