@@ -49,6 +49,7 @@ When('The Vendor should define his or her new password to access VMS', () => {
 When('The Vendor clicks {string} button from {string} form', () => {
     I.waitForElement('#submitPassword');
     I.click('#submitPassword');
+    I.seeInCurrentUrl('/login');
 });
 
 When('The Vendor will be flag as {string} also will get {string} badge', () => {
