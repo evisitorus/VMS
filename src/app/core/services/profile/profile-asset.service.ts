@@ -51,4 +51,38 @@ export class ProfileAssetService {
     return this.apiService.sendRequest(api_save_profile_asset);
   }
 
+  public update(params: ProfileAssetInterface, id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_update_profile_asset: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_assets_route.concat("/").concat(id),
+      body: {
+        name: params.namaAsset,
+        jumlah: params.jumlah,
+        tahunPembuatan: params.tahunPembuatan,
+        owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_update_profile_asset);
+  }
+
+  public delete(id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_delete_profile_asset: ApiInterface = {
+      method: ApiRouteMethods.delete,
+      url: ApiRoutes.api_assets_route.concat("/").concat(id),
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_delete_profile_asset);
+  }
+
 }
