@@ -13,15 +13,12 @@ export class TenderService {
   getListTender(page: number): Observable<any> {    
     let api_list_tender: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_list_tender,
+      url: ApiRoutes.api_list_tender + page,
       options: {
         headers: {
           // "X-App-Id" : "0MvsSnFzGmEXsl7VGcUkB3PhYScLwFwX",
           // "X-App-Secret" : "yT7FOaNiNzHU2SCK2GOWjObBS86dNpBQWXii9bRX",
           // "Access-Control-Allow-Origin" : "https://padi-dev.tees.co.id"
-        },
-        params: {
-          page : page
         }
       }
     };

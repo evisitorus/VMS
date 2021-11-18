@@ -26,6 +26,7 @@ export class TenderDataComponent implements OnInit {
         name: string;
     }
     name:string;
+    id:number
   }
 
 }
