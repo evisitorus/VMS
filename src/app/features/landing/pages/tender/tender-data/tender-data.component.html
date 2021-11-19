@@ -1,8 +1,7 @@
-<div class="" routerLink="tender/detail/{{tender.id}}">
-  <!-- <a href="tender/detail/{{tender.id}}"> -->
+<div class="tender" routerLink="tender/detail/{{tender.id}}">
     <kendo-card-body class="k-hstack top">
       <div class="top-avatar">
-          <kendo-avatar [imageSrc]="getAvatar(tender.cparent.id)" [shape]="shapes"></kendo-avatar>
+          <img src='{{ "assets/images/" + tender.cparent.id + ".png" }}' class="avatar" alt="avatar"/>
           <div class="k-card-titles">{{ tender.cparent.name }} </div>
       </div>
       <div class="status">{{ tender.status.name }} </div>
@@ -10,11 +9,11 @@
     <kendo-card-body class="k-hstack-body" style="padding: 0px 16px;">
       <div class="tender-title">{{ tender.name }}</div>
       <div class="middle">
-          <img src="./assets/images/calendar.png" class="icon"/>
+          <img src="./assets/images/calendar.png" class="icon" alt="calendar"/>
           <div class="mid1">{{ tender.publish_at }}</div>
-          <img src="./assets/images/Vector.png" class="icon"/>
-          <div class="mid1">Rp {{ tender.hps_total }}</div>
-          <img src="./assets/images/pin.png" class="icon"/>
+          <img src="./assets/images/Vector.png" class="icon" alt="amount"/>
+          <div class="mid1">{{ tender.hps_hide ? "Rp. " + tender.hps_total : (tender.hps_total | currency:'Rp. ':'symbol':'4.0-2') }}</div>
+          <img src="./assets/images/pin.png" class="icon" alt="pin"/>
           <div class="mid1">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
       </div>
       <div class="middle">
@@ -23,5 +22,4 @@
       </div>
       <div class="mid">{{ tender.publish_at  }}</div>
     </kendo-card-body>
-  <!-- </a> -->
 </div>

@@ -5,7 +5,7 @@
   padding: 0px 200px;
 }
 .k-listview {
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
   margin: auto;
   /* width: 400px; */
   /* display: inline-block; */
@@ -13,9 +13,18 @@
 .k-listview-item {
   display: inline-block;
   width: 43%;
-  padding: 10px 10px;
   border-style: solid;
   border-color: #dee2e6;
+  border-width: 3px;
+  margin: 20px 40px;
+  border-radius: 8px;
+}
+
+.k-listview-item:hover {
+  display: inline-block;
+  width: 43%;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.75);
   border-width: 3px;
   margin: 20px 40px;
   border-radius: 8px;
@@ -81,32 +90,6 @@ font-weight: normal;
 font-size: 16px;
 line-height: 40px;
 vertical-align: middle;
-}
-
-.avatar {
-  width: 150px;
-  height: 100px;
-}
-
-.top-avatar {
-  display: inherit;
-}
-
-.tender-title {
-  /* Body/Body 2 */
-
-/* font-family: Roboto; */
-font-style: normal;
-font-weight: normal;
-font-size: 20px;
-line-height: 20px;
-/* identical to box height, or 143% */
-padding: 0px 10px 10px 0px;
-letter-spacing: 0.25px;
-}
-
-.icon{
-  margin-right: 10px;
 }
 
 .k-listview {
