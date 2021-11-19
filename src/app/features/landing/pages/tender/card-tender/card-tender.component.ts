@@ -2,12 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation, OnDestroy } from "@angular
 import { finalize, delay } from "rxjs/operators";
 import { Subscription, Observable, of } from 'rxjs';
 import { ListViewDataResult, PageChangeEvent, PagerSettings } from "@progress/kendo-angular-listview";
-import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
-
-import { ProductsService } from "./product.service";
-import { TenderDataComponent } from "../tender-data/tender-data.component";
-import { HttpClientModule } from '@angular/common/http';
-
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { TenderService } from 'src/app/core/services/tender.service';
 
 @Component({
@@ -26,6 +21,9 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
   public dataTenders: any;
 
+  public popUpTitle: string = "Tender List";
+  public popUpMessage: string = "";
+  
   public get showPager(): boolean {
     return this.view && this.view.total > 0;
   }
@@ -39,7 +37,10 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
   private productsSubscription = new Subscription();
 
-  constructor(private tenderService: TenderService) {}
+  constructor(
+    private tenderService: TenderService,
+    private eventEmitterService: EventEmitterService
+  ) {}
 
 
   ngOnInit(): void {
@@ -69,12 +70,6 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
     this.loading = true;
 
-    // this.productsSubscription = this
-    //   .getTender({ skip: this.skip, take: this.pageSize, page:this.currentPage, dataTender:this.dataTenders })
-    //   .pipe(finalize(() => (this.loading = false)))
-    //   .subscribe((response) => (this.view = response));
-
-
     this.tenderService.getListTender(this.currentPage).subscribe(
       (resp) =>  {
           this.productsSubscription = this
@@ -84,8 +79,8 @@ export class CardTenderComponent implements OnInit, OnDestroy {
           return resp;
       },
       (error) => { 
-          console.log(error);
-          return error;
+        this.popUpMessage = "Gagal menemukan data tender";
+        this.triggerPopUp();
       }
       )
   }
@@ -96,17 +91,18 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     const take = options.take || this.dataTenders.meta.total;
     const delayTime = 1000;
 
-    console.log(options.dataTender?.data);
-
     if (options.dataTender?.data.tenders) {
       this.dataTenders = options.dataTender?.data;
     }
     
     return of({
-        // data: tenders.data.tenders.slice(skip, skip + take).map(item => ({ ...item })),
         data: this.dataTenders.tenders,
         total: this.dataTenders.meta.total
     }).pipe(delay(delayTime)); // simulate remote binding delay
+  }
+
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
   }
 
 }

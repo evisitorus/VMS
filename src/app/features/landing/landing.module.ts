@@ -31,7 +31,6 @@ import { TenderDataComponent } from './pages/tender/tender-data/tender-data.comp
 import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
 import { TenderInfoComponent } from './pages/tender-info/tender-info.component';
 import { CoreModule } from 'src/app/core/core.module';
-import { ProductsService } from "./pages/tender/card-tender/product.service";
 
 @NgModule({
   declarations: [
@@ -92,8 +91,7 @@ import { ProductsService } from "./pages/tender/card-tender/product.service";
     TenderDataComponent
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'en-US' }, 
-    ProductsService
+    {provide: LOCALE_ID, useValue: 'en-US' }
   ],
 })
 export class LandingModule { }
