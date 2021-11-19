@@ -36,6 +36,10 @@ exports.config = {
           // './tests/acceptance/step_definitions/steps.js'
           './tests/acceptance/step_definitions/RegisterNPWP.steps.js',
           './tests/acceptance/step_definitions/ActivationAccount.steps.js',
+          './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformation.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformationDetails.steps.js',
+          './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
         ]
   },
   plugins: {
