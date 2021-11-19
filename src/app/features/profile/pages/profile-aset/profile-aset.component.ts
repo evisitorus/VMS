@@ -69,13 +69,13 @@ export class ProfileAsetComponent implements OnInit {
   }
 
   public getData(): void {
-    this.profileAssetService.getDataAsset().subscribe(
+    this.profileAssetService.get().subscribe(
       (resp) => {
         this.gridData = resp['hydra:member'];
         this.gridData = this.mapData(this.gridData);
       },
       () => {
-        this.popUpMessage = "Gagal mendapatkan data asset";
+        this.popUpMessage = "Gagal mendapatkan data";
         this.triggerPopUp();
       }
     );
@@ -93,26 +93,9 @@ export class ProfileAsetComponent implements OnInit {
     this.open();
   }
 
-  public update(): void {
-    let params: ProfileAssetInterface = {...this.form.value};
-    this.profileAssetService.update(params, this.id).subscribe(
-      () => {
-        this.popUpMessage = "Berhasil memperbarui data asset";
-        this.triggerPopUp();
-        this.getData();
-        this.close();
-      },
-      () => {
-        this.popUpMessage = "Gagal memperbarui data asset";
-        this.triggerPopUp();
-        this.close();
-      }
-    );
-  }
-
   public save(): void {
     let params: ProfileAssetInterface = {...this.form.value};
-    this.profileAssetService.saveProfileAsset(params).subscribe(
+    this.profileAssetService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
         this.triggerPopUp();
@@ -127,15 +110,32 @@ export class ProfileAsetComponent implements OnInit {
     );
   }
 
+  public update(): void {
+    let params: ProfileAssetInterface = {...this.form.value};
+    this.profileAssetService.update(params, this.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.getData();
+        this.close();
+      },
+      () => {
+        this.popUpMessage = "Gagal memperbarui data";
+        this.triggerPopUp();
+        this.close();
+      }
+    );
+  }
+
   public delete(id: string): void {
     this.profileAssetService.delete(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data asset";
+        this.popUpMessage = "Berhasil menghapus data";
         this.triggerPopUp();
         this.getData();
       },
       () => {
-        this.popUpMessage = "Gagal menghapus data asset";
+        this.popUpMessage = "Gagal menghapus data";
         this.triggerPopUp();
       }
     );

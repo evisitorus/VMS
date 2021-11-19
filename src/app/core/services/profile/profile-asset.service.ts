@@ -17,7 +17,7 @@ export class ProfileAssetService {
     private authService: AuthService
   ) { }
 
-  public getDataAsset() {
+  public get() {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_get_profile_asset: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -31,7 +31,7 @@ export class ProfileAssetService {
     return this.apiService.sendRequest(api_get_profile_asset);
   }
 
-  public saveProfileAsset(params: ProfileAssetInterface): Observable<any> {
+  public save(params: ProfileAssetInterface): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_save_profile_asset: ApiInterface = {
       method: ApiRouteMethods.post,
