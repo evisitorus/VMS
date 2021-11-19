@@ -27,11 +27,13 @@ export class ProfileInformasiPerusahaanComponent {
 
   public opened = false;
   public openedSaham = false;
+  public vendor_info: any;
 
   ngOnInit(): void {
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
-        console.log(resp)
+        console.log(resp.data);
+        this.vendor_info = resp.data;
       },
       (error) => {
         console.log(error);
