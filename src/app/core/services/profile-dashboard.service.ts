@@ -19,7 +19,7 @@ export class ProfileDashboardService {
   getVendorData(): Observable<any> {
     let api_dashboard_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_dashboard_vendor_route,
+      url: ApiRoutes.api_vendor_information_route,
       options : {
         headers: {
           Authorization: this.token
