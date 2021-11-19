@@ -12,6 +12,7 @@ export const ApiRoutes = {
   api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
   api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
   api_assets_route: API_BASE_URL + "/mesin_peralatans",
+  api_tenders_route: API_BASE_URL + "/tenders"
 };
 
 export const ApiRouteMethods = {

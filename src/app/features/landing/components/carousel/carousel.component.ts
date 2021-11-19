@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-carousel',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn = false;
+
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn() === 'true';
   }
 
 }
