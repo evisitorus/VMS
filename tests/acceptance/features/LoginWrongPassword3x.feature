@@ -6,53 +6,31 @@ As a vendor
 I want to Login to VMS portal
 So that I can manage my VMS Account 
 
-Background: 
-    Given The Vendor is on "Login" Form on VMS Portal 
-      When The Vendor gives wrong "password" more than 3 times
-       """
-       {
-           "Email" : "admin@abadijaya.co.id",
-           "Password" : "12345"
-       
-       }
-       """
-       And The Vendor clicks "Login" button
-       And The Vendor selects "Yes" button
-       And The Vendor clicks "Login" button
-       And The Vendor selects "Yes" button
-
-
 #negatif scenario, wrong password more than 3 times 
-  Scenario:
-     Given The Vendor is on "Login" Form on VMS Portal 
-      When The Vendor gives wrong "password" more than 3 times
-       """
-       {
-           "Email" : "0oyldchgd@tmpbox.net",
-           "Password" : "12345678"
-       
-       }
-       """
-       And The Vendor clicks "Login" button
-       And The Vendor will get confirmation message 
-       """
-       {
-       
-           "message" : "Silahkan klik reset password untuk mengatur password baru anda",
-           "button"  : "Yes"
-       }
-       """
-       And The Vendor selects "Yes" button
-    #    And The Vendor will brings to "Reset Password" form 
-    #    And The Vendor should be define his/her new password 
-    #    """
-    #    {
-    #       "passwordBaru" : "W@rMachin3X1",  #password must me combination cointains numeric, alphanumeric and special character with maximum input 15 
-    #                                         #if user input more than 15 chars, input type locked
-    #       "ulangiPassword" : "W@rMachin3X1"
-    #       "button"  : "Yes"
-    #    }
-    #    """
-    #    And The Vendor must selects "Yes" button
-    #    And The Vendor will brings to "Login" Form 
-    # Then The Vendor can test his/her new password on "Login" form while they can be enter into the app
+
+    Scenario: 
+        Given The Vendor is on "Login" Form on VMS Portal 
+        When The Vendor gives wrong "password" more than 3 times
+        """
+        {
+            "Email" : "admin@abadijaya.co.id",
+            "Password" : "12345"
+        
+        }
+        """
+        And The Vendor clicks "Login" button
+        And The Vendor selects "Yes" button
+        And The Vendor clicks "Login" button
+        And The Vendor selects "Yes" button
+        And The Vendor clicks "Login" button
+        And The Vendor selects "Yes" button
+        And The Vendor clicks "Login" button
+        And The Vendor will get warning message 
+        """
+        {
+        
+            "message" : "Akun anda terkunci, silahkan hubungi Admin di admin@vms-padi.co.id untuk melakukan recovery akun.",
+            "button"  : "Yes"
+        }
+        """
+        And The Vendor selects "Yes" button

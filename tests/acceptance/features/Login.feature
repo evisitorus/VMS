@@ -35,7 +35,7 @@ So that I can manage my VMS Account
     And The Vendor input "Email" with value "<email>"
     And The Vendor input "Password" with value "<password>"
     And The Vendor clicks "Login" button
-    And The Vendor will get warning message "<copywriting>"
+    And The Vendor will get error message "<copywriting>"
     And The Vendor selects "Yes" button
     # Then The Vendor must type right password on "Password" input-type on "Login" Form
 
