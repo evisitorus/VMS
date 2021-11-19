@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TextBoxComponent } from '@progress/kendo-angular-inputs';
 import { ProfileAssetInterface } from 'src/app/core/interfaces/profile-asset.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
@@ -16,29 +17,24 @@ export class ProfileAsetComponent implements OnInit {
   public opened: boolean = false;
   public popUpTitle: string = "Profile Asset";
   public popUpMessage: string = "";
+  public id!: string;
+  public isNewData: boolean = true;
+
+  public data: any = {
+    namaAsset: "",
+    jumlah: 0,
+    tahunPembuatan: ""
+  };
 
   constructor(
     private profileAssetService: ProfileAssetService,
     private eventEmitterService: EventEmitterService
   ){ 
-    this.form = new FormGroup({
-      namaAsset: new FormControl("", [Validators.required]),
-      jumlah: new FormControl(0, [Validators.required]),
-      tahunPembuatan: new FormControl("", [Validators.required])
-    });
+    this.setFormValue();
   }
 
   ngOnInit(): void {
-    this.profileAssetService.getDataAsset().subscribe(
-      (resp) => {
-        this.gridData = resp['hydra:member'];
-        this.gridData = this.mapData(this.gridData);
-      },
-      (err) => {
-        this.popUpMessage = "Gagal mendapatkan data asset";
-        this.triggerPopUp();
-      }
-    );
+    this.getData();
   }
 
   public mapData(data:any[]) {
@@ -49,7 +45,8 @@ export class ProfileAsetComponent implements OnInit {
         no: no++,
         nama: data[key]['name'],
         jumlah: data[key]['jumlah'],
-        tahunPembuatan: data[key]['tahunPembuatan']
+        tahunPembuatan: data[key]['tahunPembuatan'],
+        id: data[key]['id']
       };
     }
     return mappedData;
@@ -63,19 +60,93 @@ export class ProfileAsetComponent implements OnInit {
     this.opened = true;
   }
   
-  public submit(): void{
-    this.close();
-    let params: ProfileAssetInterface = {...this.form.value};
-    this.profileAssetService.saveProfileAsset(params).subscribe(
+  public submit(): void {
+    if (this.isNewData) {
+      this.save();
+    } else {
+      this.update();
+    }
+  }
+
+  public getData(): void {
+    this.profileAssetService.get().subscribe(
       (resp) => {
-        this.popUpMessage = "Berhasil menyimpan data";
-        this.triggerPopUp();
-      }, 
-      (error) => {
-        this.popUpMessage = "Gagal menyimpan data";
+        this.gridData = resp['hydra:member'];
+        this.gridData = this.mapData(this.gridData);
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data";
         this.triggerPopUp();
       }
     );
+  }
+
+  public updateForm(data: any): void {
+    this.id = data.id;
+    this.data.namaAsset = data.nama;
+    this.data.jumlah = data.jumlah;
+    this.data.tahunPembuatan = data.tahunPembuatan;
+    
+    this.isNewData = false;
+
+    this.setFormValue();
+    this.open();
+  }
+
+  public save(): void {
+    let params: ProfileAssetInterface = {...this.form.value};
+    this.profileAssetService.save(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.triggerPopUp();
+        this.getData();
+        this.close();
+      }, 
+      () => {
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+        this.close();
+      }
+    );
+  }
+
+  public update(): void {
+    let params: ProfileAssetInterface = {...this.form.value};
+    this.profileAssetService.update(params, this.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.getData();
+        this.close();
+      },
+      () => {
+        this.popUpMessage = "Gagal memperbarui data";
+        this.triggerPopUp();
+        this.close();
+      }
+    );
+  }
+
+  public delete(id: string): void {
+    this.profileAssetService.delete(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.getData();
+      },
+      () => {
+        this.popUpMessage = "Gagal menghapus data";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  setFormValue(): void {
+    this.form = new FormGroup({
+      namaAsset: new FormControl(this.data.namaAsset, [Validators.required]),
+      jumlah: new FormControl(this.data.jumlah, [Validators.required]),
+      tahunPembuatan: new FormControl(this.data.tahunPembuatan, [Validators.required])
+    });
   }
 
   triggerPopUp() {
