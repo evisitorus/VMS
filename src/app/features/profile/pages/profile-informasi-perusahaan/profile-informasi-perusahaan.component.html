@@ -21,13 +21,13 @@
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center">
               <kendo-label class="col-3">Nama Perusahaan</kendo-label>
-              <kendo-textbox id="namaPerusahaanInput" class="col-md-auto" placeholder="Nama Perusahaan" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="namaPerusahaanInput" class="col-md-auto" placeholder="Nama Perusahaan" [clearButton]="true" [value]="vendor_info.name"></kendo-textbox>
             </div>
             <div class="row align-items-center">
               <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
-              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Inisial perusahaan" [clearButton]="true" [maxlength]="10"></kendo-textbox>
+              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Inisial perusahaan" [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName"></kendo-textbox>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <kendo-label>Jenis Badan Usaha</kendo-label>
               <form class="k-form" [formGroup]="buForm">
                 <kendo-formfield orientation="horizontal" showHints="initial">
@@ -117,7 +117,7 @@
                   </ul>
                 </kendo-formfield>
               </form>
-            </div>
+            </div> -->
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
@@ -147,27 +147,26 @@
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
       
               <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu">
+                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu" [value]="vendor_info.bumnPengampu">
               </kendo-autocomplete>
             </div>
       
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
-      
               <kendo-autocomplete id="organisasiHimpunanInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan">
+                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan">
               </kendo-autocomplete>
             </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-              <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10"></kendo-textbox>
+              <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Website Perusahaan</kendo-label>
-              <kendo-textbox id="websitePerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="websitePerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [value]="vendor_info.website"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
@@ -177,12 +176,12 @@
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Lokal</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"></kendo-numerictextbox>
+              <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanLokal"></kendo-numerictextbox>
             </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Asing</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"></kendo-numerictextbox>
+              <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanAsing"></kendo-numerictextbox>
             </div>
       
             <div class="row align-items-center">
@@ -192,7 +191,7 @@
       
             <div class="row align-items-center">
               <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
-              <kendo-textbox id="npwpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="npwpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
             </div>
       
             <div class="row align-items-center">
