@@ -1,24 +1,24 @@
 <div class="profile-section">
-
+  
   <div class="profile-menu">
     <app-sidebar></app-sidebar>
   </div>
   
   <div class="profile-content">
-
+    
     <div class="profile-content-title">
       <kendo-label>Asset</kendo-label>
     </div>
     
     <div class="profile-content-grid">
-      <kendo-grid>
+      <kendo-grid [data]="gridData">
         <kendo-grid-column field="no" title="No.">
         </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Nama Asset">
+        <kendo-grid-column field="nama" title="Nama Asset">
         </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Jumlah (Unit)">
+        <kendo-grid-column field="jumlah" title="Jumlah (Unit)">
         </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Tahun Pembuatan">
+        <kendo-grid-column field="tahunPembuatan" title="Tahun Pembuatan">
         </kendo-grid-column>
         <kendo-grid-column field="action" title="Action">
         </kendo-grid-column>
@@ -31,24 +31,32 @@
       </div>
       
     </div>
-
+    
     <div class="profile-content-modal">
       <kendo-window title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
         <form class="k-form">
-          
-          <label class="k-form-field">
-            <span>Nama Asset</span>
-            <input class="k-textbox" placeholder="" />
-          </label>
-          <label class="k-form-field">
-            <span>Jumlah</span>
-            <input class="k-textbox" placeholder="" />
-          </label>
-          <label class="k-form-field">
-            <span>Tahun Pembuatan</span>
-            <input class="k-textbox" placeholder="" />
-          </label>
 
+          <kendo-formfield [formGroup]="form">
+            <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
+            <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" #namaAsset required></kendo-textbox>                
+            <kendo-formhint></kendo-formhint>
+            <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield [formGroup]="form">
+            <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>
+            <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" #jumlah required></kendo-numerictextbox>                
+            <kendo-formhint></kendo-formhint>
+            <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
+          </kendo-formfield>
+
+          <kendo-formfield [formGroup]="form">
+            <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
+            <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox>                
+            <kendo-formhint></kendo-formhint>
+            <kendo-formerror>Tahun Pembuatan tidak boleh kosong</kendo-formerror>
+          </kendo-formfield>
+          
           <div class="k-actions k-actions-end">
             <div class="profile-content-modal-btn">
               <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
@@ -61,11 +69,14 @@
               </button>
             </div>
           </div>
+          
         </form>
       </kendo-window>
-
+      
     </div>
-
+    
   </div>
   
 </div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

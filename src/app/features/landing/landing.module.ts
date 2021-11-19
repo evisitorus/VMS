@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {GridModule} from "@progress/kendo-angular-grid";
 import {UploadsModule} from "@progress/kendo-angular-upload";
 import { IntlModule } from "@progress/kendo-angular-intl";
+import "@progress/kendo-angular-intl/locales/id/all";
+
 
 
 import { LandingRoutingModule } from './landing-routing.module';
@@ -27,8 +29,8 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { CardTenderComponent } from './pages/tender/card-tender/card-tender.component';
 import { TenderDataComponent } from './pages/tender/tender-data/tender-data.component'
 import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
-
-
+import { TenderInfoComponent } from './pages/tender-info/tender-info.component';
+import { CoreModule } from 'src/app/core/core.module';
 import { ProductsService } from "./pages/tender/card-tender/product.service";
 
 @NgModule({
@@ -37,10 +39,15 @@ import { ProductsService } from "./pages/tender/card-tender/product.service";
     CarouselComponent,
     CardTenderComponent,
     TenderDataComponent,
-    GridBannerComponent
+    GridBannerComponent,
+    TenderInfoComponent
   ],
   imports: [
     CommonModule,
+    CoreModule,
+    SharedModule,
+    LandingRoutingModule,
+    IntlModule,
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -85,6 +92,7 @@ import { ProductsService } from "./pages/tender/card-tender/product.service";
     TenderDataComponent
   ],
   providers: [
+    {provide: LOCALE_ID, useValue: 'en-US' }, 
     ProductsService
   ],
 })
