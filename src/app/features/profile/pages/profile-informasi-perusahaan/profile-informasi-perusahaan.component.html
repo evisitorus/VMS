@@ -21,11 +21,11 @@
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center">
               <kendo-label class="col-3">Nama Perusahaan</kendo-label>
-              <kendo-textbox id="namaPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="namaPerusahaanInput" class="col-md-auto" placeholder="Nama Perusahaan" [clearButton]="true"></kendo-textbox>
             </div>
             <div class="row align-items-center">
               <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
-              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10"></kendo-textbox>
+              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Inisial perusahaan" [clearButton]="true" [maxlength]="10"></kendo-textbox>
             </div>
             <div class="row">
               <kendo-label>Jenis Badan Usaha</kendo-label>
@@ -146,9 +146,8 @@
             <div class="row align-items-center">
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
       
-              <kendo-autocomplete id="bumnPengampuInput" #contactslist [data]="contacts" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu"
-                (valueChange)="valueChange($event)">
+              <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
+                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu">
               </kendo-autocomplete>
             </div>
       
@@ -156,9 +155,8 @@
             <div class="row align-items-center">
               <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
       
-              <kendo-autocomplete id="organisasiHimpunanInput" #contactslist [data]="contacts" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan"
-                (valueChange)="valueChange($event)">
+              <kendo-autocomplete id="organisasiHimpunanInput" class="col" valueField="label"
+                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan">
               </kendo-autocomplete>
             </div>
       
