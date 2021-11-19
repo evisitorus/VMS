@@ -1,5 +1,5 @@
-<div class="">
-  <a href="tender/detail/{{tender.id}}">
+<div class="" routerLink="tender/detail/{{tender.id}}">
+  <!-- <a href="tender/detail/{{tender.id}}"> -->
     <kendo-card-body class="k-hstack top">
       <div class="top-avatar">
           <kendo-avatar [imageSrc]="getAvatar(tender.cparent.id)" [shape]="shapes"></kendo-avatar>
@@ -23,5 +23,5 @@
       </div>
       <div class="mid">{{ tender.publish_at  }}</div>
     </kendo-card-body>
-  </a>
+  <!-- </a> -->
 </div>
