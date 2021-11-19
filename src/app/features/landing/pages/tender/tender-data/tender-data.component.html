@@ -20,6 +20,6 @@
           <div class="mid">{{ tender.method.name }}</div>
           <div class="mid" style="font-weight: bold;">{{ tender.category.name }}</div>
       </div>
-      <div class="mid">{{ tender.publish_at  }}</div>
+      <div class="mid">{{getDiffDate(tender.publish_at)}}</div>
     </kendo-card-body>
 </div>

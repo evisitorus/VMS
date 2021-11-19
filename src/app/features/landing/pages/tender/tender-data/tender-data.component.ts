@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AvatarShape } from "@progress/kendo-angular-layout";
 
 @Component({
   selector: 'app-tender-data',
@@ -8,7 +6,7 @@ import { AvatarShape } from "@progress/kendo-angular-layout";
   styleUrls: ['./tender-data.component.css']
 })
 export class TenderDataComponent implements OnInit {
-  constructor() { }
+  constructor(){}
 
   ngOnInit(): void {
   }
@@ -53,9 +51,29 @@ export class TenderDataComponent implements OnInit {
     winners: []
   }
 
-  public getAvatar(bumn: number): string {
-    return `./assets/images/${bumn}.png`;
-}
+  getDiffDate(date:Date){
+    let fromDate = new Date(date);
+    let currentDate = new Date();
 
-  public shapes: AvatarShape = "rectangle";
+    let days = Math.floor((currentDate.getTime() - fromDate.getTime()) / 1000 / 60 / 60 / 24);
+    let weeks = Math.floor(days/7);
+    let months = Math.floor(weeks/4);
+    let years = Math.floor(months/12);
+
+    let status = "";
+
+    if(years > 0){
+      status = years+"  tahun yang lalu";
+    } else if (months > 0) {
+      status = months+" bulan yang lalu";
+    } else if (weeks > 0) {
+      status = weeks+" minggu yang lalu";
+    } else if (days > 0) {
+      status = days+" hari yang lalu"
+    } else {
+      status = "Baru"
+    }
+
+    return status;
+  }
 }
