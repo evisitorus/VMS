@@ -3,7 +3,7 @@ exports.config = {
   helpers: {
     Playwright: {
       url: 'http://localhost:4200',
-      show: false,
+      show: true,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
