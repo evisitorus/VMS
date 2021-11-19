@@ -8,21 +8,20 @@ So that I can login into VMS
 
   Scenario: Forgot Password 
      Given The Vendor is on "Login" Form on VMS Portal 
-      When The Vendor forgot his/her password
+      When The Vendor forgot his or her password
        And The Vendor must clicks "Forgot Password" Link
-       And The Vendor will brings to "Forgot Password" form to type his/her registered email
+       And The Vendor will brings to "Forgot Password" form to type his or her registered email
        """
        {
        
            "email" : "admin@abadijaya.co.id"
-           "button" : "Ok"
        }
        """
-       And The Vendor must clicks "OK" button
-       And The Vendor will get link for typing new password on his/her email
-       And The Vendor must checks his/her email
+       And The Vendor clicks "Reset Password" button
+       And The Vendor will get link for typing new password on his or her email
+       And The Vendor must checks his or her email
        And The Vendor must select "Renew Password" email 
-       And The Vendor should be define his/her new password on "Renew Password" Form
+       And The Vendor should be define his or her new password on "Renew Password" Form
        """
        {
           "passwordBaru" : "W@rMachineX123",  #password must me combination cointains numeric, alphanumeric and special character with maximum input 15 
@@ -33,4 +32,4 @@ So that I can login into VMS
        """
        And The Vendor must selects "Yes" button
        And The Vendor will brings to "Login" Form 
-    Then The Vendor can test his/her new password on "Login" form while they can be enter into the app
+    Then The Vendor can test his or her new password on "Login" form while they can be enter into the app

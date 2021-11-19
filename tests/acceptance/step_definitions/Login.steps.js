@@ -14,8 +14,21 @@ Given('The Vendor must login on {string} form by entering their credential', () 
     I.fillField('#input-password input[class=k-input]', '1234');
 });
 
-Given('The Vendor clicks {string} button', () => {
-    I.click('#btn-login');
+Given('The Vendor clicks {string} button', (button) => {
+    switch (button) {
+        case "Login":
+            I.waitForElement('#btn-login');
+            I.click('#btn-login');
+            break;
+        case "Reset Password":
+            I.waitForElement('#');
+            I.click('#');
+            I.see('Periksa email Anda untuk mengatur ulang kata sandi Anda. Jika tidak muncul dalam beberapa menit, periksa folder spam Anda.');
+            break;
+        default:
+            I.click(product);
+            break;
+    }
 
 });
 
@@ -73,4 +86,36 @@ Given('The Vendor will get warning message', (raw_data) => {
     I.see(data.message);
 });
 
-  
+Given('The Vendor forgot his or her password', () => {
+
+});
+
+Given('The Vendor must clicks {string} Link', () => {
+    I.click('#btn-forgot-password');
+
+});
+
+Given('The Vendor will brings to {string} form to type his or her registered email', () => {
+    I.amOnPage('/forgot-password');
+    I.fillField();
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
