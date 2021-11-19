@@ -3,7 +3,7 @@
         {{ message }}
     </p>
     <kendo-dialog-actions *ngIf="noButton || yesButton">
-        <button *ngIf="noButton" kendoButton (click)="close()">No</button>
-        <button *ngIf="yesButton" kendoButton (click)="close()">Yes</button>
+        <button id="btn-popup-no" *ngIf="noButton" kendoButton (click)="close()">No</button>
+        <button id="btn-popup-yes" *ngIf="yesButton" kendoButton (click)="close()">Yes</button>
     </kendo-dialog-actions>
 </kendo-dialog>

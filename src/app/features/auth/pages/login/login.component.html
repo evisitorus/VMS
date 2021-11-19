@@ -27,7 +27,7 @@
             </kendo-formfield>
 
             <div class="login-forgot-password">
-                <a href="forgot-password">
+                <a href="forgot-password" id="btn-forgot-password">
                     <kendo-formhint>Lupa Kata Sandi?</kendo-formhint>
                 </a>
             </div>
@@ -41,14 +41,14 @@
             </kendo-formfield> -->
             
             <div class="k-form-buttons">
-                <button class="k-button k-primary vms-btn" (click)="login()">Login</button>
+                <button class="k-button k-primary vms-btn" (click)="login()" id="btn-login">Login</button>
                 <!-- <button class="k-button" (click)="clearForm()">Clear</button> -->
             </div>
             
         </fieldset>
 
         <div class="reg">
-            Belum punya akun? <a href="register"> Daftar</a>
+            Belum punya akun? <a href="register" id="btn-register"> Daftar</a>
         </div>
 
     </form>
