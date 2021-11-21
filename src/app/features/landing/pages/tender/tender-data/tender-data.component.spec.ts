@@ -16,10 +16,16 @@ describe('TenderDataComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TenderDataComponent);
     component = fixture.componentInstance;
+    let today = "2021-11-17 00:26:00";
+    component.getDiffDate(new Date(today));
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+
+  it('should do xyz if inputProperty is abc', () => {
+    let today = "2021-11-17 00:26:00";
+    component.getDiffDate(new Date(today));
+    expect(component.getDiffDate).toHaveBeenCalled;
   });
+  
 });

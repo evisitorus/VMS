@@ -88,7 +88,6 @@ import { CoreModule } from 'src/app/core/core.module';
   ],
   exports: [
     LandingPageComponent,
-    TenderDataComponent
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'en-US' }

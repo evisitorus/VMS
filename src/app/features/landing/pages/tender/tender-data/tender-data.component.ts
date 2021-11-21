@@ -12,13 +12,6 @@ export class TenderDataComponent implements OnInit {
   }
 
   @Input()
-  product!: {
-    productID: number;
-    productName: string;
-    unitPrice: number;
-  };
-
-  @Input()
   tender!: {
     category: {
       id: number,
