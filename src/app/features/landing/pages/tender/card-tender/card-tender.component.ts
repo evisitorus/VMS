@@ -57,9 +57,6 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.skip = event.skip;
     this.pageSize = event.take;
     this.currentPage = (this.skip/this.pageSize)+1;
-
-    console.log(this.currentPage);
-
     this.fetchData();
   }
 
