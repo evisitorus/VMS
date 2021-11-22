@@ -31,12 +31,13 @@ When('The Vendor must open {string} from VMS', () => {
 
 });
 
-When('The Vendor must clicks {string}', () => {
+When('The Vendor clicks {string}', () => {
+    I.amOnPage('/set-password?token=4ccb494a00b1ed3f0cce56fc6c0002420eeb4d7f9358d69076994f425ec0dc80');
 
 });
 
 When('The Vendor will bring to {string} form', () => {
-    I.amOnPage('/set-password');
+    I.seeInCurrentUrl('/set-password?token=4ccb494a00b1ed3f0cce56fc6c0002420eeb4d7f9358d69076994f425ec0dc80');
 });
 
 When('The Vendor should define his or her new password to access VMS', () => {
@@ -49,7 +50,12 @@ When('The Vendor should define his or her new password to access VMS', () => {
 When('The Vendor clicks {string} button from {string} form', () => {
     I.waitForElement('#submitPassword');
     I.click('#submitPassword');
-    I.seeInCurrentUrl('/login');
+    // I.seeInCurrentUrl('/login');
+});
+
+When('The Vendor will see success message from the system', (raw_data) => {
+    let data = JSON.parse(raw_data.content);
+    I.see(data.message);
 });
 
 When('The Vendor will be flag as {string} also will get {string} badge', () => {
@@ -68,7 +74,9 @@ When('The Vendor selects {string} from VMS', () => {
 
 });
   
-When('The Vendor will see warning message which stated that activation activation failed', () => {
+When('The Vendor will see warning message which stated that activation activation failed', (raw_data) => {
+    let data = JSON.parse(raw_data.content);
+    I.see(data.message);
 
 });
 
