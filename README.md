@@ -32,7 +32,6 @@ Error: error:0308010C:digital envelope routines::unsupported
 export NODE_OPTIONS=--openssl-legacy-provider
 ng test --no-watch --code-coverage
 ```
-report: ./coverage/eproc-fe
 
 ## start coding
 - up service
