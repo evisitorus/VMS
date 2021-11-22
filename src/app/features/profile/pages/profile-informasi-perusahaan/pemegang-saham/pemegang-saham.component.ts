@@ -36,9 +36,9 @@ export class PemegangSahamComponent implements OnInit {
   ngOnInit(): void {
     this.gridData = this.getPemegangSaham();
     this.columns = [
-      {field: "toParty.firstName", title:"Nama Pemegang Saham"}, 
+      {field: "toParty.firstName", title:"Nama Pemegang Saham", width:"250px"}, 
       {field: "pemegangSahamPerseorangan", title:"Jenis Pemeganng Saham"}, 
-      {field: "pemegangSahamLokal", title:"Pemeganng Saham Lokal/Asing"}, 
+      {field: "pemegangSahamLokal", title:"Pemegang Saham Lokal/Asing", width:"300px"}, 
       {field: "persentaseKepemilikan", title:"% Kepemilikan"}
     ];
   }

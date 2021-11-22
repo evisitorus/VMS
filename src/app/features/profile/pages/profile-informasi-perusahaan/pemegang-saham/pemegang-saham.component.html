@@ -1,16 +1,16 @@
 <div>
-    <kendo-label>Pemegang Saham is here</kendo-label>
+    <kendo-label>Pemegang Saham</kendo-label>
     <br>
 
     <kendo-grid
     [data]="gridData"
     >
-    <kendo-grid-column title="No.">
+    <kendo-grid-column title="No." [width]="60">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
         {{rowIndex + 1}} 
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title"></kendo-grid-column>
+    <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title" [width]="col.width"></kendo-grid-column>
     <kendo-grid-column title="Action">
       <ng-template kendoGridCellTemplate>
         Edit
