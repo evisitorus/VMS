@@ -40,6 +40,7 @@ exports.config = {
           './tests/acceptance/step_definitions/LandingPageTenderInformation.steps.js',
           './tests/acceptance/step_definitions/LandingPageTenderInformationDetails.steps.js',
           './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
+          './tests/acceptance/step_definitions/RiwayatPekerjaan.steps.js',
         ]
   },
   plugins: {
