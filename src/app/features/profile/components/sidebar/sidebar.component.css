@@ -5,15 +5,5 @@
 }
 
 .navigation-pane {
-    min-width: 300px;
-    background-color: #0e2456 !important;
-}
-
-.vms-sidebar {
-    background-color: #0e2456 !important;
-}
-
-.sidebar-section {
-    height: 100%;
-    background-color: #0e2456;
+    min-width: 100% !important;
 }
