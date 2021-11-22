@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* .profile-section {
   border-style: groove;
 } */
@@ -111,6 +112,8 @@
   float: right;
 }
 
+=======
+>>>>>>> 05ce72cf3b031d7dc40d269993ede4ff50ecd10c
 .checklist {
   border-style: groove;
 }
@@ -191,4 +194,12 @@
 .demo {
   display: flex;
   justify-content: space-evenly;
+}
+
+.row {
+  margin-bottom: 0.5rem;
+}
+
+.k-panelbar-content {
+  padding: 1em;
 }
