@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { ProfileService } from 'src/app/core/services/profile.service';
 
@@ -17,6 +17,7 @@ const messages = {
   styleUrls: ['./pemegang-saham.component.css']
 })
 export class PemegangSahamComponent implements OnInit {
+  @ViewChild('panelbar') private panelbar: any;
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
@@ -94,6 +95,7 @@ export class PemegangSahamComponent implements OnInit {
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
         this.closeSaham();
+        this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
       },
       (error) => { 
         this.popUpMessage = error;

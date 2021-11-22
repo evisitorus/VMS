@@ -7,7 +7,7 @@
       <h1 kendoCardTitle>Informasi Perusahaan</h1>
     </kendo-card-header>
     <kendo-card-body>
-      <kendo-panelbar>
+      <kendo-panelbar #panelbar >
         <kendo-panelbar-item title="Overview" [expanded]="true">
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center">
@@ -222,7 +222,7 @@
             </div>
           </ng-template>
         </kendo-panelbar-item>
-        <kendo-panelbar-item title="Saham">
+        <kendo-panelbar-item title="Saham"  [expanded]="true">
           <ng-template kendoPanelBarContent>
             <!-- pemegang saham here -->
             <app-pemegang-saham></app-pemegang-saham>
