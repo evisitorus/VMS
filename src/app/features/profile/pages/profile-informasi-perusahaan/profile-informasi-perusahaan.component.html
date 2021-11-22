@@ -27,9 +27,9 @@
               <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
               <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Inisial perusahaan" [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName"></kendo-textbox>
             </div>
-            <!-- <div class="row">
-              <kendo-label>Jenis Badan Usaha</kendo-label>
-              <form class="k-form" [formGroup]="buForm">
+            <div class="row">
+              <form class="k-form" [formGroup]="piForm">
+                <kendo-label>Jenis Badan Usaha</kendo-label>
                 <kendo-formfield orientation="horizontal" showHints="initial">
                   <ul class="k-radio-list k-list-horizontal">
                     <li class="k-radio-item">
@@ -38,6 +38,7 @@
                         type="radio"
                         #pt
                         value="pt"
+                        formControlName="buFormControl"
                         kendoRadioButton
                       />
                       <kendo-label
@@ -53,6 +54,7 @@
                         type="radio"
                         #cv
                         value="cv"
+                        formControlName="buFormControl"
                         kendoRadioButton
                       />
                       <kendo-label
@@ -68,6 +70,7 @@
                         type="radio"
                         #other
                         value="other"
+                        formControlName="buFormControl"
                         kendoRadioButton
                       />
                       <kendo-label
@@ -77,47 +80,49 @@
                       ></kendo-label>
                     </li>
                   </ul>
+                  <kendo-formerror>Error: This field is required</kendo-formerror>
                 </kendo-formfield>
               </form>
             </div>
             <div class="row">
               <kendo-label>Status Badan Usaha</kendo-label>
-              <form class="k-form" [formGroup]="sbuForm">
-                <kendo-formfield orientation="horizontal" showHints="initial">
-                  <ul class="k-radio-list k-list-horizontal">
-                    <li class="k-radio-item">
-                      <input
-                        id="pkpRbt"
-                        type="radio"
-                        #pkp
-                        value="pkp"
-                        kendoRadioButton
-                      />
-                      <kendo-label
-                        class="k-radio-label"
-                        [for]="pkp"
-                        text="PKP"
-                      ></kendo-label>
-                    </li>
-        
-                    <li class="k-radio-item">
-                      <input
-                        id="nonPkpRbt"
-                        type="radio"
-                        #nonpkp
-                        value="nonpkp"
-                        kendoRadioButton
-                      />
-                      <kendo-label
-                        class="k-radio-label"
-                        [for]="nonpkp"
-                        text="Non-PKP"
-                      ></kendo-label>
-                    </li>
-                  </ul>
-                </kendo-formfield>
-              </form>
-            </div> -->
+              <kendo-formfield orientation="horizontal" showHints="initial">
+                <ul class="k-radio-list k-list-horizontal">
+                  <li class="k-radio-item">
+                    <input
+                      id="pkpRbt"
+                      type="radio"
+                      #pkp
+                      value="pkp"
+                      formControlName="sbuFormControl"
+                      kendoRadioButton
+                    />
+                    <kendo-label
+                      class="k-radio-label"
+                      [for]="pkp"
+                      text="PKP"
+                    ></kendo-label>
+                  </li>
+      
+                  <li class="k-radio-item">
+                    <input
+                      id="nonPkpRbt"
+                      type="radio"
+                      #nonpkp
+                      value="nonpkp"
+                      formControlName="sbuFormControl"
+                      kendoRadioButton
+                    />
+                    <kendo-label
+                      class="k-radio-label"
+                      [for]="nonpkp"
+                      text="Non-PKP"
+                    ></kendo-label>
+                  </li>
+                </ul>
+                <kendo-formerror>Error: This field is required</kendo-formerror>
+              </kendo-formfield>
+            </div>
       
             <div class="row align-items-center">
               <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>

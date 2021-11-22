@@ -14,13 +14,19 @@ import { ProfileInformationService } from "src/app/core/services/profile-informa
 
 export class ProfileInformasiPerusahaanComponent {
 
-  public buForm: FormGroup;
-  public sbuForm: FormGroup;
+  public piForm: FormGroup;
+  public rbtData: any = {
+    badanUsaha: null,
+    statusBadanUsaha:null
+  }
+
   constructor(
     private profileInfoService:ProfileInformationService
   ) {
-    this.buForm = new FormGroup({});
-    this.sbuForm = new FormGroup({});
+    this.piForm = new FormGroup({
+      badanUsaha: new FormControl(this.rbtData.badanUsaha.confirmation,[Validators.required]),
+      statusBadanUsaha: new FormControl(this.rbtData.statusBadanUsaha,[Validators.required]),
+    });
   }
 
   public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
