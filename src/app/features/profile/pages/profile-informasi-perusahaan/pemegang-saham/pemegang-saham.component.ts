@@ -25,6 +25,7 @@ export class PemegangSahamComponent implements OnInit {
   public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemeganng Saham"}, {field: "Pemeganng Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
   access_token = "admin@abadijaya.co.id";
+  vendor_id = "";
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -35,10 +36,10 @@ export class PemegangSahamComponent implements OnInit {
   ngOnInit(): void {
     this.gridData = this.getPemegangSaham();
     this.columns = [
-      {field: "namaPekerjaan", title:"Nama Pemegang Saham"}, 
-      {field: "pemberiPekerjaan", title:"Jenis Pemeganng Saham"}, 
-      {field: "nilaiPekerjaan", title:"Pemeganng Saham Lokal/Asing"}, 
-      {field: "tahunPekerjaan", title:"% Kepemilikan"}
+      {field: "toParty.firstName", title:"Nama Pemegang Saham"}, 
+      {field: "pemegangSahamPerseorangan", title:"Jenis Pemeganng Saham"}, 
+      {field: "pemegangSahamLokal", title:"Pemeganng Saham Lokal/Asing"}, 
+      {field: "persentaseKepemilikan", title:"% Kepemilikan"}
     ];
   }
 
@@ -104,7 +105,8 @@ export class PemegangSahamComponent implements OnInit {
 
 
   getPemegangSaham(){
-    this.profileService.getPemegangSaham(this.access_token).subscribe(
+    this.vendor_id="133";
+    this.profileService.getPemegangSaham(this.vendor_id).subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];
         return this.gridData;
