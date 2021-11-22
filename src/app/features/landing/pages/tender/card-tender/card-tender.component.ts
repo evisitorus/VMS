@@ -70,10 +70,9 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.tenderService.getListTender(this.currentPage).subscribe(
       (resp) =>  {
           this.productsSubscription = this
-            .getTender({ skip: this.skip, take: this.pageSize, page:this.currentPage, dataTender:resp })
+            .getTender({dataTender:resp })
             .pipe(finalize(() => (this.loading = false)))
             .subscribe((response) => (this.view = response));
-          return resp;
       },
       (error) => { 
         this.popUpMessage = "Gagal menemukan data tender";
@@ -82,10 +81,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
       )
   }
 
-  getTender(options: { skip?: number, take?: number, page?:number, dataTender?:{data:{ meta: {}, tenders:[] } } } = {}): Observable<ListViewDataResult> {
-
-    const skip = options.skip || 0;
-    const take = options.take || this.dataTenders.meta.total;
+  getTender(options: { dataTender?:{data:{ meta: {}, tenders:[] } } } = {}): Observable<ListViewDataResult> {
     const delayTime = 1000;
 
     if (options.dataTender?.data.tenders) {

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { PageChangeEvent } from '@progress/kendo-angular-listview';
+import { PageSizeChangeEvent } from '@progress/kendo-angular-pager';
 import { Observable } from 'rxjs';
 import { CoreModule } from 'src/app/core/core.module';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
@@ -48,13 +50,40 @@ describe('CardTenderComponent', () => {
     spyOn(service, "getListTender").and.returnValue(obs);
     component.ngOnInit();
     expect(component).toBeTrue;
+    expect(component.getTender).toHaveBeenCalled;
+    expect(component.loading).toBeFalse;
   });
 
+  it("test init fail", () => {
+    let obs = new Observable((subscriber) => {
+      subscriber.error(false);
+      subscriber.complete();
+    });
+
+    spyOn(service, "getListTender").and.returnValue(obs);
+    component.ngOnInit();
+    expect(component.popUpMessage).toBe("Gagal menemukan data tender");
+  });
 
   it('test triggerPopUp function', () => {
     spyOn(eventEmitterService, 'trigger');
     component.triggerPopUp();
     expect(eventEmitterService.trigger).toHaveBeenCalled();
   });
+
+  it('changePage', () => {
+    let mockEvt!: jasmine.Expected<PageChangeEvent>;
+    spyOn(component, 'handlePageChange').and.callThrough();
+
+    component.handlePageChange(mockEvt as any);
+
+    expect(component.handlePageChange).toHaveBeenCalledWith(mockEvt);
+  });
+
+  // it('showpager', () => {
+  //   spyOn(component, 'showPager');
+  //   component.showPager;
+    
+  // });
 
 });
