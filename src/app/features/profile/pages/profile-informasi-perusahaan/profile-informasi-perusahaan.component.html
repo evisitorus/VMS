@@ -2,14 +2,11 @@
   <app-drawer></app-drawer>
 </div>
 <div class="profile-content">
-  <div class="mb-2" style="float: right;">
-    <button id="editVendorInfoBtn" kendoButton icon="edit" class="k-button">Edit</button>
-  </div>
   <kendo-card orientation="vertical" style="width: 100%;">
-    <kendo-card-header class="k-vstack">
-      <h1 kendoCardTitle>Informasi Perusahaan</h1>
-    </kendo-card-header>
-    <kendo-card-body>
+    <kendo-card-body class="k-vstack">
+      <div class="mt-2 mb-2">
+        <button id="editVendorInfoBtn" kendoButton icon="edit" class="k-button k-primary" style="float: right;"></button>
+      </div>
       <kendo-panelbar>
         <kendo-panelbar-item title="Overview" [expanded]="true">
           <ng-template kendoPanelBarContent>
