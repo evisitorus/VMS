@@ -51,6 +51,7 @@ body {
 .k-button.k-primary {
     background-color: #0193AC !important;
     border-color: #0193AC !important;
+    color: white!important;
 }
 
 .vms-btn {
