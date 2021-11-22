@@ -2,9 +2,6 @@
   <app-drawer></app-drawer>
 </div>
 <div class="profile-content">
-  <div class="mb-2" style="float: right;">
-    <button id="editVendorInfoBtn" kendoButton icon="edit" class="k-button">Edit</button>
-  </div>
   <kendo-card orientation="vertical" style="width: 100%;">
     <kendo-card-header class="k-vstack">
       <h1 kendoCardTitle>Informasi Perusahaan</h1>
@@ -49,7 +46,7 @@
                         text="PT"
                       ></kendo-label>
                     </li>
-        
+
                     <li class="k-radio-item">
                       <input
                         id="cvRbtn"
@@ -64,7 +61,7 @@
                         text="CV"
                       ></kendo-label>
                     </li>
-        
+
                     <li class="k-radio-item">
                       <input
                         id="otherRbt"
@@ -102,7 +99,7 @@
                         text="PKP"
                       ></kendo-label>
                     </li>
-        
+
                     <li class="k-radio-item">
                       <input
                         id="nonPkpRbt"
@@ -121,104 +118,104 @@
                 </kendo-formfield>
               </form>
             </div> -->
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
               <kendo-dropdownlist id="tipeBuDropdown" class="col-md-auto" defaultItem="Pilih Tipe Badan Usaha" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
               <kendo-dropdownlist id="kategoriBuDropdown" class="col-md-auto" defaultItem="Pilih Kategori Badan Usaha" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
               <kendo-dropdownlist id="jenisKegiatanUsahaDropdown" class="col-md-auto" defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
               <kendo-dropdownlist id="jenisPenyediaUsahaDropdown" class="col-md-auto" defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
-      
+
               <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
                 [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu" [value]="vendor_info.bumnPengampu">
               </kendo-autocomplete>
             </div>
-      
-      
+
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
               <kendo-autocomplete id="organisasiHimpunanInput" class="col" valueField="label"
                 [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan">
               </kendo-autocomplete>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
               <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Website Perusahaan</kendo-label>
               <kendo-textbox id="websitePerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [value]="vendor_info.website"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
               <kendo-numerictextbox id="jumlahKaryawanTotalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="total_karyawan"></kendo-numerictextbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Lokal</kendo-label>
               <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanDomestik"></kendo-numerictextbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Asing</kendo-label>
               <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanAsing" ></kendo-numerictextbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">No. Telepon Perusahaan</kendo-label>
               <kendo-textbox id="noTelpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="20"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
               <kendo-textbox id="npwpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
               <kendo-textbox id="alamatPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="100"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Provinsi / Kota</kendo-label>
               <kendo-dropdownlist id="provKotaDropdown" class="col-md-auto" defaultItem="Pilih Provinsi / Kota" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Kecamatan / Kelurahan</kendo-label>
               <kendo-dropdownlist id="kecKelDropdown" class="col-md-auto" defaultItem="Pilih Kecamatan / Kelurahan" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Kode Pos</kendo-label>
               <kendo-textbox id="kodePosInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="4"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Pin Geolocation</kendo-label>
               <kendo-textbox id="pinGeoLocInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
@@ -227,7 +224,7 @@
         </kendo-panelbar-item>
         <kendo-panelbar-item title="Saham">
           <ng-template kendoPanelBarContent>
-            <div>
+            <!-- <div>
               <kendo-label>Pemegang Saham</kendo-label>
               <br>
               <kendo-grid>
@@ -248,7 +245,7 @@
               <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
                 Tambah Pemegang Saham
               </button>
-      
+
               <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
                 <div class="container">
                   <div class="row align-items-center">
@@ -259,7 +256,7 @@
                     <kendo-label class="col">Nama Pemegang Saham</kendo-label>
                     <kendo-textbox id="namaPemegangSahamInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
                   </div>
-      
+
                   <div class="row">
                     <kendo-label class="col-md-auto">Jenis Pemegang Saham</kendo-label>
                     <div class="col-md-auto">
@@ -271,7 +268,7 @@
                       <kendo-label class="k-radio-label" [for]="terms" text="Badan Usaha"></kendo-label>
                     </div>
                   </div>
-      
+
                   <div class="row">
                     <kendo-label class="col-md-auto">Pemegang Saham</kendo-label>
                     <div class="col-md-auto">
@@ -288,7 +285,7 @@
                     <kendo-textbox id="persenKepemilikanSahamInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
                   </div>
                 </div>
-      
+
                 <kendo-dialog-actions>
                   <button kendoButton id="saveSahamFormBtn" (click)="closeSaham()" [primary]="true">
                     Simpan
@@ -298,9 +295,12 @@
                   </button>
                 </kendo-dialog-actions>
               </kendo-dialog>
-            </div>
+            </div> -->
             <br>
           </ng-template>
+          <!-- pemegang saham here -->
+          <app-pemegang-saham></app-pemegang-saham>
+          <!-- pemegang saham here -->
         </kendo-panelbar-item>
         <kendo-panelbar-item title="Data Pegawai">
           <ng-template kendoPanelBarContent>
@@ -327,7 +327,7 @@
               <button id="addPegawaiBtn" kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline">
                 Tambah Pegawai
               </button>
-      
+
               <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
                 <div class="container">
                   <div class="row align-items-center">
@@ -361,7 +361,7 @@
                     <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
                   </div>
                 </div>
-      
+
                 <kendo-dialog-actions>
                   <button kendoButton id="saveKaryawanFormBtn" (click)="close()" [primary]="true">Simpan</button>
                   <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
