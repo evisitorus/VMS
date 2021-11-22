@@ -1,25 +1,25 @@
 <div class="tender" routerLink="tender/detail/{{tender.id}}">
     <kendo-card-body class="k-hstack top">
       <div class="top-avatar">
-          <img src='{{ "assets/images/" + tender.cparent.id + ".png" }}' class="avatar" alt="avatar"/>
-          <div class="k-card-titles">{{ tender.cparent.name }} </div>
+          <img src='{{ "assets/images/" + tender.cparent.id + ".png" }}' id="logoPerusahaan" class="avatar" alt="avatar" />
+          <div class="k-card-titles" id="namaPerusahaan">{{ tender.cparent.name }} </div>
       </div>
-      <div class="status">{{ tender.status.name }} </div>
+      <div class="status" id="statusTender">{{ tender.status.name }} </div>
     </kendo-card-body>
     <kendo-card-body class="k-hstack-body" style="padding: 0px 16px;">
-      <div class="tender-title">{{ tender.name }}</div>
+      <div class="tender-title" id="namaTender">{{ tender.name }}</div>
       <div class="middle">
           <img src="./assets/images/calendar.png" class="icon" alt="calendar"/>
-          <div class="mid1">{{ tender.publish_at }}</div>
+          <div class="mid1" id="batasAkhirRegistrasi">{{ tender.registration_end }}</div>
           <img src="./assets/images/Vector.png" class="icon" alt="amount"/>
-          <div class="mid1">{{ tender.hps_hide ? "Rp. " + tender.hps_total : (tender.hps_total | currency:'Rp. ':'symbol':'4.0-2') }}</div>
+          <div class="mid1" id="nilaiHPS">{{ tender.hps_hide ? "Rp. " + tender.hps_total : (tender.hps_total | currency:'Rp. ':'symbol':'4.0-2') }}</div>
           <img src="./assets/images/pin.png" class="icon" alt="pin"/>
-          <div class="mid1">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
+          <div class="mid1" id="lokasi">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
       </div>
       <div class="middle">
-          <div class="mid">{{ tender.method.name }}</div>
-          <div class="mid" style="font-weight: bold;">{{ tender.category.name }}</div>
+          <div class="mid" id="metodeTender">{{ tender.method.name }}</div>
+          <div class="mid" id="bidangUsaha" style="font-weight: bold;">{{ tender.category.name }}</div>
       </div>
-      <div class="mid">{{getDiffDate(tender.publish_at)}}</div>
+      <div class="mid" id="tanggalPosting">{{getDiffDate(tender.publish_at)}}</div>
     </kendo-card-body>
 </div>
