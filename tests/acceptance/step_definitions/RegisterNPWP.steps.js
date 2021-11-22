@@ -63,10 +63,6 @@ When('The Vendor will see error message from the system', () => {
     I.see('Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi');
 });
 
-When('The Vendor clicks {string} button', () => {
-    I.click('#popUpYes');
-});
-
 Then('The Vendor cant continue for registration due to he or she unselect {string}', () => {
 });
 

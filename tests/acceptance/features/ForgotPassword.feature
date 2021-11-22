@@ -14,12 +14,12 @@ So that I can login into VMS
        """
        {
        
-           "email" : "admin@abadijaya.co.id"
+           "email" : "vms@tmpbox.net"
        }
        """
        And The Vendor clicks "Reset Password" button
-       And The Vendor will get link for typing new password on his or her email
-       And The Vendor must checks his or her email
+      #  And The Vendor will get link for typing new password on his or her email
+      #  And The Vendor must checks his or her email
        And The Vendor must select "Renew Password" email 
        And The Vendor should be define his or her new password on "Renew Password" Form
        """
@@ -30,6 +30,6 @@ So that I can login into VMS
           "button"  : "Yes"
        }
        """
-       And The Vendor must selects "Yes" button
+       And The Vendor selects "Atur Ulang Kata Sandi" button
        And The Vendor will brings to "Login" Form 
     Then The Vendor can test his or her new password on "Login" form while they can be enter into the app
