@@ -16,14 +16,14 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public loading = false;
 
   public skip = 0;
-  public pageSize = 16;
+  public pageSize = 10;
   public currentPage = 1;
 
   public dataTenders: any;
 
   public popUpTitle: string = "Tender List";
   public popUpMessage: string = "";
-  
+
   public get showPager(): boolean {
     return this.view && this.view.total > 0;
   }
@@ -74,7 +74,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
             .pipe(finalize(() => (this.loading = false)))
             .subscribe((response) => (this.view = response));
       },
-      (error) => { 
+      (error) => {
         this.popUpMessage = "Gagal menemukan data tender";
         this.triggerPopUp();
       }
@@ -87,7 +87,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     if (options.dataTender?.data.tenders) {
       this.dataTenders = options.dataTender?.data;
     }
-    
+
     return of({
         data: this.dataTenders.tenders,
         total: this.dataTenders.meta.total
