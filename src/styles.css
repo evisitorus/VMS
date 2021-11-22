@@ -3,28 +3,34 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 65px;
     display: flex;
     align-items: center;
-    background-color: #114497;
+    background-color: #0193AC;
     color: white;
     font-weight: 600;
+    padding: 0 100px;
 }
 
 body {
-    background-image: url("/assets/images/bg.png") !important;
+    /* background-image: url("/assets/images/bg.png") !important; */
+    background: white !important;
     margin: 0% !important;
-    margin-top: 60px !important;
+    margin-top: 65px !important;
 }
 
 /* KENDO */
 /* ================================ */
 
-.k-textbox {
+.k-textbox{
     box-sizing: border-box !important;
     border-radius: 3px !important;
     height: 40px;
     margin-top: 2px;
+}
+
+.k-numerictextbox input {
+    height: 40px !important;
 }
 
 .k-label {
@@ -42,7 +48,7 @@ body {
     height: 35px;
     border-color: grey !important;
     background: white !important;
-    border-radius: 8px;
+    border-radius: 8px !important;
     
     font-family: Montserrat;
     font-style: normal;
@@ -54,8 +60,8 @@ body {
 }
 
 .vms-btn-primary {
-    border-color: #114497 !important;
-    background: #114497 !important;
+    border-color: #0193AC !important;
+    background: #0193AC !important;
     color: white !important;
 }
 
@@ -70,7 +76,8 @@ body {
 
 /* --- MODAL --- */
 .k-dialog-titlebar {
-    background-color: #114497 !important;
+    background-color: #0193AC !important;
+    color: white !important;
 }
 /* --- END MODAL--- */
 
@@ -84,21 +91,47 @@ label{
 
 /* --- SIDEBAR --- */
 .k-link{
-    background-color: #0e2456 !important;
-    color: white !important;
+    /* background-color: #0193AC !important; */
+    color: black !important;
 }
 
 .k-link:hover{
-    background-color: #114497 !important;
+    background-color: white !important;
+    color: black !important;
 }
 
 .k-link.k-state-selected{
-    background-color: #114497 !important;
+    background-color: white !important;
+    color: black !important;
+}
+
+.k-link.k-state-focused{
+    box-shadow: none !important;
+    color: #0193AC !important;
+}
+
+
+.k-panel {
+    background-color: white !important;
 }
 
 .k-icon.k-panelbar-toggle {
-
     color: inherit !important;
+}
+
+.parent-sidebar > span.k-link {
+    background: #0193AC !important;
+    color: white !important;
+    border-radius: 10px;
+    height: 70px;
+}
+
+.k-panelbar {
+    border-color: white !important;
+}
+
+.vms-sidebar {
+    border-radius: 10px !important;
 }
 
 /* --- SIDEBAR --- */
@@ -108,26 +141,37 @@ label{
 /* --- PROFILE / DASHBOARD--- */
 /* ================================ */
 
+.profile-section {
+    background-color: #e5e5e5;
+    margin: 0% !important;
+    padding: 2em 1em 2em 1em;
+}
+
 .profile-content {
-    padding: 2em !important;
-    margin-left: 300px !important;
-  }
-  
-  .profile-menu {
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.profile-content-container {
+    padding: 1em 1em 1em 0.5em !important;
+    min-height: calc(100vh - 65px - 4em) !important;
+}
+
+.profile-menu {
     float: left;
-    height: 100vh;
-  }
-  
-  .profile-content-title {
+    padding: 1em 0.5em 1em 1em !important;
+}
+
+.profile-content-title {
     margin-bottom: 1em;
     font-weight: 600;
-  }
-  
-  .profile-content-grid-button {
-    float: right;
+}
+
+.profile-content-grid-button {
     margin-top: 1em;
-  }
-  
-  .profile-content-modal-btn {
+}
+
+.profile-content-modal-btn {
     min-width: 100px !important;
-  }
+}
