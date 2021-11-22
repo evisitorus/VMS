@@ -23,7 +23,7 @@ export class PemegangSahamComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
-  public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemeganng Saham"}, {field: "Pemeganng Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
+  public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemegang Saham"}, {field: "Pemeganng Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
   access_token = "admin@abadijaya.co.id";
   vendor_id = "";
@@ -38,7 +38,7 @@ export class PemegangSahamComponent implements OnInit {
     this.gridData = this.getPemegangSaham();
     this.columns = [
       {field: "toParty.firstName", title:"Nama Pemegang Saham", width:"250px"}, 
-      {field: "pemegangSahamPerseorangan", title:"Jenis Pemeganng Saham"}, 
+      {field: "pemegangSahamPerseorangan", title:"Jenis Pemegang Saham"}, 
       {field: "pemegangSahamLokal", title:"Pemegang Saham Lokal/Asing", width:"300px"}, 
       {field: "persentaseKepemilikan", title:"% Kepemilikan"}
     ];
