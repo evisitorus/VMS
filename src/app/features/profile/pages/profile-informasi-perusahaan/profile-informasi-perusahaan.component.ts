@@ -16,16 +16,16 @@ export class ProfileInformasiPerusahaanComponent {
 
   public piForm: FormGroup;
   public rbtData: any = {
-    badanUsaha: null,
-    statusBadanUsaha:null
+    buFormControl: null,
+    sbuFormControl:null
   }
 
   constructor(
     private profileInfoService:ProfileInformationService
   ) {
     this.piForm = new FormGroup({
-      badanUsaha: new FormControl(this.rbtData.badanUsaha.confirmation,[Validators.required]),
-      statusBadanUsaha: new FormControl(this.rbtData.statusBadanUsaha,[Validators.required]),
+      buFormControl: new FormControl(this.rbtData.buFormControl,[Validators.required]),
+      sbuFormControl: new FormControl(this.rbtData.sbuFormControl,[Validators.required]),
     });
   }
 
