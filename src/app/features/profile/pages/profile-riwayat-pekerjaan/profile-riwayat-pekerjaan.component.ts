@@ -53,14 +53,14 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     // this.authService.setLoggedIn(true);
     if (!this.isLoggedIn) window.location.href = "/";
 
-    this.pekerjaanForm = this.formBuilder.group({
-      email:['tutuu@tujuh.com'],
-      namaPekerjaan: ['asd', Validators.required],
-      pemberiPekerjaan: ['asd', Validators.required],
-      nilaiPekerjaan: ['1231233', Validators.required],
-      tahunPekerjaan: ['2121', Validators.required],
-      buktiPekerjaanFilePath: ['asdas.jpg', Validators.required],
-    });
+    // this.pekerjaanForm = this.formBuilder.group({
+    //   email:['tutuu@tujuh.com'],
+    //   namaPekerjaan: ['asd', Validators.required],
+    //   pemberiPekerjaan: ['asd', Validators.required],
+    //   nilaiPekerjaan: ['1231233', Validators.required],
+    //   tahunPekerjaan: ['2121', Validators.required],
+    //   buktiPekerjaanFilePath: ['asdas.jpg', Validators.required],
+    // });
     
     this.columns = [
       {field: "namaPekerjaan", title:"Nama Pekerjaan"}, 
