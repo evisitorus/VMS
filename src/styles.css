@@ -18,10 +18,6 @@ body {
     margin-top: 60px !important;
 }
 
-.k-panelbar,input {
-    border-color: #0193AC;
-}
-
 /* KENDO */
 /* ================================ */
 
@@ -94,23 +90,26 @@ body {
 
 /* --- LABEL --- */
 label{
-    font-family: Montserrat;
+    font-family: Open Sans;
     font-size: 14px;
 }
 /* --- LABEL --- */
 
 /* --- SIDEBAR --- */
 .k-link{
-    background-color: #0e2456 !important;
+    background-color: #0193AC !important;
+    border-color: #0193AC !important;
     color: white !important;
 }
 
 .k-link:hover{
-    background-color: #114497 !important;
+    background-color: #07b9d8 !important;
+    border-color: #07b9d8 !important;
 }
 
 .k-link.k-state-selected{
-    background-color: #114497 !important;
+    background-color: #07b9d8 !important;
+    border-color: #07b9d8 !important;
 }
 
 .k-icon.k-panelbar-toggle {
