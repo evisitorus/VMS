@@ -38,6 +38,7 @@ export class SetPasswordComponent implements OnInit {
   redirectOnClosePopUp: boolean = true;
   popUpMessage: string = messages.success;
   token: any;
+  tokenExpired: boolean = false;
   public minlength = 8;
   public maxlength = 15;
   public charachtersCount = 0;
@@ -51,12 +52,15 @@ export class SetPasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //call backend to check istokenexpired
+    this.isTokenExpired();
+
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.activatedRoute.queryParams.subscribe(params => {
         this.token = params['token'];
       });
 
-      this.formSetPassword = this.formBuilder.group({
+    this.formSetPassword = this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
         confirmPassword: ['', Validators.required],
         token: [this.token]
@@ -115,6 +119,23 @@ export class SetPasswordComponent implements OnInit {
       },
       (error) => { 
         this.isLoggedIn = false;
+        this.popUpMessage = error.error.message;
+        this.redirectOnClosePopUp = false;
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  
+  isTokenExpired(): void {
+    this.authService.isTokenExpired(this.token).subscribe(
+      (resp) =>  { 
+        this.popUpMessage = resp.message;
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+        this.tokenExpired = resp;
+      },
+      (error) => { 
         this.popUpMessage = error.error.message;
         this.redirectOnClosePopUp = false;
         this.triggerPopUp();
