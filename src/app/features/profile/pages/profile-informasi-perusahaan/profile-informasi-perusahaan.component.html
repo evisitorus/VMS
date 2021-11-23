@@ -75,8 +75,7 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
-              <kendo-dropdownlist id="tipeBuDropdown" class="col-md-auto" [defaultItem]="{ text: 'Pilih Tipe Badan Usaha', value: null }" [data]="tipeBadanUsahaItems" textField="text"
-              valueField="value" [(ngModel)]="selectedBadanUsaha" (valueChange)="onChangeList()" required>
+              <kendo-dropdownlist id="tipeBuDropdown" class="col-md-auto" [defaultItem]="{ name: 'Pilih Tipe Badan Usaha', id: null }" [data]="tipeBadanUsahaItems" textField="name" valueField="id" [(ngModel)]="selectedBadanUsaha" (valueChange)="onChangeList()" required>
               </kendo-dropdownlist>
             </div>
 
@@ -85,8 +84,8 @@
               <div class="row align-items-center">
                 <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
                 <kendo-dropdownlist id="kategoriBuDropdown" class="col-md-auto" formControlName="kategoriBu"
-                  [data]="listItems" [defaultItem]="{ text: 'Pilih Kategori Badan Usaha', value: null }"
-                  textField="text" valueField="value" [valuePrimitive]="true" #kategoriBu required>
+                  [data]="listItems" [defaultItem]="{ name: 'Pilih Kategori Badan Usaha', id: null }"
+                  textField="name" valueField="id" [valuePrimitive]="true" #kategoriBu required>
                 </kendo-dropdownlist>
               </div>
             </form>
@@ -94,8 +93,7 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
-              <kendo-dropdownlist id="jenisKegiatanUsahaDropdown" class="col-md-auto"
-                defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="jenisKegiatanUsahaDropdown" class="col-md-auto" [defaultItem]="{ description: 'Pilih Jenis Kegiatan Usaha Utama', id: null }" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
 
@@ -110,7 +108,7 @@
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
 
               <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu"
+                [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu"
                 [value]="vendor_info.bumnPengampu">
               </kendo-autocomplete>
             </div>
@@ -119,7 +117,7 @@
             <div class="row align-items-center">
               <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
               <kendo-autocomplete id="organisasiHimpunanInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan"
+                [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="Organisasi Himpunan"
                 [value]="vendor_info.organisasiHimpunan">
               </kendo-autocomplete>
             </div>

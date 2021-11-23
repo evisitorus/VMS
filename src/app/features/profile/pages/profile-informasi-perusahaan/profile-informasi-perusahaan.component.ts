@@ -3,8 +3,8 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
 interface Item {
-  text: string;
-  value: number;
+  name: string;
+  id: number;
 }
 
 interface Hydra {
@@ -38,19 +38,19 @@ export class ProfileInformasiPerusahaanComponent {
   
   // TODO: ambil dari table tipe vendor. jangan static
   public kategoriUmkmItems: Array<Item> = [
-    { text: "Kecil", value: 1 },
-    { text: "Menengah", value: 2 },
-    { text: "Mikro", value: 3 },
+    { name: "Kecil", id: 1 },
+    { name: "Menengah", id: 2 },
+    { name: "Mikro", id: 3 },
   ];
 
   public kategoriCorpItems: Array<Item> = [
-    { text: "BUMN (Grup)", value: 1 },
-    { text: "Swasta", value: 2 }
+    { name: "BUMN (Grup)", id: 1 },
+    { name: "Swasta", id: 2 }
   ];
 
   public tipeBadanUsahaItems: Array<Item> = [
-    { text: "UMKM", value: 1 },
-    { text: "Korporasi", value: 2 }
+    { name: "UMKM", id: 1 },
+    { name: "Korporasi", id: 2 }
   ];
 
   public isRequired = true;
@@ -58,7 +58,7 @@ export class ProfileInformasiPerusahaanComponent {
   public openedSaham = false;
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
-  public organizations: Array<Hydra> = [];
+  public organizations: Array<Item> = [];
 
   public vendor_info: any;
   public total_karyawan: any;
@@ -102,7 +102,7 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public onChangeList(): void{
-    if (this.selectedBadanUsaha.text === "UMKM") {
+    if (this.selectedBadanUsaha.name === "UMKM") {
       this.listItems = this.kategoriUmkmItems;
     } else {
       this.listItems = this.kategoriCorpItems;
