@@ -1,9 +1,16 @@
-import {Component, ViewEncapsulation, ViewChild} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
+import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
-import {AutoCompleteComponent} from "@progress/kendo-angular-dropdowns";
-import {ChipRemoveEvent} from "@progress/kendo-angular-buttons";
-import {DomSanitizer} from "@angular/platform-browser";
+interface Item {
+  name: string;
+  id: number;
+}
 
+interface Hydra {
+  description: string;
+  id: number;
+}
 @Component({
   selector: 'app-profile-informasi-perusahaan',
   templateUrl: './profile-informasi-perusahaan.component.html',
@@ -13,48 +20,111 @@ import {DomSanitizer} from "@angular/platform-browser";
 
 export class ProfileInformasiPerusahaanComponent {
 
-  constructor(private sanitizer: DomSanitizer) {
-  }
+  constructor(
+    private profileInfoService:ProfileInformationService
+  ) {}
 
-  public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
+  public psFormGroup = new FormGroup({
+    psFormControl: new FormControl(),
+  });
+  public jpsFormGroup = new FormGroup({
+    jpsFormControl: new FormControl(),
+  });
+  public buFormGroup = new FormGroup({
+    buFormControl: new FormControl(),
+  });
+  public sbuFormGroup = new FormGroup({
+    sbuFormControl: new FormControl(),
+  });
+  public kategoriBuFormGroup = new FormGroup({
+    kategoriBu: new FormControl(),
+  });
 
-  @ViewChild("contactslist") public list: AutoCompleteComponent | undefined;
-
-  public contacts: Array<{ label: string; iconClass: string }> = [
-    {label: "Pedro Afonso", iconClass: "k-chip-avatar pedro"},
-    {label: "Maria Shore", iconClass: "k-chip-avatar maria"},
-    {label: "Thomas Hardy", iconClass: "k-chip-avatar thomas"},
-    {label: "Christina Berg", iconClass: "k-chip-avatar christina"},
-    {label: "Paula Wilson", iconClass: "k-chip-avatar paula"},
+  public listItems: Array<Item> = [];
+  
+  // TODO: ambil dari table tipe vendor. jangan static
+  public kategoriUmkmItems: Array<Item> = [
+    { name: "Kecil", id: 1 },
+    { name: "Menengah", id: 2 },
+    { name: "Mikro", id: 3 },
   ];
 
-  public selectedContacts: Array<any> = [this.contacts[1]];
+  public kategoriCorpItems: Array<Item> = [
+    { name: "BUMN (Grup)", id: 1 },
+    { name: "Swasta", id: 2 }
+  ];
 
-  public valueChange(contact: string): void {
-    if (contact === "") {
-      return;
-    }
+  public tipeBadanUsahaItems: Array<Item> = [
+    { name: "UMKM", id: 1 },
+    { name: "Korporasi", id: 2 }
+  ];
 
-    const contactData = this.contacts.find((c) => c.label === contact);
-
-    if (!this.selectedContacts.includes(contactData)) {
-      this.selectedContacts.push(contactData);
-    }
-
-    // @ts-ignore
-    this.list.reset();
-  }
-
-  public onRemove(e: ChipRemoveEvent): void {
-    console.log("Remove event arguments: ", e);
-    const index = this.selectedContacts
-      .map((c) => c.label)
-      .indexOf(e.sender.label);
-    this.selectedContacts.splice(index, 1);
-  }
-
+  public isRequired = true;
   public opened = false;
   public openedSaham = false;
+
+  public jenis_penyedia_usaha: Array<Hydra> = [];
+  public jenis_kegiatan_usaha: Array<Hydra> = [];
+  public organizations: Array<Item> = [];
+
+  public vendor_info: any;
+  public total_karyawan: any;
+
+  public selectedBadanUsaha: Item = this.listItems[1];
+  public pkpStatus = false;
+
+  ngOnInit(): void {
+    //get vendor information
+    this.profileInfoService.getVendorInformation().subscribe(
+      (resp) => {
+        console.log(resp.data);
+        this.vendor_info = resp.data;
+        this.total_karyawan = resp.data.jumlahKaryawanDomestik + resp.data.jumlahKaryawanAsing;
+        this.pkpStatus = resp.data.statusPerusahaanPkp;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    //get jenis penyedia usaha
+    this.profileInfoService.getJenisPenyediaUsaha().subscribe(
+      (resp) => {
+        this.jenis_penyedia_usaha = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    //get jenis kegiatan usaha
+    this.profileInfoService.getJenisKegiatanUsaha().subscribe(
+      (resp) => {
+        this.jenis_kegiatan_usaha = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    //get list of organizations
+    this.profileInfoService.getOrganizations().subscribe(
+      (resp) => {
+        this.organizations = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  public onChangeList(): void{
+    if (this.selectedBadanUsaha.name === "UMKM") {
+      this.listItems = this.kategoriUmkmItems;
+    } else {
+      this.listItems = this.kategoriCorpItems;
+    }
+  }
 
   public close() {
     console.log(`Dialog result: ${status}`);
@@ -74,11 +144,4 @@ export class ProfileInformasiPerusahaanComponent {
     this.openedSaham = true;
   }
 
-  public mediaCards: Array<any> = [
-    {
-      imageSrc:
-        "https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg",
-      actionButtons: [],
-    },
-  ];
 }

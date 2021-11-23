@@ -20,10 +20,11 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getVendorData().subscribe(
       (resp) => {
-        this.phone_number = resp.data.phone_number;
-        this.name = resp.data.name;
-        this.is_active = resp.data.is_active;
-        this.registered_at = resp.data.registered_at;
+        console.log(resp)
+        this.phone_number = resp.phone_number;
+        this.name = resp.name;
+        this.is_active = resp.is_active;
+        this.registered_at = resp.registered_at;
       },
       (error) => {
         console.log(error);
