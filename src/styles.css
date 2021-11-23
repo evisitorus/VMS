@@ -85,6 +85,11 @@ body {
 .k-dialog-titlebar {
     background-color: #114497 !important;
 }
+
+.k-content kendo-label{
+    color: #0193AC;
+    font-weight: 500;
+}
 /* --- END MODAL--- */
 
 
@@ -96,10 +101,15 @@ label{
 /* --- LABEL --- */
 
 /* --- SIDEBAR --- */
-.k-link, .k-grid-header{
+.k-link, .k-grid-header, .k-window-titlebar, .k-dialog-titlebar{
     background-color: #0193AC !important;
     border-color: #0193AC !important;
     color: white !important;
+}
+
+.k-window {
+    width: max-content;
+    font-family: Open Sans;
 }
 
 .k-link:hover{
