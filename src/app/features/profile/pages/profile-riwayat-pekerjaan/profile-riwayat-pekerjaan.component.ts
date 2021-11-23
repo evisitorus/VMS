@@ -54,12 +54,12 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     if (!this.isLoggedIn) window.location.href = "/";
 
     this.pekerjaanForm = this.formBuilder.group({
-      email:[''],
+      email:['admin@abadijaya.co.id'],
       namaPekerjaan: ['', Validators.required],
       pemberiPekerjaan: ['', Validators.required],
       nilaiPekerjaan: ['', Validators.required],
       tahunPekerjaan: ['', Validators.required],
-      buktiPekerjaanFilePath: ['', Validators.required],
+      buktiPekerjaanFilePath: ['somepath', Validators.required],
     });
     
     this.columns = [
