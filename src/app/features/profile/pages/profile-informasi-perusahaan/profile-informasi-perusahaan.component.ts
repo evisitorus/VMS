@@ -1,10 +1,11 @@
-import {Component, ViewEncapsulation, ViewChild} from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import {AutoCompleteComponent} from "@progress/kendo-angular-dropdowns";
-import {ChipRemoveEvent} from "@progress/kendo-angular-buttons";
-import {DomSanitizer} from "@angular/platform-browser";
+import {Component, ViewEncapsulation} from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
+interface Item {
+  text: string;
+  value: number;
+}
 @Component({
   selector: 'app-profile-informasi-perusahaan',
   templateUrl: './profile-informasi-perusahaan.component.html',
@@ -24,17 +25,34 @@ export class ProfileInformasiPerusahaanComponent {
   public sbuFormGroup = new FormGroup({
     sbuFormControl: new FormControl(),
   });
+  public kategoriBuFormGroup = new FormGroup({
+    kategoriBu: new FormControl(),
+  });
 
-  public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
-  public tipeBadanUsahaItems: Array<string> = ["UMKM", "Korporasi"];
-  public kategoriUmkmItems: Array<string> = ["Kecil", "Menengah", "Mikro"];
-  public kategoriCorpItems: Array<string> = ["BUMN (Grup)", "Swasta"];
+  public listItems: Array<Item> = [];
+  
+  public kategoriUmkmItems: Array<Item> = [
+    { text: "Kecil", value: 1 },
+    { text: "Menengah", value: 2 },
+    { text: "Mikro", value: 3 },
+  ];
+
+  public kategoriCorpItems: Array<Item> = [
+    { text: "BUMN (Grup)", value: 1 },
+    { text: "Swasta", value: 2 }
+  ];
+
+  public tipeBadanUsahaItems: Array<Item> = [
+    { text: "UMKM", value: 1 },
+    { text: "Korporasi", value: 2 }
+  ];
 
   public isRequired = true;
   public opened = false;
   public openedSaham = false;
   public vendor_info: any;
   public total_karyawan: any;
+  public selectedBadanUsaha: Item = this.listItems[1];
 
   ngOnInit(): void {
     this.profileInfoService.getVendorInformation().subscribe(
@@ -47,6 +65,14 @@ export class ProfileInformasiPerusahaanComponent {
         console.log(error);
       }
     );
+  }
+
+  public onChangeList(): void{
+    if (this.selectedBadanUsaha.text === "UMKM") {
+      this.listItems = this.kategoriUmkmItems;
+    } else {
+      this.listItems = this.kategoriCorpItems;
+    }
   }
 
   public close() {

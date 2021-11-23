@@ -5,13 +5,15 @@
   <kendo-card orientation="vertical" style="width: 100%;">
     <kendo-card-body class="k-vstack">
       <div class="mt-2 mb-2">
-        <button id="editVendorInfoBtn" kendoButton icon="edit" class="k-button k-primary" style="float: right;"></button>
+        <button id="editVendorInfoBtn" kendoButton icon="edit" class="k-button k-primary"
+          style="float: right;"></button>
       </div>
       <kendo-panelbar>
         <kendo-panelbar-item title="Overview" [expanded]="true">
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center">
-              <img class="col-3" src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg" />
+              <img class="col-3"
+                src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg" />
               <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto" [title]="'Pilih File'"></kendo-fileselect>
               <kendo-formhint>Gambar harus berupa jpg, jpeg atau png dengan maksimum file 2 mb</kendo-formhint>
             </div>
@@ -21,63 +23,33 @@
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center">
               <kendo-label class="col-3">Nama Perusahaan</kendo-label>
-              <kendo-textbox id="namaPerusahaanInput" class="col-md-auto" placeholder="Nama Perusahaan" [clearButton]="true" [value]="vendor_info.name"></kendo-textbox>
+              <kendo-textbox id="namaPerusahaanInput" class="col-md-auto" placeholder="Nama Perusahaan"
+                [clearButton]="true" [value]="vendor_info.name"></kendo-textbox>
             </div>
             <div class="row align-items-center">
               <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
-              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Inisial perusahaan" [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName"></kendo-textbox>
+              <kendo-textbox id="inisialPerusahaanInput" class="col-md-auto" placeholder="Inisial perusahaan"
+                [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName"></kendo-textbox>
             </div>
             <div class="row">
               <form class="k-form" [formGroup]="buFormGroup">
                 <kendo-label>Jenis Badan Usaha</kendo-label>
                 <ul class="k-radio-list k-list-horizontal">
                   <li class="k-radio-item">
-                    <input
-                      id="ptRbtn"
-                      type="radio"
-                      #pt
-                      required
-                      value="pt"
-                      formControlName="buFormControl"
-                      kendoRadioButton
-                    />
-                    <kendo-label
-                      class="k-radio-label"
-                      [for]="pt"
-                      text="PT"
-                    ></kendo-label>
+                    <input id="ptRbtn" type="radio" #pt required value="pt" formControlName="buFormControl"
+                      kendoRadioButton />
+                    <kendo-label class="k-radio-label" [for]="pt" text="PT"></kendo-label>
                   </li>
-      
+
                   <li class="k-radio-item">
-                    <input
-                      id="cvRbtn"
-                      type="radio"
-                      #cv
-                      value="cv"
-                      formControlName="buFormControl"
-                      kendoRadioButton
-                    />
-                    <kendo-label
-                      class="k-radio-label"
-                      [for]="cv"
-                      text="CV"
-                    ></kendo-label>
+                    <input id="cvRbtn" type="radio" #cv value="cv" formControlName="buFormControl" kendoRadioButton />
+                    <kendo-label class="k-radio-label" [for]="cv" text="CV"></kendo-label>
                   </li>
-      
+
                   <li class="k-radio-item">
-                    <input
-                      id="otherRbt"
-                      type="radio"
-                      #other
-                      value="other"
-                      formControlName="buFormControl"
-                      kendoRadioButton
-                    />
-                    <kendo-label
-                      class="k-radio-label"
-                      [for]="other"
-                      text="Lainnya"
-                    ></kendo-label>
+                    <input id="otherRbt" type="radio" #other value="other" formControlName="buFormControl"
+                      kendoRadioButton />
+                    <kendo-label class="k-radio-label" [for]="other" text="Lainnya"></kendo-label>
                   </li>
                 </ul>
               </form>
@@ -87,141 +59,146 @@
               <form [formGroup]="sbuFormGroup">
                 <ul class="k-radio-list k-list-horizontal">
                   <li class="k-radio-item">
-                    <input
-                      id="pkpRbt"
-                      type="radio"
-                      #pkp
-                      required
-                      value="pkp"
-                      formControlName="sbuFormControl"
-                      kendoRadioButton
-                    />
-                    <kendo-label
-                      class="k-radio-label"
-                      [for]="pkp"
-                      text="PKP"
-                    ></kendo-label>
+                    <input id="pkpRbt" type="radio" #pkp required value="pkp" formControlName="sbuFormControl"
+                      kendoRadioButton />
+                    <kendo-label class="k-radio-label" [for]="pkp" text="PKP"></kendo-label>
                   </li>
-      
+
                   <li class="k-radio-item">
-                    <input
-                      id="nonPkpRbt"
-                      type="radio"
-                      #nonpkp
-                      value="nonpkp"
-                      formControlName="sbuFormControl"
-                      kendoRadioButton
-                    />
-                    <kendo-label
-                      class="k-radio-label"
-                      [for]="nonpkp"
-                      text="Non-PKP"
-                    ></kendo-label>
+                    <input id="nonPkpRbt" type="radio" #nonpkp value="nonpkp" formControlName="sbuFormControl"
+                      kendoRadioButton />
+                    <kendo-label class="k-radio-label" [for]="nonpkp" text="Non-PKP"></kendo-label>
                   </li>
                 </ul>
               </form>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
-              <kendo-dropdownlist id="tipeBuDropdown" class="col-md-auto" defaultItem="Pilih Tipe Badan Usaha" [data]="tipeBadanUsahaItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="tipeBuDropdown" class="col-md-auto" [defaultItem]="{ text: 'Pilih Tipe Badan Usaha', value: null }" [data]="tipeBadanUsahaItems" textField="text"
+              valueField="value" [(ngModel)]="selectedBadanUsaha" (valueChange)="onChangeList()" required>
               </kendo-dropdownlist>
             </div>
-      
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
-              <kendo-dropdownlist id="kategoriBuDropdown" class="col-md-auto" defaultItem="Pilih Kategori Badan Usaha" [data]="listItems" [valuePrimitive]="true">
-              </kendo-dropdownlist>
-            </div>
-      
+
+
+            <form [formGroup]="kategoriBuFormGroup">
+              <div class="row align-items-center">
+                <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
+                <kendo-dropdownlist id="kategoriBuDropdown" class="col-md-auto" formControlName="kategoriBu"
+                  [data]="listItems" [defaultItem]="{ text: 'Pilih Kategori Badan Usaha', value: null }"
+                  textField="text" valueField="value" [valuePrimitive]="true" #kategoriBu required>
+                </kendo-dropdownlist>
+              </div>
+            </form>
+
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
-              <kendo-dropdownlist id="jenisKegiatanUsahaDropdown" class="col-md-auto" defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="jenisKegiatanUsahaDropdown" class="col-md-auto"
+                defaultItem="Pilih Jenis Kegiatan Usaha Utama" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
-              <kendo-dropdownlist id="jenisPenyediaUsahaDropdown" class="col-md-auto" defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="jenisPenyediaUsahaDropdown" class="col-md-auto"
+                defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
-      
+
               <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu" [value]="vendor_info.bumnPengampu">
+                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="BUMN Pengampu"
+                [value]="vendor_info.bumnPengampu">
               </kendo-autocomplete>
             </div>
-      
-      
+
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
               <kendo-autocomplete id="organisasiHimpunanInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan">
+                [kendoDropDownFilter]="{ operator: 'contains' }" [filterable]="true" placeholder="Organisasi Himpunan"
+                [value]="vendor_info.organisasiHimpunan">
               </kendo-autocomplete>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-              <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
+              <kendo-textbox id="nibInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"
+                [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Website Perusahaan</kendo-label>
-              <kendo-textbox id="websitePerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [value]="vendor_info.website"></kendo-textbox>
+              <kendo-textbox id="websitePerusahaanInput" class="col-md-auto" placeholder="Type your message here"
+                [clearButton]="true" [value]="vendor_info.website"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanTotalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="total_karyawan"></kendo-numerictextbox>
+              <kendo-numerictextbox id="jumlahKaryawanTotalInput" class="col-md-auto"
+                placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
+                [value]="total_karyawan"></kendo-numerictextbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Lokal</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanDomestik"></kendo-numerictextbox>
+              <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md-auto"
+                placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
+                [value]="vendor_info.jumlahKaryawanDomestik"></kendo-numerictextbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Jumlah Karyawan Asing</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md-auto" placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanAsing" ></kendo-numerictextbox>
+              <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md-auto"
+                placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
+                [value]="vendor_info.jumlahKaryawanAsing"></kendo-numerictextbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">No. Telepon Perusahaan</kendo-label>
-              <kendo-textbox id="noTelpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="20"></kendo-textbox>
+              <kendo-textbox id="noTelpPerusahaanInput" class="col-md-auto" placeholder="Type your message here"
+                [clearButton]="true" [maxlength]="20"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
-              <kendo-textbox id="npwpPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
+              <kendo-textbox id="npwpPerusahaanInput" class="col-md-auto" placeholder="Type your message here"
+                [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
-              <kendo-textbox id="alamatPerusahaanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="100"></kendo-textbox>
+              <kendo-textbox id="alamatPerusahaanInput" class="col-md-auto" placeholder="Type your message here"
+                [clearButton]="true" [maxlength]="100"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Provinsi / Kota</kendo-label>
-              <kendo-dropdownlist id="provKotaDropdown" class="col-md-auto" defaultItem="Pilih Provinsi / Kota" [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="provKotaDropdown" class="col-md-auto" defaultItem="Pilih Provinsi / Kota"
+                [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Kecamatan / Kelurahan</kendo-label>
-              <kendo-dropdownlist id="kecKelDropdown" class="col-md-auto" defaultItem="Pilih Kecamatan / Kelurahan" [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="kecKelDropdown" class="col-md-auto" defaultItem="Pilih Kecamatan / Kelurahan"
+                [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Kode Pos</kendo-label>
-              <kendo-textbox id="kodePosInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true" [maxlength]="4"></kendo-textbox>
+              <kendo-textbox id="kodePosInput" class="col-md-auto" placeholder="Type your message here"
+                [clearButton]="true" [maxlength]="4"></kendo-textbox>
             </div>
-      
+
             <div class="row align-items-center">
               <kendo-label class="col-3">Pin Geolocation</kendo-label>
-              <kendo-textbox id="pinGeoLocInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+              <kendo-textbox id="pinGeoLocInput" class="col-md-auto" placeholder="Type your message here"
+                [clearButton]="true"></kendo-textbox>
             </div>
           </ng-template>
         </kendo-panelbar-item>
@@ -248,18 +225,20 @@
               <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
                 Tambah Pemegang Saham
               </button>
-      
+
               <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
                 <div class="container">
                   <div class="row align-items-center">
                     <kendo-label class="col">No</kendo-label>
-                    <kendo-textbox id="noPemegangSahamInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="noPemegangSahamInput" class="col-md-auto" placeholder="Type your message here"
+                      [clearButton]="true"></kendo-textbox>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">Nama Pemegang Saham</kendo-label>
-                    <kendo-textbox id="namaPemegangSahamInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="namaPemegangSahamInput" class="col-md-auto" placeholder="Type your message here"
+                      [clearButton]="true"></kendo-textbox>
                   </div>
-      
+
                   <div class="row">
                     <kendo-label class="col-md-auto">Jenis Pemegang Saham</kendo-label>
                     <div class="col-md-auto">
@@ -271,7 +250,7 @@
                       <kendo-label class="k-radio-label" [for]="terms" text="Badan Usaha"></kendo-label>
                     </div>
                   </div>
-      
+
                   <div class="row">
                     <kendo-label class="col-md-auto">Pemegang Saham</kendo-label>
                     <div class="col-md-auto">
@@ -285,10 +264,11 @@
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">% Kepemilikan Saham</kendo-label>
-                    <kendo-textbox id="persenKepemilikanSahamInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="persenKepemilikanSahamInput" class="col-md-auto"
+                      placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
                   </div>
                 </div>
-      
+
                 <kendo-dialog-actions>
                   <button kendoButton id="saveSahamFormBtn" (click)="closeSaham()" [primary]="true">
                     Simpan
@@ -327,41 +307,48 @@
               <button id="addPegawaiBtn" kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline">
                 Tambah Pegawai
               </button>
-      
+
               <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
                 <div class="container">
                   <div class="row align-items-center">
                     <kendo-label class="col">No</kendo-label>
-                    <kendo-textbox id="noPegawaiInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="noPegawaiInput" class="col-md-auto" placeholder="Type your message here"
+                      [clearButton]="true"></kendo-textbox>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">NIK</kendo-label>
-                    <kendo-textbox id="nikPegawaiInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="nikPegawaiInput" class="col-md-auto" placeholder="Type your message here"
+                      [clearButton]="true"></kendo-textbox>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">Nama Karyawan</kendo-label>
-                    <kendo-textbox id="namaKaryawanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="namaKaryawanInput" class="col-md-auto" placeholder="Type your message here"
+                      [clearButton]="true"></kendo-textbox>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">Tipe Karyawan</kendo-label>
-                    <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto" defaultItem="Pilih Tipe Karyawan" [data]="listItems" [valuePrimitive]="true">
+                    <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto" defaultItem="Pilih Tipe Karyawan"
+                      [data]="listItems" [valuePrimitive]="true">
                     </kendo-dropdownlist>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">Jabatan</kendo-label>
-                    <kendo-textbox id="jabatanKaryawanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="jabatanKaryawanInput" class="col-md-auto" placeholder="Type your message here"
+                      [clearButton]="true"></kendo-textbox>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">Bidang Pekerjaan</kendo-label>
-                    <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md-auto" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                    <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md-auto"
+                      placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
                   </div>
                   <div class="row align-items-center">
                     <kendo-label class="col">Resume</kendo-label>
-                    <kendo-fileselect id="resumeKaryawanUpload" class="col-md-auto" [title]="'Pilih File'"></kendo-fileselect>
+                    <kendo-fileselect id="resumeKaryawanUpload" class="col-md-auto" [title]="'Pilih File'">
+                    </kendo-fileselect>
                     <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
                   </div>
                 </div>
-      
+
                 <kendo-dialog-actions>
                   <button kendoButton id="saveKaryawanFormBtn" (click)="close()" [primary]="true">Simpan</button>
                   <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
