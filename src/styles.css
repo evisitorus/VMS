@@ -181,3 +181,8 @@ label{
     margin-right: 0.5em;
     cursor: pointer;
 }
+
+.k-notification-container {
+    margin-top: 35px !important;
+    margin-right: 35px !important;
+}

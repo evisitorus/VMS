@@ -42,7 +42,6 @@
             
             <div class="k-form-buttons">
                 <button class="k-button k-primary vms-btn" (click)="login()" id="btn-login">Login</button>
-                <!-- <button class="k-button" (click)="clearForm()">Clear</button> -->
             </div>
             
         </fieldset>
@@ -54,4 +53,4 @@
     </form>
 </div>
 
-<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/'"></app-popup-message>
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/dashboard'"></app-popup-message>
