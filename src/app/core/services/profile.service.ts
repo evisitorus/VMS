@@ -30,13 +30,13 @@ export class ProfileService {
     return this.apiService.sendRequest(api_add_pekerjaan);
   }
 
-  getPekerjaan(badanUsaha: string): Observable<any> {    
+  getPekerjaan(vendor: string): Observable<any> {    
     let api_get_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pengalaman_kerja,
       options: {
         params: {
-          badanUsaha : badanUsaha
+          vendor : vendor
         }
       }
     };

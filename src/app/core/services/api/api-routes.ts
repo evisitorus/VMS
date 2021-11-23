@@ -7,7 +7,7 @@ export const ApiRoutes = {
   api_activate_route: API_BASE_URL + "/users/activate",
   api_forgot_password_route: API_BASE_URL + "/auth/forgot-password",
   api_reset_password_route: API_BASE_URL + "/auth/reset-password",
-  api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
+  api_add_pengalaman_kerja: API_BASE_URL + "/vendors/pengalaman_kerja",
   api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
   api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1",
