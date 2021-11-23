@@ -8,15 +8,16 @@
 } */
 
 
-.profile-menu {
-  float: left;
-  height: 100vh;
-}
 /* 
 .profile-content {
   border-style: groove;
   float: right;
 } */
+
+.profile-menu {
+  float: left;
+  height: 100vh;
+}
 
 .profile-content {
   padding: 40px;

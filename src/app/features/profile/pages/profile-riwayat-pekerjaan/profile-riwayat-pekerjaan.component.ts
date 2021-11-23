@@ -32,7 +32,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
   public gridData: any = samplePekerjaans;
   record = 0;
-  access_token = "124";
+  access_token = "133";
 
   myRestrictions: FileRestrictions = {
     maxFileSize: 2194304,
