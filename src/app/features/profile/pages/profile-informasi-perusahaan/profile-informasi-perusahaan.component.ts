@@ -53,13 +53,15 @@ export class ProfileInformasiPerusahaanComponent {
   public vendor_info: any;
   public total_karyawan: any;
   public selectedBadanUsaha: Item = this.listItems[1];
+  public pkpStatus = false;
 
   ngOnInit(): void {
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
         console.log(resp.data);
         this.vendor_info = resp.data;
-        this.total_karyawan = resp.data.jumlahKaryawanDomestik + resp.data.jumlahKaryawanAsing
+        this.total_karyawan = resp.data.jumlahKaryawanDomestik + resp.data.jumlahKaryawanAsing;
+        this.pkpStatus = resp.data.statusPerusahaanPkp;
       },
       (error) => {
         console.log(error);

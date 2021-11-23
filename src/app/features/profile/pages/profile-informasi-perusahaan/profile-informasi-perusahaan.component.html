@@ -60,13 +60,13 @@
                 <ul class="k-radio-list k-list-horizontal">
                   <li class="k-radio-item">
                     <input id="pkpRbt" type="radio" #pkp required value="pkp" formControlName="sbuFormControl"
-                      kendoRadioButton />
+                      kendoRadioButton [checked]="pkpStatus ? true : false"/>
                     <kendo-label class="k-radio-label" [for]="pkp" text="PKP"></kendo-label>
                   </li>
 
                   <li class="k-radio-item">
                     <input id="nonPkpRbt" type="radio" #nonpkp value="nonpkp" formControlName="sbuFormControl"
-                      kendoRadioButton />
+                      kendoRadioButton [checked]="pkpStatus ? true : false"/>
                     <kendo-label class="k-radio-label" [for]="nonpkp" text="Non-PKP"></kendo-label>
                   </li>
                 </ul>
