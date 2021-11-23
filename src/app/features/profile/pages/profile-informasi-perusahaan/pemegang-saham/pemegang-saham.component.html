@@ -10,7 +10,34 @@
         {{rowIndex + 1}} 
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title" [width]="col.width"></kendo-grid-column>
+
+    <!-- <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title" [width]="col.width"></kendo-grid-column> -->
+
+    <kendo-grid-column title="Nama Pemegang Saham" [width]="250">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.toParty.firstName }}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column title="Jenis Pemegang Saham">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.pemegangSahamPerseorangan === true ? "Perseorangan" : "Badan Usaha" }}
+      </ng-template>
+    </kendo-grid-column>
+
+
+    <kendo-grid-column title="Pemegang Saham Lokal/Asing" [width]="300">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.pemegangSahamLokal === true ? "Lokal" : "Asing" }}
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column title="% Kepemilikan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.persentaseKepemilikan }}
+      </ng-template>
+    </kendo-grid-column>
+
     <kendo-grid-column title="Action">
       <ng-template kendoGridCellTemplate>
         Edit
