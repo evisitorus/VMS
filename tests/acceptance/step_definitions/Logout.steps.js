@@ -12,14 +12,15 @@ Given('The Vendor wants to exit from the app', () => {
     I.fillField('#input-password input[class=k-input]', '1234');
     I.waitForElement('#btn-login');
     I.click('#btn-login');
-    I.waitForElement('#popUpYes');
-    I.click('#popUpYes');
+    I.waitForElement('#btn-popup-yes');
+    I.click('#btn-popup-yes');
     I.amOnPage('/');
-    I.seeElement('#');
+    I.seeElement('#btn-logout');
 });
 
 Given('The Vendor must clicks {string} button where found the top of the form', () => {
-    
+    I.waitForElement('#btn-logout');
+    I.click('#btn-logout');
 });
 
 Given('The Vendor will see confirmation message', (raw_data) => {
@@ -28,10 +29,11 @@ Given('The Vendor will see confirmation message', (raw_data) => {
 });
 
 Given('The Vendor will exit from the app', () => {
+    I.amOnPage('/');
     
 });
 
 Given('The Vendor will back to landing page from VMS', () => {
-    I.amOnPage('/');
+    I.seeInCurrentUrl('/');
     I.seeElement('#btn-login');
 });

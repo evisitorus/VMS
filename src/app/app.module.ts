@@ -19,6 +19,8 @@ import { AuthModule } from './features/auth/auth.module';
 import { ProfileModule } from './features/profile/profile.module';
 import { LandingModule } from './features/landing/landing.module';
 import { LayoutModule } from '@progress/kendo-angular-layout';
+import { IconsModule } from '@progress/kendo-angular-icons';
+
 
 
 
@@ -46,6 +48,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 
     AppRoutingModule,
     LayoutModule,
+    IconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
