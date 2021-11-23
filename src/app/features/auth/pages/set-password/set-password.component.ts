@@ -96,7 +96,7 @@ export class SetPasswordComponent implements OnInit {
   activate(): void {
     this.formSetPassword.markAllAsTouched();
 
-    stop here if form is invalid
+    // stop here if form is invalid
     if (this.formSetPassword.invalid) {
       this.popUpMessage = messages.default;
       this.triggerPopUp();
