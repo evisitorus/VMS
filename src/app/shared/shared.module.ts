@@ -9,6 +9,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { NotificationModule } from '@progress/kendo-angular-notification';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     LayoutModule,
     LabelModule,
     DateInputsModule,
-    DialogsModule
+    DialogsModule,
+    NotificationModule
   ],
   exports: [
     NotFoundComponent,
