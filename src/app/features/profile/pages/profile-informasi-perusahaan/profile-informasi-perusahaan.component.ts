@@ -6,6 +6,11 @@ interface Item {
   text: string;
   value: number;
 }
+
+interface Hydra {
+  description: string;
+  id: number;
+}
 @Component({
   selector: 'app-profile-informasi-perusahaan',
   templateUrl: './profile-informasi-perusahaan.component.html',
@@ -50,12 +55,16 @@ export class ProfileInformasiPerusahaanComponent {
   public isRequired = true;
   public opened = false;
   public openedSaham = false;
+
+  public jenis_penyedia_usaha: Array<Hydra> = [];
   public vendor_info: any;
   public total_karyawan: any;
+
   public selectedBadanUsaha: Item = this.listItems[1];
   public pkpStatus = false;
 
   ngOnInit(): void {
+    //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
         console.log(resp.data);
@@ -67,6 +76,16 @@ export class ProfileInformasiPerusahaanComponent {
         console.log(error);
       }
     );
+
+    //get jenis penyedia usaha
+    this.profileInfoService.getJenisPenyediaUsaha().subscribe(
+      (resp) => {
+        this.jenis_penyedia_usaha = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   public onChangeList(): void{

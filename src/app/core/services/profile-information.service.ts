@@ -35,19 +35,19 @@ export class ProfileInformationService {
   //   return this.apiService.sendRequest(api_profile_information);
   // }
 
-  // getJenisPenyediaUsaha(): Observable<any>{
-  //   let api_jenis_penyedia_usaha: ApiInterface = {
-  //     method: ApiRouteMethods.get,
-  //     url: ApiRoutes.api_penyedia_usaha_route,
-  //     options : {
-  //       headers: {
-  //         Authorization: this.token
-  //       }
-  //     }
-  //   }
-  //   return this.apiService.sendRequest(api_jenis_penyedia_usaha);
+  getJenisPenyediaUsaha(): Observable<any>{
+    let api_jenis_penyedia_usaha: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_penyedia_usaha_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_jenis_penyedia_usaha);
 
-  // }
+  }
 
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
