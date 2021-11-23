@@ -11,7 +11,7 @@ import { MustMatch } from './must-match.validator';
 
 const messages = {
   success: '\r\n Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda',
-  default: 'Periksa kembali data Anda.',
+  default: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!.',
   wrongPattern: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!'
 };
 
@@ -97,12 +97,12 @@ export class SetPasswordComponent implements OnInit {
     this.formSetPassword.markAllAsTouched();
 
     // stop here if form is invalid
-    // if (this.formSetPassword.invalid) {
-    //   this.popUpMessage = messages.default;
-    //   this.triggerPopUp();
-    //   this.redirectOnClosePopUp = false;
-    //   return;
-    // }
+    if (this.formSetPassword.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
 
     let params: SetPasswordInterface= {...this.formSetPassword.value};
 
