@@ -36,6 +36,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public listItems: Array<Item> = [];
   
+  // TODO: ambil dari table tipe vendor. jangan static
   public kategoriUmkmItems: Array<Item> = [
     { text: "Kecil", value: 1 },
     { text: "Menengah", value: 2 },
@@ -57,6 +58,8 @@ export class ProfileInformasiPerusahaanComponent {
   public openedSaham = false;
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
+  public organizations: Array<Hydra> = [];
+
   public vendor_info: any;
   public total_karyawan: any;
 
@@ -83,9 +86,19 @@ export class ProfileInformasiPerusahaanComponent {
         this.jenis_penyedia_usaha = resp["hydra:member"];
       },
       (error) => {
-        console.log(error)
+        console.log(error);
       }
-    )
+    );
+
+    //get list of organizations
+    this.profileInfoService.getOrganizations().subscribe(
+      (resp) => {
+        this.organizations = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   public onChangeList(): void{

@@ -62,4 +62,18 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_vendor_information);
 
   }
+
+  getOrganizations(): Observable<any>{
+    let api_organizations: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_organizations,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_organizations);
+
+  }
 }
