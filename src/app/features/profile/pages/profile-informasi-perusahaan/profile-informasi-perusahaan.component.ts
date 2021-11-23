@@ -24,6 +24,12 @@ export class ProfileInformasiPerusahaanComponent {
     private profileInfoService:ProfileInformationService
   ) {}
 
+  public psFormGroup = new FormGroup({
+    psFormControl: new FormControl(),
+  });
+  public jpsFormGroup = new FormGroup({
+    jpsFormControl: new FormControl(),
+  });
   public buFormGroup = new FormGroup({
     buFormControl: new FormControl(),
   });
