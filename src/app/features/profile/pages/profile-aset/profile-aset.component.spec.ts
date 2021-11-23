@@ -59,9 +59,9 @@ describe('ProfileAsetComponent', () => {
       subscriber.complete();
     });
 
-    spyOn(profileAssetService, 'getDataAsset').and.returnValue(res);
+    spyOn(profileAssetService, 'get').and.returnValue(res);
     component.ngOnInit();
-    expect(profileAssetService.getDataAsset).toHaveBeenCalled;
+    expect(profileAssetService.get).toHaveBeenCalled;
   });
 
   it('test mapData function', () => {
@@ -82,28 +82,134 @@ describe('ProfileAsetComponent', () => {
     expect(mappedData[0]['nama']).toBe('sample1');
   });
 
-  it('test submit function success', () => {
-    let res = new Observable((subscriber) => {
+  it("test submit function save", () => {
+    spyOn(component, "save");
+
+    component.isNewData = true;
+    component.submit();
+    expect(component.save).toHaveBeenCalled();
+  });
+
+  it("test submit function update", () => {
+    spyOn(component, "update");
+
+    component.isNewData = false;
+    component.submit();
+    expect(component.update).toHaveBeenCalled();
+  });
+
+  it("test updateForm function", () => {
+    let data: any = {
+      nama: "testnama",
+      jumlah: "testjumlah",
+      tahunPembuatan: "testtahunpembuatan",
+      id: "testid"
+    };
+
+    spyOn(component, "setFormValue");
+    spyOn(component, "open");
+
+    component.updateForm(data);
+
+    expect(component.id).toBe(data.id);
+    expect(component.data.namaAsset).toBe(data.nama);
+    expect(component.data.jumlah).toBe(data.jumlah);
+    expect(component.data.tahunPembuatan).toBe(data.tahunPembuatan);
+    expect(component.isNewData).toBe(false);
+  });
+
+  it("test save function success", () => {
+    let success = new Observable((subscriber) => {
+      subscriber.next(true);
+      subscriber.complete();
+    });
+    
+    spyOn(component, "triggerPopUp");
+    spyOn(component, "getData");
+    spyOn(component, "close");
+
+    spyOn(profileAssetService, "save").and.returnValue(success);
+    component.save();
+    expect(component.popUpMessage).toBe("Berhasil menyimpan data");
+  });
+
+  it("test update function success", () => {
+    let success = new Observable((subscriber) => {
+      subscriber.next(true);
+      subscriber.complete();
+    });
+    
+    spyOn(component, "triggerPopUp");
+    spyOn(component, "getData");
+    spyOn(component, "close");
+
+    spyOn(profileAssetService, "update").and.returnValue(success);
+    component.update();
+    expect(component.popUpMessage).toBe("Berhasil memperbarui data");
+  });
+
+  it("test delete function success", () => {
+    let success = new Observable((subscriber) => {
       subscriber.next(true);
       subscriber.complete();
     });
 
-    spyOn(profileAssetService, 'saveProfileAsset').and.returnValue(res);
+    let id = "10";
+    
+    spyOn(component, "triggerPopUp");
+    spyOn(component, "getData");
+    spyOn(component, "close");
 
-    component.submit();
-    expect(component.popUpMessage).toBe('Berhasil menyimpan data');
+    spyOn(profileAssetService, "delete").and.returnValue(success);
+    component.delete(id);
+    expect(component.popUpMessage).toBe("Berhasil menghapus data");
   });
 
-  it('test submit function failed', () => {
-    let res = new Observable((subscriber) => {
+  it("test save function failed", () => {
+    let failed = new Observable((subscriber) => {
+      subscriber.error(true);
+      subscriber.complete();
+    });
+    
+    spyOn(component, "triggerPopUp");
+    spyOn(component, "getData");
+    spyOn(component, "close");
+
+    spyOn(profileAssetService, "save").and.returnValue(failed);
+    component.save();
+    expect(component.popUpMessage).toBe("Gagal menyimpan data");
+  });
+
+  it("test update function failed", () => {
+    let failed = new Observable((subscriber) => {
+      subscriber.error(true);
+      subscriber.complete();
+    });
+    
+    spyOn(component, "triggerPopUp");
+    spyOn(component, "getData");
+    spyOn(component, "close");
+
+    spyOn(profileAssetService, "update").and.returnValue(failed);
+    component.update();
+    expect(component.popUpMessage).toBe("Gagal memperbarui data");
+  });
+
+  it("test delete function failed", () => {
+    let failed = new Observable((subscriber) => {
       subscriber.error(true);
       subscriber.complete();
     });
 
-    spyOn(profileAssetService, 'saveProfileAsset').and.returnValue(res);
+    let id = "10";
+    
+    spyOn(component, "triggerPopUp");
+    spyOn(component, "getData");
+    spyOn(component, "close");
 
-    component.submit();
-    expect(component.popUpMessage).toBe('Gagal menyimpan data');
+    spyOn(profileAssetService, "delete").and.returnValue(failed);
+    component.delete(id);
+    expect(component.popUpMessage).toBe("Gagal menghapus data");
   });
 
 });
