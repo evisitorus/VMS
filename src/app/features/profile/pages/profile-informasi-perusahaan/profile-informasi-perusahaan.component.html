@@ -101,8 +101,8 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
-              <kendo-dropdownlist id="jenisPenyediaUsahaDropdown" class="col-md-auto"
-                defaultItem="Pilih Jenis Penyedia Usaha" [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="jenisPenyediaUsahaDropdown" class="col-md-auto" [defaultItem]="{ description: 'Pilih Jenis Penyedia Badan Usaha', id: null }"
+              textField="description" valueField="id" [data]="jenis_penyedia_usaha">
               </kendo-dropdownlist>
             </div>
 
