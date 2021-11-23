@@ -34,8 +34,9 @@ export class SetPasswordComponent implements OnInit {
 
   submitted = false;
   isLoggedIn: boolean = false;
-  popUpTitle: string = "Informasi Registrasi Akun";
+  popUpTitle: string = "Informasi Aktivasi Akun";
   redirectOnClosePopUp: boolean = true;
+  redirectUrl: string = "";
   popUpMessage: string = messages.success;
   token: any;
   tokenExpired: boolean = false;
@@ -52,13 +53,16 @@ export class SetPasswordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    //call backend to check istokenexpired
-    this.isTokenExpired();
-
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.activatedRoute.queryParams.subscribe(params => {
         this.token = params['token'];
       });
+
+
+    //call backend to check istokenexpired
+    this.isTokenExpired(this.token);
+
+    this.formSetPassword.disable();
 
     this.formSetPassword = this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
@@ -103,8 +107,8 @@ export class SetPasswordComponent implements OnInit {
     // stop here if form is invalid
     if (this.formSetPassword.invalid) {
       this.popUpMessage = messages.default;
-      this.triggerPopUp();
       this.redirectOnClosePopUp = false;
+      this.triggerPopUp();
       return;
     }
 
@@ -114,8 +118,9 @@ export class SetPasswordComponent implements OnInit {
       (resp) =>  { 
         this.submitted = true;
         this.popUpMessage = resp.message;
-        this.triggerPopUp();
         this.redirectOnClosePopUp = true;
+        this.redirectUrl = "/login";
+        this.triggerPopUp();
       },
       (error) => { 
         this.isLoggedIn = false;
@@ -127,17 +132,21 @@ export class SetPasswordComponent implements OnInit {
   }
 
   
-  isTokenExpired(): void {
-    this.authService.isTokenExpired(this.token).subscribe(
+  isTokenExpired(token:string): void {
+    this.authService.isTokenExpired(token).subscribe(
       (resp) =>  { 
-        this.popUpMessage = resp.message;
-        this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
-        this.tokenExpired = resp;
+        if(!resp){
+          this.popUpMessage = resp.message;
+          this.redirectOnClosePopUp = true;
+          this.redirectUrl = "/register";
+          this.triggerPopUp();
+          this.tokenExpired = resp;
+        }
       },
       (error) => { 
         this.popUpMessage = error.error.message;
-        this.redirectOnClosePopUp = false;
+        this.redirectOnClosePopUp = true;
+        this.redirectUrl = "/register";
         this.triggerPopUp();
       }
     );

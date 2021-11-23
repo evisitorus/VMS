@@ -110,7 +110,7 @@ export class AuthService {
   isTokenExpired(params: string): Observable<any> {    
     let api_register: ApiInterface = {
       method: 'POST',
-      url: ApiRoutes.api_activate_route,
+      url: ApiRoutes.api_token_route,
       body: {
         token: params
       }
