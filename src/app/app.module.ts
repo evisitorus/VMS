@@ -20,6 +20,10 @@ import { LandingModule } from './features/landing/landing.module';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { ListViewModule } from '@progress/kendo-angular-listview';
+import { IconsModule } from '@progress/kendo-angular-icons';
+
+
+
 
 
 @NgModule({
@@ -45,6 +49,7 @@ import { ListViewModule } from '@progress/kendo-angular-listview';
     AppRoutingModule,
     LayoutModule,
     ListViewModule,
+    IconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -41,6 +41,7 @@
     "@progress/kendo-angular-layout": "^6.3.3",
     "@progress/kendo-angular-listview": "^2.0.2",
     "@progress/kendo-angular-menu": "^3.0.2",
+    "@progress/kendo-angular-notification": "^3.0.3",
     "@progress/kendo-angular-pdf-export": "^3.0.0",
     "@progress/kendo-angular-popup": "^4.0.0",
     "@progress/kendo-angular-progressbar": "^2.0.0",
@@ -55,7 +56,8 @@
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4",
-    "@progress/kendo-angular-pager": "^2.0.0"
+    "@progress/kendo-angular-pager": "^2.0.0",
+    "@progress/kendo-svg-icons": "^0.1.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.10",

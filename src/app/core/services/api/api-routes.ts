@@ -15,7 +15,8 @@ export const ApiRoutes = {
     api_profile_pic: API_BASE_URL + "/users/profile/pic/26",
     api_assets_route: API_BASE_URL + "/mesin_peralatans",
     api_tenders_route: API_BASE_URL + "/tenders",
-    api_list_tender: API_BASE_URL + "/tenders/page/"
+    api_list_tender: API_BASE_URL + "/tenders/page/",
+  api_token_route: API_BASE_URL + "/users/token",
 };
 
 export const ApiRouteMethods = {
