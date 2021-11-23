@@ -72,13 +72,11 @@ Feature: Vendor - Activation Account
         And The Vendor will bring to "Activation Confirmation" form 
         And The Vendor will see warning message which stated that activation failed
         """
-        {
-        
-          "message" : "Aktivasi akun anda gagal dilakukan, karena link hanya berlaku selama 2x24 jam dari sejak anda melakukan registrasi,
-                      Silahkan ulangi proses registrasi akun anda untuk mendapatkan link aktivasi terbaru"
+        {        
+          "message" : "Aktivasi akun anda gagal dilakukan, karena link hanya berlaku selama 2x24 jam dari sejak anda melakukan registrasi, Silahkan ulangi proses registrasi akun anda untuk mendapatkan link aktivasi terbaru"
         }
         """
-      Then The Vendor cant continue to activate his or her account due activation link was expired 
+      # Then The Vendor cant continue to activate his or her account due activation link was expired 
   
  #negative scenario for account activation, wrong password 
     # Scenario: Input Wrong Password 

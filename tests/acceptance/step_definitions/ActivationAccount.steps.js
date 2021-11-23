@@ -74,6 +74,8 @@ When('The Vendor must clicks {string} button', () => {
 When('The Vendor will see warning message which stated that activation failed', (raw_data) => {
     let data = JSON.parse(raw_data.content);
     I.see(data.message);
+    I.click('#popUpYes');
+    I.amOnPage('/register');
 });
 
 Then('The Vendor will back to {string} form to define his or her new password for accessing VMS', () => {
