@@ -58,6 +58,7 @@ export class ProfileInformasiPerusahaanComponent {
   public openedSaham = false;
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
+  public jenis_kegiatan_usaha: Array<Hydra> = [];
   public organizations: Array<Item> = [];
 
   public vendor_info: any;
@@ -84,6 +85,16 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getJenisPenyediaUsaha().subscribe(
       (resp) => {
         this.jenis_penyedia_usaha = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    //get jenis kegiatan usaha
+    this.profileInfoService.getJenisKegiatanUsaha().subscribe(
+      (resp) => {
+        this.jenis_kegiatan_usaha = resp["hydra:member"];
       },
       (error) => {
         console.log(error);

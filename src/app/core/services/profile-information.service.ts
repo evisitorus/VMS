@@ -49,6 +49,20 @@ export class ProfileInformationService {
 
   }
 
+  getJenisKegiatanUsaha(): Observable<any>{
+    let api_jenis_kegiatan_usaha: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_jenis_kegiatan_usaha_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_jenis_kegiatan_usaha);
+
+  }
+
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
