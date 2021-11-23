@@ -96,7 +96,7 @@ label{
 /* --- LABEL --- */
 
 /* --- SIDEBAR --- */
-.k-link{
+.k-link, .k-grid-header{
     background-color: #0193AC !important;
     border-color: #0193AC !important;
     color: white !important;
