@@ -17,7 +17,7 @@ So that I can login into VMS
            "email" : "vms@tmpbox.net"
        }
        """
-       And The Vendor clicks "Reset Password" button
+       And The Vendor clicks "Reset Password" button on Reset Password form
       #  And The Vendor will get link for typing new password on his or her email
       #  And The Vendor must checks his or her email
       #  And The Vendor must select "Renew Password" email 

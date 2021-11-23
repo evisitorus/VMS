@@ -15,12 +15,12 @@ Given('The Vendor must clicks {string} Link', () => {
 Given('The Vendor will brings to {string} form to type his or her registered email', () => {
     I.amOnPage('/forgot-password');
     I.waitForElement('#input-email input[class=k-input]');
-    I.fillField('#input-email input[class=k-input]', 'vms@tmpbox.net');
+    I.fillField('#input-email input[class=k-input]', 'register@tmpbox.net');
 });
 
-Given('The Vendor clicks {string} button', () => {
+Given('The Vendor clicks {string} button on Reset Password form', () => {
     I.click('#btn-reset-password');
-    I.amOnPage('/reset-password?token=4ccb494a00b1ed3f0cce56fc6c0002420eeb4d7f9358d69076994f425ec0dc89');
+    I.amOnPage('/reset-password?token=57e757f4803dca75890a9b68bfcc36e5e5e2bb858928bd5ed5681fca99edb4d7');
 });
 
 Given('The Vendor should be define his or her new password on {string} Form', () => {
@@ -32,11 +32,6 @@ Given('The Vendor should be define his or her new password on {string} Form', ()
 
 Given('The Vendor will brings to {string} Form', () => {
     I.amOnPage('/login');
-});
-
-Given('The Vendor selects {string} button', () => {
-    I.waitForElement('#btn-reset-password');
-    I.click('#btn-reset-password');
 });
 
 Given('The Vendor can test his or her new password on {string} form while they can be enter into the app', () => {
