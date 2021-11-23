@@ -105,6 +105,24 @@
             </div>
 
             <div class="row align-items-center">
+              <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
+              <kendo-textbox id="npwpPerusahaanInput" class="col-md" placeholder="Type your message here"
+                [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
+            </div>
+
+            <div class="row align-items-center">
+              <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
+              <kendo-textbox id="nibInput" class="col-md" placeholder="Type your message here" [clearButton]="true"
+                [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
+            </div>
+
+            <div class="row align-items-center">
+              <kendo-label class="col-3">Bidang Usaha (KBLI 2020)</kendo-label>
+              <kendo-textbox id="nibInput" class="col-md" placeholder="Type your message here" [clearButton]="true"
+                [maxlength]="10"></kendo-textbox>
+            </div>
+
+            <div class="row align-items-center">
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
 
               <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
@@ -120,12 +138,6 @@
                 [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="Organisasi Himpunan"
                 [value]="vendor_info.organisasiHimpunan">
               </kendo-autocomplete>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-              <kendo-textbox id="nibInput" class="col-md" placeholder="Type your message here" [clearButton]="true"
-                [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
             </div>
 
             <div class="row align-items-center">
@@ -164,35 +176,44 @@
             </div>
 
             <div class="row align-items-center">
-              <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
-              <kendo-textbox id="npwpPerusahaanInput" class="col-md" placeholder="Type your message here"
-                [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
               <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
               <kendo-textbox id="alamatPerusahaanInput" class="col-md" placeholder="Type your message here"
                 [clearButton]="true" [maxlength]="100"></kendo-textbox>
             </div>
 
             <div class="row align-items-center">
-              <kendo-label class="col-3">Provinsi / Kota</kendo-label>
-              <kendo-dropdownlist id="provKotaDropdown" class="col-md" defaultItem="Pilih Provinsi / Kota"
+              <kendo-label class="col-3">Provinsi</kendo-label>
+              <kendo-dropdownlist id="provDropdown" class="col-md" defaultItem="Pilih Provinsi"
                 [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
-              <kendo-label class="col-3">Kecamatan / Kelurahan</kendo-label>
-              <kendo-dropdownlist id="kecKelDropdown" class="col-md" defaultItem="Pilih Kecamatan / Kelurahan"
+              <kendo-label class="col-3">Kota</kendo-label>
+              <kendo-dropdownlist id="kotaDropdown" class="col-md" defaultItem="Pilih Kota / Kabupaten"
+                [data]="listItems" [valuePrimitive]="true">
+              </kendo-dropdownlist>
+            </div>
+
+            <div class="row align-items-center">
+              <kendo-label class="col-3">Kecamatan</kendo-label>
+              <kendo-dropdownlist id="kecDropdown" class="col-md" defaultItem="Pilih Kecamatan"
+                [data]="listItems" [valuePrimitive]="true">
+              </kendo-dropdownlist>
+            </div>
+
+            <div class="row align-items-center">
+              <kendo-label class="col-3">Kelurahan</kendo-label>
+              <kendo-dropdownlist id="kelDropdown" class="col-md" defaultItem="Pilih Kelurahan"
                 [data]="listItems" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kode Pos</kendo-label>
-              <kendo-textbox id="kodePosInput" class="col-md" placeholder="Type your message here"
-                [clearButton]="true" [maxlength]="4"></kendo-textbox>
+              <kendo-dropdownlist id="kodePosDropdown" class="col-md" defaultItem="Pilih Kode Pos"
+                [data]="listItems" [valuePrimitive]="true">
+              </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
