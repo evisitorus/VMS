@@ -175,3 +175,8 @@ label{
 .profile-content-modal-btn {
     min-width: 100px !important;
 }
+
+.k-notification-container {
+    margin-top: 35px !important;
+    margin-right: 35px !important;
+}

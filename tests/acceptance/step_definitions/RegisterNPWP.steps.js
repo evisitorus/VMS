@@ -43,11 +43,11 @@ When('The Vendor data will be stored at database and will be flag as {string}', 
 
 });
 
-When('The Vendor will see success message from the system', () => {
-    I.see('Informasi Registrasi Akun');
-    I.see('Selamat anda telah terdaftar sebagai Vendor pada VMS, silahkan cek email anda untuk melakukan aktivasi akun');
-    I.see('Yes');
-});
+// When('The Vendor will see success message from the system', () => {
+//     I.see('Informasi Registrasi Akun');
+//     I.see('Selamat anda telah terdaftar sebagai Vendor pada VMS, silahkan cek email anda untuk melakukan aktivasi akun');
+//     I.see('Yes');
+// });
 
 When('The Vendor must selects {string} button', () => {
     I.waitForElement('#popUpYes');
@@ -61,10 +61,6 @@ When('The Vendor unclick {string}', () => {
 When('The Vendor will see error message from the system', () => {
     I.see('Informasi Registrasi Akun');
     I.see('Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi');
-});
-
-When('The Vendor clicks {string} button', () => {
-    I.click('#popUpYes');
 });
 
 Then('The Vendor cant continue for registration due to he or she unselect {string}', () => {
