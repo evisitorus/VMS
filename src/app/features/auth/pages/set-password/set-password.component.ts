@@ -34,10 +34,12 @@ export class SetPasswordComponent implements OnInit {
 
   submitted = false;
   isLoggedIn: boolean = false;
-  popUpTitle: string = "Informasi Registrasi Akun";
+  popUpTitle: string = "Informasi Aktivasi Akun";
   redirectOnClosePopUp: boolean = true;
+  redirectUrl: string = "";
   popUpMessage: string = messages.success;
   token: any;
+  tokenExpired: boolean = false;
   public minlength = 8;
   public maxlength = 15;
   public charachtersCount = 0;
@@ -56,7 +58,13 @@ export class SetPasswordComponent implements OnInit {
         this.token = params['token'];
       });
 
-      this.formSetPassword = this.formBuilder.group({
+
+    //call backend to check istokenexpired
+    this.isTokenExpired(this.token);
+
+    this.formSetPassword.disable();
+
+    this.formSetPassword = this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(8), Validators.pattern('[ A-Za-z0-9/!_@./#&+-]*')]],
         confirmPassword: ['', Validators.required],
         token: [this.token]
@@ -99,8 +107,8 @@ export class SetPasswordComponent implements OnInit {
     // stop here if form is invalid
     if (this.formSetPassword.invalid) {
       this.popUpMessage = messages.default;
-      this.triggerPopUp();
       this.redirectOnClosePopUp = false;
+      this.triggerPopUp();
       return;
     }
 
@@ -110,13 +118,35 @@ export class SetPasswordComponent implements OnInit {
       (resp) =>  { 
         this.submitted = true;
         this.popUpMessage = resp.message;
-        this.triggerPopUp();
         this.redirectOnClosePopUp = true;
+        this.redirectUrl = "/login";
+        this.triggerPopUp();
       },
       (error) => { 
         this.isLoggedIn = false;
         this.popUpMessage = error.error.message;
         this.redirectOnClosePopUp = false;
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  
+  isTokenExpired(token:string): void {
+    this.authService.isTokenExpired(token).subscribe(
+      (resp) =>  { 
+        if(!resp){
+          this.popUpMessage = resp.message;
+          this.redirectOnClosePopUp = true;
+          this.redirectUrl = "/register";
+          this.triggerPopUp();
+          this.tokenExpired = resp;
+        }
+      },
+      (error) => { 
+        this.popUpMessage = error.error.message;
+        this.redirectOnClosePopUp = true;
+        this.redirectUrl = "/register";
         this.triggerPopUp();
       }
     );
