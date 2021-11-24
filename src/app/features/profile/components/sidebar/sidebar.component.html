@@ -3,7 +3,7 @@
         <div class="navigation-pane">
             <kendo-panelbar (stateChange)="stateChange($event)" [selectable]="false" class="vms-sidebar">
                 <kendo-panelbar-item *ngFor="let item of menu" [id]="item.path" [title]="item.path ? item.path : 'home'" [selected]="item.path == selectedId" class="vms-sidebar-item" [ngClass]="item.path == 'Dashboard' ? 'parent-sidebar' : '' ">
-                    <kendo-panelbar-item *ngFor="let child of item.children" [title]="child?.path || 'about'" [id]="item.path + '/' + child?.path" [selected]="item.path + '/' + child?.path == selectedId"></kendo-panelbar-item>
+                    <kendo-panelbar-item *ngFor="let child of item.children" [title]="child?.path || 'about'" [id]="item.path + '/' + child?.path" [selected]="item.path + '/' + child?.path == selectedId"  [routerLink]="child?.route"></kendo-panelbar-item>
                 </kendo-panelbar-item>
             </kendo-panelbar>
         </div>

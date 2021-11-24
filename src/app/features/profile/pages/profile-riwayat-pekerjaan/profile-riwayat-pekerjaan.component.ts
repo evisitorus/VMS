@@ -32,7 +32,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
   public gridData: any = samplePekerjaans;
   record = 0;
-  access_token = "124";
+  access_token = "133";
 
   myRestrictions: FileRestrictions = {
     maxFileSize: 2194304,
@@ -54,12 +54,12 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     if (!this.isLoggedIn) window.location.href = "/";
 
     this.pekerjaanForm = this.formBuilder.group({
-      email:['tutuu@tujuh.com'],
-      namaPekerjaan: ['asd', Validators.required],
-      pemberiPekerjaan: ['asd', Validators.required],
-      nilaiPekerjaan: ['1231233', Validators.required],
-      tahunPekerjaan: ['2121', Validators.required],
-      buktiPekerjaanFilePath: ['asdas.jpg', Validators.required],
+      email:['admin@abadijaya.co.id'],
+      namaPekerjaan: ['', Validators.required],
+      pemberiPekerjaan: ['', Validators.required],
+      nilaiPekerjaan: ['', Validators.required],
+      tahunPekerjaan: ['', Validators.required],
+      buktiPekerjaanFilePath: ['somepath', Validators.required],
     });
     
     this.columns = [

@@ -38,14 +38,15 @@ const items = [
   { 
     path: "Kelola Akun",
     children: [
-      { path: "Profil Perusahaan" },
-      { path: "PIC" },
-      { path: "Dokumen" },
-      { path: "Alamat" },
-      { path: "Laporan Keuangan" },
-      { path: "Riwayat Pekerjaan" },
-      { path: "Asset" },
-      { path: "Verifikasi Kelengkapan" },
+      { path: "Profil Perusahaan", route:"/profile-information" },
+      { path: "PIC", route:"/profile-person-in-charge" },
+      { path: "Dokumen", route:"/profile-dokumen" },
+      { path: "Alamat", route:"/profile-alamat" },
+      { path: "Laporan Keuangan", route:"/profile-laporan-keuangan" },
+      { path: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan" },
+      { path: "Asset", route:"/profile-aset" },
+      { path: "Verifikasi Kelengkapan", route:"/profile-verification" },
+      { path: " "}
     ]
   },
   { 
