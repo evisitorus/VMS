@@ -1,5 +1,9 @@
-import { Component, ViewEncapsulation } from "@angular/core";
+import { HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpProgressEvent, HttpRequest, HttpResponse } from "@angular/common/http";
+import { Component, Injectable, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
+import { FileRestrictions } from "@progress/kendo-angular-upload";
+import { concat, Observable, of } from "rxjs";
+import { delay } from "rxjs/operators";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
 interface Item {
@@ -39,6 +43,17 @@ export class ProfileInformasiPerusahaanComponent {
   public kategoriBuFormGroup = new FormGroup({
     kategoriBu: new FormControl(),
   });
+  public logoForm: FormGroup = undefined!;
+  public data: any = {
+    files: [],
+  };
+  public submitted = false;
+
+  public imgRestrictions: FileRestrictions = {
+    allowedExtensions: ["jpg", "jpeg", "png"],
+  };
+
+  
 
   public listItems: Array<Item> = [];
 
@@ -131,14 +146,16 @@ export class ProfileInformasiPerusahaanComponent {
     }
   ];
 
-
-  
   public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number  }> = [];
 
   public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number }> = [];
 
 
   ngOnInit(): void {
+    this.logoForm = new FormGroup({
+      files: new FormControl(this.data.files),
+    });
+
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
@@ -194,6 +211,15 @@ export class ProfileInformasiPerusahaanComponent {
     // );
   }
 
+  public saveImage(value: any, valid: boolean): void {
+    this.submitted = true;
+
+    if (valid) {
+      console.log("File uploaded");
+    } else {
+      this.logoForm.markAllAsTouched();
+    }
+  }
   public onChangeList(): void {
     if (this.selectedBadanUsaha.name === "UMKM") {
       this.listItems = this.kategoriUmkmItems;
@@ -258,4 +284,28 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
 
+}
+
+@Injectable()
+export class UploadInterceptor implements HttpInterceptor {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if (req.url === 'saveUrl') {
+            const events: Observable<HttpEvent<any>>[] = [0, 30, 60, 100].map((x) => of(<HttpProgressEvent>{
+                type: HttpEventType.UploadProgress,
+                loaded: x,
+                total: 100
+            }).pipe(delay(1000)));
+
+            const success = of(new HttpResponse({ status: 200 })).pipe(delay(1000));
+            events.push(success);
+
+            return concat(...events);
+        }
+
+        if (req.url === 'removeUrl') {
+            return of(new HttpResponse({ status: 200 }));
+        }
+
+        return next.handle(req);
+      }
 }
