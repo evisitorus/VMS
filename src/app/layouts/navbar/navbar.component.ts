@@ -31,6 +31,9 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.setLoggedIn(false);
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('person_id');
+    localStorage.removeItem('vendor_id');
     this.refresh();
   }
 
