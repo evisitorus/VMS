@@ -4,7 +4,8 @@ import { Subscription, Observable, of } from 'rxjs';
 import { ListViewDataResult, PageChangeEvent, PagerSettings } from "@progress/kendo-angular-listview";
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { TenderService } from 'src/app/core/services/tender.service';
-
+import { tenders } from './tender'
+  
 @Component({
   selector: 'app-card-tender',
   templateUrl: './card-tender.component.html',
@@ -66,6 +67,12 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     }
 
     this.loading = true;
+
+
+    this.productsSubscription = this
+      .getTender({dataTender:tenders })
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((response) => (this.view = response));
 
     this.tenderService.getListTender(this.currentPage).subscribe(
       (resp) =>  {
