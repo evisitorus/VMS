@@ -21,6 +21,7 @@ const messages = {
 })
 export class DataPegawaiComponent implements OnInit {
   public tipeKaryawan: any = {};
+  tipe: Item[] = this.tipeKaryawan;
 
   public listItems: Array<{ text: string; value: number }> = [
     { text: "Small", value: 1 },
@@ -28,7 +29,7 @@ export class DataPegawaiComponent implements OnInit {
     { text: "Large", value: 3 },
   ];
 
-  popUpTitle: string = "Informasi Pemegang Saham";
+  popUpTitle: string = "Informasi Pegawai";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
@@ -72,13 +73,58 @@ export class DataPegawaiComponent implements OnInit {
 
   getTipeKaryawan(){
     this.profileService.getTipeKaryawan().subscribe(
-      (resp) =>  { 
+      (resp:any) =>  { 
         this.tipeKaryawan = resp['hydra:member'];
+        // const results = resp.map(country => ({name: country.name, continent: country.region}));
         return this.tipeKaryawan;
       },
       (error) => { 
         return error;
       }
     );
+  }
+
+  public pegawaiFormGroup = new FormGroup({
+    nikPegawaiInput: new FormControl(null),
+    namaKaryawanInput: new FormControl(null, Validators.required),
+    tipeKaryawanDropdown: new FormControl(null, Validators.required),
+    jabatanKaryawanInput: new FormControl(null, Validators.required),
+    bidangPekerjaanKaryawanInput: new FormControl(null),
+    resumeKaryawanUpload: new FormControl(null),
+  });
+
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
+  }
+
+  submitPegawai(): void {
+    this.pegawaiFormGroup.markAllAsTouched();
+    this.popUpMessage = messages.default;
+
+    const dataPemegangSaham = {
+      nik: this.pegawaiFormGroup.controls['nikPegawaiInput'].value,
+      namaKaryawan: this.pegawaiFormGroup.controls['namaKaryawanInput'].value,
+      tipeKaryawan: this.pegawaiFormGroup.controls['tipeKaryawanDropdown'].value,
+      jabatan: this.pegawaiFormGroup.controls['jabatanKaryawanInput'].value,
+      bidangPekerjaan: this.pegawaiFormGroup.controls['bidangPekerjaanKaryawanInput'].value,
+      resume: this.pegawaiFormGroup.controls['resumeKaryawanUpload'].value
+    }
+
+    console.log(dataPemegangSaham);
+    let params: AddPegawaiInterface= {...dataPemegangSaham}
+    // this.profileService.addPegawai(params).subscribe(
+    //   (resp) =>  { 
+    //     this.popUpMessage = messages.success;
+    //     this.triggerPopUp();
+    //     this.redirectOnClosePopUp = true;
+    //     this.closeSaham();
+    //     // this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
+    //   },
+    //   (error) => { 
+    //     this.popUpMessage = error;
+    //     this.triggerPopUp();
+    //     this.redirectOnClosePopUp = true;
+    //   }
+    // );
   }
 }

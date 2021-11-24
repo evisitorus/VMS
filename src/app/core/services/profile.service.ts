@@ -5,6 +5,7 @@ import { AddPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
+import { AddPegawaiInterface } from '../interfaces/add-pegawai-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -86,4 +87,21 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_tipe_karyawan);
   }
   
+  addPegawai(params: AddPegawaiInterface): Observable<any> {    
+    let api_add_pegawai: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_add_pegawai,
+      body: {
+        nik: params.nik,
+        sdmType: params.tipeKaryawan,
+        jabatan: params.jabatan,
+        bidang: params.bidangPekerjaan,
+        fromParty: "1",
+        relationshipType: "7",
+        toParty: "2",
+      }
+    };
+
+    return this.apiService.sendRequest(api_add_pegawai);
+  }
 }

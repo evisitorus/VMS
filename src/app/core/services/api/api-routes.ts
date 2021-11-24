@@ -22,7 +22,8 @@ export const ApiRoutes = {
   api_get_organizations: API_BASE_URL + "/organizations?page=1",
   api_vendor_information_route: API_BASE_URL + "/vendors/1/information",
   api_jenis_badan_usaha_route: API_BASE_URL + "",
-  api_get_tipe_karyawan: API_BASE_URL + "/sdm_types"
+  api_get_tipe_karyawan: API_BASE_URL + "/sdm_types",
+  api_add_pegawai: API_BASE_URL + "/sdm_relationships"
 };
 
 export const ApiRouteMethods = {
