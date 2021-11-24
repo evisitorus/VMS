@@ -203,6 +203,12 @@ div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-
     min-width: 100px !important;
 }
 
+.action-button {
+    width: 25px;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
 .k-notification-container {
     margin-top: 35px !important;
     margin-right: 35px !important;
