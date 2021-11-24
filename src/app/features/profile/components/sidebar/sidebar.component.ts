@@ -34,6 +34,7 @@ export class SidebarComponent implements OnInit {
 const items = [
   { 
     path: "Dashboard",
+    route:"/dashboard" 
   },
   { 
     path: "Kelola Akun",
