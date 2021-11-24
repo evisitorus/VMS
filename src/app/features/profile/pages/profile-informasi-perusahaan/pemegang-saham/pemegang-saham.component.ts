@@ -82,6 +82,15 @@ export class PemegangSahamComponent implements OnInit {
     this.pemegangSahamFormGroup.markAllAsTouched();
     this.popUpMessage = messages.default;
 
+
+    // stop here if form is invalid
+    if (this.pemegangSahamFormGroup.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
+
     const dataPemegangSaham = {
       email: "admin@abadijaya.co.id",
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
