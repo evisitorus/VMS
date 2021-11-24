@@ -17,7 +17,7 @@ export class ProfileAssetService {
     private authService: AuthService
   ) { }
 
-  public getDataAsset() {
+  public get() {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_get_profile_asset: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -31,7 +31,7 @@ export class ProfileAssetService {
     return this.apiService.sendRequest(api_get_profile_asset);
   }
 
-  public saveProfileAsset(params: ProfileAssetInterface): Observable<any> {
+  public save(params: ProfileAssetInterface): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_save_profile_asset: ApiInterface = {
       method: ApiRouteMethods.post,
@@ -39,8 +39,8 @@ export class ProfileAssetService {
       body: {
         name: params.namaAsset,
         jumlah: params.jumlah,
-        tahun_pembuatan: params.tahunPembuatan,
-        owner_id: "/api/vendor/".concat(this.authService.getLocalStorage("vendor_id")!)
+        tahunPembuatan: params.tahunPembuatan,
+        owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
       },
       options: {
         headers: {
@@ -49,6 +49,40 @@ export class ProfileAssetService {
       }
     };
     return this.apiService.sendRequest(api_save_profile_asset);
+  }
+
+  public update(params: ProfileAssetInterface, id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_update_profile_asset: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_assets_route.concat("/").concat(id),
+      body: {
+        name: params.namaAsset,
+        jumlah: params.jumlah,
+        tahunPembuatan: params.tahunPembuatan,
+        owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_update_profile_asset);
+  }
+
+  public delete(id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_delete_profile_asset: ApiInterface = {
+      method: ApiRouteMethods.delete,
+      url: ApiRoutes.api_assets_route.concat("/").concat(id),
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_delete_profile_asset);
   }
 
 }

@@ -15,7 +15,7 @@
 body {
     background-color: #E5E5E5 !important;
     margin: 0% !important;
-    margin-top: 60px !important;
+    margin-top: 65px !important;
 }
 
 /* KENDO */
@@ -55,7 +55,7 @@ body {
     height: 35px;
     border-color: grey !important;
     background: white !important;
-    border-radius: 8px;
+    border-radius: 8px !important;
     
     font-family: Montserrat;
     font-style: normal;
@@ -67,8 +67,8 @@ body {
 }
 
 .vms-btn-primary {
-    border-color: #114497 !important;
-    background: #114497 !important;
+    border-color: #0193AC !important;
+    background: #0193AC !important;
     color: white !important;
 }
 
@@ -83,7 +83,8 @@ body {
 
 /* --- MODAL --- */
 .k-dialog-titlebar {
-    background-color: #114497 !important;
+    background-color: #0193AC !important;
+    color: white !important;
 }
 
 .k-content kendo-label{
@@ -122,9 +123,33 @@ label{
     border-color: #07b9d8 !important;
 }
 
-.k-icon.k-panelbar-toggle {
+.k-link.k-state-focused{
+    box-shadow: none !important;
+    color: #0193AC !important;
+}
 
+
+.k-panel {
+    background-color: white !important;
+}
+
+.k-icon.k-panelbar-toggle {
     color: inherit !important;
+}
+
+.parent-sidebar > span.k-link {
+    background: #0193AC !important;
+    color: white !important;
+    border-radius: 10px;
+    height: 70px;
+}
+
+.k-panelbar {
+    border-color: white !important;
+}
+
+.vms-sidebar {
+    border-radius: 10px !important;
 }
 
 /* --- SIDEBAR --- */
@@ -134,26 +159,42 @@ label{
 /* --- PROFILE / DASHBOARD--- */
 /* ================================ */
 
+.profile-section {
+    background-color: #e5e5e5;
+    margin: 0% !important;
+    padding: 2em 1em 2em 1em;
+}
+
 .profile-content {
-    padding: 2em !important;
-    margin-left: 300px !important;
-  }
-  
-  .profile-menu {
+    background-color: white;
+    padding: 2em;
+    border-radius: 10px;
+}
+
+.profile-content-container {
+    padding: 1em 1em 1em 0.5em !important;
+    min-height: calc(100vh - 65px - 4em) !important;
+}
+
+.profile-menu {
     float: left;
-    height: 100vh;
-  }
-  
-  .profile-content-title {
+    padding: 1em 0.5em 1em 1em !important;
+}
+
+.profile-content-title {
     margin-bottom: 1em;
     font-weight: 600;
-  }
-  
-  .profile-content-grid-button {
-    float: right;
+}
+
+.profile-content-grid-button {
     margin-top: 1em;
-  }
-  
-  .profile-content-modal-btn {
+}
+
+.profile-content-modal-btn {
     min-width: 100px !important;
-  }
+}
+
+.k-notification-container {
+    margin-top: 35px !important;
+    margin-right: 35px !important;
+}

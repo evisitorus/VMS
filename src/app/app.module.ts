@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './layouts/main/main.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { CardComponent } from './layouts/card/card.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -20,6 +19,9 @@ import { ProfileModule } from './features/profile/profile.module';
 import { LandingModule } from './features/landing/landing.module';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { ListViewModule } from '@progress/kendo-angular-listview';
+import { IconsModule } from '@progress/kendo-angular-icons';
+
 
 
 
@@ -29,8 +31,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     AppComponent,
     MainComponent,
     FooterComponent,
-    NavbarComponent,
-    CardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +48,8 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
 
     AppRoutingModule,
     LayoutModule,
+    ListViewModule,
+    IconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
