@@ -74,5 +74,16 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pemegang_saham);
   }
 
+
+  getTipeKaryawan(): Observable<any> {    
+    let api_get_tipe_karyawan: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_tipe_karyawan,
+      options: {
+      }
+    };
+
+    return this.apiService.sendRequest(api_get_tipe_karyawan);
+  }
   
 }
