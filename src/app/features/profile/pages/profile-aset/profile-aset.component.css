@@ -2,16 +2,24 @@
   border-style: groove;
 } */
 
-.profile-content {
+/* .profile-content {
   padding: 2em !important;
   margin-left: 300px !important;
-}
+} */
 
 .profile-menu {
   float: left;
   height: 100vh;
 }
 
+.profile-content {
+  padding: 40px;
+  display: table;
+}
+
+.button-right {
+  float: right;
+}
 .profile-content-title {
   margin-bottom: 1em;
   font-weight: 600;
