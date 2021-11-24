@@ -3,5 +3,6 @@ export interface ProfileDocumentInterface {
     namaDokumen: string,
     berlakuSampai: Date,
     submitDate: Date,
+    file: string,
     attachmentFilePath: string,
 }

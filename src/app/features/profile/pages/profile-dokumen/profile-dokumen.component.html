@@ -18,30 +18,32 @@
           <kendo-formerror>Nama Dokumen tidak boleh kosong</kendo-formerror>
         </kendo-formfield>
         
-        <kendo-formfield [formGroup]="form">
+        <kendo-formfield [formGroup]="form" *ngIf="!isLifeTime">
           <kendo-label [for]="berlakuSampai" text="Berlaku Sampai"></kendo-label>
-          <kendo-datepicker arrivalDate formControlName="berlakuSampai" #berlakuSampai required></kendo-datepicker>
-          <kendo-formerror>Error: Arrival date is required</kendo-formerror>
+          <kendo-datepicker arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+          <kendo-formerror></kendo-formerror>
         </kendo-formfield>
         
         <div class="k-checkbox-wrap">
-          <input type="checkbox" kendoCheckBox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}" />
+          <input type="checkbox" kendoCheckBox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}" (change)="setIsLifeTime()"/>
           <kendo-label text="Seumur hidup" ></kendo-label>
         </div>
         
         <kendo-formfield [formGroup]="form">
-          <kendo-label text="Seumur hidup" ></kendo-label>
-          <kendo-fileselect required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}"></kendo-fileselect>
+          <kendo-label text="Lampiran File" ></kendo-label>
+          <kendo-fileselect required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
+
+          </kendo-fileselect>
         </kendo-formfield>
         
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan">
               Simpan
             </button>
           </div>
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button vms-btn" (click)="close()">
+            <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal">
               Batal
             </button>
           </div>
@@ -75,21 +77,24 @@
           <kendo-grid-column field="berlakuSampai" title="Berlaku Sampai">
           </kendo-grid-column>
           <kendo-grid-column field="lampiran" title="Lampiran">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <a class="lampiran-url" (click)="download(dataItem.file)">{{ dataItem.lampiran }}</a>
+            </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="id" title="Action">
             <ng-template kendoGridCellTemplate let-dataItem>
               <span>
-                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)">
+                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
               </span>
               <span>
-                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem.id)">
+                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem.id)" id="btn-delete">
               </span>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
         
         <div class="col-2 profile-content-grid-button">
-          <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary">
+          <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-dokumen">
             Tambah Dokumen
           </button>
         </div>

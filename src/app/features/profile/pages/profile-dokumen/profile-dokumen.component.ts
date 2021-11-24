@@ -1,9 +1,11 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { ProfileDocumentInterface } from 'src/app/core/interfaces/profile-document.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileDocumentService } from 'src/app/core/services/profile/profile-document.service';
+import { FileService } from 'src/app/core/services/file.service';
 
 @Component({
   selector: 'app-profile-dokumen',
@@ -27,7 +29,10 @@ export class ProfileDokumenComponent implements OnInit {
     allowedExtensions: ["jpg", "jpeg", "png"],
   };
   public lampiranFiles!: Array<any>;
+  public uploadedFileContentUrl!: string;
+  public uploadedFileId!: string;
 
+  public isLifeTime: boolean = false;
   public isNewData: boolean = true;
   public id!: string;
 
@@ -42,7 +47,8 @@ export class ProfileDokumenComponent implements OnInit {
 
   constructor(
     private eventEmitterService: EventEmitterService,
-    private profileDocumentService: ProfileDocumentService
+    private profileDocumentService: ProfileDocumentService,
+    private fileService: FileService
   ){
     this.setForm();
   }
@@ -59,11 +65,16 @@ export class ProfileDokumenComponent implements OnInit {
     this.opened = true;
   }
 
+  public setIsLifeTime(): void {
+    this.isLifeTime = !this.isLifeTime;
+    this.data.berlakuSampai = null;
+  }
+
   public setForm(): void {
     this.form = new FormGroup({
       nomorDokumen: new FormControl(this.data.nomorDokumen, Validators.required),
       namaDokumen: new FormControl(this.data.namaDokumen, Validators.required),
-      berlakuSampai: new FormControl(this.data.berlakuSampai, Validators.required)
+      berlakuSampai: new FormControl(this.data.berlakuSampai, [])
     });
   }
 
@@ -73,20 +84,26 @@ export class ProfileDokumenComponent implements OnInit {
       mappedData[key] = {
         no: data[key]['nomorDokumen'],
         namaDokumen: data[key]['namaDokumen'],
-        berlakuDari: data[key]['submitDate'],
-        berlakuSampai: data[key]['berlakuSampai'],
+        berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
+        berlakuSampai: formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US"),
         lampiran: data[key]['attachmentFilePath'],
+        file: data[key]['file'],
         id: data[key]['id']
       };
     }
     return mappedData;
   }
 
+  mapDateFormat(date: string) {
+    let arr_date = date.split('-');
+    return arr_date[2].concat('-').concat(arr_date[1]).concat('-').concat(arr_date[0]);
+  }
+
   public updateForm(data: any): void {
     this.id = data.id;
     this.data.nomorDokumen = data.no;
     this.data.namaDokumen = data.namaDokumen;
-    // this.data.berlakuSampai = data.berlakuSampai;
+    this.data.berlakuSampai = new Date(this.mapDateFormat(data.berlakuSampai));
     
     this.isNewData = false;
 
@@ -101,7 +118,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.gridData = this.mapData(this.gridData);
       },
       () => {
-
+        this.popUpMessage = "Gagal mendapatkan data";
+        this.triggerPopUp();
       }
     );
   }
@@ -115,7 +133,16 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public save(): void {
-    let params: ProfileDocumentInterface = {...this.form.value};
+    let params: ProfileDocumentInterface = {
+      namaDokumen: this.form.value.namaDokumen,
+      nomorDokumen: this.form.value.nomorDokumen,
+      berlakuSampai: this.form.value.berlakuSampai,
+      submitDate: new Date(),
+      file: this.uploadedFileId,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
+    console.log(params);
+    console.log(new Date())
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
@@ -132,7 +159,14 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public update(): void {
-    let params: ProfileDocumentInterface = {...this.form.value};
+    let params: ProfileDocumentInterface = {
+      namaDokumen: this.form.value.namaDokumen,
+      nomorDokumen: this.form.value.nomorDokumen,
+      berlakuSampai: this.form.value.berlakuSampai,
+      submitDate: new Date(),
+      file: this.uploadedFileId,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
     this.profileDocumentService.update(params, this.id).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";
@@ -160,6 +194,23 @@ export class ProfileDokumenComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public upload(): void {
+    this.fileService.upload(this.lampiranFiles[0]).subscribe(
+      (res) => {
+        this.uploadedFileContentUrl = res.contentUrl;
+        this.uploadedFileId = res["@id"];
+      },
+      () => {
+        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public download(fileId: string): void {
+    //TODO
   }
 
   triggerPopUp():void  {
