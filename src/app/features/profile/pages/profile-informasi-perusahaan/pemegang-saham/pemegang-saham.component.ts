@@ -118,8 +118,8 @@ export class PemegangSahamComponent implements OnInit {
 
 
   getPemegangSaham(){
-    // this.vendor_id="133";
-    this.vendor_id= JSON.parse(this.authService.getLocalStorage("vendor_id")!);
+    this.vendor_id="133";
+    // this.vendor_id= JSON.parse(this.authService.getLocalStorage("vendor_id")!);
     this.profileService.getPemegangSaham(this.vendor_id).subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];
