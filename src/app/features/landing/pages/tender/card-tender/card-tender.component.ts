@@ -83,7 +83,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
       },
       (error) => {
         this.popUpMessage = "Gagal menemukan data tender";
-        this.triggerPopUp();
+        // this.triggerPopUp();
       }
       )
   }
