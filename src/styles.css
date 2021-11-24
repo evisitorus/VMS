@@ -60,6 +60,8 @@ body {
 .k-grid-content {
     border-style: solid !important;
     border-color: #0193AC !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
 }
 
 .k-grid-table > tbody > tr {
