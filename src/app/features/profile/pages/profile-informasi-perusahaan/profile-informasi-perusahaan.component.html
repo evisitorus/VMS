@@ -179,8 +179,8 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Provinsi</kendo-label>
-              <kendo-dropdownlist id="provDropdown" class="col-md" defaultItem="Pilih Provinsi"
-                [data]="provinces" [valuePrimitive]="true">
+              <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="{ description: 'Pilih Provinsi', id: null }"
+                [data]="provinces" textField="description" valueField="id" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
 
