@@ -66,7 +66,7 @@ export class ProfileInformationService {
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_vendor_information_route,
+      url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/information',
       // options : {
       //   headers: {
       //     Authorization: this.token
