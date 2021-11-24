@@ -69,6 +69,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public vendor_info: any;
   public total_karyawan: any;
+  public vendor_contact_mechanism: any;
 
   public selectedBadanUsaha: Item = this.listItems[1];
   public pkpStatus = false;
@@ -77,10 +78,11 @@ export class ProfileInformasiPerusahaanComponent {
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
-        console.log(resp.data);
-        this.vendor_info = resp.data;
-        this.total_karyawan = resp.data.jumlahKaryawanDomestik + resp.data.jumlahKaryawanAsing;
-        this.pkpStatus = resp.data.statusPerusahaanPkp;
+        console.log(resp.data.contactMechanism.address1);
+        this.vendor_info = resp.data.party;
+        this.vendor_contact_mechanism = resp.data.contactMechanism;
+        this.total_karyawan = resp.data.party.jumlahKaryawanDomestik + resp.data.party.jumlahKaryawanAsing;
+        this.pkpStatus = resp.data.party.statusPerusahaanPkp;
       },
       (error) => {
         console.log(error);
