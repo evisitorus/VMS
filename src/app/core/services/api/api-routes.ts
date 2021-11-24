@@ -7,7 +7,7 @@ export const ApiRoutes = {
   api_activate_route: API_BASE_URL + "/users/activate",
   api_forgot_password_route: API_BASE_URL + "/auth/forgot-password",
   api_reset_password_route: API_BASE_URL + "/auth/reset-password",
-  api_vendor_information_route: API_BASE_URL + "/vendors/1/information",
+  api_vendor_information_route: API_BASE_URL + "/vendors/119/information",
   api_profile_pic: API_BASE_URL + "/users/profile/pic/26",
   api_add_pengalaman_kerja: API_BASE_URL + "/badan_usahas/pengalaman_kerja",
   api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
@@ -15,7 +15,7 @@ export const ApiRoutes = {
   api_penyedia_usaha_route : API_BASE_URL + "/jenis_penyedia_usahas?page=1",
   api_jenis_kegiatan_usaha_route: API_BASE_URL + "/jenis_kegiatan_usahas?page=1",
   api_jenis_vendor_route: API_BASE_URL + "/jenis_vendors?page=1",
-  api_get_organizations: API_BASE_URL + "/organizations?page=1"
+  api_get_organizations: API_BASE_URL + "/organizations"
 };
 
 export const ApiRouteMethods = {
