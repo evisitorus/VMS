@@ -118,7 +118,7 @@ export class PemegangSahamComponent implements OnInit {
 
 
   getPemegangSaham(){
-    this.vendor_id="253";
+    this.vendor_id="380";
     this.profileService.getPemegangSaham(this.vendor_id).subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];

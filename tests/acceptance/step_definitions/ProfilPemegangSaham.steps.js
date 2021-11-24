@@ -59,9 +59,12 @@ Given('The Vendor not define anything on {string} form or only define several fi
 });
 
 Given('The Vendor will get warning message tooltip on each mandatory fields as {string}', () => {
-
+    I.seeElement('.k-window');
+    // I.see('Informasi Pemegang Saham');
+    I.see('Data tidak boleh kosong.');
+    I.click('#btn-popup-yes');
 });
 
 Given('The Vendor must define right information from {string} while can continue to next process to define {string}', () => {
-
+    I.amOnPage('/profile-information');
 });
