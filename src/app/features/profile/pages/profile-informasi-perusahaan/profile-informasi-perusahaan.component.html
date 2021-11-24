@@ -121,18 +121,14 @@
             <div class="row align-items-center">
               <kendo-label class="col-3">BUMN Pengampu</kendo-label>
 
-              <kendo-autocomplete id="bumnPengampuInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu"
-                [value]="vendor_info.bumnPengampu">
+              <kendo-autocomplete id="bumnPengampuInput" class="col" [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu" [value]="vendor_info.bumnPengampu">
               </kendo-autocomplete>
             </div>
 
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
-              <kendo-autocomplete id="organisasiHimpunanInput" class="col" valueField="label"
-                [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="Organisasi Himpunan"
-                [value]="vendor_info.organisasiHimpunan">
+              <kendo-autocomplete id="organisasiHimpunanInput" class="col" [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan">
               </kendo-autocomplete>
             </div>
 
@@ -185,19 +181,19 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kota</kendo-label>
-              <kendo-dropdownlist id="kotaDropdown" class="col-md" defaultItem="{defaultItemKota}" [data]="dataKota" [value]="selectedKota" textField="kotaDescription" valueField="kotaId">
+              <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataKota" [value]="selectedKota" textField="kotaDescription" valueField="kotaId">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kecamatan</kendo-label>
-              <kendo-dropdownlist id="kecDropdown" class="col-md" defaultItem="{defaultItemKecamatan}" textField="kecamatanDescription" valueField="kecamatanId" [data]="dataKecamatan" [value]="selectedKecamatan">
+              <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="kecamatanDescription" valueField="kecamatanId" [data]="dataKecamatan" [value]="selectedKecamatan">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kelurahan</kendo-label>
-              <kendo-dropdownlist id="kelDropdown" class="col-md" defaultItem="Pilih Kelurahan" [valuePrimitive]="true">
+              <kendo-dropdownlist id="kelDropdown" class="col-md" defaultItem="Pilih Kelurahan" [valuePrimitive]="true" [data]="listItems">
               </kendo-dropdownlist>
             </div>
 

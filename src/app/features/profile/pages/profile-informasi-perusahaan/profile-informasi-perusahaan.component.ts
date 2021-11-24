@@ -83,12 +83,11 @@ export class ProfileInformasiPerusahaanComponent {
 
   public defaultItemProvinces: { provinceDescription: string, provinceId: number } = { provinceDescription: 'Pilih provinsi', provinceId: 0 };
 
-  public defaultItemKota:{ kotaDescription: string, kotaId: number } = { kotaDescription: 'Pilih kota', kotaId: 0 };
+  public defaultItemKota:{ kotaDescription: string, kotaId: number, provinceId: number } = { kotaDescription: 'Pilih kota', kotaId: 0 , provinceId: 0};
 
-  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number } = { kecamatanDescription: 'Pilih Kecamatan', kecamatanId: 0 };
+  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number, kotaId: number} = { kecamatanDescription: 'Pilih Kecamatan', kecamatanId: 0, kotaId: 0 };
 
-  public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
-
+  // public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
 
   public dataProvinsi: Array<{provinceDescription: string, provinceId: number}> = [
     {
@@ -133,6 +132,12 @@ export class ProfileInformasiPerusahaanComponent {
   ];
 
 
+  
+  public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number  }> = [];
+
+  public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number }> = [];
+
+
   ngOnInit(): void {
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
@@ -161,6 +166,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getJenisKegiatanUsaha().subscribe(
       (resp) => {
         this.jenis_kegiatan_usaha = resp["hydra:member"];
+        console.log( resp["hydra:member"])
       },
       (error) => {
         console.log(error);
@@ -223,8 +229,10 @@ export class ProfileInformasiPerusahaanComponent {
 
     if (value.id === this.defaultItemProvinces.provinceId) {
       this.isDisabledKota = true;
+      this.dataResultKota = [];
     } else {
       this.isDisabledKota = false;
+      this.dataResultKota = this.dataKota.filter((s) => s.provinceId === value.provinceId);
     }
   }
 
@@ -234,8 +242,10 @@ export class ProfileInformasiPerusahaanComponent {
 
     if (value.id === this.defaultItemProvinces.provinceId) {
       this.isDisabledKecamatan = true;
+      this.dataResultKecamatan = [];
     } else {
       this.isDisabledKecamatan = false;
+      this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.kotaId === value.kotaId);
     }
 
 
