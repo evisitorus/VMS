@@ -43,6 +43,7 @@ exports.config = {
           './tests/acceptance/step_definitions/ForgotPassword.steps.js',
           './tests/acceptance/step_definitions/Login.steps.js',
           './tests/acceptance/step_definitions/Logout.steps.js',
+          './tests/acceptance/step_definitions/Dokumen.steps.js',
         ]
   },
   plugins: {
