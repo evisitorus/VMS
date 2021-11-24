@@ -18,15 +18,15 @@ export class ProfileDokumenComponent implements OnInit {
   public gridData: any[] = [];
 
   public opened: boolean = false;
-  
+
   public popUpTitle: string = "Profile Dokumen";
   public popUpMessage: string = "";
-  
+
   public value: Date = new Date();
   public checked: boolean = false;
 
   public fileRestrictions: FileRestrictions = {
-    allowedExtensions: ["jpg", "jpeg", "png"],
+    allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
   };
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
@@ -104,7 +104,7 @@ export class ProfileDokumenComponent implements OnInit {
     this.data.nomorDokumen = data.no;
     this.data.namaDokumen = data.namaDokumen;
     this.data.berlakuSampai = new Date(this.mapDateFormat(data.berlakuSampai));
-    
+
     this.isNewData = false;
 
     this.setForm();
@@ -142,6 +142,7 @@ export class ProfileDokumenComponent implements OnInit {
       attachmentFilePath: this.uploadedFileContentUrl
     };
     
+
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
@@ -208,8 +209,19 @@ export class ProfileDokumenComponent implements OnInit {
     );
   }
 
-  public download(fileId: string): void {
-    //TODO
+  public download(fileId: string, filename: string) {
+    this.fileService.download(fileId).subscribe(
+      (res) => {
+        let mime = this.fileService.getMimeType(filename);
+        let blob = new Blob([res], { type: mime });
+        let url= window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      () => {
+        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
   }
 
   triggerPopUp():void  {

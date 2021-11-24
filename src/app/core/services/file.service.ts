@@ -23,7 +23,7 @@ export class FileService {
 
     let form = new FormData();
     form.append("file", file);
-    
+
     let api_upload_file: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_media_object_route,
@@ -38,7 +38,7 @@ export class FileService {
     return this.apiService.sendRequest(api_upload_file);
   }
 
-  public download(id: string): Observable<Object> {
+  public download(id: string): Observable<Blob> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_upload_file: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -47,9 +47,22 @@ export class FileService {
         headers: {
           Authorization: token,
         },
+        responseType: 'blob' as 'json',
       }
     };
     return this.apiService.sendRequest(api_upload_file);
   }
-  
+
+  public getMimeType(filePath: string): string {
+    let arr = filePath.split(".");
+    return MIME[arr[arr.length - 1]];
+  }
+
 }
+
+export const MIME: any = {
+  pdf: "application/pdf",
+  png: "image/png",
+  jpg: "image/jpg",
+  jpeg: "image/jpeg",
+};
