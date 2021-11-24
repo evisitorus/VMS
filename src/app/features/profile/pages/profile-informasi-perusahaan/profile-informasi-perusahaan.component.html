@@ -175,19 +175,19 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Provinsi</kendo-label>
-              <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="defaultItemProvinces" [data]="dataProvinsi" textField="provinceDescription" valueField="provinceId" [value]="selectedProvince">
+              <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="defaultItemProvinces" [data]="dataProvinsi" textField="provinceDescription" valueField="provinceId" [value]="selectedProvince" (valueChange)="handleProvinceChange($event)">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kota</kendo-label>
-              <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataKota" [value]="selectedKota" textField="kotaDescription" valueField="kotaId">
+              <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataResultKota" [value]="selectedKota" textField="kotaDescription" valueField="kotaId" (valueChange)="handleKotaChange($event)">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kecamatan</kendo-label>
-              <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="kecamatanDescription" valueField="kecamatanId" [data]="dataKecamatan" [value]="selectedKecamatan">
+              <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="kecamatanDescription" valueField="kecamatanId" [data]="dataResultKecamatan" [value]="selectedKecamatan" (valueChange)="handleKecamatanChange($event)">
               </kendo-dropdownlist>
             </div>
 

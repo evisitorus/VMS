@@ -166,7 +166,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getJenisKegiatanUsaha().subscribe(
       (resp) => {
         this.jenis_kegiatan_usaha = resp["hydra:member"];
-        console.log( resp["hydra:member"])
+
       },
       (error) => {
         console.log(error);
@@ -225,22 +225,24 @@ export class ProfileInformasiPerusahaanComponent {
     this.selectedKota = undefined!;
     this.selectedKecamatan = undefined!;
 
-    this.isDisabledKecamatan = true;
 
-    if (value.id === this.defaultItemProvinces.provinceId) {
+    if (value.provinceId === this.defaultItemProvinces.provinceId) {
       this.isDisabledKota = true;
       this.dataResultKota = [];
     } else {
       this.isDisabledKota = false;
       this.dataResultKota = this.dataKota.filter((s) => s.provinceId === value.provinceId);
     }
+
+    this.isDisabledKecamatan = true;
+    this.dataResultKecamatan = [];
   }
 
   handleKotaChange(value: any) {
     this.selectedKota = value;
     this.selectedKecamatan = undefined!;
 
-    if (value.id === this.defaultItemProvinces.provinceId) {
+    if (value.kotaId === this.defaultItemKota.kotaId) {
       this.isDisabledKecamatan = true;
       this.dataResultKecamatan = [];
     } else {
