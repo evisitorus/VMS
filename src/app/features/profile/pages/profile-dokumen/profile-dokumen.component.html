@@ -31,7 +31,7 @@
 
         <kendo-formfield [formGroup]="form">
           <kendo-label text="Lampiran File" ></kendo-label>
-          <kendo-fileselect required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
+          <kendo-fileselect id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
 
           </kendo-fileselect>
         </kendo-formfield>
