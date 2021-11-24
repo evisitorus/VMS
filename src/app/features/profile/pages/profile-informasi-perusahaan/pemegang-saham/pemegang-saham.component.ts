@@ -4,6 +4,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { AddPemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 const messages = {
@@ -31,7 +32,8 @@ export class PemegangSahamComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private profileService: ProfileService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private authService: AuthService,
     ) { }
 
   ngOnInit(): void {
@@ -80,6 +82,15 @@ export class PemegangSahamComponent implements OnInit {
     this.pemegangSahamFormGroup.markAllAsTouched();
     this.popUpMessage = messages.default;
 
+
+    // stop here if form is invalid
+    if (this.pemegangSahamFormGroup.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
+
     const dataPemegangSaham = {
       email: "admin@abadijaya.co.id",
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
@@ -115,8 +126,8 @@ export class PemegangSahamComponent implements OnInit {
       },
       (error) => { 
         this.popUpMessage = error;
-        this.triggerPopUp();
         this.redirectOnClosePopUp = true;
+        // this.triggerPopUp();
       }
     );
   }
