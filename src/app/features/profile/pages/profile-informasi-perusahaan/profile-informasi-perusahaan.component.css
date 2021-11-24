@@ -87,3 +87,37 @@
 .k-panelbar-content {
   padding: 1em;
 }
+
+.profile-content {
+  display: flex;
+  background-color: transparent!important;
+}
+
+.profile-menu {
+  float: left;
+  height: 100vh;
+}
+
+.profile-content-title {
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+
+.profile-content-grid-button {
+  float: right;
+  margin-top: 1em;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+div.profile-content  > kendo-panelbar-item  .k-link.k-state-focused, div.profile-content  > kendo-panelbar-item >  .k-link.k-state-selected{
+  background-color: #0193AC !important;
+  border-color: #0193AC !important;
+  color: white !important;
+}

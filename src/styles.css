@@ -102,7 +102,7 @@ label{
 /* --- LABEL --- */
 
 /* --- SIDEBAR --- */
-.k-link, .k-grid-header, .k-window-titlebar, .k-dialog-titlebar{
+.k-grid-header, .k-window-titlebar, .k-dialog-titlebar{
     background-color: #0193AC !important;
     border-color: #0193AC !important;
     color: white !important;
@@ -114,24 +114,27 @@ label{
 }
 
 .k-link:hover{
-    background-color: #07b9d8 !important;
-    border-color: #07b9d8 !important;
+    background-color: white !important;
+    color: black !important;
 }
 
-.k-link.k-state-selected{
-    background-color: #07b9d8 !important;
-    border-color: #07b9d8 !important;
+.k-link{
+    /* background-color: #0193AC !important; */
+    color: black !important;
 }
+
+
+.k-link.k-state-selected{
+    background-color: white !important;
+    color: black !important;
+}
+
 
 .k-link.k-state-focused{
     box-shadow: none !important;
     color: #0193AC !important;
 }
 
-
-.k-panel {
-    background-color: white !important;
-}
 
 .k-icon.k-panelbar-toggle {
     color: inherit !important;
@@ -142,6 +145,12 @@ label{
     color: white !important;
     border-radius: 10px;
     height: 70px;
+}
+
+div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-link.k-state-focused, .profile-content  > kendo-panelbar-item >  .k-link.k-state-selected{
+    background-color: #0193AC !important;
+    border-color: #0193AC !important;
+    color: white !important;
 }
 
 .k-panelbar {
