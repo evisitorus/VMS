@@ -118,8 +118,8 @@ export class PemegangSahamComponent implements OnInit {
       },
       (error) => { 
         this.popUpMessage = error;
-        this.triggerPopUp();
         this.redirectOnClosePopUp = true;
+        // this.triggerPopUp();
       }
     );
   }
