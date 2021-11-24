@@ -16,7 +16,7 @@
 
     <kendo-grid-column title="Nama Pemegang Saham" [width]="250">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.toParty.firstName }}
+        {{ dataItem.toParty.firstName ?   dataItem.toParty.firstName : dataItem.toParty.name}}
       </ng-template>
     </kendo-grid-column>
 
