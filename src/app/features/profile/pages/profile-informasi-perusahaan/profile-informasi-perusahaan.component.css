@@ -116,8 +116,15 @@
   min-width: 100px !important;
 }
 
-div.profile-content  > kendo-panelbar-item  .k-link.k-state-focused, div.profile-content  > kendo-panelbar-item >  .k-link.k-state-selected{
+#profile-information-panelbar > kendo-panelbar-item  .k-link ,#profile-information-panelbar > kendo-panelbar-item  .k-link.k-state-focused, #profile-information-panelbar  > kendo-panelbar-item >  .k-link.k-state-selected{
   background-color: #0193AC !important;
   border-color: #0193AC !important;
   color: white !important;
+}
+
+.k-dropdown .k-dropdown-wrap, .k-dropdowntree .k-dropdown-wrap {
+  border-color: #0193AC;
+  color: #212529;
+  background-color: transparent;
+  padding: 0;
 }
