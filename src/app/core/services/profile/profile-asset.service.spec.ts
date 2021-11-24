@@ -28,7 +28,7 @@ describe('ProfileAssetService', () => {
     apiService = TestBed.inject(ApiService);
   });
 
-  it('test getDataAsset function', () => {
+  it('test get function', () => {
     let res = new Observable((subscriber) => {
       subscriber.next(true);
       subscriber.complete();
@@ -37,14 +37,14 @@ describe('ProfileAssetService', () => {
     spyOn(authService, 'getLocalStorage').and.returnValue("tokensample");
     spyOn(apiService, 'sendRequest').and.returnValue(res);
 
-    service.getDataAsset().subscribe(
+    service.get().subscribe(
       (resp) => {
         expect(resp).toBe(true);
       }
     );
   });
 
-  it('test saveProfileAsset function', () => {
+  it('test save function', () => {
     let res = new Observable((subscriber) => {
       subscriber.next(true);
       subscriber.complete();
@@ -59,7 +59,49 @@ describe('ProfileAssetService', () => {
     spyOn(authService, 'getLocalStorage').and.returnValue("tokensample");
     spyOn(apiService, 'sendRequest').and.returnValue(res);
 
-    service.saveProfileAsset(param).subscribe(
+    service.save(param).subscribe(
+      (resp) => {
+        expect(resp).toBe(true);
+      }
+    );
+  });
+
+  it('test update function', () => {
+    let res = new Observable((subscriber) => {
+      subscriber.next(true);
+      subscriber.complete();
+    });
+
+    let param: ProfileAssetInterface = {
+      namaAsset: "Sample",
+      jumlah: 10,
+      tahunPembuatan: "2020"
+    };
+
+    let id = "11";
+
+    spyOn(authService, 'getLocalStorage').and.returnValue("tokensample");
+    spyOn(apiService, 'sendRequest').and.returnValue(res);
+
+    service.update(param, id).subscribe(
+      (resp) => {
+        expect(resp).toBe(true);
+      }
+    );
+  });
+
+  it('test update function', () => {
+    let res = new Observable((subscriber) => {
+      subscriber.next(true);
+      subscriber.complete();
+    });
+
+    let id = "11";
+
+    spyOn(authService, 'getLocalStorage').and.returnValue("tokensample");
+    spyOn(apiService, 'sendRequest').and.returnValue(res);
+
+    service.delete(id).subscribe(
       (resp) => {
         expect(resp).toBe(true);
       }

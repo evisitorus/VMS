@@ -1,0 +1,211 @@
+<div class="body-content">
+    <div class="container">
+        <div class="row">
+            <div class="col tender-detail">
+    
+                <div class="row">
+                    <div class="col-9 tender-title">
+                        <h5>{{ data.name ? data.name : "-" }}</h5>
+                    </div>
+                    <div class="col-3 tender-budget">
+                        <p>{{ data.hps_hide ? "Rp. " + data.hps_total : (data.hps_total | currency:'Rp. ':'symbol':'4.0-2') }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1 tender-status">
+                        <p>{{ data.status && data.status.name ? data.status.name : "-" }}</p>
+                    </div>
+                    <div class="col-11 tender-company">
+                        <p>{{ data.cparent && data.cparent.name ? data.cparent.name : "-" }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col breadcum">
+                        <p><a href="">Beranda</a> > Detail Tender</p>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col tender-content">
+                        <div class="row">
+                            <div class="col tender-content-title">
+                                <p>Tender Umum</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Nama Tender</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.name ? data.name : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Nomor Tender</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.code ? data.code : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Metode Tender</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.method && data.method.name ? "Tender " + data.method.name : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Kategori Bidang Usaha</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.category && data.category.name ? data.category.name : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Waktu Akhir Pendaftaran</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.registration_end ? (data.registration_end | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Waktu Akhir Kirim Penawaran</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.bid_end ? (data.bid_end | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Lokasi Tender</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.province && data.province.name ? data.province.name : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Catatan Untuk Penyedia</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.vendor_note ? data.vendor_note : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Target Capaian TKDN</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.tkdn_target ? data.tkdn_target + "%" : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Tanggal diterbitkan Tender</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.publish_at ? (data.publish_at | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col tender-content">
+                        <div class="row">
+                            <div class="col tender-content-title">
+                                <p>Informasi PIC Pengadaan</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Nama PIC Pengadaan</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.pic && data.pic.name ? data.pic.name : "-"}}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Email</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.pic && data.pic.email ? data.pic.email : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Phone</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.pic && data.pic.phone ? data.pic.phone : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Handphone</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.pic && data.pic.mobile ? data.pic.mobile : "-" }}</p>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col tender-content">
+                        <div class="row">
+                            <div class="col tender-content-title">
+                                <p>Informasi BUMN Penyelenggara</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Nama BUMN</p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ data.cparent && data.cparent.name ? data.cparent.name : "-" }}</p>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col-4 tender-content-list">
+                                <p>Portal Pengadaan</p>
+                            </div>
+                            <div class="col-8 tender-content-portal">
+                                <a href="{{ data.url ? data.url : '#' }}"> {{ data.url ? data.url : "-" }} </a>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

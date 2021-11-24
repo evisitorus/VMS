@@ -51,8 +51,12 @@ export class LoginComponent implements OnInit{
     this.authService.login(params).subscribe(
       (resp) =>  { 
         this.isLoggedIn = true;
+
         this.authService.setLoggedIn(true);
         this.authService.setToken(resp.data.access_token);
+        this.authService.setLocalStorage('person_id', resp.data.person_id);
+        this.authService.setLocalStorage('vendor_id', resp.data.vendor_id);
+        
         this.popUpMessage = resp.message;
         this.redirectOnClosePopUp = true;
         this.triggerPopUp();

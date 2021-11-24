@@ -1,0 +1,10 @@
+<div class="demo">
+
+  <kendo-card *ngFor="let card of mediaCards" width="260px" class="k-card-box" >
+    <img *ngIf="card.imageSrc" kendoCardMedia [src]="card.imageSrc" />
+    <kendo-card-body>
+      <div class="k-card-titles"><strong>{{ card.title }}</strong></div>
+      <div class="k-card-subtitle">{{ card.description }}</div>
+    </kendo-card-body>
+  </kendo-card>
+  </div>
