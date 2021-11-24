@@ -37,6 +37,37 @@ body {
     font-size: 12px;
 }
 
+/* --- TABLE --- */
+.k-grid {
+    border-style: unset !important;
+}
+
+.k-grid-header {
+    border-radius: 10px 10px 0px 0px !important;
+    background: #0193AC !important;
+    color: white !important;
+    font-weight: bold;
+    height: 60px !important;
+}
+
+.k-header {
+    border-style: unset !important;
+    height: 60px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.k-grid-content {
+    border-style: solid !important;
+    border-color: #0193AC !important;
+}
+
+.k-grid-table > tbody > tr {
+    text-align: center !important;
+    height: 40px !important;
+}
+/* --- END TABLE --- */
+
 /* ================================ */
 
 /* VMS Design Guideline */
@@ -88,6 +119,7 @@ label{
     font-size: 14px;
 }
 /* --- LABEL --- */
+
 
 /* --- SIDEBAR --- */
 .k-link{
