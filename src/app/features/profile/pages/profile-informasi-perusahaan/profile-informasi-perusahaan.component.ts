@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from "@angular/core";
+import { Component, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
@@ -21,8 +21,8 @@ interface Hydra {
 export class ProfileInformasiPerusahaanComponent {
 
   constructor(
-    private profileInfoService:ProfileInformationService
-  ) {}
+    private profileInfoService: ProfileInformationService
+  ) { }
 
   public psFormGroup = new FormGroup({
     psFormControl: new FormControl(),
@@ -41,7 +41,7 @@ export class ProfileInformasiPerusahaanComponent {
   });
 
   public listItems: Array<Item> = [];
-  
+
   // TODO: ambil dari table tipe vendor. jangan static
   public kategoriUmkmItems: Array<Item> = [
     { name: "Kecil", id: 1 },
@@ -62,6 +62,9 @@ export class ProfileInformasiPerusahaanComponent {
   public isRequired = true;
   public opened = false;
   public openedSaham = false;
+  public isDisabledKota = true;
+  public isDisabledKecamatan = true;
+  // public isDisabledKelurahan = true;
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
   public jenis_kegiatan_usaha: Array<Hydra> = [];
@@ -72,14 +75,68 @@ export class ProfileInformasiPerusahaanComponent {
   public total_karyawan: any;
   public vendor_contact_mechanism: any;
 
-  public selectedBadanUsaha: Item = this.listItems[1];
+  public selectedBadanUsaha: Item = this.listItems[0];
+  public selectedProvince: { provinceDescription: string, provinceId: number } = null!;
+  public selectedKota:{ kotaDescription: string, kotaId: number } = null!;
+  public selectedKecamatan:{ kecamatanDescription: string, kecamatanId: number } =null!;
   public pkpStatus = false;
+
+  public defaultItemProvinces: { provinceDescription: string, provinceId: number } = { provinceDescription: 'Pilih provinsi', provinceId: 0 };
+
+  public defaultItemKota:{ kotaDescription: string, kotaId: number } = { kotaDescription: 'Pilih kota', kotaId: 0 };
+
+  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number } = { kecamatanDescription: 'Pilih Kecamatan', kecamatanId: 0 };
+
+  public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
+
+
+  public dataProvinsi: Array<{provinceDescription: string, provinceId: number}> = [
+    {
+      provinceDescription: 'Jawa Barat', provinceId: 1
+    },
+    {
+      provinceDescription: 'Jawa Tengah', provinceId: 2
+    },
+    {
+      provinceDescription: 'Jawa Timur', provinceId: 3
+    }
+  ];
+
+  public dataKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [
+    {
+      kotaDescription: 'Bandung', kotaId: 1, provinceId: 1
+    },
+    {
+      kotaDescription: 'Cimahi', kotaId: 2, provinceId: 1
+    },
+    {
+      kotaDescription: 'Semarang', kotaId: 3, provinceId: 2
+    },
+    {
+      kotaDescription: 'Surabaya', kotaId: 4, provinceId: 3
+    }
+  ];
+
+  public dataKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number}> = [
+    {
+      kecamatanDescription: 'Sukasari', kecamatanId: 1, kotaId: 1
+    },
+    {
+      kecamatanDescription: 'Baleendah', kecamatanId: 2, kotaId: 1
+    },
+    {
+      kecamatanDescription: 'Pekalongan', kecamatanId: 3, kotaId: 2
+    },
+    {
+      kecamatanDescription: 'Karang Anyar', kecamatanId: 4, kotaId: 3
+    }
+  ];
+
 
   ngOnInit(): void {
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
-        console.log(resp.data.contactMechanism.address1);
         this.vendor_info = resp.data.party;
         this.vendor_contact_mechanism = resp.data.contactMechanism;
         this.total_karyawan = resp.data.party.jumlahKaryawanDomestik + resp.data.party.jumlahKaryawanAsing;
@@ -117,21 +174,21 @@ export class ProfileInformasiPerusahaanComponent {
       },
       (error) => {
         console.log(error);
-      }      
+      }
     );
 
     // get list of provinces
-    this.profileInfoService.getProvinces().subscribe(
-      (resp) => {
-        this.provinces = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
-      }      
-    );
+    // this.profileInfoService.getProvinces().subscribe(
+    //   (resp) => {
+    //     this.provinces = resp["hydra:member"];
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
   }
 
-  public onChangeList(): void{
+  public onChangeList(): void {
     if (this.selectedBadanUsaha.name === "UMKM") {
       this.listItems = this.kategoriUmkmItems;
     } else {
@@ -156,5 +213,37 @@ export class ProfileInformasiPerusahaanComponent {
   public openSaham() {
     this.openedSaham = true;
   }
+
+  handleProvinceChange(value: any) {
+    this.selectedProvince = value;
+    this.selectedKota = undefined!;
+    this.selectedKecamatan = undefined!;
+
+    this.isDisabledKecamatan = true;
+
+    if (value.id === this.defaultItemProvinces.provinceId) {
+      this.isDisabledKota = true;
+    } else {
+      this.isDisabledKota = false;
+    }
+  }
+
+  handleKotaChange(value: any) {
+    this.selectedKota = value;
+    this.selectedKecamatan = undefined!;
+
+    if (value.id === this.defaultItemProvinces.provinceId) {
+      this.isDisabledKecamatan = true;
+    } else {
+      this.isDisabledKecamatan = false;
+    }
+
+
+  }
+
+  handleKecamatanChange(value:any) {
+    this.selectedKecamatan = value;
+  }
+
 
 }

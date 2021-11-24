@@ -179,29 +179,25 @@
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Provinsi</kendo-label>
-              <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="{ description: 'Pilih Provinsi', id: null }"
-                [data]="provinces" textField="description" valueField="id" [valuePrimitive]="true">
+              <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="defaultItemProvinces" [data]="dataProvinsi" textField="provinceDescription" valueField="provinceId" [value]="selectedProvince">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kota</kendo-label>
-              <kendo-dropdownlist id="kotaDropdown" class="col-md" defaultItem="Pilih Kota / Kabupaten"
-                [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="kotaDropdown" class="col-md" defaultItem="{defaultItemKota}" [data]="dataKota" [value]="selectedKota" textField="kotaDescription" valueField="kotaId">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kecamatan</kendo-label>
-              <kendo-dropdownlist id="kecDropdown" class="col-md" defaultItem="Pilih Kecamatan"
-                [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="kecDropdown" class="col-md" defaultItem="{defaultItemKecamatan}" textField="kecamatanDescription" valueField="kecamatanId" [data]="dataKecamatan" [value]="selectedKecamatan">
               </kendo-dropdownlist>
             </div>
 
             <div class="row align-items-center">
               <kendo-label class="col-3">Kelurahan</kendo-label>
-              <kendo-dropdownlist id="kelDropdown" class="col-md" defaultItem="Pilih Kelurahan"
-                [data]="listItems" [valuePrimitive]="true">
+              <kendo-dropdownlist id="kelDropdown" class="col-md" defaultItem="Pilih Kelurahan" [valuePrimitive]="true">
               </kendo-dropdownlist>
             </div>
 
