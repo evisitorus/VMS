@@ -59,6 +59,8 @@ export class ProfileDokumenComponent implements OnInit {
 
   public close(): void {
     this.opened = false;
+    this.resetForm();
+    this.isNewData = true;
   }
 
   public open(): void {
@@ -111,6 +113,16 @@ export class ProfileDokumenComponent implements OnInit {
     this.open();
   }
 
+  public resetForm(): void {
+    this.data.id = "";
+    this.data.nomorDokumen = "";
+    this.data.namaDokumen = "";
+    this.data.berlakuDari = "";
+    this.data.berlakuSampai = "";
+    this.data.lampiran = "";
+    this.setForm();
+  }
+
   public fetchData(): void {
     this.profileDocumentService.get().subscribe(
       (response) => {
@@ -142,7 +154,6 @@ export class ProfileDokumenComponent implements OnInit {
       attachmentFilePath: this.uploadedFileContentUrl
     };
 
-    
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
