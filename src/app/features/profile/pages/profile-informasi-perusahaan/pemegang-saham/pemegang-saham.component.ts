@@ -4,6 +4,7 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { AddPemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 
 const messages = {
@@ -31,7 +32,8 @@ export class PemegangSahamComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private profileService: ProfileService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private authService: AuthService,
     ) { }
 
   ngOnInit(): void {
@@ -107,7 +109,8 @@ export class PemegangSahamComponent implements OnInit {
 
 
   getPemegangSaham(){
-    this.vendor_id="133";
+    // this.vendor_id="133";
+    this.vendor_id= JSON.parse(this.authService.getLocalStorage("vendor_id")!);
     this.profileService.getPemegangSaham(this.vendor_id).subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];
