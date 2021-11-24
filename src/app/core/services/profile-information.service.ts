@@ -80,7 +80,7 @@ export class ProfileInformationService {
   getOrganizations(): Observable<any>{
     let api_organizations: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_organizations,
+      url: ApiRoutes.api_get_organizations_route,
       // options : {
       //   headers: {
       //     Authorization: this.token
@@ -88,6 +88,20 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_organizations);
+
+  }
+
+  getProvinces(): Observable<any>{
+    let api_provinces: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_provinces_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_provinces);
 
   }
 }

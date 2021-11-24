@@ -66,6 +66,7 @@ export class ProfileInformasiPerusahaanComponent {
   public jenis_penyedia_usaha: Array<Hydra> = [];
   public jenis_kegiatan_usaha: Array<Hydra> = [];
   public organizations: Array<Item> = [];
+  public provinces: Array<Item> = [];
 
   public vendor_info: any;
   public total_karyawan: any;
@@ -116,7 +117,17 @@ export class ProfileInformasiPerusahaanComponent {
       },
       (error) => {
         console.log(error);
-      }
+      }      
+    );
+
+    // get list of provinces
+    this.profileInfoService.getProvinces().subscribe(
+      (resp) => {
+        this.provinces = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }      
     );
   }
 

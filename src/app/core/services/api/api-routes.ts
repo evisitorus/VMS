@@ -15,7 +15,8 @@ export const ApiRoutes = {
   api_penyedia_usaha_route : API_BASE_URL + "/jenis_penyedia_usahas?page=1",
   api_jenis_kegiatan_usaha_route: API_BASE_URL + "/jenis_kegiatan_usahas?page=1",
   api_jenis_vendor_route: API_BASE_URL + "/jenis_vendors?page=1",
-  api_get_organizations: API_BASE_URL + "/organizations"
+  api_get_organizations_route: API_BASE_URL + "/organizations",
+  api_get_provinces_route: API_BASE_URL + "/geo_locations?geoLocationType=5"
 };
 
 export const ApiRouteMethods = {
