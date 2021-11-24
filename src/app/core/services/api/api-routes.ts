@@ -17,6 +17,9 @@ export const ApiRoutes = {
     api_tenders_route: API_BASE_URL + "/tenders",
     api_list_tender: API_BASE_URL + "/tenders/page/",
   api_token_route: API_BASE_URL + "/users/token",
+  api_base_url: API_BASE_URL,
+  api_documents_route: API_BASE_URL + "/dokumens",
+  api_media_object_route: API_BASE_URL + "/media_objects"
 };
 
 export const ApiRouteMethods = {

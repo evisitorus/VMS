@@ -1,4 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../../interfaces/api-interface';
@@ -17,7 +16,7 @@ export class ProfileAssetService {
     private authService: AuthService
   ) { }
 
-  public get() {
+  public get(): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_get_profile_asset: ApiInterface = {
       method: ApiRouteMethods.get,
