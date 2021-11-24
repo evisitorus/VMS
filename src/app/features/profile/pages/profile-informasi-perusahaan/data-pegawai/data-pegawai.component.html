@@ -44,9 +44,13 @@
         </div>
         <div class="row">
           <kendo-label class="col-3">Tipe Karyawan</kendo-label>
-          <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto" defaultItem="Pilih Tipe Karyawan"
-            [data]="listItems" [valuePrimitive]="true">
-          </kendo-dropdownlist>
+          <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto tipeKaryawan"
+            [data]="tipeKaryawan"
+            textField="name"
+            valueField="id"
+            [defaultItem]="placeHolder"
+            >
+            </kendo-dropdownlist>
         </div>
         <div class="row">
           <kendo-label class="col-3">Jabatan</kendo-label>
