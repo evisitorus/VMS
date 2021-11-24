@@ -141,8 +141,7 @@ export class ProfileDokumenComponent implements OnInit {
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-    console.log(params);
-    console.log(new Date())
+    
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
