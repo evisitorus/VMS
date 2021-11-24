@@ -20,7 +20,7 @@
 
         <kendo-formfield [formGroup]="form" *ngIf="!isLifeTime">
           <kendo-label [for]="berlakuSampai" text="Berlaku Sampai"></kendo-label>
-          <kendo-datepicker arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+          <kendo-datepicker id="input-berlaku-sampai" arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
           <kendo-formerror></kendo-formerror>
         </kendo-formfield>
 
