@@ -84,7 +84,7 @@ pipeline {
                 script {
                     sh 'echo "test frontend"'
                     try {
-                        sh 'docker rm -f vms-fe vms-acceptancetest vms-unittest'
+                        sh 'docker rm -f vms-fe vms-test vms-unittest'
                     } catch (err) {
                         echo err.getMessage()
                     }
