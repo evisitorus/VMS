@@ -122,7 +122,7 @@ pipeline {
                         script {
                             sh 'echo "Acceptance Test"'
                             try {                                    
-                                sh 'docker run --name vms-test --net=host --ipc=host vms-acceptancetest "HEADLESS=true npx codeceptjs run --reporter mochawesome"'
+                                sh 'docker run --name vms-test --net=host --ipc=host vms-acceptancetest npx codeceptjs run --reporter mochawesome'
                             } catch (err) {
                                 env.TESTING = "gagal"
                             }

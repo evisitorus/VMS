@@ -1,9 +1,11 @@
+import { environment as env} from "src/environments/environment";
+
 exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
       url: 'http://localhost:4200',
-      show: true,
+      show: env.acceptance_test,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
