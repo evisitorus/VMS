@@ -125,7 +125,9 @@
               <kendo-numerictextbox 
                 id="kepemilikanSaham"
                 class="formField"
-                [min]="1"
+                [decimals]="2" 
+                [format]="'# \\%'"
+                [min]="0"
                 [max]="100"
                 [autoCorrect]=true
                 [spinners]="false"
