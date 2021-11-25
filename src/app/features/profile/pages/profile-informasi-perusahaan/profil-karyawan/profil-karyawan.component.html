@@ -75,11 +75,11 @@
         <div class="row">
           <kendo-label class="col-3">Jabatan</kendo-label>
           <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here" [maxlength]="25"
-            [clearButton]="true"></kendo-textbox>
+            [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
         </div>
         <div class="row">
           <kendo-label class="col-3">Bidang Pekerjaan</kendo-label>
-          <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" placeholder="Type your message here" [clearButton]="true" formControlName="bidangPekerjaan" #bidangPekerjaan></kendo-textbox>
         </div>
         <div class="row">
           <kendo-label class="col-3">Resume</kendo-label>
