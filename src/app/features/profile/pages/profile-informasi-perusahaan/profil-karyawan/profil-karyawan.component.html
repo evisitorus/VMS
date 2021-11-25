@@ -1,35 +1,52 @@
 <div>
   <kendo-label>Pegawai</kendo-label>
   <br>
-  <kendo-grid [pageSize]="5">
+  <kendo-grid [pageSize]="5" [data]="dataKaryawan" [pageable]="true" [resizable]="true">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-        {{rowIndex + 1}} 
+        {{rowIndex + 1}}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column
-    *ngFor="let col of columns"
-    [field]="col.title"
-  ></kendo-grid-column>
-    <!-- <kendo-grid-column field="shareholder_name" title="Nama Pegawai Saham">
+    <kendo-grid-column title="NIK">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.nik }}
+      </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="shareholder_type" title="Tipe Karyawan">
+    <kendo-grid-column title="Nama Pegawai">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.nama_pegawai }}
+      </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="is_domestic_shareholder" title="Jabatan">
+    <kendo-grid-column title="Tipe Karyawan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.tipe_karyawan === 1 ? "Tenaga Ahli" : 2 ? "Tenaga Terampil" : "Tenaga Administrasi" }}
+      </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="ownership" title="Bidang Pekerjaan">
+    <kendo-grid-column title="Jabatan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.jabatan }}
+      </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="ownership" title="Resume">
+    <kendo-grid-column title="Bidang Pekerjaan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.bidang_pekerjaan }}
+      </ng-template>
+    </kendo-grid-column>
+    <!-- <kendo-grid-column title="Resume">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.nik }}
+      </ng-template>
     </kendo-grid-column> -->
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-isNew="isNew">
-        <button kendoGridEditCommand >Edit</button>
+        <button kendoGridEditCommand>Edit</button>
         <button kendoGridRemoveCommand>Remove</button>
-    </ng-template>
+      </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
   <br>
-  <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
+  <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline"
+    style="float: right; color:#0193AC;">
     Tambah Pegawai
   </button>
 
@@ -37,17 +54,18 @@
     <div class="container">
       <div class="row">
         <kendo-label class="col-3">NIK</kendo-label>
-        <kendo-textbox id="nikPegawaiInput" class="col-md" placeholder="Type your message here"
-          [clearButton]="true"></kendo-textbox>
+        <kendo-textbox id="nikPegawaiInput" class="col-md" placeholder="Type your message here" [clearButton]="true">
+        </kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Nama Karyawan</kendo-label>
-        <kendo-textbox id="namaKaryawanInput" class="col-md" placeholder="Type your message here"
-          [clearButton]="true"></kendo-textbox>
+        <kendo-textbox id="namaKaryawanInput" class="col-md" placeholder="Type your message here" [clearButton]="true">
+        </kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Tipe Karyawan</kendo-label>
-        <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md" defaultItem="Pilih Tipe Karyawan" [data]="tipeKaryawan" [valuePrimitive]="true">
+        <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md" defaultItem="Pilih Tipe Karyawan"
+          [data]="tipeKaryawan" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
       <div class="row">
@@ -57,12 +75,13 @@
       </div>
       <div class="row">
         <kendo-label class="col-3">Bidang Pekerjaan</kendo-label>
-        <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" 
+        <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25"
           placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Resume</kendo-label>
-        <kendo-fileselect id="resumeKaryawanUpload" class="col-md"  [restrictions]="fileRestrictions" [(ngModel)]="selectedFile"  [ngModelOptions]="{standalone: true}" (change)="upload()">
+        <kendo-fileselect id="resumeKaryawanUpload" class="col-md" [restrictions]="fileRestrictions"
+          [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
         </kendo-fileselect>
         <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
       </div>

@@ -19,50 +19,50 @@ const messages = {
   styleUrls: ['./profil-karyawan.component.css']
 })
 export class ProfilKaryawanComponent implements OnInit {
-  @ViewChild(DataBindingDirective)
-  dataBinding!: DataBindingDirective;
+  // @ViewChild(DataBindingDirective)
+  // dataBinding!: DataBindingDirective;
 
   public columns = [
-    {field: "nik", title:"NIK"}, 
-    {field: "nama_pegawai", title:"Nama Pegawai"}, 
-    {field: "tipe_karyawan", title:"Tipe Karyawan"}, 
-    {field: "jabatan", title:"Jabatan"},
-    {field: "bidang_pekerjaan", title:"Bidang Pekerjaan"}, 
+    {field:"NIK"}, 
+    {field:"Nama Pegawai"}, 
+    {field:"Tipe Karyawan"}, 
+    {field:"Jabatan"},
+    {field:"Bidang Pekerjaan"}, 
     // {field: "resume", title:"Resume"}, 
   ];
 
   public dataKaryawan = [
     {
-      nik: "848e6002-8a92-447d-951b-1ffd5e695578",
-      nama_pegawai: "Sig Jeannel",
-      jabatan: "Human Resources Assistant III",
-      tipe_karyawan: 1,
-      bidang_pekerjaan: "HR"
+      "nik": "848e6002-8a92-447d-951b-1ffd5e695578",
+      "nama_pegawai": "Sig Jeannel",
+      "tipe_karyawan": 1,
+      "jabatan": "Human Resources Assistant III",
+      "bidang_pekerjaan": "HR"
     },
     {
-      id: "19d18d40-0e64-4837-9420-92130a0ed253",
-      nama_pegawai: "Shelden Greyes",
-      jabatan: "Operator",
-      tipe_karyawan: 2,
-      bidang_pekerjaan: "Engineering"
+      "nik": "19d18d40-0e64-4837-9420-92130a0ed253",
+      "nama_pegawai": "Shelden Greyes",
+      "tipe_karyawan": 2,
+      "jabatan": "Operator",
+      "bidang_pekerjaan": "Engineering"
     },
     {
-      nik: "bebdc6eb",
-      nama_pegawai: "Megen Cody",
-      jabatan: "Operator",
-      tipe_karyawan: 3,
-      bidang_pekerjaan: "Engineering"
+      "nik": "bebdc6eb",
+      "nama_pegawai": "Megen Cody",
+      "tipe_karyawan": 3,
+      "jabatan": "Operator",
+      "bidang_pekerjaan": "Engineering"
     },
     {
-      nik: "38b08b88",
-      nama_pegawai: "Clevey Thursfield",
-      jabatan: "VP Quality Control",
-      tipe_karyawan: 2,
-      bidang_pekerjaan: "Engineering"
+      "nik": "38b08b88",
+      "nama_pegawai": "Clevey Thursfield",
+      "tipe_karyawan": 2,
+      "jabatan": "VP Quality Control",
+      "bidang_pekerjaan": "Engineering"
     }
   ];
   
-  public gridData = this.dataKaryawan;
+  public gridData: any = {};
   public gridView!: any[];
 
   popUpTitle: string = "Informasi Pemegang Saham";
@@ -78,7 +78,7 @@ export class ProfilKaryawanComponent implements OnInit {
     },{
       id: 3,
       name: "Tenaga Administrasi"
-    }];
+  }];
   
   public opened = false;
 
@@ -98,6 +98,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
   ngOnInit(): void {
     this.gridView = this.gridData;
+    this.gridData = this.dataKaryawan;
+    console.log(this.gridData)
   }
 
   public close() {
