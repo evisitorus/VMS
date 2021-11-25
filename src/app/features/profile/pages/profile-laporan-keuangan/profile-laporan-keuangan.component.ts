@@ -256,7 +256,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.triggerModal('spt');
       }
     );
-
   }
 
   public updateNeraca(): void {
@@ -268,11 +267,31 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public deleteNeraca(id: string): void {
-
+    this.service.deleteDataNeraca(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.fetchDataNeraca();
+      },
+      () => {
+        this.popUpMessage = "Gagal menghapus data";
+        this.triggerPopUp();
+      }
+    );
   }
 
   public deleteSPT(id: string): void {
-    
+    this.service.deleteDataSPT(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.fetchDataSPT();
+      },
+      () => {
+        this.popUpMessage = "Gagal menghapus data";
+        this.triggerPopUp();
+      }
+    );
   }
 
   public upload(): void {
