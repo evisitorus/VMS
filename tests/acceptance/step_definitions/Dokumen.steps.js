@@ -1,6 +1,16 @@
 const { I } = inject();
 
 Given('The Vendor already add information in regards to {string}', () => {
+    I.amOnPage('/login');
+    I.waitForElement('#input-email input[class=k-input]');
+    I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
+    I.waitForElement('#input-password input[class=k-input]');
+    I.fillField('#input-password input[class=k-input]', '1234');
+    I.waitForElement('#btn-login');
+    I.click('#btn-login');
+    I.waitForElement('#btn-popup-yes');
+    I.click('#btn-popup-yes');
+
     I.amOnPage('/profile-information');
 });
 
@@ -32,15 +42,14 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
     I.fillField('#input-nomor-dokumen input[class=k-input]', 'vms/1/11/21/bdg');
     I.fillField('#input-nama-dokumen input[class=k-input]', 'Akta Pendirian Perusahaan');
     I.fillField('#input-berlaku-sampai input[class=k-input]', '11242021');
-    I.click('#input-lampiran-file input[type=file]');
+    // I.click('#input-lampiran-file input[type=file]');
 
     I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
-    I.wait(5);
+    // I.waitForValue('.k-file');
 });
 
 Given('The Vendor must click {string} button to save information of {string}', () => {
     I.click('#btn-simpan');
-    I.wait(30);
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
