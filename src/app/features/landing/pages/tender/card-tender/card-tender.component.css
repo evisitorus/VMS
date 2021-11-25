@@ -101,7 +101,7 @@ vertical-align: middle;
   /* For desktop: */
   .k-listview-item {
     display: inline-block;
-    width: 43%;
+    width: 40%;
     border-style: solid;
     border-color: #dee2e6;
     border-width: 3px;
