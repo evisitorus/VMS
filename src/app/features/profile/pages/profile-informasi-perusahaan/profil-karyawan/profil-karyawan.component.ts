@@ -73,7 +73,7 @@ export class ProfilKaryawanComponent implements OnInit {
       name: "Tenaga Administrasi"
   }];
 
-  public pegawaiFormGroup = new FormGroup({});
+  public pegawaiFormGroup! :FormGroup;
   
   public opened = false;
 
@@ -111,6 +111,9 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
+      nik: new FormControl(this.data.nik,[]),
+      namaPegawai: new FormControl(this.data.namaPegawai,[]),
+      tipeKaryawan: new FormControl(this.data.tipeKaryawan.name,[]),
       jabatan: new FormControl(this.data.jabatan, Validators.required),
       bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
     });
@@ -151,42 +154,42 @@ export class ProfilKaryawanComponent implements OnInit {
   // }
 
   public save(): void {
-    let params: ProfileKaryawanInterface = {
-      nik: this.pegawaiFormGroup.value.nik,
-      namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-      jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidang:this.pegawaiFormGroup.value.bidang,
-      file: this.uploadedFileId,
-      attachmentFilePath: this.uploadedFileContentUrl
-    };
+    // let params: ProfileKaryawanInterface = {
+    //   nik: this.pegawaiFormGroup.value.nik,
+    //   namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
+    //   tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+    //   jabatan:this.pegawaiFormGroup.value.jabatan,
+    //   bidang:this.pegawaiFormGroup.value.bidang,
+    //   file: this.uploadedFileId,
+    //   attachmentFilePath: this.uploadedFileContentUrl
+    // };
 
-    let temp:any = {
-      nik: this.pegawaiFormGroup.value.nik,
-      namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-      jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidang:this.pegawaiFormGroup.value.bidang,
-      // file: this.uploadedFileId,
-      // attachmentFilePath: this.uploadedFileContentUrl
-    }
+    // let temp:any = {
+    //   nik: this.pegawaiFormGroup.value.nik,
+    //   namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
+    //   tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+    //   jabatan:this.pegawaiFormGroup.value.jabatan,
+    //   bidang:this.pegawaiFormGroup.value.bidangPekerjaan,
+    //   // file: this.uploadedFileId,
+    //   // attachmentFilePath: this.uploadedFileContentUrl
+    // }
+    console.log(this.pegawaiFormGroup.value)
+    // console.log(temp)
 
-    console.log(temp)
-
-    this.profileInformationService.addProfilKaryawan(params).subscribe(
-      () => {
-        this.popUpMessage = "Berhasil menyimpan data";
-        this.triggerPopUp();
-        this.dataKaryawan.push(temp);
-        // this.fetchData();
-        this.close();
-      },
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
-        this.triggerPopUp();
-        this.close();
-      }
-    );
+    // this.profileInformationService.addProfilKaryawan(params).subscribe(
+    //   () => {
+    //     this.popUpMessage = "Berhasil menyimpan data";
+    //     this.triggerPopUp();
+    //     this.dataKaryawan.push(temp);
+    //     // this.fetchData();
+    //     // this.close();
+    //   },
+    //   () => {
+    //     this.popUpMessage = "Gagal menyimpan data";
+    //     this.triggerPopUp();
+    //     this.close();
+    //   }
+    // );
   }
 
   public close() {

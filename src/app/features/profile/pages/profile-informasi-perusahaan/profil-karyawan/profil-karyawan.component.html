@@ -14,12 +14,12 @@
     </kendo-grid-column>
     <kendo-grid-column title="Nama Pegawai">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.nama_pegawai }}
+        {{ dataItem.namaPegawai }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Tipe Karyawan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.tipe_karyawan === 1 ? "Tenaga Ahli" : 2 ? "Tenaga Terampil" : "Tenaga Administrasi" }}
+        {{ dataItem.tipeKaryawan === 1 ? "Tenaga Ahli" : 2 ? "Tenaga Terampil" : "Tenaga Administrasi" }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Jabatan">
@@ -29,7 +29,7 @@
     </kendo-grid-column>
     <kendo-grid-column title="Bidang Pekerjaan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.bidang_pekerjaan }}
+        {{ dataItem.bidangPekerjaan }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Resume">
@@ -60,21 +60,21 @@
         <kendo-formfield [formGroup]= "pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">NIK</kendo-label>
-            <kendo-textbox id="nikPegawaiInput" class="col-md" placeholder="Type your message here" [clearButton]="true">
+            <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md" placeholder="Type your message here" [clearButton]="true" #nik>
             </kendo-textbox>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]= "pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Nama Karyawan</kendo-label>
-            <kendo-textbox id="namaKaryawanInput" class="col-md" placeholder="Type your message here" [clearButton]="true">
+            <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai" placeholder="Type your message here" #namaPegawai [clearButton]="true">
             </kendo-textbox>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]= "pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Tipe Karyawan</kendo-label>
-            <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }"textField="name" valueField="id" [data]="tipeKaryawan">
+            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }"textField="name" valueField="id" [data]="tipeKaryawan">
             </kendo-dropdownlist>
           </div>
         </kendo-formfield>
