@@ -10,11 +10,12 @@
             <div class="row align-items-center">
               <img class="col-3"
                 src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg" />
-              <form class="k-form" [formGroup]="logoForm" novalidate (ngSubmit)= saveImage(logoForm.value,logoForm.valid)>
-                <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto" [title]="'Pilih File'"></kendo-fileselect>
+              <!-- <form class="k-form" [formGroup]="logoForm" novalidate (ngSubmit)= saveImage(logoForm.value,logoForm.valid)>
+                <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto" [title]="'Pilih File'" (change)="upload()"></kendo-fileselect>
                 <kendo-formhint>Gambar harus berupa jpg, jpeg atau png dengan maksimum file 2 mb</kendo-formhint>
                 <kendo-formerror *ngIf="logoForm.controls.files.errors?.required && submitted">Error: Uploading files is required</kendo-formerror>
-              </form>
+              </form> -->
+              <kendo-fileselect required name="files" #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
             </div>
           </ng-template>
         </kendo-panelbar-item>
