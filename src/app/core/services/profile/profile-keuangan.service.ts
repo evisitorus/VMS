@@ -88,6 +88,50 @@ export class ProfileKeuanganService {
     return this.apiService.sendRequest(api_save_spt);
   }
 
+  public updateDataNeraca(params: ProfileKeuanganNeracaInterface, id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_update_neraca: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_neraca_route.concat("/").concat(id),
+      body: {
+        year: params.tahun,
+        aktiva: params.aktiva,
+        pasiva: params.pasiva,
+        equitas: params.equitas,
+        omzetBersih: params.omzet,
+        vendor: "/api/vendors/".concat(this.authService.getLocalStorage('vendor_id')!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_update_neraca);
+  }
+
+  public updateDataSPT(params: ProfileKeuanganSPTInterface, id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_save_spt: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_spt_route.concat("/").concat(id),
+      body: {
+        number: params.nomorDokumen,
+        year: params.tahunSPT,
+        attachmentFilePath: params.filename,
+        submitDate: params.submitDate,
+        file: params.lampiran,
+        vendor: "/api/vendors/".concat(this.authService.getLocalStorage('vendor_id')!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_save_spt);
+  }
+
   public deleteDataNeraca(id: string): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_delete_neraca: ApiInterface = {

@@ -220,3 +220,8 @@ label{
     margin-top: 35px !important;
     margin-right: 35px !important;
 }
+
+.lampiran-url {
+    color: #0058E9;
+    cursor: pointer;
+}

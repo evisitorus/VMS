@@ -252,8 +252,7 @@
                 Tambah Neraca
               </button>
             </div>
-          </div>
-          
+          </div> 
           
         </div>
 
@@ -272,6 +271,9 @@
             <kendo-grid-column field="nomor" title="Nomor">
             </kendo-grid-column>
             <kendo-grid-column field="lampiran" title="Lampiran">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
+              </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="submitDate" title="Waktu Upload">
             </kendo-grid-column>
@@ -302,6 +304,7 @@
       <div class="profile-content-title">
         <kendo-label>Modal</kendo-label>
       </div>
+      
       <div class="profile-keuangan-field">
 
         <div class="row bank-field">

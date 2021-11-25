@@ -47,6 +47,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public popUpMessage: string = ""
 
   public isNewData: boolean = true;
+  public id!: string
 
   public dataNeraca: any = {
     tahun: "",
@@ -125,6 +126,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public triggerModal(option: string): void {
+    if (this.openNeraca === true || this.openSPT === true) {
+      this.resetForm();
+    }
     switch (option) {
       case "neraca":
         this.openNeraca = !this.openNeraca;
@@ -135,7 +139,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       default:
         break;
     }
-    this.resetForm();
   }
 
   public mapDataNeraca(data: any[]): any[] {
@@ -155,6 +158,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public mapDataSPT(data: any[]): any[] {
+    console.log(data);
     let mappedData:any[] = [];
     for (const key in data) {
       mappedData[key] = {
@@ -163,17 +167,34 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         submitDate: formatDate(data[key]['submitDate'], "dd-MM-YYYY hh:mm:ss", "en-US"),
         nomor: data[key]['number'],
         lampiran: data[key]['attachmentFilePath'],
+        file: data[key]['file']
       };
     }
     return mappedData;
   }
 
   public updateFormNeraca(data: any): void {
+    this.id = data.id;
+    this.dataNeraca.tahun = data.tahun;
+    this.dataNeraca.aktiva = data.aktiva;
+    this.dataNeraca.pasiva = data.pasiva;
+    this.dataNeraca.equitas = data.equitas;
+    this.dataNeraca.omzet = data.omzet;
 
+    this.isNewData = false;
+    this.triggerModal('neraca');
+    this.setForm();
   }
 
   public updateFormSPT(data: any): void {
+    this.id = data.id;
+    this.dataSPT.tahun = data.tahun;
+    this.dataSPT.nomorDokumen = data.nomor;
+    this.dataSPT.lampiran = data.lampiran;
 
+    this.isNewData = false;
+    this.triggerModal('spt');
+    this.setForm();
   }
 
   public fetchDataNeraca(): void {
@@ -259,11 +280,43 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateNeraca(): void {
-
+    let params : ProfileKeuanganNeracaInterface = {...this.formNeraca.value};
+    this.service.updateDataNeraca(params, this.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.fetchDataNeraca();
+        this.triggerModal('neraca');
+      },
+      () => {
+        this.popUpMessage = "Gagal memperbarui data";
+        this.triggerPopUp();
+        this.triggerModal('neraca');
+      }
+    );
   }
 
   public updateSPT(): void {
-
+    let params : ProfileKeuanganSPTInterface = {
+      tahunSPT: this.formSPT.value.tahunSPT,
+      nomorDokumen: this.formSPT.value.nomorDokumen,
+      lampiran: this.uploadedFileId,
+      filename: this.uploadedFileContentUrl,
+      submitDate: new Date()
+    };
+    this.service.updateDataSPT(params, this.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.fetchDataSPT();
+        this.triggerModal('spt');
+      },
+      () => {
+        this.popUpMessage = "Gagal memperbarui data";
+        this.triggerPopUp();
+        this.triggerModal('spt');
+      }
+    );
   }
 
   public deleteNeraca(id: string): void {
@@ -302,6 +355,23 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       },
       () => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public download(fileId: string, filename: string) {
+    console.log(fileId);
+    console.log(filename);
+    this.fileService.download(fileId).subscribe(
+      (res) => {
+        let mime = this.fileService.getMimeType(filename);
+        let blob = new Blob([res], { type: mime });
+        let url= window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      () => {
+        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
         this.triggerPopUp();
       }
     );
