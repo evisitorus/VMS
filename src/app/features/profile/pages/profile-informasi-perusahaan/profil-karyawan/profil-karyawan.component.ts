@@ -27,31 +27,31 @@ export class ProfilKaryawanComponent implements OnInit {
   public dataKaryawan = [
     {
       "nik": "848e6002-8a92-447d-951b-1ffd5e695578",
-      "nama_pegawai": "Sig Jeannel",
-      "tipe_karyawan": 1,
+      "namaPegawai": "Sig Jeannel",
+      "tipeKaryawan": 1,
       "jabatan": "Human Resources Assistant III",
-      "bidang_pekerjaan": "HR"
+      "bidangPekerjaan": "HR"
     },
     {
       "nik": "19d18d40-0e64-4837-9420-92130a0ed253",
-      "nama_pegawai": "Shelden Greyes",
-      "tipe_karyawan": 2,
+      "namaPegawai": "Shelden Greyes",
+      "tipeKaryawan": 2,
       "jabatan": "Operator",
-      "bidang_pekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering"
     },
     {
       "nik": "bebdc6eb",
-      "nama_pegawai": "Megen Cody",
-      "tipe_karyawan": 3,
+      "namaPegawai": "Megen Cody",
+      "tipeKaryawan": 3,
       "jabatan": "Operator",
-      "bidang_pekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering"
     },
     {
       "nik": "38b08b88",
-      "nama_pegawai": "Clevey Thursfield",
-      "tipe_karyawan": 2,
+      "namaPegawai": "Clevey Thursfield",
+      "tipeKaryawan": 2,
       "jabatan": "VP Quality Control",
-      "bidang_pekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering"
     }
   ];
   
@@ -112,7 +112,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
       nik: new FormControl(this.data.nik,[]),
-      namaPegawai: new FormControl(this.data.namaPegawai,[]),
+      namaPegawai: new FormControl(this.data.namaPegawai,Validators.required),
       tipeKaryawan: new FormControl(this.data.tipeKaryawan.name,[]),
       jabatan: new FormControl(this.data.jabatan, Validators.required),
       bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
@@ -153,44 +153,46 @@ export class ProfilKaryawanComponent implements OnInit {
   //   );
   // }
 
-  public save(): void {
-    // let params: ProfileKaryawanInterface = {
-    //   nik: this.pegawaiFormGroup.value.nik,
-    //   namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
-    //   tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-    //   jabatan:this.pegawaiFormGroup.value.jabatan,
-    //   bidang:this.pegawaiFormGroup.value.bidang,
-    //   file: this.uploadedFileId,
-    //   attachmentFilePath: this.uploadedFileContentUrl
-    // };
-
-    // let temp:any = {
-    //   nik: this.pegawaiFormGroup.value.nik,
-    //   namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
-    //   tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-    //   jabatan:this.pegawaiFormGroup.value.jabatan,
-    //   bidang:this.pegawaiFormGroup.value.bidangPekerjaan,
-    //   // file: this.uploadedFileId,
-    //   // attachmentFilePath: this.uploadedFileContentUrl
-    // }
-    console.log(this.pegawaiFormGroup.value)
-    // console.log(temp)
-
-    // this.profileInformationService.addProfilKaryawan(params).subscribe(
-    //   () => {
-    //     this.popUpMessage = "Berhasil menyimpan data";
-    //     this.triggerPopUp();
-    //     this.dataKaryawan.push(temp);
-    //     // this.fetchData();
-    //     // this.close();
-    //   },
-    //   () => {
-    //     this.popUpMessage = "Gagal menyimpan data";
-    //     this.triggerPopUp();
-    //     this.close();
-    //   }
-    // );
+  public addToTableFe():void{
+    let temp:any = {
+      nik: this.pegawaiFormGroup.value.nik,
+      namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+      jabatan:this.pegawaiFormGroup.value.jabatan,
+      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan,
+      // file: this.uploadedFileId,
+      // attachmentFilePath: this.uploadedFileContentUrl
+    }
+    this.popUpMessage = "Berhasil menyimpan data";
+    this.triggerPopUp();
+    this.dataKaryawan.push(temp);
   }
+
+  // public save(): void {
+  //   let params: ProfileKaryawanInterface = {
+  //     nik: this.pegawaiFormGroup.value.nik,
+  //     namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
+  //     tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+  //     jabatan:this.pegawaiFormGroup.value.jabatan,
+  //     bidang:this.pegawaiFormGroup.value.bidangPekerjaan,
+  //     file: this.uploadedFileId,
+  //     attachmentFilePath: this.uploadedFileContentUrl
+  //   };
+
+  //   this.profileInformationService.addProfilKaryawan(params).subscribe(
+  //     () => {
+  //       this.popUpMessage = "Berhasil menyimpan data";
+  //       this.triggerPopUp();
+  //       // this.fetchData();
+  //       this.close();
+  //     },
+  //     () => {
+  //       this.popUpMessage = "Gagal menyimpan data";
+  //       this.triggerPopUp();
+  //       this.close();
+  //     }
+  //   );
+  // }
 
   public close() {
     console.log(`Dialog result: ${status}`);
