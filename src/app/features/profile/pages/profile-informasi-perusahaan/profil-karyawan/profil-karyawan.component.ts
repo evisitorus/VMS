@@ -4,8 +4,8 @@ import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
+import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
 
 interface Item {
   name: string;
@@ -121,6 +121,35 @@ export class ProfilKaryawanComponent implements OnInit {
     
   }
 
+  // public mapData(data: any[]): any[] {
+  //   let mappedData:any[] = [];
+  //   for (const key in data) {
+  //     mappedData[key] = {
+  //       nik: data[key]['nik'],
+  //       namaDokumen: data[key]['namaDokumen'],
+  //       berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
+  //       berlakuSampai: formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US"),
+  //       lampiran: data[key]['attachmentFilePath'],
+  //       file: data[key]['file'],
+  //       id: data[key]['id']
+  //     };
+  //   }
+  //   return mappedData;
+  // }
+
+  // public fetchData(): void {
+  //   this.profileInformationService.getProfilKaryawan().subscribe(
+  //     (response) => {
+  //       this.gridData = response['hydra:member'];
+  //       this.gridData = this.mapData(this.gridData);
+  //     },
+  //     () => {
+  //       this.popUpMessage = "Gagal mendapatkan data";
+  //       this.triggerPopUp();
+  //     }
+  //   );
+  // }
+
   public save(): void {
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
@@ -132,7 +161,32 @@ export class ProfilKaryawanComponent implements OnInit {
       attachmentFilePath: this.uploadedFileContentUrl
     };
 
-    this.profileInformationService.
+    let temp:any = {
+      nik: this.pegawaiFormGroup.value.nik,
+      namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+      jabatan:this.pegawaiFormGroup.value.jabatan,
+      bidang:this.pegawaiFormGroup.value.bidang,
+      // file: this.uploadedFileId,
+      // attachmentFilePath: this.uploadedFileContentUrl
+    }
+
+    console.log(temp)
+
+    this.profileInformationService.addProfilKaryawan(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.triggerPopUp();
+        this.dataKaryawan.push(temp);
+        // this.fetchData();
+        this.close();
+      },
+      () => {
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+        this.close();
+      }
+    );
   }
 
   public close() {
