@@ -31,19 +31,13 @@
         </kendo-grid>
         <br>
         
-        <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
-          Tambah Asset
-        </button>
-      
-      <kendo-window title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
-        <form class="k-form">
-
-          <kendo-formfield [formGroup]="form">
-            <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
-            <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" #namaAsset required></kendo-textbox>                
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
-          </kendo-formfield>
+        <div class="col-2 profile-content-grid-button">
+          <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
+            Tambah Asset
+          </button>
+        </div>
+        
+      </div>
 
           <kendo-formfield [formGroup]="form">
             <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>

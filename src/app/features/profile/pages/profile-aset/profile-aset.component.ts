@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TextBoxComponent } from '@progress/kendo-angular-inputs';
 import { ProfileAssetInterface } from 'src/app/core/interfaces/profile-asset.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
@@ -54,6 +53,8 @@ export class ProfileAsetComponent implements OnInit {
 
   public close() {
     this.opened = false;
+    this.resetForm();
+    this.isNewData = true;
   }
 
   public open() {
@@ -93,6 +94,13 @@ export class ProfileAsetComponent implements OnInit {
     this.open();
   }
 
+  public resetForm(): void {
+    this.data.namaAsset = "";
+    this.data.jumlah = "";
+    this.data.tahunPembuatan = "";
+    this.setFormValue();
+  }
+
   public save(): void {
     let params: ProfileAssetInterface = {...this.form.value};
     this.profileAssetService.save(params).subscribe(
@@ -101,11 +109,13 @@ export class ProfileAsetComponent implements OnInit {
         this.triggerPopUp();
         this.getData();
         this.close();
+        this.resetForm();
       }, 
       () => {
         this.popUpMessage = "Gagal menyimpan data";
         this.triggerPopUp();
         this.close();
+        this.resetForm();
       }
     );
   }
@@ -118,11 +128,13 @@ export class ProfileAsetComponent implements OnInit {
         this.triggerPopUp();
         this.getData();
         this.close();
+        this.resetForm();
       },
       () => {
         this.popUpMessage = "Gagal memperbarui data";
         this.triggerPopUp();
         this.close();
+        this.resetForm();
       }
     );
   }
