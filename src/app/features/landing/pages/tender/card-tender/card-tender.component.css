@@ -1,8 +1,9 @@
 .demo {
-  display: flex;
+  /* display: flex; */
   /* justify-content: center; */
-  margin: 2em;
-  padding: 0px 200px;
+  /* margin: 2em; */
+  /* padding: 0px 200px; */
+  width: 100%;
 }
 .k-listview {
   /* font-family: sans-serif; */
@@ -12,7 +13,7 @@
 }
 .k-listview-item {
   display: inline-block;
-  width: 43%;
+  /* width: 43%; */
   border-style: solid;
   border-color: #dee2e6;
   border-width: 3px;
@@ -22,7 +23,7 @@
 
 .k-listview-item:hover {
   display: inline-block;
-  width: 43%;
+  /* width: 43%; */
   border-style: solid;
   border-color: rgba(0,0,0,0.75);
   border-width: 3px;
@@ -94,4 +95,24 @@ vertical-align: middle;
 
 .k-listview {
   border: none !important;
+}
+
+@media only screen and (min-width: 1080px) {
+  /* For desktop: */
+  .k-listview-item {
+    display: inline-block;
+    width: 40%;
+    border-style: solid;
+    border-color: #dee2e6;
+    border-width: 3px;
+    margin: 20px 40px;
+    border-radius: 8px;
+  }
+  .demo {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin: 2em; */
+    padding: 0px 200px;
+    width: 100%;
+  }
 }
