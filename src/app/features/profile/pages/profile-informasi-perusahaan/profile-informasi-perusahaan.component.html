@@ -7,10 +7,10 @@
       <kendo-panelbar id="profile-information-panelbar">
         <kendo-panelbar-item title="Overview" [expanded]="true">
           <ng-template kendoPanelBarContent>
-            <div class="row align-items-center">
+            <div class="row align-items-center justify-content-center k-vstack">
               <img class="col-3"
                 src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg" />
-              <kendo-fileselect id="imgPerusahaanUpload" required name="files" #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+              <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" required name="files" look="flat" #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
             </div>
           </ng-template>
         </kendo-panelbar-item>
