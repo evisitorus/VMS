@@ -281,7 +281,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        this.logoImg = reader.readAsDataURL(this.selectedFile[0]);
+        // this.logoImg = reader.readAsDataURL(this.selectedFile[0]);
         this.uploadedFileId = res["@id"]; //vendor :logo_id
       },
       (error) => {
