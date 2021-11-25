@@ -3,7 +3,7 @@ exports.config = {
   helpers: {
     Playwright: {
       url: 'http://localhost:4200',
-      show: false,
+      show: true,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
@@ -32,7 +32,19 @@ exports.config = {
   hooks: [],
   gherkin: {
     features: './tests/acceptance/features/*.feature',
-    steps: ['./tests/acceptance/step_definitions/steps.js']
+    steps: [
+          // './tests/acceptance/step_definitions/steps.js'
+          './tests/acceptance/step_definitions/RegisterNPWP.steps.js',
+          './tests/acceptance/step_definitions/ActivationAccount.steps.js',
+          './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformation.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformationDetails.steps.js',
+          './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
+          './tests/acceptance/step_definitions/ForgotPassword.steps.js',
+          './tests/acceptance/step_definitions/Login.steps.js',
+          './tests/acceptance/step_definitions/Logout.steps.js',
+          './tests/acceptance/step_definitions/ProfilPemegangSaham.steps.js',
+        ]
   },
   plugins: {
     screenshotOnFail: {

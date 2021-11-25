@@ -106,4 +106,17 @@ export class AuthService {
     return this.apiService.sendRequest(api_register);
   }
 
+  //activation set password
+  isTokenExpired(params: string): Observable<any> {    
+    let api_register: ApiInterface = {
+      method: 'POST',
+      url: ApiRoutes.api_token_route,
+      body: {
+        token: params
+      }
+    };
+
+    return this.apiService.sendRequest(api_register);
+  }
+
 }
