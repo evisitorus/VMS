@@ -77,7 +77,7 @@ export class ProfileInformasiPerusahaanComponent {
   ];
 
   public isRequired = true;
-  public opened = false;
+
   public isDisabledKota = true;
   public isDisabledKecamatan = true;
   // public isDisabledKelurahan = true;
@@ -227,15 +227,6 @@ export class ProfileInformasiPerusahaanComponent {
     } else {
       this.listItems = this.kategoriCorpItems;
     }
-  }
-
-  public close() {
-    console.log(`Dialog result: ${status}`);
-    this.opened = false;
-  }
-
-  public open() {
-    this.opened = true;
   }
 
   handleProvinceChange(value: any) {
