@@ -27,6 +27,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
+    maxFileSize: 2097152
   };
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
