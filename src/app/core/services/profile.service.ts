@@ -74,5 +74,27 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pemegang_saham);
   }
 
+  // addProfilKaryawan(): Observable<any> {
+  //   let api_add_profil_karyawan: ApiInterface = {
+  //     method: ApiRouteMethods.post,
+  //     url: ApiRoutes.api_add_karyawan_route,
+  //     // body: {
+
+  //     // }
+  //   }
+
+  //   return this.apiService.sendRequest(api_add_profil_karyawan);
+  // }
+
+  // getProfilKaryawan(): Observable<any> {
+  //   let api_get_profil_karyawan: ApiInterface = {
+  //     method: ApiRouteMethods.get,
+  //     url: ApiRoutes.api_get_karyawan_route,
+  //   // body: {
+
+  //   // }
+  //   }
+  // }
+
   
 }

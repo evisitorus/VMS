@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
@@ -79,6 +80,8 @@ export class ProfilKaryawanComponent implements OnInit {
       id: 3,
       name: "Tenaga Administrasi"
   }];
+
+  public pegawaiFormGroup = new FormGroup({});
   
   public opened = false;
 
@@ -99,7 +102,10 @@ export class ProfilKaryawanComponent implements OnInit {
   ngOnInit(): void {
     this.gridView = this.gridData;
     this.gridData = this.dataKaryawan;
-    console.log(this.gridData)
+  }
+
+  public submitProfilKaryawan(): void {
+    this.pegawaiFormGroup.markAllAsTouched();
   }
 
   public close() {

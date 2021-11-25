@@ -27,6 +27,8 @@ export const ApiRoutes = {
   api_media_object_route: API_BASE_URL + "/media_objects",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
   api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
+  api_get_karyawan_route: API_BASE_URL + "",
+  api_add_karyawan_route: API_BASE_URL + ""
 };
 
 export const ApiRouteMethods = {
