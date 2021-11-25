@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import { ProfileDocumentInterface } from 'src/app/core/interfaces/profile-document.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileDocumentService } from 'src/app/core/services/profile/profile-document.service';
@@ -32,6 +32,8 @@ export class ProfileDokumenComponent implements OnInit {
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
+  public invalidFileExtension!: boolean;
+  public invalidMaxFileSize!: boolean;
 
   public isLifeTime: boolean = false;
   public isNewData: boolean = true;
@@ -138,10 +140,15 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.isNewData) {
-      this.save();
+    if (this.lampiranFiles === null) {
+      this.popUpMessage = "File tidak valid";
+      this.triggerPopUp();
     } else {
-      this.update();
+      if (this.isNewData) {
+        this.save();
+      } else {
+        this.update();
+      }
     }
   }
 
@@ -208,17 +215,33 @@ export class ProfileDokumenComponent implements OnInit {
     );
   }
 
+  public selectEventHandler(e: SelectEvent): void {
+    let errors = e.files[0].validationErrors;
+    if (errors?.includes("invalidMaxFileSize")) {
+      this.invalidMaxFileSize = true;
+    } else {
+      this.invalidMaxFileSize = false;
+    }
+    if (errors?.includes("invalidFileExtension")) {
+      this.invalidFileExtension = true;
+    } else {
+      this.invalidFileExtension = false;
+    }
+  }
+
   public upload(): void {
-    this.fileService.upload(this.lampiranFiles[0]).subscribe(
-      (res) => {
-        this.uploadedFileContentUrl = res.contentUrl;
-        this.uploadedFileId = res["@id"];
-      },
-      () => {
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
-        this.triggerPopUp();
-      }
-    );
+    if (this.lampiranFiles !== null) {
+      this.fileService.upload(this.lampiranFiles[0]).subscribe(
+        (res) => {
+          this.uploadedFileContentUrl = res.contentUrl;
+          this.uploadedFileId = res["@id"];
+        },
+        () => {
+          this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+          this.triggerPopUp();
+        }
+      );
+    }
   }
 
   public download(fileId: string, filename: string) {
