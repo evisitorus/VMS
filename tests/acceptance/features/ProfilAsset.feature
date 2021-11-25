@@ -43,17 +43,8 @@ Feature: Vendor Basic - Completed vendor information
       }
       """
       #repeat process 1 to add another "Asset"
-     
-    #   And The Vendor must click "Simpan" button where found on the left-buttom of "Asset" form 
-    #   And The Vendor will see confirmation message 
-    #   """
-    #   {
-      
-    #     "message" : "Simpan Asset ?",
-    #     "option"  : "Yes/No"
-    #   }
-    #   """
-    #   And The Vendor must select "Yes" option
+    #   And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Asset" on "Asset Grid"
+	  #   And The Vendor will get flag as "Completed" for checklist  if already upload at least one record on "Asset" and will be displayed on "Verifikasi Kelengkapan" form also "Dashboard" form     
     #   And The Vendor will see progress of upgrade level on "Vendor Dashboard"
     #   """
     #   {
