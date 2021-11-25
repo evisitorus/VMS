@@ -1,11 +1,11 @@
-import { environment as env} from "src/environments/environment";
+const environment = require("src/environments/environment")
 
 exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
       url: 'http://localhost:4200',
-      show: env.acceptance_test,
+      show: environment.acceptance_test,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
