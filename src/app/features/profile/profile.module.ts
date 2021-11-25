@@ -33,6 +33,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/profil-karyawan/profil-karyawan.component';
 
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
@@ -64,7 +65,8 @@ import { APP_BASE_HREF } from '@angular/common';
     ProfileLaporanKeuanganComponent,
     ProfileDashboardComponent,
     PemegangSahamComponent,
-    DrawerComponent
+    DrawerComponent,
+    ProfilKaryawanComponent
   ],
   imports: [
     CommonModule,

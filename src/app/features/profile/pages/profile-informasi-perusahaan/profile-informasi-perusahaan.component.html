@@ -220,77 +220,8 @@
         </kendo-panelbar-item>
         <kendo-panelbar-item title="Data Pegawai">
           <ng-template kendoPanelBarContent>
-            <div>
-              <kendo-label>Pegawai</kendo-label>
-              <br>
-              <kendo-grid>
-                <kendo-grid-column field="no" title="No.">
-                </kendo-grid-column>
-                <kendo-grid-column field="shareholder_name" title="Nama Pegawai Saham">
-                </kendo-grid-column>
-                <kendo-grid-column field="shareholder_type" title="Tipe Karyawan">
-                </kendo-grid-column>
-                <kendo-grid-column field="is_domestic_shareholder" title="Jabatan">
-                </kendo-grid-column>
-                <kendo-grid-column field="ownership" title="Bidang Pekerjaan">
-                </kendo-grid-column>
-                <kendo-grid-column field="ownership" title="Resume">
-                </kendo-grid-column>
-                <kendo-grid-column field="action" title="Action">
-                </kendo-grid-column>
-              </kendo-grid>
-              <br>
-              <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
-                Tambah Pegawai
-              </button>
-
-              <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
-                <div class="container">
-                  <div class="row">
-                    <kendo-label class="col-3">No</kendo-label>
-                    <kendo-textbox id="noPegawaiInput" class="col-md-auto" placeholder="Type your message here"
-                      [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">NIK</kendo-label>
-                    <kendo-textbox id="nikPegawaiInput" class="col-md-auto" placeholder="Type your message here"
-                      [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Nama Karyawan</kendo-label>
-                    <kendo-textbox id="namaKaryawanInput" class="col-md-auto" placeholder="Type your message here"
-                      [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Tipe Karyawan</kendo-label>
-                    <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto" defaultItem="Pilih Tipe Karyawan"
-                      [data]="listItems" [valuePrimitive]="true">
-                    </kendo-dropdownlist>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Jabatan</kendo-label>
-                    <kendo-textbox id="jabatanKaryawanInput" class="col-md-auto" placeholder="Type your message here"
-                      [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Bidang Pekerjaan</kendo-label>
-                    <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md-auto"
-                      placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Resume</kendo-label>
-                    <kendo-fileselect id="resumeKaryawanUpload" class="col-md-auto" [title]="'Pilih File'">
-                    </kendo-fileselect>
-                    <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
-                  </div>
-                </div>
-
-                <kendo-dialog-actions>
-                  <button kendoButton id="saveKaryawanFormBtn" (click)="close()" [primary]="true">Simpan</button>
-                  <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
-                </kendo-dialog-actions>
-              </kendo-dialog>
-            </div>
+            <!-- data pegawai -->
+            <app-profil-karyawan></app-profil-karyawan>
           </ng-template>
         </kendo-panelbar-item>
       </kendo-panelbar>
