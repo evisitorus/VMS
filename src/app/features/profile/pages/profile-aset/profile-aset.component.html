@@ -1,14 +1,61 @@
-<div class="profile-section">
+<div class="row profile-section">
+
+  <div class="profile-content-modal">
+    <kendo-window title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+      <form class="k-form">
+
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
+          <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" #namaAsset required></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>
+          <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" #jumlah required></kendo-numerictextbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
+          <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Tahun Pembuatan tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <div class="k-actions k-actions-end">
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
+              Simpan
+            </button>
+          </div>
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button vms-btn" (click)="close()">
+              Batal
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </kendo-window>
+
+  </div>
 
   <div class="col-2 profile-menu">
     <app-sidebar></app-sidebar>
   </div>
-  
-  <div class="profile-content">
-    <kendo-label>Aset Perusahaan</kendo-label>
-    <br><br>
-    
-    <div>
+
+  <div class="col-10 profile-content-container">
+
+    <div class="profile-content">
+
+      <div class="profile-content-title">
+        <kendo-label>Asset</kendo-label>
+      </div>
+
+      <div class="profile-content-grid">
         <kendo-grid [data]="gridData">
           <kendo-grid-column field="no" title="No.">
           </kendo-grid-column>
@@ -29,52 +76,17 @@
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
-        <br>
-        
-        <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
-          Tambah Asset
-        </button>
-      
-      <kendo-window title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
-        <form class="k-form">
 
-          <kendo-formfield [formGroup]="form">
-            <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
-            <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" #namaAsset required></kendo-textbox>                
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
-          </kendo-formfield>
+        <div class="col-2 profile-content-grid-button">
+          <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
+            Tambah Asset
+          </button>
+        </div>
 
-          <kendo-formfield [formGroup]="form">
-            <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>
-            <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" #jumlah required></kendo-numerictextbox>                
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
-          </kendo-formfield>
+      </div>
 
-          <kendo-formfield [formGroup]="form">
-            <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
-            <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox>                
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Tahun Pembuatan tidak boleh kosong</kendo-formerror>
-          </kendo-formfield>
-          
-          <div class="k-actions k-actions-end">
-            <div class="profile-content-modal-btn">
-              <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
-                Simpan
-              </button>
-            </div>
-            <div class="profile-content-modal-btn">
-              <button type="button" class="k-button vms-btn" (click)="close()">
-                Batal
-              </button>
-            </div>
-          </div>
-          
-        </form>
-      </kendo-window>
     </div>
+
   </div>
 
 </div>
