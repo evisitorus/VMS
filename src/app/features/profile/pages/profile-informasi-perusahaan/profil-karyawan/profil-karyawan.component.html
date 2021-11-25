@@ -3,6 +3,9 @@
   <br>
   <kendo-grid>
     <kendo-grid-column field="no" title="No.">
+      <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}} 
+      </ng-template>
     </kendo-grid-column>
     <kendo-grid-column field="shareholder_name" title="Nama Pegawai Saham">
     </kendo-grid-column>
@@ -14,8 +17,12 @@
     </kendo-grid-column>
     <kendo-grid-column field="ownership" title="Resume">
     </kendo-grid-column>
-    <kendo-grid-column field="action" title="Action">
-    </kendo-grid-column>
+    <kendo-grid-command-column field="action" title="Action">
+      <ng-template kendoGridCellTemplate let-isNew="isNew">
+        <button kendoGridEditCommand >Edit</button>
+        <button kendoGridRemoveCommand>Remove</button>
+    </ng-template>
+    </kendo-grid-command-column>
   </kendo-grid>
   <br>
   <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
@@ -25,39 +32,33 @@
   <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
     <div class="container">
       <div class="row">
-        <kendo-label class="col-3">No</kendo-label>
-        <kendo-textbox id="noPegawaiInput" class="col-md-auto" placeholder="Type your message here"
-          [clearButton]="true"></kendo-textbox>
-      </div>
-      <div class="row">
         <kendo-label class="col-3">NIK</kendo-label>
-        <kendo-textbox id="nikPegawaiInput" class="col-md-auto" placeholder="Type your message here"
+        <kendo-textbox id="nikPegawaiInput" class="col-md" placeholder="Type your message here"
           [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Nama Karyawan</kendo-label>
-        <kendo-textbox id="namaKaryawanInput" class="col-md-auto" placeholder="Type your message here"
+        <kendo-textbox id="namaKaryawanInput" class="col-md" placeholder="Type your message here"
           [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Tipe Karyawan</kendo-label>
-        <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto" defaultItem="Pilih Tipe Karyawan"
-          [valuePrimitive]="true">
+        <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md" defaultItem="Pilih Tipe Karyawan" [data]="tipeKaryawan" [valuePrimitive]="true">
         </kendo-dropdownlist>
       </div>
       <div class="row">
         <kendo-label class="col-3">Jabatan</kendo-label>
-        <kendo-textbox id="jabatanKaryawanInput" class="col-md-auto" placeholder="Type your message here"
+        <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here" [maxlength]="25"
           [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Bidang Pekerjaan</kendo-label>
-        <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md-auto"
+        <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" 
           placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
       </div>
       <div class="row">
         <kendo-label class="col-3">Resume</kendo-label>
-        <kendo-fileselect id="resumeKaryawanUpload" class="col-md-auto" [title]="'Pilih File'">
+        <kendo-fileselect id="resumeKaryawanUpload" class="col-md" [title]="'Pilih File'">
         </kendo-fileselect>
         <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
       </div>
