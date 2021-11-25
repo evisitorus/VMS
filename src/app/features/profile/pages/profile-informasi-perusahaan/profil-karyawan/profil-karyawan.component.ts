@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 
 interface Item {
   name: string;
@@ -20,17 +21,6 @@ const messages = {
   styleUrls: ['./profil-karyawan.component.css']
 })
 export class ProfilKaryawanComponent implements OnInit {
-  // @ViewChild(DataBindingDirective)
-  // dataBinding!: DataBindingDirective;
-
-  public columns = [
-    {field:"NIK"}, 
-    {field:"Nama Pegawai"}, 
-    {field:"Tipe Karyawan"}, 
-    {field:"Jabatan"},
-    {field:"Bidang Pekerjaan"}, 
-    // {field: "resume", title:"Resume"}, 
-  ];
 
   public dataKaryawan = [
     {
@@ -64,7 +54,7 @@ export class ProfilKaryawanComponent implements OnInit {
   ];
   
   public gridData: any = {};
-  public gridView!: any[];
+  // public gridView!: any[];
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
@@ -86,7 +76,8 @@ export class ProfilKaryawanComponent implements OnInit {
   public opened = false;
 
   constructor(
-    private fileService: FileService
+    private fileService: FileService,
+    private eventEmitterService: EventEmitterService,
   ) { }
 
   public submitted = false;
@@ -96,11 +87,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "doc", "docx"],
-    maxFileSize: 20000000 //20 MB
+    maxFileSize: 20971520 //20 MB
   };
 
   ngOnInit(): void {
-    this.gridView = this.gridData;
+    // this.gridView = this.gridData;
     this.gridData = this.dataKaryawan;
   }
 
@@ -117,7 +108,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.opened = true;
   }
 
-  upload(): void {
+  public upload(): void {
     console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
@@ -125,11 +116,30 @@ export class ProfilKaryawanComponent implements OnInit {
         this.uploadedFileId = res["@id"]; //vendor :logo_id
       },
       (error) => {
-        // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
-        // this.triggerPopUp();
+        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.triggerPopUp();
         console.log(error);
       }
     );
+  }
+
+  public download(fileId: string, filename: string) {
+    this.fileService.download(fileId).subscribe(
+      (res) => {
+        let mime = this.fileService.getMimeType(filename);
+        let blob = new Blob([res], { type: mime });
+        let url= window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      () => {
+        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  triggerPopUp():void  {
+    this.eventEmitterService.trigger();
   }
 
 }
