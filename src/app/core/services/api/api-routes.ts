@@ -1,3 +1,5 @@
+const PADI_BASE_URL = "https://padi-dev.tees.co.id/external-app";
+
 const API_BASE_URL = env.api_base_path.concat('/api');
 import { environment as env} from "src/environments/environment";
 
@@ -15,7 +17,15 @@ export const ApiRoutes = {
   api_assets_route: API_BASE_URL + "/mesin_peralatans",
   api_documents_route: API_BASE_URL + "/dokumens",
   api_tenders_route: API_BASE_URL + "/tenders",
-  api_media_object_route: API_BASE_URL + "/media_objects"
+  api_media_object_route: API_BASE_URL + "/media_objects",
+  api_list_tender: API_BASE_URL + "/tenders/page/",
+  api_token_route: API_BASE_URL + "/users/token",
+  api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
+  api_add_pemegang_saham:  API_BASE_URL + "/vendors/pemegang_saham",
+  api_vendor_information_route: API_BASE_URL + "/vendors/1/information",
+  api_penyedia_usaha_route : API_BASE_URL + "/jenis_penyedia_usahas?page=1",
+  api_jenis_badan_usaha_route: API_BASE_URL + "",
+  api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1"
 };
 
 export const ApiRouteMethods = {
