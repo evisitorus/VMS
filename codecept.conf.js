@@ -1,11 +1,9 @@
-const environment = require("./src/environments/environment.prod")
-
 exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
       url: 'http://localhost:4200',
-      show: environment.acceptance_test,
+      show: true,
       browser: 'chromium',
       waitForTimeout: 10000,
       waitForNavigation: 'networkidle',
