@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  api_base_path: "http://103.107.101.12/"
+  api_base_path: "http://vms-dev.tenderbumn.id",
+  acceptance_test : false
 };
