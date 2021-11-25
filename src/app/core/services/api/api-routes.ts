@@ -22,7 +22,8 @@ export const ApiRoutes = {
     api_vendor_information_route: API_BASE_URL + "/vendors/1/information",
     api_penyedia_usaha_route : API_BASE_URL + "/jenis_penyedia_usahas?page=1",
     api_jenis_badan_usaha_route: API_BASE_URL + "",
-    api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1"
+    api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
+    api_get_vendor: API_BASE_URL + "/vendors",
 };
 
 export const ApiRouteMethods = {

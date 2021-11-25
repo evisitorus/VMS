@@ -16,15 +16,19 @@ export class ProfileDashboardComponent implements OnInit {
   name:string="";
   is_active:string="";
   registered_at:string="";
+  jenis_kegiatan_usaha:string = "";
+  address_vendor:string = "";
 
   ngOnInit(): void {
-    this.profileService.getVendorData().subscribe(
+    this.profileService.getVendor().subscribe(
       (resp) => {
         console.log(resp)
-        this.phone_number = resp.phone_number;
-        this.name = resp.name;
-        this.is_active = resp.is_active;
-        this.registered_at = resp.registered_at;
+        // this.phone_number = resp.phone_number;
+        // this.name = resp.name;
+        // this.is_active = resp.is_active;
+        // this.registered_at = resp.registered_at;
+        this.jenis_kegiatan_usaha = resp.jenisKegiatanUsaha[0].description;
+        console.log(resp.jenisKegiatanUsaha[0].description);
       },
       (error) => {
         console.log(error);

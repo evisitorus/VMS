@@ -34,16 +34,15 @@
           <div class="container">
             <div class="row">
               <i class="col-md-auto bi-building"></i>
-              <p class="col">Jl. Jenderal Gatot Soebroto Kav 52, Kuningan Barat, Mampang Prapatan, Kota Jakarta Selatan, DKI Jakarta
-                10310</p>
+              <p class="col">{{ address_vendor ? jenis_kegiatan_usaha : "Data tidak tersedia" }}</p>
             </div>
             <div class="row">
               <i class="col-md-auto bi-telephone"></i>
-              <p class="col">{{phone_number}}</p>
+              <p class="col">{{ phone_number ? jenis_kegiatan_usaha : "Data tidak tersedia" }}</p>
             </div>
             <div class="row">
               <i class="col-md-auto bi-briefcase"></i>
-              <p class="col">Material Konstruksi</p>
+              <p class="col"> {{ jenis_kegiatan_usaha ? jenis_kegiatan_usaha : "Data tidak tersedia" }}</p>
             </div>
             <div class="row">
               <p class="vendor-hint">Terdaftar di VMS sejak {{registered_at}}</p>
