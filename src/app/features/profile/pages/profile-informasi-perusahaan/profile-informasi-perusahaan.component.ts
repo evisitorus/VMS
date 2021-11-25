@@ -54,7 +54,7 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
-
+  public logoImg = "https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg";
   
 
   public listItems: Array<Item> = [];
@@ -276,10 +276,12 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   upload(): void {
+    let reader = new FileReader();
     console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
+        this.logoImg = reader.readAsDataURL(this.selectedFile[0]);
         this.uploadedFileId = res["@id"]; //vendor :logo_id
       },
       (error) => {
