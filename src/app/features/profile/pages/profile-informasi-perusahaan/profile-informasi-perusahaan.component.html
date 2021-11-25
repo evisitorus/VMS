@@ -178,7 +178,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
                   <kendo-numerictextbox id="jumlahKaryawanTotal" class="col-md" placeholder="Type your message here"
-                    [spinners]="false" [maxlength]="10" [decimals]="0 [min]="0" [value]="total_karyawan" formControlName="jumlahKaryawanTotal">
+                    [spinners]="false" [maxlength]="10" [decimals]="0"  [min]="0" [value]="total_karyawan" formControlName="jumlahKaryawanTotal">
                   </kendo-numerictextbox>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.jumlahKaryawanTotal.errors?.required">Jumlah Karyawan Total tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
