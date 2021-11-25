@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { FileService } from 'src/app/core/services/file.service';
 
 interface Item {
   name: string;
@@ -35,7 +36,10 @@ export class ProfilKaryawanComponent implements OnInit {
     }];
   
   public opened = false;
-  constructor() { }
+
+  constructor(
+    private fileService: FileService
+  ) { }
 
   public submitted = false;
   public selectedFile!: Array<any>;
@@ -89,6 +93,21 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public open() {
     this.opened = true;
+  }
+
+  upload(): void {
+    console.log(this.selectedFile);
+    this.fileService.upload(this.selectedFile[0]).subscribe(
+      (res) => {
+        this.uploadedFileContentUrl = res.contentUrl; // file url
+        this.uploadedFileId = res["@id"]; //vendor :logo_id
+      },
+      (error) => {
+        // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        // this.triggerPopUp();
+        console.log(error);
+      }
+    );
   }
 
 }
