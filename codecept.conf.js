@@ -1,4 +1,4 @@
-const environment = require("src/environments/environment")
+const environment = require("./src/environments/environment.prod")
 
 exports.config = {
   output: 'tests/acceptance/_output',
