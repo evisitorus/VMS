@@ -142,6 +142,7 @@ export class ProfileDokumenComponent implements OnInit {
   public submit(): void {
     if (this.lampiranFiles === null) {
       this.popUpMessage = "File tidak valid";
+      this.close();
       this.triggerPopUp();
     } else {
       if (this.isNewData) {
