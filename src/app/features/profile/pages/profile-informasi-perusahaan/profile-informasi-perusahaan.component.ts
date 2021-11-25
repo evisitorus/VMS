@@ -1,9 +1,6 @@
-import { HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpProgressEvent, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Component, Injectable, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { FileRestrictions } from "@progress/kendo-angular-upload";
-import { concat, Observable, of } from "rxjs";
-import { delay } from "rxjs/operators";
 import { FileService } from "src/app/core/services/file.service";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
@@ -81,7 +78,6 @@ export class ProfileInformasiPerusahaanComponent {
 
   public isRequired = true;
   public opened = false;
-  public openedSaham = false;
   public isDisabledKota = true;
   public isDisabledKecamatan = true;
   // public isDisabledKelurahan = true;
@@ -242,15 +238,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.opened = true;
   }
 
-  public closeSaham() {
-    console.log(`Dialog result: ${status}`);
-    this.openedSaham = false;
-  }
-
-  public openSaham() {
-    this.openedSaham = true;
-  }
-
   handleProvinceChange(value: any) {
     this.selectedProvince = value;
     this.selectedKota = undefined!;
@@ -295,36 +282,13 @@ export class ProfileInformasiPerusahaanComponent {
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"]; //vendor :logo_id
       },
-      () => {
+      (error) => {
         // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         // this.triggerPopUp();
+        console.log(error);
       }
     );
   }
 
 
-}
-
-@Injectable()
-export class UploadInterceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url === 'saveUrl') {
-            const events: Observable<HttpEvent<any>>[] = [0, 30, 60, 100].map((x) => of(<HttpProgressEvent>{
-                type: HttpEventType.UploadProgress,
-                loaded: x,
-                total: 100
-            }).pipe(delay(1000)));
-
-            const success = of(new HttpResponse({ status: 200 })).pipe(delay(1000));
-            events.push(success);
-
-            return concat(...events);
-        }
-
-        if (req.url === 'removeUrl') {
-            return of(new HttpResponse({ status: 200 }));
-        }
-
-        return next.handle(req);
-      }
 }
