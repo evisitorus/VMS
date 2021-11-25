@@ -17,7 +17,7 @@ export class GridBannerComponent implements OnInit {
   "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
   public imageSrc =
     "https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/sofia.jpg";
-  
+
   public card1 = "./assets/images/card1.png";
   public card2 = "./assets/images/card2.png";
   public card3 = "./assets/images/card3.png";
