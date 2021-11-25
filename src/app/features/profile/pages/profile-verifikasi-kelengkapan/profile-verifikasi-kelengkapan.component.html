@@ -1,9 +1,11 @@
 <div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
 
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+  
+
+  <div class="profile-content">
     <kendo-label>Verifikasi Kelengkapan</kendo-label>
     <br><br>
     <div class="verification-checklist">
@@ -76,9 +78,7 @@
           text="Completed"
         ></kendo-label>
       </div>
-    </div>
-
-    <div class="verification-checklist">
+    
       <div class="checklist">
         <kendo-label>Disclaimer</kendo-label>
         <br><br>
@@ -91,6 +91,8 @@
       </div>
     </div>
     <br>
-    <button kendoButton look="outline">Rekam Data</button>
+    <button kendoButton icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
+      Rekam Data
+    </button>
   </div>
 </div>

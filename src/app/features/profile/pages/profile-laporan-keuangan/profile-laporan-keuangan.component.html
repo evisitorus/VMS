@@ -1,9 +1,11 @@
 <div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
 
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+  
+
+  <div class="profile-content">
     <kendo-label>Laporan Keuangan</kendo-label>
     <br><br>
     <div>
@@ -45,7 +47,7 @@
         </kendo-grid-column>
       </kendo-grid>
       <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
+      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
         Tambah Neraca
       </button>
 
@@ -100,7 +102,7 @@
         </kendo-grid-column>
       </kendo-grid>
       <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
+      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
         Tambah SPT Tahunan
       </button>
 

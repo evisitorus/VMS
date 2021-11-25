@@ -1,18 +1,18 @@
 <div class="profile-section">
 
-  <div class="profile-menu">
+  <div class="col-2 profile-menu">
     <app-sidebar></app-sidebar>
   </div>
   
 
   <div class="profile-content">
-
     <kendo-label>Riwayat Pekerjaan</kendo-label>
     <br><br>
 
     <div>
       <kendo-grid
         [data]="gridData"
+        style="height: 240px;"
       >
         <kendo-grid-column title="No.">
           <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
@@ -29,7 +29,7 @@
         </kendo-grid-column>
       </kendo-grid>
       <br>
-      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="button-right">
+      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
         Tambah Riwayat Pekerjaan
       </button>
 
