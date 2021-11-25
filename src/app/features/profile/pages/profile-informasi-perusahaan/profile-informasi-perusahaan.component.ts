@@ -1,5 +1,5 @@
 import { Component, Injectable, ViewEncapsulation } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { FileRestrictions } from "@progress/kendo-angular-upload";
 import { FileService } from "src/app/core/services/file.service";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
@@ -27,21 +27,31 @@ export class ProfileInformasiPerusahaanComponent {
     private fileService: FileService
   ) { }
 
-  public psFormGroup = new FormGroup({
-    psFormControl: new FormControl(),
+  public profileInformationFormGroup = new FormGroup({
+    namaPerusahaan: new FormControl(null, Validators.required),
+    jenisBadanUsaha:new FormControl(null, Validators.required),
+    statusBadanUsaha:new FormControl(null, Validators.required),
+    tipeBadanUsaha: new FormControl(null, Validators.required),
+    kategoriBadanUsaha:new FormControl(null, Validators.required),
+    jenisKegiatanUsahaUtama:new FormControl(null, Validators.required),
+    jenisPenyediaUsaha: new FormControl(null, Validators.required),
+    npwpPerusahaan:new FormControl(null, Validators.required),
+    nomorIndukBerusaha: new FormControl(null, Validators.required),
+    bidangUsaha:new FormControl(null, Validators.required),
+    bumnPengampu:new FormControl(null, Validators.required),
+    websitePerusahaan:new FormControl(null, Validators.required),
+    jumlahKaryawanTotal:new FormControl(null, Validators.required),
+    jumlahKaryawanLokal:new FormControl(null, Validators.required),
+    jumlahKaryawanAsing:new FormControl(null, Validators.required),
+    noTeleponPerusahaan:new FormControl(null, Validators.required),
+    alamatPerusahaan:new FormControl(null, Validators.required),
+    provinsi:new FormControl(null, Validators.required),
+    kota:new FormControl(null, Validators.required),
+    kecamatan:new FormControl(null, Validators.required),
+    kelurahan:new FormControl(null, Validators.required),
+    kodePos:new FormControl(null, Validators.required),
   });
-  public jpsFormGroup = new FormGroup({
-    jpsFormControl: new FormControl(),
-  });
-  public buFormGroup = new FormGroup({
-    buFormControl: new FormControl(),
-  });
-  public sbuFormGroup = new FormGroup({
-    sbuFormControl: new FormControl(),
-  });
-  public kategoriBuFormGroup = new FormGroup({
-    kategoriBu: new FormControl(),
-  });
+
   public logoForm: FormGroup = undefined!;
   public data: any = {
     files: [],
