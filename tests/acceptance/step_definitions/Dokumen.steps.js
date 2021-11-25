@@ -39,25 +39,30 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
 });
 
 Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', () => {
+    I.waitForElement('#input-nomor-dokumen input[class=k-input]');
     I.fillField('#input-nomor-dokumen input[class=k-input]', 'vms/1/11/21/bdg');
+    I.waitForElement('#input-nama-dokumen input[class=k-input]');
     I.fillField('#input-nama-dokumen input[class=k-input]', 'Akta Pendirian Perusahaan');
+    I.waitForElement('#input-berlaku-sampai input[class=k-input]');
     I.fillField('#input-berlaku-sampai input[class=k-input]', '11242021');
-    // I.click('#input-lampiran-file input[type=file]');
-
+    I.waitForElement('#input-lampiran-file input[type=file]');
     I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
-    // I.waitForValue('.k-file');
 });
 
 Given('The Vendor must click {string} button to save information of {string}', () => {
+    I.waitForElement('#btn-simpan');
     I.click('#btn-simpan');
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
     I.see('Berhasil menyimpan data');
+    I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
 
 Given('The Vendor will see first 5 lists of {string} on {string}', () => {
+    I.seeElement('#btn-update');
+    I.seeElement('#btn-delete');
 
 });
 
@@ -73,7 +78,7 @@ Given('The Vendor will see progress of upgrade level on {string}', () => {
 
 });
 
-Given('Then The Vendor already manage her or his company information by uploading necessary documents', () => {
+Given('The Vendor already manage her or his company information by uploading necessary documents', () => {
 
 });
 
