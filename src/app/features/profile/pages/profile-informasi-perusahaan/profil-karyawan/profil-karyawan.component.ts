@@ -5,6 +5,7 @@ import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
+import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
 
 interface Item {
   name: string;
@@ -117,6 +118,21 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public submitProfilKaryawan(): void {
     this.pegawaiFormGroup.markAllAsTouched();
+    
+  }
+
+  public save(): void {
+    let params: ProfileKaryawanInterface = {
+      nik: this.pegawaiFormGroup.value.nik,
+      namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+      jabatan:this.pegawaiFormGroup.value.jabatan,
+      bidang:this.pegawaiFormGroup.value.bidang,
+      file: this.uploadedFileId,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
+
+    this.profileInformationService.
   }
 
   public close() {
