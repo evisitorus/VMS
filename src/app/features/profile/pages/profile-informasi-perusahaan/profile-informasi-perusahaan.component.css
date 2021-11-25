@@ -1,14 +1,15 @@
-.profile-section {
-  border-style: groove;
-}
 
 .profile-menu {
-  border-style: groove;
   float: left;
+  height: 100vh;
 }
 
 .profile-content {
-  border-style: groove;
+  padding: 40px;
+  display: table;
+}
+
+.button-right {
   float: right;
 }
 
@@ -92,4 +93,12 @@
 .demo {
   display: flex;
   justify-content: space-evenly;
+}
+
+.row {
+  margin-bottom: 0.5rem;
+}
+
+.k-panelbar-content {
+  padding: 1em;
 }
