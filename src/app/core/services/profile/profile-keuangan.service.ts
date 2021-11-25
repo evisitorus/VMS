@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ApiInterface } from '../../interfaces/api-interface';
+import { ProfileKeuanganNeracaInterface } from '../../interfaces/profile-keuangan.interface';
 import { ApiRouteMethods, ApiRoutes } from '../api/api-routes';
 import { ApiService } from '../api/api.service';
 import { AuthService } from '../auth.service';
@@ -14,7 +16,7 @@ export class ProfileKeuanganService {
     private authService: AuthService
   ) { }
 
-  public fetchDataNeraca() {
+  public fetchDataNeraca(): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_get_neraca: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -28,7 +30,7 @@ export class ProfileKeuanganService {
     return this.apiService.sendRequest(api_get_neraca);
   }
 
-  public fetchDataSPT() {
+  public fetchDataSPT(): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_get_spt: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -40,6 +42,28 @@ export class ProfileKeuanganService {
       }
     };
     return this.apiService.sendRequest(api_get_spt);
+  }
+
+  public saveDataNeraca(params: ProfileKeuanganNeracaInterface): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_save_neraca: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_neraca_route,
+      body: {
+        year: params.tahun,
+        aktiva: params.aktiva,
+        pasiva: params.pasiva,
+        equitas: params.equitas,
+        omzetBersih: params.omzet,
+        vendor: "/api/vendors/".concat(this.authService.getLocalStorage('vendor_id')!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_save_neraca);
   }
 
 }

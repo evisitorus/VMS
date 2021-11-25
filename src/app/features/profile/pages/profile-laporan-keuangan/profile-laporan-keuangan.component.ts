@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { ProfileKeuanganNeracaInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKeuanganService } from 'src/app/core/services/profile/profile-keuangan.service';
 
@@ -43,11 +44,13 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public popUpTitle: string = "Profile Keuangan";
   public popUpMessage: string = ""
 
+  public isNewData: boolean = true;
+
   public dataNeraca: any = {
     tahun: "",
     aktiva: "",
     pasiva: "",
-    ekuitas: "",
+    equitas: "",
     omzet: ""
   };
 
@@ -72,7 +75,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       tahun: new FormControl(this.dataNeraca.tahun, [Validators.required]),
       aktiva: new FormControl(this.dataNeraca.aktiva, [Validators.required]),
       pasiva: new FormControl(this.dataNeraca.pasiva, [Validators.required]),
-      ekuitas: new FormControl(this.dataNeraca.ekuitas, [Validators.required]),
+      equitas: new FormControl(this.dataNeraca.equitas, [Validators.required]),
       omzet: new FormControl(this.dataNeraca.omzet, [Validators.required]),
     });
 
@@ -92,7 +95,30 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     });
   }
 
-  triggerPopUp() {
+  public resetForm(): void {
+    this.dataNeraca.tahun = "";
+    this.dataNeraca.aktiva = "";
+    this.dataNeraca.pasiva = "";
+    this.dataNeraca.equitas = "";
+    this.dataNeraca.omzet = "";
+
+    this.dataSPT.tahun = "";
+    this.dataSPT.nomorDokumen = "";
+    this.dataSPT.lampiran = "";
+
+    this.dataKeuangan.namaBank = "";
+    this.dataKeuangan.cabang = "";
+    this.dataKeuangan.nomorRekening = "";
+    this.dataKeuangan.namaPemilikRekening = "";
+    this.dataKeuangan.modalDasar = "";
+    this.dataKeuangan.modalDitempatkan = "";
+
+    this.isNewData = true;
+
+    this.setForm();
+  }
+
+  public triggerPopUp() {
     this.eventEmitterService.trigger();
   }
 
@@ -107,6 +133,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       default:
         break;
     }
+    this.resetForm();
   }
 
   public mapDataNeraca(data: any[]): any[] {
@@ -174,10 +201,47 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public submitNeraca(): void {
-
+    if (this.isNewData) {
+      this.saveNeraca();
+    } else {
+      this.updateNeraca();
+    }
   }
 
   public submitSPT(): void {
+    if (this.isNewData) {
+      this.saveSPT();
+    } else {
+      this.updateSPT();
+    }
+  }
+
+  public saveNeraca(): void {
+    let params: ProfileKeuanganNeracaInterface = {...this.formNeraca.value};
+    this.service.saveDataNeraca(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.triggerPopUp();
+        this.fetchDataNeraca();
+        this.triggerModal('neraca');
+      },
+      () => {
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+        this.triggerModal('neraca');
+      }
+    );
+  }
+
+  public saveSPT(): void {
+
+  }
+
+  public updateNeraca(): void {
+
+  }
+
+  public updateSPT(): void {
 
   }
 
