@@ -15,7 +15,9 @@ export const ApiRoutes = {
   api_assets_route: API_BASE_URL + "/mesin_peralatans",
   api_documents_route: API_BASE_URL + "/dokumens",
   api_tenders_route: API_BASE_URL + "/tenders",
-  api_media_object_route: API_BASE_URL + "/media_objects"
+  api_media_object_route: API_BASE_URL + "/media_objects",
+  api_neraca_route: API_BASE_URL + "/neracas",
+  api_spt_route: API_BASE_URL + "/spt_pajaks"
 };
 
 export const ApiRouteMethods = {

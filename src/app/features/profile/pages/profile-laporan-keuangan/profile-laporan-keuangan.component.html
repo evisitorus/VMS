@@ -77,7 +77,7 @@
             </button>
           </div>
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitNeraca()">
               Simpan
             </button>
           </div>
@@ -138,7 +138,7 @@
             </button>
           </div>
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitSPT()">
               Simpan
             </button>
           </div>
@@ -223,18 +223,26 @@
         </div>
 
         <div class="profile-content-grid">
-          <kendo-grid>
-            <kendo-grid-column field="no" title="Tahun">
+          <kendo-grid [data]="dataGridNeraca">
+            <kendo-grid-column field="tahun" title="Tahun">
             </kendo-grid-column>
-            <kendo-grid-column field="shareholder_name" title="Aktiva (Asset)">
+            <kendo-grid-column field="aktiva" title="Aktiva (Asset)">
             </kendo-grid-column>
-            <kendo-grid-column field="shareholder_type" title="Passiva (Liability)">
+            <kendo-grid-column field="pasiva" title="Passiva (Liability)">
             </kendo-grid-column>
-            <kendo-grid-column field="is_domestic_shareholder" title="Ekuitas (Equity)">
+            <kendo-grid-column field="equitas" title="Ekuitas (Equity)">
             </kendo-grid-column>
-            <kendo-grid-column field="is_domestic_shareholder" title="Omzet Bersih">
+            <kendo-grid-column field="omzet" title="Omzet Bersih">
             </kendo-grid-column>
-            <kendo-grid-column field="action" title="Action">
+            <kendo-grid-column field="id" title="Action">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteNeraca(dataItem.id)">
+                </span>
+              </ng-template>
             </kendo-grid-column>
           </kendo-grid>
 
@@ -258,16 +266,24 @@
         </div>
 
         <div class="profile-content-grid">
-          <kendo-grid>
-            <kendo-grid-column field="no" title="Tahun">
+          <kendo-grid [data]="dataGridSPT">
+            <kendo-grid-column field="tahun" title="Tahun">
             </kendo-grid-column>
-            <kendo-grid-column field="shareholder_name" title="Nomor">
+            <kendo-grid-column field="nomor" title="Nomor">
             </kendo-grid-column>
-            <kendo-grid-column field="shareholder_type" title="Lampiran">
+            <kendo-grid-column field="lampiran" title="Lampiran">
             </kendo-grid-column>
-            <kendo-grid-column field="is_domestic_shareholder" title="Waktu Upload">
+            <kendo-grid-column field="submitDate" title="Waktu Upload">
             </kendo-grid-column>
-            <kendo-grid-column field="action" title="Action">
+            <kendo-grid-column field="id" title="Action">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteSPT(dataItem.id)">
+                </span>
+              </ng-template>
             </kendo-grid-column>
           </kendo-grid>
 
@@ -328,3 +344,5 @@
 
   </div>
 </div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

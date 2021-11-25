@@ -1,6 +1,9 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { ProfileKeuanganService } from 'src/app/core/services/profile/profile-keuangan.service';
 
 @Component({
   selector: 'app-profile-laporan-keuangan',
@@ -9,10 +12,15 @@ import { FileRestrictions } from '@progress/kendo-angular-upload';
 })
 export class ProfileLaporanKeuanganComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private service: ProfileKeuanganService,
+    private eventEmitterService: EventEmitterService
+  ) { }
 
   ngOnInit(): void {
     this.setForm();
+    this.fetchDataNeraca();
+    this.fetchDataSPT();
   }
 
   public openNeraca = false;
@@ -22,8 +30,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public formSPT!: FormGroup;
   public formKeuangan!: FormGroup;
 
-  public dataNeracaGrid: any[] = [];
-  public dataSptGrid: any[] = [];
+  public dataGridNeraca: any[] = [];
+  public dataGridSPT: any[] = [];
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
@@ -31,6 +39,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
+
+  public popUpTitle: string = "Profile Keuangan";
+  public popUpMessage: string = ""
 
   public dataNeraca: any = {
     tahun: "",
@@ -81,6 +92,10 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     });
   }
 
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
+  }
+
   public triggerModal(option: string): void {
     switch (option) {
       case "neraca":
@@ -94,11 +109,87 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     }
   }
 
-  public upload(): void {
+  public mapDataNeraca(data: any[]): any[] {
+    let mappedData:any[] = [];
+    for (const key in data) {
+      mappedData[key] = {
+        id: data[key]['id'],
+        tahun: data[key]['year'],
+        asset: data[key]['asset'],
+        aktiva: data[key]['aktiva'],
+        pasiva: data[key]['pasiva'],
+        equitas: data[key]['equitas'],
+        omzet: data[key]['omzetBersih']
+      };
+    }
+    return mappedData;
+  }
+
+  public mapDataSPT(data: any[]): any[] {
+    let mappedData:any[] = [];
+    for (const key in data) {
+      mappedData[key] = {
+        id: data[key]['id'],
+        tahun: data[key]['year'],
+        submitDate: formatDate(data[key]['submitDate'], "dd-MM-YYYY hh:mm:ss", "en-US"),
+        nomor: data[key]['number'],
+        lampiran: data[key]['attachmentFilePath'],
+      };
+    }
+    return mappedData;
+  }
+
+  public updateFormNeraca(data: any): void {
 
   }
 
-  public submit() {
+  public updateFormSPT(data: any): void {
+
+  }
+
+  public fetchDataNeraca(): void {
+    this.service.fetchDataNeraca().subscribe(
+      (resp) => {
+        this.dataGridNeraca = resp['hydra:member'];
+        this.dataGridNeraca = this.mapDataNeraca(this.dataGridNeraca);
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public fetchDataSPT(): void {
+    this.service.fetchDataSPT().subscribe(
+      (resp) => {
+        this.dataGridSPT = resp['hydra:member'];
+        this.dataGridSPT = this.mapDataSPT(this.dataGridSPT);
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public submitNeraca(): void {
+
+  }
+
+  public submitSPT(): void {
+
+  }
+
+  public deleteNeraca(id: string): void {
+
+  }
+
+  public deleteSPT(id: string): void {
+    
+  }
+
+  public upload(): void {
 
   }
 
