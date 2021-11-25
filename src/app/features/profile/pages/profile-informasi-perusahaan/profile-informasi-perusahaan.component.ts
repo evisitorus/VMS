@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { FileRestrictions } from "@progress/kendo-angular-upload";
 import { concat, Observable, of } from "rxjs";
 import { delay } from "rxjs/operators";
+import { FileService } from "src/app/core/services/file.service";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
 interface Item {
@@ -25,7 +26,8 @@ interface Hydra {
 export class ProfileInformasiPerusahaanComponent {
 
   constructor(
-    private profileInfoService: ProfileInformationService
+    private profileInfoService: ProfileInformationService,
+    private fileService: FileService
   ) { }
 
   public psFormGroup = new FormGroup({
@@ -52,6 +54,9 @@ export class ProfileInformasiPerusahaanComponent {
   public imgRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png"],
   };
+  public selectedFile!: Array<any>;
+  public uploadedFileContentUrl!: string;
+  public uploadedFileId!: string;
 
   
 
@@ -281,6 +286,20 @@ export class ProfileInformasiPerusahaanComponent {
 
   handleKecamatanChange(value:any) {
     this.selectedKecamatan = value;
+  }
+
+  upload(): void {
+    console.log(this.selectedFile);
+    this.fileService.upload(this.selectedFile[0]).subscribe(
+      (res) => {
+        this.uploadedFileContentUrl = res.contentUrl; // file url
+        this.uploadedFileId = res["@id"]; //vendor :logo_id
+      },
+      () => {
+        // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        // this.triggerPopUp();
+      }
+    );
   }
 
 
