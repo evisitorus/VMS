@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
 
 interface Item {
   name: string;
@@ -75,11 +76,6 @@ export class ProfilKaryawanComponent implements OnInit {
   
   public opened = false;
 
-  constructor(
-    private fileService: FileService,
-    private eventEmitterService: EventEmitterService,
-  ) { }
-
   public submitted = false;
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
@@ -90,9 +86,33 @@ export class ProfilKaryawanComponent implements OnInit {
     maxFileSize: 20971520 //20 MB
   };
 
+  public data: any = {
+    nik: "",
+    namaPegawai: "",
+    tipeKaryawan: "",
+    jabatan: "",
+    bidangPekerjaan: "",
+    resume: ""
+  };
+
+  constructor(
+    private fileService: FileService,
+    private profileInformationService: ProfileInformationService,
+    private eventEmitterService: EventEmitterService,
+  ) { 
+    this.setForm();
+  }
+
   ngOnInit(): void {
     // this.gridView = this.gridData;
     this.gridData = this.dataKaryawan;
+  }
+
+  public setForm(): void {
+    this.pegawaiFormGroup = new FormGroup({
+      jabatan: new FormControl(this.data.jabatan, Validators.required),
+      bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
+    });
   }
 
   public submitProfilKaryawan(): void {
