@@ -1,7 +1,9 @@
-.demo {
-    display: flex;
+.demoGrid {
+    /* display: flex; */
     justify-content: center;
-    margin: 2em;
+    /* margin: 2em; */
+    width: 100%;
+    margin: 50px;
   }
   .k-card-header {
     flex: 0 0 auto;
@@ -51,6 +53,29 @@
       padding: 0px 16px 16px;
   }
   .k-card-box{
-      width: 400px !important;
+      /* width: 400px !important; */
       margin: 0px 10px;
+      /* display: inline-block; */
+      /* width: 20% !important; */
+      /* height: 300px; */
   }
+
+
+@media only screen and (min-width: 1080px) {
+  /* For desktop: */
+
+.k-card-box{
+  /* width: 400px !important; */
+  margin: 0px 10px;
+  display: inline-flex;
+  /* width: 20% !important; */
+  /* height: 300px; */
+}
+.demoGrid {
+  /* display: flex; */
+  justify-content: center;
+  /* margin: 2em; */
+  width: 100%;
+  margin: 20px;
+}
+}
