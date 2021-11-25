@@ -122,13 +122,13 @@ pipeline {
                         script {
                             sh 'echo "Acceptance Test"'
                             try {                                    
-                                sh 'docker run --name vms-test --net=host --ipc=host vms-acceptancetest npx codeceptjs run --reporter mochawesome'
+                                sh 'docker run --name vms-test --net=host --ipc=host vms-acceptancetest "HEADLESS=true npx codeceptjs run --reporter mochawesome"'
                             } catch (err) {
                                 env.TESTING = "gagal"
                             }
                             sh 'docker cp vms-test:/app/tests/acceptance/_output hasil'
                             sh 'docker rm -f vms-test'
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil/_output', reportFiles: 'scenario.html', reportName: 'Acceptance Test Report', reportTitles: ''])
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil/_output', reportFiles: 'records.html, scenario.html', reportName: 'Acceptance Test Report', reportTitles: ''])
                         }
                     }
                 }

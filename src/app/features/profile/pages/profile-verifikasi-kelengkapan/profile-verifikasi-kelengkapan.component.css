@@ -1,4 +1,4 @@
-.profile-section {
+/* .profile-section {
   border-style: groove;
 }
 
@@ -10,7 +10,7 @@
 .profile-content {
   border-style: groove;
   float: right;
-}
+} */
 
 .checklist {
   border-style: groove;
@@ -18,4 +18,19 @@
 
 .verification-checklist {
   border-style: groove;
+}
+
+
+.profile-menu {
+  float: left;
+  height: 100vh;
+}
+
+.profile-content {
+  padding: 40px;
+  display: table;
+}
+
+.button-right {
+  float: right;
 }

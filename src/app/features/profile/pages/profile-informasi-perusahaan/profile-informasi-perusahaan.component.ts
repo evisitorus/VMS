@@ -14,23 +14,17 @@ import { ProfileInformationService } from "src/app/core/services/profile-informa
 
 export class ProfileInformasiPerusahaanComponent {
 
+  public buForm: FormGroup;
+  public sbuForm: FormGroup;
   constructor(
     private profileInfoService:ProfileInformationService
-  ) {}
-
-  public buFormGroup = new FormGroup({
-    buFormControl: new FormControl(),
-  });
-  public sbuFormGroup = new FormGroup({
-    sbuFormControl: new FormControl(),
-  });
+  ) {
+    this.buForm = new FormGroup({});
+    this.sbuForm = new FormGroup({});
+  }
 
   public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
-  public tipeBadanUsahaItems: Array<string> = ["UMKM", "Korporasi"];
-  public kategoriUmkmItems: Array<string> = ["Kecil", "Menengah", "Mikro"];
-  public kategoriCorpItems: Array<string> = ["BUMN (Grup)", "Swasta"];
 
-  public isRequired = true;
   public opened = false;
   public openedSaham = false;
   public vendor_info: any;
