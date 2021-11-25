@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../../interfaces/api-interface';
-import { ProfileInformationInterface } from '../../interfaces/profile-information.interface';
+import { ProfileKaryawanInterface } from '../../interfaces/profile-karyawan.interface';
 import { ApiRouteMethods, ApiRoutes } from '../api/api-routes';
 import { ApiService } from '../api/api.service';
 import { AuthService } from '../auth.service';
@@ -16,7 +16,7 @@ export class ProfileInformationService {
     private authService: AuthService
   ) { }
 
-    public addProfilKaryawan(params: ProfileInformationInterface): Observable<any> {
+    public addProfilKaryawan(params: ProfileKaryawanInterface): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_add_profil_karyawan: ApiInterface = {
       method: ApiRouteMethods.post,
