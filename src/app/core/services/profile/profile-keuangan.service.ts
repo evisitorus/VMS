@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../../interfaces/api-interface';
-import { ProfileKeuanganNeracaInterface } from '../../interfaces/profile-keuangan.interface';
+import { ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from '../../interfaces/profile-keuangan.interface';
 import { ApiRouteMethods, ApiRoutes } from '../api/api-routes';
 import { ApiService } from '../api/api.service';
 import { AuthService } from '../auth.service';
@@ -64,6 +64,28 @@ export class ProfileKeuanganService {
       }
     };
     return this.apiService.sendRequest(api_save_neraca);
+  }
+
+  public saveDataSPT(params: ProfileKeuanganSPTInterface): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_save_spt: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_spt_route,
+      body: {
+        number: params.nomorDokumen,
+        year: params.tahunSPT,
+        attachmentFilePath: params.filename,
+        submitDate: params.submitDate,
+        file: params.lampiran,
+        vendor: "/api/vendors/".concat(this.authService.getLocalStorage('vendor_id')!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_save_spt);
   }
 
 }

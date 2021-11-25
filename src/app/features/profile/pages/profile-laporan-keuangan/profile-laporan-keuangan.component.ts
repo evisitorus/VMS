@@ -2,8 +2,9 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
-import { ProfileKeuanganNeracaInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
+import { ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKeuanganService } from 'src/app/core/services/profile/profile-keuangan.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   constructor(
     private service: ProfileKeuanganService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private fileService: FileService
   ) { }
 
   ngOnInit(): void {
@@ -234,6 +236,26 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public saveSPT(): void {
+    let params: ProfileKeuanganSPTInterface = {
+      tahunSPT: this.formSPT.value.tahunSPT,
+      nomorDokumen: this.formSPT.value.nomorDokumen,
+      lampiran: this.uploadedFileId,
+      filename: this.uploadedFileContentUrl,
+      submitDate: new Date()
+    };
+    this.service.saveDataSPT(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.triggerPopUp();
+        this.fetchDataSPT();
+        this.triggerModal('spt');
+      },
+      () => {
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+        this.triggerModal('spt');
+      }
+    );
 
   }
 
@@ -254,7 +276,16 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public upload(): void {
-
+    this.fileService.upload(this.lampiranFiles[0]).subscribe(
+      (res) => {
+        this.uploadedFileContentUrl = res.contentUrl;
+        this.uploadedFileId = res["@id"];
+      },
+      () => {
+        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
   }
 
 }

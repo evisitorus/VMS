@@ -9,7 +9,9 @@ export interface ProfileKeuanganNeracaInterface {
 export interface ProfileKeuanganSPTInterface {
     tahunSPT: number,
     nomorDokumen: number,
-    lampiran: number
+    lampiran: string,
+    filename: string,
+    submitDate: Date
 }
 
 export interface ProfileKeuanganInterface {
