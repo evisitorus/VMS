@@ -21,7 +21,7 @@ So that I can upgrade my company level to vendor pro
       """
       {
       
-         "no"				  	: "autonumber",
+         "nomorDokumen"		    : "dokumen01",
          "namaDokumen"			: "Akta Pendirian Perusahaan", 
          "berlakuDari"          : "pilih tanggal pada datepicker dengan format dd-mm-yyyy, set default as today"
          "berlakuSampai"        : "pilih opsi : Seumur Hidup atau pilih tanggal pada datepicker dengan format dd-mm-yyyy, set default as today"
@@ -32,7 +32,7 @@ So that I can upgrade my company level to vendor pro
       }
       """
       And The Vendor must click "Simpan" button to save information of "Dokumen" 
-#       And The Vendor will see that pop-up form already closed when she or he clicks "Simpan"
+      And The Vendor will see that pop-up form already closed when she or he clicks "Simpan"
 #       And The Vendor will see first 5 lists of "Dokumen" on "Dokumen Grid"
 #       """
 #       {
