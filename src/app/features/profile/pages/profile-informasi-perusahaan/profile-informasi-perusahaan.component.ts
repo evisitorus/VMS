@@ -23,37 +23,13 @@ interface Hydra {
 export class ProfileInformasiPerusahaanComponent {
 
   constructor(
+    // private eventEmitterService: EventEmitterService,
     private profileInfoService: ProfileInformationService,
     private fileService: FileService
-  ) { }
+  ) {
+  }
 
-  public profileInformationFormGroup = new FormGroup({
-    namaPerusahaan: new FormControl(null, Validators.required),
-    inisialPerusahaan: new FormControl(null,[]),
-    jenisBadanUsaha:new FormControl(null, Validators.required),
-    statusBadanUsaha:new FormControl(null, Validators.required),
-    tipeBadanUsaha: new FormControl(null, Validators.required),
-    kategoriBadanUsaha:new FormControl(null, Validators.required),
-    jenisKegiatanUsahaUtama:new FormControl(null, Validators.required),
-    jenisPenyediaUsaha: new FormControl(null, Validators.required),
-    npwpPerusahaan:new FormControl(null, Validators.required),
-    nomorIndukBerusaha: new FormControl(null, Validators.required),
-    bidangUsaha:new FormControl(null, Validators.required),
-    bumnPengampu:new FormControl(null, Validators.required),
-    organisasiHimpunan: new FormControl(null,[]),
-    websitePerusahaan:new FormControl(null, Validators.required),
-    jumlahKaryawanTotal:new FormControl(null, Validators.required),
-    jumlahKaryawanLokal:new FormControl(null, Validators.required),
-    jumlahKaryawanAsing:new FormControl(null, Validators.required),
-    noTeleponPerusahaan:new FormControl(null, Validators.required),
-    alamatPerusahaan:new FormControl(null, Validators.required),
-    provinsi:new FormControl(null, Validators.required),
-    kota:new FormControl(null, Validators.required),
-    kecamatan:new FormControl(null, Validators.required),
-    kelurahan:new FormControl(null, Validators.required),
-    kodePos:new FormControl(null, Validators.required),
-    pinGeoLoc: new FormControl(null,[]),
-  });
+  public profileInformationFormGroup!: FormGroup;
 
   public logoForm: FormGroup = undefined!;
   public data: any = {
@@ -67,8 +43,8 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
-  public logoImg!:any;
-  
+  public logoImg!: any;
+
 
   public listItems: Array<Item> = [];
 
@@ -106,19 +82,19 @@ export class ProfileInformasiPerusahaanComponent {
 
   public selectedBadanUsaha: Item = this.listItems[0];
   public selectedProvince: { provinceDescription: string, provinceId: number } = null!;
-  public selectedKota:{ kotaDescription: string, kotaId: number } = null!;
-  public selectedKecamatan:{ kecamatanDescription: string, kecamatanId: number } =null!;
+  public selectedKota: { kotaDescription: string, kotaId: number } = null!;
+  public selectedKecamatan: { kecamatanDescription: string, kecamatanId: number } = null!;
   public pkpStatus = false;
 
   public defaultItemProvinces: { provinceDescription: string, provinceId: number } = { provinceDescription: 'Pilih provinsi', provinceId: 0 };
 
-  public defaultItemKota:{ kotaDescription: string, kotaId: number, provinceId: number } = { kotaDescription: 'Pilih kota', kotaId: 0 , provinceId: 0};
+  public defaultItemKota: { kotaDescription: string, kotaId: number, provinceId: number } = { kotaDescription: 'Pilih kota', kotaId: 0, provinceId: 0 };
 
-  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number, kotaId: number} = { kecamatanDescription: 'Pilih Kecamatan', kecamatanId: 0, kotaId: 0 };
+  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number, kotaId: number } = { kecamatanDescription: 'Pilih Kecamatan', kecamatanId: 0, kotaId: 0 };
 
   // public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
 
-  public dataProvinsi: Array<{provinceDescription: string, provinceId: number}> = [
+  public dataProvinsi: Array<{ provinceDescription: string, provinceId: number }> = [
     {
       provinceDescription: 'Jawa Barat', provinceId: 1
     },
@@ -145,7 +121,7 @@ export class ProfileInformasiPerusahaanComponent {
     }
   ];
 
-  public dataKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number}> = [
+  public dataKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [
     {
       kecamatanDescription: 'Sukasari', kecamatanId: 1, kotaId: 1
     },
@@ -160,27 +136,22 @@ export class ProfileInformasiPerusahaanComponent {
     }
   ];
 
-  public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number  }> = [];
+  public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [];
 
-  public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number }> = [];
+  public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [];
 
-
-  ngOnInit(): void {
-    this.logoForm = new FormGroup({
-      files: new FormControl(this.data.files),
-    });
-
+  public fetchData(): void {
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
-      (resp) => { 
+      (resp) => {
         let data = resp.data[0];
         this.vendor_info = data.party;
-        // console.log(resp.data[0].party)
         this.vendor_contact_mechanism = data.contactMechanism;
         this.total_karyawan = data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
         this.pkpStatus = data.party.statusPerusahaanPkp;
         this.logoImg = data.logo.id;
-        console.log(this.vendor_info)
+
+        this.setForm();
       },
       (error) => {
         console.log(error);
@@ -227,6 +198,46 @@ export class ProfileInformasiPerusahaanComponent {
     //     console.log(error);
     //   }
     // );
+  }
+
+  ngOnInit(): void {
+    this.logoForm = new FormGroup({
+      files: new FormControl(this.data.files),
+    });
+
+    this.fetchData();
+
+
+  }
+
+  public setForm(): void {
+    this.profileInformationFormGroup = new FormGroup({
+      namaPerusahaan: new FormControl(this.vendor_info.name, Validators.required),
+      inisialPerusahaan: new FormControl(this.vendor_info.altName, []),
+      jenisBadanUsaha: new FormControl(null, Validators.required),
+      statusBadanUsaha: new FormControl(null, Validators.required),
+      tipeBadanUsaha: new FormControl(null, Validators.required),
+      kategoriBadanUsaha: new FormControl(null, Validators.required),
+      jenisKegiatanUsahaUtama: new FormControl(null, Validators.required),
+      jenisPenyediaUsaha: new FormControl(null, Validators.required),
+      npwpPerusahaan: new FormControl(this.vendor_info.npwp, Validators.required),
+      nomorIndukBerusaha: new FormControl(this.vendor_info.nomorIndukBerusaha, Validators.required),
+      bidangUsaha: new FormControl(null, Validators.required),
+      bumnPengampu: new FormControl(this.vendor_info.bumnPengampu, Validators.required),
+      organisasiHimpunan: new FormControl(this.vendor_info.organisasiHimpunan, []),
+      websitePerusahaan: new FormControl(this.vendor_info.website, Validators.required),
+      jumlahKaryawanTotal: new FormControl(this.total_karyawan, Validators.required),
+      jumlahKaryawanLokal: new FormControl(this.vendor_info.jumlahKaryawanDomestik, Validators.required),
+      jumlahKaryawanAsing: new FormControl(this.vendor_info.jumlahKaryawanAsing, Validators.required),
+      noTeleponPerusahaan: new FormControl(this.vendor_contact_mechanism.telcoNumber, Validators.required),
+      alamatPerusahaan: new FormControl(this.vendor_contact_mechanism.address1, Validators.required),
+      provinsi: new FormControl(this.selectedProvince, Validators.required),
+      kota: new FormControl(this.selectedKota, Validators.required),
+      kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
+      kelurahan: new FormControl(null, Validators.required),
+      kodePos: new FormControl(null, Validators.required),
+      pinGeoLoc: new FormControl(null, []),
+    });
   }
 
   public saveImage(value: any, valid: boolean): void {
@@ -288,7 +299,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   }
 
-  handleKecamatanChange(value:any) {
+  handleKecamatanChange(value: any) {
     this.selectedKecamatan = value;
   }
 
@@ -297,7 +308,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        this.uploadedFileId,this.logoImg = res["@id"]; //vendor :logo_id
+        this.uploadedFileId, this.logoImg = res["@id"]; //vendor :logo_id
       },
       (error) => {
         // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";

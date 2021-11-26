@@ -21,7 +21,7 @@
               <div class="row align-items-center">
                 <kendo-formfield [formGroup] = "profileInformationFormGroup">
                   <kendo-label class="col-3">Nama Perusahaan</kendo-label>
-                  <kendo-textbox id="namaPerusahaan" class="col-md" placeholder="Nama Perusahaan" [clearButton]="true" [value]="vendor_info.name" formControlName="namaPerusahaan"></kendo-textbox>
+                  <kendo-textbox id="namaPerusahaan" class="col-md" placeholder="Nama Perusahaan" [clearButton]="true"  formControlName="namaPerusahaan"></kendo-textbox>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.namaPerusahaan.errors?.required">Nama Perusahaan tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
               </div>
@@ -29,7 +29,7 @@
                 <kendo-formfield [formGroup] = "profileInformationFormGroup">
                   <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
                   <kendo-textbox id="inisialPerusahaanInput" class="col-md" placeholder="Inisial perusahaan"
-                    [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName" formControlName="inisialPerusahaan"></kendo-textbox>
+                    [clearButton]="true" [maxlength]="10" formControlName="inisialPerusahaan"></kendo-textbox>
                 </kendo-formfield>
               </div>
               <div class="row">
@@ -125,7 +125,7 @@
               <div class="row align-items-center">
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
-                  <kendo-textbox id="npwpPerusahaan" class="col-md" placeholder="Type your message here" formControlName="npwpPerusahaan" [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
+                  <kendo-textbox id="npwpPerusahaan" class="col-md" placeholder="Type your message here" formControlName="npwpPerusahaan" [clearButton]="true"></kendo-textbox>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.npwpPerusahaan.errors?.required">NPWP tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
               </div>
@@ -133,7 +133,7 @@
               <div class="row align-items-center">
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-                  <kendo-textbox id="nomorIndukBerusaha" class="col-md" placeholder="Type your message here" [clearButton]="true" [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha" formControlName="nomorIndukBerusaha"></kendo-textbox>
+                  <kendo-textbox id="nomorIndukBerusaha" class="col-md" placeholder="Type your message here" [clearButton]="true" [maxlength]="10" formControlName="nomorIndukBerusaha"></kendo-textbox>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.nomorIndukBerusaha.errors?.required">Nomor Induk Berusaha tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
               </div>
@@ -150,7 +150,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">BUMN Pengampu</kendo-label>
                   <kendo-autocomplete id="bumnPengampu" class="col" [kendoDropDownFilter]="{ operator: 'contains' }"
-                    [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu" [value]="vendor_info.bumnPengampu" formControlName="bumnPengampu">
+                    [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu"  formControlName="bumnPengampu">
                   </kendo-autocomplete>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">BUMN Pengampu tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
@@ -162,7 +162,7 @@
                   <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
                   <kendo-autocomplete id="organisasiHimpunan" class="col"
                     [kendoDropDownFilter]="{ operator: 'contains' }" [data]="organizations" valueField="name"
-                    [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan"  formControlName="organisasiHimpunan">
+                    [filterable]="true" placeholder="Organisasi Himpunan"  formControlName="organisasiHimpunan">
                   </kendo-autocomplete>
                 </kendo-formfield>
               </div>
@@ -171,7 +171,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Website Perusahaan</kendo-label>
                   <kendo-textbox id="websitePerusahaan" class="col-md" placeholder="Type your message here"
-                    [clearButton]="true" [value]="vendor_info.website" formControlName="websitePerusahaan"></kendo-textbox>
+                    [clearButton]="true" formControlName="websitePerusahaan"></kendo-textbox>
                 </kendo-formfield>
                 <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.websitePerusahaan.errors?.required">Website Perusahaan tidak boleh kosong</kendo-formerror>
               </div>
@@ -191,8 +191,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-md-auto">Jumlah Karyawan Lokal</kendo-label>
                   <kendo-numerictextbox id="jumlahKaryawanLokal" class="col-md" placeholder="Type your message here"
-                    [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
-                    [value]="vendor_info.jumlahKaryawanDomestik" formControlName="jumlahKaryawanLokal"></kendo-numerictextbox>
+                    [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" formControlName="jumlahKaryawanLokal"></kendo-numerictextbox>
                     <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.jumlahKaryawanLokal.errors?.required">Jumlah Karyawan Lokal tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
               </div>
@@ -202,7 +201,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-md-auto">Jumlah Karyawan Asing</kendo-label>
                   <kendo-numerictextbox id="jumlahKaryawanAsing" class="col-md" placeholder="Type your message here"
-                    [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="vendor_info.jumlahKaryawanAsing" formControlName="jumlahKaryawanAsing">
+                    [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" formControlName="jumlahKaryawanAsing">
                   </kendo-numerictextbox>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.jumlahKaryawanAsing.errors?.required">Jumlah Karyawan Asing tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
@@ -220,7 +219,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
                   <kendo-textbox id="alamatPerusahaan" class="col-md" placeholder="Type your message here"
-                    [clearButton]="true" [maxlength]="100" [value]="vendor_contact_mechanism.address1" formControlName="alamatPerusahaan"></kendo-textbox>
+                    [clearButton]="true" [maxlength]="100" formControlName="alamatPerusahaan"></kendo-textbox>
                     <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.alamatPerusahaan.errors?.required">Alamat Perusahaan tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
               </div>
@@ -229,7 +228,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Provinsi</kendo-label>
                   <kendo-dropdownlist id="provinsi" class="col-md" [defaultItem]="defaultItemProvinces"
-                    [data]="dataProvinsi" textField="provinceDescription" valueField="provinceId" [value]="selectedProvince"
+                    [data]="dataProvinsi" textField="provinceDescription" valueField="provinceId" 
                     (valueChange)="handleProvinceChange($event)" formControlName="provinsi">
                   </kendo-dropdownlist>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.provinsi.errors?.required">Provinsi tidak boleh kosong</kendo-formerror>
@@ -240,7 +239,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Kota/Kabupaten</kendo-label>
                   <kendo-dropdownlist id="kota" class="col-md" [defaultItem]="defaultItemKota"
-                    [data]="dataResultKota" [value]="selectedKota" textField="kotaDescription" valueField="kotaId"
+                    [data]="dataResultKota" textField="kotaDescription" valueField="kotaId"
                     (valueChange)="handleKotaChange($event)" formControlName="kota">
                   </kendo-dropdownlist>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.kota.errors?.required">Kota tidak boleh kosong</kendo-formerror>
@@ -251,8 +250,7 @@
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Kecamatan</kendo-label>
                   <kendo-dropdownlist id="kecamatan" class="col-md" [defaultItem]="defaultItemKecamatan"
-                    textField="kecamatanDescription" valueField="kecamatanId" [data]="dataResultKecamatan"
-                    [value]="selectedKecamatan" (valueChange)="handleKecamatanChange($event)" formControlName="kecamatan">
+                    textField="kecamatanDescription" valueField="kecamatanId" [data]="dataResultKecamatan" (valueChange)="handleKecamatanChange($event)" formControlName="kecamatan">
                   </kendo-dropdownlist>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.kecamatan.errors?.required">Kecamatan tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
@@ -261,8 +259,7 @@
               <div class="row align-items-center">
                 <kendo-formfield [formGroup]="profileInformationFormGroup">
                   <kendo-label class="col-3">Kelurahan</kendo-label>
-                  <kendo-dropdownlist id="kelurahan" class="col-md" defaultItem="Pilih Kelurahan" [valuePrimitive]="true"
-                    [data]="listItems" formControlName="kelurahan">
+                  <kendo-dropdownlist id="kelurahan" class="col-md" defaultItem="Pilih Kelurahan" [valuePrimitive]="true" [data]="listItems" formControlName="kelurahan">
                   </kendo-dropdownlist>
                   <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.kelurahan.errors?.required">Kelurahan tidak boleh kosong</kendo-formerror>
                 </kendo-formfield>
