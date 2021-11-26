@@ -11,7 +11,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-textbox class="content-input-field" id="input-neraca-tahun" formControlName="tahun" [clearButton]="true" #tahun required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-tahun" formControlName="tahun" format="#" [min]="0" #tahun required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Tahun tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -24,7 +24,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-textbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" [clearButton]="true" #aktiva required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" format="Rp\ ##,#" #aktiva required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Aktiva (Asset) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -37,7 +37,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-textbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" [clearButton]="true" #pasiva required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" format="Rp\ ##,#" #pasiva required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Passiva (Liability) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-textbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" [clearButton]="true" #equitas required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" format="Rp\ ##,#" #equitas required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Ekuitas (Equity) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -63,7 +63,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-textbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" [clearButton]="true" #omzet required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" format="Rp\ ##,#" #omzet required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Omzet Bersih tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -228,12 +228,24 @@
             <kendo-grid-column field="tahun" title="Tahun">
             </kendo-grid-column>
             <kendo-grid-column field="aktiva" title="Aktiva (Asset)">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{ dataItem.aktiva | currency:'Rp. ':'symbol':'4.0-2' }}
+              </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="pasiva" title="Passiva (Liability)">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{ dataItem.pasiva | currency:'Rp. ':'symbol':'4.0-2' }}
+              </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="equitas" title="Ekuitas (Equity)">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{ dataItem.equitas | currency:'Rp. ':'symbol':'4.0-2' }}
+              </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="omzet" title="Omzet Bersih">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                {{ dataItem.omzet | currency:'Rp. ':'symbol':'4.0-2' }}
+              </ng-template>
             </kendo-grid-column>
             <kendo-grid-column field="id" title="Action">
               <ng-template kendoGridCellTemplate let-dataItem>
