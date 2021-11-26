@@ -1,6 +1,7 @@
 import { Component, Injectable, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { FileRestrictions } from "@progress/kendo-angular-upload";
+import { EventEmitterService } from "src/app/core/services/event-emitter.service";
 import { FileService } from "src/app/core/services/file.service";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
 
@@ -23,7 +24,7 @@ interface Hydra {
 export class ProfileInformasiPerusahaanComponent {
 
   constructor(
-    // private eventEmitterService: EventEmitterService,
+    private eventEmitterService: EventEmitterService,
     private profileInfoService: ProfileInformationService,
     private fileService: FileService
   ) {
@@ -36,7 +37,8 @@ export class ProfileInformasiPerusahaanComponent {
     files: [],
   };
   public submitted = false;
-
+  public popUpMessage: string = "";
+  
   public imgRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png"],
   };
@@ -311,11 +313,15 @@ export class ProfileInformasiPerusahaanComponent {
         this.uploadedFileId, this.logoImg = res["@id"]; //vendor :logo_id
       },
       (error) => {
-        // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
-        // this.triggerPopUp();
+        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.triggerPopUp();
         console.log(error);
       }
     );
+  }
+
+  triggerPopUp():void  {
+    this.eventEmitterService.trigger();
   }
 
 
