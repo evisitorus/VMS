@@ -64,7 +64,7 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
-  public logoImg = "https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg";
+  public logoImg!:any;
   
 
   public listItems: Array<Item> = [];
@@ -174,6 +174,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.vendor_contact_mechanism = resp.data.contactMechanism;
         this.total_karyawan = resp.data.party.jumlahKaryawanDomestik + resp.data.party.jumlahKaryawanAsing;
         this.pkpStatus = resp.data.party.statusPerusahaanPkp;
+        this.logoImg = resp.data.logo.id;
       },
       (error) => {
         console.log(error);
@@ -286,13 +287,11 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   upload(): void {
-    let reader = new FileReader();
     console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        // this.logoImg = reader.readAsDataURL(this.selectedFile[0]);
-        this.uploadedFileId = res["@id"]; //vendor :logo_id
+        this.uploadedFileId,this.logoImg = res["@id"]; //vendor :logo_id
       },
       (error) => {
         // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
