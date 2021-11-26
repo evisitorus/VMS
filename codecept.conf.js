@@ -45,6 +45,7 @@ exports.config = {
           './tests/acceptance/step_definitions/Logout.steps.js',
           './tests/acceptance/step_definitions/Dokumen.steps.js',
           './tests/acceptance/step_definitions/ProfilPemegangSaham.steps.js',
+          './tests/acceptance/step_definitions/ProfilAsset.steps.js',
         ]
   },
   plugins: {
@@ -63,7 +64,27 @@ exports.config = {
       deleteSuccessful: false,
       fullPageScreenshots: true
     },
-  },
+    autoLogin: {
+      enabled: true,
+      inject: 'loginAs',
+      users: {
+          user: {
+              login: (I) => {
+                  I.amOnPage('login');
+                  I.waitForElement('#input-email input[class=k-input]');
+                  I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
+                  I.waitForElement('#input-password input[class=k-input]');
+                  I.fillField('#input-password input[class=k-input]', '1234');
+                  I.waitForElement('#btn-login');
+                  I.click('#btn-login');
+              },
+              check: () => {},
+              fetch: () => {},
+              restore: () => {}
+          },
+        }
+      }
+    },
   tests: 'tests/acceptance/*_test.js',
   name: 'eproc-fe'
 }
