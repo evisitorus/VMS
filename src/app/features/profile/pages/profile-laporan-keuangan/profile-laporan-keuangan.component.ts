@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import { ProfileKeuanganInterface, ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
@@ -39,10 +39,13 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
+    maxFileSize: 2097152
   };
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
+  public invalidFileExtension!: boolean;
+  public invalidMaxFileSize!: boolean;
 
   public popUpTitle: string = "Profile Keuangan";
   public popUpMessage: string = ""
@@ -251,10 +254,16 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public submitSPT(): void {
-    if (this.isNewData) {
-      this.saveSPT();
+    if (this.lampiranFiles === null) {
+      this.popUpMessage = "File tidak valid";
+      this.triggerModal('spt');
+      this.triggerPopUp();
     } else {
-      this.updateSPT();
+      if (this.isNewData) {
+        this.saveSPT();
+      } else {
+        this.updateSPT();
+      }
     }
   }
 
@@ -379,6 +388,20 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public selectEventHandler(e: SelectEvent): void {
+    let errors = e.files[0].validationErrors;
+    if (errors?.includes("invalidMaxFileSize")) {
+      this.invalidMaxFileSize = true;
+    } else {
+      this.invalidMaxFileSize = false;
+    }
+    if (errors?.includes("invalidFileExtension")) {
+      this.invalidFileExtension = true;
+    } else {
+      this.invalidFileExtension = false;
+    }
   }
 
   public upload(): void {
