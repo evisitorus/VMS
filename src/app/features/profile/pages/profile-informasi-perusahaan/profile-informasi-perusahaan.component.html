@@ -29,7 +29,7 @@
                 <kendo-formfield [formGroup] = "profileInformationFormGroup">
                   <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
                   <kendo-textbox id="inisialPerusahaanInput" class="col-md" placeholder="Inisial perusahaan"
-                    [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName"></kendo-textbox>
+                    [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName" formControlName="inisialPerusahaan"></kendo-textbox>
                 </kendo-formfield>
               </div>
               <div class="row">
@@ -158,11 +158,13 @@
   
   
               <div class="row align-items-center">
-                <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
-                <kendo-autocomplete id="organisasiHimpunanInput" class="col"
-                  [kendoDropDownFilter]="{ operator: 'contains' }" [data]="organizations" valueField="name"
-                  [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan">
-                </kendo-autocomplete>
+                <kendo-formfield [formGroup]="profileInformationFormGroup">
+                  <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
+                  <kendo-autocomplete id="organisasiHimpunan" class="col"
+                    [kendoDropDownFilter]="{ operator: 'contains' }" [data]="organizations" valueField="name"
+                    [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan"  formControlName="organisasiHimpunan">
+                  </kendo-autocomplete>
+                </kendo-formfield>
               </div>
   
               <div class="row align-items-center">
@@ -276,8 +278,10 @@
               </div>
   
               <div class="row align-items-center">
-                <kendo-label class="col-3">Pin Geolocation</kendo-label>
-                <kendo-textbox id="pinGeoLocInput" class="col-md" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+                <kendo-formfield [formGroup]="profileInformationFormGroup">
+                  <kendo-label class="col-3">Pin Geolocation</kendo-label>
+                  <kendo-textbox id="pinGeoLoc" class="col-md" placeholder="Type your message here" [clearButton]="true"  formControlName="pinGeoLoc"></kendo-textbox>
+                </kendo-formfield>
               </div>
             </form>
           </ng-template>

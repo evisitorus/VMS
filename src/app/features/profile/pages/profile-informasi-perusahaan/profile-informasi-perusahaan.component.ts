@@ -29,6 +29,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public profileInformationFormGroup = new FormGroup({
     namaPerusahaan: new FormControl(null, Validators.required),
+    inisialPerusahaan: new FormControl(null,[]),
     jenisBadanUsaha:new FormControl(null, Validators.required),
     statusBadanUsaha:new FormControl(null, Validators.required),
     tipeBadanUsaha: new FormControl(null, Validators.required),
@@ -39,6 +40,7 @@ export class ProfileInformasiPerusahaanComponent {
     nomorIndukBerusaha: new FormControl(null, Validators.required),
     bidangUsaha:new FormControl(null, Validators.required),
     bumnPengampu:new FormControl(null, Validators.required),
+    organisasiHimpunan: new FormControl(null,[]),
     websitePerusahaan:new FormControl(null, Validators.required),
     jumlahKaryawanTotal:new FormControl(null, Validators.required),
     jumlahKaryawanLokal:new FormControl(null, Validators.required),
@@ -50,6 +52,7 @@ export class ProfileInformasiPerusahaanComponent {
     kecamatan:new FormControl(null, Validators.required),
     kelurahan:new FormControl(null, Validators.required),
     kodePos:new FormControl(null, Validators.required),
+    pinGeoLoc: new FormControl(null,[]),
   });
 
   public logoForm: FormGroup = undefined!;
@@ -169,13 +172,15 @@ export class ProfileInformasiPerusahaanComponent {
 
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
-      (resp) => {
+      (resp) => { 
         let data = resp.data[0];
         this.vendor_info = data.party;
+        // console.log(resp.data[0].party)
         this.vendor_contact_mechanism = data.contactMechanism;
-        this.total_karyawan = resp.data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
+        this.total_karyawan = data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
         this.pkpStatus = data.party.statusPerusahaanPkp;
         this.logoImg = data.logo.id;
+        console.log(this.vendor_info)
       },
       (error) => {
         console.log(error);
