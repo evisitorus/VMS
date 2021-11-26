@@ -80,5 +80,4 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pemegang_saham);
   }
 
-  
 }
