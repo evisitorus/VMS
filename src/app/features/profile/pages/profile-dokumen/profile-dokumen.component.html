@@ -20,7 +20,7 @@
 
         <kendo-formfield [formGroup]="form" *ngIf="!isLifeTime">
           <kendo-label [for]="berlakuSampai" text="Berlaku Sampai"></kendo-label>
-          <kendo-datepicker arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+          <kendo-datepicker id="input-berlaku-sampai" arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
           <kendo-formerror></kendo-formerror>
         </kendo-formfield>
 
@@ -31,9 +31,9 @@
 
         <kendo-formfield [formGroup]="form">
           <kendo-label text="Lampiran File" ></kendo-label>
-          <kendo-fileselect required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
-
-          </kendo-fileselect>
+          <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+          <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+          <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
         </kendo-formfield>
 
         <div class="k-actions k-actions-end">
