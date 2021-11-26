@@ -14,7 +14,7 @@
 
                     <kendo-panelbar-item *ngFor="let child of item.children" 
                         [title]="child?.title || 'about'" 
-                        [id]="item.id ? item.id  : child.id" 
+                        [id]="child.id ? child.id  : item.id" 
                         [selected]="item.title + '/' + child?.title == selectedId"  
                         [routerLink]="child?.route" 
                         class="k-state-active">
