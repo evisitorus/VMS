@@ -155,7 +155,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.vendor_contact_mechanism = data.contactMechanism;
         this.total_karyawan = data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
         this.pkpStatus = data.party.statusPerusahaanPkp;
-        this.logoImg = ApiRoutes.api_documents_route + "/" + data.logo.id + "/file";
+        this.logoImg = ApiRoutes.api_media_object_route + "/" + data.logo.id + "/file";
 
         this.setForm();
       },
