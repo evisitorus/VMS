@@ -17,12 +17,15 @@ export class ProfileService {
     private authService: AuthService
     ) { }
 
+  email = this.authService.getLocalStorage('email')!;
+  vendor_id = this.authService.getLocalStorage('vendor_id')!;
+  
   addPekerjaan(params: AddPekerjaanInterface): Observable<any> {    
     let api_add_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pengalaman_kerja,
       body: {
-        email: params.email,
+        email: this.email,
         namaPekerjaan: params.namaPekerjaan,
         pemberiPekerjaan: params.pemberiPekerjaan,
         nilaiPekerjaan: params.nilaiPekerjaan,
@@ -34,13 +37,13 @@ export class ProfileService {
     return this.apiService.sendRequest(api_add_pekerjaan);
   }
 
-  getPekerjaan(vendor: string): Observable<any> {    
+  getPekerjaan(): Observable<any> {    
     let api_get_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pengalaman_kerja,
       options: {
         params: {
-          vendor : vendor
+          vendor : this.vendor_id
         }
       }
     };
@@ -49,7 +52,6 @@ export class ProfileService {
   }
 
 
-  email = this.authService.getLocalStorage('email')!;
   addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
     let api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
@@ -67,7 +69,6 @@ export class ProfileService {
   }
 
 
-  vendor_id = this.authService.getLocalStorage('vendor_id')!;
   getPemegangSaham(): Observable<any> {    
     let api_get_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.get,
