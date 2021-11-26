@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
-import { ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
+import { ProfileKeuanganInterface, ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKeuanganService } from 'src/app/core/services/profile/profile-keuangan.service';
@@ -24,6 +24,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.setForm();
     this.fetchDataNeraca();
     this.fetchDataSPT();
+    this.fetchDataKeuangan();
   }
 
   public openNeraca = false;
@@ -158,7 +159,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public mapDataSPT(data: any[]): any[] {
-    console.log(data);
     let mappedData:any[] = [];
     for (const key in data) {
       mappedData[key] = {
@@ -204,7 +204,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.dataGridNeraca = this.mapDataNeraca(this.dataGridNeraca);
       },
       () => {
-        this.popUpMessage = "Gagal mendapatkan data";
+        this.popUpMessage = "Gagal mendapatkan data Neraca";
         this.triggerPopUp();
       }
     );
@@ -217,7 +217,26 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.dataGridSPT = this.mapDataSPT(this.dataGridSPT);
       },
       () => {
-        this.popUpMessage = "Gagal mendapatkan data";
+        this.popUpMessage = "Gagal mendapatkan data SPT";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public fetchDataKeuangan(): void {
+    this.service.fetchDataKeuangan().subscribe(
+      (resp) => {
+        let data = resp.data;
+        this.dataKeuangan.namaBank = data.fromParty.name;
+        this.dataKeuangan.cabang = data.cabang;
+        this.dataKeuangan.nomorRekening = data.nomorRekening;
+        this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
+        this.dataKeuangan.modalDasar = data.toParty.modalDasar;
+        this.dataKeuangan.modalDitempatkan = data.toParty.modalDitempatkan;
+        this.setForm();
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data Keuangan";
         this.triggerPopUp();
       }
     );
@@ -347,6 +366,21 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     );
   }
 
+  public postDataKeuangan(): void {
+    let params: ProfileKeuanganInterface = {...this.formKeuangan.value};
+    this.service.postDataKeuangan(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.triggerPopUp();
+        this.fetchDataKeuangan();
+      },
+      () => {
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+      }
+    );
+  }
+
   public upload(): void {
     this.fileService.upload(this.lampiranFiles[0]).subscribe(
       (res) => {
@@ -361,8 +395,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public download(fileId: string, filename: string) {
-    console.log(fileId);
-    console.log(filename);
     this.fileService.download(fileId).subscribe(
       (res) => {
         let mime = this.fileService.getMimeType(filename);

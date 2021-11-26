@@ -28,6 +28,7 @@ export const ApiRoutes = {
   api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
   api_base_url: API_BASE_URL,
   api_documents_route: API_BASE_URL + "/dokumens",
+  api_vendor_route: API_BASE_URL + "/vendors"
 };
 
 export const ApiRouteMethods = {

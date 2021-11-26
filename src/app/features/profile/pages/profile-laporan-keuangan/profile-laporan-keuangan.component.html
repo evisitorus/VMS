@@ -72,12 +72,12 @@
         
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button vms-btn" (click)="triggerModal('neraca')">
+            <button type="button" class="k-button vms-btn" (click)="triggerModal('neraca')" id="btn-batal-neraca">
               Batal
             </button>
           </div>
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitNeraca()">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitNeraca()" id="btn-simpan-neraca">
               Simpan
             </button>
           </div>
@@ -125,7 +125,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formSPT">
-              <kendo-fileselect required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
+              <kendo-fileselect id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
               </kendo-fileselect>
             </kendo-formfield>
           </div>
@@ -133,12 +133,12 @@
 
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button vms-btn" (click)="triggerModal('spt')">
+            <button type="button" class="k-button vms-btn" (click)="triggerModal('spt')" id="btn-batal-spt">
               Batal
             </button>
           </div>
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitSPT()">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitSPT()" id="btn-simpan-spt">
               Simpan
             </button>
           </div>
@@ -337,7 +337,7 @@
 
       <div class="k-actions k-actions-center">
         <div class="col-2 profile-content-grid-button">
-          <button kendoButton class="vms-btn vms-btn-primary">
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-simpan-profile-keuangan" (click)="postDataKeuangan()">
             Simpan
           </button>
         </div>
