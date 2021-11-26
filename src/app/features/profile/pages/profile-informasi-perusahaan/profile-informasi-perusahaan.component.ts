@@ -1,9 +1,12 @@
 import { Component, Injectable, ViewEncapsulation } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { FileRestrictions } from "@progress/kendo-angular-upload";
+import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { EventEmitterService } from "src/app/core/services/event-emitter.service";
 import { FileService } from "src/app/core/services/file.service";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
+import { environment as env } from "src/environments/environment";
+
 
 interface Item {
   name: string;
@@ -41,6 +44,7 @@ export class ProfileInformasiPerusahaanComponent {
   
   public imgRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png"],
+    maxFileSize: 2097152
   };
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
@@ -151,7 +155,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.vendor_contact_mechanism = data.contactMechanism;
         this.total_karyawan = data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
         this.pkpStatus = data.party.statusPerusahaanPkp;
-        this.logoImg = data.logo.id;
+        this.logoImg = ApiRoutes.api_documents_route + "/" + data.logo.id + "/file";
 
         this.setForm();
       },
@@ -310,7 +314,9 @@ export class ProfileInformasiPerusahaanComponent {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        this.uploadedFileId, this.logoImg = res["@id"]; //vendor :logo_id
+        this.uploadedFileId  = res["@id"]; 
+        //vendor :logo_id
+        this.logoImg = env.api_base_path + res["@id"] + "/file";
       },
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";

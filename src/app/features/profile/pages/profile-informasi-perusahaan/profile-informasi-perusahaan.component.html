@@ -9,7 +9,7 @@
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center justify-content-center k-vstack">
               <img class="col-3" src="{{logoImg}}" />
-              <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" required name="files" look="flat"
+              <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false" 
                 #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile"
                 [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
             </div>
