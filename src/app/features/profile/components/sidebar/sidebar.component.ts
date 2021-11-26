@@ -1,3 +1,4 @@
+import { componentFactoryName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PanelBarItemModel } from '@progress/kendo-angular-layout';
@@ -33,28 +34,31 @@ export class SidebarComponent implements OnInit {
 
 const items = [
   { 
-    path: "Dashboard",
+    title: "Dashboard",
     route:"/dashboard",
     id: "sidebar-dashboard" 
   },
   { 
-    path: "Kelola Akun",
+    id: "sidebar-kelola-akun",
+    title: "Kelola Akun",
+    expanded: "true",
     children: [
-      { path: "Profil Perusahaan", route:"/profile-information", id: "sidebar-dashboard"  },
-      { path: "PIC", route:"/profile-person-in-charge", id: "sidebar-pic"  },
-      { path: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
-      { path: "Alamat", route:"/profile-alamat", id: "sidebar-alamat"  },
-      { path: "Laporan Keuangan", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
-      { path: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan", id: "sidebar-riwayat-pekerjaan"  },
-      { path: "Asset", route:"/profile-aset", id: "sidebar-aset"  },
-      { path: "Verifikasi Kelengkapan", route:"/profile-verification", id: "sidebar-verification"  },
-      { path: " "}
+      { title: "Profil Perusahaan", route:"/profile-information", id: "sidebar-dashboard"  },
+      { title: "PIC", route:"/profile-person-in-charge", id: "sidebar-pic"  },
+      { title: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
+      { title: "Alamat", route:"/profile-alamat", id: "sidebar-alamat"  },
+      { title: "Laporan Keuangan", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
+      { title: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan", id: "sidebar-riwayat-pekerjaan"  },
+      { title: "Asset", route:"/profile-aset", id: "sidebar-aset"  },
+      { title: "Verifikasi Kelengkapan", route:"/profile-verification", id: "sidebar-verification"  },
+      { title: " ", id: ""}
     ]
   },
   { 
-    path: "Tender",
+    title: "Tender",
+    id: "sidebar-tender",
     children: [
-      { path: "Informasi Tender BUMN", route:"/", id: "sidebar-tender"  }
+      { title: "Informasi Tender BUMN", route:"/", id: "sidebar-tender-bumn"  }
     ]
   },
 ];

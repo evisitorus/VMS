@@ -2,8 +2,23 @@
     <div class="layout">
         <div class="navigation-pane">
             <kendo-panelbar (stateChange)="stateChange($event)" [selectable]="false" class="vms-sidebar">
-                <kendo-panelbar-item *ngFor="let item of menu" [id]="item.path" [title]="item.path ? item.path : 'home'" [selected]="item.path == selectedId" class="vms-sidebar-item" [ngClass]="item.path == 'Dashboard' ? 'parent-sidebar' : '' " [routerLink]="item?.route">
-                    <kendo-panelbar-item *ngFor="let child of item.children" [title]="child?.path || 'about'" [id]="item.path + '/' + child?.path" [selected]="item.path + '/' + child?.path == selectedId"  [routerLink]="child?.route"></kendo-panelbar-item>
+                <kendo-panelbar-item *ngFor="let item of menu" 
+                    [id]="item.id" 
+                    [title]="item.title ? item.title : 'home'" 
+                    [selected]="item.title == selectedId" 
+                    class="vms-sidebar-item" 
+                    [ngClass]="item.title == 'Dashboard' ? 'parent-sidebar' : '' " 
+                    [routerLink]="item?.route" 
+                    [expanded]="item?.expanded ? true : false" 
+                    [selected]="item?.expanded ? true : false" >
+
+                    <kendo-panelbar-item *ngFor="let child of item.children" 
+                        [title]="child?.title || 'about'" 
+                        [id]="item.id ? item.id  : child.id" 
+                        [selected]="item.title + '/' + child?.title == selectedId"  
+                        [routerLink]="child?.route" 
+                        class="k-state-active">
+                    </kendo-panelbar-item>
                 </kendo-panelbar-item>
             </kendo-panelbar>
         </div>
