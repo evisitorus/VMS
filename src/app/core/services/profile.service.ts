@@ -5,13 +5,17 @@ import { AddPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService
+    ) { }
 
   addPekerjaan(params: AddPekerjaanInterface): Observable<any> {    
     let api_add_pekerjaan: ApiInterface = {
@@ -60,13 +64,15 @@ export class ProfileService {
     return this.apiService.sendRequest(api_add_pemegang_saham);
   }
 
-  getPemegangSaham(vendor: string): Observable<any> {    
+
+  vendor_id = this.authService.getLocalStorage('vendor_id')!;
+  getPemegangSaham(): Observable<any> {    
     let api_get_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pemegang_saham_route,
       options: {
         params: {
-          fromParty : vendor
+          fromParty : this.vendor_id
         }
       }
     };
