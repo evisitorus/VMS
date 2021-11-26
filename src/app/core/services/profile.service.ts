@@ -48,12 +48,14 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pekerjaan);
   }
 
+
+  email = this.authService.getLocalStorage('email')!;
   addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
     let api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pemegang_saham,
       body: {
-        email: params.email,
+        email: this.email,
         namaPemegangSaham: params.namaPemegangSaham,
         perseorangan: params.perseorangan,
         lokal: params.lokal,
