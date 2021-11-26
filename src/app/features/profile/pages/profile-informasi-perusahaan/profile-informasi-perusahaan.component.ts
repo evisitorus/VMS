@@ -170,11 +170,12 @@ export class ProfileInformasiPerusahaanComponent {
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
-        this.vendor_info = resp.data.party;
-        this.vendor_contact_mechanism = resp.data.contactMechanism;
-        this.total_karyawan = resp.data.party.jumlahKaryawanDomestik + resp.data.party.jumlahKaryawanAsing;
-        this.pkpStatus = resp.data.party.statusPerusahaanPkp;
-        this.logoImg = resp.data.logo.id;
+        let data = resp.data[0];
+        this.vendor_info = data.party;
+        this.vendor_contact_mechanism = data.contactMechanism;
+        this.total_karyawan = resp.data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
+        this.pkpStatus = data.party.statusPerusahaanPkp;
+        this.logoImg = data.logo.id;
       },
       (error) => {
         console.log(error);
