@@ -12,20 +12,20 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
 
 });
 
-Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', () => {
-    I.click('#btn-addPemegangSaham');
-});
+// Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', () => {
+//     I.click('#btn-addPemegangSaham');
+// });
 
-Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', () => {
-    I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers');
-    I.click('#Perseorangan');
-    I.click('#Lokal');
-    I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
-});
+// Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', () => {
+//     I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers');
+//     I.click('#Perseorangan');
+//     I.click('#Lokal');
+//     I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
+// });
 
-Given('The Vendor must click {string} button to save information of {string}', () => {
-    I.click('#submitPemegangSaham');
-});
+// Given('The Vendor must click {string} button to save information of {string}', () => {
+//     I.click('#submitPemegangSaham');
+// });
 
 Given('The Vendor will see that pop-up form already closed when clicks {string}', () => {
     I.see('Informasi Pemegang Saham');
@@ -34,12 +34,12 @@ Given('The Vendor will see that pop-up form already closed when clicks {string}'
     I.dontSeeElement('.k-window');
 });
 
-Given('The Vendor will see first 5 lists of {string} on {string}', () => {
-    I.see('Steven Rogers');
-    I.see('Perseorangan');
-    I.see('Lokal');
-    I.see('50');
-});
+// Given('The Vendor will see first 5 lists of {string} on {string}', () => {
+//     I.see('Steven Rogers');
+//     I.see('Perseorangan');
+//     I.see('Lokal');
+//     I.see('50');
+// });
 
 Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
 
