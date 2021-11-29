@@ -163,13 +163,13 @@
 }
 
 #input-filter-keyword, #input-filter-status {
-  width: 60%;
+  width: 100%;
 }
 
 #input-register-begin, #input-register-end, #input-hps-begin, #input-hps-end {
-  width: 200px;
+  width: 50%;
 }
 
 #input-hps-begin, #input-register-begin {
-  margin-right: 1em !important;
+  /* margin-right: 1em !important; */
 }
