@@ -52,7 +52,7 @@
   </kendo-grid>
 
     <br>
-    <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" icon="k-icon k-i-plus-outline">
+    <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" style="float: right; color:#0193AC;" look="flat" icon="k-icon k-i-plus-outline">
       Tambah Pemegang Saham
     </button>
 
@@ -128,7 +128,9 @@
               <kendo-numerictextbox 
                 id="kepemilikanSaham"
                 class="formField"
-                [min]="1"
+                [decimals]="2" 
+                [format]="'# \\%'"
+                [min]="0"
                 [max]="100"
                 [autoCorrect]=true
                 [spinners]="false"
