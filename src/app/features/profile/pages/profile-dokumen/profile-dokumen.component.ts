@@ -162,6 +162,7 @@ export class ProfileDokumenComponent implements OnInit {
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
+    
 
     this.profileDocumentService.save(params).subscribe(
       () => {

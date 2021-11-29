@@ -17,6 +17,8 @@ export const ApiRoutes = {
   api_assets_route: API_BASE_URL + "/mesin_peralatans",
   api_tenders_route: API_BASE_URL + "/tenders",
   api_media_object_route: API_BASE_URL + "/media_objects",
+  api_neraca_route: API_BASE_URL + "/neracas",
+  api_spt_route: API_BASE_URL + "/spt_pajaks",
   api_list_tender: API_BASE_URL + "/tenders/page/",
   api_token_route: API_BASE_URL + "/users/token",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
@@ -26,6 +28,7 @@ export const ApiRoutes = {
   api_jenis_badan_usaha_route: API_BASE_URL + "",
   api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
   api_documents_route: API_BASE_URL + "/dokumens",
+  api_vendor_route: API_BASE_URL + "/vendors"
 };
 
 export const ApiRouteMethods = {
