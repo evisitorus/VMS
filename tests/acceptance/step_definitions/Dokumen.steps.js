@@ -1,16 +1,6 @@
 const { I } = inject();
 
 Given('The Vendor already add information in regards to {string}', () => {
-    I.amOnPage('/login');
-    I.waitForElement('#input-email input[class=k-input]');
-    I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
-    I.waitForElement('#input-password input[class=k-input]');
-    I.fillField('#input-password input[class=k-input]', '1234');
-    I.waitForElement('#btn-login');
-    I.click('#btn-login');
-    I.waitForElement('#btn-popup-yes');
-    I.click('#btn-popup-yes');
-
     I.amOnPage('/profile-information');
 });
 
@@ -19,8 +9,7 @@ Given('The Vendor wants manage {string} which needed for further verification fr
 });
 
 Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
-    // I.waitForElement('#k-panelbar-0-item-sidebar-kelola-akun [ng-reflect-id=sidebar-kelola-akun]');
-    // // I.click('#k-panelbar-0-item-sidebar-kelola-akun span]');
+
 });
 
 Given('The Vendor must click {string} Tab', () => {
@@ -28,8 +17,21 @@ Given('The Vendor must click {string} Tab', () => {
     I.click('#k-panelbar-1-item-sidebar-dokumen');
 });
 
-Given('The Vendor will see {string} form', () => {
-    I.amOnPage('/profile-dokumen');
+Given('The Vendor will see {string} form', (form) => {
+    switch (form) {
+        case "Dokumen":
+            I.amOnPage('/profile-dokumen');
+            break;
+        case "Asset":
+            I.amOnPage('/profile-aset');
+            break;
+        case "Informasi Keuangan":
+            I.amOnPage('/profile-laporan-keuangan');
+            break;
+        default:
+            I.amOnPage(form);
+            break;
+    }
 });
 
 Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
@@ -85,6 +87,14 @@ Given('The Vendor must click {string} button to save information of {string}', (
         case "Pemegang Saham":
             I.waitForElement('#submitPemegangSaham');
             I.click('#submitPemegangSaham');
+            break;
+        case "Asset":
+            I.waitForElement('#btn-simpan');
+    I.click('#btn-simpan');
+            break;
+        case "Keuangan":
+            I.waitForElement('#btn-simpan-profile-keuangan');
+            I.click('#btn-simpan-profile-keuangan');
             break;
         default:
             I.waitForElement(button2);
