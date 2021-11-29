@@ -48,6 +48,18 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.waitForElement('#btn-addPemegangSaham');
             I.click('#btn-addPemegangSaham');
             break;
+        case "Asset":
+            I.waitForElement('#btn-tambah-asset');
+            I.click('#btn-tambah-asset');
+            break;
+        case "Neraca Keuangan":
+            I.waitForElement('#btn-tambah-neraca');
+            I.click('#btn-tambah-neraca');
+            break;
+        case "SPT Tahunan":
+            I.waitForElement('#btn-tambah-spt');
+            I.click('#btn-tambah-spt');
+            break;
         default:
             I.click(button3);
             break;
@@ -72,6 +84,34 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.click('#Lokal');
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
             break;
+        case "Asset":
+            I.waitForElement('#input-nama-asset input[class=k-input]');
+            I.fillField('#input-nama-asset input[class=k-input]', 'Crane');
+            I.waitForElement('#input-jumlah-asset input[role=spinbutton]');
+            I.fillField('#input-jumlah-asset input[role=spinbutton]', 100);
+            I.waitForElement('#input-tahun-asset input[class=k-input]');
+            I.fillField('#input-tahun-asset input[class=k-input]', '2012');
+            break;
+        case "Neraca Keuangan":
+            I.waitForElement('#input-neraca-tahun input[role=spinbutton]');
+            I.fillField('#input-neraca-tahun input[role=spinbutton]', 2015);
+            I.waitForElement('#input-neraca-aktiva input[role=spinbutton]');
+            I.fillField('#input-neraca-aktiva input[role=spinbutton]', 1000000000);
+            I.waitForElement('#input-neraca-pasiva input[role=spinbutton]');
+            I.fillField('#input-neraca-pasiva input[role=spinbutton]', 1000000000);
+            I.waitForElement('#input-neraca-ekuitas input[role=spinbutton]');
+            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', 1000000000);
+            I.waitForElement('#input-neraca-omzet input[role=spinbutton]');
+            I.fillField('#input-neraca-omzet input[role=spinbutton]', 1000000000);
+            break;
+        case "SPT Tahunan":
+            I.waitForElement('#input-spt-tahun input[class=k-input]');
+            I.fillField('#input-spt-tahun input[class=k-input]' , '');
+            I.waitForElement('#input-spt-nomor-dokumen input[class=k-input]');
+            I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '');
+            I.waitForElement('#input-spt-lampiran input[type=file]');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
+            break;
         default:
             I.waitForElement(form2);
             break;
@@ -90,14 +130,22 @@ Given('The Vendor must click {string} button to save information of {string}', (
             break;
         case "Asset":
             I.waitForElement('#btn-simpan');
-    I.click('#btn-simpan');
+            I.click('#btn-simpan');
             break;
         case "Keuangan":
             I.waitForElement('#btn-simpan-profile-keuangan');
             I.click('#btn-simpan-profile-keuangan');
             break;
+        case "Neraca Keuangan":
+            I.waitForElement('#btn-simpan-neraca');
+            I.click('#btn-simpan-neraca');
+            break;
+        case "SPT Tahunan":
+            I.waitForElement('#btn-simpan-spt');
+            I.click('#btn-simpan-spt');
+            break;
         default:
-            I.waitForElement(button2);
+            I.click(button2);
             break;
     }    
 });
