@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TextBoxComponent } from '@progress/kendo-angular-inputs';
 import { ProfileAssetInterface } from 'src/app/core/interfaces/profile-asset.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
@@ -55,6 +54,7 @@ export class ProfileAsetComponent implements OnInit {
   public close() {
     this.opened = false;
     this.resetForm();
+    this.isNewData = true;
   }
 
   public open() {

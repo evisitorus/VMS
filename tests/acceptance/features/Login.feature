@@ -43,13 +43,3 @@ So that I can manage my VMS Account
         | case                               | result       | email                 | password  | copywriting	   	                                                                                           |
         | [negative case - wrong email]      | Login failed | admin@abadijaya.co    | 1235      | Email tidak terdaftar, silahkan inputkan email benar atau lakukan registrasi jika anda belum memiliki akun.|
         | [negative case - wrong password]   | Login failed | admin@abadijaya.co.id | 12345     | Password yang anda inputkan salah, silahkan ulangi!                                                        |
-
-  
-  # Scenario: The Vendor input wrong Email and Password
-  #   Given The Vendor is on "Login" Form on VMS Portal
-  #   And The Vendor input "Email" with value "admin@abadijaya.co"
-  #   And The Vendor input "Password" with value "1234"
-  #   And The Vendor clicks "Login" button
-  #   And The Vendor will get error message "email salah"
-  #   And The Vendor selects "Yes" button
-  #   Then The Vendor must type right password on "Password" input-type on "Login" Form
