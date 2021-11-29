@@ -13,7 +13,7 @@
 }
 
 body {
-    background-color: #E5E5E5 !important;
+    background-color:white !important;
     margin: 0% !important;
     margin-top: 65px !important;
 }
@@ -213,3 +213,10 @@ div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-
     margin-top: 35px !important;
     margin-right: 35px !important;
 }
+
+#logoBumn .k-avatar-image {
+    width: 70% !important;
+    height: 80% !important;
+    object-fit: contain !important;
+    background-size: contain !important;
+  }
