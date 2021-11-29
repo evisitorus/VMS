@@ -1,1 +1,8 @@
-<p>tentang-kami works!</p>
+<div class="container">
+  <kendo-card *ngFor="let card of mediaCards" class="k-card-box" >
+    <img *ngIf="card.imageSrc" kendoCardMedia [src]="card.imageSrc" />
+    <kendo-card-body>
+      <div class="k-card-titles"><strong>{{ card.title }}</strong></div>
+      <div class="k-card-subtitle">{{ card.description }}</div>
+    </kendo-card-body>
+</div>
