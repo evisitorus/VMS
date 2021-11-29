@@ -1,19 +1,19 @@
-<div class="demo">
+<div class="container mt-3">
   <kendo-listview
-      [data]="view"
-      [loading]="loading"
-      [itemStyle]="{
-        display: 'inline-flex'
-      }"
-      [pageable]="pagerSettings"
-      [pageSize]="pageSize"
-      [skip]="skip"
-      (pageChange)="handlePageChange($event)"
-    >
-      <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
-        <app-tender-data [tender]="dataItem"></app-tender-data>
-      </ng-template>
-    </kendo-listview>
+  [data]="view"
+  [loading]="loading"
+  [itemStyle]="{
+    display: 'inline-flex'
+  }"
+  [pageable]="pagerSettings"
+  [pageSize]="pageSize"
+  [skip]="skip"
+  (pageChange)="handlePageChange($event)"
+>
+  <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+    <app-tender-data [tender]="dataItem"></app-tender-data>
+  </ng-template>
+</kendo-listview>
 </div>
 
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
