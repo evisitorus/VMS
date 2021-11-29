@@ -1,82 +1,128 @@
 <div class="profile-section">
-
-  <div class="col-2 profile-menu">
+  <div class="profile-menu">
     <app-sidebar></app-sidebar>
   </div>
-  
 
   <div class="profile-content">
     <form class="k-form auth-form" [formGroup]="form">
-      <kendo-label>Akun Saya</kendo-label>
-      <br><br>
       <fieldset class="k-form-fieldset">
-        <kendo-formfield>
-          <kendo-label [for]="responseName" text="Nama"></kendo-label>
-          <kendo-textbox formControlName="name" [clearButton]="true" #name required [readonly]=isDisabled
-                         [(ngModel)]="responseName"
-                         [value]=responseName></kendo-textbox>
-          <kendo-formhint></kendo-formhint>
-          <kendo-formerror>Nama tidak boleh kosong</kendo-formerror>
-        </kendo-formfield>
 
-        <kendo-formfield>
-          <kendo-label [for]="responseEmail" text="E-Mail"></kendo-label>
-          <kendo-textbox formControlName="email" #email [value]="responseEmail" [readonly]="isDisabled"
-                         [(ngModel)]="responseEmail"></kendo-textbox>
-        </kendo-formfield>
+        <ng-container
+          *ngIf="responseFile; then showPICPicture; else showDefaultPicture">
+        </ng-container>
 
-        <kendo-formfield>
-          <kendo-label [for]="responsePhoneNumber" text="No. Handphone"></kendo-label>
-          <kendo-textbox formControlName="phoneNumber" [clearButton]="true" #phoneNumber required
-                         [readonly]="isDisabled" [value]="responsePhoneNumber"
-                         [(ngModel)]="responsePhoneNumber"></kendo-textbox>
-          <kendo-formhint></kendo-formhint>
-          <kendo-formerror>Nomor Handphone tidak boleh kosong</kendo-formerror>
-        </kendo-formfield>
+        <ng-template #showPICPicture>
+            <div class="row align-items-center k-justify-content-center">
+              <img class="col-3" [src]="responseFile"/>
+            </div>
+        </ng-template>
+        <ng-template #showDefaultPicture>
+          <div class="row align-items-center k-justify-content-center">
+            <img class="col-3" src="/assets/images/nopic.jpg" style="width: 15%; height: 15%"/>
+          </div>
+        </ng-template>
 
-        <div *ngIf="isDisabled">
-          <kendo-label>Kata Sandi</kendo-label>
-          <kendo-label>Harap ganti kata sandi secara berkala untuk meningkatkan keamanan akun</kendo-label>
+        <div class="row align-items-center k-justify-content-center" *ngIf="!isDisabled">
+          <kendo-fileselect id="input-pic-avatar" required name="picAvatar" #picAvatar="ngModel"
+                            [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles"
+                            [ngModelOptions]="{standalone: true}" (change)="upload()">
+          </kendo-fileselect>
         </div>
-        <br>
-        <div *ngIf="!isDisabled">
-          <kendo-formfield>
-            <kendo-label [for]="oldPassword" text="Kata Sandi Lama"></kendo-label>
-            <kendo-textbox formControlName="oldPassword" #oldPassword required [clearButton]="true">
-              <ng-template kendoTextBoxSuffixTemplate>
-                <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
-              </ng-template>
-            </kendo-textbox>
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
-          </kendo-formfield>
 
-          <kendo-formfield>
-            <kendo-label [for]="newPassword" text="Kata Sandi Baru"></kendo-label>
-            <kendo-textbox formControlName="newPassword" #newPassword required [clearButton]="true">
-              <ng-template kendoTextBoxSuffixTemplate>
-                <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
-              </ng-template>
+        <kendo-formfield>
+          <div class="row align-items-center">
+            <kendo-label class="col-3">Nama</kendo-label>
+            <kendo-textbox id="input-name" class="col-md" formControlName="name" placeholder="Nama"
+                           [clearButton]="true" #name
+                           required
+                           [readonly]=isDisabled
+                           [(ngModel)]="responseName"
+                           [value]=responseName>
+              <!--            <kendo-formhint></kendo-formhint>-->
+              <!--            <kendo-formerror>Nama tidak boleh kosong</kendo-formerror>-->
             </kendo-textbox>
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
-          </kendo-formfield>
 
-          <kendo-formfield>
-            <kendo-label [for]="confirmNewPassword" text="Konfirmasi Kata Sandi Baru"></kendo-label>
-            <kendo-textbox formControlName="confirmNewPassword" #confirmNewPassword required [clearButton]="true">
-              <ng-template kendoTextBoxSuffixTemplate>
-                <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('confirmNewPassword')"></button>
-              </ng-template>
-            </kendo-textbox>
-            <kendo-formhint></kendo-formhint>
-            <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
-          </kendo-formfield>
-          <br>
-          <button kendoButton look="outline" (click)="save()">Simpan</button>
+          </div>
+        </kendo-formfield>
+
+        <div class="row align-items-center">
+          <kendo-label class="col-3">Alamat Email</kendo-label>
+          <kendo-textbox id="input-email" class="col-md" formControlName="email" #email
+                         [value]="responseEmail"
+                         [readonly]=true
+                         [(ngModel)]="responseEmail">
+          </kendo-textbox>
         </div>
+
+        <div class="row align-items-center">
+          <kendo-label class="col-3">No. Handphone</kendo-label>
+          <kendo-textbox id="input-phone-number" class="col-md" formControlName="phoneNumber"
+                         placeholder="Type your message here"
+                         [clearButton]="true" #phoneNumber
+                         required
+                         [readonly]=isDisabled
+                         [(ngModel)]="responsePhoneNumber"
+                         [value]=responsePhoneNumber>
+          </kendo-textbox>
+          <!--          <kendo-formhint></kendo-formhint>-->
+          <!--          <kendo-formerror>No. Handphone tidak boleh kosong</kendo-formerror>-->
+        </div>
+
+        <div class="row align-items-center" [hidden]="!isDisabled">
+          <kendo-label class="col-3">Kata Sandi</kendo-label>
+          <kendo-label class="col-md">Harap ganti kata sandi secara berkala untuk
+            meningkatkan keamanan akun
+          </kendo-label>
+        </div>
+
+        <div class="row align-items-center" [hidden]="isDisabled">
+          <kendo-label class="col-3">Kata Sandi Lama</kendo-label>
+          <kendo-textbox id="input-old-password" class="col-md" formControlName="oldPassword"
+                         placeholder="Type your message here"
+                         [clearButton]="true" #oldPassword
+                         required>
+            <ng-template kendoTextBoxSuffixTemplate>
+              <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
+            </ng-template>
+          </kendo-textbox>
+          <!--          <kendo-formhint></kendo-formhint>-->
+          <!--          <kendo-formerror>Kata Sandi Lama tidak koleh kosong</kendo-formerror>-->
+        </div>
+
+        <div class="row align-items-center" [hidden]="isDisabled">
+          <kendo-label class="col-3">Kata Sandi Baru</kendo-label>
+          <kendo-textbox id="input-new-password" class="col-md" formControlName="newPassword"
+                         placeholder="Type your message here"
+                         [clearButton]="true" #newPassword
+                         required>
+            <ng-template kendoTextBoxSuffixTemplate>
+              <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
+            </ng-template>
+          </kendo-textbox>
+          <!--          <kendo-formhint></kendo-formhint>-->
+          <!--          <kendo-formerror>Kata Sandi Baru tidak koleh kosong</kendo-formerror>-->
+        </div>
+
+        <div class="row align-items-center" [hidden]="isDisabled">
+          <kendo-label class="col-3">Konfirmasi Kata Sandi Baru</kendo-label>
+          <kendo-textbox id="input-confirm-new-password" class="col-md" formControlName="confirmNewPassword"
+                         placeholder="Type your message here"
+                         [clearButton]="true" #confirmNewPassword
+                         required>
+            <ng-template kendoTextBoxSuffixTemplate>
+              <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('confirmNewPassword')"></button>
+            </ng-template>
+          </kendo-textbox>
+          <!--          <kendo-formhint></kendo-formhint>-->
+          <!--          <kendo-formerror>Konfirmasi Kata Sandi Baru tidak koleh kosong</kendo-formerror>-->
+        </div>
+
+        <div class="k-form-buttons k-float-right">
+          <button class="k-button k-primary vms-btn" (click)="changeIsDisabled()" *ngIf="isDisabled">Perbarui</button>
+          <button class="k-button k-primary vms-btn" (click)="save()" *ngIf="!isDisabled">Simpan</button>
+        </div>
+
       </fieldset>
-      <button kendoButton look="outline" (click)="changeIsDisabled()" *ngIf="isDisabled">Edit</button>
     </form>
   </div>
 </div>
