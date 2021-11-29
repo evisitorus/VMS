@@ -1,9 +1,15 @@
-<div class="container">
-  <kendo-card *ngFor="let card of mediaCards" class="k-card-box" >
-    <img *ngIf="card.imageSrc" kendoCardMedia [src]="card.imageSrc" />
-    <kendo-card-body>
-      <div class="k-card-titles"><strong>{{ card.title }}</strong></div>
-      <div class="k-card-subtitle">{{ card.description }}</div>
-    </kendo-card-body>
-  </kendo-card>
+<div class="k-vstack">
+  <div class="container">
+    <button kendoButton class="k-button k-primary k-flat" icon="arrow-chevron-left" href="/">Homepage</button>
+    <div class="card m-3 p-3">
+      <h1 class="text-center heading">Tentang Kami</h1>
+      <kendo-card *ngFor="let card of mediaCards" class="k-card-box my-3 w-100" orientation="horizontal" style="border-color:#0193AC ;">
+        <img *ngIf="card.imageSrc" kendoCardMedia [src]="card.imageSrc" />
+        <kendo-card-body>
+          <div class="k-card-titles"><strong>{{ card.title }}</strong></div>
+          <div class="k-card-subtitle">{{ card.description }}</div>
+        </kendo-card-body>
+      </kendo-card>
+    </div>
+  </div>
 </div>
