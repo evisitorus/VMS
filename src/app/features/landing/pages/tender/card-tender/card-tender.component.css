@@ -65,32 +65,32 @@
 }
 
 .k-card-titles{
-
-/* Body/Body 2 - Bold */
-
-/* font-family: Roboto; */
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 40px;
-/* identical to box height, or 143% */
-
-letter-spacing: 0.25px;
-margin: 0px 20px;
-color: #000000;
-vertical-align: middle;
+  
+  /* Body/Body 2 - Bold */
+  
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  /* identical to box height, or 143% */
+  
+  letter-spacing: 0.25px;
+  margin: 0px 20px;
+  color: #000000;
+  vertical-align: middle;
 }
 
 .k-card-body{
   /* margin: 10px 50px; */
 }
 .status{
-/* font-family: Roboto; */
-font-style: normal;
-font-weight: normal;
-font-size: 16px;
-line-height: 40px;
-vertical-align: middle;
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 40px;
+  vertical-align: middle;
 }
 
 .k-listview {
@@ -115,4 +115,61 @@ vertical-align: middle;
     padding: 0px 200px;
     width: 100%;
   }
+}
+
+/* G */
+.filter {
+  min-height: 100px;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #EBEBEB;
+}
+
+.filter-category > kendo-dropdownlist, .filter-created-at > kendo-dropdownlist {
+  width: 50% !important;
+}
+
+.btn-toggle-filter, .btn-toggle-filter:focus {
+  background-color: unset !important;
+  border-color:  unset !important;
+  border-style: unset !important;
+  margin-left: 0.5em;
+}
+
+.filter > p {
+  text-align: center;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+.hidden-filter {
+  min-height: 200px;
+  padding: 1em;
+
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #EBEBEB;
+}
+
+.hidden-filter-content {
+  margin-bottom: 1em !important;
+}
+
+#input-filter-keyword, #input-filter-status {
+  width: 60%;
+}
+
+#input-register-begin, #input-register-end, #input-hps-begin, #input-hps-end {
+  width: 200px;
+}
+
+#input-hps-begin, #input-register-begin {
+  margin-right: 1em !important;
 }

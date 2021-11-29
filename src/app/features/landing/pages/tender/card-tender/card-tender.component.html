@@ -1,4 +1,59 @@
 <div class="demo">
+
+  <div class="filter">
+      <p>Informasi Pengadaan</p>
+      <div class="row">
+        <div class="col-6 filter-category">
+          <kendo-dropdownlist [(ngModel)]="selectedCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)"> </kendo-dropdownlist>
+          <button kendoButton class="btn-toggle-filter" (click)="toggleFilter()"> 
+            {{hiddenFilter ? 'Buka' : 'Tutup'}} filter <span class="{{hiddenFilter ? 'k-icon k-i-arrow-60-down' : 'k-icon k-i-arrow-60-up'}}"></span>
+          </button>
+        </div>
+        <div class="col-6 filter-created-at k-actions k-actions-end">
+          <kendo-dropdownlist [(ngModel)]="selectedCreatedAtItem" [data]="listFilterCreatedAt"> </kendo-dropdownlist>
+        </div>
+      </div>
+      <div class="hidden-filter" *ngIf="!hiddenFilter">
+
+        <div class="row hidden-filter-content">
+          <div class="col-6 filter-keyword">
+            <kendo-label [for]="filterKeyword" text="Cari Berdasarkan"></kendo-label> <br>
+            <kendo-textbox id="input-filter-keyword" [clearButton]="true" #filterKeyword></kendo-textbox>
+          </div>
+          <div class="col-6 filter-register-range">
+            <div class="float-end">
+              <kendo-label text="Rentang Waktu Registrasi"></kendo-label> <br>
+              <kendo-datepicker id="input-register-begin" registerBegin #registerBegin></kendo-datepicker>
+              <kendo-datepicker id="input-register-end" registerEnd #registerEnd></kendo-datepicker>
+            </div>
+          </div>
+        </div>
+
+        <div class="row hidden-filter-content">
+          <div class="col-6 filter-status">
+            <kendo-label [for]="filterStatus" text="Status Tender"></kendo-label> <br>
+            <kendo-dropdownlist [(ngModel)]="selectedStatusItem" [data]="listFilterStatus" id="input-filter-status" #filterStatus></kendo-dropdownlist>
+          </div>
+          <div class="col-6 filter-hps-range">
+            <div class="float-end">
+              <kendo-label text="Rentang HPS"></kendo-label> <br>
+              <kendo-numerictextbox id="input-hps-begin" hpsBegin #hpsBegin></kendo-numerictextbox>
+              <kendo-numerictextbox id="input-hps-end" hpsEnd #hpsEnd></kendo-numerictextbox>
+            </div>
+          </div>
+        </div>
+
+        <div class="k-actions k-actions-end">
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="resetFilter()" id="btn-reset-filter">
+              Reset Filter
+            </button>
+          </div>
+        </div>
+
+      </div>
+  </div>
+
   <kendo-listview
       [data]="view"
       [loading]="loading"
