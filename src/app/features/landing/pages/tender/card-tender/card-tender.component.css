@@ -16,6 +16,7 @@
 .k-listview-content {
   padding: 20px 0;
   justify-content: center !important;
+  border-color: #EBEBEB !important;
 }
 
 .k-listview-item:hover {
@@ -34,21 +35,12 @@
 }
 
 .header, .footer {
-  color: #A0A0A0;
+  color: #EBEBEB;
   font-size: 16px;
   padding: 6px 10px;
 }
 .footer {
   font-size: 14px;
-}
-
-.k-hstack {
-  /* height: 100px; */
-}
-
-
-.k-hstack-body {
-  /* height: 210px; */
 }
 
 .middle {
@@ -83,9 +75,6 @@ color: #000000;
 vertical-align: middle;
 }
 
-.k-card-body{
-  /* margin: 10px 50px; */
-}
 .status{
 /* font-family: Roboto; */
 font-style: normal;
