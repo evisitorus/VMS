@@ -22,12 +22,15 @@ export const ApiRoutes = {
   api_get_organizations_route: API_BASE_URL + "/organizations",
   api_get_provinces_route: API_BASE_URL + "/geo_locations?geoLocationType=5",
   api_tenders_route: API_BASE_URL + "/tenders",
+  api_media_object_route: API_BASE_URL + "/media_objects",
+  api_neraca_route: API_BASE_URL + "/neracas",
+  api_spt_route: API_BASE_URL + "/spt_pajaks",
   api_list_tender: API_BASE_URL + "/tenders/page/",
   api_token_route: API_BASE_URL + "/users/token",
   api_documents_route: API_BASE_URL + "/dokumens",
-  api_media_object_route: API_BASE_URL + "/media_objects",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
   api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
+  api_vendor_route: API_BASE_URL + "/vendors"
 };
 
 export const ApiRouteMethods = {

@@ -6,8 +6,7 @@
     height: 63px;
     display: flex;
     align-items: center;
-    background-color: #0193AC;
-    color: white;
+    background-color: white;
     font-weight: 600;
     font-family: Open Sans;
 }
@@ -37,6 +36,39 @@ body {
 .k-label {
     font-size: 12px;
 }
+
+/* --- TABLE --- */
+.k-grid {
+    border-style: unset !important;
+}
+
+.k-grid-header {
+    border-radius: 10px 10px 0px 0px !important;
+    background: #0193AC !important;
+    color: white !important;
+    font-weight: bold;
+    height: 60px !important;
+}
+
+.k-header {
+    border-style: unset !important;
+    height: 60px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.k-grid-content {
+    border-style: solid !important;
+    border-color: #0193AC !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.k-grid-table > tbody > tr {
+    text-align: center !important;
+    height: 40px !important;
+}
+/* --- END TABLE --- */
 
 /* ================================ */
 
@@ -100,6 +132,7 @@ label{
     font-size: 14px;
 }
 /* --- LABEL --- */
+
 
 /* --- SIDEBAR --- */
 .k-grid-header, .k-window-titlebar, .k-dialog-titlebar{
@@ -220,3 +253,7 @@ div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-
     object-fit: contain !important;
     background-size: contain !important;
   }
+.lampiran-url {
+    color: #0058E9;
+    cursor: pointer;
+}

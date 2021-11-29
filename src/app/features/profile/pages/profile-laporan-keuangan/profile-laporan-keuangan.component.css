@@ -1,29 +1,45 @@
-/* .profile-section {
-  border-style: groove;
-} */
-
-/* .profile-menu {
-  border-style: groove;
-  float: left;
-} */
-
-
-/* 
-.profile-content {
-  border-style: groove;
-  float: right;
-} */
-
-.profile-menu {
-  float: left;
-  height: 100vh;
+.profile-keuangan-field {
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #d8d8d8;
+    padding: 2em 1em 1em 1em;
+    margin: 0em 0em 2em 0em;
 }
 
-.profile-content {
-  padding: 40px;
-  display: table;
+.profile-keuangan-table {
+  padding: 0em 0em 2em 0em;
 }
 
-.button-right {
-  float: right;
+.bank-field {
+    margin-bottom: 1em;
+}
+
+.content-input-field{
+    /* border: 1px solid #0193AC !important; */
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    width: 100%;
+    height: 45px;
+}
+
+.content-input-field > input {
+    border-color: #0193AC !important;
+}
+
+.modal-label {
+    padding: unset;
+    vertical-align: middle;
+}
+
+.modal-field {
+  padding: unset;
+  margin-bottom: 0.5em;
+}
+
+.modal-field > kendo-formfield {
+  margin-top: unset !important;
+}
+
+.modal-form {
+  padding: 1em !important;
 }

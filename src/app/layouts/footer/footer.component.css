@@ -1,0 +1,46 @@
+.footer-container {
+    margin: unset !important;
+}
+
+.footer {
+    min-height: 200px;
+    background-color: #0092AC;
+    color: white;
+    position: relative;
+}
+
+.footer-content > p {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    margin: unset;
+}
+
+.copyright {
+    background-color: #00839A;
+    color: white;
+    min-height: 65px;
+    position: relative;
+}
+
+.copyright-content, .footer-content {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.copyright-content > p {
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    margin: unset;
+}

@@ -33,7 +33,34 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     pageSizeValues: false,
     buttonCount: 5,
     info: true,
+    position: "both"
   };
+
+  public hiddenFilter: boolean = true;
+  public filterCategory!: Array<{ text: string; value: number }>;
+  public listFilterCategory: Array<{ text: string; value: number }> = [
+    { text: "Semua Kategori", value: 1 },
+    { text: "Material Konstruksi", value: 2 },
+    { text: "Jasa Konstruksi & Renovasi", value: 3 },
+  ];
+  public listFilterCreatedAt: Array<string> = [
+    "Terbaru",
+    "Terlama",
+    "HPS Terendah",
+    "HPS Tertinggi"
+  ];
+  public listFilterStatus: Array<string> = [
+    "Semua Status",
+    "Aktif",
+    "Calon Pemenang Terpilih",
+    "Pemenang Terpilih",
+    "Masa Sanggah",
+    "Selesai",
+    "Dibatalkan"
+  ];
+  public selectedCategoryItem: any = this.listFilterCategory[0];
+  public selectedCreatedAtItem: any = this.listFilterCreatedAt[0];
+  public selectedStatusItem: any = this.listFilterStatus[0];
 
   private productsSubscription = new Subscription();
 
@@ -45,6 +72,25 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchData();
+    this.setFilter();
+  }
+
+  public setFilter(): void {
+    this.filterCategory = this.listFilterCategory.slice();
+  }
+
+  public resetFilter(): void {
+    
+  }
+
+  public handleFilter(value: any): void {
+    this.filterCategory = this.listFilterCategory.filter(
+      (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+  }
+
+  public toggleFilter(): void {
+    this.hiddenFilter = !this.hiddenFilter;
   }
 
   public ngOnDestroy(): void {

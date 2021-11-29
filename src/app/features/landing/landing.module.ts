@@ -31,6 +31,7 @@ import { TenderDataComponent } from './pages/tender/tender-data/tender-data.comp
 import { GridBannerComponent } from './pages/grid-banner/grid-banner.component';
 import { TenderInfoComponent } from './pages/tender-info/tender-info.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { GridLogoComponent } from './components/grid-logo/grid-logo.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CoreModule } from 'src/app/core/core.module';
     CardTenderComponent,
     TenderDataComponent,
     GridBannerComponent,
-    TenderInfoComponent
+    TenderInfoComponent,
+    GridLogoComponent,
   ],
   imports: [
     CommonModule,
