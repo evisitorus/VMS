@@ -34,6 +34,12 @@
   color: white !important;
 }
 
+.k-pager-wrap {
+  border-style: none;
+  background-color: white;
+  margin-bottom: 3em;
+}
+
 .header, .footer {
   color: #EBEBEB;
   font-size: 16px;
