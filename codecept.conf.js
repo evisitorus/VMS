@@ -46,6 +46,7 @@ exports.config = {
           './tests/acceptance/step_definitions/Dokumen.steps.js',
           './tests/acceptance/step_definitions/ProfilPemegangSaham.steps.js',
           './tests/acceptance/step_definitions/ProfilAsset.steps.js',
+          './tests/acceptance/step_definitions/ProfilKeuangan.steps.js',
         ]
   },
   plugins: {
