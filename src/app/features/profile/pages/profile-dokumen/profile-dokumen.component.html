@@ -1,7 +1,7 @@
 <div class="row profile-section">
 
   <div class="profile-content-modal">
-    <kendo-window title="Tambah Dokumen" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+    <kendo-dialog title="Tambah Dokumen" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
       <form class="k-form">
 
         <kendo-formfield [formGroup]="form">
@@ -50,7 +50,7 @@
         </div>
 
       </form>
-    </kendo-window>
+    </kendo-dialog>
 
   </div>
 

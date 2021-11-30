@@ -2,7 +2,7 @@
 
   <div class="profile-content-modal modal-neraca">
 
-    <kendo-window title="Tambah Neraca" *ngIf="openNeraca" (close)="triggerModal('neraca')" [minWidth]="250" [width]="600">
+    <kendo-dialog title="Tambah Neraca" *ngIf="openNeraca" (close)="triggerModal('neraca')" [minWidth]="250" [width]="600">
       <form class="k-form modal-form">
 
         <div class="row">
@@ -11,7 +11,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-tahun" formControlName="tahun" format="#" [min]="0" #tahun required></kendo-numerictextbox>
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-tahun" formControlName="tahun" format="#" [min]="0" [maxlength]="4" #tahun required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Tahun tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -84,13 +84,13 @@
         </div>
         
       </form>
-    </kendo-window>
+    </kendo-dialog>
 
   </div>
 
   <div class="profile-content-modal modal-spt">
 
-    <kendo-window title="Tambah SPT Tahunan" *ngIf="openSPT" (close)="triggerModal('spt')" [minWidth]="250" [width]="600">
+    <kendo-dialog title="Tambah SPT Tahunan" *ngIf="openSPT" (close)="triggerModal('spt')" [minWidth]="250" [width]="600">
       <form class="k-form modal-form">
         
         <div class="row">
@@ -146,7 +146,7 @@
         </div>
 
       </form>
-    </kendo-window>
+    </kendo-dialog>
   </div>
 
   <div class="col-2 profile-menu">

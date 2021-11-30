@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { TenderService } from 'src/app/core/services/landing/tender.service';
+import { TenderService } from 'src/app/core/services/tender.service';
 
 @Component({
   selector: 'app-tender-info',
@@ -28,7 +28,7 @@ export class TenderInfoComponent implements OnInit {
       (res) => {
         this.data = res.data.tender;
       },
-      (err) => {
+      () => {
         this.popUpMessage = "Gagal menemukan data tender";
         this.triggerPopUp();
       }

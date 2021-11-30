@@ -1,15 +1,7 @@
-.demo {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* margin: 2em; */
-  /* padding: 0px 200px; */
-  width: 100%;
-}
 .k-listview {
   /* font-family: sans-serif; */
   margin: auto;
   /* width: 400px; */
-  /* display: inline-block; */
 }
 .k-listview-item {
   display: inline-block;
@@ -17,8 +9,15 @@
   border-style: solid;
   border-color: #dee2e6;
   border-width: 3px;
-  margin: 20px 40px;
+  margin: 1em 2rem;
   border-radius: 8px;
+  text-align: justify;
+}
+
+.k-listview-content {
+  padding: 20px 0;
+  justify-content: center !important;
+  border-color: #EBEBEB !important;
 }
 
 .k-listview-item:hover {
@@ -31,22 +30,23 @@
   border-radius: 8px;
 }
 
+.k-pager-numbers .k-link.k-state-selected {
+  background-color: #0092AC !important;
+  color: white !important;
+}
+
+.k-pager-wrap {
+  border-style: none;
+  background-color: white;
+}
+
 .header, .footer {
-  color: #A0A0A0;
+  color: #EBEBEB;
   font-size: 16px;
   padding: 6px 10px;
 }
 .footer {
   font-size: 14px;
-}
-
-.k-hstack {
-  /* height: 100px; */
-}
-
-
-.k-hstack-body {
-  /* height: 210px; */
 }
 
 .middle {
@@ -66,31 +66,28 @@
 
 .k-card-titles{
 
-/* Body/Body 2 - Bold */
+  /* Body/Body 2 - Bold */
 
-/* font-family: Roboto; */
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-line-height: 40px;
-/* identical to box height, or 143% */
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  /* identical to box height, or 143% */
 
-letter-spacing: 0.25px;
-margin: 0px 20px;
-color: #000000;
-vertical-align: middle;
+  letter-spacing: 0.25px;
+  margin: 0px 20px;
+  color: #000000;
+  vertical-align: middle;
 }
 
-.k-card-body{
-  /* margin: 10px 50px; */
-}
 .status{
-/* font-family: Roboto; */
-font-style: normal;
-font-weight: normal;
-font-size: 16px;
-line-height: 40px;
-vertical-align: middle;
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 40px;
+  vertical-align: middle;
 }
 
 .k-listview {
@@ -100,19 +97,72 @@ vertical-align: middle;
 @media only screen and (min-width: 1080px) {
   /* For desktop: */
   .k-listview-item {
-    display: inline-block;
     width: 40%;
     border-style: solid;
     border-color: #dee2e6;
     border-width: 3px;
-    margin: 20px 40px;
+    margin: 1em 2rem;
     border-radius: 8px;
   }
-  .demo {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* margin: 2em; */
-    padding: 0px 200px;
-    width: 100%;
-  }
+}
+
+/* G */
+.filter {
+  min-height: 100px;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #EBEBEB;
+}
+
+.filter-category > kendo-dropdownlist {
+  width: 50% !important;
+}
+
+#select-order-by {
+  width: 70% !important;
+}
+
+.btn-toggle-filter, .btn-toggle-filter:focus {
+  background-color: unset !important;
+  border-color:  unset !important;
+  border-style: unset !important;
+  margin-left: 0.5em;
+}
+
+.filter > p {
+  text-align: center;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+.hidden-filter {
+  min-height: 200px;
+  padding: 1em;
+
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #EBEBEB;
+}
+
+.hidden-filter-content {
+  margin-bottom: 1em !important;
+}
+
+#input-filter-keyword, #select-filter-status, #select-filter-register-end {
+  width: 100%;
+}
+
+#input-hps-begin, #input-hps-end {
+  width: 50%;
+}
+
+#input-hps-begin, #input-register-begin {
+  /* margin-right: 1em !important; */
 }
