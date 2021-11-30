@@ -25,6 +25,7 @@ export class ProfileDashboardComponent implements OnInit {
   keuangan: string = "";
   pekerjaan: string = "";
   aset: string = "";
+  alamat: string = "";
 
   ngOnInit(): void {
     this.profileService.getVendor().subscribe(
@@ -58,7 +59,7 @@ export class ProfileDashboardComponent implements OnInit {
         this.profil = resp.data.profil_perusahaan;
         this.pic = resp.data.pic_perusahaan;
         this.dokumen = resp.data.dokumen;
-        this.address_vendor = resp.data.alamat;
+        this.alamat = resp.data.alamat;
         this.keuangan= resp.data.keuangan;
         this.pekerjaan= resp.data.pekerjaan;
         this.aset = resp.data.aset;
