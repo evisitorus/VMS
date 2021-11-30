@@ -21,7 +21,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.setForm();
+    this.setAllForm();
     this.fetchDataNeraca();
     this.fetchDataSPT();
     this.fetchDataKeuangan();
@@ -77,21 +77,13 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     modalDitempatkan: ""
   }
 
-  public setForm(): void {
-    this.formNeraca = new FormGroup({
-      tahun: new FormControl(this.dataNeraca.tahun, [Validators.required]),
-      aktiva: new FormControl(this.dataNeraca.aktiva, [Validators.required]),
-      pasiva: new FormControl(this.dataNeraca.pasiva, [Validators.required]),
-      equitas: new FormControl(this.dataNeraca.equitas, [Validators.required]),
-      omzet: new FormControl(this.dataNeraca.omzet, [Validators.required]),
-    });
+  public setAllForm(): void {
+    this.setFormKeuangan();
+    this.setFormNeraca();
+    this.setFormSPT();
+  }
 
-    this.formSPT = new FormGroup({
-      tahunSPT: new FormControl(this.dataSPT.tahun, [Validators.required]),
-      nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required]),
-      lampiran: new FormControl(this.dataSPT.lampiran, [Validators.required]),
-    });
-
+  public setFormKeuangan(): void {
     this.formKeuangan = new FormGroup({
       namaBank: new FormControl(this.dataKeuangan.namaBank, [Validators.required]),
       cabang: new FormControl(this.dataKeuangan.cabang, [Validators.required]),
@@ -102,7 +94,26 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     });
   }
 
-  public resetForm(): void {
+  public setFormNeraca(): void {
+    this.formNeraca = new FormGroup({
+      tahun: new FormControl(this.dataNeraca.tahun, [Validators.required]),
+      aktiva: new FormControl(this.dataNeraca.aktiva, [Validators.required]),
+      pasiva: new FormControl(this.dataNeraca.pasiva, [Validators.required]),
+      equitas: new FormControl(this.dataNeraca.equitas, [Validators.required]),
+      omzet: new FormControl(this.dataNeraca.omzet, [Validators.required]),
+    });
+  }
+
+  public setFormSPT(): void {
+    this.formSPT = new FormGroup({
+      tahunSPT: new FormControl(this.dataSPT.tahun, [Validators.required]),
+      nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required]),
+      lampiran: new FormControl(this.dataSPT.lampiran, [Validators.required]),
+    });
+
+  }
+
+  public resetAllForm(): void {
     this.dataNeraca.tahun = "";
     this.dataNeraca.aktiva = "";
     this.dataNeraca.pasiva = "";
@@ -122,7 +133,36 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
     this.isNewData = true;
 
-    this.setForm();
+    this.setAllForm();
+  }
+
+  public resetFormKeuangan(): void {
+    this.dataKeuangan.namaBank = "";
+    this.dataKeuangan.cabang = "";
+    this.dataKeuangan.nomorRekening = "";
+    this.dataKeuangan.namaPemilikRekening = "";
+    this.dataKeuangan.modalDasar = "";
+    this.dataKeuangan.modalDitempatkan = "";
+    this.isNewData = true;
+    this.setFormKeuangan();
+  }
+
+  public resetFormNeraca(): void {
+    this.dataNeraca.tahun = "";
+    this.dataNeraca.aktiva = "";
+    this.dataNeraca.pasiva = "";
+    this.dataNeraca.equitas = "";
+    this.dataNeraca.omzet = "";
+    this.isNewData = true;
+    this.setFormNeraca();
+  }
+
+  public resetFormSPT(): void {
+    this.dataSPT.tahun = "";
+    this.dataSPT.nomorDokumen = "";
+    this.dataSPT.lampiran = "";
+    this.isNewData = true;
+    this.setFormSPT();
   }
 
   public triggerPopUp() {
@@ -130,14 +170,17 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public triggerModal(option: string): void {
-    if (this.openNeraca === true || this.openSPT === true) {
-      this.resetForm();
-    }
     switch (option) {
       case "neraca":
+        if (this.openNeraca === true) {
+          this.resetFormNeraca();
+        }
         this.openNeraca = !this.openNeraca;
         break;
       case "spt":
+        if (this.openSPT === true) {
+          this.resetFormSPT();
+        }
         this.openSPT = !this.openSPT;
         break
       default:
@@ -150,12 +193,12 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     for (const key in data) {
       mappedData[key] = {
         id: data[key]['id'],
-        tahun: data[key]['year'],
-        asset: data[key]['asset'],
-        aktiva: data[key]['aktiva'],
-        pasiva: data[key]['pasiva'],
-        equitas: data[key]['equitas'],
-        omzet: data[key]['omzetBersih']
+        tahun: parseInt(data[key]['year']),
+        asset: parseInt(data[key]['asset']),
+        aktiva: parseInt(data[key]['aktiva']),
+        pasiva: parseInt(data[key]['pasiva']),
+        equitas: parseInt(data[key]['equitas']),
+        omzet: parseInt(data[key]['omzetBersih'])
       };
     }
     return mappedData;
@@ -186,7 +229,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
     this.isNewData = false;
     this.triggerModal('neraca');
-    this.setForm();
+    this.setFormNeraca();
   }
 
   public updateFormSPT(data: any): void {
@@ -197,7 +240,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
     this.isNewData = false;
     this.triggerModal('spt');
-    this.setForm();
+    this.setFormSPT();
   }
 
   public fetchDataNeraca(): void {
@@ -236,7 +279,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
         this.dataKeuangan.modalDasar = data.toParty.modalDasar;
         this.dataKeuangan.modalDitempatkan = data.toParty.modalDitempatkan;
-        this.setForm();
+        this.setFormKeuangan();
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data Keuangan";
