@@ -8,8 +8,16 @@ Given('The Vendor wants manage {string} which needed for further verification fr
     
 });
 
-Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
-
+Given('The Vendor must click {string} menu where found on {string} of {string}', (button1, button2, button3) => {
+    switch (button1) {
+        case "Informasi Keuangan":
+            I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan')
+            I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
+            break;
+        default:
+            I.click(button1);
+            break;
+        }
 });
 
 Given('The Vendor must click {string} Tab', () => {
