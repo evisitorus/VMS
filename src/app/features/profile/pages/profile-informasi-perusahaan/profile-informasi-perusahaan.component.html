@@ -24,7 +24,7 @@
             <div class="row align-items-center">
               <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
               <kendo-textbox id="inisialPerusahaanInput" class="col-md" placeholder="Inisial perusahaan"
-                [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName"></kendo-textbox>
+                [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName ? vendor_info.altName : ' ' "></kendo-textbox>
             </div>
             <div class="row">
               <form class="k-form" [formGroup]="buFormGroup">

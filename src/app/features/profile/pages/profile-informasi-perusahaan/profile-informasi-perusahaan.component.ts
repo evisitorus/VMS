@@ -88,6 +88,7 @@ export class ProfileInformasiPerusahaanComponent {
   public provinces: Array<Item> = [];
 
   public vendor_info: any;
+  public vendor_data: any;
   public total_karyawan: any;
   public vendor_contact_mechanism: any;
 
@@ -170,6 +171,15 @@ export class ProfileInformasiPerusahaanComponent {
       }
     );
 
+    this.profileInfoService.getVendorData().subscribe(
+      (resp) => {
+        this.vendor_data = resp;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
     //get jenis penyedia usaha
     this.profileInfoService.getJenisPenyediaUsaha().subscribe(
       (resp) => {
@@ -182,6 +192,18 @@ export class ProfileInformasiPerusahaanComponent {
 
     //get jenis kegiatan usaha
     this.profileInfoService.getJenisKegiatanUsaha().subscribe(
+      (resp) => {
+        this.jenis_kegiatan_usaha = resp["hydra:member"];
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+
+    //get tipe vendor
+    this.profileInfoService.getTipeVendor().subscribe(
       (resp) => {
         this.jenis_kegiatan_usaha = resp["hydra:member"];
 

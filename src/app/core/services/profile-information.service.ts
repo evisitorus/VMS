@@ -63,6 +63,21 @@ export class ProfileInformationService {
 
   }
 
+
+  getTipeVendor(): Observable<any>{
+    let api_tipe_vendor: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_tipe_vendor_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_tipe_vendor);
+
+  }
+
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -74,6 +89,20 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_vendor_information);
+
+  }
+
+  getVendorData(): Observable<any>{
+    let api_vendor_data: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id'),
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_vendor_data);
 
   }
 
