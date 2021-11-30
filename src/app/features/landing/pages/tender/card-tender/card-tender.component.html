@@ -4,13 +4,13 @@
       <p>Informasi Pengadaan</p>
       <div class="row">
         <div class="col-6 filter-category">
-          <kendo-dropdownlist [(ngModel)]="selectedFilterCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+          <kendo-dropdownlist id="select-filter-category" [(ngModel)]="selectedFilterCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
           <button kendoButton class="btn-toggle-filter" (click)="toggleFilter()"> 
             {{hiddenFilter ? 'Buka' : 'Tutup'}} filter <span class="{{hiddenFilter ? 'k-icon k-i-arrow-60-down' : 'k-icon k-i-arrow-60-up'}}"></span>
           </button>
         </div>
         <div class="col-6 filter-created-at k-actions k-actions-end">
-          <kendo-dropdownlist [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+          <kendo-dropdownlist id="select-order-by" [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
         </div>
       </div>
       <div class="hidden-filter" *ngIf="!hiddenFilter">
@@ -20,26 +20,21 @@
             <kendo-label [for]="filterKeyword" text="Cari Berdasarkan"></kendo-label> <br>
             <kendo-textbox placeholder="Cari" id="input-filter-keyword" [clearButton]="true" [(value)]="filterKeyword" (change)="filter()"></kendo-textbox>
           </div>
-          <div class="col-6 filter-register-range">
-            <div class="float-end">
-              <kendo-label text="Rentang Waktu Registrasi"></kendo-label> <br>
-              <kendo-datepicker placeholder="Dari" id="input-register-begin" registerBegin #registerBegin></kendo-datepicker>
-              <kendo-datepicker placeholder="Sampai" id="input-register-end" registerEnd #registerEnd></kendo-datepicker>
-            </div>
+          <div class="col-6 filter-register-end">
+            <kendo-label text="Akhir Registrasi"></kendo-label> <br>
+            <kendo-dropdownlist id="select-filter-register-end" [(ngModel)]="selectedFilterRegisterEndItem" [data]="filterRegisterEnd" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
           </div>
         </div>
 
         <div class="row hidden-filter-content">
           <div class="col-6 filter-status">
             <kendo-label [for]="filterStatus" text="Status Tender"></kendo-label> <br>
-            <kendo-dropdownlist id="input-filter-status" [(ngModel)]="selectedFilterStatusItem" [data]="filterStatus" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+            <kendo-dropdownlist id="select-filter-status" [(ngModel)]="selectedFilterStatusItem" [data]="filterStatus" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
           </div>
           <div class="col-6 filter-hps-range">
-            <div class="float-end">
-              <kendo-label text="Rentang HPS"></kendo-label> <br>
-              <kendo-numerictextbox (change)="filter()" [(value)]="filterHpsStart" placeholder="Dari Rp" format="Rp\ ##,#" id="input-hps-begin" hpsBegin #hpsBegin></kendo-numerictextbox>
-              <kendo-numerictextbox (change)="filter()" [(value)]="filterHpsEnd" placeholder="Sampai Rp" format="Rp\ ##,#" id="input-hps-end" hpsEnd #hpsEnd></kendo-numerictextbox>
-            </div>
+            <kendo-label text="Rentang HPS"></kendo-label> <br>
+            <kendo-numerictextbox (change)="filter()" [(value)]="filterHpsStart" placeholder="Dari Rp" format="Rp\ ##,#" id="input-hps-begin" hpsBegin #hpsBegin></kendo-numerictextbox>
+            <kendo-numerictextbox (change)="filter()" [(value)]="filterHpsEnd" placeholder="Sampai Rp" format="Rp\ ##,#" id="input-hps-end" hpsEnd #hpsEnd></kendo-numerictextbox>
           </div>
         </div>
 

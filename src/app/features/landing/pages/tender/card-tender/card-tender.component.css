@@ -128,8 +128,12 @@
   border-color: #EBEBEB;
 }
 
-.filter-category > kendo-dropdownlist, .filter-created-at > kendo-dropdownlist {
+.filter-category > kendo-dropdownlist {
   width: 50% !important;
+}
+
+#select-order-by {
+  width: 70% !important;
 }
 
 .btn-toggle-filter, .btn-toggle-filter:focus {
@@ -162,11 +166,11 @@
   margin-bottom: 1em !important;
 }
 
-#input-filter-keyword, #input-filter-status {
+#input-filter-keyword, #select-filter-status, #select-filter-register-end {
   width: 100%;
 }
 
-#input-register-begin, #input-register-end, #input-hps-begin, #input-hps-end {
+#input-hps-begin, #input-hps-end {
   width: 50%;
 }
 

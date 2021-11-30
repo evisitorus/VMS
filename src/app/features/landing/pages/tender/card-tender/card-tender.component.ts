@@ -43,6 +43,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public orderBy!: Array<any>;
   public filterCategory!: Array<any>;
   public filterStatus!: Array<any>;
+  public filterRegisterEnd!: Array<any>;
   public filterKeyword: string = "";
   public filterHpsStart!: number;
   public filterHpsEnd!: number;
@@ -50,10 +51,12 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public listOrderBy: Array<any> = tenderOrderBy;
   public listFilterCategory: Array<any> = categoryTender;
   public listFilterStatus: Array<string> = statusTender;
+  public listFilterRegisterEnd: Array<any> = registerEndTender;
 
   public selectedOrderByItem: any = this.listOrderBy[0];
   public selectedFilterCategoryItem: any = this.listFilterCategory[0];
   public selectedFilterStatusItem: any = this.listFilterStatus[0];
+  public selectedFilterRegisterEndItem: any = this.listFilterRegisterEnd[0];
 
   private productsSubscription = new Subscription();
 
@@ -72,12 +75,14 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.orderBy = this.listOrderBy.slice();
     this.filterCategory = this.listFilterCategory.slice();
     this.filterStatus = this.listFilterStatus.slice();
+    this.filterRegisterEnd = this.listFilterRegisterEnd.slice();
   }
 
   public resetFilter(): void {
     this.selectedOrderByItem = this.listOrderBy[0];
     this.selectedFilterCategoryItem = this.listFilterCategory[0];
     this.selectedFilterStatusItem = this.listFilterStatus[0];
+    this.selectedFilterRegisterEndItem = this.listFilterRegisterEnd[0];
   }
 
   public filter() {
@@ -95,6 +100,10 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   
       if (this.filterKeyword !== "") {
         this.query = this.query + "q=" + this.filterKeyword + "&";
+      }
+
+      if (this.filterRegisterEnd !== null) {
+        this.query = this.query + "reg-ends=" + this.selectedFilterRegisterEndItem.value + "&"
       }
 
       if (this.filterHpsStart !== undefined && this.filterHpsStart !== 0) {
@@ -219,4 +228,11 @@ const statusTender: Array<any> = [
   { value: 10, text: "Selesai" },
   { value: -1, text: "Dibatalkan" },
   { value: -2, text: "Dibuat Ulang" },
+];
+
+const registerEndTender: Array<any> = [
+  { value: null, text: "" },
+  { value: 'today', text: "Hari Ini" },
+  { value: 'week', text: "Minggu Ini" },
+  { value: 'month', text: "Bulan Ini" },
 ];
