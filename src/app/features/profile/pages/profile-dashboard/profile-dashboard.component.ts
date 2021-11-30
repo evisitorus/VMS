@@ -18,6 +18,13 @@ export class ProfileDashboardComponent implements OnInit {
   registered_at:string="";
   jenis_kegiatan_usaha:string = "";
   address_vendor:string = "";
+  vendor_name: string = "";
+  profil: string = "";
+  pic: string = "";
+  dokumen: string = "";
+  keuangan: string = "";
+  pekerjaan: string = "";
+  aset: string = "";
 
   ngOnInit(): void {
     this.profileService.getVendor().subscribe(
@@ -38,6 +45,23 @@ export class ProfileDashboardComponent implements OnInit {
         // this.name = resp.name;
         // this.is_active = resp.is_active;
         this.registered_at = resp.data.registered_at;
+        this.vendor_name = resp.data.name;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.profileService.getVendorStatusData().subscribe(
+      (resp) => {
+        console.log(resp)
+        this.profil = resp.data.profil_perusahaan;
+        this.pic = resp.data.pic_perusahaan;
+        this.dokumen = resp.data.dokumen;
+        this.address_vendor = resp.data.alamat;
+        this.keuangan= resp.data.keuangan;
+        this.pekerjaan= resp.data.pekerjaan;
+        this.aset = resp.data.aset;
       },
       (error) => {
         console.log(error);

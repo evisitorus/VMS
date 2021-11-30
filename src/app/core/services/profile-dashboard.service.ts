@@ -50,4 +50,13 @@ export class ProfileDashboardService {
 
     return this.apiService.sendRequest(api_get_users);
   }
+
+  getVendorStatusData(): Observable<any> {
+    let api_get_vendor_status_data: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/status_data",
+    }
+
+    return this.apiService.sendRequest(api_get_vendor_status_data);
+  }
 }

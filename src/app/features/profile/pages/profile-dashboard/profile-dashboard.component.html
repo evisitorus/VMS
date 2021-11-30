@@ -30,7 +30,12 @@
       </kendo-card-header>
       <kendo-card-body>
         <div class="vendor-profile k-hstack">
-          <kendo-avatar width="100px" height="70px" initials="Vendor"></kendo-avatar>
+          <div class="container-profile">
+            <kendo-avatar width="100px" height="70px" initials="Vendor"></kendo-avatar>
+            <div class="row" style="margin-top: 10px;">
+              <p class="col">{{ vendor_name ? vendor_name : "Data tidak tersedia" }}</p>
+            </div>
+          </div>
           <div class="container">
             <div class="row">
               <i class="col-md-auto bi-building"></i>
@@ -56,10 +61,10 @@
               <label>Profile Perusahaan</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" ngModel="checked" disabled/>
+              <input type="checkbox" [checked]="profil" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Completed</label>
+              <label class="k-checkbox-label ml-2">{{ profil ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
           <div class="row">
@@ -67,10 +72,10 @@
               <label>PIC Perusahaan</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" ngModel="checked" disabled/>
+              <input type="checkbox" [checked]="pic" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Completed</label>
+              <label class="k-checkbox-label ml-2">{{ pic ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
           <div class="row">
@@ -78,10 +83,10 @@
               <label>Dokumen</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" disabled/>
+              <input type="checkbox" [checked]="dokumen" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Incomplete</label>
+              <label class="k-checkbox-label ml-2">{{ dokumen ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
           <div class="row">
@@ -89,10 +94,10 @@
               <label>Alamat</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" disabled/>
+              <input type="checkbox" [checked]="address_vendor" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Incomplete</label>
+              <label class="k-checkbox-label ml-2">{{ address_vendor ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
           <div class="row">
@@ -100,10 +105,10 @@
               <label>Laporan Keuangan</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" disabled/>
+              <input type="checkbox" [checked]="keuangan" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Incomplete</label>
+              <label class="k-checkbox-label ml-2">{{ keuangan ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
           <div class="row">
@@ -111,10 +116,10 @@
               <label>Riwayat Pekerjaan</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" disabled/>
+              <input type="checkbox" [checked]="pekerjaan" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Incomplete</label>
+              <label class="k-checkbox-label ml-2">{{ pekerjaan ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
           <div class="row">
@@ -122,10 +127,10 @@
               <label>Asset</label>
             </div>
             <div class="col-md-auto">
-              <input type="checkbox" disabled/>
+              <input type="checkbox" [checked]="aset" disabled/>
             </div>
             <div class="col">
-              <label class="k-checkbox-label ml-2">Incomplete</label>
+              <label class="k-checkbox-label ml-2">{{ aset ? 'Completed' : 'Incomplete'}}</label>
             </div>
           </div>
         </div>
