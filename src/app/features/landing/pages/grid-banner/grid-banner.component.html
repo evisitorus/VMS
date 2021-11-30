@@ -1,12 +1,7 @@
-<div class="demo">
-  <div class="demoGrid">
-    <kendo-card *ngFor="let card of mediaCards" class="k-card-box" >
-      <img *ngIf="card.imageSrc" kendoCardMedia [src]="card.imageSrc" />
-      <kendo-card-body>
-        <div class="k-card-titles"><strong>{{ card.title }}</strong></div>
-        <div class="k-card-subtitle">{{ card.description }}</div>
-      </kendo-card-body>
-    </kendo-card>
+<div class="container-fluid">
+  <div class="d-flex row justify-content-center text-center">
+    <div *ngFor="let card of mediaCards" class="col-md-auto my-4 mx-5 ">
+      <kendo-avatar id="logoBumn" class="wrap" *ngIf="card.imageSrc" width="144px" height="144px" [border]="true" [imageSrc]="card.imageSrc" shape="circle"></kendo-avatar>
     </div>
   </div>
-  
+</div>

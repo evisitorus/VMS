@@ -1,15 +1,7 @@
-.demo {
-  /* display: flex; */
-  /* justify-content: center; */
-  /* margin: 2em; */
-  /* padding: 0px 200px; */
-  width: 100%;
-}
 .k-listview {
   /* font-family: sans-serif; */
   margin: auto;
   /* width: 400px; */
-  /* display: inline-block; */
 }
 .k-listview-item {
   display: inline-block;
@@ -17,8 +9,15 @@
   border-style: solid;
   border-color: #dee2e6;
   border-width: 3px;
-  margin: 20px 20%;
+  margin: 1em 2rem;
   border-radius: 8px;
+  text-align: justify;
+}
+
+.k-listview-content {
+  padding: 20px 0;
+  justify-content: center !important;
+  border-color: #EBEBEB !important;
 }
 
 .k-listview-item:hover {
@@ -27,26 +26,27 @@
   border-style: solid;
   border-color: rgba(0,0,0,0.75);
   border-width: 3px;
-  margin: 20px 5%;
+  margin: 20px 40px;
   border-radius: 8px;
 }
 
+.k-pager-numbers .k-link.k-state-selected {
+  background-color: #0092AC !important;
+  color: white !important;
+}
+
+.k-pager-wrap {
+  border-style: none;
+  background-color: white;
+}
+
 .header, .footer {
-  color: #A0A0A0;
+  color: #EBEBEB;
   font-size: 16px;
   padding: 6px 10px;
 }
 .footer {
   font-size: 14px;
-}
-
-.k-hstack {
-  /* height: 100px; */
-}
-
-
-.k-hstack-body {
-  /* height: 210px; */
 }
 
 .middle {
@@ -65,25 +65,22 @@
 }
 
 .k-card-titles{
-  
+
   /* Body/Body 2 - Bold */
-  
+
   /* font-family: Roboto; */
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
   line-height: 40px;
   /* identical to box height, or 143% */
-  
+
   letter-spacing: 0.25px;
   margin: 0px 20px;
   color: #000000;
   vertical-align: middle;
 }
 
-.k-card-body{
-  /* margin: 10px 50px; */
-}
 .status{
   /* font-family: Roboto; */
   font-style: normal;
@@ -100,20 +97,12 @@
 @media only screen and (min-width: 1080px) {
   /* For desktop: */
   .k-listview-item {
-    display: inline-block;
     width: 40%;
     border-style: solid;
     border-color: #dee2e6;
     border-width: 3px;
-    margin: 20px 5%;
+    margin: 1em 2rem;
     border-radius: 8px;
-  }
-  .demo {
-    /* display: flex; */
-    /* justify-content: center; */
-    /* margin: 2em; */
-    padding: 0px 200px;
-    width: 100%;
   }
 }
 

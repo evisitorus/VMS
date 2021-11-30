@@ -1,23 +1,16 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-grid-banner',
-  templateUrl: './grid-banner.component.html',
-  styleUrls: ['./grid-banner.component.css']
+  selector: 'app-tentang-kami',
+  templateUrl: './tentang-kami.component.html',
+  styleUrls: ['./tentang-kami.component.css']
 })
-export class GridBannerComponent implements OnInit {
+export class TentangKamiComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-  public avatarSrc =
-  "https://previews.123rf.com/images/aquir/aquir1311/aquir131100316/23569861-sample-grunge-red-round-stamp.jpg";
-  public imageSrc =
-    "https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/sofia.jpg";
-
   public card1 = "./assets/images/card1.png";
   public card2 = "./assets/images/card2.png";
   public card3 = "./assets/images/card3.png";
@@ -25,8 +18,7 @@ export class GridBannerComponent implements OnInit {
 
   public mediaCards: Array<any> = [
     {
-      imageSrc:
-        "./assets/images/pnm.png",
+      imageSrc: this.card1,
       title:
         "Governance, Transaparansi dan Digital Procurement",
       description:
@@ -34,8 +26,7 @@ export class GridBannerComponent implements OnInit {
       actionsLayout: "start",
     },
     {
-      imageSrc:
-        "./assets/images/Pegadaian.png",
+      imageSrc: this.card2,
       title:
         "Efisiensi dan Sinergi Berkelanjutan",
       description:
@@ -43,8 +34,7 @@ export class GridBannerComponent implements OnInit {
       actionsLayout: "start",
     },
     {
-      imageSrc:
-        "./assets/images/pln.png",
+      imageSrc: this.card3,
       title:
         "Mendorong Pemberdayaan UMKM",
       description:
@@ -52,17 +42,13 @@ export class GridBannerComponent implements OnInit {
       actionsLayout: "start",
     },
     {
-      imageSrc:
-        "./assets/images/telkom.png",
+      imageSrc: this.card4,
       title:
         "Optimalisasi TKDN",
       description:
         "Meningkatkan Tingkat Kandungan Dalam Negri (TKDN) dalam proses procurement di BUMN.",
       actionsLayout: "start",
     },
-    {
-      imageSrc: "./assets/images/pertamina.png"
-    }
   ];
 
 }

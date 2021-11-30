@@ -21,6 +21,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { ListViewModule } from '@progress/kendo-angular-listview';
 import { IconsModule } from '@progress/kendo-angular-icons';
+import { TentangKamiComponent } from './layouts/tentang-kami/tentang-kami.component';
 
 
 
@@ -31,7 +32,8 @@ import { IconsModule } from '@progress/kendo-angular-icons';
     AppComponent,
     MainComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    TentangKamiComponent
   ],
   imports: [
     BrowserModule,
