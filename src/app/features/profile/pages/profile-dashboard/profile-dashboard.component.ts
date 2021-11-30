@@ -43,7 +43,7 @@ export class ProfileDashboardComponent implements OnInit {
       (resp) => {
         console.log(resp)
         this.phone_number = resp.data.phone_number;
-        // this.name = resp.name;
+        this.address_vendor = resp.data.address;
         // this.is_active = resp.is_active;
         this.registered_at = resp.data.registered_at;
         this.vendor_name = resp.data.name;
