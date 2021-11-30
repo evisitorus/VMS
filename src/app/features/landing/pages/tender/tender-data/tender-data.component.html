@@ -1,5 +1,5 @@
 <div class="tender" routerLink="tender/detail/{{tender.id}}">
-    <kendo-card-body class="k-hstack top">
+    <kendo-card-body class="k-hstack top justify-content-between">
       <div class="top-avatar">
           <img src='{{ "assets/images/" + tender.cparent.id + ".png" }}' id="logoPerusahaan" class="avatar" alt="avatar" />
           <div class="k-card-titles nama-perusahaan" id="namaPerusahaan">{{ tender.cparent.name }} </div>
@@ -16,9 +16,9 @@
           <img src="./assets/images/pin.png" class="icon" alt="pin"/>
           <div class="mid1" id="lokasi">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
       </div>
-      <div class="middle">
-          <div class="mid" id="metodeTender">{{ tender.method.name }}</div>
-          <div class="mid" id="bidangUsaha" style="font-weight: bold;">{{ tender.category.name }}</div>
+      <div class="k-hstack">
+          <div [ngClass]="tender.method.name == 'Umum' ? 'label tender-umum' : 'label'" id="metodeTender">{{ tender.method.name }}</div>
+          <div class="mx-3 mid label bidang-usaha" id="bidangUsaha">{{ tender.category.name }}</div>
       </div>
       <div class="mid" id="tanggalPosting">{{getDiffDate(tender.publish_at)}}</div>
     </kendo-card-body>

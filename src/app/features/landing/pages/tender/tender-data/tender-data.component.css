@@ -128,4 +128,13 @@
 .tender-umum {
     background: #B6D7DD;
     color: #000000;
+    width: fit-content;
+    font-size: 12px;
+    padding: 4px;
+}
+
+.bidang-usaha {
+    padding: 4px;
+    font-weight: bold;
+    background: #E5E5E5;
 }
