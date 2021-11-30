@@ -4,7 +4,7 @@
           <img src='{{ "assets/images/" + tender.cparent.id + ".png" }}' id="logoPerusahaan" class="avatar" alt="avatar" />
           <div class="k-card-titles nama-perusahaan" id="namaPerusahaan">{{ tender.cparent.name }} </div>
       </div>
-      <div class="status" id="statusTender">{{ tender.status.name }} </div>
+      <div [ngClass]="tender.status.name == 'Aktif' ? 'status label tender-aktif' : 'Pemenang Terpilih' ? 'status label tender-terpilih' : 'Calon Pemenang Terpilih' ? 'status label tender-calon' : 'Masa Sanggah' ? 'status label tender-sanggah' : 'Dibatalkan' ? 'status label tender-batal' : 'status label tender-selesai' " id="statusTender">{{ tender.status.name }} </div>
     </kendo-card-body>
     <kendo-card-body class="k-hstack-body" style="padding: 0px 16px;">
       <div class="tender-title" id="namaTender">{{ tender.name }}</div>

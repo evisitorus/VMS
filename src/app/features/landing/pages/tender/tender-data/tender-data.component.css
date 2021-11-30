@@ -48,7 +48,7 @@
     font-size: 12px;
     line-height: 40px;
     vertical-align: middle;
-    min-width: 105px;
+    min-width: 8em;
     text-align: center
 }
 
@@ -88,4 +88,44 @@
     font-size: 13px;
     line-height: 25px;
     margin-top: 5px;
+}
+
+.label {
+    padding: 1px;
+    border-radius: 8px;
+}
+
+.tender-aktif {
+    background: #B7E7A1;
+    color: #37B400;
+}
+
+.tender-terpilih {
+    background: #CBDFFF;
+    color: #0058E9;
+}
+
+.tender-calon {
+    color: #00839A;
+    background: #A0D5DF;
+}
+
+.tender-sanggah {
+    color: #F27043;
+    background: #F9CFC1;
+}
+
+.tender-batal {
+    background: #F0AAA3;
+    color: #F31700;
+}
+
+.tender-selesai {
+    background: #C4C4C4;
+    color: #000000;
+}
+
+.tender-umum {
+    background: #B6D7DD;
+    color: #000000;
 }
