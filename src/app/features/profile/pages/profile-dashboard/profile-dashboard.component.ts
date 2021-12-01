@@ -26,6 +26,7 @@ export class ProfileDashboardComponent implements OnInit {
   pekerjaan: string = "";
   aset: string = "";
   alamat: string = "";
+  star: string = "";
 
   ngOnInit(): void {
     this.profileService.getVendor().subscribe(
@@ -63,6 +64,11 @@ export class ProfileDashboardComponent implements OnInit {
         this.keuangan= resp.data.keuangan;
         this.pekerjaan= resp.data.pekerjaan;
         this.aset = resp.data.aset;
+
+        const hasValue = Object.values(resp.data).includes(false);
+        hasValue ? 
+        this.star = "bi-star-half" :
+        this.star = "bi-star-fill";
       },
       (error) => {
         console.log(error);
