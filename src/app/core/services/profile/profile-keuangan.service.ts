@@ -59,6 +59,21 @@ export class ProfileKeuanganService {
     return this.apiService.sendRequest(api_get_data_keuangan);
   }
 
+  public fetchListBank(): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let vendor_id = this.authService.getLocalStorage('vendor_id')!;
+    let api_get_list_bank: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_list_bank_route,
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_get_list_bank);
+  }
+
   public saveDataNeraca(params: ProfileKeuanganNeracaInterface): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_save_neraca: ApiInterface = {

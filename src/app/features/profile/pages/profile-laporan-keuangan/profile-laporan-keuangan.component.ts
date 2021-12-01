@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import { ProfileKeuanganInterface, ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
@@ -21,6 +22,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchListBank();
     this.setAllForm();
     this.fetchDataNeraca();
     this.fetchDataSPT();
@@ -52,6 +54,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public isNewData: boolean = true;
   public id!: string
+
+  public listNamaBank: Array<string> = [];
 
   public dataNeraca: any = {
     tahun: "",
@@ -209,7 +213,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     for (const key in data) {
       mappedData[key] = {
         id: data[key]['id'],
-        tahun: data[key]['year'],
+        tahun: parseInt(data[key]['year']),
         submitDate: formatDate(data[key]['submitDate'], "dd-MM-YYYY hh:mm:ss", "en-US"),
         nomor: data[key]['number'],
         lampiran: data[key]['attachmentFilePath'],
@@ -248,6 +252,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       (resp) => {
         this.dataGridNeraca = resp['hydra:member'];
         this.dataGridNeraca = this.mapDataNeraca(this.dataGridNeraca);
+        this.loadItemsNeraca();
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data Neraca";
@@ -261,6 +266,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       (resp) => {
         this.dataGridSPT = resp['hydra:member'];
         this.dataGridSPT = this.mapDataSPT(this.dataGridSPT);
+        this.loadItemsSPT();
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data SPT";
@@ -277,12 +283,27 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.dataKeuangan.cabang = data.cabang;
         this.dataKeuangan.nomorRekening = data.nomorRekening;
         this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
-        this.dataKeuangan.modalDasar = data.toParty.modalDasar;
-        this.dataKeuangan.modalDitempatkan = data.toParty.modalDitempatkan;
+        this.dataKeuangan.modalDasar = parseInt(data.toParty.modalDasar);
+        this.dataKeuangan.modalDitempatkan = parseInt(data.toParty.modalDitempatkan);
         this.setFormKeuangan();
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data Keuangan";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public fetchListBank(): void {
+    this.service.fetchListBank().subscribe(
+      (resp) => {
+        const data = resp.data;
+        for (let key in data) {
+          this.listNamaBank.push(data[key]['name']);
+        }
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data Bank";
         this.triggerPopUp();
       }
     );
@@ -335,7 +356,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public saveSPT(): void {
     let params: ProfileKeuanganSPTInterface = {
-      tahunSPT: this.formSPT.value.tahunSPT,
+      tahunSPT: this.formSPT.value.tahunSPT.toString(),
       nomorDokumen: this.formSPT.value.nomorDokumen,
       lampiran: this.uploadedFileId,
       filename: this.uploadedFileContentUrl,
@@ -375,7 +396,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public updateSPT(): void {
     let params : ProfileKeuanganSPTInterface = {
-      tahunSPT: this.formSPT.value.tahunSPT,
+      tahunSPT: this.formSPT.value.tahunSPT.toString(),
       nomorDokumen: this.formSPT.value.nomorDokumen,
       lampiran: this.uploadedFileId,
       filename: this.uploadedFileContentUrl,
@@ -425,7 +446,14 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public postDataKeuangan(): void {
-    let params: ProfileKeuanganInterface = {...this.formKeuangan.value};
+    let params: ProfileKeuanganInterface = {
+      namaBank: this.formKeuangan.value.namaBank,
+      cabang: this.formKeuangan.value.cabang,
+      nomorRekening: this.formKeuangan.value.nomorRekening,
+      namaPemilikRekening: this.formKeuangan.value.namaPemilikRekening,
+      modalDasar: this.formKeuangan.value.modalDasar.toString(),
+      modalDitempatkan: this.formKeuangan.value.modalDitempatkan.toString(),
+    };
     this.service.postDataKeuangan(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
@@ -479,6 +507,33 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public gridViewNeraca!: GridDataResult;
+  public gridViewSPT!: GridDataResult;
+  public skip: number = 0;
+  public pageSize: number = 5;
+  
+  public pageChangeNeraca(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.loadItemsNeraca();
+  }
+  private loadItemsNeraca(): void {
+    this.gridViewNeraca = {
+      data: this.dataGridNeraca.slice(this.skip, this.skip + this.pageSize),
+      total: this.dataGridNeraca.length,
+    };
+  }
+
+  public pageChangeSPT(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.loadItemsSPT();
+  }
+  private loadItemsSPT(): void {
+    this.gridViewSPT = {
+      data: this.dataGridSPT.slice(this.skip, this.skip + this.pageSize),
+      total: this.dataGridSPT.length,
+    };
   }
 
 }

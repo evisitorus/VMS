@@ -99,7 +99,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formSPT">
-              <kendo-textbox class="content-input-field" id="input-spt-tahun" formControlName="tahunSPT" [clearButton]="true" #tahunSPT required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-spt-tahun" formControlName="tahunSPT" format="#" [maxlength]="4" #tahunSPT required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Tahun tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -169,7 +169,8 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [clearButton]="true" #namaBank required></kendo-textbox>                
+              <kendo-autocomplete class="content-input-field" formControlName="namaBank" [data]="listNamaBank" [kendoDropDownFilter]="{ operator: 'contains' }" required></kendo-autocomplete>
+              <!-- <kendo-textbox class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [clearButton]="true" #namaBank required></kendo-textbox>                 -->
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nama Bank tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -224,7 +225,7 @@
         </div>
 
         <div class="profile-content-grid">
-          <kendo-grid [data]="dataGridNeraca">
+          <kendo-grid [data]="gridViewNeraca" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeNeraca($event)">
             <kendo-grid-column field="tahun" title="Tahun">
             </kendo-grid-column>
             <kendo-grid-column field="aktiva" title="Aktiva (Asset)">
@@ -278,7 +279,7 @@
         </div>
 
         <div class="profile-content-grid">
-          <kendo-grid [data]="dataGridSPT">
+          <kendo-grid [data]="gridViewSPT" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeSPT($event)">
             <kendo-grid-column field="tahun" title="Tahun">
             </kendo-grid-column>
             <kendo-grid-column field="nomor" title="Nomor">
@@ -325,8 +326,8 @@
             <kendo-label>Modal Dasar (Sesuai Akta)</kendo-label>
           </div>
           <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" [clearButton]="true" #modalDasar required></kendo-textbox>                
+            <kendo-formfield [formGroup]="formKeuangan">              
+              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" #modalDasar required></kendo-numerictextbox> 
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -339,7 +340,7 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" [clearButton]="true" #modalDitempatkan required></kendo-textbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" #modalDitempatkan required></kendo-numerictextbox>               
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>

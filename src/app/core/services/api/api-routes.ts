@@ -30,7 +30,8 @@ export const ApiRoutes = {
   api_documents_route: API_BASE_URL + "/dokumens",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
   api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
-  api_vendor_route: API_BASE_URL + "/vendors"
+  api_vendor_route: API_BASE_URL + "/vendors",
+  api_list_bank_route: API_BASE_URL + "/banks"
 };
 
 export const ApiRouteMethods = {

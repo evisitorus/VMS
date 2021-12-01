@@ -8,7 +8,7 @@
                     [selected]="item.title == selectedId" 
                     class="vms-sidebar-item" 
                     [ngClass]="item.title == 'Dashboard' ? 'parent-sidebar' : '' " 
-                    [routerLink]="item?.route" 
+                    (click)="navigate(item?.route)" 
                     [expanded]="item?.expanded ? true : false" 
                     [selected]="item?.expanded ? true : false" >
 
@@ -16,7 +16,7 @@
                         [title]="child?.title || 'about'" 
                         [id]="child.id ? child.id  : item.id" 
                         [selected]="item.title + '/' + child?.title == selectedId"  
-                        [routerLink]="child?.route" 
+                        (click)="navigate(child?.route)" 
                         class="k-state-active">
                     </kendo-panelbar-item>
                 </kendo-panelbar-item>
