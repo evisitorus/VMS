@@ -3,6 +3,14 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { FileRestrictions } from "@progress/kendo-angular-upload";
 import { FileService } from "src/app/core/services/file.service";
 import { ProfileInformationService } from "src/app/core/services/profile-information.service";
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { ProfileInterface } from 'src/app/core/interfaces/profile-interface';
+
+const messages = {
+  default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
+  success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
+  disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
+};
 
 interface Item {
   name: string;
@@ -24,8 +32,15 @@ export class ProfileInformasiPerusahaanComponent {
 
   constructor(
     private profileInfoService: ProfileInformationService,
-    private fileService: FileService
+    private fileService: FileService,
+    private eventEmitterService: EventEmitterService
   ) { }
+
+  popUpTitle: string = "Informasi Registrasi Akun";
+  popUpMessage: string = messages.default;
+  redirectOnClosePopUp: boolean = true;
+
+  profileForm = new FormGroup({});
 
   public psFormGroup = new FormGroup({
     psFormControl: new FormControl(),
@@ -96,15 +111,16 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedProvince: { provinceDescription: string, provinceId: number } = null!;
   public selectedKota:{ kotaDescription: string, kotaId: number } = null!;
   public selectedKecamatan:{ kecamatanDescription: string, kecamatanId: number } =null!;
+  public selectedKelurahan:{ kecamatanDescription: string, kecamatanId: number } =null!;
   public pkpStatus = false;
 
-  public defaultItemProvinces: { provinceDescription: string, provinceId: number } = { provinceDescription: 'Pilih provinsi', provinceId: 0 };
+  public defaultItemProvinces: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
 
-  public defaultItemKota:{ kotaDescription: string, kotaId: number, provinceId: number } = { kotaDescription: 'Pilih kota', kotaId: 0 , provinceId: 0};
+  public defaultItemKota:{ description: string, id: number, provinceId: number } = { description: 'Pilih kota', id: 0 , provinceId: 0};
 
-  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number, kotaId: number} = { kecamatanDescription: 'Pilih Kecamatan', kecamatanId: 0, kotaId: 0 };
+  public defaultItemKecamatan: { description: string, id: number, kotaId: number} = { description: 'Pilih Kecamatan', id: 0, kotaId: 0 };
 
-  // public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
+  public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
 
   public dataProvinsi: Array<{provinceDescription: string, provinceId: number}> = [
     {
@@ -118,39 +134,16 @@ export class ProfileInformasiPerusahaanComponent {
     }
   ];
 
-  public dataKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [
-    {
-      kotaDescription: 'Bandung', kotaId: 1, provinceId: 1
-    },
-    {
-      kotaDescription: 'Cimahi', kotaId: 2, provinceId: 1
-    },
-    {
-      kotaDescription: 'Semarang', kotaId: 3, provinceId: 2
-    },
-    {
-      kotaDescription: 'Surabaya', kotaId: 4, provinceId: 3
-    }
-  ];
+  public provinsi: Array<{}> = [];
 
-  public dataKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number}> = [
-    {
-      kecamatanDescription: 'Sukasari', kecamatanId: 1, kotaId: 1
-    },
-    {
-      kecamatanDescription: 'Baleendah', kecamatanId: 2, kotaId: 1
-    },
-    {
-      kecamatanDescription: 'Pekalongan', kecamatanId: 3, kotaId: 2
-    },
-    {
-      kecamatanDescription: 'Karang Anyar', kecamatanId: 4, kotaId: 3
-    }
-  ];
+  public dataKota: Array<{}> = [];
 
-  public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number  }> = [];
+  public dataKecamatan: Array<{}> = [];
 
-  public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId:number, kotaId: number }> = [];
+  public dataResultKota: Array<{}> = [];
+
+  public dataResultKecamatan: Array<{}> = [];
+  public dataResultKelurahan: Array<{}> = [];
 
 
   ngOnInit(): void {
@@ -224,14 +217,14 @@ export class ProfileInformasiPerusahaanComponent {
     );
 
     // get list of provinces
-    // this.profileInfoService.getProvinces().subscribe(
-    //   (resp) => {
-    //     this.provinces = resp["hydra:member"];
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this.profileInfoService.getProvinces().subscribe(
+      (resp) => {
+        this.provinsi = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   public saveImage(value: any, valid: boolean): void {
@@ -261,40 +254,74 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   handleProvinceChange(value: any) {
-    this.selectedProvince = value;
-    this.selectedKota = undefined!;
-    this.selectedKecamatan = undefined!;
+    // this.selectedProvince = value;
+    // this.selectedKota = undefined!;
+    // this.selectedKecamatan = undefined!;
 
+    // if (value.id === this.defaultItemProvinces.id) {
+    //   this.isDisabledKota = true;
+    //   this.dataResultKota = [];
+    // } else {
+    //   this.isDisabledKota = false;
+    //   this.dataResultKota = this.dataKota.filter((s) => s.provinsi === value.id);
+    // }
 
-    if (value.provinceId === this.defaultItemProvinces.provinceId) {
-      this.isDisabledKota = true;
-      this.dataResultKota = [];
-    } else {
-      this.isDisabledKota = false;
-      this.dataResultKota = this.dataKota.filter((s) => s.provinceId === value.provinceId);
-    }
+    this.profileInfoService.getKotaKabupaten(value.id).subscribe(
+      (resp) => {
+        this.dataResultKota = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
-    this.isDisabledKecamatan = true;
-    this.dataResultKecamatan = [];
+    // this.isDisabledKecamatan = true;
+    // this.dataResultKecamatan = [];
   }
 
   handleKotaChange(value: any) {
-    this.selectedKota = value;
-    this.selectedKecamatan = undefined!;
+    // this.selectedKota = value;
+    // this.selectedKecamatan = undefined!;
 
-    if (value.kotaId === this.defaultItemKota.kotaId) {
-      this.isDisabledKecamatan = true;
-      this.dataResultKecamatan = [];
-    } else {
-      this.isDisabledKecamatan = false;
-      this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.kotaId === value.kotaId);
-    }
+    // if (value.kotaId === this.defaultItemKota.id) {
+    //   this.isDisabledKecamatan = true;
+    //   this.dataResultKecamatan = [];
+    // } else {
+    //   this.isDisabledKecamatan = false;
+    //   this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.id === value.kotaId);
+    // }
 
+    this.profileInfoService.getKecamatan(value.id).subscribe(
+      (resp) => {
+        this.dataResultKecamatan = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
   }
 
   handleKecamatanChange(value:any) {
-    this.selectedKecamatan = value;
+    this.profileInfoService.getKelurahan(value.id).subscribe(
+      (resp) => {
+        this.dataResultKecamatan = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  handleKelurahanChange(value:any) {
+    this.profileInfoService.getKodepos(value.id).subscribe(
+      (resp) => {
+        this.dataResultKecamatan = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   upload(): void {
@@ -310,6 +337,31 @@ export class ProfileInformasiPerusahaanComponent {
         console.log(error);
       }
     );
+  }
+
+  updateProfile(): void {
+    this.profileForm.markAllAsTouched();
+
+    let params: ProfileInterface= {...this.profileForm.value};
+    this.profileInfoService.updateProfile(params).subscribe(
+      (resp) =>  { 
+        this.submitted = true;
+        this.popUpMessage = resp.message;
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      },
+      (error) => { 
+        if(error.error.message){
+          this.popUpMessage = error.error.message;
+        }
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      }
+    );
+  }
+
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
   }
 
 

@@ -30,8 +30,13 @@ export const ApiRoutes = {
   api_tipe_vendor_route: API_BASE_URL + "/tipe_vendors",
   api_get_organizations_route: API_BASE_URL + "/organizations",
   api_get_provinces_route: API_BASE_URL + "/geo_locations?geoLocationType=5",
+  api_get_kotakab: API_BASE_URL + "/geo_locations?geoLocationType=6",
+  api_get_kecamatan: API_BASE_URL + "/geo_locations?geoLocationType=7",
+  api_get_kelurahan: API_BASE_URL + "/geo_locations?geoLocationType=8",
+  api_get_kodepos: API_BASE_URL + "/geo_locations?geoLocationType=8",
   api_documents_route: API_BASE_URL + "/dokumens",
   api_media_object_route: API_BASE_URL + "/media_objects",
+  api_update_profile: API_BASE_URL + "/vendors/profile"
 };
 
 export const ApiRouteMethods = {
