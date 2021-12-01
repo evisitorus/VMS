@@ -80,6 +80,16 @@ export class ProfilePersonInChargeComponent implements OnInit {
     maxFileSize: 2097152
   };
 
+  public opened = false;
+
+  public close(status: any) {
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
+  }
+
   responseName: string = "";
   responsePhoneNumber: string = "";
   responseEmail: string = "";
@@ -113,7 +123,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responseFile = response.data;
         },
         (error) => {
-          console.log(error);
         }
       );
     }
@@ -128,7 +137,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
       (error) => {
         this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
         this.triggerPopUp();
-        console.log(error);
       }
     )
     this.changeIsDisabled();
@@ -149,7 +157,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.responseEmail = response.data.email;
       },
       (error) => {
-        console.log(error);
       }
     )
   }
@@ -163,12 +170,11 @@ export class ProfilePersonInChargeComponent implements OnInit {
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
-        console.log(res);
+        this.responseFile = environment.api_base_path + res["@id"] + "/file";
       },
       (err) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.triggerPopUp();
-        console.log(err);
       }
     );
   }

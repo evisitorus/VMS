@@ -27,13 +27,8 @@ export const ApiRoutes = {
   api_token_route: API_BASE_URL + "/users/token",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
   api_add_pemegang_saham:  API_BASE_URL + "/vendors/pemegang_saham",
-  api_penyedia_usaha_route : API_BASE_URL + "/jenis_penyedia_usahas?page=1",
   api_jenis_badan_usaha_route: API_BASE_URL + "",
-  api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
   api_documents_route: API_BASE_URL + "/dokumens",
-  api_media_object_route: API_BASE_URL + "/media_objects",
-  api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
-  api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
 };
 
 export const ApiRouteMethods = {

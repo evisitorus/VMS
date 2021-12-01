@@ -91,3 +91,10 @@
 .vms-btn:hover {
   /*border-radius: 2px;*/
 }
+
+#attention {
+  font-size: small;
+  font-weight: lighter;
+  font-style: italic;
+  margin: 20px 0 20px 0;
+}

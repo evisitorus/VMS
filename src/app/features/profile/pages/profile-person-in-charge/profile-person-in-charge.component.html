@@ -4,6 +4,10 @@
   </div>
 
   <div class="profile-content">
+    <h4>PIC</h4>
+    <div id="attention" *ngIf="!isDisabled">
+      Perhatian :<br>Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.
+    </div>
     <form class="k-form auth-form" [formGroup]="form">
       <fieldset class="k-form-fieldset">
 
@@ -25,14 +29,14 @@
         <div class="row align-items-center k-justify-content-center" *ngIf="!isDisabled">
           <kendo-fileselect id="input-pic-avatar" required name="picAvatar" #picAvatar="ngModel"
                             [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles"
-                            [ngModelOptions]="{standalone: true}" (change)="upload()">
+                            [ngModelOptions]="{standalone: true}" (change)="upload()" [multiple]="false">
           </kendo-fileselect>
         </div>
 
         <kendo-formfield>
           <div class="row align-items-center">
             <kendo-label class="col-3">Nama</kendo-label>
-            <kendo-textbox id="input-name" class="col-md" formControlName="name" placeholder="Nama"
+            <kendo-textbox id="input-name" class="col-md" formControlName="name" placeholder="Nama Anda"
                            [clearButton]="true" #name
                            required
                            [readonly]=isDisabled
@@ -57,7 +61,7 @@
         <div class="row align-items-center">
           <kendo-label class="col-3">No. Handphone</kendo-label>
           <kendo-textbox id="input-phone-number" class="col-md" formControlName="phoneNumber"
-                         placeholder="Type your message here"
+                         placeholder="Nomor Telepon Anda"
                          [clearButton]="true" #phoneNumber
                          required
                          [readonly]=isDisabled
@@ -78,8 +82,8 @@
         <div class="row align-items-center" [hidden]="isDisabled">
           <kendo-label class="col-3">Kata Sandi Lama</kendo-label>
           <kendo-textbox id="input-old-password" class="col-md" formControlName="oldPassword"
-                         placeholder="Type your message here"
-                         [clearButton]="true" #oldPassword
+                         placeholder="Kata sandi lama Anda"
+                         [clearButton]="true" #oldPassword [minlength]="1" [maxlength]="15"
                          required>
             <ng-template kendoTextBoxSuffixTemplate>
               <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
@@ -92,8 +96,8 @@
         <div class="row align-items-center" [hidden]="isDisabled">
           <kendo-label class="col-3">Kata Sandi Baru</kendo-label>
           <kendo-textbox id="input-new-password" class="col-md" formControlName="newPassword"
-                         placeholder="Type your message here"
-                         [clearButton]="true" #newPassword
+                         placeholder="Kata kunci baru Anda"
+                         [clearButton]="true" #newPassword [minlength]="1" [maxlength]="15"
                          required>
             <ng-template kendoTextBoxSuffixTemplate>
               <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
@@ -106,8 +110,8 @@
         <div class="row align-items-center" [hidden]="isDisabled">
           <kendo-label class="col-3">Konfirmasi Kata Sandi Baru</kendo-label>
           <kendo-textbox id="input-confirm-new-password" class="col-md" formControlName="confirmNewPassword"
-                         placeholder="Type your message here"
-                         [clearButton]="true" #confirmNewPassword
+                         placeholder="Konfirmasi kata sandi baru Anda"
+                         [clearButton]="true" #confirmNewPassword [minlength]="1" [maxlength]="15"
                          required>
             <ng-template kendoTextBoxSuffixTemplate>
               <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('confirmNewPassword')"></button>
@@ -117,10 +121,34 @@
           <!--          <kendo-formerror>Konfirmasi Kata Sandi Baru tidak koleh kosong</kendo-formerror>-->
         </div>
 
-        <div class="k-form-buttons k-float-right">
-          <button class="k-button k-primary vms-btn" (click)="changeIsDisabled()" *ngIf="isDisabled">Perbarui</button>
-          <button class="k-button k-primary vms-btn" (click)="save()" *ngIf="!isDisabled">Simpan</button>
-        </div>
+        <ng-container
+          *ngIf="isDisabled; then showUpdateButton; else showSaveButton">
+        </ng-container>
+
+        <ng-template #showUpdateButton>
+          <div class="k-form-buttons k-float-right">
+            <button class="k-button k-primary vms-btn" (click)="changeIsDisabled()" *ngIf="isDisabled">Perbarui</button>
+          </div>
+        </ng-template>
+        <ng-template #showSaveButton>
+          <div class="k-form-buttons k-float-right">
+            <button class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan</button>
+          </div>
+        </ng-template>
+
+        <kendo-dialog
+          *ngIf="opened"
+          (close)="close('cancel')"
+          [minWidth]="250"
+          [width]="450">
+          <p style="margin: 30px; text-align: center;">
+            Simpan perubahan pada PIC Perusahaan?
+          </p>
+          <kendo-dialog-actions>
+            <button kendoButton (click)="close('no')">Tidak</button>
+            <button kendoButton (click)="save(); close('yes')" [primary]="true">Ya</button>
+          </kendo-dialog-actions>
+        </kendo-dialog>
 
       </fieldset>
     </form>
