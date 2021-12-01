@@ -83,8 +83,8 @@
           <kendo-label class="col-3">Kata Sandi Lama</kendo-label>
           <kendo-textbox id="input-old-password" class="col-md" formControlName="oldPassword"
                          placeholder="Kata sandi lama Anda"
-                         [clearButton]="true" #oldPassword [minlength]="1" [maxlength]="15"
-                         required>
+                         [clearButton]="true" #oldPassword [minlength]="4" [maxlength]="15" (keypress)="enablePasswordTextbox()" (keydown.space)="$event.preventDefault()"
+                         >
             <ng-template kendoTextBoxSuffixTemplate>
               <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
             </ng-template>
@@ -97,8 +97,8 @@
           <kendo-label class="col-3">Kata Sandi Baru</kendo-label>
           <kendo-textbox id="input-new-password" class="col-md" formControlName="newPassword"
                          placeholder="Kata kunci baru Anda"
-                         [clearButton]="true" #newPassword [minlength]="1" [maxlength]="15"
-                         required>
+                         [clearButton]="true" #newPassword [minlength]="4" [maxlength]="15" [disabled]="passwordTextbox" (keydown.space)="$event.preventDefault()"
+                         >
             <ng-template kendoTextBoxSuffixTemplate>
               <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
             </ng-template>
@@ -111,8 +111,8 @@
           <kendo-label class="col-3">Konfirmasi Kata Sandi Baru</kendo-label>
           <kendo-textbox id="input-confirm-new-password" class="col-md" formControlName="confirmNewPassword"
                          placeholder="Konfirmasi kata sandi baru Anda"
-                         [clearButton]="true" #confirmNewPassword [minlength]="1" [maxlength]="15"
-                         required>
+                         [clearButton]="true" #confirmNewPassword [minlength]="4" [maxlength]="15" [disabled]="passwordTextbox" (keydown.space)="$event.preventDefault()"
+                         >
             <ng-template kendoTextBoxSuffixTemplate>
               <button kendoButton look="clear" icon="eye" (click)="toggleVisibility('confirmNewPassword')"></button>
             </ng-template>

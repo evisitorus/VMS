@@ -80,6 +80,12 @@ export class ProfilePersonInChargeComponent implements OnInit {
     maxFileSize: 2097152
   };
 
+  public passwordTextbox = true;
+
+  enablePasswordTextbox(){
+    this.passwordTextbox = false;
+  };
+
   public opened = false;
 
   public close(status: any) {
@@ -185,15 +191,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   public selectEventHandler(e: SelectEvent): void {
     let errors = e.files[0].validationErrors;
-    if (errors?.includes("invalidMaxFileSize")) {
-      this.invalidMaxFileSize = true;
-    } else {
-      this.invalidMaxFileSize = false;
-    }
-    if (errors?.includes("invalidFileExtension")) {
-      this.invalidFileExtension = true;
-    } else {
-      this.invalidFileExtension = false;
-    }
+    this.invalidMaxFileSize = !!errors?.includes("invalidMaxFileSize");
+    this.invalidFileExtension = !!errors?.includes("invalidFileExtension");
   }
 }
