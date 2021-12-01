@@ -25,7 +25,7 @@ export class ProfileService {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pengalaman_kerja,
       body: {
-        email: this.email,
+        vendor: this.vendor_id,
         namaPekerjaan: params.namaPekerjaan,
         pemberiPekerjaan: params.pemberiPekerjaan,
         nilaiPekerjaan: params.nilaiPekerjaan,

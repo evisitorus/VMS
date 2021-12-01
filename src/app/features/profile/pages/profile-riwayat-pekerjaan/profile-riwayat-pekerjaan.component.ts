@@ -53,7 +53,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     if (!this.isLoggedIn) window.location.href = "/";
 
     this.pekerjaanForm = this.formBuilder.group({
-      email:[''],
       namaPekerjaan: ['', Validators.required],
       pemberiPekerjaan: ['', Validators.required],
       nilaiPekerjaan: ['', Validators.required],
