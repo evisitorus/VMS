@@ -92,7 +92,7 @@ export class PemegangSahamComponent implements OnInit {
     }
 
     const dataPemegangSaham = {
-      email: "admin@abadijaya.co.id",
+      email: "",
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
       perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
@@ -102,33 +102,46 @@ export class PemegangSahamComponent implements OnInit {
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.addPemegangSaham(params).subscribe(
       (resp) =>  { 
-        this.popUpMessage = messages.success;
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.redirectOnClosePopUp = false;
         this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
+        this.getPemegangSaham();
         this.closeSaham();
         this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
       },
       (error) => { 
-        this.popUpMessage = error;
+        this.popUpMessage = "Gagal menyimpan data";
         this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
+        this.closeSaham();
       }
     );
   }
 
+  public mapData(data:any[]) {
+    let mappedData:any[] = [];
+    let no = 1;
+    for (const key in data) {
+      mappedData[key] = {
+        no: no++,
+        namaPemegangSaham: data[key]['toParty']['firstName'],
+        pemegangSahamPerseorangan: data[key]['pemegangSahamPerseorangan'] ?  "Perseorangan" : "Badan Usaha",
+        pemegangSahamLokal: data[key]['pemegangSahamLokal'] ? "Lokal" : "Asing",
+        persentaseKepemilikan: data[key]['persentaseKepemilikan']
+      };
+    }
+    return mappedData;
+  }
 
   getPemegangSaham(){
-    this.vendor_id="133";
-    // this.vendor_id= JSON.parse(this.authService.getLocalStorage("vendor_id")!);
-    this.profileService.getPemegangSaham(this.vendor_id).subscribe(
+    this.profileService.getPemegangSaham().subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];
+        this.gridData = this.mapData(this.gridData);
         return this.gridData;
       },
       (error) => { 
-        this.popUpMessage = error;
-        this.redirectOnClosePopUp = true;
-        // this.triggerPopUp();
+        this.popUpMessage = "Gagal mendapatkan data";
+        this.triggerPopUp();
       }
     );
   }

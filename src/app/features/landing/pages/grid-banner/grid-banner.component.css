@@ -62,7 +62,7 @@
 
 
 @media only screen and (min-width: 1080px) {
-  /* For desktop: */
+/* For desktop: */
 
 .k-card-box{
   /* width: 400px !important; */
@@ -72,10 +72,10 @@
   min-height: 300px;
 }
 .demoGrid {
-  /* display: flex; */
-  justify-content: center;
-  /* margin: 2em; */
-  width: 100%;
-  margin: 20px;
+/* display: flex; */
+justify-content: center;
+/* margin: 2em; */
+width: 100%;
+margin: 20px;
 }
 }

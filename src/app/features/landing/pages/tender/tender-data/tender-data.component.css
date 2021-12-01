@@ -83,3 +83,9 @@ letter-spacing: 0.25px;
 .k-listview {
     border: none !important;
 }
+
+.nama-perusahaan {
+    font-size: 13px;
+    line-height: 25px;
+    margin-top: 5px;
+}
