@@ -121,16 +121,13 @@ label{
 .k-link{
     /* background-color: #0193AC !important; */
     color: black !important;
-    background-color: #07b9d8 !important;
-    border-color: #07b9d8 !important;
 }
 
 
 .k-link.k-state-selected{
-    background-color: white !important;
-    color: black !important;
-    background-color: #07b9d8 !important;
-    border-color: #07b9d8 !important;
+    color: white !important;
+    background-color: #0193ac !important;
+    border-color: #0193ac !important;
 }
 
 
