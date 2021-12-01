@@ -18,9 +18,10 @@ export class ProfileKeuanganService {
 
   public fetchDataNeraca(): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
+    let vendor_id = this.authService.getLocalStorage('vendor_id')!;
     let api_get_neraca: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_neraca_route,
+      url: ApiRoutes.api_neraca_route + "?vendor=" + vendor_id,
       options: {
         headers: {
           Authorization: token
@@ -32,9 +33,10 @@ export class ProfileKeuanganService {
 
   public fetchDataSPT(): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
+    let vendor_id = this.authService.getLocalStorage('vendor_id')!;
     let api_get_spt: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_spt_route,
+      url: ApiRoutes.api_spt_route + "?vendor=" + vendor_id,
       options: {
         headers: {
           Authorization: token

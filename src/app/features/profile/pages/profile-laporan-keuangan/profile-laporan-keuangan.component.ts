@@ -278,14 +278,16 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public fetchDataKeuangan(): void {
     this.service.fetchDataKeuangan().subscribe(
       (resp) => {
-        let data = resp.data;
-        this.dataKeuangan.namaBank = data.fromParty.name;
-        this.dataKeuangan.cabang = data.cabang;
-        this.dataKeuangan.nomorRekening = data.nomorRekening;
-        this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
-        this.dataKeuangan.modalDasar = parseInt(data.toParty.modalDasar);
-        this.dataKeuangan.modalDitempatkan = parseInt(data.toParty.modalDitempatkan);
-        this.setFormKeuangan();
+        if (resp.data) {
+          let data = resp.data;
+          this.dataKeuangan.namaBank = data.fromParty.name;
+          this.dataKeuangan.cabang = data.cabang;
+          this.dataKeuangan.nomorRekening = data.nomorRekening;
+          this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
+          this.dataKeuangan.modalDasar = parseInt(data.toParty.modalDasar);
+          this.dataKeuangan.modalDitempatkan = parseInt(data.toParty.modalDitempatkan);
+          this.setFormKeuangan();
+        }
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data Keuangan";
