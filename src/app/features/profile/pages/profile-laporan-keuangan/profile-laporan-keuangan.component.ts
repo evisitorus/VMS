@@ -378,7 +378,13 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateNeraca(): void {
-    let params : ProfileKeuanganNeracaInterface = {...this.formNeraca.value};
+    let params : ProfileKeuanganNeracaInterface = {
+      tahun: this.formNeraca.value.tahun.toString(),
+      aktiva: this.formNeraca.value.aktiva.toString(),
+      pasiva: this.formNeraca.value.pasiva.toString(),
+      equitas: this.formNeraca.value.equitas.toString(),
+      omzet: this.formNeraca.value.omzet.toString()
+    };
     this.service.updateDataNeraca(params, this.id).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";
