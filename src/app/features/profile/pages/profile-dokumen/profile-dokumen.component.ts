@@ -142,24 +142,26 @@ export class ProfileDokumenComponent implements OnInit {
         this.gridData = response['hydra:member'];
         this.gridData = this.mapData(this.gridData);
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
   }
 
   public submit(): void {
-    console.log(this.isLifeTime);
     if (this.lampiranFiles === null) {
       this.popUpMessage = "File tidak valid";
       this.close();
       this.triggerPopUp();
     } else {
-      if (this.isNewData) {
-        this.save();
-      } else {
-        this.update();
+      this.form.markAllAsTouched();
+      if (this.form.valid) {
+        if (this.isNewData) {
+          this.save();
+        } else {
+          this.update();
+        }
       }
     }
   }
@@ -181,8 +183,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.fetchData();
         this.close();
       },
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
       }
@@ -205,8 +207,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.fetchData();
         this.close();
       },
-      () => {
-        this.popUpMessage = "Gagal memperbarui data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
       }
@@ -220,8 +222,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.triggerPopUp();
         this.fetchData();
       },
-      () => {
-        this.popUpMessage = "Gagal menghapus data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -248,8 +250,8 @@ export class ProfileDokumenComponent implements OnInit {
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
         },
-        () => {
-          this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        (err) => {
+          this.popUpMessage = err.error.message;
           this.triggerPopUp();
         }
       );
@@ -264,8 +266,8 @@ export class ProfileDokumenComponent implements OnInit {
         let url= window.URL.createObjectURL(blob);
         window.open(url);
       },
-      () => {
-        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );

@@ -62,10 +62,13 @@ export class ProfileAsetComponent implements OnInit {
   }
   
   public submit(): void {
-    if (this.isNewData) {
-      this.save();
-    } else {
-      this.update();
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
+      if (this.isNewData) {
+        this.save();
+      } else {
+        this.update();
+      }
     }
   }
 
@@ -75,8 +78,8 @@ export class ProfileAsetComponent implements OnInit {
         this.gridData = resp['hydra:member'];
         this.gridData = this.mapData(this.gridData);
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -115,8 +118,8 @@ export class ProfileAsetComponent implements OnInit {
         this.close();
         this.resetForm();
       }, 
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
         this.resetForm();
@@ -138,8 +141,8 @@ export class ProfileAsetComponent implements OnInit {
         this.close();
         this.resetForm();
       },
-      () => {
-        this.popUpMessage = "Gagal memperbarui data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
         this.resetForm();
@@ -154,8 +157,8 @@ export class ProfileAsetComponent implements OnInit {
         this.triggerPopUp();
         this.getData();
       },
-      () => {
-        this.popUpMessage = "Gagal menghapus data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );

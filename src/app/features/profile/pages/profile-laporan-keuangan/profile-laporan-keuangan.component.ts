@@ -254,8 +254,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.dataGridNeraca = this.mapDataNeraca(this.dataGridNeraca);
         this.loadItemsNeraca();
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data Neraca";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -268,8 +268,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.dataGridSPT = this.mapDataSPT(this.dataGridSPT);
         this.loadItemsSPT();
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data SPT";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -289,8 +289,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
           this.setFormKeuangan();
         }
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data Keuangan";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -304,18 +304,21 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
           this.listNamaBank.push(data[key]['name']);
         }
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data Bank";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
   }
 
   public submitNeraca(): void {
-    if (this.isNewData) {
-      this.saveNeraca();
-    } else {
-      this.updateNeraca();
+    this.formNeraca.markAllAsTouched();
+    if (this.formNeraca.valid) {
+      if (this.isNewData) {
+        this.saveNeraca();
+      } else {
+        this.updateNeraca();
+      }
     }
   }
 
@@ -325,10 +328,13 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       this.triggerModal('spt');
       this.triggerPopUp();
     } else {
-      if (this.isNewData) {
-        this.saveSPT();
-      } else {
-        this.updateSPT();
+      this.formSPT.markAllAsTouched();
+      if (this.formSPT.valid) {
+        if (this.isNewData) {
+          this.saveSPT();
+        } else {
+          this.updateSPT();
+        }
       }
     }
   }
@@ -348,8 +354,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.fetchDataNeraca();
         this.triggerModal('neraca');
       },
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.triggerModal('neraca');
       }
@@ -371,8 +377,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.fetchDataSPT();
         this.triggerModal('spt');
       },
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.triggerModal('spt');
       }
@@ -394,8 +400,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.fetchDataNeraca();
         this.triggerModal('neraca');
       },
-      () => {
-        this.popUpMessage = "Gagal memperbarui data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.triggerModal('neraca');
       }
@@ -417,8 +423,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.fetchDataSPT();
         this.triggerModal('spt');
       },
-      () => {
-        this.popUpMessage = "Gagal memperbarui data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.triggerModal('spt');
       }
@@ -432,8 +438,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.triggerPopUp();
         this.fetchDataNeraca();
       },
-      () => {
-        this.popUpMessage = "Gagal menghapus data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -446,33 +452,36 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.triggerPopUp();
         this.fetchDataSPT();
       },
-      () => {
-        this.popUpMessage = "Gagal menghapus data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
   }
 
   public postDataKeuangan(): void {
-    let params: ProfileKeuanganInterface = {
-      namaBank: this.formKeuangan.value.namaBank,
-      cabang: this.formKeuangan.value.cabang,
-      nomorRekening: this.formKeuangan.value.nomorRekening,
-      namaPemilikRekening: this.formKeuangan.value.namaPemilikRekening,
-      modalDasar: this.formKeuangan.value.modalDasar.toString(),
-      modalDitempatkan: this.formKeuangan.value.modalDitempatkan.toString(),
-    };
-    this.service.postDataKeuangan(params).subscribe(
-      () => {
-        this.popUpMessage = "Berhasil menyimpan data";
-        this.triggerPopUp();
-        this.fetchDataKeuangan();
-      },
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
-        this.triggerPopUp();
-      }
-    );
+    this.formKeuangan.markAllAsTouched();
+    if (this.formKeuangan.valid) {
+      let params: ProfileKeuanganInterface = {
+        namaBank: this.formKeuangan.value.namaBank,
+        cabang: this.formKeuangan.value.cabang,
+        nomorRekening: this.formKeuangan.value.nomorRekening,
+        namaPemilikRekening: this.formKeuangan.value.namaPemilikRekening,
+        modalDasar: this.formKeuangan.value.modalDasar.toString(),
+        modalDitempatkan: this.formKeuangan.value.modalDitempatkan.toString(),
+      };
+      this.service.postDataKeuangan(params).subscribe(
+        () => {
+          this.popUpMessage = "Berhasil menyimpan data";
+          this.triggerPopUp();
+          this.fetchDataKeuangan();
+        },
+        (err) => {
+          this.popUpMessage = err.error.message;
+          this.triggerPopUp();
+        }
+      );
+    }
   }
 
   public selectEventHandler(e: SelectEvent): void {
@@ -495,8 +504,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
       },
-      () => {
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -510,8 +519,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         let url= window.URL.createObjectURL(blob);
         window.open(url);
       },
-      () => {
-        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
