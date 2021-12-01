@@ -49,97 +49,95 @@
     </kendo-grid>
 
     <br>
-    <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" style="float: right; color:#0193AC;" look="flat" icon="k-icon k-i-plus-outline">
+    <button kendoButton *ngIf="!openedSaham" look="flat" (click)="openSaham()" icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
       Tambah Pemegang Saham
     </button>
 
     <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
-
-    <form [formGroup]="pemegangSahamFormGroup">
-      <div>
-        <div class="wrap">
-          <kendo-label class="labelForm">Nama Pemegang Saham</kendo-label>
-          <div>
-          <kendo-textbox class="formField " id="namaPemegangSaham" placeholder="Type your message here" formControlName="namaPemegangSaham"></kendo-textbox>
-          <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.namaPemegangSaham.errors?.required">Nama Pemegang Saham tidak boleh kosong</kendo-formerror>
-          </div>
-        </div>
+      <div class="container">
+      <form [formGroup]="pemegangSahamFormGroup">
         <div>
           <div class="wrap">
-          <kendo-label class="labelForm">Jenis Pemegang Saham</kendo-label>
-          <div>
-            <input
-              id="Perseorangan"
-              type="radio"
-              required
-              [value]="true"
-              formControlName="perseorangan"
-              kendoRadioButton
-            />
-            <kendo-label class="k-radio-label"  for="Perseorangan">Perseorangan</kendo-label>
-            <input
-              id="BadanUsaha"
-              type="radio"
-              required
-              [value]="false"
-              formControlName="perseorangan"
-              kendoRadioButton
-            />
-            <kendo-label class="k-radio-label" for="BadanUsaha">Badan Usaha</kendo-label>
-            <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.perseorangan.errors?.required">Jenis Pemegang Saham tidak boleh kosong</kendo-formerror>
+            <kendo-label class="labelForm">Nama Pemegang Saham</kendo-label>
+            <div>
+            <kendo-textbox class="formField " id="namaPemegangSaham" placeholder="Type your message here" [clearButton]="true" formControlName="namaPemegangSaham"></kendo-textbox>
+            <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.namaPemegangSaham.errors?.required">Nama Pemegang Saham tidak boleh kosong</kendo-formerror>
+            </div>
           </div>
-        </div>
-        </div>
-        <div>
-        </div>
-        <div>
-          <div class="wrap">
-            <kendo-label class="labelForm">Pemegang Saham</kendo-label>
+          <div>
+            <div class="wrap">
+            <kendo-label class="labelForm">Jenis Pemegang Saham</kendo-label>
             <div>
               <input
-              id="Lokal"
-              type="radio"
-              required
-              [value]="true"
-              formControlName="lokal"
-              kendoRadioButton
+                id="Perseorangan"
+                type="radio"
+                required
+                [value]="true"
+                formControlName="perseorangan"
+                kendoRadioButton
               />
-              <kendo-label class="k-radio-label"  for="Lokal">Lokal</kendo-label>
+              <kendo-label class="k-radio-label"  for="Perseorangan">Perseorangan</kendo-label>
               <input
-                id="Asing"
+                id="BadanUsaha"
                 type="radio"
                 required
                 [value]="false"
-                formControlName="lokal"
+                formControlName="perseorangan"
                 kendoRadioButton
               />
-              <kendo-label class="k-radio-label" for="Asing">Asing</kendo-label>
-              <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.lokal.errors?.required">Pemegang Saham Lokal/Asing tidak boleh kosong</kendo-formerror>
+              <kendo-label class="k-radio-label" for="BadanUsaha">Badan Usaha</kendo-label>
+              <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.perseorangan.errors?.required">Jenis Pemegang Saham tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+          </div>
+          <div>
+          </div>
+          <div>
+            <div class="wrap">
+              <kendo-label class="labelForm">Pemegang Saham</kendo-label>
+              <div>
+                <input
+                id="Lokal"
+                type="radio"
+                required
+                [value]="true"
+                formControlName="lokal"
+                kendoRadioButton
+                />
+                <kendo-label class="k-radio-label"  for="Lokal">Lokal</kendo-label>
+                <input
+                  id="Asing"
+                  type="radio"
+                  required
+                  [value]="false"
+                  formControlName="lokal"
+                  kendoRadioButton
+                />
+                <kendo-label class="k-radio-label" for="Asing">Asing</kendo-label>
+                <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.lokal.errors?.required">Pemegang Saham Lokal/Asing tidak boleh kosong</kendo-formerror>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="wrap">
+              <kendo-label class="labelForm">% Kepemilikan Saham</kendo-label>
+              <div>
+                <kendo-numerictextbox 
+                  class="formField"
+                  [min]="1"
+                  [max]="100"
+                  [autoCorrect]=true
+                  [spinners]="false"
+                  formControlName="presentaseKepemilikan"
+                >
+                </kendo-numerictextbox>
+                <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.presentaseKepemilikan.errors?.required">Kepemilikan Saham tidak boleh kosong</kendo-formerror>
+              </div>
             </div>
           </div>
         </div>
-        <div>
-          <div class="wrap">
-            <kendo-label class="labelForm">% Kepemilikan Saham</kendo-label>
-            <div>
-              <kendo-numerictextbox 
-                id="kepemilikanSaham"
-                class="formField"
-                [decimals]="2" 
-                [format]="'# \\%'"
-                [min]="0"
-                [max]="100"
-                [autoCorrect]=true
-                [spinners]="false"
-                formControlName="presentaseKepemilikan"
-              >
-              </kendo-numerictextbox>
-              <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.presentaseKepemilikan.errors?.required">Kepemilikan Saham tidak boleh kosong</kendo-formerror>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
+      </form>
+      </div> 
 
       <kendo-dialog-actions>
         <button id="submitPemegangSaham" kendoButton (click)="submitPemegangSaham()" [primary]="true">
