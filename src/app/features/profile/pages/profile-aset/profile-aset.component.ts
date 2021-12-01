@@ -102,7 +102,11 @@ export class ProfileAsetComponent implements OnInit {
   }
 
   public save(): void {
-    let params: ProfileAssetInterface = {...this.form.value};
+    let params: ProfileAssetInterface = {
+      namaAsset: this.form.value.namaAsset,
+      jumlah: this.form.value.jumlah,
+      tahunPembuatan: this.form.value.tahunPembuatan.toString()
+    };
     this.profileAssetService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
