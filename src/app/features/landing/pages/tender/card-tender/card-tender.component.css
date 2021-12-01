@@ -33,9 +33,10 @@
 .k-pager-numbers .k-link.k-state-selected {
   background-color: #0092AC !important;
   color: white !important;
+  border-radius: 360px;
+  border-style: none;
 }
-
-.k-pager-wrap {
+.k-pager-wrap, .k-pager-nav, .k-pager-numbers .k-link {
   border-style: none;
   background-color: white;
 }
