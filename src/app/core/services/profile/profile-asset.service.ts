@@ -18,9 +18,10 @@ export class ProfileAssetService {
 
   public get(): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
+    let vendor_id = this.authService.getLocalStorage('vendor_id')!;
     let api_get_profile_asset: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_assets_route,
+      url: ApiRoutes.api_assets_route + "?owner=" + vendor_id,
       options: {
         headers: {
           Authorization: token

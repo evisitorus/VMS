@@ -20,7 +20,8 @@
 
         <kendo-formfield [formGroup]="form">
           <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
-          <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox>
+          <kendo-numerictextbox id="input-tahun-asset" formControlName="tahunPembuatan" [maxlength]="4" format="#" #tahunPembuatan required></kendo-numerictextbox>
+          <!-- <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox> -->
           <kendo-formhint></kendo-formhint>
           <kendo-formerror>Tahun Pembuatan tidak boleh kosong</kendo-formerror>
         </kendo-formfield>
@@ -77,11 +78,14 @@
           </kendo-grid-column>
         </kendo-grid>
 
-        <div class="col-2 profile-content-grid-button">
-          <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
-            Tambah Asset
-          </button>
+        <div class="k-actions k-actions-end">
+          <div class="col-2 profile-content-grid-button">
+            <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
+              Tambah Asset
+            </button>
+          </div>
         </div>
+        
 
       </div>
 

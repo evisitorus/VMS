@@ -32,18 +32,23 @@ export class ProfileDocumentService {
     
     public save(params: ProfileDocumentInterface): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
+      let body: any = {
+        nomorDokumen: params.nomorDokumen,
+        namaDokumen: params.namaDokumen,
+        submitDate: params.submitDate,
+        file: params.file,
+        attachmentFilePath: params.attachmentFilePath,
+        owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
+      };
+
+      if (params.berlakuSampai) {
+        body.berlakuSampai = params.berlakuSampai;
+      }
+
       let api_save_profile_doc: ApiInterface = {
         method: ApiRouteMethods.post,
         url: ApiRoutes.api_documents_route,
-        body: {
-          nomorDokumen: params.nomorDokumen,
-          namaDokumen: params.namaDokumen,
-          berlakuSampai: params.berlakuSampai,
-          submitDate: params.submitDate,
-          file: params.file,
-          attachmentFilePath: params.attachmentFilePath,
-          owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
-        },
+        body: body,
         options: {
           headers: {
             Authorization: token
@@ -55,18 +60,25 @@ export class ProfileDocumentService {
     
     public update(params: ProfileDocumentInterface, id: string): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
+      let body: any = {
+        nomorDokumen: params.nomorDokumen,
+        namaDokumen: params.namaDokumen,
+        submitDate: params.submitDate,
+        file: params.file,
+        attachmentFilePath: params.attachmentFilePath,
+        owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
+      };
+
+      if (params.berlakuSampai) {
+        body.berlakuSampai = params.berlakuSampai;
+      } else {
+        body.berlakuSampai = null
+      }
+
       let api_update_profile_doc: ApiInterface = {
         method: ApiRouteMethods.put,
         url: ApiRoutes.api_documents_route.concat('/').concat(id),
-        body: {
-          nomorDokumen: params.nomorDokumen,
-          namaDokumen: params.namaDokumen,
-          berlakuSampai: params.berlakuSampai,
-          submitDate: params.submitDate,
-          file: params.file,
-          attachmentFilePath: params.attachmentFilePath,
-          owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
-        },
+        body: body,
         options: {
           headers: {
             Authorization: token,

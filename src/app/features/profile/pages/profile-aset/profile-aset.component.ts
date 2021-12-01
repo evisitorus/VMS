@@ -86,7 +86,7 @@ export class ProfileAsetComponent implements OnInit {
     this.id = data.id;
     this.data.namaAsset = data.nama;
     this.data.jumlah = data.jumlah;
-    this.data.tahunPembuatan = data.tahunPembuatan;
+    this.data.tahunPembuatan = parseInt(data.tahunPembuatan);
     
     this.isNewData = false;
 
@@ -121,7 +121,11 @@ export class ProfileAsetComponent implements OnInit {
   }
 
   public update(): void {
-    let params: ProfileAssetInterface = {...this.form.value};
+    let params: ProfileAssetInterface = {
+      namaAsset: this.form.value.namaAsset,
+      jumlah: this.form.value.jumlah,
+      tahunPembuatan: this.form.value.tahunPembuatan.toString()
+    };
     this.profileAssetService.update(params, this.id).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";
