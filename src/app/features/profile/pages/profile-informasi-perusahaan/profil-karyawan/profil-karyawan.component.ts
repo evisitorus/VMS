@@ -62,16 +62,7 @@ export class ProfilKaryawanComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
-  public tipeKaryawan: Array<Item> = [{ 
-      id: 1,
-      name: "Tenaga Ahli"
-    },{
-      id: 2,
-      name: "Tenaga Terampil"
-    },{
-      id: 3,
-      name: "Tenaga Administrasi"
-  }];
+  public tipeKaryawan: Array<Item> = [];
 
   public pegawaiFormGroup! :FormGroup;
   
@@ -107,13 +98,22 @@ export class ProfilKaryawanComponent implements OnInit {
   ngOnInit(): void {
     // this.gridView = this.gridData;
     this.gridData = this.dataKaryawan;
+
+    this.profileInformationService.getTipeKaryawan().subscribe(
+      (resp) => {
+        this.tipeKaryawan = resp['hydra:member'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(this.data.nik,[]),
+      nik: new FormControl(this.data.nik,Validators.required),
       namaPegawai: new FormControl(this.data.namaPegawai,Validators.required),
-      tipeKaryawan: new FormControl(this.data.tipeKaryawan.name,[]),
+      tipeKaryawan: new FormControl(this.data.tipeKaryawan.name,Validators.required),
       jabatan: new FormControl(this.data.jabatan, Validators.required),
       bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
     });
