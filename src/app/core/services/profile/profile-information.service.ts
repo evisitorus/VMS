@@ -70,7 +70,7 @@ export class ProfileInformationService {
   getBidangKaryawan(): Observable<any> {
     let api_get_bidang_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_bidang_karyawan,
+      url: ApiRoutes.api_bidang_karyawan,
       // options: {
       //   headers: {
       //     Authorization: token,
@@ -79,6 +79,18 @@ export class ProfileInformationService {
     }
 
     return this.apiService.sendRequest(api_get_bidang_karyawan);
+  }
+
+  postBidangKaryawan(bidang: string): Observable<any> {
+    let api_post_bidang_karyawan: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_bidang_karyawan,
+      body: {
+        name: bidang
+      }
+    }
+
+    return this.apiService.sendRequest(api_post_bidang_karyawan);
   }
   
   // addPegawai(params: ): Observable<any> {    
