@@ -6,10 +6,10 @@
   border-style: groove;
   float: left;
 } */
-.profile-menu {
-  /*border-style: groove;*/
-  /*float: left;*/
-}
+/* .profile-menu {
+  border-style: groove;
+  float: left;
+} */
 
 /*.profile-content {*/
 /*  border-style: groove;*/
@@ -27,7 +27,7 @@
   float: right;
 } */
 
-.profile-menu {
+/* .profile-menu {
   float: left;
   height: 100vh;
 }
@@ -36,7 +36,7 @@
   padding: 40px;
   display: table;
   width: 82%;
-}
+} */
 
 .button-right {
   float: right;

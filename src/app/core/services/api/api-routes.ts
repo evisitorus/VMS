@@ -40,6 +40,7 @@ export const ApiRoutes = {
   api_vendor_route: API_BASE_URL + "/vendors",
   api_list_bank_route: API_BASE_URL + "/banks",
   api_update_profile: API_BASE_URL + "/vendors/profile",
+  api_neraca_route: API_BASE_URL + "/neracas",
 };
 
 export const ApiRouteMethods = {
