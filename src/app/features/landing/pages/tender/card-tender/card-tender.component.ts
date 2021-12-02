@@ -83,6 +83,11 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.selectedFilterCategoryItem = this.listFilterCategory[0];
     this.selectedFilterStatusItem = this.listFilterStatus[0];
     this.selectedFilterRegisterEndItem = this.listFilterRegisterEnd[0];
+    this.filterKeyword = "";
+    this.filterHpsStart = 0;
+    this.filterHpsEnd = 0;
+    this.filter();
+    this.fetchData();
   }
 
   public filter() {
@@ -184,32 +189,32 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
 const categoryTender: Array<any> = [
   { value: null, text: "Semua Kategori" },
-  { value: 2, text: "Material Konstruksi" },
-  { value: 3, text: "Jasa Konstruksi & Renovasi" },
-  { value: 4, text: "Jasa Ekspedisi & Pengepakan" },
-  { value: 5, text: "Pengadaan & Sewa Peralatan-Mesin" },
-  { value: 6, text: "Jasa Perawatan Peralatan & Mesin" },
-  { value: 7, text: "Jasa Advertising" },
-  { value: 8, text: "Pengadaan & Sewa Perlengkapan-Furniture" },
-  { value: 9, text: "Catering & Snack" },
-  { value: 10, text: "Souvenir & Merchandise" },
-  { value: 12, text: "Sewa Gedung" },
-  { value: 12, text: "Pertanian & Peternakan" },
-  { value: 13, text: "Pengadaan & Sewa Kendaraan" },
-  { value: 14, text: "Pendidikan & Pelatihan" },
-  { value: 15, text: "Konveksi & Laundry" },
-  { value: 16, text: "Jasa Travel & Akomodasi" },
-  { value: 17, text: "Jasa Percetakan & Media" },
-  { value: 18, text: "Jasa Perawatan Kendaraan" },
-  { value: 19, text: "Jasa Perawatan Gedung" },
-  { value: 20, text: "Jasa Perawatan Elektronik & IT" },
-  { value: 21, text: "Jasa Mandor  & Tenaga Kerja Lainnya" },
-  { value: 22, text: "Jasa Event Organizer" },
-  { value: 23, text: "Alat Tulis Kantor" },
-  { value: 24, text: "Alat & Jasa Kesehatan-Keselamatan" },
-  { value: 25, text: "Bahan Kimia" },
-  { value: 26, text: "Barang Elektronik, Komputer & Periferal" },
-  { value: 27, text: "Jasa Konsultan & Penilaian" },
+  { value: 1, text: "Material Konstruksi" },
+  { value: 2, text: "Jasa Konstruksi & Renovasi" },
+  { value: 3, text: "Jasa Ekspedisi & Pengepakan" },
+  { value: 4, text: "Pengadaan & Sewa Peralatan-Mesin" },
+  { value: 5, text: "Jasa Perawatan Peralatan & Mesin" },
+  { value: 6, text: "Jasa Advertising" },
+  { value: 7, text: "Pengadaan & Sewa Perlengkapan-Furniture" },
+  { value: 8, text: "Catering & Snack" },
+  { value: 200, text: "Souvenir & Merchandise" },
+  { value: 199, text: "Sewa Gedung" },
+  { value: 198, text: "Pertanian & Peternakan" },
+  { value: 197, text: "Pengadaan & Sewa Kendaraan" },
+  { value: 196, text: "Pendidikan & Pelatihan" },
+  { value: 195, text: "Konveksi & Laundry" },
+  { value: 194, text: "Jasa Travel & Akomodasi" },
+  { value: 193, text: "Jasa Percetakan & Media" },
+  { value: 192, text: "Jasa Perawatan Kendaraan" },
+  { value: 191, text: "Jasa Perawatan Gedung" },
+  { value: 190, text: "Jasa Perawatan Elektronik & IT" },
+  { value: 19, text: "Jasa Mandor  & Tenaga Kerja Lainnya" },
+  { value: 188, text: "Jasa Event Organizer" },
+  { value: 187, text: "Alat Tulis Kantor" },
+  { value: 186, text: "Alat & Jasa Kesehatan-Keselamatan" },
+  { value: 185, text: "Bahan Kimia" },
+  { value: 184, text: "Barang Elektronik, Komputer & Periferal" },
+  { value: 183, text: "Jasa Konsultan & Penilaian" },
 ];
 
 const tenderOrderBy: Array<any> = [
