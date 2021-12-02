@@ -34,7 +34,7 @@ describe('ProfileService', () => {
     });
 
     let param: AddPekerjaanInterface = {
-      email: 'mail@test.com',
+      // email: 'mail@test.com',
       namaPekerjaan: 'testing',
       pemberiPekerjaan: 'testing',
       nilaiPekerjaan: 200000.00,
@@ -60,7 +60,7 @@ describe('ProfileService', () => {
     let badanUsaha: string = "124";
 
     spyOn(apiService, 'sendRequest').and.returnValue(res);
-    service.getPekerjaan(badanUsaha).subscribe(
+    service.getPekerjaan().subscribe(
       (resp) => {
         expect(resp).toBe(true);
       }
