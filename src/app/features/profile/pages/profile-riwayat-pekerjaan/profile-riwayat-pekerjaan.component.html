@@ -1,75 +1,77 @@
-<div class="profile-section">
+<div class="row profile-section">
 
   <div class="col-2 profile-menu">
     <app-sidebar></app-sidebar>
   </div>
+
+  <div class="col-10 profile-content-container">
+    <div class="profile-content">
+      <kendo-label>Riwayat Pekerjaan</kendo-label>
+      <br><br>
   
-
-  <div class="profile-content">
-    <kendo-label>Riwayat Pekerjaan</kendo-label>
-    <br><br>
-
-    <div>
-      <kendo-grid
-        [data]="gridData"
-        style="height: 240px;"
-      >
-        <kendo-grid-column title="No.">
-          <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-            {{rowIndex + 1}} 
-          </ng-template>
-        </kendo-grid-column>
-        <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title"></kendo-grid-column>
-        <kendo-grid-column title="Action">
-          <ng-template kendoGridCellTemplate>
-            Edit
-            |
-            Delete
-          </ng-template>
-        </kendo-grid-column>
-      </kendo-grid>
-      <br>
-      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
-        Tambah Riwayat Pekerjaan
-      </button>
-
-      <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <form class="k-form login-form" [formGroup]="pekerjaanForm">
-          <kendo-formfield>
-            <kendo-label [for]="namaPekerjaan">Nama Pekerjaan</kendo-label>
-            <kendo-textbox  id="namaPekerjaan" formControlName="namaPekerjaan" #namaPekerjaan placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </kendo-formfield>
-          <kendo-formfield>
-            <kendo-label [for]="pemberiPekerjaan">Pemberi Pekerjaan</kendo-label>
-            <kendo-textbox  id="pemberiPekerjaan" formControlName="pemberiPekerjaan" #pemberiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </kendo-formfield>
-          <kendo-formfield>
-            <kendo-label [for]="nilaiPekerjaan">Nilai Pekerjaan</kendo-label>
-            <kendo-textbox id="nilaiPekerjaan" formControlName="nilaiPekerjaan" #nilaiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </kendo-formfield>
-          <kendo-formfield>
-            <kendo-label [for]="tahunPekerjaan">Tahun</kendo-label>
-            <kendo-textbox id="tahunPekerjaan" formControlName="tahunPekerjaan" #tahunPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </kendo-formfield>
-          <!-- <kendo-formfield>
-            <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
-            <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
-            <kendo-fileselect  id="buktiPekerjaanFilePath" formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [restrictions]="myRestrictions" [title]="'Pilih File'"></kendo-fileselect>
-          </kendo-formfield> -->
-        </form>
-        </div>
-
-        <kendo-dialog-actions>
-          <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true">
-            Simpan
-          </button>
-          <button id="closeButtonDialog" kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
+      <div>
+        <kendo-grid
+          [data]="gridData"
+          style="height: 240px;"
+        >
+          <kendo-grid-column title="No.">
+            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+              {{rowIndex + 1}} 
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title"></kendo-grid-column>
+          <kendo-grid-column title="Action">
+            <ng-template kendoGridCellTemplate>
+              Edit
+              |
+              Delete
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+        <br>
+        <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
+          Tambah Riwayat Pekerjaan
+        </button>
+  
+        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()">
+          <div>
+            <form class="k-form login-form" [formGroup]="pekerjaanForm">
+            <kendo-formfield>
+              <kendo-label [for]="namaPekerjaan">Nama Pekerjaan</kendo-label>
+              <kendo-textbox  id="namaPekerjaan" formControlName="namaPekerjaan" #namaPekerjaan placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            </kendo-formfield>
+            <kendo-formfield>
+              <kendo-label [for]="pemberiPekerjaan">Pemberi Pekerjaan</kendo-label>
+              <kendo-textbox  id="pemberiPekerjaan" formControlName="pemberiPekerjaan" #pemberiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            </kendo-formfield>
+            <kendo-formfield>
+              <kendo-label [for]="nilaiPekerjaan">Nilai Pekerjaan</kendo-label>
+              <kendo-textbox id="nilaiPekerjaan" formControlName="nilaiPekerjaan" #nilaiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            </kendo-formfield>
+            <kendo-formfield>
+              <kendo-label [for]="tahunPekerjaan">Tahun</kendo-label>
+              <kendo-textbox id="tahunPekerjaan" formControlName="tahunPekerjaan" #tahunPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+            </kendo-formfield>
+            <!-- <kendo-formfield>
+              <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
+              <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
+              <kendo-fileselect  id="buktiPekerjaanFilePath" formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [restrictions]="myRestrictions" [title]="'Pilih File'"></kendo-fileselect>
+            </kendo-formfield> -->
+          </form>
+          </div>
+  
+          <kendo-dialog-actions>
+            <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true">
+              Simpan
+            </button>
+            <button id="closeButtonDialog" kendoButton (click)="closeSaham()" [primary]="false">
+              Batal
+            </button>
+          </kendo-dialog-actions>
+        </kendo-dialog>
+      </div>
+  
     </div>
-
   </div>
+  
 </div>
