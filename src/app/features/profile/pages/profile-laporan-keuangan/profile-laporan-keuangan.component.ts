@@ -112,7 +112,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.formSPT = new FormGroup({
       tahunSPT: new FormControl(this.dataSPT.tahun, [Validators.required]),
       nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required]),
-      lampiran: new FormControl(this.dataSPT.lampiran, [Validators.required]),
+      // lampiran: new FormControl(this.dataSPT.lampiran, [Validators.required]),
     });
 
   }
@@ -323,6 +323,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public submitSPT(): void {
+    console.log(this.formSPT.valid);
     if (this.lampiranFiles === null) {
       this.popUpMessage = "File tidak valid";
       this.triggerModal('spt');
