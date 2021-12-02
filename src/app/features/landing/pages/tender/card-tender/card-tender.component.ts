@@ -32,7 +32,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public pagerSettings: PagerSettings = {
     previousNext: true,
     pageSizeValues: false,
-    buttonCount: 5,
+    buttonCount: 10,
     info: true,
     position: "both"
   };
