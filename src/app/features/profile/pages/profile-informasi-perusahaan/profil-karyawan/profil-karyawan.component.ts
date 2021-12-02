@@ -63,6 +63,7 @@ export class ProfilKaryawanComponent implements OnInit {
   redirectOnClosePopUp: boolean = true;
 
   public tipeKaryawan: Array<Item> = [];
+  public bidangPekerjaan: Array<Item> = [];
 
   public pegawaiFormGroup! :FormGroup;
   
@@ -106,7 +107,16 @@ export class ProfilKaryawanComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    )
+    );
+
+    this.profileInformationService.getBidangKaryawan().subscribe(
+      (resp) => {
+        this.bidangPekerjaan = resp['hydra:member'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   public setForm(): void {
