@@ -1,13 +1,13 @@
 .k-checkbox-wrap {
-    display: inline-flex;
-    margin-top: 1em;
+  display: inline-flex;
+  margin-top: 1em;
 }
 
 .k-checkbox-wrap input {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .lampiran-url {
-    color: #0058E9;
-    cursor: pointer;
+  color: #0058E9;
+  cursor: pointer;
 }

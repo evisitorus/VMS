@@ -12,7 +12,7 @@ describe('ProfileDokumenComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ProfileDokumenComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -30,7 +30,7 @@ describe('ProfileDokumenComponent', () => {
     component.close();
     expect(component.opened).toBeFalsy;
   });
-  
+
   it('test open function', () => {
     component.open();
     expect(component.opened).toBeTruthy;

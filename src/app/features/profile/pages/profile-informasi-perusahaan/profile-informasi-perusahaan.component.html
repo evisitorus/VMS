@@ -8,205 +8,388 @@
         <kendo-panelbar-item title="Overview" [expanded]="true">
           <ng-template kendoPanelBarContent>
             <div class="row align-items-center justify-content-center k-vstack">
-              <img class="col-3"
-                   src="https://www.telerik.com/kendo-angular-ui-develop/components/layout/card/assets/black_sea.jpg" />
-              <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" required name="files" look="flat" #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+              <img class="col-3" src="{{logoImg}}" />
+              <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false"
+                                #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile"
+                                [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
             </div>
           </ng-template>
         </kendo-panelbar-item>
         <kendo-panelbar-item title="Data Perusahaan">
           <ng-template kendoPanelBarContent>
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Nama Perusahaan</kendo-label>
-              <kendo-textbox id="namaPerusahaanInput" class="col-md" placeholder="Nama Perusahaan"
-                             [clearButton]="true" [value]="vendor_info.name"></kendo-textbox>
-            </div>
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
-              <kendo-textbox id="inisialPerusahaanInput" class="col-md" placeholder="Inisial perusahaan"
-                             [clearButton]="true" [maxlength]="10" [value]="vendor_info.altName ? vendor_info.altName : ' ' "></kendo-textbox>
-            </div>
-            <div class="row">
-              <form class="k-form" [formGroup]="buFormGroup">
-                <kendo-label>Jenis Badan Usaha</kendo-label>
-                <ul class="k-radio-list k-list-horizontal">
-                  <li class="k-radio-item">
-                    <input id="ptRbtn" type="radio" #pt required value="pt" formControlName="buFormControl"
-                           kendoRadioButton />
-                    <kendo-label class="k-radio-label" [for]="pt" text="PT"></kendo-label>
-                  </li>
+            <form>
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Nama Perusahaan</kendo-label>
+                  <div class="col-md k-vstack">
+                    <kendo-textbox id="namaPerusahaan" class="col-md w-100" placeholder="Nama Perusahaan" [clearButton]="true"
+                                   formControlName="namaPerusahaan"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.namaPerusahaan.errors?.required">Nama Perusahaan tidak
+                      boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
+                  <kendo-textbox id="inisialPerusahaanInput" class="col-md w-100" placeholder="Inisial perusahaan"
+                                 [clearButton]="true" [maxlength]="10" formControlName="inisialPerusahaan"></kendo-textbox>
+                </div>
+              </kendo-formfield>
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Jenis Badan Usaha</kendo-label>
+                  <div class="col">
+                    <ul class="k-radio-list k-list-horizontal">
+                      <li class="k-radio-item">
+                        <input id="ptRbtn" type="radio" #pt value="pt" formControlName="jenisBadanUsaha"
+                               kendoRadioButton />
+                        <kendo-label class="k-radio-label" [for]="pt" text="PT"></kendo-label>
+                      </li>
 
-                  <li class="k-radio-item">
-                    <input id="cvRbtn" type="radio" #cv value="cv" formControlName="buFormControl" kendoRadioButton />
-                    <kendo-label class="k-radio-label" [for]="cv" text="CV"></kendo-label>
-                  </li>
+                      <li class="k-radio-item">
+                        <input id="cvRbtn" type="radio" #cv value="cv" formControlName="jenisBadanUsaha"
+                               kendoRadioButton />
+                        <kendo-label class="k-radio-label" [for]="cv" text="CV"></kendo-label>
+                      </li>
 
-                  <li class="k-radio-item">
-                    <input id="otherRbt" type="radio" #other value="other" formControlName="buFormControl"
-                           kendoRadioButton />
-                    <kendo-label class="k-radio-label" [for]="other" text="Lainnya"></kendo-label>
-                  </li>
-                </ul>
-              </form>
-            </div>
-            <div class="row">
-              <kendo-label>Status Badan Usaha</kendo-label>
-              <form [formGroup]="sbuFormGroup">
-                <ul class="k-radio-list k-list-horizontal">
-                  <li class="k-radio-item">
-                    <input id="pkpRbt" type="radio" #pkp required value="pkp" formControlName="sbuFormControl"
-                           kendoRadioButton [checked]="pkpStatus ? true : false"/>
-                    <kendo-label class="k-radio-label" [for]="pkp" text="PKP"></kendo-label>
-                  </li>
+                      <li class="k-radio-item">
+                        <input id="otherRbt" type="radio" #other value="other" formControlName="jenisBadanUsaha"
+                               kendoRadioButton />
+                        <kendo-label class="k-radio-label" [for]="other" text="Lainnya"></kendo-label>
+                      </li>
+                    </ul>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.jenisBadanUsaha.errors?.required">Jenis Badan Usaha
+                      tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
 
-                  <li class="k-radio-item">
-                    <input id="nonPkpRbt" type="radio" #nonpkp value="nonpkp" formControlName="sbuFormControl"
-                           kendoRadioButton [checked]="pkpStatus ? true : false"/>
-                    <kendo-label class="k-radio-label" [for]="nonpkp" text="Non-PKP"></kendo-label>
-                  </li>
-                </ul>
-              </form>
-            </div>
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Status Badan Usaha</kendo-label>
+                  <div class="col">
+                    <ul class="k-radio-list k-list-horizontal">
+                      <li class="k-radio-item">
+                        <input id="pkpRbt" type="radio" #pkp value="pkp" formControlName="statusBadanUsaha"
+                               kendoRadioButton [checked]="pkpStatus ? true : false" />
+                        <kendo-label class="k-radio-label" [for]="pkp" text="PKP"></kendo-label>
+                      </li>
 
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
-              <kendo-dropdownlist id="tipeBuDropdown" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Badan Usaha', id: null }" [data]="tipeBadanUsahaItems" textField="name" valueField="id" [(ngModel)]="selectedBadanUsaha" (valueChange)="onChangeList()" required>
-              </kendo-dropdownlist>
-            </div>
+                      <li class="k-radio-item">
+                        <input id="nonPkpRbt" type="radio" #nonpkp value="nonpkp" formControlName="statusBadanUsaha"
+                               kendoRadioButton [checked]="pkpStatus ? true : false" />
+                        <kendo-label class="k-radio-label" [for]="nonpkp" text="Non-PKP"></kendo-label>
+                      </li>
+                    </ul>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.statusBadanUsaha.errors?.required">Status Badan Usaha
+                      tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
 
 
-            <form [formGroup]="kategoriBuFormGroup">
-              <div class="row align-items-center">
-                <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
-                <kendo-dropdownlist id="kategoriBuDropdown" class="col-md" formControlName="kategoriBu"
-                                    [data]="listItems" [defaultItem]="{ name: 'Pilih Kategori Badan Usaha', id: null }"
-                                    textField="name" valueField="id" [valuePrimitive]="true" #kategoriBu required>
-                </kendo-dropdownlist>
-              </div>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
+                  <div class="col-md k-vstack">
+                    <kendo-dropdownlist id="tipeBadanUsaha" class="col-md w-100"
+                                        [defaultItem]="{ name: 'Pilih Tipe Badan Usaha', id: null }" [data]="tipeBadanUsahaItems"
+                                        textField="name" valueField="id" [(ngModel)]="selectedBadanUsaha" formControlName="tipeBadanUsaha"
+                                        (valueChange)="onChangeList()" required>
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.tipeBadanUsaha.errors?.required">Tipe Badan Usaha
+                      tidak
+                      boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+
+                  <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="kategoriBadanUsaha" class="col-md w-100" formControlName="kategoriBadanUsaha"
+                                        [data]="listItems" [defaultItem]="{ name: 'Pilih Kategori Badan Usaha', id: null }"
+                                        textField="name" valueField="id" [valuePrimitive]="true" #kategoriBadanUsaha>
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.kategoriBadanUsaha.errors?.required">Kategori Badan
+                      Usaha tidak boleh kosong</kendo-formerror>
+                  </div>
+
+                </div>
+              </kendo-formfield>
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="jenisKegiatanUsahaUtama" class="col-md w-100"
+                                        formControlName="jenisKegiatanUsahaUtama"
+                                        [defaultItem]="{ description: 'Pilih Jenis Kegiatan Usaha Utama', id: null }"
+                                        [data]="jenis_kegiatan_usaha" textField="description" valueField="id" [valuePrimitive]="true">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.jenisKegiatanUsahaUtama.errors?.required">Jenis
+                      Kegiatan
+                      Usaha Utama tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="jenisPenyediaUsaha" class="col-md w-100" formControlName="jenisPenyediaUsaha"
+                                        [defaultItem]="{ description: 'Pilih Jenis Penyedia Badan Usaha', id: null }"
+                                        textField="description" valueField="id" [data]="jenis_penyedia_usaha">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.jenisPenyediaUsaha.errors?.required">Jenis Penyedia
+                      Usaha tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-textbox id="npwpPerusahaan" class="col-md w-100" placeholder="Type your message here"
+                                   formControlName="npwpPerusahaan" [clearButton]="true"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.npwpPerusahaan.errors?.required">NPWP tidak boleh
+                      kosong
+                    </kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+
+                  <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-textbox id="nomorIndukBerusaha" class="col-md w-100" placeholder="Type your message here"
+                                   [clearButton]="true" [maxlength]="10" formControlName="nomorIndukBerusaha"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.nomorIndukBerusaha.errors?.required">Nomor Induk
+                      Berusaha tidak boleh kosong</kendo-formerror>
+                  </div>
+
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Bidang Usaha (KBLI 2020)</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-textbox id="bidangUsaha" class="col-md w-100" placeholder="Type your message here"
+                                   [clearButton]="true" [maxlength]="10" formControlName="bidangUsaha"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.bidangUsaha.errors?.required">Bidang Usaha tidak boleh
+                      kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">BUMN Pengampu</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-autocomplete id="bumnPengampu" class="col w-100" [kendoDropDownFilter]="{ operator: 'contains' }"
+                                        [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu"
+                                        formControlName="bumnPengampu">
+                    </kendo-autocomplete>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">BUMN Pengampu tidak
+                      boleh
+                      kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
+                  <kendo-autocomplete id="organisasiHimpunan" class="col w-100"
+                                      [kendoDropDownFilter]="{ operator: 'contains' }" [data]="organizations" valueField="name"
+                                      [filterable]="true" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan">
+                  </kendo-autocomplete>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Website Perusahaan</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-textbox id="websitePerusahaan" class="col w-100" placeholder="Type your message here"
+                                   [clearButton]="true" formControlName="websitePerusahaan"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.websitePerusahaan.errors?.required">Website Perusahaan
+                      tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-numerictextbox id="jumlahKaryawanTotal" class="col w-100" placeholder="Type your message here"
+                                          [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="total_karyawan"
+                                          formControlName="jumlahKaryawanTotal">
+                    </kendo-numerictextbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.jumlahKaryawanTotal.errors?.required">Jumlah Karyawan
+                      Total tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <div class="col-3"></div>
+                  <kendo-label class="col-md-auto">Jumlah Karyawan Lokal</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-numerictextbox id="jumlahKaryawanLokal" class="col w-100" placeholder="Type your message here"
+                                          [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
+                                          formControlName="jumlahKaryawanLokal">
+                    </kendo-numerictextbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.jumlahKaryawanLokal.errors?.required">Jumlah Karyawan
+                      Lokal tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <div class="col-3"></div>
+                  <kendo-label class="col-md-auto">Jumlah Karyawan Asing</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-numerictextbox id="jumlahKaryawanAsing" class="col w-100" placeholder="Type your message here"
+                                          [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
+                                          formControlName="jumlahKaryawanAsing">
+                    </kendo-numerictextbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.jumlahKaryawanAsing.errors?.required">Jumlah Karyawan
+                      Asing tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">No. Telepon Perusahaan</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-textbox id="noTeleponPerusahaan" class="col w-100" placeholder="Type your message here"
+                                   [clearButton]="true" [maxlength]="20" formControlName="noTeleponPerusahaan"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.noTeleponPerusahaan.errors?.required">Nomor Telepon
+                      Perusahaan tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-textbox id="alamatPerusahaan" class="col w-100" placeholder="Type your message here"
+                                   [clearButton]="true" [maxlength]="100" formControlName="alamatPerusahaan"></kendo-textbox>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.alamatPerusahaan.errors?.required">Alamat Perusahaan
+                      tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Provinsi</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="provinsi" class="col w-100" [defaultItem]="defaultItemProvinces"
+                                        [data]="dataProvinsi" textField="provinceDescription" valueField="provinceId"
+                                        (valueChange)="handleProvinceChange($event)" formControlName="provinsi">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.provinsi.errors?.required">Provinsi tidak boleh kosong
+                    </kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Kota/Kabupaten</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="kota" class="col w-100" [defaultItem]="defaultItemKota" [data]="dataResultKota"
+                                        textField="kotaDescription" valueField="kotaId" (valueChange)="handleKotaChange($event)"
+                                        formControlName="kota">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.kota.errors?.required">
+                      Kota tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Kecamatan</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="kecamatan" class="col w-100" [defaultItem]="defaultItemKecamatan"
+                                        textField="kecamatanDescription" valueField="kecamatanId" [data]="dataResultKecamatan"
+                                        (valueChange)="handleKecamatanChange($event)" formControlName="kecamatan">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.kecamatan.errors?.required">Kecamatan tidak boleh kosong
+                    </kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Kelurahan</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="kelurahan" class="col w-100" defaultItem="Pilih Kelurahan"
+                                        [valuePrimitive]="true" [data]="listItems" formControlName="kelurahan">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint" *ngIf="profileInformationFormGroup.controls.kelurahan.errors?.required">Kelurahan tidak boleh kosong
+                    </kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Kode Pos</kendo-label>
+                  <div class="col k-vstack">
+                    <kendo-dropdownlist id="kodePos" class="col w-100" defaultItem="Pilih Kode Pos" [data]="listItems"
+                                        [valuePrimitive]="true" formControlName="kodePos">
+                    </kendo-dropdownlist>
+                    <kendo-formerror class="formHint"
+                                     *ngIf="profileInformationFormGroup.controls.kodePos.errors?.required">Kode Pos tidak boleh kosong
+                    </kendo-formerror>
+                  </div>
+                </div>
+              </kendo-formfield>
+
+              <kendo-formfield [formGroup]="profileInformationFormGroup">
+                <div class="row align-items-center">
+                  <kendo-label class="col-3">Pin Geolocation</kendo-label>
+                  <kendo-textbox id="pinGeoLoc" class="col w-100" placeholder="Type your message here" [clearButton]="true"
+                                 formControlName="pinGeoLoc"></kendo-textbox>
+                </div>
+              </kendo-formfield>
             </form>
-
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
-              <kendo-dropdownlist id="jenisKegiatanUsahaDropdown" class="col-md" [defaultItem]="{ description: 'Pilih Jenis Kegiatan Usaha Utama', id: null }" [data]="jenis_kegiatan_usaha" textField="description" valueField="id" [valuePrimitive]="true">
-              </kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
-              <kendo-dropdownlist id="jenisPenyediaUsahaDropdown" class="col-md" [defaultItem]="{ description: 'Pilih Jenis Penyedia Badan Usaha', id: null }"
-                                  textField="description" valueField="id" [data]="jenis_penyedia_usaha">
-              </kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
-              <kendo-textbox id="npwpPerusahaanInput" class="col-md" placeholder="Type your message here"
-                             [clearButton]="true" [value]="vendor_info.npwp"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-              <kendo-textbox id="nibInput" class="col-md" placeholder="Type your message here" [clearButton]="true"
-                             [maxlength]="10" [value]="vendor_info.nomorIndukBerusaha"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Bidang Usaha (KBLI 2020)</kendo-label>
-              <kendo-textbox id="nibInput" class="col-md" placeholder="Type your message here" [clearButton]="true"
-                             [maxlength]="10"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">BUMN Pengampu</kendo-label>
-
-              <kendo-autocomplete id="bumnPengampuInput" class="col" [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu" [value]="vendor_info.bumnPengampu">
-              </kendo-autocomplete>
-            </div>
-
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
-              <kendo-autocomplete id="organisasiHimpunanInput" class="col" [kendoDropDownFilter]="{ operator: 'contains' }"  [data]="organizations" valueField="name" [filterable]="true" placeholder="Organisasi Himpunan" [value]="vendor_info.organisasiHimpunan">
-              </kendo-autocomplete>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Website Perusahaan</kendo-label>
-              <kendo-textbox id="websitePerusahaanInput" class="col-md" placeholder="Type your message here"
-                             [clearButton]="true" [value]="vendor_info.website"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanTotalInput" class="col-md"
-                                    placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
-                                    [value]="total_karyawan"></kendo-numerictextbox>
-            </div>
-
-            <div class="row align-items-center">
-              <div class="col-3"></div>
-              <kendo-label class="col-md-auto">Jumlah Karyawan Lokal</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanLokalInput" class="col-md"
-                                    placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
-                                    [value]="vendor_info.jumlahKaryawanDomestik"></kendo-numerictextbox>
-            </div>
-
-            <div class="row align-items-center">
-              <div class="col-3"></div>
-              <kendo-label class="col-md-auto">Jumlah Karyawan Asing</kendo-label>
-              <kendo-numerictextbox id="jumlahKaryawanAsingInput" class="col-md"
-                                    placeholder="Type your message here" [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0"
-                                    [value]="vendor_info.jumlahKaryawanAsing"></kendo-numerictextbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">No. Telepon Perusahaan</kendo-label>
-              <kendo-textbox id="noTelpPerusahaanInput" class="col-md" placeholder="Type your message here"
-                             [clearButton]="true" [maxlength]="20"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Alamat Perusahaan</kendo-label>
-              <kendo-textbox id="alamatPerusahaanInput" class="col-md" placeholder="Type your message here"
-                             [clearButton]="true" [maxlength]="100" [value]="vendor_contact_mechanism.address1"></kendo-textbox>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Provinsi</kendo-label>
-              <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="defaultItemProvinces" [data]="provinsi" textField="description" valueField="id" [value]="selectedProvince" (valueChange)="handleProvinceChange($event)">
-              </kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Kota</kendo-label>
-              <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataResultKota" [value]="selectedKota" textField="description" valueField="id" (valueChange)="handleKotaChange($event)">
-              </kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Kecamatan</kendo-label>
-              <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="description" valueField="id" [data]="dataResultKecamatan" [value]="selectedKecamatan" (valueChange)="handleKecamatanChange($event)">
-              </kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Kelurahan</kendo-label>
-              <kendo-dropdownlist id="kelDropdown" class="col-md" [defaultItem]="defaultItemKelurahan" textField="description" valueField="id" [data]="dataResultKelurahan" [value]="selectedKelurahan" (valueChange)="handleKelurahanChange($event)"></kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Kode Pos</kendo-label>
-              <kendo-dropdownlist id="kodePosDropdown" class="col-md" defaultItem="Pilih Kode Pos"
-                                  [data]="listItems" [valuePrimitive]="true">
-              </kendo-dropdownlist>
-            </div>
-
-            <div class="row align-items-center">
-              <kendo-label class="col-3">Pin Geolocation</kendo-label>
-              <kendo-textbox id="pinGeoLocInput" class="col-md" placeholder="Type your message here"
-                             [clearButton]="true"></kendo-textbox>
-            </div>
           </ng-template>
         </kendo-panelbar-item>
         <kendo-panelbar-item title="Saham">
@@ -219,83 +402,14 @@
         </kendo-panelbar-item>
         <kendo-panelbar-item title="Data Pegawai">
           <ng-template kendoPanelBarContent>
-            <div>
-              <kendo-label>Pegawai</kendo-label>
-              <br>
-              <kendo-grid>
-                <kendo-grid-column field="no" title="No.">
-                </kendo-grid-column>
-                <kendo-grid-column field="shareholder_name" title="Nama Pegawai Saham">
-                </kendo-grid-column>
-                <kendo-grid-column field="shareholder_type" title="Tipe Karyawan">
-                </kendo-grid-column>
-                <kendo-grid-column field="is_domestic_shareholder" title="Jabatan">
-                </kendo-grid-column>
-                <kendo-grid-column field="ownership" title="Bidang Pekerjaan">
-                </kendo-grid-column>
-                <kendo-grid-column field="ownership" title="Resume">
-                </kendo-grid-column>
-                <kendo-grid-column field="action" title="Action">
-                </kendo-grid-column>
-              </kendo-grid>
-              <br>
-              <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
-                Tambah Pegawai
-              </button>
-
-              <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
-                <div class="container">
-                  <div class="row">
-                    <kendo-label class="col-3">No</kendo-label>
-                    <kendo-textbox id="noPegawaiInput" class="col-md-auto" placeholder="Type your message here"
-                                   [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">NIK</kendo-label>
-                    <kendo-textbox id="nikPegawaiInput" class="col-md-auto" placeholder="Type your message here"
-                                   [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Nama Karyawan</kendo-label>
-                    <kendo-textbox id="namaKaryawanInput" class="col-md-auto" placeholder="Type your message here"
-                                   [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Tipe Karyawan</kendo-label>
-                    <kendo-dropdownlist id="tipeKaryawanDropdown" class="col-md-auto" defaultItem="Pilih Tipe Karyawan"
-                                        [data]="listItems" [valuePrimitive]="true">
-                    </kendo-dropdownlist>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Jabatan</kendo-label>
-                    <kendo-textbox id="jabatanKaryawanInput" class="col-md-auto" placeholder="Type your message here"
-                                   [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Bidang Pekerjaan</kendo-label>
-                    <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md-auto"
-                                   placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-                  </div>
-                  <div class="row">
-                    <kendo-label class="col-3">Resume</kendo-label>
-                    <kendo-fileselect id="resumeKaryawanUpload" class="col-md-auto" [title]="'Pilih File'">
-                    </kendo-fileselect>
-                    <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
-                  </div>
-                </div>
-
-                <kendo-dialog-actions>
-                  <button kendoButton id="saveKaryawanFormBtn" (click)="close()" [primary]="true">Simpan</button>
-                  <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
-                </kendo-dialog-actions>
-              </kendo-dialog>
-            </div>
+            <!-- data pegawai -->
+            <app-profil-karyawan></app-profil-karyawan>
           </ng-template>
         </kendo-panelbar-item>
       </kendo-panelbar>
     </kendo-card-body>
     <kendo-card-actions style="justify-content:right;">
-      <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit" (click)="updateProfile()" >Simpan</button>
+      <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit">Simpan</button>
     </kendo-card-actions>
   </kendo-card>
 </div>
