@@ -28,28 +28,40 @@ export class ProfilKaryawanComponent implements OnInit {
     {
       "nik": "848e6002-8a92-447d-951b-1ffd5e695578",
       "namaPegawai": "Sig Jeannel",
-      "tipeKaryawan": 1,
+      "tipeKaryawan": {
+        id:1,
+        name: "Tenaga Ahli"
+      },
       "jabatan": "Human Resources Assistant III",
       "bidangPekerjaan": "HR"
     },
     {
       "nik": "19d18d40-0e64-4837-9420-92130a0ed253",
       "namaPegawai": "Shelden Greyes",
-      "tipeKaryawan": 2,
+      "tipeKaryawan": {
+        id:2,
+        name: "Tenaga Terampil"
+      },
       "jabatan": "Operator",
       "bidangPekerjaan": "Engineering"
     },
     {
       "nik": "bebdc6eb",
       "namaPegawai": "Megen Cody",
-      "tipeKaryawan": 3,
+      "tipeKaryawan": {
+        id:2,
+        name: "Tenaga Administrasi"
+      },
       "jabatan": "Operator",
       "bidangPekerjaan": "Engineering"
     },
     {
       "nik": "38b08b88",
       "namaPegawai": "Clevey Thursfield",
-      "tipeKaryawan": 2,
+      "tipeKaryawan": {
+        id:2,
+        name: "Tenaga Terampil"
+      },
       "jabatan": "VP Quality Control",
       "bidangPekerjaan": "Engineering"
     }
@@ -68,6 +80,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public pegawaiFormGroup! :FormGroup;
   
   public opened = false;
+  public filter!: string;
 
   public submitted = false;
   public selectedFile!: Array<any>;
@@ -121,11 +134,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(this.data.nik,Validators.required),
-      namaPegawai: new FormControl(this.data.namaPegawai,Validators.required),
-      tipeKaryawan: new FormControl(this.data.tipeKaryawan.name,Validators.required),
-      jabatan: new FormControl(this.data.jabatan, Validators.required),
-      bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
+      nik: new FormControl(null,Validators.required),
+      namaPegawai: new FormControl(null,Validators.required),
+      tipeKaryawan: new FormControl(null,Validators.required),
+      jabatan: new FormControl(null, Validators.required),
+      bidangPekerjaan: new FormControl(null, Validators.required)
     });
   }
 
@@ -133,6 +146,23 @@ export class ProfilKaryawanComponent implements OnInit {
     this.pegawaiFormGroup.markAllAsTouched();
     
   }
+
+  // public addNew(): void {
+
+  //   this.profileInformationService.postBidangKaryawan(this.filter).subscribe();
+  //   // this.bidangPekerjaan.push({
+  //   //   name: this.filter,
+  //   //   id: 0,
+  //   // });
+  //   this.handleFilter(this.filter);
+  // }
+
+  // public handleFilter(value:any) {
+  //   this.filter = value;
+  //   this.data = this.bidangPekerjaan.filter(
+  //     (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+  //   );
+  // }
 
   // public mapData(data: any[]): any[] {
   //   let mappedData:any[] = [];

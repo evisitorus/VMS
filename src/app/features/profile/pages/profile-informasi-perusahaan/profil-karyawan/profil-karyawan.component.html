@@ -19,7 +19,7 @@
     </kendo-grid-column>
     <kendo-grid-column title="Tipe Karyawan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.tipeKaryawan.id === 1 ? "Tenaga Ahli" : 2 ? "Tenaga Terampil" : "Tenaga Administrasi" }}
+        {{ dataItem.tipeKaryawan.name }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Jabatan">
@@ -74,7 +74,7 @@
         <kendo-formfield [formGroup]= "pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Tipe Karyawan</kendo-label>
-            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }"textField="name" valueField="id" [data]="tipeKaryawan">
+            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id" [data]="tipeKaryawan" #tipeKaryawan>
             </kendo-dropdownlist>
           </div>
         </kendo-formfield>
@@ -88,8 +88,9 @@
         <kendo-formfield [formGroup]= "pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
-            <!-- <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" placeholder="Type your message here" [clearButton]="true" formControlName="bidangPekerjaan" #bidangPekerjaan></kendo-textbox> -->
-            <kendo-dropdownlist id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" placeholder="contoh: IT" [suggest]="true" formControlName="bidangPekerjaan" #bidangPekerjaan></kendo-dropdownlist>
+            <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" class="col-md" [defaultItem]="{ name: 'Pilih Bidang Pekerjaan', id: null }" textField="name" valueField="id" [data]="bidangPekerjaan" #bidangPekerjaan>
+
+            </kendo-dropdownlist>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]= "pegawaiFormGroup">
