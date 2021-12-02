@@ -1,29 +1,14 @@
 <div class="grid-logo">
-    <ul class="press">
-        <li>
-            <div class="press-logo">
-                <img alt="Telkom" src="/assets/images/landing/telkom.png" id="telkom"/>
-            </div>
-        </li>
-        <li>
-            <div class="press-logo">
-                <img alt="Telkom" src="/assets/images/landing/pegadaian.png" id="pegadaian"/>
-            </div>
-        </li>
-        <li>
-            <div class="press-logo">
-                <img alt="Telkom" src="/assets/images/landing/pln.png" id="pln"/>
-            </div>
-        </li>
-        <li>
-            <div class="press-logo">
-                <img alt="Telkom" src="/assets/images/landing/pertamina.png" id="pertamina"/>
-            </div>
-        </li>
-        <li class="last">
-            <div class="press-logo">
-                <img alt="Telkom" src="/assets/images/landing/pnm.png" id="pnm"/>
-            </div>
-        </li>
-        <li></ul>
+    <div class="row">
+        <div class="col-12 logo-title">
+            <h6>BUMN yang berpartisipasi</h6>
+        </div>
     </div>
+    <ul class="press">
+        <li *ngFor="let card of mediaCards" class="{{card.last? 'last': ''}}">
+            <div class="press-logo">
+                <kendo-avatar id="logoBumn" class="wrap" *ngIf="card.imageSrc" width="144px" height="144px" [border]="true" [imageSrc]="card.imageSrc" shape="circle"></kendo-avatar>
+            </div>
+        </li>
+    <li></ul>
+</div>
