@@ -74,13 +74,12 @@ export class ProfilKaryawanComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
-  public tipe: Array<Item> = [];
-  public bidang: Array<Item> = [];
+  public tipeSource: Array<Item> = [];
+  public bidangSource: Array<Item> = [];
 
   public pegawaiFormGroup!: FormGroup;
 
   public opened = false;
-  public filter!: string;
 
   public submitted = false;
   public selectedFile!: Array<any>;
@@ -101,12 +100,16 @@ export class ProfilKaryawanComponent implements OnInit {
     resume: ""
   };
 
+  public bidangTemp: Array<Item> = [];
+
   constructor(
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
     private eventEmitterService: EventEmitterService,
   ) {
     this.setForm();
+    //extract from 0
+    this.bidangTemp = this.bidangSource.slice(0);
   }
 
   ngOnInit(): void {
@@ -120,8 +123,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.setForm();
     this.profileInformationService.getTipeKaryawan().subscribe(
       (resp) => {
-        this.tipe = resp['hydra:member'];
-
+        this.tipeSource = resp['hydra:member'];
       },
       (error) => {
         console.log(error);
@@ -130,7 +132,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.getBidangKaryawan().subscribe(
       (resp) => {
-        this.bidang = resp['hydra:member'];
+        this.bidangSource = resp['hydra:member'];
       },
       (error) => {
         console.log(error);
@@ -155,31 +157,37 @@ export class ProfilKaryawanComponent implements OnInit {
 
   }
 
+  // add new bidang value based on user input
+  public filter!: string;
+  public selectedBidang!: Item ;
   public addNew(): void {
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
-        console.log(res)
-        // this.uploadedFileContentUrl = res.contentUrl; // file url
-        // this.uploadedFileId = res["@id"]; //vendor :logo_id
+        //add new value into temp array and backend
+        this.bidangSource.push({
+          name: this.filter,
+          id: 0,
+        });
+        //make new added value the selected value
+        this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
+        this.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
+        this.triggerPopUp();
       },
       (error) => {
-        // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
-        // this.triggerPopUp();
-        console.log(error);
+        this.popUpMessage = "Gagal menambahkan bidang pekerjaan";
+        this.triggerPopUp();
       });
-    this.bidang.push({
-      name: this.filter,
-      id: 0,
-    });
-    console.log(this.bidang)
+
+
     this.handleFilter(this.filter);
+
   }
 
+  // searching handler
   public handleFilter(value: any) {
-    console.log(value)
     this.filter = value;
-    this.bidang = this.bidang.filter(
+    this.bidangTemp = this.bidangSource.filter(
       (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
   }

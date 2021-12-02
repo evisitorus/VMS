@@ -78,7 +78,7 @@
             <kendo-label class="col">Tipe Karyawan</kendo-label>
             <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md"
               [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id"
-              [data]="tipe" #tipeKaryawan>
+              [data]="tipeSource" #tipeKaryawan>
             </kendo-dropdownlist>
             <kendo-formerror class="formHint" *ngIf="pegawaiFormGroup.controls.tipeKaryawan.errors?.required">Tipe
               Karyawan tidak boleh kosong</kendo-formerror>
@@ -95,8 +95,7 @@
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
             <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col-md"
-              [defaultItem]="{ name: 'Pilih Bidang Pekerjaan', id: null }" textField="name" valueField="id"
-              [data]="bidang" (filterChange)="handleFilter($event)" #bidangPekerjaan >
+              [defaultItem]="{ name: 'Masukkan nama bidang pekerjaan, contoh: IT, Human Resource...', id: null }" textField="name" valueField="id" [data]="bidangTemp" (filterChange)="handleFilter($event)" #bidangPekerjaan [(ngModel)]="selectedBidang" >
               <ng-template kendoDropDownListNoDataTemplate>
                 <div>
                   Data bidang pekerjaan tidak ditemukan
