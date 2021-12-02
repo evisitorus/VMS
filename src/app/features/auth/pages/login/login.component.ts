@@ -56,6 +56,9 @@ export class LoginComponent implements OnInit{
         this.authService.setToken(resp.data.access_token);
         this.authService.setLocalStorage('person_id', resp.data.person_id);
         this.authService.setLocalStorage('vendor_id', resp.data.vendor_id);
+        this.authService.setLocalStorage('email', resp.data.email);
+
+        console.log(this.authService.getLocalStorage('email'));
         
         this.popUpMessage = resp.message;
         this.redirectOnClosePopUp = true;

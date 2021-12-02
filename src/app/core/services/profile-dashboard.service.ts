@@ -16,6 +16,9 @@ export class ProfileDashboardService {
   ) { }
 
   token = this.authService.getLocalStorage('access_token')!;
+  vendor_id = this.authService.getLocalStorage('vendor_id')!;
+  user_id = this.authService.getLocalStorage('person_id')!;
+
   getVendorData(): Observable<any> {
     let api_dashboard_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
@@ -30,5 +33,30 @@ export class ProfileDashboardService {
     return this.apiService.sendRequest(api_dashboard_vendor);
   }
 
+  getVendor(): Observable<any> {
+    let api_get_vendor: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id,
+    }
+
+    return this.apiService.sendRequest(api_get_vendor);
+  }
  
+  getDashboard(): Observable<any> {
+    let api_get_users: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_users + "/dashboard/" + this.user_id,
+    }
+
+    return this.apiService.sendRequest(api_get_users);
+  }
+
+  getVendorStatusData(): Observable<any> {
+    let api_get_vendor_status_data: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/status_data",
+    }
+
+    return this.apiService.sendRequest(api_get_vendor_status_data);
+  }
 }
