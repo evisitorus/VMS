@@ -19,17 +19,9 @@
     font-style: normal;
     font-size: 22px;
     line-height: 30px;
-    color: #114497;
+    font-weight: bold;
 }
 
-.eproc-text {
-    font-family: Open Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 30px;
-    color: #114497;
-}
 
 .login-forgot-password {
     margin-bottom: 3em;

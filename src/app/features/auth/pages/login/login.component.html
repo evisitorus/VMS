@@ -1,9 +1,8 @@
 <div class="auth-section">
     <form class="k-form auth-form" [formGroup]="form">
 
-        <div class="auth-form-title">
-            <label class="welcome-text">Selamat datang di</label> <br>
-            <label class="eproc-text">PaDi eProc</label>
+        <div class="auth-form-title text-center">
+            <label class="welcome-text">Masuk ke Portal Vendor</label>
         </div>
 
         <fieldset class="k-form-fieldset">
@@ -40,14 +39,17 @@
                 </div>
             </kendo-formfield> -->
             
-            <div class="k-form-buttons">
+            <div class="k-form-buttons my-3">
                 <button class="k-button k-primary vms-btn" (click)="login()" id="btn-login">Login</button>
             </div>
             
         </fieldset>
 
         <div class="reg">
-            Belum punya akun? <a href="register" id="btn-register"> Daftar</a>
+            Belum punya akun? <a href="register" id="btn-register"> Daftar sebagai Vendor</a>
+        </div>
+        <div class="reg">
+            Bukan Vendor? <a href="#" id="btn-register-bumn">Klik di sini</a>
         </div>
 
     </form>
