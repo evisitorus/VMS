@@ -94,9 +94,21 @@
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
-            <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" class="col-md"
+            <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col-md"
               [defaultItem]="{ name: 'Pilih Bidang Pekerjaan', id: null }" textField="name" valueField="id"
-              [data]="bidang" #bidangPekerjaan>
+              [data]="bidang" (filterChange)="handleFilter($event)" #bidangPekerjaan >
+              <ng-template kendoDropDownListNoDataTemplate>
+                <div>
+                  Data bidang pekerjaan tidak ditemukan
+                  <ng-container *ngIf="filter"
+                    >Apakah anda mau menambahkan - "{{ filter }}" ?</ng-container
+                  >
+                  <br />
+                  <button *ngIf="filter" class="k-button" (click)="addNew()">
+                    Tambah bidang baru
+                  </button>
+                </div>
+              </ng-template>
             </kendo-dropdownlist>
             <kendo-formerror class="formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang
               Pekerjaan tidak boleh kosong</kendo-formerror>

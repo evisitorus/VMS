@@ -29,7 +29,7 @@ export class ProfilKaryawanComponent implements OnInit {
       "nik": "848e6002-8a92-447d-951b-1ffd5e695578",
       "namaPegawai": "Sig Jeannel",
       "tipeKaryawan": {
-        id:1,
+        id: 1,
         name: "Tenaga Ahli"
       },
       "jabatan": "Human Resources Assistant III",
@@ -39,7 +39,7 @@ export class ProfilKaryawanComponent implements OnInit {
       "nik": "19d18d40-0e64-4837-9420-92130a0ed253",
       "namaPegawai": "Shelden Greyes",
       "tipeKaryawan": {
-        id:2,
+        id: 2,
         name: "Tenaga Terampil"
       },
       "jabatan": "Operator",
@@ -49,7 +49,7 @@ export class ProfilKaryawanComponent implements OnInit {
       "nik": "bebdc6eb",
       "namaPegawai": "Megen Cody",
       "tipeKaryawan": {
-        id:2,
+        id: 2,
         name: "Tenaga Administrasi"
       },
       "jabatan": "Operator",
@@ -59,14 +59,14 @@ export class ProfilKaryawanComponent implements OnInit {
       "nik": "38b08b88",
       "namaPegawai": "Clevey Thursfield",
       "tipeKaryawan": {
-        id:2,
+        id: 2,
         name: "Tenaga Terampil"
       },
       "jabatan": "VP Quality Control",
       "bidangPekerjaan": "Engineering"
     }
   ];
-  
+
   public gridData: any = {};
   // public gridView!: any[];
 
@@ -77,8 +77,8 @@ export class ProfilKaryawanComponent implements OnInit {
   public tipe: Array<Item> = [];
   public bidang: Array<Item> = [];
 
-  public pegawaiFormGroup! :FormGroup;
-  
+  public pegawaiFormGroup!: FormGroup;
+
   public opened = false;
   public filter!: string;
 
@@ -105,7 +105,7 @@ export class ProfilKaryawanComponent implements OnInit {
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
     private eventEmitterService: EventEmitterService,
-  ) { 
+  ) {
     this.setForm();
   }
 
@@ -113,16 +113,15 @@ export class ProfilKaryawanComponent implements OnInit {
     // this.gridView = this.gridData;
     // this.gridData = this.dataKaryawan;
     this.fetchData();
-    
+
   }
 
-  public fetchData():void {
+  public fetchData(): void {
     this.setForm();
     this.profileInformationService.getTipeKaryawan().subscribe(
       (resp) => {
         this.tipe = resp['hydra:member'];
-        console.log(this.tipe)
-        
+
       },
       (error) => {
         console.log(error);
@@ -132,21 +131,20 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getBidangKaryawan().subscribe(
       (resp) => {
         this.bidang = resp['hydra:member'];
-        console.log(this.bidang)
       },
       (error) => {
         console.log(error);
       }
     );
 
-    
+
   }
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(null,Validators.required),
-      namaPegawai: new FormControl(null,Validators.required),
-      tipeKaryawan: new FormControl(null,Validators.required),
+      nik: new FormControl(null, Validators.required),
+      namaPegawai: new FormControl(null, Validators.required),
+      tipeKaryawan: new FormControl(null, Validators.required),
       jabatan: new FormControl(null, Validators.required),
       bidangPekerjaan: new FormControl(null, Validators.required)
     });
@@ -154,25 +152,37 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public submitProfilKaryawan(): void {
     this.pegawaiFormGroup.markAllAsTouched();
-    
+
   }
 
-  // public addNew(): void {
+  public addNew(): void {
 
-  //   this.profileInformationService.postBidangKaryawan(this.filter).subscribe();
-  //   // this.bidangPekerjaan.push({
-  //   //   name: this.filter,
-  //   //   id: 0,
-  //   // });
-  //   this.handleFilter(this.filter);
-  // }
+    this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
+      (res) => {
+        console.log(res)
+        // this.uploadedFileContentUrl = res.contentUrl; // file url
+        // this.uploadedFileId = res["@id"]; //vendor :logo_id
+      },
+      (error) => {
+        // this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        // this.triggerPopUp();
+        console.log(error);
+      });
+    this.bidang.push({
+      name: this.filter,
+      id: 0,
+    });
+    console.log(this.bidang)
+    this.handleFilter(this.filter);
+  }
 
-  // public handleFilter(value:any) {
-  //   this.filter = value;
-  //   this.data = this.bidangPekerjaan.filter(
-  //     (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
-  //   );
-  // }
+  public handleFilter(value: any) {
+    console.log(value)
+    this.filter = value;
+    this.bidang = this.bidang.filter(
+      (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
+  }
 
   // public mapData(data: any[]): any[] {
   //   let mappedData:any[] = [];
@@ -203,13 +213,13 @@ export class ProfilKaryawanComponent implements OnInit {
   //   );
   // }
 
-  public addToTableFe():void{
-    let temp:any = {
+  public addToTableFe(): void {
+    let temp: any = {
       nik: this.pegawaiFormGroup.value.nik,
       namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
       tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-      jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan,
+      jabatan: this.pegawaiFormGroup.value.jabatan,
+      bidangPekerjaan: this.pegawaiFormGroup.value.bidangPekerjaan,
       // file: this.uploadedFileId,
       // attachmentFilePath: this.uploadedFileContentUrl
     }
@@ -273,7 +283,7 @@ export class ProfilKaryawanComponent implements OnInit {
       (res) => {
         let mime = this.fileService.getMimeType(filename);
         let blob = new Blob([res], { type: mime });
-        let url= window.URL.createObjectURL(blob);
+        let url = window.URL.createObjectURL(blob);
         window.open(url);
       },
       () => {
@@ -283,7 +293,7 @@ export class ProfilKaryawanComponent implements OnInit {
     );
   }
 
-  triggerPopUp():void  {
+  triggerPopUp(): void {
     this.eventEmitterService.trigger();
   }
 
