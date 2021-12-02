@@ -116,8 +116,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     }
 
     this.validasiForm();
-
-    let params: AddPekerjaanInterface= {...this.pekerjaanForm.value};
+    let params: AddPekerjaanInterface = {
+      namaPekerjaan: this.pekerjaanForm.value.namaPekerjaan,
+      pemberiPekerjaan: this.pekerjaanForm.value.pemberiPekerjaan,
+      nilaiPekerjaan: this.pekerjaanForm.value.nilaiPekerjaan,
+      tahunPekerjaan: this.pekerjaanForm.value.tahunPekerjaan,
+      buktiPekerjaanFilePath: this.pekerjaanForm.value.buktiPekerjaanFilePath,
+    };
     this.profileService.addPekerjaan(params).subscribe(
       (resp) =>  { 
         console.log("ok");
