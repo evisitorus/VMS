@@ -74,8 +74,8 @@ export class ProfilKaryawanComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
-  public tipeKaryawan: Array<Item> = [];
-  public bidangPekerjaan: Array<Item> = [];
+  public tipe: Array<Item> = [];
+  public bidang: Array<Item> = [];
 
   public pegawaiFormGroup! :FormGroup;
   
@@ -120,8 +120,8 @@ export class ProfilKaryawanComponent implements OnInit {
     this.setForm();
     this.profileInformationService.getTipeKaryawan().subscribe(
       (resp) => {
-        this.tipeKaryawan = resp['hydra:member'];
-        console.log(this.tipeKaryawan)
+        this.tipe = resp['hydra:member'];
+        console.log(this.tipe)
         
       },
       (error) => {
@@ -131,8 +131,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.getBidangKaryawan().subscribe(
       (resp) => {
-        this.bidangPekerjaan = resp['hydra:member'];
-        console.log(this.bidangPekerjaan)
+        this.bidang = resp['hydra:member'];
+        console.log(this.bidang)
       },
       (error) => {
         console.log(error);
