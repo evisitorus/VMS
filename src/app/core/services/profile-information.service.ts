@@ -35,24 +35,38 @@ export class ProfileInformationService {
   //   return this.apiService.sendRequest(api_profile_information);
   // }
 
-  // getJenisPenyediaUsaha(): Observable<any>{
-  //   let api_jenis_penyedia_usaha: ApiInterface = {
-  //     method: ApiRouteMethods.get,
-  //     url: ApiRoutes.api_penyedia_usaha_route,
-  //     options : {
-  //       headers: {
-  //         Authorization: this.token
-  //       }
-  //     }
-  //   }
-  //   return this.apiService.sendRequest(api_jenis_penyedia_usaha);
+  getJenisPenyediaUsaha(): Observable<any>{
+    let api_jenis_penyedia_usaha: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_penyedia_usaha_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_jenis_penyedia_usaha);
 
-  // }
+  }
+
+  getJenisKegiatanUsaha(): Observable<any>{
+    let api_jenis_kegiatan_usaha: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_jenis_kegiatan_usaha_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_jenis_kegiatan_usaha);
+
+  }
 
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_vendor_information_route,
+      url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/information',
       // options : {
       //   headers: {
       //     Authorization: this.token
@@ -60,6 +74,34 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_vendor_information);
+
+  }
+
+  getOrganizations(): Observable<any>{
+    let api_organizations: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_organizations_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_organizations);
+
+  }
+
+  getProvinces(): Observable<any>{
+    let api_provinces: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_provinces_route,
+      // options : {
+      //   headers: {
+      //     Authorization: this.token
+      //   }
+      // }
+    }
+    return this.apiService.sendRequest(api_provinces);
 
   }
 }

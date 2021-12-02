@@ -3,18 +3,16 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 65px;
+    height: 63px;
     display: flex;
     align-items: center;
-    background-color: #0193AC;
-    color: white;
+    background-color: white;
     font-weight: 600;
-    padding: 0 100px;
+    font-family: Open Sans;
 }
 
 body {
-    /* background-image: url("/assets/images/bg.png") !important; */
-    background: white !important;
+    background-color:white !important;
     margin: 0% !important;
     margin-top: 65px !important;
 }
@@ -22,9 +20,11 @@ body {
 /* KENDO */
 /* ================================ */
 
-.k-textbox{
+.k-textbox, .k-autocomplete{
     box-sizing: border-box !important;
-    border-radius: 3px !important;
+    border: 1px solid #0193AC !important;
+    box-sizing: border-box;
+    border-radius: 8px;
     height: 40px;
     margin-top: 2px;
 }
@@ -37,12 +37,51 @@ body {
     font-size: 12px;
 }
 
+/* --- TABLE --- */
+.k-grid {
+    border-style: unset !important;
+}
+
+.k-grid-header {
+    border-radius: 10px 10px 0px 0px !important;
+    background: #0193AC !important;
+    color: white !important;
+    font-weight: bold;
+    height: 60px !important;
+}
+
+.k-header {
+    border-style: unset !important;
+    height: 60px !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.k-grid-content {
+    border-style: solid !important;
+    border-color: #0193AC !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+.k-grid-table > tbody > tr {
+    text-align: center !important;
+    height: 40px !important;
+}
+/* --- END TABLE --- */
+
 /* ================================ */
 
 /* VMS Design Guideline */
 /* ================================ */
 
 /* --- BUTTON --- */
+.k-button.k-primary {
+    background-color: #0193AC !important;
+    border-color: #0193AC !important;
+    color: white!important;
+}
+
 .vms-btn {
     width: 100%;
     height: 35px;
@@ -79,20 +118,32 @@ body {
     background-color: #0193AC !important;
     color: white !important;
 }
+
+.k-content kendo-label{
+    color: #0193AC;
+    font-weight: 500;
+}
 /* --- END MODAL--- */
 
 
 /* --- LABEL --- */
 label{
-    font-family: Montserrat;
+    font-family: Open Sans;
     font-size: 14px;
 }
 /* --- LABEL --- */
 
+
 /* --- SIDEBAR --- */
-.k-link{
-    /* background-color: #0193AC !important; */
-    color: black !important;
+.k-grid-header, .k-window-titlebar, .k-dialog-titlebar{
+    background-color: #0193AC !important;
+    border-color: #0193AC !important;
+    color: white !important;
+}
+
+.k-window {
+    width: max-content;
+    font-family: Open Sans;
 }
 
 .k-link:hover{
@@ -100,20 +151,23 @@ label{
     color: black !important;
 }
 
+.k-link{
+    /* background-color: #0193AC !important; */
+    color: black !important;
+}
+
+
 .k-link.k-state-selected{
     background-color: white !important;
     color: black !important;
 }
+
 
 .k-link.k-state-focused{
     box-shadow: none !important;
     color: #0193AC !important;
 }
 
-
-.k-panel {
-    background-color: white !important;
-}
 
 .k-icon.k-panelbar-toggle {
     color: inherit !important;
@@ -124,6 +178,12 @@ label{
     color: white !important;
     border-radius: 10px;
     height: 70px;
+}
+
+div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-link.k-state-focused, .profile-content  > kendo-panelbar-item >  .k-link.k-state-selected{
+    background-color: #0193AC !important;
+    border-color: #0193AC !important;
+    color: white !important;
 }
 
 .k-panelbar {
@@ -185,4 +245,15 @@ label{
 .k-notification-container {
     margin-top: 35px !important;
     margin-right: 35px !important;
+}
+
+#logoBumn .k-avatar-image {
+    width: 70% !important;
+    height: 80% !important;
+    object-fit: contain !important;
+    background-size: contain !important;
+  }
+.lampiran-url {
+    color: #0058E9;
+    cursor: pointer;
 }

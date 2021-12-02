@@ -26,7 +26,7 @@ export class GridBannerComponent implements OnInit {
   public mediaCards: Array<any> = [
     {
       imageSrc:
-        "./assets/images/card1.png",
+        "./assets/images/pnm.png",
       title:
         "Governance, Transaparansi dan Digital Procurement",
       description:
@@ -35,7 +35,7 @@ export class GridBannerComponent implements OnInit {
     },
     {
       imageSrc:
-        "./assets/images/card2.png",
+        "./assets/images/Pegadaian.png",
       title:
         "Efisiensi dan Sinergi Berkelanjutan",
       description:
@@ -44,7 +44,7 @@ export class GridBannerComponent implements OnInit {
     },
     {
       imageSrc:
-        "./assets/images/card3.png",
+        "./assets/images/pln.png",
       title:
         "Mendorong Pemberdayaan UMKM",
       description:
@@ -53,13 +53,16 @@ export class GridBannerComponent implements OnInit {
     },
     {
       imageSrc:
-        "./assets/images/card4.png",
+        "./assets/images/telkom.png",
       title:
         "Optimalisasi TKDN",
       description:
         "Meningkatkan Tingkat Kandungan Dalam Negri (TKDN) dalam proses procurement di BUMN.",
       actionsLayout: "start",
     },
+    {
+      imageSrc: "./assets/images/pertamina.png"
+    }
   ];
 
 }

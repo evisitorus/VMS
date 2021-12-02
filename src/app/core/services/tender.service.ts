@@ -10,18 +10,20 @@ export class TenderService {
 
   constructor(private apiService: ApiService) { }
 
-  getListTender(page: number): Observable<any> {    
+  getListTender(query: string, page: number, per_page: number = 10): Observable<any> {    
     let api_list_tender: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_list_tender + page,
-      options: {
-        headers: {
-          // "X-App-Id" : "0MvsSnFzGmEXsl7VGcUkB3PhYScLwFwX",
-          // "X-App-Secret" : "yT7FOaNiNzHU2SCK2GOWjObBS86dNpBQWXii9bRX",
-          // "Access-Control-Allow-Origin" : "https://padi-dev.tees.co.id"
-        }
-      }
+      url: ApiRoutes.api_tenders_route + "?page=" + page + "&per_page=" + per_page + "&" + query
     };
     return this.apiService.sendRequest(api_list_tender);
   }
+
+  getDetailTender(id: string): Observable<any>{
+    let request: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_tenders_route.concat('/').concat(id),
+    };
+    return this.apiService.sendRequest(request);
+  }
+
 }

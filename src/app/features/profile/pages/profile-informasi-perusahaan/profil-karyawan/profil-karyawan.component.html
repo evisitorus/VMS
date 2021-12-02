@@ -1,0 +1,115 @@
+<div>
+  <kendo-label>Pegawai</kendo-label>
+  <br>
+  <kendo-grid [pageSize]="5" [data]="dataKaryawan" [pageable]="true" [resizable]="true">
+    <kendo-grid-column field="no" title="No.">
+      <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="NIK">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.nik }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Nama Pegawai">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.namaPegawai }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Tipe Karyawan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.tipeKaryawan === 1 ? "Tenaga Ahli" : 2 ? "Tenaga Terampil" : "Tenaga Administrasi" }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Jabatan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.jabatan }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Bidang Pekerjaan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.bidangPekerjaan }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Resume">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.resume }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-command-column field="action" title="Action">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <span>
+          <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update">
+        </span>
+        <span>
+          <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete">
+        </span>
+      </ng-template>>
+    </kendo-grid-command-column>
+  </kendo-grid>
+  <br>
+  <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline"
+    style="float: right; color:#0193AC;">
+    Tambah Pegawai
+  </button>
+
+  <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
+    <div class="container">
+      <form [formGroup]="pegawaiFormGroup">
+        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">NIK</kendo-label>
+            <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md" placeholder="Type your message here" [clearButton]="true" #nik>
+            </kendo-textbox>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">Nama Karyawan</kendo-label>
+            <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai" placeholder="Type your message here" #namaPegawai [clearButton]="true">
+            </kendo-textbox>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">Tipe Karyawan</kendo-label>
+            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }"textField="name" valueField="id" [data]="tipeKaryawan">
+            </kendo-dropdownlist>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">Jabatan</kendo-label>
+            <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here" [maxlength]="25"
+              [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">Bidang Pekerjaan</kendo-label>
+            <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" placeholder="Type your message here" [clearButton]="true" formControlName="bidangPekerjaan" #bidangPekerjaan></kendo-textbox>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">Resume</kendo-label>
+            <div class="col-md">
+              <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+            </kendo-fileselect>
+            <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
+            </div>
+          </div>
+
+        </kendo-formfield>
+      </form>
+    </div>
+
+    <kendo-dialog-actions>
+      <button kendoButton id="saveKaryawanFormBtn" (click)="addToTableFe()" [primary]="true">Simpan</button>
+      <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+</div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
