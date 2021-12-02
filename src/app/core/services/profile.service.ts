@@ -81,33 +81,4 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pemegang_saham);
   }
 
-
-  getTipeKaryawan(): Observable<any> {    
-    let api_get_tipe_karyawan: ApiInterface = {
-      method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_tipe_karyawan,
-      options: {
-      }
-    };
-
-    return this.apiService.sendRequest(api_get_tipe_karyawan);
-  }
-  
-  addPegawai(params: AddPegawaiInterface): Observable<any> {    
-    let api_add_pegawai: ApiInterface = {
-      method: ApiRouteMethods.post,
-      url: ApiRoutes.api_add_pegawai,
-      body: {
-        nik: params.nik,
-        sdmType: params.tipeKaryawan,
-        jabatan: params.jabatan,
-        bidang: params.bidangPekerjaan,
-        fromParty: "1",
-        relationshipType: "7",
-        toParty: "2",
-      }
-    };
-
-    return this.apiService.sendRequest(api_add_pegawai);
-  }
 }

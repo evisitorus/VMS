@@ -55,6 +55,50 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_profil_karyawan);
   }
 
+  
+  getTipeKaryawan(): Observable<any> {    
+    let api_get_tipe_karyawan: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_tipe_karyawan,
+      options: {
+      }
+    };
+
+    return this.apiService.sendRequest(api_get_tipe_karyawan);
+  }
+
+  getBidangKaryawan(): Observable<any> {
+    let api_get_bidang_karyawan: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_bidang_karyawan,
+      // options: {
+      //   headers: {
+      //     Authorization: token,
+      //   }
+      // }
+    }
+
+    return this.apiService.sendRequest(api_get_bidang_karyawan);
+  }
+  
+  // addPegawai(params: ): Observable<any> {    
+  //   let api_add_pegawai: ApiInterface = {
+  //     method: ApiRouteMethods.post,
+  //     url: ApiRoutes.api_add_pegawai,
+  //     body: {
+  //       nik: params.nik,
+  //       sdmType: params.tipeKaryawan,
+  //       jabatan: params.jabatan,
+  //       bidang: params.bidangPekerjaan,
+  //       fromParty: "1",
+  //       relationshipType: "7",
+  //       toParty: "2",
+  //     }
+  //   };
+
+  //   return this.apiService.sendRequest(api_add_pegawai);
+  // }
+
   // public delete(id: string): Observable<any> {
   //   let token = this.authService.getLocalStorage('access_token')!;
   //   let api_delete_profile_info: ApiInterface = {

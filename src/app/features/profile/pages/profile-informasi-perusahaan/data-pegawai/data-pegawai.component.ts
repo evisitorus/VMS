@@ -40,7 +40,7 @@ export class DataPegawaiComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.tipeKaryawan = this.getTipeKaryawan();
+    // this.tipeKaryawan = this.getTipeKaryawan();
   }
 
   public isRequired = true;
@@ -71,18 +71,18 @@ export class DataPegawaiComponent implements OnInit {
     id: 0,
   };
 
-  getTipeKaryawan(){
-    this.profileService.getTipeKaryawan().subscribe(
-      (resp:any) =>  { 
-        this.tipeKaryawan = resp['hydra:member'];
-        // const results = resp.map(country => ({name: country.name, continent: country.region}));
-        return this.tipeKaryawan;
-      },
-      (error) => { 
-        return error;
-      }
-    );
-  }
+  // getTipeKaryawan(){
+  //   this.profileService.getTipeKaryawan().subscribe(
+  //     (resp:any) =>  { 
+  //       this.tipeKaryawan = resp['hydra:member'];
+  //       // const results = resp.map(country => ({name: country.name, continent: country.region}));
+  //       return this.tipeKaryawan;
+  //     },
+  //     (error) => { 
+  //       return error;
+  //     }
+  //   );
+  // }
 
   public pegawaiFormGroup = new FormGroup({
     nikPegawaiInput: new FormControl(null),
