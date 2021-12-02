@@ -57,49 +57,59 @@
   <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
     <div class="container">
       <form [formGroup]="pegawaiFormGroup">
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">NIK</kendo-label>
-            <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md" placeholder="Type your message here" [clearButton]="true" #nik>
+            <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md"
+              placeholder="Type your message here" [clearButton]="true" #nik>
             </kendo-textbox>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Nama Karyawan</kendo-label>
-            <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai" placeholder="Type your message here" #namaPegawai [clearButton]="true">
+            <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai"
+              placeholder="Type your message here" #namaPegawai [clearButton]="true">
             </kendo-textbox>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Tipe Karyawan</kendo-label>
-            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id" [data]="tipeKaryawan" #tipeKaryawan>
+            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md"
+              [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id"
+              [data]="tipeKaryawan" #tipeKaryawan>
             </kendo-dropdownlist>
+            <kendo-formerror class="formHint" *ngIf="pegawaiFormGroup.controls.tipeKaryawan.errors?.required">Tipe
+              Karyawan tidak boleh kosong</kendo-formerror>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Jabatan</kendo-label>
-            <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here" [maxlength]="25"
-              [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
+            <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here"
+              [maxlength]="25" [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
-            <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" class="col-md" [defaultItem]="{ name: 'Pilih Bidang Pekerjaan', id: null }" textField="name" valueField="id" [data]="bidangPekerjaan" #bidangPekerjaan>
-
+            <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" class="col-md"
+              [defaultItem]="{ name: 'Pilih Bidang Pekerjaan', id: null }" textField="name" valueField="id"
+              [data]="bidangPekerjaan" #bidangPekerjaan>
             </kendo-dropdownlist>
+            <kendo-formerror class="formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang
+              Pekerjaan tidak boleh kosong</kendo-formerror>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Resume</kendo-label>
             <div class="col-md">
-              <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
-            </kendo-fileselect>
-            <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
+              <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile"
+                [ngModelOptions]="{standalone: true}" (change)="upload()">
+              </kendo-fileselect>
+              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
           </div>
 

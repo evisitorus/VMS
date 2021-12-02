@@ -30,8 +30,8 @@ export const ApiRoutes = {
   api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
   api_get_organizations: API_BASE_URL + "/organizations?page=1",
   api_jenis_badan_usaha_route: API_BASE_URL + "",
-  api_get_tipe_karyawan: API_BASE_URL + "/sdm_types",
-  api_bidang_karyawan: API_BASE_URL + "/sdm_bidangs",
+  api_get_tipe_karyawan: API_BASE_URL + "/sdm_types?page=1",
+  api_bidang_karyawan: API_BASE_URL + "/sdm_bidangs?page=1",
   api_add_pegawai: API_BASE_URL + "/sdm_relationships"
 };
 

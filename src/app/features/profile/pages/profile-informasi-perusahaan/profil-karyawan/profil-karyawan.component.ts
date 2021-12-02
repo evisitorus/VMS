@@ -111,11 +111,18 @@ export class ProfilKaryawanComponent implements OnInit {
 
   ngOnInit(): void {
     // this.gridView = this.gridData;
-    this.gridData = this.dataKaryawan;
+    // this.gridData = this.dataKaryawan;
+    this.fetchData();
+    
+  }
 
+  public fetchData():void {
+    this.setForm();
     this.profileInformationService.getTipeKaryawan().subscribe(
       (resp) => {
         this.tipeKaryawan = resp['hydra:member'];
+        console.log(this.tipeKaryawan)
+        
       },
       (error) => {
         console.log(error);
@@ -125,11 +132,14 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getBidangKaryawan().subscribe(
       (resp) => {
         this.bidangPekerjaan = resp['hydra:member'];
+        console.log(this.bidangPekerjaan)
       },
       (error) => {
         console.log(error);
       }
     );
+
+    
   }
 
   public setForm(): void {
