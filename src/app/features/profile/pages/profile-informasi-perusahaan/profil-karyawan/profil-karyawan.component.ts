@@ -263,7 +263,6 @@ export class ProfilKaryawanComponent implements OnInit {
   // }
 
   public close() {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
