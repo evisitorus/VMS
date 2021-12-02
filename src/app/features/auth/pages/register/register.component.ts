@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   public mask: string = "99.999.999.9-999.999";
 
   popUpTitle: string = "Informasi Registrasi Akun";
-  popUpMessage: string = messages.default;
+  popUpMessage: string = messages.failed;
   redirectOnClosePopUp: boolean = true;
 
   public minlength = 8;
@@ -79,7 +79,6 @@ export class RegisterComponent implements OnInit {
         if(error.error.message){
           this.popUpMessage = error.error.message;
         }
-        this.popUpMessage = messages.failed;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
       }
