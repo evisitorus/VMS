@@ -37,9 +37,10 @@ describe('ProfileService', () => {
       // email: 'mail@test.com',
       namaPekerjaan: 'testing',
       pemberiPekerjaan: 'testing',
-      nilaiPekerjaan: 200000.00,
+      nilaiPekerjaan: '200000.00',
       tahunPekerjaan: '2010',
-      buktiPekerjaanFilePath: 'testing'
+      buktiPekerjaanFilePath: 'testing',
+      lampiran: 'file/path.jpg'
     };
 
     spyOn(apiService, 'sendRequest').and.returnValue(res);
