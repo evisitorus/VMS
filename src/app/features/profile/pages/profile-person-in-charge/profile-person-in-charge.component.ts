@@ -1,6 +1,6 @@
 import {ProfilePICService} from "../../../../core/services/profile/profile-pic/profile-pic.service";
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
+import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {TextBoxComponent} from "@progress/kendo-angular-inputs";
 import {ProfilePICInterface} from "../../../../core/interfaces/profile/profile-pic-interface";
 import {AuthService} from "../../../../core/services/auth.service";
@@ -30,7 +30,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   public form: FormGroup = new FormGroup({
-    name: new FormControl(),
+    name: new FormControl("", Validators.required),
     email: new FormControl(),
     phoneNumber: new FormControl(),
     oldPassword: new FormControl(),
