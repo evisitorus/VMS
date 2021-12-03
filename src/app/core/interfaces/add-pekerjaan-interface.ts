@@ -4,4 +4,5 @@ export interface AddPekerjaanInterface {
     nilaiPekerjaan: number;
     tahunPekerjaan: string;
     buktiPekerjaanFilePath: string;
+    lampiran: string
 }

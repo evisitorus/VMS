@@ -30,7 +30,8 @@ export class ProfileService {
         pemberiPekerjaan: params.pemberiPekerjaan,
         nilaiPekerjaan: params.nilaiPekerjaan,
         tahunPekerjaan: params.tahunPekerjaan,
-        buktiPekerjaanFilePath: params.buktiPekerjaanFilePath
+        buktiPekerjaanFilePath: params.buktiPekerjaanFilePath,
+        file: params.lampiran
       }
     };
 

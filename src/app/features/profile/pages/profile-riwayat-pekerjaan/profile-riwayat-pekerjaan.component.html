@@ -33,7 +33,7 @@
           Tambah Riwayat Pekerjaan
         </button>
   
-        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()" width="600px">
+        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()" width="700px">
           <div>
             <form class="k-form login-form modal-form" [formGroup]="pekerjaanForm">
 
@@ -92,11 +92,18 @@
               </div>
             </div>
 
-            <!-- <kendo-formfield>
-              <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
-              <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
-              <kendo-fileselect  id="buktiPekerjaanFilePath" formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [restrictions]="myRestrictions" [title]="'Pilih File'"></kendo-fileselect>
-            </kendo-formfield> -->
+            <div class="row">
+              <div class="col-4 modal-label">
+                <p>Lampiran Bukti Pekerjaan</p>
+              </div>
+              <div class="col-8 modal-field">
+                <kendo-formfield [formGroup]="pekerjaanForm">
+                  <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+                  <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+                  <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+                </kendo-formfield>
+              </div>
+            </div>
 
           </form>
         </div>
