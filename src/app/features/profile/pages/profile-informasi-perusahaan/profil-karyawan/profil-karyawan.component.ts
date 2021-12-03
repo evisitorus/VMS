@@ -34,7 +34,7 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       "jabatan": "Human Resources Assistant III",
       "bidangPekerjaan": "HR",
-      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     },
     {
       "nik": "19d18d40",
@@ -45,7 +45,7 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       "jabatan": "Operator",
       "bidangPekerjaan": "Engineering",
-      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     },
     {
       "nik": "bebdc6eb",
@@ -56,7 +56,7 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       "jabatan": "Operator",
       "bidangPekerjaan": "Engineering",
-      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     },
     {
       "nik": "38b08b88",
@@ -67,7 +67,7 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       "jabatan": "VP Quality Control",
       "bidangPekerjaan": "Engineering",
-      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     }
   ];
 
