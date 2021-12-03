@@ -26,6 +26,8 @@ export const ApiRoutes = {
   api_jenis_badan_usaha_route: API_BASE_URL + "",
   api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
   api_documents_route: API_BASE_URL + "/dokumens",
+  api_add_companyAddress:  API_BASE_URL + "/vendors/company_address",
+  //api_get_companyAddress:  API_BASE_URL + "/vendors/alamat_perusahaan",
 };
 
 export const ApiRouteMethods = {

@@ -5,10 +5,10 @@ import {ProfilePersonInChargeComponent} from "./pages/profile-person-in-charge/p
 import {ProfileAsetComponent} from "./pages/profile-aset/profile-aset.component";
 import {ProfileDokumenComponent} from "./pages/profile-dokumen/profile-dokumen.component";
 import {ProfileRiwayatPekerjaanComponent} from "./pages/profile-riwayat-pekerjaan/profile-riwayat-pekerjaan.component";
-import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component";
 import {ProfileLaporanKeuanganComponent} from "./pages/profile-laporan-keuangan/profile-laporan-keuangan.component";
 import {ProfileDashboardComponent} from "./pages/profile-dashboard/profile-dashboard.component";
-import {PemegangSahamComponent} from "./pages/profile-informasi-perusahaan/pemegang-saham/pemegang-saham.component"
+import {PemegangSahamComponent} from "./pages/profile-informasi-perusahaan/pemegang-saham/pemegang-saham.component";
+import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component"
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -41,10 +41,10 @@ import { APP_BASE_HREF } from '@angular/common';
 //     expanded: true,
 //     parent: true,
 //     children: [
-//       {    
+//       {
 //         path: 'profile-information',
-//         component: ProfileInformasiPerusahaanComponent, 
-//         text: 'Informasi Perusahaan' 
+//         component: ProfileInformasiPerusahaanComponent,
+//         text: 'Informasi Perusahaan'
 //       }
 //     ]
 //   }

@@ -8,7 +8,7 @@
     >
     <kendo-grid-column title="No." [width]="60" field="no" >
       <!-- <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-        {{rowIndex + 1}} 
+        {{rowIndex + 1}}
       </ng-template> -->
     </kendo-grid-column>
 
@@ -63,7 +63,7 @@
         <div class="wrap">
           <kendo-label class="labelForm">Nama Pemegang Saham</kendo-label>
           <div>
-          <kendo-textbox class="formField " id="namaPemegangSaham" placeholder="Type your message here" formControlName="namaPemegangSaham"></kendo-textbox>
+          <kendo-textbox class="formField" id="namaPemegangSaham" placeholder="Type your message here" formControlName="namaPemegangSaham"></kendo-textbox>
           <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.namaPemegangSaham.errors?.required">Nama Pemegang Saham tidak boleh kosong</kendo-formerror>
           </div>
         </div>
@@ -125,7 +125,7 @@
           <div class="wrap">
             <kendo-label class="labelForm">% Kepemilikan Saham</kendo-label>
             <div>
-              <kendo-numerictextbox 
+              <kendo-numerictextbox
                 id="kepemilikanSaham"
                 class="formField"
                 [min]="1"
