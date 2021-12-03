@@ -128,8 +128,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     let params: AddPekerjaanInterface = {
       namaPekerjaan: this.pekerjaanForm.value.namaPekerjaan,
       pemberiPekerjaan: this.pekerjaanForm.value.pemberiPekerjaan,
-      nilaiPekerjaan: this.pekerjaanForm.value.nilaiPekerjaan,
-      tahunPekerjaan: this.pekerjaanForm.value.tahunPekerjaan,
+      nilaiPekerjaan: this.pekerjaanForm.value.nilaiPekerjaan.toString(),
+      tahunPekerjaan: this.pekerjaanForm.value.tahunPekerjaan.toString(),
       buktiPekerjaanFilePath: this.uploadedFileContentUrl,
       lampiran: this.uploadedFileId,
     };
