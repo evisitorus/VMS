@@ -80,10 +80,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public openedSaham = false;
 
   public close() {
-    console.log("close, reset");
     this.opened = false;
     this.resetForm();
     this.isNewData = true;
+    this.lampiranFiles = [];
   }
 
   public open() {
@@ -91,10 +91,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public closeSaham() {
-    console.log("closesaham, reset");
     this.openedSaham = false;
     this.resetForm();
     this.isNewData = true;
+    this.lampiranFiles = [];
   }
 
   public openSaham() {
@@ -125,7 +125,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       namaPekerjaan: new FormControl(this.data.namaPekerjaan, Validators.required),
       pemberiPekerjaan: new FormControl(this.data.pemberiPekerjaan, Validators.required),
       nilaiPekerjaan: new FormControl(this.data.nilaiPekerjaan, Validators.required),
-      tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)
+      tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)      
     });
   }
 
