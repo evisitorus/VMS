@@ -22,8 +22,12 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     asset: false,    
   };
 
+  public role!: string;
+  public isDisabled: boolean = false;
+
   public popUpTitle: string = "Verifikasi Kelengkapan";
   public popUpMessage: string = "";
+  public redirectOnClosePopUp: boolean = true;
 
   constructor(
     private service: ProfileKelengkapanService,
@@ -44,13 +48,19 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public getDataKelengkapan(): void {
     this.service.getDataKelengkapan().subscribe(
       (resp) => {
-        this.data.profilePerusahaan = resp.data.profile_perusahaan;
-        this.data.PICPerusahaan = resp.data.pic_perusahaan;
-        this.data.dokumen = resp.data.document;
-        this.data.asset = resp.data.asset;
-        this.data.alamat = resp.data.alamat;
-        this.data.riwayatPekerjaan = resp.data.riwayat_pekerjaan;
-        this.data.laporanKeuangan = resp.data.laporan_keuangan;
+        let kelengkapan = resp.data.kelengkapan;
+        this.data.profilePerusahaan = kelengkapan.profile_perusahaan;
+        this.data.PICPerusahaan = kelengkapan.pic_perusahaan;
+        this.data.dokumen = kelengkapan.document;
+        this.data.asset = kelengkapan.asset;
+        this.data.alamat = kelengkapan.alamat;
+        this.data.riwayatPekerjaan = kelengkapan.riwayat_pekerjaan;
+        this.data.laporanKeuangan = kelengkapan.laporan_keuangan;
+        
+        this.role = resp.data.role_vendor.roleType.name;
+        if (this.role === "Vendor Basic (sedang diverifikasi)") {
+          this.isDisabled = true;
+        }
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan kelengkapan data";
@@ -59,13 +69,26 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     );
   }
 
-  public verify(): void {
+  public verify(): any {
+    this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.popUpMessage = "Proses Verifikasi sedang dalam proses";
-      this.triggerPopUp();
-    } else {
-      this.popUpMessage = "Lengkapi data terlebih dahulu";
-      this.triggerPopUp();
+      for (let d in this.data) {
+        if (!this.data[d]) {
+          this.popUpMessage = "Lengkapi data terlebih dahulu";
+          this.triggerPopUp();
+          return false;
+        }
+      }
+      this.service.verifikasiKelengkapan().subscribe(
+        () => {
+          this.popUpMessage = "Data anda sudah kami rekam dan sedang dalam tahap verifikasi";
+          this.triggerPopUp();
+        },
+        () => {
+          this.popUpMessage = "Pengajuan Verifikasi Gagal";
+          this.triggerPopUp();
+        }
+      );
     }
   }
 
