@@ -8,7 +8,7 @@
 } */
 
 
-/* 
+/*
 .profile-content {
   border-style: groove;
   float: right;
@@ -26,4 +26,22 @@
 
 .button-right {
   float: right;
+}
+
+.wrap {
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 10px;
+}
+
+.labelForm {
+    width: 250px;
+}
+
+.formField{
+    width: 100% !important;
+}
+
+.formHint {
+    width: 350px;
 }
