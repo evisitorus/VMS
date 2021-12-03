@@ -33,32 +33,80 @@
           Tambah Riwayat Pekerjaan
         </button>
   
-        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()">
+        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()" width="700px">
           <div>
-            <form class="k-form login-form" [formGroup]="pekerjaanForm">
-            <kendo-formfield>
-              <kendo-label [for]="namaPekerjaan">Nama Pekerjaan</kendo-label>
-              <kendo-textbox  id="namaPekerjaan" formControlName="namaPekerjaan" #namaPekerjaan placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-            </kendo-formfield>
-            <kendo-formfield>
-              <kendo-label [for]="pemberiPekerjaan">Pemberi Pekerjaan</kendo-label>
-              <kendo-textbox  id="pemberiPekerjaan" formControlName="pemberiPekerjaan" #pemberiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-            </kendo-formfield>
-            <kendo-formfield>
-              <kendo-label [for]="nilaiPekerjaan">Nilai Pekerjaan</kendo-label>
-              <kendo-textbox id="nilaiPekerjaan" formControlName="nilaiPekerjaan" #nilaiPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-            </kendo-formfield>
-            <kendo-formfield>
-              <kendo-label [for]="tahunPekerjaan">Tahun</kendo-label>
-              <kendo-textbox id="tahunPekerjaan" formControlName="tahunPekerjaan" #tahunPekerjaan  placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-            </kendo-formfield>
-            <!-- <kendo-formfield>
-              <kendo-label [for]="buktiPekerjaanFilePath">Lampiran</kendo-label>
-              <kendo-formhint>Dokumen dapat berupa JPG, PNG, PDF, maks 2MB</kendo-formhint>
-              <kendo-fileselect  id="buktiPekerjaanFilePath" formControlName="buktiPekerjaanFilePath" #buktiPekerjaanFilePath [restrictions]="myRestrictions" [title]="'Pilih File'"></kendo-fileselect>
-            </kendo-formfield> -->
+            <form class="k-form login-form modal-form" [formGroup]="pekerjaanForm">
+
+              <div class="row">
+                <div class="col-4 modal-label">
+                  <p>Nama Pekerjaan</p>
+                </div>
+                <div class="col-8 modal-field">
+                  <kendo-formfield [formGroup]="pekerjaanForm">
+                    <kendo-textbox class="content-input-field" id="namaPekerjaan" formControlName="namaPekerjaan" [clearButton]="true" #namaPekerjaan required></kendo-textbox>                
+                    <kendo-formhint></kendo-formhint>
+                    <kendo-formerror>Nama Pekerjaan tidak boleh kosong</kendo-formerror>
+                  </kendo-formfield>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-4 modal-label">
+                  <p>Pemberi Pekerjaan</p>
+                </div>
+                <div class="col-8 modal-field">
+                  <kendo-formfield [formGroup]="pekerjaanForm">
+                    <kendo-textbox  id="pemberiPekerjaan" formControlName="pemberiPekerjaan" #pemberiPekerjaan  placeholder="" [clearButton]="true"></kendo-textbox>
+                    <kendo-formhint></kendo-formhint>
+                    <kendo-formerror>Pemberi Pekerjaan tidak boleh kosong</kendo-formerror>
+                  </kendo-formfield>
+                </div>
+              </div>
+
+
+            <div class="row">
+              <div class="col-4 modal-label">
+                <p>Nilai Pekerjaan</p>
+              </div>
+              <div class="col-8 modal-field">
+                <kendo-formfield [formGroup]="pekerjaanForm">
+                  <kendo-numerictextbox id="nilaiPekerjaan" formControlName="nilaiPekerjaan" #nilaiPekerjaan  placeholder=""  format="n" [min]="0"  [spinners]="false"></kendo-numerictextbox>
+                  <kendo-formhint></kendo-formhint>
+                  <kendo-formerror>Nilai Pekerjaan tidak boleh kosong</kendo-formerror>
+                </kendo-formfield>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-4 modal-label">
+                <p>Tahun</p>
+              </div>
+              <div class="col-8 modal-field">
+                <kendo-formfield [formGroup]="pekerjaanForm">
+                  <kendo-numerictextbox id="tahunPekerjaan" formControlName="tahunPekerjaan" #tahunPekerjaan  placeholder="" format="#" [maxlength]="4" [min]="1900" [spinners]="false"></kendo-numerictextbox>
+                  <kendo-formhint></kendo-formhint>
+                  <kendo-formerror>Tahun tidak boleh kosong, pastikan benar</kendo-formerror>
+                </kendo-formfield>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-4 modal-label">
+                <p>Lampiran Bukti Pekerjaan</p>
+              </div>
+              <div class="col-8 modal-field">
+                <kendo-formfield [formGroup]="pekerjaanForm">
+                  <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+                  <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+                  <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+                </kendo-formfield>
+              </div>
+            </div>
+
           </form>
-          </div>
+        </div>
   
           <kendo-dialog-actions>
             <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true">
