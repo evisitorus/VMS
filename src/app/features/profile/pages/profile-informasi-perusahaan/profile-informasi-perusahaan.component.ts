@@ -41,7 +41,7 @@ export class ProfileInformasiPerusahaanComponent {
   };
   public submitted = false;
   public popUpMessage: string = "";
-  
+
   public imgRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png"],
     maxFileSize: 2097152
@@ -305,7 +305,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        this.uploadedFileId  = res["@id"]; 
+        this.uploadedFileId  = res["@id"];
         //vendor :logo_id
         this.logoImg = env.api_base_path + res["@id"] + "/file";
       },

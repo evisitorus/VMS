@@ -18,4 +18,8 @@ export class CarouselComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn() === 'true';
   }
 
+  navigate(url: string): void {
+    window.location.href = url;
+  }
+
 }

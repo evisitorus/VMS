@@ -32,7 +32,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
   public gridData: any = samplePekerjaans;
   record = 0;
-  access_token = "133";
 
   myRestrictions: FileRestrictions = {
     maxFileSize: 2194304,
@@ -54,7 +53,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     if (!this.isLoggedIn) window.location.href = "/";
 
     this.pekerjaanForm = this.formBuilder.group({
-      email:['admin@abadijaya.co.id'],
       namaPekerjaan: ['', Validators.required],
       pemberiPekerjaan: ['', Validators.required],
       nilaiPekerjaan: ['', Validators.required],
@@ -118,8 +116,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     }
 
     this.validasiForm();
-
-    let params: AddPekerjaanInterface= {...this.pekerjaanForm.value};
+    let params: AddPekerjaanInterface = {
+      namaPekerjaan: this.pekerjaanForm.value.namaPekerjaan,
+      pemberiPekerjaan: this.pekerjaanForm.value.pemberiPekerjaan,
+      nilaiPekerjaan: this.pekerjaanForm.value.nilaiPekerjaan,
+      tahunPekerjaan: this.pekerjaanForm.value.tahunPekerjaan,
+      buktiPekerjaanFilePath: this.pekerjaanForm.value.buktiPekerjaanFilePath,
+    };
     this.profileService.addPekerjaan(params).subscribe(
       (resp) =>  { 
         console.log("ok");
@@ -143,7 +146,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
   
   getPekerjaan(){
-    this.profileService.getPekerjaan(this.access_token).subscribe(
+    this.profileService.getPekerjaan().subscribe(
       (resp) =>  { 
         this.gridData = resp['hydra:member'];
         return this.gridData;

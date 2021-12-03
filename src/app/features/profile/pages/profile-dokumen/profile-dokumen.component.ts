@@ -71,8 +71,10 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public setIsLifeTime(): void {
-    this.isLifeTime = !this.isLifeTime;
-    this.data.berlakuSampai = null;
+    if (this.checked) {
+      this.data.berlakuSampai = null;
+    }
+    this.isLifeTime = this.checked;
   }
 
   public setForm(): void {
@@ -90,7 +92,7 @@ export class ProfileDokumenComponent implements OnInit {
         no: data[key]['nomorDokumen'],
         namaDokumen: data[key]['namaDokumen'],
         berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
-        berlakuSampai: formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US"),
+        berlakuSampai: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "Seumur Hidup",
         lampiran: data[key]['attachmentFilePath'],
         file: data[key]['file'],
         id: data[key]['id']
@@ -108,12 +110,20 @@ export class ProfileDokumenComponent implements OnInit {
     this.id = data.id;
     this.data.nomorDokumen = data.no;
     this.data.namaDokumen = data.namaDokumen;
-    this.data.berlakuSampai = new Date(this.mapDateFormat(data.berlakuSampai));
+    this.data.berlakuSampai = data.berlakuSampai !== "Seumur Hidup" ? new Date(this.mapDateFormat(data.berlakuSampai)) : null;
 
     this.isNewData = false;
 
     this.setForm();
     this.open();
+
+    if (this.data.berlakuSampai === null) {
+      this.checked = true;
+      this.setIsLifeTime();
+    } else {
+      this.checked = false;
+      this.setIsLifeTime();      
+    }
   }
 
   public resetForm(): void {
@@ -132,8 +142,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.gridData = response['hydra:member'];
         this.gridData = this.mapData(this.gridData);
       },
-      () => {
-        this.popUpMessage = "Gagal mendapatkan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -145,10 +155,13 @@ export class ProfileDokumenComponent implements OnInit {
       this.close();
       this.triggerPopUp();
     } else {
-      if (this.isNewData) {
-        this.save();
-      } else {
-        this.update();
+      this.form.markAllAsTouched();
+      if (this.form.valid) {
+        if (this.isNewData) {
+          this.save();
+        } else {
+          this.update();
+        }
       }
     }
   }
@@ -157,12 +170,12 @@ export class ProfileDokumenComponent implements OnInit {
     let params: ProfileDocumentInterface = {
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
-      berlakuSampai: this.form.value.berlakuSampai,
+      berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-
+    
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
@@ -170,8 +183,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.fetchData();
         this.close();
       },
-      () => {
-        this.popUpMessage = "Gagal menyimpan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
       }
@@ -182,7 +195,7 @@ export class ProfileDokumenComponent implements OnInit {
     let params: ProfileDocumentInterface = {
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
-      berlakuSampai: this.form.value.berlakuSampai,
+      berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
@@ -194,8 +207,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.fetchData();
         this.close();
       },
-      () => {
-        this.popUpMessage = "Gagal memperbarui data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
       }
@@ -209,8 +222,8 @@ export class ProfileDokumenComponent implements OnInit {
         this.triggerPopUp();
         this.fetchData();
       },
-      () => {
-        this.popUpMessage = "Gagal menghapus data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -237,8 +250,8 @@ export class ProfileDokumenComponent implements OnInit {
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
         },
-        () => {
-          this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        (err) => {
+          this.popUpMessage = err.error.message;
           this.triggerPopUp();
         }
       );
@@ -253,8 +266,8 @@ export class ProfileDokumenComponent implements OnInit {
         let url= window.URL.createObjectURL(blob);
         window.open(url);
       },
-      () => {
-        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );

@@ -1,0 +1,14 @@
+<div class="grid-logo">
+    <div class="row">
+        <div class="col-12 logo-title">
+            <h6>BUMN yang berpartisipasi</h6>
+        </div>
+    </div>
+    <ul class="press">
+        <li *ngFor="let card of mediaCards" class="{{card.last? 'last': ''}}">
+            <div class="press-logo">
+                <kendo-avatar id="logoBumn" class="wrap" *ngIf="card.imageSrc" width="144px" height="144px" [border]="true" [imageSrc]="card.imageSrc" shape="circle"></kendo-avatar>
+            </div>
+        </li>
+    <li></ul>
+</div>

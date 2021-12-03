@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_base_path: "http://localhost:8000"
+  api_base_path: "http://localhost:8000",
+  acceptance_test : true
 };
 
 /*

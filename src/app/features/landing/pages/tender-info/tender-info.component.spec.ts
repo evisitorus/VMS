@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CoreModule } from 'src/app/core/core.module';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { TenderService } from 'src/app/core/services/landing/tender.service';
+import { TenderService } from 'src/app/core/services/tender.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { TenderInfoComponent } from './tender-info.component';

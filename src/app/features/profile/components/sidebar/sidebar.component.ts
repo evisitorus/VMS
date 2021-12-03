@@ -30,6 +30,13 @@ export class SidebarComponent implements OnInit {
     return false;
   }
 
+  public navigate(url: string|undefined): void {
+    console.log(url);
+    if (url !== "" && url != undefined) {
+      window.location.href = url;
+    }
+  }
+
 }
 
 const items = [
