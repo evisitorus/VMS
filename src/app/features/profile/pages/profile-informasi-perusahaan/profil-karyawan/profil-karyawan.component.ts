@@ -26,24 +26,26 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public dataKaryawan = [
     {
-      "nik": "848e6002-8a92-447d-951b-1ffd5e695578",
+      "nik": "848e6002",
       "namaPegawai": "Sig Jeannel",
       "tipeKaryawan": {
         id: 1,
         name: "Tenaga Ahli"
       },
       "jabatan": "Human Resources Assistant III",
-      "bidangPekerjaan": "HR"
+      "bidangPekerjaan": "HR",
+      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
     },
     {
-      "nik": "19d18d40-0e64-4837-9420-92130a0ed253",
+      "nik": "19d18d40",
       "namaPegawai": "Shelden Greyes",
       "tipeKaryawan": {
         id: 2,
         name: "Tenaga Terampil"
       },
       "jabatan": "Operator",
-      "bidangPekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering",
+      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
     },
     {
       "nik": "bebdc6eb",
@@ -53,7 +55,8 @@ export class ProfilKaryawanComponent implements OnInit {
         name: "Tenaga Administrasi"
       },
       "jabatan": "Operator",
-      "bidangPekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering",
+      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
     },
     {
       "nik": "38b08b88",
@@ -63,7 +66,8 @@ export class ProfilKaryawanComponent implements OnInit {
         name: "Tenaga Terampil"
       },
       "jabatan": "VP Quality Control",
-      "bidangPekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering",
+      "resume": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
     }
   ];
 
