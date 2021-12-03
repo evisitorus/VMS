@@ -27,3 +27,7 @@
 .button-right {
   float: right;
 }
+
+.modal-label {
+  line-height: 70px;
+}
