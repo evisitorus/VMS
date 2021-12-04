@@ -18,24 +18,6 @@ export class ProfileInformationService {
 
   token = this.authService.getLocalStorage('access_token')!;
 
-  // uploadImg(img: String): Observable<any> {
-    
-  //   let api_profile_information: ApiInterface = {
-  //     method: ApiRouteMethods.post,
-  //     // url: ApiRoutes.api_profile_information,
-  //     url:"",
-  //     body : {
-  //       img: img
-  //     },
-  //     options : {
-  //       headers: {
-  //         Authorization: this.token
-  //       }
-  //     }
-  //   }
-  //   return this.apiService.sendRequest(api_profile_information);
-  // }
-
   getJenisPenyediaUsaha(): Observable<any>{
     let api_jenis_penyedia_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
