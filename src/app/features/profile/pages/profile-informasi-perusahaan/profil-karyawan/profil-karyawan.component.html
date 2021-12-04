@@ -1,7 +1,7 @@
 <div>
   <kendo-label>Pegawai</kendo-label>
   <br>
-  <kendo-grid [pageSize]="5" [data]="dataKaryawan" [pageable]="true" [resizable]="true">
+  <kendo-grid [pageSize]="5" [data]="gridDataPegawai" [pageable]="true" [resizable]="true">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
         {{rowIndex + 1}}
@@ -14,12 +14,12 @@
     </kendo-grid-column>
     <kendo-grid-column title="Nama Pegawai">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.namaPegawai }}
+        {{ dataItem.fromParty.firstName + " " + dataItem.fromParty.lastName }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Tipe Karyawan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.tipeKaryawan.name }}
+        {{ dataItem.sdmType.name }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Jabatan">
@@ -29,12 +29,12 @@
     </kendo-grid-column>
     <kendo-grid-column title="Bidang Pekerjaan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.bidangPekerjaan }}
+        {{ dataItem.sdmBidang.name }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Resume">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.resume }}</a>
+        <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.cvFilePath }}</a>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
