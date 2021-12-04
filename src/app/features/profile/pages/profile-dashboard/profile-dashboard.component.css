@@ -35,3 +35,8 @@
   min-width: 300px;
   padding: 10px;
 }
+
+.container-profile-avatar {
+  max-width: 30%;
+  padding: 10px;
+}

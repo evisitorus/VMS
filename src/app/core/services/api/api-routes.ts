@@ -1,9 +1,11 @@
 const PADI_BASE_URL = "https://padi-dev.tees.co.id/external-app";
 
 const API_BASE_URL = env.api_base_path.concat('/api');
+const API_ENV = env.api_base_path;
 import { environment as env} from "src/environments/environment";
 
 export const ApiRoutes = {
+  api_env : API_ENV,
   api_login_route: API_BASE_URL + "/auth/login",
   api_register_route: API_BASE_URL + "/users/register",
   api_activate_route: API_BASE_URL + "/users/activate",

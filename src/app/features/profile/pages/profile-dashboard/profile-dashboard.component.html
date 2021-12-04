@@ -30,9 +30,8 @@
         </kendo-card-header>
         <kendo-card-body>
           <div class="vendor-profile k-hstack">
-            <div class="container-profile">
-
-              <div>
+            <div class="container-profile-avatar">
+              <div style="text-align: center;">
                 <ng-container *ngIf="logoImg; then showLogo; else showDefaultLogo">
                 </ng-container>
                 <div>
@@ -44,8 +43,7 @@
                   </ng-template>
                 </div>
               </div>
-
-                <div class="row" style="margin-top: 10px;">
+                <div class="row" style="margin-top: 30px; text-align: center;">
                 <p class="col">{{ vendor_name ? vendor_name : "Data tidak tersedia" }}</p>
               </div>
             </div>
