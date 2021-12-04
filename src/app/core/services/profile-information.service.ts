@@ -117,7 +117,7 @@ export class ProfileInformationService {
   getKotaKabupaten(provinsi:any): Observable<any>{
     let api_get_kotakab: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kotakab,
+      url: ApiRoutes.api_get_kotakab.concat(provinsi),
       options : {
         params: {
           provinsi : provinsi
@@ -131,7 +131,7 @@ export class ProfileInformationService {
   getKecamatan(kotakab:any): Observable<any>{
     let api_get_kecamatan: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kecamatan,
+      url: ApiRoutes.api_get_kecamatan.concat(kotakab),
       options : {
         params: {
           kotakab : kotakab
@@ -145,7 +145,7 @@ export class ProfileInformationService {
   getKelurahan(kecamatan:any): Observable<any>{
     let api_get_kelurahan: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kelurahan,
+      url: ApiRoutes.api_get_kelurahan.concat(kecamatan),
       options : {
         params: {
           kecamatan : kecamatan
