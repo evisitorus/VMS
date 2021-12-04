@@ -337,8 +337,31 @@
                       </div>
                     </div>
                   </kendo-formfield>
+
+                  <div class="row align-items-center">
+                    <kendo-label class="col-3">Provinsi</kendo-label>
+                    <kendo-dropdownlist id="provDropdown" class="col-md" [defaultItem]="defaultItemProvinces" [data]="provinsi" textField="description" valueField="id" [value]="selectedProvince" (valueChange)="handleProvinceChange($event)">
+                    </kendo-dropdownlist>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <kendo-label class="col-3">Kota</kendo-label>
+                    <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataResultKota" [value]="selectedKota" textField="description" valueField="id" (valueChange)="handleKotaChange($event)">
+                    </kendo-dropdownlist>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <kendo-label class="col-3">Kecamatan</kendo-label>
+                    <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="description" valueField="id" [data]="dataResultKecamatan" [value]="selectedKecamatan" (valueChange)="handleKecamatanChange($event)">
+                    </kendo-dropdownlist>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <kendo-label class="col-3">Kelurahan</kendo-label>
+                    <kendo-dropdownlist id="kelDropdown" class="col-md" [defaultItem]="defaultItemKelurahan" textField="description" valueField="id" [data]="dataResultKelurahan" [value]="selectedKelurahan" (valueChange)="handleKelurahanChange($event)"></kendo-dropdownlist>
+                  </div>
     
-                  <kendo-formfield [formGroup]="profileInformationFormGroup">
+                  <!-- <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Provinsi</kendo-label>
                       <div class="col k-vstack">
@@ -394,7 +417,7 @@
                         </kendo-formerror>
                       </div>
                     </div>
-                  </kendo-formfield>
+                  </kendo-formfield> -->
     
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">

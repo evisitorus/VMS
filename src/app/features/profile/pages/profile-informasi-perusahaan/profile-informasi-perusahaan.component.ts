@@ -98,28 +98,33 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedKodePos: { kodePosDescription: string, kodePosId: number } = null!;
   public pkpStatus = false;
 
-  public defaultItemProvinces: { provinceDescription: string, provinceId: number } = {
-    provinceDescription: 'Pilih provinsi',
-    provinceId: 0
-  };
+  // public defaultItemProvinces: { provinceDescription: string, provinceId: number } = {
+  //   provinceDescription: 'Pilih provinsi',
+  //   provinceId: 0
+  // };
 
-  public defaultItemKota: { kotaDescription: string, kotaId: number, provinceId: number } = {
-    kotaDescription: 'Pilih kota',
-    kotaId: 0,
-    provinceId: 0
-  };
+  // public defaultItemKota: { kotaDescription: string, kotaId: number, provinceId: number } = {
+  //   kotaDescription: 'Pilih kota',
+  //   kotaId: 0,
+  //   provinceId: 0
+  // };
 
-  public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number, kotaId: number } = {
-    kecamatanDescription: 'Pilih Kecamatan',
-    kecamatanId: 0,
-    kotaId: 0
-  };
+  // public defaultItemKecamatan: { kecamatanDescription: string, kecamatanId: number, kotaId: number } = {
+  //   kecamatanDescription: 'Pilih Kecamatan',
+  //   kecamatanId: 0,
+  //   kotaId: 0
+  // };
 
-  public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number, kecamatanId: number } = {
-    kelurahanDescription: 'Pilih Kelurahan',
-    kelurahanId: 0,
-    kecamatanId: 0
-  };
+  // public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number, kecamatanId: number } = {
+  //   kelurahanDescription: 'Pilih Kelurahan',
+  //   kelurahanId: 0,
+  //   kecamatanId: 0
+  // };
+  
+  public defaultItemProvinces: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
+  public defaultItemKota:{ description: string, id: number, provinceId: number } = { description: 'Pilih kota', id: 0 , provinceId: 0};
+  public defaultItemKecamatan: { description: string, id: number, kotaId: number} = { description: 'Pilih Kecamatan', id: 0, kotaId: 0 };
+  public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
 
   public defaultItemKodePos: { kodePosDescription: string, kodePosId: number, kelurahanId: number } = {
     kodePosDescription: 'Pilih Kode Pos',
@@ -129,68 +134,71 @@ export class ProfileInformasiPerusahaanComponent {
 
   // public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
 
-  public dataProvinsi: Array<{ provinceDescription: string, provinceId: number }> = [
-    {
-      provinceDescription: 'Jawa Barat', provinceId: 1
-    },
-    {
-      provinceDescription: 'Jawa Tengah', provinceId: 2
-    },
-    {
-      provinceDescription: 'Jawa Timur', provinceId: 3
-    }
-  ];
+  // public dataProvinsi: Array<{ provinceDescription: string, provinceId: number }> = [
+  //   {
+  //     provinceDescription: 'Jawa Barat', provinceId: 1
+  //   },
+  //   {
+  //     provinceDescription: 'Jawa Tengah', provinceId: 2
+  //   },
+  //   {
+  //     provinceDescription: 'Jawa Timur', provinceId: 3
+  //   }
+  // ];
 
-  public dataKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [
-    {
-      kotaDescription: 'Bandung', kotaId: 1, provinceId: 1
-    },
-    {
-      kotaDescription: 'Cimahi', kotaId: 2, provinceId: 1
-    },
-    {
-      kotaDescription: 'Semarang', kotaId: 3, provinceId: 2
-    },
-    {
-      kotaDescription: 'Pekalongan', kotaId: 4, provinceId: 3
-    }
-  ];
+  // public dataKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [
+  //   {
+  //     kotaDescription: 'Bandung', kotaId: 1, provinceId: 1
+  //   },
+  //   {
+  //     kotaDescription: 'Cimahi', kotaId: 2, provinceId: 1
+  //   },
+  //   {
+  //     kotaDescription: 'Semarang', kotaId: 3, provinceId: 2
+  //   },
+  //   {
+  //     kotaDescription: 'Pekalongan', kotaId: 4, provinceId: 3
+  //   }
+  // ];
 
-  public dataKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [
-    {
-      kecamatanDescription: 'Sukasari', kecamatanId: 1, kotaId: 1
-    },
-    {
-      kecamatanDescription: 'Baleendah', kecamatanId: 2, kotaId: 1
-    },
-    {
-      kecamatanDescription: 'Banyumanik', kecamatanId: 3, kotaId: 2
-    },
-    {
-      kecamatanDescription: 'Pekalongan Barat', kecamatanId: 4, kotaId: 3
-    }
-  ];
+  // public dataKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [
+  //   {
+  //     kecamatanDescription: 'Sukasari', kecamatanId: 1, kotaId: 1
+  //   },
+  //   {
+  //     kecamatanDescription: 'Baleendah', kecamatanId: 2, kotaId: 1
+  //   },
+  //   {
+  //     kecamatanDescription: 'Banyumanik', kecamatanId: 3, kotaId: 2
+  //   },
+  //   {
+  //     kecamatanDescription: 'Pekalongan Barat', kecamatanId: 4, kotaId: 3
+  //   }
+  // ];
 
-  public dataKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [
-    {
-      kelurahanDescription: 'Sukarasa', kelurahanId: 1, kecamatanId: 1
-    },
-    {
-      kelurahanDescription: 'Rancamanyar', kelurahanId: 2, kecamatanId: 2
-    },
-    {
-      kelurahanDescription: 'Banyumanik', kelurahanId: 3, kecamatanId: 3
-    },
-    {
-      kelurahanDescription: 'Medono', kelurahanId: 4, kecamatanId: 4
-    },
-  ];
+  // public dataKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [
+  //   {
+  //     kelurahanDescription: 'Sukarasa', kelurahanId: 1, kecamatanId: 1
+  //   },
+  //   {
+  //     kelurahanDescription: 'Rancamanyar', kelurahanId: 2, kecamatanId: 2
+  //   },
+  //   {
+  //     kelurahanDescription: 'Banyumanik', kelurahanId: 3, kecamatanId: 3
+  //   },
+  //   {
+  //     kelurahanDescription: 'Medono', kelurahanId: 4, kecamatanId: 4
+  //   },
+  // ];
 
-  public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [];
-
-  public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [];
-
-  public dataResultKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [];
+  // public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [];
+  // public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [];
+  // public dataResultKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [];
+  
+  public dataKecamatan: Array<{}> = [];
+  public dataResultKota: Array<{}> = [];
+  public dataResultKecamatan: Array<{}> = [];
+  public dataResultKelurahan: Array<{}> = [];
 
   public fetchData(): void {
     //get vendor information
@@ -316,63 +324,141 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
+  // handleProvinceChange(value: any) {
+  //   this.selectedProvince = value;
+  //   this.selectedKota = undefined!;
+  //   this.selectedKecamatan = undefined!;
+
+
+  //   if (value.provinceId === this.defaultItemProvinces.provinceId) {
+  //     this.isDisabledKota = true;
+  //     this.dataResultKota = [];
+  //   } else {
+  //     this.isDisabledKota = false;
+  //     this.dataResultKota = this.dataKota.filter((s) => s.provinceId === value.provinceId);
+  //   }
+
+  //   this.isDisabledKecamatan = true;
+  //   this.dataResultKecamatan = [];
+  // }
+
+  // handleKotaChange(value: any) {
+  //   this.selectedKota = value;
+  //   this.selectedKecamatan = undefined!;
+
+  //   if (value.kotaId === this.defaultItemKota.kotaId) {
+  //     this.isDisabledKecamatan = true;
+  //     this.dataResultKecamatan = [];
+  //   } else {
+  //     this.isDisabledKecamatan = false;
+  //     this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.kotaId === value.kotaId);
+  //   }
+
+
+  // }
+
+  // handleKecamatanChange(value: any) {
+  //   this.selectedKecamatan = value;
+  //   this.selectedKelurahan = undefined!;
+
+  //   if (value.kecamatanId === this.defaultItemKecamatan.kecamatanId) {
+  //     this.isDisabledKelurahan = true;
+  //     this.dataResultKelurahan = [];
+  //   } else {
+  //     this.isDisabledKelurahan = false;
+  //     this.dataResultKelurahan = this.dataKelurahan.filter((s) => s.kecamatanId === value.kecamatanId);
+  //   }
+  // }
+
+  // handleKelurahanChange(value: any) {
+  //   this.selectedKelurahan = value;
+  //   // this.selectedKelurahan = undefined!;
+
+  //   // if (value.kecamatanId === this.defaultItemKecamatan.kecamatanId) {
+  //   //   // this.isDisabledKodePos = true;
+  //   //   // this.dataResultKodePos = [];
+  //   // } else {
+  //   //   // this.isDisabledKodePos = false;
+  //   //   // this.dataResultKodePos = this.dataKelurahan.filter((s) => s.kecamatanId === value.kecamatanId);
+  //   // }
+  // public close() {
+  //   console.log(`Dialog result: ${status}`);
+  //   this.opened = false;
+  // }
+
+  // public open() {
+  //   this.opened = true;
+  // }
+
   handleProvinceChange(value: any) {
-    this.selectedProvince = value;
-    this.selectedKota = undefined!;
-    this.selectedKecamatan = undefined!;
+    // this.selectedProvince = value;
+    // this.selectedKota = undefined!;
+    // this.selectedKecamatan = undefined!;
 
+    // if (value.id === this.defaultItemProvinces.id) {
+    //   this.isDisabledKota = true;
+    //   this.dataResultKota = [];
+    // } else {
+    //   this.isDisabledKota = false;
+    //   this.dataResultKota = this.dataKota.filter((s) => s.provinsi === value.id);
+    // }
 
-    if (value.provinceId === this.defaultItemProvinces.provinceId) {
-      this.isDisabledKota = true;
-      this.dataResultKota = [];
-    } else {
-      this.isDisabledKota = false;
-      this.dataResultKota = this.dataKota.filter((s) => s.provinceId === value.provinceId);
-    }
+    this.profileInfoService.getKotaKabupaten(value.id).subscribe(
+      (resp) => {
+        this.dataResultKota = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
-    this.isDisabledKecamatan = true;
-    this.dataResultKecamatan = [];
+    // this.isDisabledKecamatan = true;
+    // this.dataResultKecamatan = [];
   }
 
   handleKotaChange(value: any) {
-    this.selectedKota = value;
-    this.selectedKecamatan = undefined!;
+    // this.selectedKota = value;
+    // this.selectedKecamatan = undefined!;
 
-    if (value.kotaId === this.defaultItemKota.kotaId) {
-      this.isDisabledKecamatan = true;
-      this.dataResultKecamatan = [];
-    } else {
-      this.isDisabledKecamatan = false;
-      this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.kotaId === value.kotaId);
-    }
-
-
-  }
-
-  handleKecamatanChange(value: any) {
-    this.selectedKecamatan = value;
-    this.selectedKelurahan = undefined!;
-
-    if (value.kecamatanId === this.defaultItemKecamatan.kecamatanId) {
-      this.isDisabledKelurahan = true;
-      this.dataResultKelurahan = [];
-    } else {
-      this.isDisabledKelurahan = false;
-      this.dataResultKelurahan = this.dataKelurahan.filter((s) => s.kecamatanId === value.kecamatanId);
-    }
-  }
-
-  handleKelurahanChange(value: any) {
-    this.selectedKelurahan = value;
-    // this.selectedKelurahan = undefined!;
-
-    // if (value.kecamatanId === this.defaultItemKecamatan.kecamatanId) {
-    //   // this.isDisabledKodePos = true;
-    //   // this.dataResultKodePos = [];
+    // if (value.kotaId === this.defaultItemKota.id) {
+    //   this.isDisabledKecamatan = true;
+    //   this.dataResultKecamatan = [];
     // } else {
-    //   // this.isDisabledKodePos = false;
-    //   // this.dataResultKodePos = this.dataKelurahan.filter((s) => s.kecamatanId === value.kecamatanId);
+    //   this.isDisabledKecamatan = false;
+    //   this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.id === value.kotaId);
     // }
+
+    this.profileInfoService.getKecamatan(value.id).subscribe(
+      (resp) => {
+        this.dataResultKecamatan = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  }
+
+  handleKecamatanChange(value:any) {
+    this.profileInfoService.getKelurahan(value.id).subscribe(
+      (resp) => {
+        this.dataResultKecamatan = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  handleKelurahanChange(value:any) {
+    this.profileInfoService.getKodepos(value.id).subscribe(
+      (resp) => {
+        this.dataResultKecamatan = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   upload(): void {
