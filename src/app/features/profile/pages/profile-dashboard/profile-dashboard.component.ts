@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileDashboardService } from 'src/app/core/services/profile-dashboard.service';
+import {ApiRoutes} from "src/app/core/services/api/api-routes";
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -27,36 +28,38 @@ export class ProfileDashboardComponent implements OnInit {
   aset: string = "";
   alamat: string = "";
   star: string = "";
+  public logoImg!: any;
+
 
   ngOnInit(): void {
     this.profileService.getVendor().subscribe(
       (resp) => {
-        console.log(resp);
         this.jenis_kegiatan_usaha = resp.jenisKegiatanUsaha[0].description;
-        console.log(resp.jenisKegiatanUsaha[0].description);
       },
       (error) => {
-        console.log(error);
       }
     );
 
     this.profileService.getDashboard().subscribe(
       (resp) => {
-        console.log(resp)
         this.phone_number = resp.data.phone_number;
         this.address_vendor = resp.data.address;
-        // this.is_active = resp.is_active;
         this.registered_at = resp.data.registered_at;
         this.vendor_name = resp.data.name;
+
+        if (null === resp.data.logo) {
+          this.logoImg = null;
+        } else {
+          this.logoImg = ApiRoutes.api_media_object_route + "/" + resp.data.logo + "/file";
+        }
       },
       (error) => {
-        console.log(error);
       }
     );
 
     this.profileService.getVendorStatusData().subscribe(
       (resp) => {
-        console.log(resp)
+        // console.log(resp)
         this.profil = resp.data.profil_perusahaan;
         this.pic = resp.data.pic_perusahaan;
         this.dokumen = resp.data.dokumen;
@@ -66,14 +69,12 @@ export class ProfileDashboardComponent implements OnInit {
         this.aset = resp.data.aset;
 
         const hasValue = Object.values(resp.data).includes(false);
-        hasValue ? 
+        hasValue ?
         this.star = "bi-star-half" :
         this.star = "bi-star-fill";
       },
       (error) => {
-        console.log(error);
       }
     );
   }
-
 }
