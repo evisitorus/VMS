@@ -119,18 +119,35 @@ export class ProfileInformasiPerusahaanComponent {
   public dataResultKelurahan: Array<{}> = [];
   public dataResultKodepos: Array<{}> = [];
 
+  public dataPerusahaan: any = {
+    namaPerusahaan : "",
+
+  };
+
   public fetchData(): void {
     //get vendor information
     this.profileInfoService.getVendorInformation().subscribe(
       (resp) => {
-        let data = resp.data;
+        let data = resp.data[0];
+        console.log(data);
+
+        this.dataPerusahaan.namaPerusahaan = data.party.name;
+        this.dataPerusahaan.inisialPerusahaan = data.party.altName;
+        // this.dataPerusahaan.inisialPerusahaan = data.party.altName;
+
+
         this.vendor_info = data;
-        this.vendor_contact_mechanism = data.contactMechanism;
+        this.vendor_contact_mechanism = {};
+        // this.vendor_contact_mechanism = data.contactMechanism;
         this.total_karyawan = data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing;
         this.pkpStatus = data.statusPerusahaanPkp;
-        this.jenisVendor = data.jenisVendor.id;
-        this.tipeVendor = data.tipeVendor.parents[0].id;
-        this.kategoriVendor = data.tipeVendor.id;
+        this.jenisVendor = "";
+
+        this.vendor_contact_mechanism.telcoNumber = {};
+        this.vendor_contact_mechanism.address = {};
+        // this.jenisVendor = data.jenisVendor.id;
+        // this.tipeVendor = data.tipeVendor.parents[0].id;
+        // this.kategoriVendor = data.tipeVendor.id;
         
         // if (null === data.logo) {
         //   this.logoImg = null;
@@ -179,30 +196,30 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
-        this.selectedProvince = {
-          id: this.vendor_contact_mechanism.address.province.id,
-          description: this.vendor_contact_mechanism.address.province.description
-        };
+        // this.selectedProvince = {
+        //   id: this.vendor_contact_mechanism.address.province.id,
+        //   description: this.vendor_contact_mechanism.address.province.description
+        // };
 
-        this.selectedKota = {
-          id: this.vendor_contact_mechanism.address.city.id,
-          description: this.vendor_contact_mechanism.address.city.description
-        };
+        // this.selectedKota = {
+        //   id: this.vendor_contact_mechanism.address.city.id,
+        //   description: this.vendor_contact_mechanism.address.city.description
+        // };
 
-        this.selectedKecamatan = {
-          id: this.vendor_contact_mechanism.address.district.id,
-          description: this.vendor_contact_mechanism.address.district.description
-        };
+        // this.selectedKecamatan = {
+        //   id: this.vendor_contact_mechanism.address.district.id,
+        //   description: this.vendor_contact_mechanism.address.district.description
+        // };
 
-        this.selectedKelurahan = {
-          id: this.vendor_contact_mechanism.address.village.id,
-          description: this.vendor_contact_mechanism.address.village.description
-        };
+        // this.selectedKelurahan = {
+        //   id: this.vendor_contact_mechanism.address.village.id,
+        //   description: this.vendor_contact_mechanism.address.village.description
+        // };
 
-        this.selectedKodepos = {
-          id: this.vendor_contact_mechanism.address.village.postalCode.id,
-          description: this.vendor_contact_mechanism.address.village.postalCode.postalCodeNum
-        };
+        // this.selectedKodepos = {
+        //   id: this.vendor_contact_mechanism.address.village.postalCode.id,
+        //   description: this.vendor_contact_mechanism.address.village.postalCode.postalCodeNum
+        // };
 
         this.setForm();
 
@@ -224,8 +241,8 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setForm(): void {
     this.profileInformationFormGroup = new FormGroup({
-      namaPerusahaan: new FormControl(this.vendor_info.name, Validators.required),
-      inisialPerusahaan: new FormControl(this.vendor_info.altName, []),
+      namaPerusahaan: new FormControl(this.dataPerusahaan.namaPerusahaan, Validators.required),
+      inisialPerusahaan: new FormControl(this.dataPerusahaan.altName, []),
       jenisBadanUsaha: new FormControl(this.jenisVendor.toString(), Validators.required),
       statusBadanUsaha: new FormControl(this.vendor_info.statusPerusahaanPkp, Validators.required),
       tipeBadanUsaha: new FormControl(this.tipeVendor, Validators.required),
@@ -250,6 +267,34 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
+
+    // this.profileInformationFormGroup = new FormGroup({
+    //   namaPerusahaan: new FormControl(this.vendor_info.name, Validators.required),
+    //   inisialPerusahaan: new FormControl(this.vendor_info.altName, []),
+    //   jenisBadanUsaha: new FormControl(this.jenisVendor.toString(), Validators.required),
+    //   statusBadanUsaha: new FormControl(this.vendor_info.statusPerusahaanPkp, Validators.required),
+    //   tipeBadanUsaha: new FormControl(this.tipeVendor, Validators.required),
+    //   kategoriBadanUsaha: new FormControl(this.tipeVendor, Validators.required),
+    //   jenisKegiatanUsahaUtama: new FormControl(null, Validators.required),
+    //   jenisPenyediaUsaha: new FormControl(null, Validators.required),
+    //   npwpPerusahaan: new FormControl(this.vendor_info.npwp, Validators.required),
+    //   nomorIndukBerusaha: new FormControl(this.vendor_info.nomorIndukBerusaha, Validators.required),
+    //   bidangUsaha: new FormControl(null, Validators.required),
+    //   bumnPengampu: new FormControl(this.vendor_info.bumnPengampu, Validators.required),
+    //   organisasiHimpunan: new FormControl(this.vendor_info.organisasiHimpunan, []),
+    //   websitePerusahaan: new FormControl(this.vendor_info.website, Validators.required),
+    //   jumlahKaryawanTotal: new FormControl(this.total_karyawan, Validators.required),
+    //   jumlahKaryawanLokal: new FormControl(this.vendor_info.jumlahKaryawanDomestik, Validators.required),
+    //   jumlahKaryawanAsing: new FormControl(this.vendor_info.jumlahKaryawanAsing, Validators.required),
+    //   noTeleponPerusahaan: new FormControl(this.vendor_contact_mechanism.telcoNumber.number, Validators.required),
+    //   alamatPerusahaan: new FormControl(this.vendor_contact_mechanism.address.address1, Validators.required),
+    //   provinsi: new FormControl(this.selectedProvince, Validators.required),
+    //   kota: new FormControl(this.selectedKota, Validators.required),
+    //   kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
+    //   kelurahan: new FormControl(this.selectedKelurahan, Validators.required),
+    //   kodePos: new FormControl(this.selectedKodepos, Validators.required),
+    //   // pinGeoLoc: new FormControl(null, []),
+    // });
   }
 
   public saveImage(value: any, valid: boolean): void {
