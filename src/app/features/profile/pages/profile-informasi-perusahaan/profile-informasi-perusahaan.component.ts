@@ -70,7 +70,7 @@ export class ProfileInformasiPerusahaanComponent {
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
 
-  
+
 
   public listItems: Array<Item> = [];
 
@@ -114,13 +114,10 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedKelurahan:{ kecamatanDescription: string, kecamatanId: number } =null!;
   public pkpStatus = false;
 
-  public defaultItemProvinces: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
-
-  public defaultItemKota:{ description: string, id: number, provinceId: number } = { description: 'Pilih kota', id: 0 , provinceId: 0};
-
-  public defaultItemKecamatan: { description: string, id: number, kotaId: number} = { description: 'Pilih Kecamatan', id: 0, kotaId: 0 };
-
-  public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
+  // public defaultItemProvinces: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
+  // public defaultItemKota:{ description: string, id: number, provinceId: number } = { description: 'Pilih kota', id: 0 , provinceId: 0};
+  // public defaultItemKecamatan: { description: string, id: number, kotaId: number} = { description: 'Pilih Kecamatan', id: 0, kotaId: 0 };
+  // public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
 
   public dataProvinsi: Array<{provinceDescription: string, provinceId: number}> = [
     {
@@ -138,12 +135,10 @@ export class ProfileInformasiPerusahaanComponent {
 
   public dataKota: Array<{}> = [];
 
-  public dataKecamatan: Array<{}> = [];
-
-  public dataResultKota: Array<{}> = [];
-
-  public dataResultKecamatan: Array<{}> = [];
-  public dataResultKelurahan: Array<{}> = [];
+  // public dataKecamatan: Array<{}> = [];
+  // public dataResultKota: Array<{}> = [];
+  // public dataResultKecamatan: Array<{}> = [];
+  // public dataResultKelurahan: Array<{}> = [];
 
 
   ngOnInit(): void {
@@ -253,65 +248,65 @@ export class ProfileInformasiPerusahaanComponent {
     this.opened = true;
   }
 
-  handleProvinceChange(value: any) {
-    // this.selectedProvince = value;
-    // this.selectedKota = undefined!;
-    // this.selectedKecamatan = undefined!;
+  // handleProvinceChange(value: any) {
+  //   // this.selectedProvince = value;
+  //   // this.selectedKota = undefined!;
+  //   // this.selectedKecamatan = undefined!;
 
-    // if (value.id === this.defaultItemProvinces.id) {
-    //   this.isDisabledKota = true;
-    //   this.dataResultKota = [];
-    // } else {
-    //   this.isDisabledKota = false;
-    //   this.dataResultKota = this.dataKota.filter((s) => s.provinsi === value.id);
-    // }
+  //   // if (value.id === this.defaultItemProvinces.id) {
+  //   //   this.isDisabledKota = true;
+  //   //   this.dataResultKota = [];
+  //   // } else {
+  //   //   this.isDisabledKota = false;
+  //   //   this.dataResultKota = this.dataKota.filter((s) => s.provinsi === value.id);
+  //   // }
 
-    this.profileInfoService.getKotaKabupaten(value.id).subscribe(
-      (resp) => {
-        this.dataResultKota = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  //   this.profileInfoService.getKotaKabupaten(value.id).subscribe(
+  //     (resp) => {
+  //       this.dataResultKota = resp["hydra:member"];
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
 
-    // this.isDisabledKecamatan = true;
-    // this.dataResultKecamatan = [];
-  }
+  //   // this.isDisabledKecamatan = true;
+  //   // this.dataResultKecamatan = [];
+  // }
 
-  handleKotaChange(value: any) {
-    // this.selectedKota = value;
-    // this.selectedKecamatan = undefined!;
+  // handleKotaChange(value: any) {
+  //   // this.selectedKota = value;
+  //   // this.selectedKecamatan = undefined!;
 
-    // if (value.kotaId === this.defaultItemKota.id) {
-    //   this.isDisabledKecamatan = true;
-    //   this.dataResultKecamatan = [];
-    // } else {
-    //   this.isDisabledKecamatan = false;
-    //   this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.id === value.kotaId);
-    // }
+  //   // if (value.kotaId === this.defaultItemKota.id) {
+  //   //   this.isDisabledKecamatan = true;
+  //   //   this.dataResultKecamatan = [];
+  //   // } else {
+  //   //   this.isDisabledKecamatan = false;
+  //   //   this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.id === value.kotaId);
+  //   // }
 
-    this.profileInfoService.getKecamatan(value.id).subscribe(
-      (resp) => {
-        this.dataResultKecamatan = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+  //   this.profileInfoService.getKecamatan(value.id).subscribe(
+  //     (resp) => {
+  //       this.dataResultKecamatan = resp["hydra:member"];
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
 
-  }
+  // }
 
-  handleKecamatanChange(value:any) {
-    this.profileInfoService.getKelurahan(value.id).subscribe(
-      (resp) => {
-        this.dataResultKecamatan = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  // handleKecamatanChange(value:any) {
+  //   this.profileInfoService.getKelurahan(value.id).subscribe(
+  //     (resp) => {
+  //       this.dataResultKecamatan = resp["hydra:member"];
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   handleKelurahanChange(value:any) {
     this.profileInfoService.getKodepos(value.id).subscribe(
@@ -344,13 +339,13 @@ export class ProfileInformasiPerusahaanComponent {
 
     let params: ProfileInterface= {...this.profileForm.value};
     this.profileInfoService.updateProfile(params).subscribe(
-      (resp) =>  { 
+      (resp) =>  {
         this.submitted = true;
         this.popUpMessage = resp.message;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
       },
-      (error) => { 
+      (error) => {
         if(error.error.message){
           this.popUpMessage = error.error.message;
         }
