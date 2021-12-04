@@ -123,7 +123,7 @@ export class PemegangSahamComponent implements OnInit {
     for (const key in data) {
       mappedData[key] = {
         no: no++,
-        namaPemegangSaham: data[key]['toParty']['firstName'],
+        namaPemegangSaham: data[key]['toParty']['firstName'] ? data[key]['toParty']['firstName'] : data[key]['toParty']['name'],
         pemegangSahamPerseorangan: data[key]['pemegangSahamPerseorangan'] ?  "Perseorangan" : "Badan Usaha",
         pemegangSahamLokal: data[key]['pemegangSahamLokal'] ? "Lokal" : "Asing",
         persentaseKepemilikan: data[key]['persentaseKepemilikan']
