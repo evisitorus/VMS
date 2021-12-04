@@ -158,11 +158,11 @@ export class ProfileInformationService {
   getKodepos(kelurahan:any): Observable<any>{
     let api_get_kodepos: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kodepos,
+      url: ApiRoutes.api_get_kodepos.concat(kelurahan),
       options : {
-        params: {
-          kelurahan : kelurahan
-        }
+        // params: {
+        //   kelurahan : kelurahan
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kodepos);

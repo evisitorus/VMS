@@ -41,7 +41,7 @@ export const ApiRoutes = {
   api_get_kotakab: API_BASE_URL + "/geo_location_relationships?geoLocationRule.description=Provinsi%20-%20Kota%2FKabupaten&fromGeoLocation=",
   api_get_kecamatan: API_BASE_URL + "/geo_location_relationships?geoLocationRule.description=Kota%2FKabupaten%20-%20Kecamatan&fromGeoLocation=",
   api_get_kelurahan: API_BASE_URL + "/geo_location_relationships?geoLocationRule.description=Kecamatan%20-%20Kelurahan&fromGeoLocation=",
-  api_get_kodepos: API_BASE_URL + "/geo_locations?geoLocationType=8",
+  api_get_kodepos: API_BASE_URL + "/villages?id=",
   api_vendor_route: API_BASE_URL + "/vendors",
   api_list_bank_route: API_BASE_URL + "/banks",
   api_update_profile: API_BASE_URL + "/vendors/profile",
