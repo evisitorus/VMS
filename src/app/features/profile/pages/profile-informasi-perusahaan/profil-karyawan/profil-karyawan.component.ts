@@ -6,6 +6,7 @@ import { FileService } from 'src/app/core/services/file.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
+import { ApiRoutes } from "src/app/core/services/api/api-routes";
 
 interface Item {
   name: string;
@@ -230,9 +231,9 @@ export class ProfilKaryawanComponent implements OnInit {
       namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
       tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
       jabatan: this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan: this.pegawaiFormGroup.value.bidangPekerjaan,
+      bidangPekerjaan: this.pegawaiFormGroup.value.bidangPekerjaan.name,
       // file: this.uploadedFileId,
-      // attachmentFilePath: this.uploadedFileContentUrl
+      resume: ApiRoutes.api_base_url + this.uploadedFileContentUrl
     }
     this.popUpMessage = "Berhasil menyimpan data";
     this.triggerPopUp();
