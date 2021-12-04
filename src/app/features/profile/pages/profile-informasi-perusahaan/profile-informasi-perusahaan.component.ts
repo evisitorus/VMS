@@ -78,7 +78,8 @@ export class ProfileInformasiPerusahaanComponent {
 
   public isDisabledKota = true;
   public isDisabledKecamatan = true;
-  // public isDisabledKelurahan = true;
+  public isDisabledKelurahan = true;
+  public isDisabledKodePos = true;
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
   public jenis_kegiatan_usaha: Array<Hydra> = [];
@@ -93,6 +94,8 @@ export class ProfileInformasiPerusahaanComponent {
   public selectedProvince: { provinceDescription: string, provinceId: number } = null!;
   public selectedKota: { kotaDescription: string, kotaId: number } = null!;
   public selectedKecamatan: { kecamatanDescription: string, kecamatanId: number } = null!;
+  public selectedKelurahan: { kelurahanDescription: string, kelurahanId: number } = null!;
+  public selectedKodePos: { kodePosDescription: string, kodePosId: number } = null!;
   public pkpStatus = false;
 
   public defaultItemProvinces: { provinceDescription: string, provinceId: number } = {
@@ -110,6 +113,18 @@ export class ProfileInformasiPerusahaanComponent {
     kecamatanDescription: 'Pilih Kecamatan',
     kecamatanId: 0,
     kotaId: 0
+  };
+
+  public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number, kecamatanId: number } = {
+    kelurahanDescription: 'Pilih Kelurahan',
+    kelurahanId: 0,
+    kecamatanId: 0
+  };
+
+  public defaultItemKodePos: { kodePosDescription: string, kodePosId: number, kelurahanId: number } = {
+    kodePosDescription: 'Pilih Kode Pos',
+    kodePosId: 0,
+    kelurahanId: 0
   };
 
   // public defaultItemKelurahan: { kelurahanDescription: string, kelurahanId: number } = { kelurahanDescription: 'Pilih Kelurahan', kelurahanId: 0 };
@@ -137,7 +152,7 @@ export class ProfileInformasiPerusahaanComponent {
       kotaDescription: 'Semarang', kotaId: 3, provinceId: 2
     },
     {
-      kotaDescription: 'Surabaya', kotaId: 4, provinceId: 3
+      kotaDescription: 'Pekalongan', kotaId: 4, provinceId: 3
     }
   ];
 
@@ -149,16 +164,33 @@ export class ProfileInformasiPerusahaanComponent {
       kecamatanDescription: 'Baleendah', kecamatanId: 2, kotaId: 1
     },
     {
-      kecamatanDescription: 'Pekalongan', kecamatanId: 3, kotaId: 2
+      kecamatanDescription: 'Banyumanik', kecamatanId: 3, kotaId: 2
     },
     {
-      kecamatanDescription: 'Karang Anyar', kecamatanId: 4, kotaId: 3
+      kecamatanDescription: 'Pekalongan Barat', kecamatanId: 4, kotaId: 3
     }
+  ];
+
+  public dataKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [
+    {
+      kelurahanDescription: 'Sukarasa', kelurahanId: 1, kecamatanId: 1
+    },
+    {
+      kelurahanDescription: 'Rancamanyar', kelurahanId: 2, kecamatanId: 2
+    },
+    {
+      kelurahanDescription: 'Banyumanik', kelurahanId: 3, kecamatanId: 3
+    },
+    {
+      kelurahanDescription: 'Medono', kelurahanId: 4, kecamatanId: 4
+    },
   ];
 
   public dataResultKota: Array<{ kotaDescription: string, kotaId: number, provinceId: number }> = [];
 
   public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [];
+
+  public dataResultKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [];
 
   public fetchData(): void {
     //get vendor information
@@ -169,7 +201,13 @@ export class ProfileInformasiPerusahaanComponent {
         this.vendor_contact_mechanism = data.contactMechanism;
         this.total_karyawan = data.party.jumlahKaryawanDomestik + data.party.jumlahKaryawanAsing;
         this.pkpStatus = data.party.statusPerusahaanPkp;
-        this.logoImg = ApiRoutes.api_media_object_route + "/" + data.logo.id + "/file";
+
+        if (null === data.logo) {
+          this.logoImg = null;
+        } else {
+          this.logoImg = ApiRoutes.api_media_object_route + "/" + data.logo.id + "/file";
+        }
+
 
         this.setForm();
       },
@@ -313,6 +351,28 @@ export class ProfileInformasiPerusahaanComponent {
 
   handleKecamatanChange(value: any) {
     this.selectedKecamatan = value;
+    this.selectedKelurahan = undefined!;
+
+    if (value.kecamatanId === this.defaultItemKecamatan.kecamatanId) {
+      this.isDisabledKelurahan = true;
+      this.dataResultKelurahan = [];
+    } else {
+      this.isDisabledKelurahan = false;
+      this.dataResultKelurahan = this.dataKelurahan.filter((s) => s.kecamatanId === value.kecamatanId);
+    }
+  }
+
+  handleKelurahanChange(value: any) {
+    this.selectedKelurahan = value;
+    // this.selectedKelurahan = undefined!;
+
+    // if (value.kecamatanId === this.defaultItemKecamatan.kecamatanId) {
+    //   // this.isDisabledKodePos = true;
+    //   // this.dataResultKodePos = [];
+    // } else {
+    //   // this.isDisabledKodePos = false;
+    //   // this.dataResultKodePos = this.dataKelurahan.filter((s) => s.kecamatanId === value.kecamatanId);
+    // }
   }
 
   upload(): void {
@@ -337,41 +397,44 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   save() {
-    this.params = {
-      name: this.profileInformationFormGroup.value.namaPerusahaan,
-      initial:this.profileInformationFormGroup.value.inisialPerusahaan,
-      jenisBadanUsaha:this.profileInformationFormGroup.value.jenisBadanUsaha,
-      statusBadanUsaha: this.profileInformationFormGroup.value.statusBadanUsaha,
-      tipeBadanUsaha: this.profileInformationFormGroup.value.tipeBadanUsaha,
-      kategoriBadanUsaha:this.profileInformationFormGroup.value.kategoriBadanUsaha,
-      jenisKegiatanUsaha:this.profileInformationFormGroup.value.jenisKegiatanUsaha,
-      jenisPenyediaUsaha:this.profileInformationFormGroup.value.jenisPenyediaUsaha,
-      npwp: this.profileInformationFormGroup.value.npwpPerusahaan,
-      nib:this.profileInformationFormGroup.value.nomorIndukBerusaha,
-      bidangUsaha:this.profileInformationFormGroup.value.bidangUsaha,
-      oragnisasiHimpunan:this.profileInformationFormGroup.value.organisasiHimpunan,
-      bumnPengampu:this.profileInformationFormGroup.value.bumnPengampu,
-      website:this.profileInformationFormGroup.value.websitePerusahaan,
-      jumlahKaryawanTotal:this.profileInformationFormGroup.value.jumlahKaryawanTotal,
-      jumlahKaryawanLokal:this.profileInformationFormGroup.value.jumlahKaryawanLokal,
-      jumlahKaryawanAsing:this.profileInformationFormGroup.value.jumlahKaryawanAsing,
-      phoneNumber:this.profileInformationFormGroup.value.noTeleponPerusahaan
-    }
-
     this.profileInformationFormGroup.markAllAsTouched();
-    let vendorID = this.authService.getLocalStorage('vendor_id')!;
-
-    // this.profileInfoService.updateProfileInformation(this.params, vendorID).subscribe(
-    //   (response) => {
-    //     location.reload();
-    //   },
-    //   (error) => {
-    //     this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
-    //     this.triggerPopUp();
-    //   }
-    // )
-
-    console.log(this.params);
+    if (this.profileInformationFormGroup.valid) {
+      this.params = {
+        name: this.profileInformationFormGroup.value.namaPerusahaan,
+        initial:this.profileInformationFormGroup.value.inisialPerusahaan,
+        jenisBadanUsaha:this.profileInformationFormGroup.value.jenisBadanUsaha,
+        statusBadanUsaha: this.profileInformationFormGroup.value.statusBadanUsaha,
+        tipeBadanUsaha: this.profileInformationFormGroup.value.tipeBadanUsaha,
+        kategoriBadanUsaha:this.profileInformationFormGroup.value.kategoriBadanUsaha,
+        jenisKegiatanUsaha:this.profileInformationFormGroup.value.jenisKegiatanUsaha,
+        jenisPenyediaUsaha:this.profileInformationFormGroup.value.jenisPenyediaUsaha,
+        npwp: this.profileInformationFormGroup.value.npwpPerusahaan,
+        nib:this.profileInformationFormGroup.value.nomorIndukBerusaha,
+        bidangUsaha:this.profileInformationFormGroup.value.bidangUsaha,
+        oragnisasiHimpunan:this.profileInformationFormGroup.value.organisasiHimpunan,
+        bumnPengampu:this.profileInformationFormGroup.value.bumnPengampu,
+        website:this.profileInformationFormGroup.value.websitePerusahaan,
+        jumlahKaryawanTotal:this.profileInformationFormGroup.value.jumlahKaryawanTotal,
+        jumlahKaryawanLokal:this.profileInformationFormGroup.value.jumlahKaryawanLokal,
+        jumlahKaryawanAsing:this.profileInformationFormGroup.value.jumlahKaryawanAsing,
+        phoneNumber:this.profileInformationFormGroup.value.noTeleponPerusahaan
+      }
+  
+      this.profileInformationFormGroup.markAllAsTouched();
+      let vendorID = this.authService.getLocalStorage('vendor_id')!;
+  
+      this.profileInfoService.updateProfileInformation(this.params, vendorID).subscribe(
+        (response) => {
+          location.reload();
+        },
+        (error) => {
+          this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
+          this.triggerPopUp();
+        }
+      )
+  
+      console.log(this.params);
+    }
   }
 
   form = new FormGroup({
