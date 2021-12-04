@@ -72,7 +72,7 @@ export class ProfilKaryawanComponent implements OnInit {
     }
   ];
 
-  public gridData: any = {};
+  public gridDataPegawai: any = {};
   // public gridView!: any[];
 
   popUpTitle: string = "Informasi Pemegang Saham";
@@ -143,6 +143,16 @@ export class ProfilKaryawanComponent implements OnInit {
       }
     );
 
+    this.profileInformationService.getKaryawan().subscribe(
+      (response) => {
+        this.gridDataPegawai = response.data;
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data";
+        this.triggerPopUp();
+      }
+    );
+
 
   }
 
@@ -210,19 +220,6 @@ export class ProfilKaryawanComponent implements OnInit {
   //     };
   //   }
   //   return mappedData;
-  // }
-
-  // public fetchData(): void {
-  //   this.profileInformationService.getProfilKaryawan().subscribe(
-  //     (response) => {
-  //       this.gridData = response['hydra:member'];
-  //       this.gridData = this.mapData(this.gridData);
-  //     },
-  //     () => {
-  //       this.popUpMessage = "Gagal mendapatkan data";
-  //       this.triggerPopUp();
-  //     }
-  //   );
   // }
 
   public addToTableFe(): void {

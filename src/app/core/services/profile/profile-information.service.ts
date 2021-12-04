@@ -63,7 +63,7 @@ export class ProfileInformationService {
     // let token = this.authService.getLocalStorage('access_token')!;
     let api_get_profil_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_pegawai_route,
+      url: ApiRoutes.api_get_pegawai_route + localStorage.getItem('vendor_id'),
       // options: {
       //   headers: {
       //     Authorization: token
