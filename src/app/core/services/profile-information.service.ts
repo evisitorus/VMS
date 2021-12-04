@@ -119,9 +119,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kotakab.concat(provinsi),
       options : {
-        params: {
-          provinsi : provinsi
-        }
+        // params: {
+        //   provinsi : provinsi
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kotakab);
@@ -133,9 +133,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kecamatan.concat(kotakab),
       options : {
-        params: {
-          kotakab : kotakab
-        }
+        // params: {
+        //   kotakab : kotakab
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kecamatan);
@@ -147,9 +147,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kelurahan.concat(kecamatan),
       options : {
-        params: {
-          kecamatan : kecamatan
-        }
+        // params: {
+        //   kecamatan : kecamatan
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kelurahan);

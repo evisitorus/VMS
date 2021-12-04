@@ -195,10 +195,12 @@ export class ProfileInformasiPerusahaanComponent {
   // public dataResultKecamatan: Array<{ kecamatanDescription: string, kecamatanId: number, kotaId: number }> = [];
   // public dataResultKelurahan: Array<{ kelurahanDescription: string, kelurahanId: number, kecamatanId: number }> = [];
   
+  public provinsi: Array<{}> = [];
   public dataKecamatan: Array<{}> = [];
   public dataResultKota: Array<{}> = [];
   public dataResultKecamatan: Array<{}> = [];
   public dataResultKelurahan: Array<{}> = [];
+  public dataResultKodepos: Array<{}> = [];
 
   public fetchData(): void {
     //get vendor information
@@ -256,14 +258,14 @@ export class ProfileInformasiPerusahaanComponent {
     );
 
     // get list of provinces
-    // this.profileInfoService.getProvinces().subscribe(
-    //   (resp) => {
-    //     this.provinces = resp["hydra:member"];
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this.profileInfoService.getProvinces().subscribe(
+      (resp) => {
+        this.provinsi = resp["hydra:member"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -391,18 +393,6 @@ export class ProfileInformasiPerusahaanComponent {
   // }
 
   handleProvinceChange(value: any) {
-    // this.selectedProvince = value;
-    // this.selectedKota = undefined!;
-    // this.selectedKecamatan = undefined!;
-
-    // if (value.id === this.defaultItemProvinces.id) {
-    //   this.isDisabledKota = true;
-    //   this.dataResultKota = [];
-    // } else {
-    //   this.isDisabledKota = false;
-    //   this.dataResultKota = this.dataKota.filter((s) => s.provinsi === value.id);
-    // }
-
     this.profileInfoService.getKotaKabupaten(value.id).subscribe(
       (resp) => {
         this.dataResultKota = resp["hydra:member"];
@@ -411,24 +401,10 @@ export class ProfileInformasiPerusahaanComponent {
         console.log(error);
       }
     );
-
-    // this.isDisabledKecamatan = true;
-    // this.dataResultKecamatan = [];
   }
 
   handleKotaChange(value: any) {
-    // this.selectedKota = value;
-    // this.selectedKecamatan = undefined!;
-
-    // if (value.kotaId === this.defaultItemKota.id) {
-    //   this.isDisabledKecamatan = true;
-    //   this.dataResultKecamatan = [];
-    // } else {
-    //   this.isDisabledKecamatan = false;
-    //   this.dataResultKecamatan = this.dataKecamatan.filter((s) => s.id === value.kotaId);
-    // }
-
-    this.profileInfoService.getKecamatan(value.id).subscribe(
+    this.profileInfoService.getKecamatan(value.toGeoLocation.id).subscribe(
       (resp) => {
         this.dataResultKecamatan = resp["hydra:member"];
       },
@@ -440,9 +416,9 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   handleKecamatanChange(value:any) {
-    this.profileInfoService.getKelurahan(value.id).subscribe(
+    this.profileInfoService.getKelurahan(value.toGeoLocation.id).subscribe(
       (resp) => {
-        this.dataResultKecamatan = resp["hydra:member"];
+        this.dataResultKelurahan = resp["hydra:member"];
       },
       (error) => {
         console.log(error);
@@ -453,7 +429,7 @@ export class ProfileInformasiPerusahaanComponent {
   handleKelurahanChange(value:any) {
     this.profileInfoService.getKodepos(value.id).subscribe(
       (resp) => {
-        this.dataResultKecamatan = resp["hydra:member"];
+        this.dataResultKodepos = resp["hydra:member"];
       },
       (error) => {
         console.log(error);

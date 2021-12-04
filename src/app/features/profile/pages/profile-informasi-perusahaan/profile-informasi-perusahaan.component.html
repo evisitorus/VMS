@@ -346,19 +346,19 @@
 
                   <div class="row align-items-center">
                     <kendo-label class="col-3">Kota</kendo-label>
-                    <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataResultKota" [value]="selectedKota" textField="description" valueField="id" (valueChange)="handleKotaChange($event)">
+                    <kendo-dropdownlist id="kotaDropdown" class="col-md" [defaultItem]="defaultItemKota" [data]="dataResultKota" [value]="selectedKota" textField="toGeoLocation.description" valueField="id" (valueChange)="handleKotaChange($event)">
                     </kendo-dropdownlist>
                   </div>
 
                   <div class="row align-items-center">
                     <kendo-label class="col-3">Kecamatan</kendo-label>
-                    <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="description" valueField="id" [data]="dataResultKecamatan" [value]="selectedKecamatan" (valueChange)="handleKecamatanChange($event)">
+                    <kendo-dropdownlist id="kecDropdown" class="col-md" [defaultItem]="defaultItemKecamatan" textField="toGeoLocation.description" valueField="id" [data]="dataResultKecamatan" [value]="selectedKecamatan" (valueChange)="handleKecamatanChange($event)">
                     </kendo-dropdownlist>
                   </div>
 
                   <div class="row align-items-center">
                     <kendo-label class="col-3">Kelurahan</kendo-label>
-                    <kendo-dropdownlist id="kelDropdown" class="col-md" [defaultItem]="defaultItemKelurahan" textField="description" valueField="id" [data]="dataResultKelurahan" [value]="selectedKelurahan" (valueChange)="handleKelurahanChange($event)"></kendo-dropdownlist>
+                    <kendo-dropdownlist id="kelDropdown" class="col-md" [defaultItem]="defaultItemKelurahan" textField="toGeoLocation.description" valueField="id" [data]="dataResultKelurahan" [value]="selectedKelurahan" (valueChange)="handleKelurahanChange($event)"></kendo-dropdownlist>
                   </div>
     
                   <!-- <kendo-formfield [formGroup]="profileInformationFormGroup">
