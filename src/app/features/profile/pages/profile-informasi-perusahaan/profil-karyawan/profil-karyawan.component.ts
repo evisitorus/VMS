@@ -111,7 +111,6 @@ export class ProfilKaryawanComponent implements OnInit {
     private profileInformationService: ProfileInformationService,
     private eventEmitterService: EventEmitterService,
   ) {
-    this.setForm();
     //extract from 0
     this.bidangTemp = this.bidangSource.slice(0);
   }
