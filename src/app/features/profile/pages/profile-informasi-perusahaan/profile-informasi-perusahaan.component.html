@@ -7,8 +7,23 @@
       <kendo-panelbar id="profile-information-panelbar">
         <kendo-panelbar-item title="Overview" [expanded]="true">
           <ng-template kendoPanelBarContent>
+
             <div class="row align-items-center justify-content-center k-vstack">
-              <img class="col-3" src="{{logoImg}}" />
+              <ng-container
+                *ngIf="logoImg; then showLogo; else showDefaultLogo">
+              </ng-container>
+
+              <ng-template #showLogo>
+                <div class="row align-items-center k-justify-content-center">
+                  <img class="col-3" [src]="logoImg"/>
+                </div>
+              </ng-template>
+              <ng-template #showDefaultLogo>
+                <div class="row align-items-center k-justify-content-center">
+                  <img class="col-3" src="/assets/images/nologo.png" style="width: 15%; height: 15%"/>
+                </div>
+              </ng-template>
+
               <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false"
                                 #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile"
                                 [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
@@ -22,8 +37,8 @@
                 <div class="row align-items-center">
                   <kendo-label class="col-3">Nama Perusahaan</kendo-label>
                   <div class="col-md k-vstack">
-                    <kendo-textbox id="namaPerusahaan" class="col-md w-100" placeholder="Nama Perusahaan" [clearButton]="true"
-                                   formControlName="namaPerusahaan"></kendo-textbox>
+                    <kendo-textbox id="namaPerusahaan" class="col-md w-100" placeholder="Nama Perusahaan" [clearButton]="true" formControlName="namaPerusahaan">
+                    </kendo-textbox>
                     <kendo-formerror class="formHint"
                                      *ngIf="profileInformationFormGroup.controls.namaPerusahaan.errors?.required">Nama Perusahaan tidak
                       boleh kosong</kendo-formerror>
@@ -37,6 +52,7 @@
                                  [clearButton]="true" [maxlength]="10" formControlName="inisialPerusahaan"></kendo-textbox>
                 </div>
               </kendo-formfield>
+
               <kendo-formfield [formGroup]="profileInformationFormGroup">
                 <div class="row align-items-center">
                   <kendo-label class="col-3">Jenis Badan Usaha</kendo-label>
@@ -71,27 +87,30 @@
                 <div class="row align-items-center">
                   <kendo-label class="col-3">Status Badan Usaha</kendo-label>
                   <div class="col">
-                    <ul class="k-radio-list k-list-horizontal">
-                      <li class="k-radio-item">
-                        <input id="pkpRbt" type="radio" #pkp value="pkp" formControlName="statusBadanUsaha"
-                               kendoRadioButton [checked]="pkpStatus ? true : false" />
-                        <kendo-label class="k-radio-label" [for]="pkp" text="PKP"></kendo-label>
-                      </li>
+                      <ng-container
+                        *ngIf="pkpStatus; then pkp; else nonpkp">
+                      </ng-container>
 
-                      <li class="k-radio-item">
-                        <input id="nonPkpRbt" type="radio" #nonpkp value="nonpkp" formControlName="statusBadanUsaha"
-                               kendoRadioButton [checked]="pkpStatus ? true : false" />
-                        <kendo-label class="k-radio-label" [for]="nonpkp" text="Non-PKP"></kendo-label>
-                      </li>
-                    </ul>
+                      <ng-template #pkp>
+                            <ul class="k-radio-list k-step-list-vertical">
+                              <li class="k-radio-item"><input type="radio" formControlName="statusBadanUsaha" [value]="true">PKP</li>
+                              <li class="k-radio-item"><input type="radio" formControlName="statusBadanUsaha">Non-PKP</li>
+                            </ul>
+                      </ng-template>
+
+                      <ng-template #nonpkp>
+                        <ul class="k-radio-list k-step-list-vertical">
+                          <li class="k-radio-item"><input type="radio" formControlName="statusBadanUsaha">PKP</li>
+                          <li class="k-radio-item"><input type="radio" formControlName="statusBadanUsaha" [value]="false">Non-PKP</li>
+                        </ul>
+                      </ng-template>
+
                     <kendo-formerror class="formHint"
                                      *ngIf="profileInformationFormGroup.controls.statusBadanUsaha.errors?.required">Status Badan Usaha
                       tidak boleh kosong</kendo-formerror>
                   </div>
                 </div>
               </kendo-formfield>
-
-
 
               <kendo-formfield [formGroup]="profileInformationFormGroup">
                 <div class="row align-items-center">
@@ -243,8 +262,8 @@
                   <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
                   <div class="col k-vstack">
                     <kendo-numerictextbox id="jumlahKaryawanTotal" class="col w-100" placeholder="Type your message here"
-                                          [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="total_karyawan"
-                                          formControlName="jumlahKaryawanTotal">
+                      [spinners]="false" [maxlength]="10" [decimals]="0" [min]="0" [value]="total_karyawan" [readonly]="true"
+                      formControlName="jumlahKaryawanTotal">
                     </kendo-numerictextbox>
                     <kendo-formerror class="formHint"
                                      *ngIf="profileInformationFormGroup.controls.jumlahKaryawanTotal.errors?.required">Jumlah Karyawan
@@ -409,7 +428,7 @@
       </kendo-panelbar>
     </kendo-card-body>
     <kendo-card-actions style="justify-content:right;">
-      <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit">Simpan</button>
+      <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit" (click)="save()">Simpan</button>
     </kendo-card-actions>
   </kendo-card>
 </div>

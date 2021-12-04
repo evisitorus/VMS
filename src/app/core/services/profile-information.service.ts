@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiInterface } from '../interfaces/api-interface';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ApiInterface} from '../interfaces/api-interface';
+import {ApiRouteMethods, ApiRoutes} from './api/api-routes';
+import {ApiService} from './api/api.service';
+import {AuthService} from './auth.service';
+import {ProfileInformationInterface} from "../interfaces/profile/profile-information-interface";
 import { ProfileInterface } from '../interfaces/profile-interface';
-import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
-import { ApiService } from './api/api.service';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,10 @@ import { AuthService } from './auth.service';
 export class ProfileInformationService {
 
   constructor(
-    private apiService:ApiService,
+    private apiService: ApiService,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   token = this.authService.getLocalStorage('access_token')!;
 
@@ -29,10 +31,9 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_jenis_penyedia_usaha);
-
   }
 
-  getJenisKegiatanUsaha(): Observable<any>{
+  getJenisKegiatanUsaha(): Observable<any> {
     let api_jenis_kegiatan_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_jenis_kegiatan_usaha_route,
@@ -43,7 +44,6 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_jenis_kegiatan_usaha);
-
   }
 
 
@@ -72,7 +72,6 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_vendor_information);
-
   }
 
   getVendorData(): Observable<any>{
@@ -100,10 +99,9 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_organizations);
-
   }
 
-  getProvinces(): Observable<any>{
+  getProvinces(): Observable<any> {
     let api_provinces: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_provinces_route,
@@ -114,7 +112,6 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_provinces);
-
   }
 
   getKotaKabupaten(provinsi:any): Observable<any>{
