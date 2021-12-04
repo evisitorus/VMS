@@ -95,7 +95,8 @@
             <form class="k-form" [formGroup]="form">
               <kendo-formfield showHints="initial">
                 <div class="k-form-field-checkbox-wrap">
-                  <input kendoCheckBox id="disclaimer" type="checkbox" formControlName="disclaimer"/>
+                  <input *ngIf="isDisabled" kendoCheckBox id="disclaimer" type="checkbox" disabled [checked]="true"/>
+                  <input *ngIf="!isDisabled" kendoCheckBox id="disclaimer" type="checkbox" formControlName="disclaimer"/>
                   <kendo-label class="k-checkbox-label" for="disclaimer" text="Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR"></kendo-label>
                 </div>
                 <!-- <kendo-formhint>Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR</kendo-formhint> -->
@@ -108,9 +109,10 @@
 
       <div class="k-actions k-actions-end">
         <div class="col-2 profile-content-grid-button">
-          <button kendoButton class="vms-btn vms-btn-primary" id="btn-tambah-dokumen" (click)="verify()">
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-tambah-dokumen" (click)="verify()" *ngIf="!isDisabled">
             Rekam Data
           </button>
+          <kendo-label class="verifikasi-label" *ngIf="isDisabled">Sedang dalam proses verifikasi</kendo-label>
         </div>
       </div>
 
@@ -119,4 +121,4 @@
   
 </div>
 
-<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-verification'"></app-popup-message>

@@ -24,14 +24,15 @@ export class ProfileService {
   addPekerjaan(params: AddPekerjaanInterface): Observable<any> {    
     let api_add_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_add_pengalaman_kerja,
+      url: ApiRoutes.api_post_pengalaman_kerja,
       body: {
-        vendor: this.vendor_id,
+        vendor: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!),
         namaPekerjaan: params.namaPekerjaan,
         pemberiPekerjaan: params.pemberiPekerjaan,
         nilaiPekerjaan: params.nilaiPekerjaan,
         tahunPekerjaan: params.tahunPekerjaan,
-        buktiPekerjaanFilePath: params.buktiPekerjaanFilePath
+        buktiPekerjaanFilePath: params.buktiPekerjaanFilePath,
+        file: params.lampiran
       }
     };
 

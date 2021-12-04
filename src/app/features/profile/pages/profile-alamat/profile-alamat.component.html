@@ -1,79 +1,98 @@
-<div class="profile-section">
+<div class="row profile-section">
+
+  <div class="profile-content-modal">
+    <kendo-dialog title="Tambah Alamat" *ngIf="openedAddress" (close)="closeSaham()">
+
+      <form [formGroup]="companyAddressFormGroup">
+
+        <div class ="wrap">
+          <kendo-label class="labelForm">No</kendo-label>
+          <kendo-textbox class="formField" placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Nama Alamat</kendo-label>
+          <kendo-textbox class="formField" id ="namaAlamat" placeholder="Type your message here" formControlName="namaAlamat" [clearButton]="true"></kendo-textbox>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Alamat</kendo-label>
+          <kendo-textbox class="formField" id="alamat" placeholder="Type your message here" formControlName="alamat" [clearButton]="true"></kendo-textbox>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Provinsi / Kota</kendo-label>
+          <kendo-dropdownlist id ="provinsi" class="formField" defaultItem="Pilih Provinsi / Kota" [data]="listItems" formControlName="provinsi" [valuePrimitive]="true">
+          </kendo-dropdownlist>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Kota / Kabupaten</kendo-label>
+          <kendo-dropdownlist id ="kecamatan" class="formField" defaultItem="Pilih Kota / Kabupaten" [data]="listItems" formControlName="kecamatan" [valuePrimitive]="true">
+          </kendo-dropdownlist>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Kelurahan</kendo-label>
+          <kendo-dropdownlist id ="kelurahan" class="formField" defaultItem="Pilih Kelurahan" [data]="listItems" formControlName="kelurahan" [valuePrimitive]="true">
+          </kendo-dropdownlist>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Kode Pos</kendo-label>
+          <kendo-textbox class="formField" id ="kodePos" placeholder="Type your message here" formControlName="kodePos" [clearButton]="true"></kendo-textbox>
+        </div>
+        <div class ="wrap">
+          <kendo-label class="labelForm">Pin Geolocation</kendo-label>
+          <kendo-textbox class="formField" id ="geoLocation" placeholder="Type your message here" formControlName="geoLocation" [clearButton]="true"></kendo-textbox>
+        </div>
+
+      </form>
+      <kendo-dialog-actions>
+        <div class="k-actions k-actions-end">
+          <div class="profile-content-modal-btn">
+            <button class="k-button vms-btn" kendoButton (click)="closeSaham()">
+              Batal
+            </button>
+          </div>
+
+          <div class="profile-content-modal-btn">
+            <button id="submitCompanyAddress" class="k-button k-primary vms-btn vms-btn-primary" kendoButton (click)="submitCompanyAddress()" [primary]="false">
+              Simpan
+            </button>
+          </div>
+        </div>
+      </kendo-dialog-actions>
+    </kendo-dialog>
+  </div>
 
   <div class="col-2 profile-menu">
     <app-sidebar></app-sidebar>
   </div>
+
+  <div class="col-10 profile-content-container">
+    <div class="profile-content">
+      <kendo-label>Alamat</kendo-label>
+      <br><br>
   
-
-  <div class="profile-content">
-    <kendo-label>Alamat</kendo-label>
-    <br><br>
-
-    <div>
-      <kendo-grid>
-        <kendo-grid-column field="no" title="No.">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Nama Alamat">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Alamat">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Provinsi">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Kota">
-        </kendo-grid-column>
-        <kendo-grid-column field="action" title="Action">
-        </kendo-grid-column>
-      </kendo-grid>
-      <br>
-      <button id="addPekerjaan" kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
-        Tambah Alamat
-      </button>
-
-      <kendo-dialog title="Tambah Alamat" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <div>
-            <kendo-label>No</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Nama Alamat</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Alamat</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Provinsi / Kota</kendo-label>
-            <kendo-dropdownlist defaultItem="Pilih Provinsi / Kota" [data]="listItems" [valuePrimitive]="true">
-            </kendo-dropdownlist>
-          </div>
-
-          <div>
-            <kendo-label>Kecamatan / Kelurahan</kendo-label>
-            <kendo-dropdownlist defaultItem="Pilih Kecamatan / Kelurahan" [data]="listItems" [valuePrimitive]="true">
-            </kendo-dropdownlist>
-          </div>
-          <div>
-            <kendo-label>Kode Pos</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Pin Geolocation</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-        </div>
-
-        <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
-            Simpan
-          </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
+      <div>
+        <kendo-grid>
+          <kendo-grid-column field="no" title="No.">
+          </kendo-grid-column>
+          <kendo-grid-column field="shareholder_name" title="Nama Alamat">
+          </kendo-grid-column>
+          <kendo-grid-column field="shareholder_type" title="Alamat">
+          </kendo-grid-column>
+          <kendo-grid-column field="is_domestic_shareholder" title="Provinsi">
+          </kendo-grid-column>
+          <kendo-grid-column field="is_domestic_shareholder" title="Kota">
+          </kendo-grid-column>
+          <kendo-grid-column field="action" title="Action">
+          </kendo-grid-column>
+        </kendo-grid>
+        <br>
+        <button id="addPekerjaan" kendoButton *ngIf="!openedAddress" (click)="openSaham()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
+          Tambah Alamat
+        </button>
+  
+        
+      </div>
+  
     </div>
-
   </div>
+
 </div>

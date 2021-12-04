@@ -29,6 +29,22 @@ export class ProfileKelengkapanService {
       };
       return this.apiService.sendRequest(api_get_kelengkapan);
     }
+
+    public verifikasiKelengkapan(): Observable<any> {
+      let token = this.authService.getLocalStorage('access_token')!;
+      let vendor_id = this.authService.getLocalStorage('vendor_id')!;
+      let api_get_kelengkapan: ApiInterface = {
+        method: ApiRouteMethods.post,
+        url: ApiRoutes.api_vendor_route + "/" + vendor_id + "/verification",
+        body: {},
+        options: {
+          headers: {
+            Authorization: token,
+          }
+        }
+      };
+      return this.apiService.sendRequest(api_get_kelengkapan);
+    }
     
   }
   

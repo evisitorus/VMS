@@ -7,7 +7,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { samplePekerjaans } from './pekerjaan';
-import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
+import { FileService } from 'src/app/core/services/file.service';
 
 const messages = {
   default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
@@ -21,7 +22,7 @@ const messages = {
   styleUrls: ['./profile-riwayat-pekerjaan.component.css']
 })
 export class ProfileRiwayatPekerjaanComponent implements OnInit {
-  pekerjaanForm = new FormGroup({});
+  pekerjaanForm!: FormGroup;
   submitted = false;
 
   popUpTitle: string = "Informasi Pengalaman Kerja";
@@ -33,9 +34,18 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public gridData: any = samplePekerjaans;
   record = 0;
 
-  myRestrictions: FileRestrictions = {
-    maxFileSize: 2194304,
-    allowedExtensions: [".jpg", ".png", "pdf"]
+  public invalidFileExtension!: boolean;
+  public invalidMaxFileSize!: boolean;
+
+  public lampiranFiles!: Array<any>;
+  public uploadedFileContentUrl!: string;
+  public uploadedFileId!: string;
+
+  public isNewData: boolean = true;
+
+  public fileRestrictions: FileRestrictions = {
+    allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
+    maxFileSize: 2097152
   };
 
   constructor(
@@ -43,23 +53,18 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     private profileService: ProfileService,
     private eventEmitterService: EventEmitterService,
     private authService: AuthService,
-    ) { }
+    private fileService: FileService
+    ) { 
+      this.setForm();
+    }
 
     get f() { return this.pekerjaanForm.controls; }
 
   ngOnInit(): void {
     // this.isLoggedIn = true;
     // this.authService.setLoggedIn(true);
-    if (!this.isLoggedIn) window.location.href = "/";
+    // if (!this.isLoggedIn) window.location.href = "/";
 
-    this.pekerjaanForm = this.formBuilder.group({
-      namaPekerjaan: ['', Validators.required],
-      pemberiPekerjaan: ['', Validators.required],
-      nilaiPekerjaan: ['', Validators.required],
-      tahunPekerjaan: ['', Validators.required],
-      buktiPekerjaanFilePath: ['somepath', Validators.required],
-    });
-    
     this.columns = [
       {field: "namaPekerjaan", title:"Nama Pekerjaan"}, 
       {field: "pemberiPekerjaan", title:"Pemberi Pekerjaan"}, 
@@ -76,6 +81,9 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public close() {
     this.opened = false;
+    this.resetForm();
+    this.isNewData = true;
+    this.lampiranFiles = [];
   }
 
   public open() {
@@ -84,10 +92,41 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public closeSaham() {
     this.openedSaham = false;
+    this.resetForm();
+    this.isNewData = true;
+    this.lampiranFiles = [];
   }
 
   public openSaham() {
     this.openedSaham = true;
+  }
+
+  public data: any = {
+    namaPekerjaan: "",
+    pemberiPekerjaan: "",
+    nilaiPekerjaan: "",
+    tahunPekerjaan: "",
+    buktiPekerjaanFilePath: "",
+    lampiran: ""
+  };
+
+  public resetForm(): void {
+    this.data.namaPekerjaan = "";
+    this.data.pemberiPekerjaan = "";
+    this.data.nilaiPekerjaan = "";
+    this.data.tahunPekerjaan = "";
+    this.data.buktiPekerjaanFilePath = "";
+    this.data.lampiran = "";
+    this.setForm();
+  }
+
+  public setForm(): void {
+    this.pekerjaanForm = new FormGroup({
+      namaPekerjaan: new FormControl(this.data.namaPekerjaan, Validators.required),
+      pemberiPekerjaan: new FormControl(this.data.pemberiPekerjaan, Validators.required),
+      nilaiPekerjaan: new FormControl(this.data.nilaiPekerjaan, Validators.required),
+      tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)      
+    });
   }
 
   triggerPopUp() {
@@ -103,35 +142,35 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     }
   }
 
-  submit(): void {
-    this.pekerjaanForm.markAllAsTouched();
-    this.popUpMessage = messages.default;
 
-    // stop here if form is invalid
-    if (this.pekerjaanForm.invalid) {
-      this.popUpMessage = messages.default;
+  public submit(): void {
+    if (this.lampiranFiles === null) {
+      this.popUpMessage = "File tidak valid";
+      this.close();
       this.triggerPopUp();
-      this.redirectOnClosePopUp = false;
-      return;
+    } else {
+      this.pekerjaanForm.markAllAsTouched();
+      if (this.pekerjaanForm.valid) {
+          this.save();
+      }
     }
+  }
 
-    this.validasiForm();
+  save(): void {
     let params: AddPekerjaanInterface = {
       namaPekerjaan: this.pekerjaanForm.value.namaPekerjaan,
       pemberiPekerjaan: this.pekerjaanForm.value.pemberiPekerjaan,
-      nilaiPekerjaan: this.pekerjaanForm.value.nilaiPekerjaan,
-      tahunPekerjaan: this.pekerjaanForm.value.tahunPekerjaan,
-      buktiPekerjaanFilePath: this.pekerjaanForm.value.buktiPekerjaanFilePath,
+      nilaiPekerjaan: this.pekerjaanForm.value.nilaiPekerjaan.toString(),
+      tahunPekerjaan: this.pekerjaanForm.value.tahunPekerjaan.toString(),
+      buktiPekerjaanFilePath: this.uploadedFileContentUrl,
+      lampiran: this.uploadedFileId,
     };
     this.profileService.addPekerjaan(params).subscribe(
       (resp) =>  { 
-        console.log("ok");
-        this.submitted = true;
         this.popUpMessage = messages.success;
         this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
-        this.closeSaham();
         this.getPekerjaan();
+        this.closeSaham();
       },
       (error) => { 
         console.log(params);
@@ -155,6 +194,35 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         this.popUpMessage = error;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
+      }
+    );
+  }
+
+
+  public selectEventHandler(e: SelectEvent): void {
+    let errors = e.files[0].validationErrors;
+    if (errors?.includes("invalidMaxFileSize")) {
+      this.invalidMaxFileSize = true;
+    } else {
+      this.invalidMaxFileSize = false;
+    }
+    if (errors?.includes("invalidFileExtension")) {
+      this.invalidFileExtension = true;
+    } else {
+      this.invalidFileExtension = false;
+    }
+  }
+
+
+  public upload(): void {
+    this.fileService.upload(this.lampiranFiles[0]).subscribe(
+      (res) => {
+        this.uploadedFileContentUrl = res.contentUrl;
+        this.uploadedFileId = res["@id"];
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
       }
     );
   }

@@ -24,13 +24,13 @@ export class PemegangSahamComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
-  public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemegang Saham"}, {field: "Pemeganng Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
+  public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemegang Saham"}, {field: "Pemegang Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
   access_token = "admin@abadijaya.co.id";
   vendor_id = "";
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private profileService: ProfileService,
     private eventEmitterService: EventEmitterService,
     private authService: AuthService,
@@ -39,9 +39,9 @@ export class PemegangSahamComponent implements OnInit {
   ngOnInit(): void {
     this.gridData = this.getPemegangSaham();
     this.columns = [
-      {field: "toParty.firstName", title:"Nama Pemegang Saham", width:"250px"}, 
-      {field: "pemegangSahamPerseorangan", title:"Jenis Pemegang Saham"}, 
-      {field: "pemegangSahamLokal", title:"Pemegang Saham Lokal/Asing", width:"300px"}, 
+      {field: "toParty.firstName", title:"Nama Pemegang Saham", width:"250px"},
+      {field: "pemegangSahamPerseorangan", title:"Jenis Pemegang Saham"},
+      {field: "pemegangSahamLokal", title:"Pemegang Saham Lokal/Asing", width:"300px"},
       {field: "persentaseKepemilikan", title:"% Kepemilikan"}
     ];
   }
@@ -77,7 +77,7 @@ export class PemegangSahamComponent implements OnInit {
   triggerPopUp() {
     this.eventEmitterService.trigger();
   }
-  
+
   submitPemegangSaham(): void {
     this.pemegangSahamFormGroup.markAllAsTouched();
     this.popUpMessage = messages.default;
@@ -101,7 +101,7 @@ export class PemegangSahamComponent implements OnInit {
 
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.addPemegangSaham(params).subscribe(
-      (resp) =>  { 
+      (resp) =>  {
         this.popUpMessage = "Berhasil menyimpan data";
         this.redirectOnClosePopUp = false;
         this.triggerPopUp();
@@ -109,7 +109,7 @@ export class PemegangSahamComponent implements OnInit {
         this.closeSaham();
         this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
       },
-      (error) => { 
+      (error) => {
         this.popUpMessage = "Gagal menyimpan data";
         this.triggerPopUp();
         this.closeSaham();
@@ -134,12 +134,12 @@ export class PemegangSahamComponent implements OnInit {
 
   getPemegangSaham(){
     this.profileService.getPemegangSaham().subscribe(
-      (resp) =>  { 
+      (resp) =>  {
         this.gridData = resp['hydra:member'];
         this.gridData = this.mapData(this.gridData);
         return this.gridData;
       },
-      (error) => { 
+      (error) => {
         this.popUpMessage = "Gagal mendapatkan data";
         this.triggerPopUp();
       }
