@@ -1,13 +1,16 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
     <img class="nav-icon" routerLink="/" width="150" alt="VMS" src="assets/images/bumn.png"/>
-    
+
     <div class="spacer"></div>
-    
+
     <ul class="nav justify-content-end">
         <li class="nav-item">
             <a class="nav-link" href="#">Beranda</a>
         </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" href="/dashboard">Profil</a>
+      </li>
         <li class="nav-item">
             <a class="nav-link" href="/tentang-kami">Tentang Kami</a>
         </li>
@@ -18,5 +21,5 @@
             <a id="btn-logout" class="nav-link" href="#" (click)="logout()">Logout</a>
         </li>
     </ul>
-    
+
 </div>
