@@ -93,6 +93,8 @@ export class ProfileInformasiPerusahaanComponent {
 
   public vendor_info: any;
   public total_karyawan: any;
+  public karyawan_lokal: any;
+  public karyawan_asing:any;
   public vendor_contact_mechanism: any;
 
   public selectedBadanUsaha: Item = this.listItems[0];
@@ -281,6 +283,9 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
+
+    this.karyawan_lokal = data.jumlahKaryawanDomestik;
+    this.karyawan_asing = data.jumlahKaryawanAsing;
   }
 
 
@@ -346,6 +351,16 @@ export class ProfileInformasiPerusahaanComponent {
         console.log(error);
       }
     );
+  }
+
+  handleKaryawanLokalChange(value:any){
+    this.karyawan_lokal = value;
+    this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+  }
+
+  handleKaryawanAsingChange(value:any){
+    this.karyawan_asing = value;
+    this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
   }
 
   upload(): void {
