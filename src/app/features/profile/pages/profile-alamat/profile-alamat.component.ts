@@ -4,6 +4,7 @@ import { CompanyAddressService } from 'src/app/core/services/profile.companyAddr
 import { AddCompanyAddressInterface } from 'src/app/core/interfaces/add-companyAddress-interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
 
 const messages = {
   default: 'Data tidak boleh kosong.',
@@ -18,127 +19,82 @@ const messages = {
 
 export class ProfileAlamatComponent implements OnInit {
 
+  public form!: FormGroup;
+  public gridData: any[] = [];
+
+  public popUpTitle: string = "Profile Alamat";
+  public popUpMessage: string = "";
+
   constructor(
-
-    private formBuilder: FormBuilder,
-    private companyAddressService: CompanyAddressService,
     private eventEmitterService: EventEmitterService,
-    private authService: AuthService,
-
+    private service: ProfileAddressService
   ) { }
 
   ngOnInit(): void {
+    this.fetchData();
   }
 
   public opened = false;
-  public openedAddress = false;
 
-  public close() {
+  public close(): void {
     this.opened = false;
   }
 
-  public open() {
+  public open(): void  {
     this.opened = true;
   }
 
-  public closeSaham() {
-    this.openedAddress = false;
-  }
-
-  public openSaham() {
-    this.openedAddress = true;
-  }
-
-  //public listItems: Array<string> = ["Item 1", "Item 2", "Item 3"];
-  public listItems: Array<number> = [1, 2, 3];
-
-  public companyAddressFormGroup = new FormGroup({
-    namaAlamat: new FormControl(null, Validators.required),
-    alamat: new FormControl(null, Validators.required),
-    provinsi: new FormControl(null, Validators.required),
-    kecamatan: new FormControl(null, Validators.required),
-    kelurahan: new FormControl(null, Validators.required),
-    kodePos: new FormControl(null, Validators.required),
-    geoLocation: new FormControl(null, Validators.required),
-  });
-
-  triggerPopUp() {
+  public triggerPopUp(): void  {
     this.eventEmitterService.trigger();
   }
 
-  submitCompanyAddress(): void {
-    this.companyAddressFormGroup.markAllAsTouched();
-    //this.popUpMessage = messages.default;
-
-    // stop here if form is invalid
-    if (this.companyAddressFormGroup.invalid) {
-      //this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      //this.redirectOnClosePopUp = false;
-      return;
-    }
-
-    const dataCompanyAddress = {
-      namaAlamat: this.companyAddressFormGroup.controls['namaAlamat'].value,
-      alamat: this.companyAddressFormGroup.controls['alamat'].value,
-      provinsi: this.companyAddressFormGroup.controls['provinsi'].value,
-      kecamatan: this.companyAddressFormGroup.controls['kecamatan'].value,
-      kelurahan: this.companyAddressFormGroup.controls['kelurahan'].value,
-      kodePos: this.companyAddressFormGroup.controls['kodePos'].value,
-      geoLocation: this.companyAddressFormGroup.controls['geoLocation'].value,
-    }
-
-    alert('masuk sini')
-    console.log(dataCompanyAddress)
-    let params: AddCompanyAddressInterface= {...dataCompanyAddress}
-    this.companyAddressService.addCompanyAddress(params).subscribe(
-      (resp) =>  {
-        //console.log(resp)
-        //this.popUpMessage = "Berhasil menyimpan data";
-        //this.redirectOnClosePopUp = false;
-        this.triggerPopUp();
-        //this.getCompanyAddress();
-        this.closeSaham();
-        //this.panelbar.stateChange.next([{title: 'Alamat', expanded: true, selected: true}])
-      },
-      (error) => {
-        //this.popUpMessage = "Gagal menyimpan data";
-        this.triggerPopUp();
-        this.closeSaham();
-      }
-    );
-  }
-
-  /*public mapData(data:any[]) {
+  public mapData(data: any[]): any[] {
     let mappedData:any[] = [];
     let no = 1;
     for (const key in data) {
       mappedData[key] = {
         no: no++,
-        namaAlamat: data[key]['namaAlamat'],
-        alamat: data[key]['alamat'],
-        propinsi: data[key]['propinsi'],
-        kecamatan: data[key]['kecamatan'],
-        kelurahan: data[key]['kelurahan'],
-        kodePos: data[key]['kodePos'],
-        geoLocation: data[key]['geoLocation']
+        namaAlamat: data[key]['note'],
+        alamat: data[key]['address1'],
+        provinsi:data[key]['province']['description'],
+        kota: data[key]['city']['description'],
+        id: data[key]['id'],
       };
     }
     return mappedData;
   }
 
-  getCompanyAddress(){
-    this.CompanyAddressService.getCompanyAddress().subscribe(
-      (resp) =>  {
-        this.gridData = resp['hydra:member'];
+  public fetchData(): void {
+    this.service.fetchData().subscribe(
+      (response) => {
+        this.gridData = response.data;
         this.gridData = this.mapData(this.gridData);
-        return this.gridData;
       },
-      (error) => {
-        this.popUpMessage = "Gagal mendapatkan data";
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
-  }*/
+  }
 
+  public updateForm(data: any): void {
+
+  }
+
+  public submit(): void {
+
+  }
+
+  public save(): void {
+
+  }
+
+  public update(): void {
+
+  }
+
+  public delete(id: string): void {
+
+  }
+  
 }
