@@ -22,6 +22,15 @@ interface Hydra {
   id: number;
 }
 
+interface Address {
+  contactMechanism: {
+    type : string,
+    address1 : string,
+    number : string
+  };
+  party: {}
+}
+
 @Component({
   selector: 'app-profile-informasi-perusahaan',
   templateUrl: './profile-informasi-perusahaan.component.html',
@@ -92,6 +101,7 @@ export class ProfileInformasiPerusahaanComponent {
   public jenis_kegiatan_usaha: Array<Hydra> = [];
   public organizations: Array<Item> = [];
   public provinces: Array<Item> = [];
+  public contact_mechanism: Array<Address> = [];
 
   public vendor_info: any;
   public total_karyawan: any;
@@ -240,20 +250,30 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
-        //get contact mechanism
-        this.profileInfoService.getContactMechanism().subscribe(
-          (resp) => {
-            console.log(resp);
-          },
-          (error) => {
-            console.log(error);
+      },
+      (error) => {
+        console.log(console.log(error));
+      }
+    );
+
+    //get contact mechanism
+    this.profileInfoService.getContactMechanism().subscribe(
+      (resp) => {
+        this.contact_mechanism = resp["hydra:member"];
+
+        this.contact_mechanism.forEach( (value) => {
+          if(value.contactMechanism.address1 === undefined){
+            this.dataPerusahaan.noTelepon = value.contactMechanism.number;
+          } else {
+            this.dataPerusahaan.alamat = value.contactMechanism.address1;
           }
-        );
+
+        }); 
 
         this.setFormPerusahaan(this.dataPerusahaan);
       },
       (error) => {
-        console.log(console.log(error));
+        console.log(error);
       }
     );
   }
@@ -267,7 +287,8 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public setFormPerusahaan(data:any): void {
-    console.log(data);
+    console.log(data.noTelepon);
+    console.log(data.alamat);
     this.profileInformationFormGroup = this.fb.group({
       namaPerusahaan: new FormControl(data.namaPerusahaan, Validators.required),
       inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
@@ -286,8 +307,8 @@ export class ProfileInformasiPerusahaanComponent {
       jumlahKaryawanTotal: new FormControl(data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing, Validators.required),
       jumlahKaryawanLokal: new FormControl(data.jumlahKaryawanDomestik, Validators.required),
       jumlahKaryawanAsing: new FormControl(data.jumlahKaryawanAsing, Validators.required),
-      noTeleponPerusahaan: new FormControl(null, Validators.required),
-      alamatPerusahaan: new FormControl(null, Validators.required),
+      noTeleponPerusahaan: new FormControl(data.noTelepon, Validators.required),
+      alamatPerusahaan: new FormControl(data.alamat, Validators.required),
       provinsi: new FormControl(this.selectedProvince, Validators.required),
       kota: new FormControl(this.selectedKota, Validators.required),
       kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
