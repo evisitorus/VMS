@@ -238,7 +238,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
         this.dataPerusahaan.statusPerusahaanPkp = resp.statusPerusahaanPkp ? "true" : "false";
         
-        if(resp.tipeVendor){
+        if(resp.tipeVendor === undefined){
           this.dataPerusahaan.tipeBadanUsaha = null;
         } else {
           this.dataPerusahaan.tipeBadanUsaha = resp.tipeVendor.id
@@ -310,10 +310,9 @@ export class ProfileInformasiPerusahaanComponent {
           (resp) => {
             this.tipeBadanUsahaItems = resp["hydra:member"];
             if(this.dataPerusahaan.tipeBadanUsaha == null){
-              this.selectedBadanUsaha = this.listItems[0];
+              this.selectedBadanUsaha = this.tipeBadanUsahaItems[-1]
             } else {
-              const index = this.tipeBadanUsahaItems.findIndex(x => x.id === this.dataPerusahaan.tipeBadanUsaha.id);
-              console.log(index);
+              const index = this.tipeBadanUsahaItems.findIndex(x => x.id === this.dataPerusahaan.tipeBadanUsaha);
               this.selectedBadanUsaha = this.tipeBadanUsahaItems[index];
             }
           },
