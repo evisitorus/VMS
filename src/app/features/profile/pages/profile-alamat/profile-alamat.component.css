@@ -1,47 +1,17 @@
-/* .profile-section {
-  border-style: groove;
-} */
-
-/* .profile-menu {
-  border-style: groove;
-  float: left;
-} */
-
-
-/*
-.profile-content {
-  border-style: groove;
-  float: right;
-} */
-
-.profile-menu {
-  float: left;
-  height: 100vh;
+.modal-label {
+  padding: unset;
+  vertical-align: middle;
 }
 
-.profile-content {
-  padding: 40px;
-  display: table;
+.modal-field {
+padding: unset;
+margin-bottom: 0.5em;
 }
 
-.button-right {
-  float: right;
+.modal-field > kendo-formfield {
+margin-top: unset !important;
 }
 
-.wrap {
-    display: flex;
-    /* justify-content: space-between; */
-    padding: 10px;
-}
-
-.labelForm {
-    width: 250px;
-}
-
-.formField{
-    width: 100% !important;
-}
-
-.formHint {
-    width: 350px;
+.modal-form {
+padding: 1em !important;
 }
