@@ -122,8 +122,8 @@
   width: 50% !important;
 }
 
-#select-order-by {
-  width: 70% !important;
+#select-order-by, #select-filter-category, #select-filter-bumn {
+  width: 100% !important;
 }
 
 .btn-toggle-filter, .btn-toggle-filter:focus {
