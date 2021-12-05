@@ -247,13 +247,13 @@ export class ProfileInformasiPerusahaanComponent {
         if(resp.jenisKegiatanUsaha.length === 0){
           this.dataPerusahaan.jenisKegiatanUsaha = null;
         } else {
-          this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0]
+          this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0].id
         }
 
         if(resp.jenisPenyediaUsaha.length === 0){
           this.dataPerusahaan.jenisPenyediaUsaha = null;
         } else {
-          this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0]
+          this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisPenyediaUsaha[0].id
         }
         this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
         this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
@@ -267,7 +267,13 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getJenisPenyediaUsaha().subscribe(
           (resp) => {
             this.jenis_penyedia_usaha = resp["hydra:member"];
-            this.selectedJenisPenyedia = this.jenis_penyedia_usaha[this.dataPerusahaan.jenisPenyediaUsaha];
+
+            if(this.dataPerusahaan.jenisPenyediaUsaha == null){
+              this.selectedJenisPenyedia = this.jenis_penyedia_usaha[-1]
+            } else {
+              const index = this.jenis_penyedia_usaha.findIndex(x => x.id === this.dataPerusahaan.jenisPenyediaUsaha);
+              this.selectedJenisPenyedia = this.jenis_penyedia_usaha[index];
+            }
           },
           (error) => {
             console.log(error);
@@ -278,7 +284,12 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getJenisKegiatanUsaha().subscribe(
           (resp) => {
             this.jenis_kegiatan_usaha = resp["hydra:member"];
-            this.selectedJenisKegiatan = this.jenis_penyedia_usaha[this.dataPerusahaan.jenisKegiatanUsaha];
+            if(this.dataPerusahaan.jenisKegiatanUsaha == null){
+              this.selectedJenisKegiatan = this.jenis_kegiatan_usaha[-1]
+            } else {
+              const index = this.jenis_kegiatan_usaha.findIndex(x => x.id === this.dataPerusahaan.jenisKegiatanUsaha);
+              this.selectedJenisKegiatan = this.jenis_kegiatan_usaha[index];
+            }
           },
           (error) => {
             console.log(error);

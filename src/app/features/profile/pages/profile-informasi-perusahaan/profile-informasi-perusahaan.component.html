@@ -130,7 +130,7 @@
                     </div>
                   </kendo-formfield>
     
-                  <kendo-formfield [formGroup]="profileInformationFormGroup">
+                  <!-- <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
     
                       <kendo-label class="col-3">Kategori Badan Usaha</kendo-label>
@@ -145,7 +145,8 @@
                       </div>
     
                     </div>
-                  </kendo-formfield>
+                  </kendo-formfield> -->
+
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
@@ -157,9 +158,7 @@
                                             [data]="jenis_kegiatan_usaha" textField="description" valueField="id">
                         </kendo-dropdownlist>
                         <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.jenisKegiatanUsahaUtama.errors?.required">Jenis
-                          Kegiatan
-                          Usaha Utama tidak boleh kosong</kendo-formerror>
+                                         *ngIf="profileInformationFormGroup.controls.jenisKegiatanUsahaUtama.errors?.required">Jenis Kegiatan Usaha Utama tidak boleh kosong</kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
