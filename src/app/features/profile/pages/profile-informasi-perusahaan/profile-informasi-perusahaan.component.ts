@@ -266,6 +266,14 @@ export class ProfileInformasiPerusahaanComponent {
             this.dataPerusahaan.noTelepon = value.contactMechanism.number;
           } else {
             this.dataPerusahaan.alamat = value.contactMechanism.address1;
+            this.dataPerusahaan.address = value.contactMechanism;
+            console.log(this.dataPerusahaan.address);
+            let provinsi = this.dataPerusahaan.address.province.description;
+            console.log(provinsi);
+
+            // const index = this.provinsi.findIndex(x => x.description === provinsi);
+            // this.selectedBadanUsaha = this.tipeBadanUsahaItems[index];
+            
           }
 
         }); 
