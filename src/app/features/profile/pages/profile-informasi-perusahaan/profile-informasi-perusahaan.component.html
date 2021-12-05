@@ -152,8 +152,9 @@
                       <div class="col k-vstack">
                         <kendo-dropdownlist id="jenisKegiatanUsahaUtama" class="col-md w-100"
                                             formControlName="jenisKegiatanUsahaUtama"
+                                            [(ngModel)]="selectedJenisKegiatan" 
                                             [defaultItem]="{ description: 'Pilih Jenis Kegiatan Usaha Utama', id: null }"
-                                            [data]="jenis_kegiatan_usaha" textField="description" valueField="id" [valuePrimitive]="true">
+                                            [data]="jenis_kegiatan_usaha" textField="description" valueField="id">
                         </kendo-dropdownlist>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.jenisKegiatanUsahaUtama.errors?.required">Jenis

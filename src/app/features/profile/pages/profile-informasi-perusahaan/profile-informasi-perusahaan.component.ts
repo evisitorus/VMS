@@ -60,6 +60,7 @@ export class ProfileInformasiPerusahaanComponent {
 
 
   public listItems: Array<Item> = [];
+  public items: Array<Hydra> = [];
 
   // TODO: ambil dari table tipe vendor. jangan static
   public kategoriUmkmItems: Array<Item> = [
@@ -95,6 +96,7 @@ export class ProfileInformasiPerusahaanComponent {
   public vendor_contact_mechanism: any;
 
   public selectedBadanUsaha: Item = this.listItems[0];
+  public selectedJenisKegiatan: Hydra = this.items[0];
   public selectedProvince!: { description: string, id: number };
   public selectedKota!: { description: string, id: number };
   public selectedKecamatan!: { description: string, id: number };
@@ -236,7 +238,8 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.statusPerusahaanPkp = resp.statusPerusahaanPkp ? "true" : "false";
         this.dataPerusahaan.tipeBadanUsahaName = resp.tipeVendor.name ? resp.tipeVendor.name : "";
         this.dataPerusahaan.tipeBadanUsahaId = resp.tipeVendor.id ? resp.tipeVendor.id : "";
-        // this.dataPerusahaan.jenisKegiatanUsahaUtama = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
+        this.dataPerusahaan.jenisKegiatanUsahaUtamaDescription = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
+        this.dataPerusahaan.jenisKegiatanUsahaUtamaId = resp.jenisKegiatanUsaha[0].id ? resp.jenisKegiatanUsaha[0].id : "";
         // this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
         this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
         this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
@@ -261,6 +264,11 @@ export class ProfileInformasiPerusahaanComponent {
           (resp) => {
             this.jenis_kegiatan_usaha = resp["hydra:member"];
 
+            const items = {
+              description : this.dataPerusahaan.jenisKegiatanUsahaUtamaDescription,
+              id : this.dataPerusahaan.jenisKegiatanUsahaUtamaId
+            }
+            this.selectedJenisKegiatan = items;
           },
           (error) => {
             console.log(error);
@@ -326,9 +334,9 @@ export class ProfileInformasiPerusahaanComponent {
       inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
       jenisBadanUsaha: new FormControl(data.jenisBadanUsaha, Validators.required),
       statusBadanUsaha: new FormControl(data.statusPerusahaanPkp , Validators.required),
-      tipeBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      tipeBadanUsaha: new FormControl(data.tipeBadanUsahaName, Validators.required),
       kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
-      jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsahaUtama, Validators.required),
+      jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsahaUtamaDesctiption, Validators.required),
       jenisPenyediaUsaha: new FormControl(data.jenisPenyediaUsaha, Validators.required),
       npwpPerusahaan: new FormControl(data.npwp, Validators.required),
       nomorIndukBerusaha: new FormControl(data.nib, Validators.required),
