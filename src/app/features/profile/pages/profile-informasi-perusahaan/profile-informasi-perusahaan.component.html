@@ -168,9 +168,11 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-dropdownlist id="jenisPenyediaUsaha" class="col-md w-100" formControlName="jenisPenyediaUsaha"
-                                            [defaultItem]="{ description: 'Pilih Jenis Penyedia Badan Usaha', id: null }"
-                                            textField="description" valueField="id" [data]="jenis_penyedia_usaha">
+                        <kendo-dropdownlist id="jenisPenyediaUsaha" class="col-md w-100"
+                                            formControlName="jenisPenyediaUsaha"
+                                            [(ngModel)]="selectedJenisPenyedia" 
+                                            [defaultItem]="{ description: 'Pilih Jenis Penyedia Usaha', id: null }"
+                                            [data]="jenis_penyedia_usaha" textField="description" valueField="id">
                         </kendo-dropdownlist>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.jenisPenyediaUsaha.errors?.required">Jenis Penyedia

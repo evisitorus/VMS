@@ -97,6 +97,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public selectedBadanUsaha: Item = this.listItems[0];
   public selectedJenisKegiatan: Hydra = this.items[0];
+  public selectedJenisPenyedia: Hydra = this.items[0];
   public selectedProvince!: { description: string, id: number };
   public selectedKota!: { description: string, id: number };
   public selectedKecamatan!: { description: string, id: number };
@@ -240,7 +241,12 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.tipeBadanUsahaId = resp.tipeVendor.id ? resp.tipeVendor.id : "";
         this.dataPerusahaan.jenisKegiatanUsahaUtamaDescription = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
         this.dataPerusahaan.jenisKegiatanUsahaUtamaId = resp.jenisKegiatanUsaha[0].id ? resp.jenisKegiatanUsaha[0].id : "";
-        // this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
+
+        if(resp.jenisPenyediaUsaha.length === 0){
+          this.dataPerusahaan.jenisPenyediaUsaha = null;
+        } else {
+          this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0] ? resp.jenisKegiatanUsaha[0] : "";
+        }
         this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
         this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
         this.dataPerusahaan.bumnPengampu = resp.bumnPengampu ? resp.bumnPengampu : "";
@@ -253,6 +259,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getJenisPenyediaUsaha().subscribe(
           (resp) => {
             this.jenis_penyedia_usaha = resp["hydra:member"];
+            this.selectedJenisPenyedia = this.jenis_penyedia_usaha[this.dataPerusahaan.jenisPenyediaUsaha];
           },
           (error) => {
             console.log(error);
