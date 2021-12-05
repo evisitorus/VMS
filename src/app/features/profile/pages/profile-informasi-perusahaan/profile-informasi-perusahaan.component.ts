@@ -237,15 +237,23 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.inisialPerusahaan = resp.altName ? resp.altName : "";
         this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
         this.dataPerusahaan.statusPerusahaanPkp = resp.statusPerusahaanPkp ? "true" : "false";
-        this.dataPerusahaan.tipeBadanUsahaName = resp.tipeVendor.name ? resp.tipeVendor.name : "";
-        this.dataPerusahaan.tipeBadanUsahaId = resp.tipeVendor.id ? resp.tipeVendor.id : "";
-        this.dataPerusahaan.jenisKegiatanUsahaUtamaDescription = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
-        this.dataPerusahaan.jenisKegiatanUsahaUtamaId = resp.jenisKegiatanUsaha[0].id ? resp.jenisKegiatanUsaha[0].id : "";
+        
+        if(resp.tipeVendor){
+          this.dataPerusahaan.tipeBadanUsaha = null;
+        } else {
+          this.dataPerusahaan.tipeBadanUsaha = resp.tipeVendor.id
+        }
+
+        if(resp.jenisKegiatanUsaha.length === 0){
+          this.dataPerusahaan.jenisKegiatanUsaha = null;
+        } else {
+          this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0]
+        }
 
         if(resp.jenisPenyediaUsaha.length === 0){
           this.dataPerusahaan.jenisPenyediaUsaha = null;
         } else {
-          this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0] ? resp.jenisKegiatanUsaha[0] : "";
+          this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0]
         }
         this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
         this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
@@ -270,12 +278,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getJenisKegiatanUsaha().subscribe(
           (resp) => {
             this.jenis_kegiatan_usaha = resp["hydra:member"];
-
-            const items = {
-              description : this.dataPerusahaan.jenisKegiatanUsahaUtamaDescription,
-              id : this.dataPerusahaan.jenisKegiatanUsahaUtamaId
-            }
-            this.selectedJenisKegiatan = items;
+            this.selectedJenisKegiatan = this.jenis_penyedia_usaha[this.dataPerusahaan.jenisKegiatanUsaha];
           },
           (error) => {
             console.log(error);
@@ -306,11 +309,13 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getTipeVendor().subscribe(
           (resp) => {
             this.tipeBadanUsahaItems = resp["hydra:member"];
-            const badanusahaitems = {
-              name : this.dataPerusahaan.tipeBadanUsahaName,
-              id : this.dataPerusahaan.tipeBadanUsahaId
+            if(this.dataPerusahaan.tipeBadanUsaha == null){
+              this.selectedBadanUsaha = this.listItems[0];
+            } else {
+              const index = this.tipeBadanUsahaItems.findIndex(x => x.id === this.dataPerusahaan.tipeBadanUsaha.id);
+              console.log(index);
+              this.selectedBadanUsaha = this.tipeBadanUsahaItems[index];
             }
-            this.selectedBadanUsaha = badanusahaitems;
           },
           (error) => {
             console.log(error);
