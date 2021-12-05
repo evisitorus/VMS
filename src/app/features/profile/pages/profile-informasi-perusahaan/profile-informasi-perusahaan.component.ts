@@ -9,7 +9,8 @@ import {ProfileInformationService} from "src/app/core/services/profile-informati
 import {environment as env} from "src/environments/environment";
 import {ProfileInformationInterface} from "../../../../core/interfaces/profile/profile-information-interface";
 import {AuthService} from "../../../../core/services/auth.service";
-import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service"
+import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service";
+import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
 
 interface Item {
   name: string;
@@ -36,7 +37,8 @@ export class ProfileInformasiPerusahaanComponent {
     private fileService: FileService,
     private authService: AuthService,
     private profileDashboardService : ProfileDashboardService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private addressService: ProfileAddressService,
   ) {
   }
   public params!: ProfileInformationInterface;
@@ -232,6 +234,16 @@ export class ProfileInformasiPerusahaanComponent {
               const index = this.tipeBadanUsahaItems.findIndex(x => x.id === this.dataPerusahaan.tipeBadanUsaha);
               this.selectedBadanUsaha = this.tipeBadanUsahaItems[index];
             }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get contact mechanism
+        this.profileInfoService.getContactMechanism().subscribe(
+          (resp) => {
+            console.log(resp);
           },
           (error) => {
             console.log(error);

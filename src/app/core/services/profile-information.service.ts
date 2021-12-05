@@ -19,6 +19,7 @@ export class ProfileInformationService {
   }
 
   token = this.authService.getLocalStorage('access_token')!;
+  vendor_id = this.authService.getLocalStorage('vendor_id')!;
 
   getJenisPenyediaUsaha(): Observable<any>{
     let api_jenis_penyedia_usaha: ApiInterface = {
@@ -216,6 +217,19 @@ export class ProfileInformationService {
     }
 
     return this.apiService.sendRequest(api_profile_information);
+  }
+
+  getContactMechanism(): Observable<any>{
+    let api_get_contact_mechanism: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_contact_mechanism,
+      options : {
+        params: {
+          party : this.vendor_id
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_contact_mechanism);
   }
   
 }
