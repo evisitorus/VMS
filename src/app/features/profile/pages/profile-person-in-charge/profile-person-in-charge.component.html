@@ -7,7 +7,7 @@
   <div class="col-10 profile-content-container">
 
     <div class="profile-content">
-      
+
       <div class="profile-content-title">
         <kendo-label>PIC</kendo-label>
       </div>
@@ -17,11 +17,11 @@
       </div>
       <form class="k-form auth-form" [formGroup]="form">
         <fieldset class="k-form-fieldset">
-  
+
           <ng-container
             *ngIf="responseFile; then showPICPicture; else showDefaultPicture">
           </ng-container>
-  
+
           <ng-template #showPICPicture>
               <div class="row align-items-center k-justify-content-center">
                 <img class="col-3" [src]="responseFile"/>
@@ -32,14 +32,14 @@
               <img class="col-3" src="/assets/images/nopic.jpg" style="width: 15%; height: 15%"/>
             </div>
           </ng-template>
-  
+
           <div class="row align-items-center k-justify-content-center" *ngIf="!isDisabled">
             <kendo-fileselect id="input-pic-avatar" required name="picAvatar" #picAvatar="ngModel"
                               [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles"
                               [ngModelOptions]="{standalone: true}" (change)="upload()" [multiple]="false">
             </kendo-fileselect>
           </div>
-  
+
           <kendo-formfield>
             <div class="row align-items-center">
               <kendo-label class="col-3">Nama</kendo-label>
@@ -48,14 +48,17 @@
                              required
                              [readonly]=isDisabled
                              [(ngModel)]="responseName"
-                             [value]=responseName>
+                             [value]=responseName
+                             [minlength]="3"
+                             [maxlength]="50"
+                             (keypress)="keyPressAlphaSymbol($event)">
                 <!--            <kendo-formhint></kendo-formhint>-->
                 <!--            <kendo-formerror>Nama tidak boleh kosong</kendo-formerror>-->
               </kendo-textbox>
-  
+
             </div>
           </kendo-formfield>
-  
+
           <div class="row align-items-center">
             <kendo-label class="col-3">Alamat Email</kendo-label>
             <kendo-textbox id="input-email" class="col-md" formControlName="email" #email
@@ -64,7 +67,7 @@
                            [(ngModel)]="responseEmail">
             </kendo-textbox>
           </div>
-  
+
           <div class="row align-items-center">
             <kendo-label class="col-3">No. Handphone</kendo-label>
             <kendo-textbox id="input-phone-number" class="col-md" formControlName="phoneNumber"
@@ -73,19 +76,22 @@
                            required
                            [readonly]=isDisabled
                            [(ngModel)]="responsePhoneNumber"
-                           [value]=responsePhoneNumber>
+                           [value]=responsePhoneNumber
+                           [minlength]="9"
+                           [maxlength]="13"
+                           (keypress)="keyPressNumbers($event)">
             </kendo-textbox>
             <!--          <kendo-formhint></kendo-formhint>-->
             <!--          <kendo-formerror>No. Handphone tidak boleh kosong</kendo-formerror>-->
           </div>
-  
+
           <div class="row align-items-center" [hidden]="!isDisabled">
             <kendo-label class="col-3">Kata Sandi</kendo-label>
             <kendo-label class="col-md">Harap ganti kata sandi secara berkala untuk
               meningkatkan keamanan akun
             </kendo-label>
           </div>
-  
+
           <div class="row align-items-center" [hidden]="isDisabled">
             <kendo-label class="col-3">Kata Sandi Lama</kendo-label>
             <kendo-textbox id="input-old-password" class="col-md" formControlName="oldPassword"
@@ -99,7 +105,7 @@
             <!--          <kendo-formhint></kendo-formhint>-->
             <!--          <kendo-formerror>Kata Sandi Lama tidak koleh kosong</kendo-formerror>-->
           </div>
-  
+
           <div class="row align-items-center" [hidden]="isDisabled">
             <kendo-label class="col-3">Kata Sandi Baru</kendo-label>
             <kendo-textbox id="input-new-password" class="col-md" formControlName="newPassword"
@@ -113,7 +119,7 @@
             <!--          <kendo-formhint></kendo-formhint>-->
             <!--          <kendo-formerror>Kata Sandi Baru tidak koleh kosong</kendo-formerror>-->
           </div>
-  
+
           <div class="row align-items-center" [hidden]="isDisabled">
             <kendo-label class="col-3">Konfirmasi Kata Sandi Baru</kendo-label>
             <kendo-textbox id="input-confirm-new-password" class="col-md" formControlName="confirmNewPassword"
@@ -127,11 +133,11 @@
             <!--          <kendo-formhint></kendo-formhint>-->
             <!--          <kendo-formerror>Konfirmasi Kata Sandi Baru tidak koleh kosong</kendo-formerror>-->
           </div>
-  
+
           <ng-container
             *ngIf="isDisabled; then showUpdateButton; else showSaveButton">
           </ng-container>
-  
+
           <ng-template #showUpdateButton>
             <div class="k-form-buttons k-float-right">
               <button class="k-button k-primary vms-btn" (click)="changeIsDisabled()" *ngIf="isDisabled">Perbarui</button>
@@ -142,7 +148,7 @@
               <button class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan</button>
             </div>
           </ng-template>
-  
+
           <kendo-dialog
             *ngIf="opened"
             (close)="close('cancel')"
@@ -156,7 +162,7 @@
               <button kendoButton (click)="save(); close('yes')" [primary]="true">Ya</button>
             </kendo-dialog-actions>
           </kendo-dialog>
-  
+
         </fieldset>
       </form>
     </div>
