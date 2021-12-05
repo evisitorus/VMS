@@ -1,6 +1,7 @@
 import {Component, Injectable, ViewEncapsulation} from "@angular/core";
-import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 import {FileRestrictions} from "@progress/kendo-angular-upload";
+import { from } from "rxjs";
 import {ApiRoutes} from "src/app/core/services/api/api-routes";
 import {EventEmitterService} from "src/app/core/services/event-emitter.service";
 import {FileService} from "src/app/core/services/file.service";
@@ -8,6 +9,7 @@ import {ProfileInformationService} from "src/app/core/services/profile-informati
 import {environment as env} from "src/environments/environment";
 import {ProfileInformationInterface} from "../../../../core/interfaces/profile/profile-information-interface";
 import {AuthService} from "../../../../core/services/auth.service";
+import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service"
 
 interface Item {
   name: string;
@@ -33,6 +35,8 @@ export class ProfileInformasiPerusahaanComponent {
     private profileInfoService: ProfileInformationService,
     private fileService: FileService,
     private authService: AuthService,
+    private profileDashboardService : ProfileDashboardService,
+    public fb: FormBuilder
   ) {
   }
   public params!: ProfileInformationInterface;
@@ -119,10 +123,7 @@ export class ProfileInformasiPerusahaanComponent {
   public dataResultKelurahan: Array<{}> = [];
   public dataResultKodepos: Array<{}> = [];
 
-  public dataPerusahaan: any = {
-    namaPerusahaan : "",
-
-  };
+  public dataPerusahaan: any = {};
 
   public fetchData(): void {
     //get vendor information
@@ -130,11 +131,6 @@ export class ProfileInformasiPerusahaanComponent {
       (resp) => {
         let data = resp.data[0];
         console.log(data);
-
-        this.dataPerusahaan.namaPerusahaan = data.party.name;
-        this.dataPerusahaan.inisialPerusahaan = data.party.altName;
-        // this.dataPerusahaan.inisialPerusahaan = data.party.altName;
-
 
         this.vendor_info = data;
         this.vendor_contact_mechanism = {};
@@ -231,35 +227,120 @@ export class ProfileInformasiPerusahaanComponent {
     
   }
 
+  public getDataPerusahaan(): void{
+    this.profileDashboardService.getVendor().subscribe(
+      (resp) => {
+        this.dataPerusahaan.namaPerusahaan = resp.name ? resp.name : "";
+        this.dataPerusahaan.inisialPerusahaan = resp.altName ? resp.altName : "";
+        this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
+        this.dataPerusahaan.statusPerusahaanPkp = resp.statusPerusahaanPkp ? "true" : "false";
+        this.dataPerusahaan.tipeBadanUsahaName = resp.tipeVendor.name ? resp.tipeVendor.name : "";
+        this.dataPerusahaan.tipeBadanUsahaId = resp.tipeVendor.id ? resp.tipeVendor.id : "";
+        // this.dataPerusahaan.jenisKegiatanUsahaUtama = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
+        // this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisKegiatanUsaha[0].description ? resp.jenisKegiatanUsaha[0].description : "";
+        this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
+        this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
+        this.dataPerusahaan.bumnPengampu = resp.bumnPengampu ? resp.bumnPengampu : "";
+        this.dataPerusahaan.organisasiHimpunan = resp.organisasiHimpunan ? resp.organisasiHimpunan : "";
+        this.dataPerusahaan.web = resp.website ? resp.website : "";
+        this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : "";
+        this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : "";
+
+        //get jenis penyedia usaha
+        this.profileInfoService.getJenisPenyediaUsaha().subscribe(
+          (resp) => {
+            this.jenis_penyedia_usaha = resp["hydra:member"];
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get jenis kegiatan usaha
+        this.profileInfoService.getJenisKegiatanUsaha().subscribe(
+          (resp) => {
+            this.jenis_kegiatan_usaha = resp["hydra:member"];
+
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get list of organizations
+        this.profileInfoService.getOrganizations().subscribe(
+          (resp) => {
+            this.organizations = resp["hydra:member"];
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        // get list of provinces
+        this.profileInfoService.getProvinces().subscribe(
+          (resp) => {
+            this.provinsi = resp["hydra:member"];        
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get tipe badan usaha
+        this.profileInfoService.getTipeVendor().subscribe(
+          (resp) => {
+            this.tipeBadanUsahaItems = resp["hydra:member"];
+            const badanusahaitems = {
+              name : this.dataPerusahaan.tipeBadanUsahaName,
+              id : this.dataPerusahaan.tipeBadanUsahaId
+            }
+            this.selectedBadanUsaha = badanusahaitems;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        this.setFormPerusahaan(this.dataPerusahaan);
+      },
+      (error) => {
+        console.log(console.log(error));
+      }
+    );
+  }
+
   ngOnInit(): void {
     this.logoForm = new FormGroup({
       files: new FormControl(this.data.files),
     });
 
-    this.fetchData();
+    // this.fetchData();
+    this.getDataPerusahaan();
   }
 
-  public setForm(): void {
-    this.profileInformationFormGroup = new FormGroup({
-      namaPerusahaan: new FormControl(this.dataPerusahaan.namaPerusahaan, Validators.required),
-      inisialPerusahaan: new FormControl(this.dataPerusahaan.altName, []),
-      jenisBadanUsaha: new FormControl(this.jenisVendor.toString(), Validators.required),
-      statusBadanUsaha: new FormControl(this.vendor_info.statusPerusahaanPkp, Validators.required),
-      tipeBadanUsaha: new FormControl(this.tipeVendor, Validators.required),
-      kategoriBadanUsaha: new FormControl(this.tipeVendor, Validators.required),
-      jenisKegiatanUsahaUtama: new FormControl(null, Validators.required),
-      jenisPenyediaUsaha: new FormControl(null, Validators.required),
-      npwpPerusahaan: new FormControl(this.vendor_info.npwp, Validators.required),
-      nomorIndukBerusaha: new FormControl(this.vendor_info.nomorIndukBerusaha, Validators.required),
-      bidangUsaha: new FormControl(null, Validators.required),
-      bumnPengampu: new FormControl(this.vendor_info.bumnPengampu, Validators.required),
-      organisasiHimpunan: new FormControl(this.vendor_info.organisasiHimpunan, []),
-      websitePerusahaan: new FormControl(this.vendor_info.website, Validators.required),
-      jumlahKaryawanTotal: new FormControl(this.total_karyawan, Validators.required),
-      jumlahKaryawanLokal: new FormControl(this.vendor_info.jumlahKaryawanDomestik, Validators.required),
-      jumlahKaryawanAsing: new FormControl(this.vendor_info.jumlahKaryawanAsing, Validators.required),
-      noTeleponPerusahaan: new FormControl(this.vendor_contact_mechanism.telcoNumber.number, Validators.required),
-      alamatPerusahaan: new FormControl(this.vendor_contact_mechanism.address.address1, Validators.required),
+  public setFormPerusahaan(data:any): void {
+    console.log(data);
+    this.profileInformationFormGroup = this.fb.group({
+      namaPerusahaan: new FormControl(data.namaPerusahaan, Validators.required),
+      inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
+      jenisBadanUsaha: new FormControl(data.jenisBadanUsaha, Validators.required),
+      statusBadanUsaha: new FormControl(data.statusPerusahaanPkp , Validators.required),
+      tipeBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsahaUtama, Validators.required),
+      jenisPenyediaUsaha: new FormControl(data.jenisPenyediaUsaha, Validators.required),
+      npwpPerusahaan: new FormControl(data.npwp, Validators.required),
+      nomorIndukBerusaha: new FormControl(data.nib, Validators.required),
+      bidangUsaha: new FormControl(data.bidangUsaha, Validators.required),
+      bumnPengampu: new FormControl(data.bumnPengampu, Validators.required),
+      organisasiHimpunan: new FormControl(data.organisasiHimpunan, []),
+      websitePerusahaan: new FormControl(data.web, Validators.required),
+      jumlahKaryawanTotal: new FormControl(data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing, Validators.required),
+      jumlahKaryawanLokal: new FormControl(data.jumlahKaryawanDomestik, Validators.required),
+      jumlahKaryawanAsing: new FormControl(data.jumlahKaryawanAsing, Validators.required),
+      noTeleponPerusahaan: new FormControl(null, Validators.required),
+      alamatPerusahaan: new FormControl(null, Validators.required),
       provinsi: new FormControl(this.selectedProvince, Validators.required),
       kota: new FormControl(this.selectedKota, Validators.required),
       kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
@@ -267,7 +348,10 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
+  }
 
+
+  public setForm(): void {
     // this.profileInformationFormGroup = new FormGroup({
     //   namaPerusahaan: new FormControl(this.vendor_info.name, Validators.required),
     //   inisialPerusahaan: new FormControl(this.vendor_info.altName, []),

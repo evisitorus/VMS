@@ -64,20 +64,17 @@
                       <div class="col">
                         <ul class="k-radio-list k-list-horizontal">
                           <li class="k-radio-item">
-                            <input id="ptRbtn" type="radio" #pt value="1" formControlName="jenisBadanUsaha" 
-                                   kendoRadioButton />
+                            <input id="ptRbtn" type="radio" #pt value="1" formControlName="jenisBadanUsaha" kendoRadioButton/>
                             <kendo-label class="k-radio-label" [for]="pt" text="PT"></kendo-label>
                           </li>
     
                           <li class="k-radio-item">
-                            <input id="cvRbtn" type="radio" #cv value="2" formControlName="jenisBadanUsaha"
-                                   kendoRadioButton />
+                            <input id="cvRbtn" type="radio" #cv value="2" formControlName="jenisBadanUsaha" kendoRadioButton />
                             <kendo-label class="k-radio-label" [for]="cv" text="CV"></kendo-label>
                           </li>
     
                           <li class="k-radio-item">
-                            <input id="otherRbt" type="radio" #other value="3" formControlName="jenisBadanUsaha"
-                                   kendoRadioButton />
+                            <input id="otherRbt" type="radio" #other value="3" formControlName="jenisBadanUsaha" kendoRadioButton />
                             <kendo-label class="k-radio-label" [for]="other" text="Lainnya"></kendo-label>
                           </li>
                         </ul>
@@ -96,7 +93,7 @@
                           id="pkp"
                           type="radio"
                           required
-                          [value]="true"
+                          value="true"
                           formControlName="statusBadanUsaha"
                           kendoRadioButton
                         />
@@ -105,7 +102,7 @@
                           id="nonpkp"
                           type="radio"
                           required
-                          [value]="false"
+                          value="false"
                           formControlName="statusBadanUsaha"
                           kendoRadioButton
                         />
