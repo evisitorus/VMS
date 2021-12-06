@@ -57,7 +57,7 @@
       </div>
 
       <div class="profile-content-grid">
-        <kendo-grid [data]="gridData">
+        <kendo-grid [data]="gridData" class="vms-kendo-grid">
           <kendo-grid-column field="no" title="No.">
           </kendo-grid-column>
           <kendo-grid-column field="nama" title="Nama Asset">
@@ -68,12 +68,15 @@
           </kendo-grid-column>
           <kendo-grid-column field="id" title="Action">
             <ng-template kendoGridCellTemplate let-dataItem>
-              <span>
-                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)">
-              </span>
-              <span>
-                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem.id)">
-              </span>
+              <div *ngIf="!dataItem.deletedAt">
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.nama)">
+                </span>
+              </div>   
+              <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
@@ -94,5 +97,7 @@
   </div>
 
 </div>
+
+<div kendoDialogContainer></div>
 
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
