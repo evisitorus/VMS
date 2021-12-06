@@ -6,6 +6,7 @@ import { FileService } from 'src/app/core/services/file.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
+import { ApiRoutes } from "src/app/core/services/api/api-routes";
 
 interface Item {
   name: string;
@@ -26,35 +27,51 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public dataKaryawan = [
     {
-      "nik": "848e6002-8a92-447d-951b-1ffd5e695578",
+      "nik": "848e6002",
       "namaPegawai": "Sig Jeannel",
-      "tipeKaryawan": 1,
+      "tipeKaryawan": {
+        id: 1,
+        name: "Tenaga Ahli"
+      },
       "jabatan": "Human Resources Assistant III",
-      "bidangPekerjaan": "HR"
+      "bidangPekerjaan": "HR",
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     },
     {
-      "nik": "19d18d40-0e64-4837-9420-92130a0ed253",
+      "nik": "19d18d40",
       "namaPegawai": "Shelden Greyes",
-      "tipeKaryawan": 2,
+      "tipeKaryawan": {
+        id: 2,
+        name: "Tenaga Terampil"
+      },
       "jabatan": "Operator",
-      "bidangPekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering",
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     },
     {
       "nik": "bebdc6eb",
       "namaPegawai": "Megen Cody",
-      "tipeKaryawan": 3,
+      "tipeKaryawan": {
+        id: 2,
+        name: "Tenaga Administrasi"
+      },
       "jabatan": "Operator",
-      "bidangPekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering",
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     },
     {
       "nik": "38b08b88",
       "namaPegawai": "Clevey Thursfield",
-      "tipeKaryawan": 2,
+      "tipeKaryawan": {
+        id: 2,
+        name: "Tenaga Terampil"
+      },
       "jabatan": "VP Quality Control",
-      "bidangPekerjaan": "Engineering"
+      "bidangPekerjaan": "Engineering",
+      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
     }
   ];
-  
+
   public gridData: any = {};
   // public gridView!: any[];
 
@@ -62,19 +79,11 @@ export class ProfilKaryawanComponent implements OnInit {
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
-  public tipeKaryawan: Array<Item> = [{ 
-      id: 1,
-      name: "Tenaga Ahli"
-    },{
-      id: 2,
-      name: "Tenaga Terampil"
-    },{
-      id: 3,
-      name: "Tenaga Administrasi"
-  }];
+  public tipeSource: Array<Item> = [];
+  public bidangSource: Array<Item> = [];
 
-  public pegawaiFormGroup! :FormGroup;
-  
+  public pegawaiFormGroup!: FormGroup;
+
   public opened = false;
 
   public submitted = false;
@@ -96,32 +105,95 @@ export class ProfilKaryawanComponent implements OnInit {
     resume: ""
   };
 
+  public bidangTemp: Array<Item> = [];
+
   constructor(
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
     private eventEmitterService: EventEmitterService,
-  ) { 
-    this.setForm();
+  ) {
+    //extract from 0
+    this.bidangTemp = this.bidangSource.slice(0);
   }
 
   ngOnInit(): void {
     // this.gridView = this.gridData;
-    this.gridData = this.dataKaryawan;
+    // this.gridData = this.dataKaryawan;
+    this.fetchData();
+
+  }
+
+  public fetchData(): void {
+    this.setForm();
+    this.profileInformationService.getTipeKaryawan().subscribe(
+      (resp) => {
+        this.tipeSource = resp['hydra:member'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.profileInformationService.getBidangKaryawan().subscribe(
+      (resp) => {
+        this.bidangSource = resp['hydra:member'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+
   }
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(this.data.nik,[]),
-      namaPegawai: new FormControl(this.data.namaPegawai,Validators.required),
-      tipeKaryawan: new FormControl(this.data.tipeKaryawan.name,[]),
-      jabatan: new FormControl(this.data.jabatan, Validators.required),
-      bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
+      nik: new FormControl(null, Validators.required),
+      namaPegawai: new FormControl(null, Validators.required),
+      tipeKaryawan: new FormControl(null, Validators.required),
+      jabatan: new FormControl(null, Validators.required),
+      bidangPekerjaan: new FormControl(null, Validators.required)
     });
   }
 
   public submitProfilKaryawan(): void {
     this.pegawaiFormGroup.markAllAsTouched();
-    
+
+  }
+
+  // add new bidang value based on user input
+  public filter!: string;
+  public selectedBidang!: Item ;
+  public addNew(): void {
+
+    this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
+      (res) => {
+        //add new value into temp array and backend
+        this.bidangSource.push({
+          name: this.filter,
+          id: 0,
+        });
+        //make new added value the selected value
+        this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
+        this.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
+        this.triggerPopUp();
+      },
+      (error) => {
+        this.popUpMessage = "Gagal menambahkan bidang pekerjaan";
+        this.triggerPopUp();
+      });
+
+
+    this.handleFilter(this.filter);
+
+  }
+
+  // searching handler
+  public handleFilter(value: any) {
+    this.filter = value;
+    this.bidangTemp = this.bidangSource.filter(
+      (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    );
   }
 
   // public mapData(data: any[]): any[] {
@@ -153,15 +225,15 @@ export class ProfilKaryawanComponent implements OnInit {
   //   );
   // }
 
-  public addToTableFe():void{
-    let temp:any = {
+  public addToTableFe(): void {
+    let temp: any = {
       nik: this.pegawaiFormGroup.value.nik,
       namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
       tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-      jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan,
+      jabatan: this.pegawaiFormGroup.value.jabatan,
+      bidangPekerjaan: this.pegawaiFormGroup.value.bidangPekerjaan.name,
       // file: this.uploadedFileId,
-      // attachmentFilePath: this.uploadedFileContentUrl
+      resume: ApiRoutes.api_base_url + this.uploadedFileContentUrl
     }
     this.popUpMessage = "Berhasil menyimpan data";
     this.triggerPopUp();
@@ -195,7 +267,6 @@ export class ProfilKaryawanComponent implements OnInit {
   // }
 
   public close() {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
@@ -223,7 +294,7 @@ export class ProfilKaryawanComponent implements OnInit {
       (res) => {
         let mime = this.fileService.getMimeType(filename);
         let blob = new Blob([res], { type: mime });
-        let url= window.URL.createObjectURL(blob);
+        let url = window.URL.createObjectURL(blob);
         window.open(url);
       },
       () => {
@@ -233,7 +304,7 @@ export class ProfilKaryawanComponent implements OnInit {
     );
   }
 
-  triggerPopUp():void  {
+  triggerPopUp(): void {
     this.eventEmitterService.trigger();
   }
 

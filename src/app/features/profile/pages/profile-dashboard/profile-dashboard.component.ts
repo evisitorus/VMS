@@ -35,6 +35,12 @@ export class ProfileDashboardComponent implements OnInit {
     this.profileService.getVendor().subscribe(
       (resp) => {
         this.jenis_kegiatan_usaha = resp.jenisKegiatanUsaha[0].description;
+
+        if (null === resp.logo) {
+          this.logoImg = null;
+        } else {
+          this.logoImg = ApiRoutes.api_env + resp.logo + "/file";
+        }
       },
       (error) => {
       }
@@ -46,12 +52,6 @@ export class ProfileDashboardComponent implements OnInit {
         this.address_vendor = resp.data.address;
         this.registered_at = resp.data.registered_at;
         this.vendor_name = resp.data.name;
-
-        if (null === resp.data.logo) {
-          this.logoImg = null;
-        } else {
-          this.logoImg = ApiRoutes.api_media_object_route + "/" + resp.data.logo + "/file";
-        }
       },
       (error) => {
       }

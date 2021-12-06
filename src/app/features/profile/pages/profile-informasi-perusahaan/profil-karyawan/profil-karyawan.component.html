@@ -19,7 +19,7 @@
     </kendo-grid-column>
     <kendo-grid-column title="Tipe Karyawan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.tipeKaryawan === 1 ? "Tenaga Ahli" : 2 ? "Tenaga Terampil" : "Tenaga Administrasi" }}
+        {{ dataItem.tipeKaryawan.name }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Jabatan">
@@ -32,11 +32,11 @@
         {{ dataItem.bidangPekerjaan }}
       </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column title="Resume">
+    <!-- <kendo-grid-column title="Resume">
       <ng-template kendoGridCellTemplate let-dataItem>
         <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.resume }}</a>
       </ng-template>
-    </kendo-grid-column>
+    </kendo-grid-column> -->
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-dataItem>
         <span>
@@ -57,47 +57,79 @@
   <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
     <div class="container">
       <form [formGroup]="pegawaiFormGroup">
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">NIK</kendo-label>
-            <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md" placeholder="Type your message here" [clearButton]="true" #nik>
+            <div class="col k-vstack">
+              <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md"
+              placeholder="Type your message here" [clearButton]="true" #nik>
             </kendo-textbox>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan harus diisi</kendo-formerror>
+            </div>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Nama Karyawan</kendo-label>
-            <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai" placeholder="Type your message here" #namaPegawai [clearButton]="true">
+            <div class="col k-vstack">
+              <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai"
+              placeholder="Type your message here" #namaPegawai [clearButton]="true">
             </kendo-textbox>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.namaPegawai.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+            </div>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Tipe Karyawan</kendo-label>
-            <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md" [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }"textField="name" valueField="id" [data]="tipeKaryawan">
+            <div class="col k-vstack">
+              <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md"
+              [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id"
+              [data]="tipeSource" #tipeKaryawan>
             </kendo-dropdownlist>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.tipeKaryawan.errors?.required">Mohon pilih salah satu opsi tipe karyawan</kendo-formerror>
+            </div>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Jabatan</kendo-label>
-            <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here" [maxlength]="25"
-              [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
+            <div class="col k-vstack">
+              <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here"
+              [maxlength]="25" [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.jabatan.errors?.required">Jabatan tidak boleh kosong</kendo-formerror>
+            </div>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
-            <kendo-textbox id="bidangPekerjaanKaryawanInput" class="col-md" [maxlength]="25" placeholder="Type your message here" [clearButton]="true" formControlName="bidangPekerjaan" #bidangPekerjaan></kendo-textbox>
+            <div class="col k-vstack">
+              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col"
+              [defaultItem]="{ name: 'Masukkan nama bidang pekerjaan, contoh: IT, Human Resource...', id: null }" textField="name" valueField="id" [data]="bidangTemp" (filterChange)="handleFilter($event)" #bidangPekerjaan [(ngModel)]="selectedBidang" >
+              <ng-template kendoDropDownListNoDataTemplate>
+                <div>
+                  Data bidang pekerjaan tidak ditemukan
+                  <ng-container *ngIf="filter">Apakah anda mau menambahkan - "{{ filter }}" ?</ng-container>
+                  <br />
+                  <button *ngIf="filter" class="k-button" (click)="addNew()">
+                    Tambah bidang baru
+                  </button>
+                </div>
+              </ng-template>
+            </kendo-dropdownlist>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang
+              Pekerjaan tidak boleh kosong</kendo-formerror>
+            </div>
           </div>
         </kendo-formfield>
-        <kendo-formfield [formGroup]= "pegawaiFormGroup">
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
             <kendo-label class="col">Resume</kendo-label>
-            <div class="col-md">
+            <div class="col">
               <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
-            </kendo-fileselect>
-            <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
+              </kendo-fileselect>
+              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
           </div>
 

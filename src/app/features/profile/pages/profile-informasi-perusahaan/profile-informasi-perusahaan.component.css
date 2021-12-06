@@ -88,15 +88,15 @@
   padding: 1em;
 }
 
-.profile-content {
+/* .profile-content {
   display: flex;
   background-color: transparent!important;
-}
+} */
 
-.profile-menu {
+/* .profile-menu {
   float: left;
   height: 100vh;
-}
+} */
 
 .profile-content-title {
   margin-bottom: 1em;

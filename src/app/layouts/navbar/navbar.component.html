@@ -8,14 +8,14 @@
         <li class="nav-item">
             <a class="nav-link" href="#">Beranda</a>
         </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link" href="/dashboard">Profil</a>
-      </li>
         <li class="nav-item">
             <a class="nav-link" href="/tentang-kami">Tentang Kami</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Kontak</a>
+        <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" href="/dashboard">Profil</a>
+          </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+            <a class="nav-link" href="/login">Login</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
             <a id="btn-logout" class="nav-link" href="#" (click)="logout()">Logout</a>

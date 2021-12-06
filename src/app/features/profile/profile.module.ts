@@ -34,6 +34,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/profil-karyawan/profil-karyawan.component';
+import { DataPegawaiComponent } from './pages/profile-informasi-perusahaan/data-pegawai/data-pegawai.component';
 
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
@@ -66,7 +67,8 @@ import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/pr
     ProfileDashboardComponent,
     PemegangSahamComponent,
     DrawerComponent,
-    ProfilKaryawanComponent
+    ProfilKaryawanComponent,
+    DataPegawaiComponent
   ],
   imports: [
     CommonModule,

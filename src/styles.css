@@ -158,8 +158,9 @@ label{
 
 
 .k-link.k-state-selected{
-    background-color: white !important;
-    color: black !important;
+    color: white !important;
+    background-color: #0193ac !important;
+    border-color: #0193ac !important;
 }
 
 
