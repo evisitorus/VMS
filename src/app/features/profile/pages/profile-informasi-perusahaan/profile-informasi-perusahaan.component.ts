@@ -6,7 +6,7 @@ import {ApiRoutes} from "src/app/core/services/api/api-routes";
 import {EventEmitterService} from "src/app/core/services/event-emitter.service";
 import {FileService} from "src/app/core/services/file.service";
 import {ProfileInformationService} from "src/app/core/services/profile-information.service";
-import {environment as env} from "src/environments/environment";
+import {environment as env, environment} from "src/environments/environment";
 import {ProfileInformationInterface} from "../../../../core/interfaces/profile/profile-information-interface";
 import {AuthService} from "../../../../core/services/auth.service";
 import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service";
@@ -145,6 +145,11 @@ export class ProfileInformasiPerusahaanComponent {
   public getDataPerusahaan(): void{
     this.profileDashboardService.getVendor().subscribe(
       (resp) => {
+
+        if (resp.logo) {
+          this.logoImg = environment.api_base_path + resp.logo.concat('/file');
+        }
+
         this.dataPerusahaan.namaPerusahaan = resp.name ? resp.name : "";
         this.dataPerusahaan.inisialPerusahaan = resp.altName ? resp.altName : "";
 
@@ -285,43 +290,43 @@ export class ProfileInformasiPerusahaanComponent {
               }
             );
 
-            this.profileInfoService.getKotaKabupaten(this.dataPerusahaan.address.province.id).subscribe(
-              (resp) => {
-                this.cities = resp["hydra:member"];
-                const index = this.cities.findIndex(x => x.id === this.dataPerusahaan.address.city.id);
-                // this.defaultItemKota.description = this.cities[index].description;  
-                this.selectedKota = this.cities[index];  
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
+            // this.profileInfoService.getKotaKabupaten(this.dataPerusahaan.address.province.id).subscribe(
+            //   (resp) => {
+            //     this.cities = resp["hydra:member"];
+            //     const index = this.cities.findIndex(x => x.id === this.dataPerusahaan.address.city.id);
+            //     // this.defaultItemKota.description = this.cities[index].description;  
+            //     this.selectedKota = this.cities[index];  
+            //   },
+            //   (error) => {
+            //     console.log(error);
+            //   }
+            // );
 
             
-            this.profileInfoService.getKecamatan(this.dataPerusahaan.address.city.id).subscribe(
-              (resp) => {
-                this.districts = resp["hydra:member"];
-                const index = this.districts.findIndex(x => x.id === this.dataPerusahaan.address.district.id);
-                // this.defaultItemKecamatan.description  = this.districts[index].description;
-                this.selectedKecamatan = this.districts[index];  
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
+            // this.profileInfoService.getKecamatan(this.dataPerusahaan.address.city.id).subscribe(
+            //   (resp) => {
+            //     this.districts = resp["hydra:member"];
+            //     const index = this.districts.findIndex(x => x.id === this.dataPerusahaan.address.district.id);
+            //     // this.defaultItemKecamatan.description  = this.districts[index].description;
+            //     this.selectedKecamatan = this.districts[index];  
+            //   },
+            //   (error) => {
+            //     console.log(error);
+            //   }
+            // );
             
 
-            this.profileInfoService.getKelurahan(this.dataPerusahaan.address.district.id).subscribe(
-              (resp) => {
-                this.villages = resp["hydra:member"];
-                const index = this.villages.findIndex(x => x.id === this.dataPerusahaan.address.district.id);
-                // this.defaultItemKecamatan.description  = this.villages[index].description;
-                this.selectedKelurahan = this.villages[index];  
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
+            // this.profileInfoService.getKelurahan(this.dataPerusahaan.address.district.id).subscribe(
+            //   (resp) => {
+            //     this.villages = resp["hydra:member"];
+            //     const index = this.villages.findIndex(x => x.id === this.dataPerusahaan.address.district.id);
+            //     // this.defaultItemKecamatan.description  = this.villages[index].description;
+            //     this.selectedKelurahan = this.villages[index];  
+            //   },
+            //   (error) => {
+            //     console.log(error);
+            //   }
+            // );
 
           }
 
