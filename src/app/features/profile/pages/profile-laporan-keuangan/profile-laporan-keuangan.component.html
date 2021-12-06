@@ -250,12 +250,15 @@
             </kendo-grid-column>
             <kendo-grid-column field="id" title="Action">
               <ng-template kendoGridCellTemplate let-dataItem>
-                <span>
-                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)">
-                </span>
-                <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteNeraca(dataItem.id)">
-                </span>
+                <div *ngIf="!dataItem.deletedAt">
+                  <span>
+                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)">
+                  </span>
+                  <span>
+                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)">
+                  </span>
+                </div>
+                <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
               </ng-template>
             </kendo-grid-column>
           </kendo-grid>
@@ -361,5 +364,7 @@
 
   </div>
 </div>
+
+<div kendoDialogContainer></div>
 
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

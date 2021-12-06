@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import { ProfileKeuanganInterface, ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
@@ -18,7 +19,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   constructor(
     private service: ProfileKeuanganService,
     private eventEmitterService: EventEmitterService,
-    private fileService: FileService
+    private fileService: FileService,
+    private neracaDialogService: DialogService,
+    private sptDialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -202,7 +205,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         aktiva: parseInt(data[key]['aktiva']),
         pasiva: parseInt(data[key]['pasiva']),
         equitas: parseInt(data[key]['equitas']),
-        omzet: parseInt(data[key]['omzetBersih'])
+        omzet: parseInt(data[key]['omzetBersih']),
+        deletedAt: data[key]['deletedAt']
       };
     }
     return mappedData;
@@ -458,6 +462,40 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public deleteConfirmation(type: string, id: string, name: string): void {
+    if (type === "neraca") {
+      const dialog: DialogRef = this.neracaDialogService.open({
+        title: "Konfirmasi",
+        content: "Apakah neraca tahun " + name + " akan dihapus dari sistem ?",
+        actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+        width: 450,
+        height: 200,
+        minWidth: 250,
+      });
+  
+      dialog.result.subscribe((result) => {
+        if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+          this.deleteNeraca(id);
+        } 
+      });
+    } else {
+      const dialog: DialogRef = this.sptDialogService.open({
+        title: "Konfirmasi",
+        content: "Apakah " + name + " akan dihapus dari sistem ?",
+        actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+        width: 450,
+        height: 200,
+        minWidth: 250,
+      });
+  
+      dialog.result.subscribe((result) => {
+        if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+          this.deleteSPT(id);
+        } 
+      });
+    }
   }
 
   public postDataKeuangan(): void {
