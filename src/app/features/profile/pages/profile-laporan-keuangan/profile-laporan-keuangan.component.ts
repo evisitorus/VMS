@@ -221,7 +221,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         submitDate: formatDate(data[key]['submitDate'], "dd-MM-YYYY hh:mm:ss", "en-US"),
         nomor: data[key]['number'],
         lampiran: data[key]['attachmentFilePath'],
-        file: data[key]['file']
+        file: data[key]['file'],
+        deletedAt: data[key]['deletedAt'],
       };
     }
     return mappedData;
@@ -483,7 +484,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     } else {
       const dialog: DialogRef = this.sptDialogService.open({
         title: "Konfirmasi",
-        content: "Apakah " + name + " akan dihapus dari sistem ?",
+        content: "Apakah SPT tahun " + name + " akan dihapus dari sistem ?",
         actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
         width: 450,
         height: 200,

@@ -296,12 +296,15 @@
             </kendo-grid-column>
             <kendo-grid-column field="id" title="Action">
               <ng-template kendoGridCellTemplate let-dataItem>
-                <span>
-                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)">
-                </span>
-                <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteSPT(dataItem.id)">
-                </span>
+                <div *ngIf="!dataItem.deletedAt">
+                  <span>
+                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)">
+                  </span>
+                  <span>
+                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)">
+                  </span>
+                </div>
+                <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>                
               </ng-template>
             </kendo-grid-column>
           </kendo-grid>
