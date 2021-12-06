@@ -168,7 +168,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.web = resp.website ? resp.website : "";
         this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : "";
         this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : "";
-        this.dataPerusahaan.bidangUsaha = "46638";
+        this.dataPerusahaan.bidangUsaha = resp.website ? "46638" : "";
 
         //get jenis penyedia usaha
         this.profileInfoService.getJenisPenyediaUsaha().subscribe(
