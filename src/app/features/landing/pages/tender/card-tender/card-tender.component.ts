@@ -42,6 +42,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
   public orderBy!: Array<any>;
   public filterCategory!: Array<any>;
+  public filterBUMN!: Array<any>;
   public filterStatus!: Array<any>;
   public filterRegisterEnd!: Array<any>;
   public filterKeyword: string = "";
@@ -50,11 +51,13 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
   public listOrderBy: Array<any> = tenderOrderBy;
   public listFilterCategory: Array<any> = categoryTender;
+  public listFilterBUMN: Array<any> = BUMNTender;
   public listFilterStatus: Array<string> = statusTender;
   public listFilterRegisterEnd: Array<any> = registerEndTender;
 
   public selectedOrderByItem: any = this.listOrderBy[0];
   public selectedFilterCategoryItem: any = this.listFilterCategory[0];
+  public selectedFilterBUMNItem: any = this.listFilterBUMN[0];
   public selectedFilterStatusItem: any = this.listFilterStatus[0];
   public selectedFilterRegisterEndItem: any = this.listFilterRegisterEnd[0];
 
@@ -76,6 +79,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.filterCategory = this.listFilterCategory.slice();
     this.filterStatus = this.listFilterStatus.slice();
     this.filterRegisterEnd = this.listFilterRegisterEnd.slice();
+    this.filterBUMN = this.listFilterBUMN.slice();
   }
 
   public resetFilter(): void {
@@ -95,6 +99,10 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
     if (this.selectedFilterCategoryItem.value !== null) {
       this.query = this.query + "cids=" + this.selectedFilterCategoryItem.value + "&";
+    }
+
+    if (this.selectedFilterBUMNItem.value !== null) {
+      this.query = this.query + "q=" + this.selectedFilterBUMNItem.value + "&";
     }
 
     if (!this.hiddenFilter) {
@@ -240,4 +248,13 @@ const registerEndTender: Array<any> = [
   { value: 'today', text: "Hari Ini" },
   { value: 'week', text: "Minggu Ini" },
   { value: 'month', text: "Bulan Ini" },
+];
+
+const BUMNTender: Array<any> = [
+  { value: null, text: "Semua BUMN" },
+  { value: 'Pegadaian', text: "Pegadaian" },
+  { value: 'Pertamina', text: "Pertamina" },
+  { value: 'PLN', text: "PLN" },
+  { value: 'PNM', text: "PNM" },
+  { value: 'Telkom', text: "Telkom" },
 ];

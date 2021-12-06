@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ApiInterface } from '../interfaces/api-interface';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {ApiInterface} from '../interfaces/api-interface';
+import {ApiRouteMethods, ApiRoutes} from './api/api-routes';
+import {ApiService} from './api/api.service';
+import {AuthService} from './auth.service';
+import {ProfileInformationInterface} from "../interfaces/profile/profile-information-interface";
 import { ProfileInterface } from '../interfaces/profile-interface';
-import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
-import { ApiService } from './api/api.service';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ import { AuthService } from './auth.service';
 export class ProfileInformationService {
 
   constructor(
-    private apiService:ApiService,
+    private apiService: ApiService,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   token = this.authService.getLocalStorage('access_token')!;
+  vendor_id = this.authService.getLocalStorage('vendor_id')!;
 
   getJenisPenyediaUsaha(): Observable<any>{
     let api_jenis_penyedia_usaha: ApiInterface = {
@@ -29,10 +32,9 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_jenis_penyedia_usaha);
-
   }
 
-  getJenisKegiatanUsaha(): Observable<any>{
+  getJenisKegiatanUsaha(): Observable<any> {
     let api_jenis_kegiatan_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_jenis_kegiatan_usaha_route,
@@ -43,7 +45,6 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_jenis_kegiatan_usaha);
-
   }
 
 
@@ -72,7 +73,6 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_vendor_information);
-
   }
 
   getVendorData(): Observable<any>{
@@ -100,10 +100,9 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_organizations);
-
   }
 
-  getProvinces(): Observable<any>{
+  getProvinces(): Observable<any> {
     let api_provinces: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_provinces_route,
@@ -114,17 +113,16 @@ export class ProfileInformationService {
       // }
     }
     return this.apiService.sendRequest(api_provinces);
-
   }
 
   getKotaKabupaten(provinsi:any): Observable<any>{
     let api_get_kotakab: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kotakab,
+      url: ApiRoutes.api_get_kotakab.concat(provinsi),
       options : {
-        params: {
-          provinsi : provinsi
-        }
+        // params: {
+        //   provinsi : provinsi
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kotakab);
@@ -134,11 +132,11 @@ export class ProfileInformationService {
   getKecamatan(kotakab:any): Observable<any>{
     let api_get_kecamatan: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kecamatan,
+      url: ApiRoutes.api_get_kecamatan.concat(kotakab),
       options : {
-        params: {
-          kotakab : kotakab
-        }
+        // params: {
+        //   kotakab : kotakab
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kecamatan);
@@ -148,11 +146,11 @@ export class ProfileInformationService {
   getKelurahan(kecamatan:any): Observable<any>{
     let api_get_kelurahan: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kelurahan,
+      url: ApiRoutes.api_get_kelurahan.concat(kecamatan),
       options : {
-        params: {
-          kecamatan : kecamatan
-        }
+        // params: {
+        //   kecamatan : kecamatan
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kelurahan);
@@ -161,11 +159,11 @@ export class ProfileInformationService {
   getKodepos(kelurahan:any): Observable<any>{
     let api_get_kodepos: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_kodepos,
+      url: ApiRoutes.api_get_kodepos.concat(kelurahan),
       options : {
-        params: {
-          kelurahan : kelurahan
-        }
+        // params: {
+        //   kelurahan : kelurahan
+        // }
       }
     }
     return this.apiService.sendRequest(api_get_kodepos);
@@ -185,6 +183,53 @@ export class ProfileInformationService {
     };
 
     return this.apiService.sendRequest(api_update_profile);
+  }
+
+  updateProfileInformation(params: ProfileInformationInterface, vendorID: string): Observable<any> {
+    let api_profile_information: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/information',
+      body: {
+        name: params.name,
+        initial: params.initial,
+        jenis_badan_usaha: params.jenisBadanUsaha,
+        status_badan_usaha: params.statusBadanUsaha,
+        tipe_badan_usaha: params.tipeBadanUsaha,
+        kategori_badan_usaha: params.kategoriBadanUsaha,
+        jenis_kegiatan_usaha: params.jenisKegiatanUsaha,
+        jenis_penyedia_usaha: params.jenisPenyediaUsaha,
+        npwp: params.npwp,
+        nib: params.nib,
+        bidang_usaha: params.bidangUsaha,
+        oragnisasi_himpunan: params.oragnisasiHimpunan,
+        bumn_pengampu: params.bumnPengampu,
+        website: params.website,
+        jumlah_karyawan_total: params.jumlahKaryawanTotal,
+        jumlah_karyawan_lokal: params.jumlahKaryawanLokal,
+        jumlah_karyawan_asing: params.jumlahKaryawanAsing,
+        phone_number: params.phoneNumber
+      },
+      options: {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      },
+    }
+
+    return this.apiService.sendRequest(api_profile_information);
+  }
+
+  getContactMechanism(): Observable<any>{
+    let api_get_contact_mechanism: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_contact_mechanism,
+      options : {
+        params: {
+          party : this.vendor_id
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_contact_mechanism);
   }
   
 }

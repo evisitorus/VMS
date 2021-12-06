@@ -3,21 +3,33 @@
   <div class="filter">
     <p>Informasi Pengadaan</p>
     <div class="row">
-      <div class="col-6 filter-category">
+      <div class="col-4 filter-category">
+        <kendo-label [for]="filterCategory" text=""></kendo-label> <br>
         <kendo-dropdownlist id="select-filter-category" [(ngModel)]="selectedFilterCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+      </div>
+      <div class="col-4 filter-by-bumn">
+        <kendo-label [for]="filterBUMN" text=""></kendo-label> <br>
+        <kendo-dropdownlist id="select-filter-bumn" [(ngModel)]="selectedFilterBUMNItem" [data]="filterBUMN" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+      </div>
+      <div class="col-4 filter-created-at">
+        <kendo-label [for]="orderBy" text="Urutkan Berdasarkan"></kendo-label>
+        <kendo-dropdownlist id="select-order-by" [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+      </div>
+    </div>
+
+    <div class="k-actions k-actions-end">
+      <div class="profile-content-modal-btn">
         <button kendoButton class="btn-toggle-filter" (click)="toggleFilter()">
           {{hiddenFilter ? 'Buka' : 'Tutup'}} filter <span class="{{hiddenFilter ? 'k-icon k-i-arrow-60-down' : 'k-icon k-i-arrow-60-up'}}"></span>
         </button>
       </div>
-      <div class="col-6 filter-created-at k-actions k-actions-end">
-        <kendo-dropdownlist id="select-order-by" [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
-      </div>
     </div>
+
     <div class="hidden-filter" *ngIf="!hiddenFilter">
 
       <div class="row hidden-filter-content">
         <div class="col-6 filter-keyword">
-          <kendo-label [for]="filterKeyword" text="Cari Berdasarkan"></kendo-label> <br>
+          <kendo-label [for]="filterKeyword" text="Cari Berdasarkan"></kendo-label>
           <kendo-textbox placeholder="Cari" id="input-filter-keyword" [clearButton]="true" [(value)]="filterKeyword" (change)="filter()"></kendo-textbox>
         </div>
         <div class="col-6 filter-register-end">

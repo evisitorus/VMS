@@ -1,9 +1,11 @@
 const PADI_BASE_URL = "https://padi-dev.tees.co.id/external-app";
 
 const API_BASE_URL = env.api_base_path.concat('/api');
+const API_ENV = env.api_base_path;
 import { environment as env} from "src/environments/environment";
 
 export const ApiRoutes = {
+  api_env : API_ENV,
   api_login_route: API_BASE_URL + "/auth/login",
   api_register_route: API_BASE_URL + "/users/register",
   api_activate_route: API_BASE_URL + "/users/activate",
@@ -17,8 +19,6 @@ export const ApiRoutes = {
   api_profile_pic: API_BASE_URL + "/users/profile/pic",
   api_assets_route: API_BASE_URL + "/mesin_peralatans",
   api_penyedia_usaha_route: API_BASE_URL + "/jenis_penyedia_usahas?page=1",
-  api_get_organizations_route: API_BASE_URL + "/organizations",
-  api_get_provinces_route: API_BASE_URL + "/geo_locations?geoLocationType=5",
   api_tenders_route: API_BASE_URL + "/tenders",
   api_list_tender: API_BASE_URL + "/tenders/page/",
   api_token_route: API_BASE_URL + "/users/token",
@@ -38,15 +38,18 @@ export const ApiRoutes = {
   api_base_url: API_BASE_URL,
   api_jenis_kegiatan_usaha_route: API_BASE_URL + "/jenis_kegiatan_usahas?page=1",
   api_tipe_vendor_route: API_BASE_URL + "/tipe_vendors",
-  api_get_kotakab: API_BASE_URL + "/geo_locations?geoLocationType=6",
-  api_get_kecamatan: API_BASE_URL + "/geo_locations?geoLocationType=7",
-  api_get_kelurahan: API_BASE_URL + "/geo_locations?geoLocationType=8",
-  api_get_kodepos: API_BASE_URL + "/geo_locations?geoLocationType=8",
+  api_get_organizations_route: API_BASE_URL + "/organizations",
+  api_get_provinces_route: API_BASE_URL + "/geo_locations?geoLocationType.description=Provinsi",
+  api_get_kotakab: API_BASE_URL + "/geo_location_relationships?geoLocationRule.description=Provinsi%20-%20Kota%2FKabupaten&fromGeoLocation=",
+  api_get_kecamatan: API_BASE_URL + "/geo_location_relationships?geoLocationRule.description=Kota%2FKabupaten%20-%20Kecamatan&fromGeoLocation=",
+  api_get_kelurahan: API_BASE_URL + "/geo_location_relationships?geoLocationRule.description=Kecamatan%20-%20Kelurahan&fromGeoLocation=",
+  api_get_kodepos: API_BASE_URL + "/villages?id=",
   api_vendor_route: API_BASE_URL + "/vendors",
   api_list_bank_route: API_BASE_URL + "/banks",
   api_update_profile: API_BASE_URL + "/vendors/profile",
   api_neraca_route: API_BASE_URL + "/neracas",
   api_add_companyAddress:  API_BASE_URL + "/vendors/company_address",
+  api_get_contact_mechanism: API_BASE_URL + "/party_contact_mechanisms",
   //api_get_companyAddress:  API_BASE_URL + "/vendors/alamat_perusahaan",
 };
 
