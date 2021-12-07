@@ -11,7 +11,7 @@
   <kendo-grid-column field="id" title="Action">
     <ng-template kendoGridCellTemplate let-dataItem>
       <span>
-        <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="openSaham()"  id="btn-update">
+        <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
       </span>
       <span>
         <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="openSaham()">

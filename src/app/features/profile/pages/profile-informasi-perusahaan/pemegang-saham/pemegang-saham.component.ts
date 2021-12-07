@@ -126,7 +126,8 @@ export class PemegangSahamComponent implements OnInit {
         namaPemegangSaham: data[key]['toParty']['firstName'] ? data[key]['toParty']['firstName'] : data[key]['toParty']['name'],
         pemegangSahamPerseorangan: data[key]['pemegangSahamPerseorangan'] ?  "Perseorangan" : "Badan Usaha",
         pemegangSahamLokal: data[key]['pemegangSahamLokal'] ? "Lokal" : "Asing",
-        persentaseKepemilikan: data[key]['persentaseKepemilikan']
+        persentaseKepemilikan: data[key]['persentaseKepemilikan'],
+        id: data[key]['id'],
       };
     }
     return mappedData;
@@ -144,5 +145,20 @@ export class PemegangSahamComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+
+  public updateForm(data: any): void {
+
+    console.log(data);
+    
+    // this.id = data.id;
+    // this.data.nomorDokumen = data.no;
+    // this.data.namaDokumen = data.namaDokumen;
+    
+    // this.isNewData = false;
+
+    // this.setForm();
+    // this.open();
   }
 }
