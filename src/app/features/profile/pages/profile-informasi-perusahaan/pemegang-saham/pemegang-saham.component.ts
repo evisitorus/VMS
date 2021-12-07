@@ -181,4 +181,34 @@ export class PemegangSahamComponent implements OnInit {
     this.setForm();
     this.openSaham();
   }
+
+
+  public submit(): void {
+    this.pemegangSahamFormGroup.markAllAsTouched();
+    if (this.pemegangSahamFormGroup.valid) {
+      if (this.isNewData) {
+        this.submitPemegangSaham();
+      } else {
+        this.updatePemegangSaham();
+      }
+    }
+  }
+
+
+  public updatePemegangSaham(): void {
+    let params: AddPemegangSahamInterface= {...this.data}
+    this.profileService.updatePemegangSaham(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.getPemegangSaham();
+        this.close();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+        this.close();
+      }
+    );
+  }
 }

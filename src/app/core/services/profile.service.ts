@@ -85,4 +85,20 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pemegang_saham);
   }
 
+  updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
+    let api_update_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_update_pemegang_saham,
+      body: {
+        id: params.id,
+        namaPemegangSaham: params.namaPemegangSaham,
+        perseorangan: params.perseorangan,
+        lokal: params.lokal,
+        presentaseKepemilikan: params.persentaseKepemilikan
+      }
+    };
+
+    return this.apiService.sendRequest(api_update_pemegang_saham);
+  }
+
 }
