@@ -48,6 +48,7 @@ export const ApiRoutes = {
   api_list_bank_route: API_BASE_URL + "/banks",
   api_update_profile: API_BASE_URL + "/vendors/profile",
   api_neraca_route: API_BASE_URL + "/neracas",
+  api_address_route: API_BASE_URL + "/addresses",
   api_add_companyAddress:  API_BASE_URL + "/vendors/company_address",
   api_get_contact_mechanism: API_BASE_URL + "/party_contact_mechanisms",
   //api_get_companyAddress:  API_BASE_URL + "/vendors/alamat_perusahaan",

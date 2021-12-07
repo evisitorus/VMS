@@ -34,7 +34,7 @@ export class ProfileAddressService {
     public save(params: ProfileAddressInterface): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let vendor_id = this.authService.getLocalStorage('vendor_id')!;
-      let api_get_address: ApiInterface = {
+      let api_save_address: ApiInterface = {
         method: ApiRouteMethods.post,
         url: ApiRoutes.api_vendor_route + "/" + vendor_id + "/address",
         body: {
@@ -52,7 +52,21 @@ export class ProfileAddressService {
           }
         }
       };
-      return this.apiService.sendRequest(api_get_address);
+      return this.apiService.sendRequest(api_save_address);
+    }
+
+    public delete(id: string): Observable<any> {
+      let token = this.authService.getLocalStorage('access_token')!;
+      let api_delete_address: ApiInterface = {
+        method: ApiRouteMethods.delete,
+        url: ApiRoutes.api_address_route + "/" + id,
+        options: {
+          headers: {
+            Authorization: token
+          }
+        }
+      };
+      return this.apiService.sendRequest(api_delete_address);
     }
 
 }

@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
 import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
 import { ProfileAddressInterface } from 'src/app/core/interfaces/profile-address-interface';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 
 const messages = {
   default: 'Data tidak boleh kosong.',
@@ -46,18 +47,19 @@ export class ProfileAlamatComponent implements OnInit {
 
   public isNewData: boolean = true;
 
+  public opened = false;
+
   constructor(
     private eventEmitterService: EventEmitterService,
     private service: ProfileAddressService,
-    private addressService: ProfileInformationService
+    private addressService: ProfileInformationService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
     this.fetchData();
     this.setForm();
   }
-
-  public opened = false;
 
   public close(): void {
     this.opened = false;
@@ -118,6 +120,7 @@ export class ProfileAlamatComponent implements OnInit {
         provinsi:data[key]['province']['description'],
         kota: data[key]['city']['description'],
         id: data[key]['id'],
+        deletedAt: data[key]['deletedAt'],
       };
     }
     return mappedData;
@@ -283,7 +286,34 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public delete(id: string): void {
+    this.service.delete(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+      }
+    );
+  }
 
+  public deleteConfirmation(id: string, name: string): void {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Konfirmasi",
+      content: "Apakah " + name + " akan dihapus dari sistem ?",
+      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    });
+
+    dialog.result.subscribe((result) => {
+      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+        this.delete(id);
+      } 
+    });
   }
   
 }
