@@ -98,7 +98,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public data: any = {
     nik: "",
-    namaPegawai: "",
+    firstNameKaryawan: "",
+    lastNameKaryawan: "",
     tipeKaryawan: "",
     jabatan: "",
     bidangPekerjaan: "",
@@ -159,7 +160,8 @@ export class ProfilKaryawanComponent implements OnInit {
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
       nik: new FormControl(null, Validators.required),
-      namaPegawai: new FormControl(null, Validators.required),
+      firstNameKaryawan: new FormControl(null, Validators.required),
+      lastNameKaryawan: new FormControl(null, Validators.required),
       tipeKaryawan: new FormControl(null, Validators.required),
       jabatan: new FormControl(null, Validators.required),
       bidangPekerjaan: new FormControl(null, Validators.required)
