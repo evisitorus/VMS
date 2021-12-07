@@ -35,29 +35,30 @@ export class ProfileInformationService {
   //   return this.apiService.sendRequest(api_add_pegawai);
   // }
 
-  // public addProfilKaryawan(params: ProfileKaryawanInterface): Observable<any> {
-  //   let token = this.authService.getLocalStorage('access_token')!;
-  //   let api_add_profil_karyawan: ApiInterface = {
-  //     method: ApiRouteMethods.post,
-  //     url: ApiRoutes.api_vendor_information_route,
-  //     body: {
-  //       nik: params.nik,
-  //       namaPegawai: params.namaPegawai,
-  //       sdmType: params.tipeKaryawan,
-  //       jabatan: params.jabatan,
-  //       sdmBidang: params.bidang,
-  //       cvFilePath: params.attachmentFilePath,
-  //       owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
-  //     },
-  //     options: {
-  //       headers: {
-  //         Authorization: token
-  //       }
-  //     }
-  //   }
+  public addProfilKaryawan(params: ProfileKaryawanInterface): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_add_profil_karyawan: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_vendor_information_route,
+      body: {
+        nik: params.nik,
+        firstName: params.firstName,
+        lastName: params.lastName,
+        sdmType: params.tipeKaryawan,
+        jabatan: params.jabatan,
+        bidangPekerjaan: params.bidangPekerjaan,
+        cvFilePath: params.attachmentFilePath,
+        id: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    }
 
-  //   return this.apiService.sendRequest(api_add_profil_karyawan);
-  // }
+    return this.apiService.sendRequest(api_add_profil_karyawan);
+  }
 
   public getKaryawan(): Observable<any> {
     // let token = this.authService.getLocalStorage('access_token')!;
