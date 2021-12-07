@@ -2,43 +2,12 @@
   <kendo-label>Pemegang Saham</kendo-label>
   <br>
 
-  <kendo-grid
-  [data]="gridData"
-  style="height: 240px;"
-  >
-  <kendo-grid-column title="No." [width]="60" field="no" >
-    <!-- <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-      {{rowIndex + 1}} 
-    </ng-template> -->
-  </kendo-grid-column>
-
-  <!-- <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title" [width]="col.width"></kendo-grid-column> -->
-
-  <kendo-grid-column title="Nama Pemegang Saham" field="namaPemegangSaham"  [width]="250">
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.toParty.firstName ?   dataItem.toParty.firstName : dataItem.toParty.name}}
-    </ng-template> -->
-  </kendo-grid-column>
-
-  <kendo-grid-column title="Jenis Pemegang Saham" field="pemegangSahamPerseorangan"  >
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.pemegangSahamPerseorangan === true ? "Perseorangan" : "Badan Usaha" }}
-    </ng-template> -->
-  </kendo-grid-column>
-
-
-  <kendo-grid-column title="Pemegang Saham Lokal/Asing" field="pemegangSahamLokal"   [width]="300">
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.pemegangSahamLokal === true ? "Lokal" : "Asing" }}
-    </ng-template> -->
-  </kendo-grid-column>
-
-  <kendo-grid-column title="% Kepemilikan" field="persentaseKepemilikan" >
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.persentaseKepemilikan }}
-    </ng-template> -->
-  </kendo-grid-column>
-
+  <kendo-grid [data]="gridData" style="height: 240px;">
+  <kendo-grid-column title="No." [width]="60" field="no" ></kendo-grid-column>
+  <kendo-grid-column title="Nama Pemegang Saham" field="namaPemegangSaham"  [width]="250"></kendo-grid-column>
+  <kendo-grid-column title="Jenis Pemegang Saham" field="pemegangSahamPerseorangan"></kendo-grid-column>
+  <kendo-grid-column title="Pemegang Saham Lokal/Asing" field="pemegangSahamLokal"   [width]="300"></kendo-grid-column>
+  <kendo-grid-column title="% Kepemilikan" field="persentaseKepemilikan" ></kendo-grid-column>
   <kendo-grid-column field="id" title="Action">
     <ng-template kendoGridCellTemplate let-dataItem>
       <span>
