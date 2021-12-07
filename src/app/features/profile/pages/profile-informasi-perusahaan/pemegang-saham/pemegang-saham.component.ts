@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 import { ProfileService } from 'src/app/core/services/profile.service';
 
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { AddPemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
+import { AddPemegangSahamInterface, UpdatePemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 
@@ -33,8 +33,8 @@ export class PemegangSahamComponent implements OnInit {
   public data: any = {
     id: "",
     namaPemegangSaham: "",
-    pemegangSahamPerseorangan: "",
-    pemegangSahamLokal: "",
+    perseorangan: "",
+    lokal: "",
     persentaseKepemilikan: ""
   };
 
@@ -133,6 +133,7 @@ export class PemegangSahamComponent implements OnInit {
       mappedData[key] = {
         no: no++,
         namaPemegangSaham: data[key]['toParty']['firstName'] ? data[key]['toParty']['firstName'] : data[key]['toParty']['name'],
+        namaPemegangSahamValue: data[key]['toParty'],
         pemegangSahamPerseorangan: data[key]['pemegangSahamPerseorangan'] ?  "Perseorangan" : "Badan Usaha",
         pemegangSahamPerseoranganValue: data[key]['pemegangSahamPerseorangan'],
         pemegangSahamLokal: data[key]['pemegangSahamLokal'] ? "Lokal" : "Asing",
@@ -158,22 +159,12 @@ export class PemegangSahamComponent implements OnInit {
     );
   }
 
-  public setForm(): void {
-    this.pemegangSahamFormGroup = new FormGroup({
-      namaPemegangSaham: new FormControl(this.data.namaPemegangSaham, Validators.required),
-      perseorangan: new FormControl(this.data.pemegangSahamPerseorangan, Validators.required),
-      lokal: new FormControl(this.data.pemegangSahamLokal, Validators.required),
-      persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
-    });
-  }
-
   public updateForm(data: any): void {
-    console.log(data);
-    console.log(parseFloat(data.persentaseKepemilikan));
-    this.id = data.id;
+    this.data.id = data.id;
+    this.data.namaPemegangSahamValue = data.namaPemegangSahamValue;
     this.data.namaPemegangSaham = data.namaPemegangSaham;
-    this.data.pemegangSahamPerseorangan = data.pemegangSahamPerseoranganValue;
-    this.data.pemegangSahamLokal = data.pemegangSahamLokalValue;
+    this.data.perseorangan = data.pemegangSahamPerseoranganValue;
+    this.data.lokal = data.pemegangSahamLokalValue;
     this.data.persentaseKepemilikan = parseFloat(data.persentaseKepemilikan);
     
     this.isNewData = false;
@@ -182,6 +173,16 @@ export class PemegangSahamComponent implements OnInit {
     this.openSaham();
   }
 
+
+  public setForm(): void {
+    this.pemegangSahamFormGroup = new FormGroup({
+      id: new FormControl(this.data.id, Validators.required),
+      namaPemegangSaham: new FormControl(this.data.namaPemegangSahamValue.firstName ? this.data.namaPemegangSahamValue.firstName : this.data.namaPemegangSahamValue.name , Validators.required),
+      perseorangan: new FormControl(this.data.perseorangan, Validators.required),
+      lokal: new FormControl(this.data.lokal, Validators.required),
+      persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
+    });
+  }
 
   public submit(): void {
     this.pemegangSahamFormGroup.markAllAsTouched();
@@ -194,9 +195,10 @@ export class PemegangSahamComponent implements OnInit {
     }
   }
 
-
   public updatePemegangSaham(): void {
-    let params: AddPemegangSahamInterface= {...this.data}
+    this.data.namaPemegangSaham = this.data.namaPemegangSahamValue;
+    let params: UpdatePemegangSahamInterface= {...this.data}
+    console.log(params);
     this.profileService.updatePemegangSaham(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";

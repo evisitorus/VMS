@@ -5,7 +5,7 @@ import { AddPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
-import { AddPegawaiInterface } from '../interfaces/add-pegawai-interface';
+import { UpdatePemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
 import { AuthService } from './auth.service';
 
 @Injectable({

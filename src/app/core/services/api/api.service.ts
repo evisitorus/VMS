@@ -30,6 +30,7 @@ export class ApiService {
   }
 
   post(params: ApiInterface) {
+    console.log(params);
     return this.http.post(params.url, params.body, params.options);
   }
 
