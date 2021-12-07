@@ -252,10 +252,10 @@
               <ng-template kendoGridCellTemplate let-dataItem>
                 <div *ngIf="!dataItem.deletedAt">
                   <span>
-                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)">
+                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)" id="btn-update-neraca">
                   </span>
                   <span>
-                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)">
+                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)" id="btn-delete-neraca">
                   </span>
                 </div>
                 <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
@@ -298,10 +298,10 @@
               <ng-template kendoGridCellTemplate let-dataItem>
                 <div *ngIf="!dataItem.deletedAt">
                   <span>
-                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)">
+                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)" id="btn-update-spt">
                   </span>
                   <span>
-                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)">
+                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)" id="btn-delete-spt">
                   </span>
                 </div>
                 <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>                
