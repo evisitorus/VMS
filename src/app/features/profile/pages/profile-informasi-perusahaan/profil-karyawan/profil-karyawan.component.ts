@@ -176,7 +176,7 @@ export class ProfilKaryawanComponent implements OnInit {
   // add new bidang value based on user input
   public filter!: string;
   public selectedBidang!: Item ;
-  public addNew(): void {
+  public addNewBidang(): void {
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
