@@ -26,8 +26,17 @@ export class PemegangSahamComponent implements OnInit {
 
   public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemegang Saham"}, {field: "Pemegang Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
-  access_token = "admin@abadijaya.co.id";
   vendor_id = "";
+  public id!: string;
+  public isNewData: boolean = true;
+
+  public data: any = {
+    id: "",
+    namaPemegangSaham: "",
+    pemegangSahamPerseorangan: "",
+    pemegangSahamLokal: "",
+    persentaseKepemilikan: ""
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,7 +79,7 @@ export class PemegangSahamComponent implements OnInit {
     namaPemegangSaham: new FormControl(null, Validators.required),
     perseorangan: new FormControl(null, Validators.required),
     lokal: new FormControl(null, Validators.required),
-    presentaseKepemilikan: new FormControl(null, Validators.required),
+    persentaseKepemilikan: new FormControl(null, Validators.required),
   });
 
 
@@ -96,7 +105,7 @@ export class PemegangSahamComponent implements OnInit {
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
       perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
-      presentaseKepemilikan: this.pemegangSahamFormGroup.controls['presentaseKepemilikan'].value
+      persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value
     }
 
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
@@ -107,7 +116,7 @@ export class PemegangSahamComponent implements OnInit {
         this.triggerPopUp();
         this.getPemegangSaham();
         this.closeSaham();
-        this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
+        // this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
       },
       (error) => {
         this.popUpMessage = "Gagal menyimpan data";
@@ -125,7 +134,9 @@ export class PemegangSahamComponent implements OnInit {
         no: no++,
         namaPemegangSaham: data[key]['toParty']['firstName'] ? data[key]['toParty']['firstName'] : data[key]['toParty']['name'],
         pemegangSahamPerseorangan: data[key]['pemegangSahamPerseorangan'] ?  "Perseorangan" : "Badan Usaha",
+        pemegangSahamPerseoranganValue: data[key]['pemegangSahamPerseorangan'],
         pemegangSahamLokal: data[key]['pemegangSahamLokal'] ? "Lokal" : "Asing",
+        pemegangSahamLokalValue: data[key]['pemegangSahamLokal'],
         persentaseKepemilikan: data[key]['persentaseKepemilikan'],
         id: data[key]['id'],
       };
@@ -147,18 +158,27 @@ export class PemegangSahamComponent implements OnInit {
     );
   }
 
+  public setForm(): void {
+    this.pemegangSahamFormGroup = new FormGroup({
+      namaPemegangSaham: new FormControl(this.data.namaPemegangSaham, Validators.required),
+      perseorangan: new FormControl(this.data.pemegangSahamPerseorangan, Validators.required),
+      lokal: new FormControl(this.data.pemegangSahamLokal, Validators.required),
+      persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
+    });
+  }
 
   public updateForm(data: any): void {
-
     console.log(data);
+    console.log(parseFloat(data.persentaseKepemilikan));
+    this.id = data.id;
+    this.data.namaPemegangSaham = data.namaPemegangSaham;
+    this.data.pemegangSahamPerseorangan = data.pemegangSahamPerseoranganValue;
+    this.data.pemegangSahamLokal = data.pemegangSahamLokalValue;
+    this.data.persentaseKepemilikan = parseFloat(data.persentaseKepemilikan);
     
-    // this.id = data.id;
-    // this.data.nomorDokumen = data.no;
-    // this.data.namaDokumen = data.namaDokumen;
-    
-    // this.isNewData = false;
+    this.isNewData = false;
 
-    // this.setForm();
-    // this.open();
+    this.setForm();
+    this.openSaham();
   }
 }

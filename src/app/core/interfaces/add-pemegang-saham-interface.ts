@@ -3,5 +3,5 @@ export interface AddPemegangSahamInterface {
     namaPemegangSaham: string;
     perseorangan: boolean;
     lokal: boolean;
-    presentaseKepemilikan: number;
+    persentaseKepemilikan: number;
 }
