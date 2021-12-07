@@ -29,6 +29,7 @@ export class PemegangSahamComponent implements OnInit {
   vendor_id = "";
   public id!: string;
   public isNewData: boolean = true;
+  public disableNamaPemegangSaham: boolean = true;
 
   public data: any = {
     id: "",
@@ -168,6 +169,7 @@ export class PemegangSahamComponent implements OnInit {
     this.data.persentaseKepemilikan = parseFloat(data.persentaseKepemilikan);
     
     this.isNewData = false;
+    this.disableNamaPemegangSaham = true;
 
     this.setForm();
     this.openSaham();
@@ -177,8 +179,8 @@ export class PemegangSahamComponent implements OnInit {
   public setForm(): void {
     this.pemegangSahamFormGroup = new FormGroup({
       id: new FormControl(this.data.id, Validators.required),
-      namaPemegangSaham: new FormControl(this.data.namaPemegangSahamValue.firstName ? this.data.namaPemegangSahamValue.firstName : this.data.namaPemegangSahamValue.name , Validators.required),
-      perseorangan: new FormControl(this.data.perseorangan, Validators.required),
+      namaPemegangSaham: new FormControl({disabled: this.disableNamaPemegangSaham, value: this.data.namaPemegangSahamValue.firstName ? this.data.namaPemegangSahamValue.firstName : this.data.namaPemegangSahamValue.name  }, Validators.required),
+      perseorangan: new FormControl({disabled: this.disableNamaPemegangSaham, value: this.data.perseorangan }, Validators.required),
       lokal: new FormControl(this.data.lokal, Validators.required),
       persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
     });
@@ -196,9 +198,16 @@ export class PemegangSahamComponent implements OnInit {
   }
 
   public updatePemegangSaham(): void {
-    this.data.namaPemegangSaham = this.data.namaPemegangSahamValue;
-    let params: UpdatePemegangSahamInterface= {...this.data}
-    console.log(params);
+
+    const dataPemegangSaham = {
+      id: this.pemegangSahamFormGroup.controls['id'].value,
+      lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
+      persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value
+    }
+
+    console.log(dataPemegangSaham);
+
+    let params: UpdatePemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.updatePemegangSaham(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";

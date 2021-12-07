@@ -87,14 +87,11 @@ export class ProfileService {
 
   updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
     let api_update_pemegang_saham: ApiInterface = {
-      method: ApiRouteMethods.post,
-      url: ApiRoutes.api_update_pemegang_saham,
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_update_pemegang_saham + "/" + params.id,
       body: {
-        id: params.id,
-        namaPemegangSaham: params.namaPemegangSaham,
-        perseorangan: params.perseorangan,
         lokal: params.lokal,
-        presentaseKepemilikan: params.persentaseKepemilikan
+        persentaseKepemilikan: params.persentaseKepemilikan.toString()
       }
     };
 
