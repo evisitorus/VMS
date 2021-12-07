@@ -16,25 +16,6 @@ export class ProfileInformationService {
     private authService: AuthService
   ) { }
 
-
-  // addPegawai(params: ): Observable<any> {    
-  //   let api_add_pegawai: ApiInterface = {
-  //     method: ApiRouteMethods.post,
-  //     url: ApiRoutes.api_pegawai_route,
-  //     body: {
-  //       nik: params.nik,
-  //       sdmType: params.tipeKaryawan,
-  //       jabatan: params.jabatan,
-  //       bidang: params.bidangPekerjaan,
-  //       fromParty: "1",
-  //       relationshipType: "7",
-  //       toParty: "2",
-  //     }
-  //   };
-
-  //   return this.apiService.sendRequest(api_add_pegawai);
-  // }
-
   public addProfilKaryawan(params: ProfileKaryawanInterface): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_add_profil_karyawan: ApiInterface = {
@@ -65,11 +46,6 @@ export class ProfileInformationService {
     let api_get_profil_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pegawai_route + localStorage.getItem('vendor_id'),
-      // options: {
-      //   headers: {
-      //     Authorization: token
-      //   }
-      // }
     };
     return this.apiService.sendRequest(api_get_profil_karyawan);
   }
@@ -89,11 +65,6 @@ export class ProfileInformationService {
     let api_get_bidang_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_bidang_karyawan,
-      // options: {
-      //   headers: {
-      //     Authorization: token,
-      //   }
-      // }
     }
 
     return this.apiService.sendRequest(api_get_bidang_karyawan);
