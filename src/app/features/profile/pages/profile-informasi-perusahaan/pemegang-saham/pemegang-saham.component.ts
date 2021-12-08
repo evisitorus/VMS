@@ -187,6 +187,8 @@ export class PemegangSahamComponent implements OnInit {
   public updatePemegangSaham(): void {
     const dataPemegangSaham = {
       id: this.pemegangSahamFormGroup.controls['id'].value,
+      namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
+      perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
       persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value
     }
