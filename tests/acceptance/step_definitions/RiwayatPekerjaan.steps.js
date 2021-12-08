@@ -12,9 +12,9 @@ Given('The Vendor wants manage {string} from the Company', () => {
 
 // });
 
-Given('The Vendor must click {string} Tab', () => {
+// Given('The Vendor must click {string} Tab', () => {
 
-});
+// });
 
 Given('The Vendor will see {string} form', () => {
 

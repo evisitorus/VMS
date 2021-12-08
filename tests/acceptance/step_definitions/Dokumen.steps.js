@@ -21,8 +21,39 @@ Given('The Vendor must click {string} menu where found on {string} of {string}',
 });
 
 Given('The Vendor must click {string} Tab', () => {
-    I.waitForElement('#k-panelbar-1-item-sidebar-dokumen');
-    I.click('#k-panelbar-1-item-sidebar-dokumen');
+    switch (form) {
+        case "Dokumen":
+            I.waitForElement('#k-panelbar-0-item-sidebar-dokumen');
+            I.click('#k-panelbar-0-item-sidebar-dokumen');
+            break;
+        case "Profil Perusahaan":
+            I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
+            I.click('#k-panelbar-0-item-sidebar-profile-information');
+            break;
+        case "PIC":
+            I.waitForElement('#k-panelbar-0-item-sidebar-pic');
+            I.click('#k-panelbar-0-item-sidebar-pic');
+            break;
+        case "Alamat":
+            I.waitForElement('#k-panelbar-0-item-sidebar-alamat');
+            I.click('#k-panelbar-0-item-sidebar-alamat');
+            break;
+        case "Laporan Keuangan":
+            I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan');
+            I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
+            break;
+        case "Riwayat Pekerjaan":
+            I.waitForElement('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+            I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+            break;
+        case "Asset":
+            I.waitForElement('#k-panelbar-0-item-sidebar-aset');
+            I.click('#k-panelbar-0-item-sidebar-aset');
+            break;
+        default:
+            I.amOnPage(form);
+            break;
+    }
 });
 
 Given('The Vendor will see {string} form', (form) => {
@@ -35,6 +66,9 @@ Given('The Vendor will see {string} form', (form) => {
             break;
         case "Informasi Keuangan":
             I.amOnPage('/profile-laporan-keuangan');
+            break;
+        case "Alamat":
+            I.amOnPage('/profile-alamat');
             break;
         default:
             I.amOnPage(form);
@@ -67,6 +101,10 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
         case "SPT Tahunan":
             I.waitForElement('#btn-tambah-spt');
             I.click('#btn-tambah-spt');
+            break;
+        case "Alamat":
+            I.waitForElement('#btn-tambah-alamat');
+            I.click('#btn-tambah-alamat');
             break;
         default:
             I.click(button3);

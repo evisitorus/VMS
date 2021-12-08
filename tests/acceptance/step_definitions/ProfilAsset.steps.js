@@ -25,10 +25,10 @@ Given('The Vendor wants manage {string} from the Company', () => {
 //     I.click('#');
 // });
 
-Given('The Vendor must click {string} Tab', () => {
+// Given('The Vendor must click {string} Tab', () => {
     // I.waitForElement('#');
     // I.click('#');
-});
+// });
 
 // Given('The Vendor will see {string} form', () => {
 //     I.amOnPage('/profile-aset');
