@@ -254,7 +254,16 @@ div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-
     object-fit: contain !important;
     background-size: contain !important;
   }
+
 .lampiran-url {
     color: #0058E9;
     cursor: pointer;
+}
+
+.text-deleted-at {
+    color: #0193AC !important;
+}
+
+.vms-kendo-grid {
+    color: #0193AC !important;
 }
