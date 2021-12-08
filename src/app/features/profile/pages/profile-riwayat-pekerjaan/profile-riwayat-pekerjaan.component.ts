@@ -43,6 +43,9 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public isNewData: boolean = true;
 
+  public opened = false;
+  public openedSaham = false;
+
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
     maxFileSize: 2097152
@@ -61,23 +64,53 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     get f() { return this.pekerjaanForm.controls; }
 
   ngOnInit(): void {
-    // this.isLoggedIn = true;
-    // this.authService.setLoggedIn(true);
-    // if (!this.isLoggedIn) window.location.href = "/";
-
-    this.columns = [
-      {field: "namaPekerjaan", title:"Nama Pekerjaan"}, 
-      {field: "pemberiPekerjaan", title:"Pemberi Pekerjaan"}, 
-      {field: "nilaiPekerjaan", title:"Nilai Pekerjaan"}, 
-      {field: "tahunPekerjaan", title:"Tahun"}, 
-      {field: "buktiPekerjaanFilePath", title:"Lampiran"}
-    ];
-    this.gridData = this.getPekerjaan();
-
+    this.getPekerjaan();
+  }
+  
+  getPekerjaan(){
+    this.profileService.getPekerjaan().subscribe(
+      (resp) =>  { 
+        this.gridData = resp['hydra:member'];
+        this.gridData = this.mapData(this.gridData);
+      },
+      (error) => { 
+        this.popUpMessage = error;
+        this.triggerPopUp();
+        this.redirectOnClosePopUp = true;
+      }
+    );
   }
 
-  public opened = false;
-  public openedSaham = false;
+  public mapData(data: any[]): any[] {
+    let mappedData:any[] = [];
+    for (const key in data) {
+      mappedData[key] = {
+        namaPekerjaan: data[key]['namaPekerjaan'],
+        pemberiPekerjaan: data[key]['pemberiPekerjaan'],
+        nilaiPekerjaan: data[key]['nilaiPekerjaan'],
+        tahunPekerjaan: data[key]['tahunPekerjaan'],
+        lampiran: data[key]['buktiPekerjaanFilePath'],
+        file: data[key]['file'],
+        id: data[key]['id']
+      };
+    }
+    return mappedData;
+  }
+
+  public download(fileId: string, filename: string) {
+    this.fileService.download(fileId).subscribe(
+      (res) => {
+        let mime = this.fileService.getMimeType(filename);
+        let blob = new Blob([res], { type: mime });
+        let url= window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+      }
+    );
+  }
 
   public close() {
     this.opened = false;
@@ -178,20 +211,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         // if(error.error.message){
           this.popUpMessage = error;
         // }
-        this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
-      }
-    );
-  }
-  
-  getPekerjaan(){
-    this.profileService.getPekerjaan().subscribe(
-      (resp) =>  { 
-        this.gridData = resp['hydra:member'];
-        return this.gridData;
-      },
-      (error) => { 
-        this.popUpMessage = error;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
       }

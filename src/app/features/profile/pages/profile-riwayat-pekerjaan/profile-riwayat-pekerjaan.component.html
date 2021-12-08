@@ -10,21 +10,29 @@
       <br><br>
   
       <div>
-        <kendo-grid
-          [data]="gridData"
-          style="height: 240px;"
-        >
-          <kendo-grid-column title="No.">
+        <kendo-grid [data]="gridData" style="height: 240px;">
+          <kendo-grid-column title="No." [width]="60">
             <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
               {{rowIndex + 1}} 
             </ng-template>
           </kendo-grid-column>
-          <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title"></kendo-grid-column>
+          <kendo-grid-column field="namaPekerjaan" title="Nama Pekerjaan"></kendo-grid-column>
+          <kendo-grid-column field="pemberiPekerjaan" title="Pemberi Pekerjaan"></kendo-grid-column>
+          <kendo-grid-column field="nilaiPekerjaan" title="Nilai Pekerjaan"></kendo-grid-column>
+          <kendo-grid-column field="tahunPekerjaan" title="Tahun"></kendo-grid-column>
+          <kendo-grid-column field="buktiPekerjaanFilePath" title="Lampiran">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
+            </ng-template>
+          </kendo-grid-column>
           <kendo-grid-column title="Action">
             <ng-template kendoGridCellTemplate>
-              Edit
-              |
-              Delete
+              <span>
+                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="closeSaham()" id="btn-update">
+              </span>
+              <span>
+                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="closeSaham()" id="btn-delete">
+              </span>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
