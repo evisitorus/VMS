@@ -51,6 +51,7 @@ export const ApiRoutes = {
   api_add_companyAddress:  API_BASE_URL + "/vendors/company_address",
   //api_get_companyAddress:  API_BASE_URL + "/vendors/alamat_perusahaan",
   api_update_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
+  api_delete_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
 };
 
 export const ApiRouteMethods = {

@@ -102,7 +102,7 @@ export class ProfileService {
   deletePemegangSaham(id: string): Observable<any> {    
     let api_delete_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.put,
-      url: ApiRoutes.api_update_pemegang_saham + "/" + id,
+      url: ApiRoutes.api_delete_pemegang_saham + "/" + id,
       body: {
         active: false
       }
