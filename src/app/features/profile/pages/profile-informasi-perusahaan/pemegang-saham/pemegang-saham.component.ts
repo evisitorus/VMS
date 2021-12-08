@@ -10,7 +10,7 @@ import { AddPemegangSahamInterface, UpdatePemegangSahamInterface } from 'src/app
 const messages = {
   default: 'Data tidak boleh kosong.',
   success: 'Sukses',
-  deleteConfirmationTitle: "Konfirmasi hapus data",
+  deleteConfirmationTitle: "Konfirmasi hapus data Pemegang Saham",
   deleteConfirmationMessage: "Apakah Pemegang Saham atas nama .. akan dihapus dari sistem ?",
 };
 
@@ -219,6 +219,7 @@ export class PemegangSahamComponent implements OnInit {
     this.profileService.deletePemegangSaham(id).subscribe(
       () => {
         this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
         this.getPemegangSaham();
       },
       (err) => {
