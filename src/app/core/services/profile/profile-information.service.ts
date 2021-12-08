@@ -53,7 +53,7 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_profil_karyawan);
   }
 
-  getTipeKaryawan(): Observable<any> {
+  public getTipeKaryawan(): Observable<any> {
     let api_get_tipe_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_tipe_karyawan,
@@ -64,7 +64,7 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_tipe_karyawan);
   }
 
-  getBidangKaryawan(): Observable<any> {
+  public getBidangKaryawan(): Observable<any> {
     let api_get_bidang_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_bidang_karyawan,
@@ -73,7 +73,7 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_bidang_karyawan);
   }
 
-  postBidangKaryawan(bidang: string): Observable<any> {
+  public postBidangKaryawan(bidang: string): Observable<any> {
     let api_post_bidang_karyawan: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_bidang_karyawan,
@@ -85,18 +85,41 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_post_bidang_karyawan);
   }
 
+  public update(params: ProfileKaryawanInterface, id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_update_pegawai: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_pegawai_route.concat("/").concat(id),
+      body: {
+        nik: params.nik,
+        firstName: params.firstName,
+        lastName: params.lastName,
+        tipeKaryawan: params.tipeKaryawan,
+        jabatan: params.jabatan,
+        bidangPekerjaan: params.bidangPekerjaan,
+        cvFilePath: params.attachmentFilePath,
+        file_id: params.file,
+      },
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_update_pegawai);
+  }
 
-  // public delete(id: string): Observable<any> {
-  //   let token = this.authService.getLocalStorage('access_token')!;
-  //   let api_delete_profile_info: ApiInterface = {
-  //     method: ApiRouteMethods.delete,
-  //     url: ApiRoutes.api_vendor_information_route.concat('/').concat(id),
-  //     options: {
-  //       headers: {
-  //         Authorization: token
-  //       }
-  //     }
-  //   };
-  //   return this.apiService.sendRequest(api_delete_profile_info);
-  // }
+  public delete(id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_delete_pegawai_info: ApiInterface = {
+      method: ApiRouteMethods.delete,
+      url: ApiRoutes.api_pegawai_route.concat('/').concat(id),
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_delete_pegawai_info);
+  }
 }
