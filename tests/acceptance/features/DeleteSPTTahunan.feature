@@ -6,6 +6,9 @@ As a Vendor
 I want to delete SPT Tahunan  
 So that I can modify SPT Tahunan information which has been recorded on the app 
 
+Background: 
+    Given Vendor already login to VMS Portal
+
  #Delete SPT Tahunan
   Scenario: Delete selected SPT Tahunan
    Given The Vendor still on "Laporan Keuangan" form 

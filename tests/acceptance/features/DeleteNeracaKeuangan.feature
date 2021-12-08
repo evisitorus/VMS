@@ -6,6 +6,9 @@ As a Vendor
 I want to delete Neraca Keuangan  
 So that I can modify neraca keuangan information which has been recorded on the app 
 
+Background: 
+    Given Vendor already login to VMS Portal
+
  #Delete Neraca Keuangan
   Scenario: Delete selected Neraca Keuangan
     Given The Vendor still on "Laporan Keuangan" form 

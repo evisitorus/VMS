@@ -6,12 +6,15 @@ As a Vendor
 I want to delete document  
 So that I can modify document which has been recorded on the app 
 
+Background: 
+    Given Vendor already login to VMS Portal
+
   #Delete Existing Document 
   Scenario: Delete Selected Record from Document 
-    Given The Vendor wants to delete selected document which has been uploaded 
+    Given The Vendor wants to delete selected document which already uploaded 
      When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
       And The Vendor must click "Dokumen" Tab 
-      And The Vendor will see "Dokumen" grid where found on "Dokumen" form
+    #   And The Vendor will see "Dokumen" grid where found on "Dokumen" form
       """
       {
       	 "No | Nama Dokumen                | Berlaku Dari | Berlaku Sampai | Lampiran                 | Action      "

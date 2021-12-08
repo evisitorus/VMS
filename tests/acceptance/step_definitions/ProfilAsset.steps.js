@@ -94,15 +94,15 @@ Given('The Vendor must clicks button {string} button from selected record on {st
         case "Asset":
             I.click('#btn-delete-asset');
             break;
-        // case "Dokumen":
-        //     I.click('#btn-delete-asset');
-        //     break;
-        // case "Neraca Keuangan":
-        //     I.click('#btn-delete-asset');
-        //     break;
-        // case "SPT Tahunan":
-        //     I.click('#btn-delete-asset');
-        //     break;
+        case "Dokumen":
+            I.click('#btn-delete');
+            break;
+        case "Neraca Keuangan":
+            I.click('#btn-delete-neraca');
+            break;
+        case "SPT Tahunan":
+            I.click('#btn-delete-spt');
+            break;
         default:
             I.click(form);
             break;
