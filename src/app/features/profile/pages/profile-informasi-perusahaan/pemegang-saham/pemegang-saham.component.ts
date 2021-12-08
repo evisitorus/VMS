@@ -38,6 +38,8 @@ export class PemegangSahamComponent implements OnInit {
 
   public closeSaham() {
     this.openedSaham = false;
+    this.resetForm();
+    this.isNewData = true;
   }
 
   public openSaham() {
@@ -171,6 +173,15 @@ export class PemegangSahamComponent implements OnInit {
       lokal: new FormControl(this.data.lokal, Validators.required),
       persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
     });
+  }
+
+  public resetForm(): void {
+    this.data.id= "";
+    this.data.namaPemegangSaham= "";
+    this.data.perseorangan= "";
+    this.data.lokal= "";
+    this.data.persentaseKepemilikan= ""
+    this.setForm();
   }
 
   public submit(): void {
