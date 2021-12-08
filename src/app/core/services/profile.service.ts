@@ -63,7 +63,8 @@ export class ProfileService {
         namaPemegangSaham: params.namaPemegangSaham,
         perseorangan: params.perseorangan,
         lokal: params.lokal,
-        presentaseKepemilikan: params.persentaseKepemilikan
+        presentaseKepemilikan: params.persentaseKepemilikan,
+        active: true
       }
     };
 
