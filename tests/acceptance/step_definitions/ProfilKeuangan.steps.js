@@ -42,3 +42,23 @@ Given('The Vendor will get warning message tooltip on empty fields', () => {
     I.see('Nama Bank tidak boleh kosong');
     I.see('Cabang tidak boleh kosong');
 });
+
+Given('The Vendor wants to delete one of record from {string} on {string} which part of {string} form', () => {
+    
+});
+
+Given('', () => {
+    
+});
+
+Given('', () => {
+    
+});
+
+Given('', () => {
+    
+});
+
+Given('', () => {
+    
+});

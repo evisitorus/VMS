@@ -7,14 +7,14 @@ I want to delete document
 So that I can modify document which has been recorded on the app 
 
 Background: 
-    Given Vendor already login to VMS Portal
+    Given The Vendor already login to VMS Portal
 
   #Delete Existing Document 
   Scenario: Delete Selected Record from Document 
     Given The Vendor wants to delete selected document which already uploaded 
      When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
       And The Vendor must click "Dokumen" Tab 
-    #   And The Vendor will see "Dokumen" grid where found on "Dokumen" form
+      And The Vendor will see "Dokumen" form
       """
       {
       	 "No | Nama Dokumen                | Berlaku Dari | Berlaku Sampai | Lampiran                 | Action      "
@@ -37,7 +37,7 @@ Background:
       """ 	
       And The Vendor must select "Yes" option
       And The Vendor will see information changes from selected record from "Dokumen" on "Dokumen Grid" and deleted record will be flag as "Terhapus"
-      And The Vendor will see list of "Dokumen" on "Dokumen Grid"
+      And The Vendor will see list of modified "Dokumen" on "Dokumen Grid"
       """
       {
       	 "No | Nama Dokumen                | Berlaku Dari | Berlaku Sampai | Lampiran                 | Action      "
@@ -50,4 +50,4 @@ Background:
       }
       """
      And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Dokumen" on "Dokumen Grid"
-   Then The Vendor already modify pegawai information by deleting selected record of "Dokumen"
+   Then The Vendor already modify her or his company information by delete recorded "Dokumen"

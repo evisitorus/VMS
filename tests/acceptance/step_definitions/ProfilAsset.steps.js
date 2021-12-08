@@ -20,10 +20,10 @@ Given('The Vendor wants manage {string} from the Company', () => {
 
 });
 
-Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
-    // I.waitForElement('#');
-    // I.click('#');
-});
+// Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
+//     I.waitForElement('#');
+//     I.click('#');
+// });
 
 Given('The Vendor must click {string} Tab', () => {
     // I.waitForElement('#');
@@ -131,11 +131,7 @@ Given('The Vendor will see list of modified {string} on {string}', () => {
 
 });
 
-Given('The Vendor already modify her or his company information by delete recorded asset', () => {
-
-});
-
-Given('', () => {
+Given('The Vendor already modify her or his company information by delete recorded {string}', () => {
 
 });
 

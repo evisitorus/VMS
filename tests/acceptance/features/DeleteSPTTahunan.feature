@@ -7,7 +7,7 @@ I want to delete SPT Tahunan
 So that I can modify SPT Tahunan information which has been recorded on the app 
 
 Background: 
-    Given Vendor already login to VMS Portal
+    Given The Vendor already login to VMS Portal
 
  #Delete SPT Tahunan
   Scenario: Delete selected SPT Tahunan
@@ -23,7 +23,7 @@ Background:
        """
        And The Vendor must select "Yes" option
        And The Vendor will see information changes from selected record from "Laporan Keuangan" on "Laporan Keuangan Grid" and deleted record will be flag as "Terhapus"
-       And The Vendor will see list of "SPT Tahunan" on "SPT Tahunan Grid"
+       And The Vendor will see list of modified "SPT Tahunan" on "SPT Tahunan Grid"
        """
        {
            "No | Tahun   | Nomor Dokumen 		 | Lampiran 		   | Waktu Upload        | Action      "
@@ -35,4 +35,4 @@ Background:
         }
         """
      And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Laporan Keuangan" on "Laporan Keuangan Grid"
-    Then The Vendor already modify Laporan Keuangan information by deleting selected record of "SPT Tahunan"
+    Then The Vendor already modify her or his company information by delete recorded "SPT Tahunan"

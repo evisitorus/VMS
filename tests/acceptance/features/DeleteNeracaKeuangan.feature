@@ -7,7 +7,7 @@ I want to delete Neraca Keuangan
 So that I can modify neraca keuangan information which has been recorded on the app 
 
 Background: 
-    Given Vendor already login to VMS Portal
+    Given The Vendor already login to VMS Portal
 
  #Delete Neraca Keuangan
   Scenario: Delete selected Neraca Keuangan
@@ -23,7 +23,7 @@ Background:
        """ 	
        And The Vendor must select "Yes" option
        And The Vendor will see information changes from selected record from "Neraca Keuangan" on "Neraca Keuangan Grid" and deleted record will be flag as "Terhapus"
-       And The Vendor will see list of "Neraca Keuangan" on "Neraca Keuangan Grid"
+       And The Vendor will see list of modified "Neraca Keuangan" on "Neraca Keuangan Grid"
         """
         {
            "No | Tahun   | Aktiva 		     | Pasiva 		       | Ekuitas              | Nett-Omzet           | Action      "
@@ -35,4 +35,4 @@ Background:
         }
         """
        And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Neraca Keuangan" on "Neraca Keuangan Grid"
-    Then The Vendor already modify neraca keuangan information by deleting selected record of "Neraca Keuangan"
+    Then The Vendor already modify her or his company information by delete recorded "Neraca Keuangan"

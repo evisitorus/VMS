@@ -7,7 +7,7 @@ I want to delete asset
 So that I can modify asset information which has been recorded on the app 
 
 Background: 
-    Given Vendor already login to VMS Portal
+    Given The Vendor already login to VMS Portal
 
   #Delete Asset
   Scenario: Delete selected record from Asset
@@ -42,4 +42,4 @@ Background:
       }
       """
       And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Asset" on "Asset Grid"
-    Then The Vendor already modify her or his company information by delete recorded asset   
+    Then The Vendor already modify her or his company information by delete recorded "Asset"   
