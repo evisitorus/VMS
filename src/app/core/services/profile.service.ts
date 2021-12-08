@@ -57,9 +57,9 @@ export class ProfileService {
   addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
     let api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_add_pemegang_saham,
+      url: ApiRoutes.api_add_pemegang_saham + "/" + this.vendor_id + "/pemegang_saham",
       body: {
-        vendor: this.vendor_id,
+        // vendor: this.vendor_id,
         namaPemegangSaham: params.namaPemegangSaham,
         perseorangan: params.perseorangan,
         lokal: params.lokal,

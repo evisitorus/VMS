@@ -25,7 +25,7 @@ export const ApiRoutes = {
   api_documents_route: API_BASE_URL + "/dokumens",
   api_media_object_route: API_BASE_URL + "/media_objects",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
-  api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
+  api_add_pemegang_saham: API_BASE_URL + "/vendors",
   api_get_organizations: API_BASE_URL + "/organizations?page=1",
   api_jenis_badan_usaha_route: API_BASE_URL + "",
   api_get_tipe_karyawan: API_BASE_URL + "/sdm_types?page=1",

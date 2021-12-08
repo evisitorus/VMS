@@ -36,16 +36,6 @@ export class PemegangSahamComponent implements OnInit {
   popUpConfirmationMessage: string = "Apakah Pemegang Saham atas nama " + this.deletePemegangSahamName + " akan dihapus dari sistem ?";
   redirectOnClosePopUp: boolean = false;
 
-  public closeSaham() {
-    this.openedSaham = false;
-    this.resetForm();
-    this.isNewData = true;
-  }
-
-  public openSaham() {
-    this.openedSaham = true;
-  }
-
   public pemegangSahamFormGroup = new FormGroup({
     namaPemegangSaham: new FormControl(null, Validators.required),
     perseorangan: new FormControl(null, Validators.required),
@@ -110,6 +100,25 @@ export class PemegangSahamComponent implements OnInit {
     this.eventEmitterService.trigger();
   }
 
+  public closeSaham() {
+    this.openedSaham = false;
+    this.isNewData = true;
+    this.setAddForm();
+  }
+
+  public openSaham() {
+    this.openedSaham = true;
+  }
+
+  public setAddForm(): void {
+    this.pemegangSahamFormGroup = new FormGroup({
+      namaPemegangSaham: new FormControl(null, Validators.required),
+      perseorangan: new FormControl(null, Validators.required),
+      lokal: new FormControl(null, Validators.required),
+      persentaseKepemilikan: new FormControl(null, Validators.required)
+    });
+  }
+
   public submit(): void {
     this.pemegangSahamFormGroup.markAllAsTouched();
     if (this.pemegangSahamFormGroup.valid) {
@@ -124,7 +133,6 @@ export class PemegangSahamComponent implements OnInit {
   submitPemegangSaham(): void {
     this.pemegangSahamFormGroup.markAllAsTouched();
     this.popUpMessage = messages.default;
-
 
     // stop here if form is invalid
     if (this.pemegangSahamFormGroup.invalid) {
@@ -174,12 +182,12 @@ export class PemegangSahamComponent implements OnInit {
     this.popUpTitle = "Perhatian";
     this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
     this.triggerPopUp();
-    this.setForm();
+    this.setUpdateForm();
     this.openSaham();
   }
 
 
-  public setForm(): void {
+  public setUpdateForm(): void {
     this.pemegangSahamFormGroup = new FormGroup({
       id: new FormControl(this.data.id, Validators.required),
       namaPemegangSaham: new FormControl({disabled: this.disableNamaPemegangSaham, value: this.data.namaPemegangSahamValue.firstName ? this.data.namaPemegangSahamValue.firstName : this.data.namaPemegangSahamValue.name  }, Validators.required),
@@ -187,15 +195,6 @@ export class PemegangSahamComponent implements OnInit {
       lokal: new FormControl(this.data.lokal, Validators.required),
       persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
     });
-  }
-
-  public resetForm(): void {
-    this.data.id= "";
-    this.data.namaPemegangSaham= "";
-    this.data.perseorangan= "";
-    this.data.lokal= "";
-    this.data.persentaseKepemilikan= ""
-    this.setForm();
   }
 
   public updatePemegangSaham(): void {
