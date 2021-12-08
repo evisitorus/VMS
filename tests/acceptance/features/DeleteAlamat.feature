@@ -11,7 +11,7 @@ Background:
 
  #delete Alamat
   Scenario: Delete selected record from Alamat 
-    Given The Vendor wants to delete selected document which has been recorded  
+    Given The Vendor wants to delete selected document which already uploaded  
      When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
       And The Vendor must click "Alamat" Tab 
       And The Vendor will see "Alamat" form
