@@ -88,7 +88,7 @@ export class ProfileService {
 
   updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
     let api_update_pemegang_saham: ApiInterface = {
-      method: ApiRouteMethods.put,
+      method: ApiRouteMethods.post,
       url: ApiRoutes.api_update_pemegang_saham + "/" + params.id,
       body: {
         lokal: params.lokal,
@@ -101,7 +101,7 @@ export class ProfileService {
 
   deletePemegangSaham(id: string): Observable<any> {    
     let api_delete_pemegang_saham: ApiInterface = {
-      method: ApiRouteMethods.post,
+      method: ApiRouteMethods.put,
       url: ApiRoutes.api_delete_pemegang_saham + "/" + id,
       body: {
         active: false
