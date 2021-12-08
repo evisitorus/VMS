@@ -110,6 +110,17 @@ export class PemegangSahamComponent implements OnInit {
     this.eventEmitterService.trigger();
   }
 
+  public submit(): void {
+    this.pemegangSahamFormGroup.markAllAsTouched();
+    if (this.pemegangSahamFormGroup.valid) {
+      if (this.isNewData) {
+        this.submitPemegangSaham();
+      } else {
+        this.updatePemegangSaham();
+      }
+    }
+  }
+
   submitPemegangSaham(): void {
     this.pemegangSahamFormGroup.markAllAsTouched();
     this.popUpMessage = messages.default;
@@ -160,6 +171,9 @@ export class PemegangSahamComponent implements OnInit {
     this.isNewData = false;
     this.disableNamaPemegangSaham = false;
 
+    this.popUpTitle = "Perhatian";
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
     this.setForm();
     this.openSaham();
   }
@@ -182,17 +196,6 @@ export class PemegangSahamComponent implements OnInit {
     this.data.lokal= "";
     this.data.persentaseKepemilikan= ""
     this.setForm();
-  }
-
-  public submit(): void {
-    this.pemegangSahamFormGroup.markAllAsTouched();
-    if (this.pemegangSahamFormGroup.valid) {
-      if (this.isNewData) {
-        this.submitPemegangSaham();
-      } else {
-        this.updatePemegangSaham();
-      }
-    }
   }
 
   public updatePemegangSaham(): void {
@@ -225,7 +228,6 @@ export class PemegangSahamComponent implements OnInit {
     this.popUpConfirmationMessage= 'Apakah Pemegang Saham atas nama "' + data.namaPemegangSaham + '" akan dihapus dari sistem ?';
     this.opened = true;
     this.deleteId = data.id;
-    console.log(this.deleteId);
   }
 
   public deletePemegangSaham(id: string): void {
