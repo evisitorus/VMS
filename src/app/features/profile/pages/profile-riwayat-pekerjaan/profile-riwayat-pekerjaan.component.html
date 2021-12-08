@@ -30,22 +30,32 @@
             </ng-template>
           </kendo-grid-column>
           <kendo-grid-column title="Action">
-            <ng-template kendoGridCellTemplate>
-              <span>
-                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="close()" id="btn-update">
-              </span>
-              <span>
-                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="close()" id="btn-delete">
-              </span>
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <ng-container
+              *ngIf="dataItem.active; then active; else inactive">
+            </ng-container>
+              <ng-template #inactive>
+                <span>
+                  <kendo-label class="labelForm">Terhapus</kendo-label>
+                </span>
+              </ng-template>
+              <ng-template #active>
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)">
+                </span>
+              </ng-template>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
         <br>
-        <button id="addPekerjaan" kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
+        <button id="addPekerjaan" kendoButton *ngIf="!openedPekerjaan" (click)="openPekerjaan()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
           Tambah Riwayat Pekerjaan
         </button>
   
-        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="opened" (close)="close()">
+        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedPekerjaan" (close)="closePekerjaan()">
             <form class="k-form login-form modal-form" [formGroup]="pekerjaanForm">
               <div>
                 <div class="wrap">
@@ -98,7 +108,7 @@
             <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true">
               Simpan
             </button>
-            <button id="closeButtonDialog" kendoButton (click)="close()" [primary]="false">
+            <button id="closeButtonDialog" kendoButton (click)="closePekerjaan()" [primary]="false">
               Batal
             </button>
           </kendo-dialog-actions>
@@ -111,3 +121,18 @@
 </div>
 
 <app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>
+
+<kendo-dialog
+  *ngIf="opened"
+  [actions]="myActions"
+  [actionsLayout]="actionsLayout"
+  (action)="onAction($event)"
+  [title]="popUpConfirmationTitle"
+  (close)="close('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center;">
+    {{ popUpConfirmationMessage }}
+  </p>
+</kendo-dialog>
