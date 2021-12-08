@@ -11,7 +11,7 @@ const messages = {
   default: 'Data tidak boleh kosong.',
   success: 'Sukses',
   deleteConfirmationTitle: "Konfirmasi hapus data",
-  deleteConfirmationMessage: "Apakah Pemegang Saham atas nama {nama_pemegang_saham} akan dihapus dari sistem ?",
+  deleteConfirmationMessage: "Apakah Pemegang Saham atas nama .. akan dihapus dari sistem ?",
 };
 
 @Component({
@@ -22,19 +22,19 @@ const messages = {
 export class PemegangSahamComponent implements OnInit {
   @ViewChild('panelbar') private panelbar: any;
 
-  popUpTitle: string = "Informasi Pemegang Saham";
-  popUpMessage: string = messages.default;
-
-  popUpConfirmationTitle: string = messages.deleteConfirmationTitle;
-  popUpConfirmationMessage: string = messages.deleteConfirmationMessage;
-  redirectOnClosePopUp: boolean = false;
-
   public gridData: any = {};
   public id!: string;
   public deleteId!: string;
+  public deletePemegangSahamName!: string;
   public isNewData: boolean = true;
   public disableNamaPemegangSaham: boolean = true;
   public openedSaham = false;
+
+  popUpTitle: string = "Informasi Pemegang Saham";
+  popUpMessage: string = messages.default;
+  popUpConfirmationTitle: string = messages.deleteConfirmationTitle;
+  popUpConfirmationMessage: string = "Apakah Pemegang Saham atas nama " + this.deletePemegangSahamName + " akan dihapus dari sistem ?";
+  redirectOnClosePopUp: boolean = false;
 
   public closeSaham() {
     this.openedSaham = false;
@@ -208,6 +208,8 @@ export class PemegangSahamComponent implements OnInit {
   }
 
   public delete(data: any): void {
+    this.popUpConfirmationTitle= messages.deleteConfirmationTitle;
+    this.popUpConfirmationMessage= 'Apakah Pemegang Saham atas nama "' + data.namaPemegangSaham + '" akan dihapus dari sistem ?';
     this.opened = true;
     this.deleteId = data.id;
     console.log(this.deleteId);
