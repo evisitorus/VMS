@@ -62,6 +62,14 @@ export class ProfileInformationService {
 
   }
 
+  getJenisVendor(): Observable<any> {
+    let api_jenis_vendor: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_jenis_vendor_route
+    };
+    return this.apiService.sendRequest(api_jenis_vendor);
+  }
+
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
