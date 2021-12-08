@@ -4,6 +4,7 @@ export interface AddPemegangSahamInterface {
     perseorangan: boolean;
     lokal: boolean;
     persentaseKepemilikan: number;
+    active:boolean
 }
 
 export interface UpdatePemegangSahamInterface {

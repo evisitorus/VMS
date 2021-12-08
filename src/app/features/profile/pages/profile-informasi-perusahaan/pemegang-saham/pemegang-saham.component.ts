@@ -126,7 +126,8 @@ export class PemegangSahamComponent implements OnInit {
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
       perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
-      persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value
+      persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value,
+      active: true
     }
 
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
