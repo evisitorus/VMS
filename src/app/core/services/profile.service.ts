@@ -98,4 +98,13 @@ export class ProfileService {
     return this.apiService.sendRequest(api_update_pemegang_saham);
   }
 
+  deletePemegangSaham(id: string): Observable<any> {    
+    let api_delete_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.delete,
+      url: ApiRoutes.api_update_pemegang_saham + "/" + id
+    };
+
+    return this.apiService.sendRequest(api_delete_pemegang_saham);
+  }
+
 }

@@ -22,7 +22,7 @@ export class PemegangSahamComponent implements OnInit {
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
-  redirectOnClosePopUp: boolean = true;
+  redirectOnClosePopUp: boolean = false;
 
   public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemegang Saham"}, {field: "Pemegang Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
@@ -198,14 +198,11 @@ export class PemegangSahamComponent implements OnInit {
   }
 
   public updatePemegangSaham(): void {
-
     const dataPemegangSaham = {
       id: this.pemegangSahamFormGroup.controls['id'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
       persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value
     }
-
-    console.log(dataPemegangSaham);
 
     let params: UpdatePemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.updatePemegangSaham(params).subscribe(
@@ -219,6 +216,21 @@ export class PemegangSahamComponent implements OnInit {
         this.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
+      }
+    );
+  }
+
+
+  public deletePemegangSaham(data: any): void {
+    this.profileService.deletePemegangSaham(data.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.getPemegangSaham();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
       }
     );
   }
