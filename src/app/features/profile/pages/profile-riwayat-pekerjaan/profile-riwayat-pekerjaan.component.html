@@ -67,7 +67,7 @@
                 <div class="wrap">
                   <kendo-label class="labelForm">Nilai Pekerjaan</kendo-label>
                   <div>
-                    <kendo-numerictextbox class="formField" id="nilaiPekerjaan" formControlName="nilaiPekerjaan" format="Rp\ ##,#" [min]="0"  [spinners]="false"></kendo-numerictextbox>
+                    <kendo-numerictextbox class="formField" id="nilaiPekerjaan" formControlName="nilaiPekerjaan" format="Rp\ ##,#" [min]="0" [maxlength]="15" [spinners]="false"></kendo-numerictextbox>
                     <kendo-formhint>satuan Rupiah</kendo-formhint>
                     <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.nilaiPekerjaan.errors?.required">Nilai Pekerjaan tidak boleh kosong</kendo-formerror>
                   </div>
@@ -84,7 +84,8 @@
                 <div class="wrap">
                   <kendo-label class="labelForm">Lampiran Bukti Pekerjaan</kendo-label>
                   <div>
-                    <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+                    <kendo-fileselect class="formField"  id="lampiran" (select)="selectEventHandler($event)" [multiple]="false" id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+                    <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
                     <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
                     <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
                   </div>
@@ -108,3 +109,5 @@
   </div>
   
 </div>
+
+<app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>

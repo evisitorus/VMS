@@ -11,7 +11,7 @@ import { FileService } from 'src/app/core/services/file.service';
 
 const messages = {
   default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
-  success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
+  success: 'Berhasil menyimpan data',
   disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
 };
 
@@ -25,7 +25,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   popUpTitle: string = "Informasi Pengalaman Kerja";
   popUpMessage: string = messages.success;
-  redirectOnClosePopUp: boolean = true;
+  redirectOnClosePopUp: boolean = false;
   isLoggedIn: boolean = true;
   
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
@@ -37,7 +37,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
-  public uploadedFileId!: string;
+  public uploadedFileId: string = "";
 
   public isNewData: boolean = true;
 
@@ -53,7 +53,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     namaPekerjaan: new FormControl(null, Validators.required),
     pemberiPekerjaan: new FormControl(null, Validators.required),
     nilaiPekerjaan: new FormControl(null, Validators.required),
-    tahunPekerjaan: new FormControl(null, Validators.required)   
+    tahunPekerjaan: new FormControl(null, Validators.required)  
   });
 
   public data: any = {
@@ -151,24 +151,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       namaPekerjaan: new FormControl(this.data.namaPekerjaan, Validators.required),
       pemberiPekerjaan: new FormControl(this.data.pemberiPekerjaan, Validators.required),
       nilaiPekerjaan: new FormControl(this.data.nilaiPekerjaan, Validators.required),
-      tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)      
+      tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)
     });
   }
 
-  validasiForm(){
-    if (this.pekerjaanForm.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = true;
-      return;
-    }
-  }
-
-
   public submit(): void {
-    if (this.lampiranFiles === null) {
-      this.popUpMessage = "File tidak valid";
-      this.close();
+    if (this.uploadedFileId == "") {
+      this.popUpMessage = "Periksa kembali file Anda";
       this.triggerPopUp();
     } else {
       this.pekerjaanForm.markAllAsTouched();
@@ -201,7 +190,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
           this.popUpMessage = error;
         // }
         this.triggerPopUp();
-        this.redirectOnClosePopUp = true;
+        this.redirectOnClosePopUp = false;
       }
     );
   }
