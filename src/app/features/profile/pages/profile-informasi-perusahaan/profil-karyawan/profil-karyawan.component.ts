@@ -217,7 +217,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        this.uploadedFileId = res["@id"]; //vendor :logo_id
+        this.uploadedFileId = res["@id"]; //vendor :resume_id
       },
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
