@@ -4,7 +4,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms"
 import { AddPekerjaanInterface } from 'src/app/core/interfaces/add-pekerjaan-interface';
 
 import { ProfileService } from 'src/app/core/services/profile.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { samplePekerjaans } from './pekerjaan';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
@@ -22,7 +21,6 @@ const messages = {
   styleUrls: ['./profile-riwayat-pekerjaan.component.css']
 })
 export class ProfileRiwayatPekerjaanComponent implements OnInit {
-  pekerjaanForm!: FormGroup;
   submitted = false;
 
   popUpTitle: string = "Informasi Pengalaman Kerja";
@@ -51,17 +49,28 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     maxFileSize: 2097152
   };
 
+  public pekerjaanForm = new FormGroup({
+    namaPekerjaan: new FormControl(null, Validators.required),
+    pemberiPekerjaan: new FormControl(null, Validators.required),
+    nilaiPekerjaan: new FormControl(null, Validators.required),
+    tahunPekerjaan: new FormControl(null, Validators.required)   
+  });
+
+  public data: any = {
+    namaPekerjaan: "",
+    pemberiPekerjaan: "",
+    nilaiPekerjaan: "",
+    tahunPekerjaan: "",
+    buktiPekerjaanFilePath: "",
+    lampiran: ""
+  };
+
   constructor(
-    private formBuilder: FormBuilder, 
     private profileService: ProfileService,
     private eventEmitterService: EventEmitterService,
-    private authService: AuthService,
     private fileService: FileService
-    ) { 
-      this.setForm();
-    }
+    ) { }
 
-    get f() { return this.pekerjaanForm.controls; }
 
   ngOnInit(): void {
     this.getPekerjaan();
@@ -112,6 +121,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     );
   }
 
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
+  }
+
   public close() {
     this.opened = false;
     this.resetForm();
@@ -122,26 +135,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public open() {
     this.opened = true;
   }
-
-  public closeSaham() {
-    this.openedSaham = false;
-    this.resetForm();
-    this.isNewData = true;
-    this.lampiranFiles = [];
-  }
-
-  public openSaham() {
-    this.openedSaham = true;
-  }
-
-  public data: any = {
-    namaPekerjaan: "",
-    pemberiPekerjaan: "",
-    nilaiPekerjaan: "",
-    tahunPekerjaan: "",
-    buktiPekerjaanFilePath: "",
-    lampiran: ""
-  };
 
   public resetForm(): void {
     this.data.namaPekerjaan = "";
@@ -160,10 +153,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       nilaiPekerjaan: new FormControl(this.data.nilaiPekerjaan, Validators.required),
       tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)      
     });
-  }
-
-  triggerPopUp() {
-    this.eventEmitterService.trigger();
   }
 
   validasiForm(){
@@ -203,7 +192,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         this.popUpMessage = messages.success;
         this.triggerPopUp();
         this.getPekerjaan();
-        this.closeSaham();
+        this.close();
       },
       (error) => { 
         console.log(params);
