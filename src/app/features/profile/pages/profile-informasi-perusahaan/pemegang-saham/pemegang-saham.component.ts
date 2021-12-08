@@ -158,7 +158,7 @@ export class PemegangSahamComponent implements OnInit {
     this.data.persentaseKepemilikan = parseFloat(data.persentaseKepemilikan);
     
     this.isNewData = false;
-    this.disableNamaPemegangSaham = true;
+    this.disableNamaPemegangSaham = false;
 
     this.setForm();
     this.openSaham();
