@@ -8,13 +8,13 @@ Given('The Vendor wants manage {string} from the Company', () => {
 
 });
 
-Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
+// Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
 
-});
+// });
 
-Given('The Vendor must click {string} Tab', () => {
+// Given('The Vendor must click {string} Tab', () => {
 
-});
+// });
 
 Given('The Vendor will see {string} form', () => {
 
@@ -40,9 +40,9 @@ Given('The Vendor will see that pop-up form already closed when she or he clicks
 
 });
 
-Given('The Vendor will see list of {string} on {string}', () => {
+// Given('The Vendor will see list of {string} on {string}', () => {
 
-});
+// });
 
 Given('The Vendor must click {string} button where found on the left-buttom of {string} form', () => {
 

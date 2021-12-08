@@ -1,16 +1,27 @@
 const { I } = inject();
 
-Given('The Vendor still on {string} form', () => {
-    I.amOnPage('/');
+// Given('The Vendor still on {string} form', () => {
+//     I.amOnPage('/');
+// });
+
+Given('The Vendor already define information from {string}', (form) => {
+    switch (form) {
+        case "Informasi Perusahaan":
+            I.amOnPage('/profile-information');
+            break;
+        case "Informasi Bank":
+            I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
+            I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
+            break;
+        default:
+            I.waitForElement(form);
+            break;
+    }
 });
 
-Given('The Vendor already define information from {string}', () => {
-    I.amOnPage('/profile-information');
-});
+// Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
 
-Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
-
-});
+// });
 
 // Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', () => {
 //     I.click('#btn-addPemegangSaham');
@@ -60,7 +71,6 @@ Given('The Vendor not define anything on {string} form or only define several fi
 
 Given('The Vendor will get warning message tooltip on each mandatory fields as {string}', () => {
     I.seeElement('.k-window');
-    // I.see('Informasi Pemegang Saham');
     I.see('Data tidak boleh kosong.');
     I.click('#btn-popup-yes');
 });
