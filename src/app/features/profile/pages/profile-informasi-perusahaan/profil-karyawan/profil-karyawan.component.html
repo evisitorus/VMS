@@ -72,10 +72,10 @@
           <div class="row">
             <kendo-label class="col">First Name</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="firstNameKaryawan" class="col-md" formControlName="firstNameKaryawan"
+              <kendo-textbox id="firstName" class="col-md" formControlName="firstName"
               placeholder="Type your message here" #namaPegawai [clearButton]="true">
             </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstNameKaryawan.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -83,10 +83,10 @@
           <div class="row">
             <kendo-label class="col">Last Name</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="lastNameKaryawan" class="col-md" formControlName="lastNameKaryawan"
+              <kendo-textbox id="lastName" class="col-md" formControlName="lastName"
               placeholder="Type your message here" #namaPegawai [clearButton]="true">
             </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastNameKaryawan.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
