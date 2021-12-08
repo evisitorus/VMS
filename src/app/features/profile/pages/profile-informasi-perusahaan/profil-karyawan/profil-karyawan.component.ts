@@ -71,8 +71,6 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.gridView = this.gridData;
-    // this.gridData = this.dataKaryawan;
     this.fetchData();
 
   }
@@ -160,22 +158,6 @@ export class ProfilKaryawanComponent implements OnInit {
       (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
   }
-
-  // public mapData(data: any[]): any[] {
-  //   let mappedData:any[] = [];
-  //   for (const key in data) {
-  //     mappedData[key] = {
-  //       nik: data[key]['nik'],
-  //       namaDokumen: data[key]['namaDokumen'],
-  //       berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
-  //       berlakuSampai: formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US"),
-  //       lampiran: data[key]['attachmentFilePath'],
-  //       file: data[key]['file'],
-  //       id: data[key]['id']
-  //     };
-  //   }
-  //   return mappedData;
-  // }
 
   public save(): void {
     let file_id = this.uploadedFileId.replace(/\D/g,'');
