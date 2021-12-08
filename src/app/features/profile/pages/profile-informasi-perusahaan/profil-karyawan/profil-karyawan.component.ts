@@ -178,14 +178,15 @@ export class ProfilKaryawanComponent implements OnInit {
   // }
 
   public save(): void {
+    let file_id = this.uploadedFileId.replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
       jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan,
-      file: this.uploadedFileId,
+      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan.id,
+      file: file_id,
       attachmentFilePath: this.uploadedFileContentUrl
     };
 
@@ -213,11 +214,12 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public upload(): void {
-    console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
+        console.log(res)
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"]; //vendor :resume_id
+
       },
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
