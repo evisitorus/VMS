@@ -43,7 +43,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
     this.oldPasswordTextbox.input.nativeElement.type = "password";
     this.newPasswordTextbox.input.nativeElement.type = "password";
     this.confirmNewPasswordTextbox.input.nativeElement.type = "password";
-
   }
 
   public toggleVisibility(name: string): void {
@@ -193,5 +192,27 @@ export class ProfilePersonInChargeComponent implements OnInit {
     let errors = e.files[0].validationErrors;
     this.invalidMaxFileSize = !!errors?.includes("invalidMaxFileSize");
     this.invalidFileExtension = !!errors?.includes("invalidFileExtension");
+  }
+
+  keyPressAlphaSymbol(event: { keyCode: number; preventDefault: () => void; }) {
+    let input = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z\- ']/.test(input)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
   }
 }
