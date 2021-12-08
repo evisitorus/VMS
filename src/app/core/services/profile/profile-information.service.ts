@@ -20,7 +20,7 @@ export class ProfileInformationService {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_add_profil_karyawan: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_vendor_information_route,
+      url: ApiRoutes.api_add_pegawai_route,
       body: {
         nik: params.nik,
         firstName: params.firstName,
