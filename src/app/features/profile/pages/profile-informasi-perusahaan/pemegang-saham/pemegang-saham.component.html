@@ -23,7 +23,7 @@
           <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
         </span>
         <span>
-          <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deletePemegangSaham(dataItem)">
+          <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)">
         </span>
       </ng-template>
     </ng-template>
@@ -135,4 +135,20 @@
 </div>
 
 
-<app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>
+<app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [noButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>
+
+<kendo-dialog
+  *ngIf="opened"
+  [actions]="myActions"
+  [actionsLayout]="actionsLayout"
+  (action)="onAction($event)"
+  [title]="popUpConfirmationTitle"
+  (close)="close('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center;">
+    <!-- Apakah Pemegang Saham atas nama {{ nama_pemegang_saham }} akan dihapus dari sistem ? -->
+    Apakah Pemegang Saham atas nama ... akan dihapus dari sistem ?
+  </p>
+</kendo-dialog>

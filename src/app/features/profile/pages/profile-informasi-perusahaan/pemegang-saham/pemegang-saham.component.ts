@@ -1,15 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { DialogAction, ActionsLayout } from "@progress/kendo-angular-dialog";
 
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { AddPemegangSahamInterface, UpdatePemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
-import { AuthService } from 'src/app/core/services/auth.service';
 
 
 const messages = {
   default: 'Data tidak boleh kosong.',
-  success: 'Sukses'
+  success: 'Sukses',
+  deleteConfirmationTitle: "Konfirmasi hapus data",
+  deleteConfirmationMessage: "Apakah Pemegang Saham atas nama {nama_pemegang_saham} akan dihapus dari sistem ?",
 };
 
 @Component({
@@ -22,10 +24,14 @@ export class PemegangSahamComponent implements OnInit {
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
+
+  popUpConfirmationTitle: string = messages.deleteConfirmationTitle;
+  popUpConfirmationMessage: string = messages.deleteConfirmationMessage;
   redirectOnClosePopUp: boolean = false;
 
   public gridData: any = {};
   public id!: string;
+  public deleteId!: string;
   public isNewData: boolean = true;
   public disableNamaPemegangSaham: boolean = true;
   public openedSaham = false;
@@ -201,12 +207,16 @@ export class PemegangSahamComponent implements OnInit {
     );
   }
 
+  public delete(data: any): void {
+    this.opened = true;
+    this.deleteId = data.id;
+    console.log(this.deleteId);
+  }
 
-  public deletePemegangSaham(data: any): void {
-    this.profileService.deletePemegangSaham(data.id).subscribe(
+  public deletePemegangSaham(id: string): void {
+    this.profileService.deletePemegangSaham(id).subscribe(
       () => {
         this.popUpMessage = "Berhasil menghapus data";
-        this.triggerPopUp();
         this.getPemegangSaham();
       },
       (err) => {
@@ -214,5 +224,30 @@ export class PemegangSahamComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public opened = false;
+  public actionsLayout: ActionsLayout = "normal";
+
+  public myActions: DialogAction[] = [
+    { text: "No" },
+    { text: "Yes", primary: true },
+  ];
+
+  public onAction(action: DialogAction): void {
+    console.log(action);
+    if(action.text == "Yes"){
+      this.deletePemegangSaham(this.deleteId);
+    }
+    this.opened = false;
+  }
+
+  public close(status: any) {
+    console.log(status);
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
   }
 }
