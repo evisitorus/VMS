@@ -89,7 +89,7 @@ export class ProfileService {
   updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
     let api_update_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_update_pemegang_saham + "/" + params.id,
+      url: ApiRoutes.api_base_pemegang_saham + "/" + params.id + "/update" ,
       body: {
         vendor: this.vendor_id,
         namaPemegangSaham: params.namaPemegangSaham,
