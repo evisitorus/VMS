@@ -207,7 +207,13 @@ export class ProfileInformationService {
         jumlah_karyawan_total: params.jumlahKaryawanTotal,
         jumlah_karyawan_lokal: params.jumlahKaryawanLokal,
         jumlah_karyawan_asing: params.jumlahKaryawanAsing,
-        phone_number: params.phoneNumber
+        phone_number: params.phoneNumber,
+        alamat_perusahaan: params.alamatPerusahaan,
+        provinsi: params.provinsi,
+        kota: params.kota,
+        kecamatan: params.kecamatan,
+        kelurahan: params.keluarahan,
+        kodePos: params.kodePos
       },
       options: {
         headers: {
