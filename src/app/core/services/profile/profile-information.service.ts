@@ -25,13 +25,16 @@ export class ProfileInformationService {
         nik: params.nik,
         firstName: params.firstName,
         lastName: params.lastName,
-        sdmType: params.tipeKaryawan,
+        tipeKaryawan: params.tipeKaryawan,
         jabatan: params.jabatan,
         bidangPekerjaan: params.bidangPekerjaan,
         cvFilePath: params.attachmentFilePath,
-        id: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
+        file_id: params.file,
       },
       options: {
+        params: {
+          id: (this.authService.getLocalStorage("vendor_id")!)
+        },
         headers: {
           Authorization: token
         }
