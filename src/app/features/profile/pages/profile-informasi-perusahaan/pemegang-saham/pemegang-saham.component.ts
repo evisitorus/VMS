@@ -122,7 +122,6 @@ export class PemegangSahamComponent implements OnInit {
     }
 
     const dataPemegangSaham = {
-      email: "",
       namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
       perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
       lokal: this.pemegangSahamFormGroup.controls['lokal'].value,

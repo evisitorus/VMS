@@ -59,7 +59,7 @@ export class ProfileService {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pemegang_saham,
       body: {
-        email: this.email,
+        vendor: this.vendor_id,
         namaPemegangSaham: params.namaPemegangSaham,
         perseorangan: params.perseorangan,
         lokal: params.lokal,
