@@ -1,16 +1,6 @@
 const { I } = inject();
 
 Given('The Vendor already add information in regards to {string}', () => {
-    I.amOnPage('/login');
-    I.waitForElement('#input-email input[class=k-input]');
-    I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
-    I.waitForElement('#input-password input[class=k-input]');
-    I.fillField('#input-password input[class=k-input]', '1234');
-    I.waitForElement('#btn-login');
-    I.click('#btn-login');
-    I.waitForElement('#btn-popup-yes');
-    I.click('#btn-popup-yes');
-
     I.amOnPage('/profile-information');
 });
 
@@ -18,9 +8,16 @@ Given('The Vendor wants manage {string} which needed for further verification fr
     
 });
 
-Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
-    // I.waitForElement('#k-panelbar-0-item-sidebar-kelola-akun [ng-reflect-id=sidebar-kelola-akun]');
-    // // I.click('#k-panelbar-0-item-sidebar-kelola-akun span]');
+Given('The Vendor must click {string} menu where found on {string} of {string}', (button1, button2, button3) => {
+    switch (button1) {
+        case "Informasi Keuangan":
+            I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan')
+            I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
+            break;
+        default:
+            I.click(button1);
+            break;
+        }
 });
 
 Given('The Vendor must click {string} Tab', () => {
@@ -28,8 +25,21 @@ Given('The Vendor must click {string} Tab', () => {
     I.click('#k-panelbar-1-item-sidebar-dokumen');
 });
 
-Given('The Vendor will see {string} form', () => {
-    I.amOnPage('/profile-dokumen');
+Given('The Vendor will see {string} form', (form) => {
+    switch (form) {
+        case "Dokumen":
+            I.amOnPage('/profile-dokumen');
+            break;
+        case "Asset":
+            I.amOnPage('/profile-aset');
+            break;
+        case "Informasi Keuangan":
+            I.amOnPage('/profile-laporan-keuangan');
+            break;
+        default:
+            I.amOnPage(form);
+            break;
+    }
 });
 
 Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
@@ -45,6 +55,18 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
         case "Pemegang Saham":
             I.waitForElement('#btn-addPemegangSaham');
             I.click('#btn-addPemegangSaham');
+            break;
+        case "Asset":
+            I.waitForElement('#btn-tambah-asset');
+            I.click('#btn-tambah-asset');
+            break;
+        case "Neraca Keuangan":
+            I.waitForElement('#btn-tambah-neraca');
+            I.click('#btn-tambah-neraca');
+            break;
+        case "SPT Tahunan":
+            I.waitForElement('#btn-tambah-spt');
+            I.click('#btn-tambah-spt');
             break;
         default:
             I.click(button3);
@@ -70,6 +92,37 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.click('#Lokal');
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
             break;
+        case "Asset":
+            I.waitForElement('#input-nama-asset input[class=k-input]');
+            I.fillField('#input-nama-asset input[class=k-input]', 'Crane');
+            I.waitForElement('#input-jumlah-asset input[role=spinbutton]');
+            I.fillField('#input-jumlah-asset input[role=spinbutton]', 100);
+            I.waitForElement('#input-tahun-asset input[class=k-input]');
+            I.fillField('#input-tahun-asset input[class=k-input]', '2012');
+            break;
+        case "Neraca Keuangan":
+            // I.waitForElement('#input-neraca-tahun input[role=spinbutton]');
+            // I.click('#input-neraca-tahun input[role=spinbutton]');
+            I.fillField('#input-neraca-tahun input[role=spinbutton]', 2015);
+            I.wait(10);
+            I.seeInField('#input-neraca-tahun input[role=spinbutton]', 2015);
+            // I.waitForElement('#input-neraca-aktiva input[role=spinbutton]');
+            I.fillField('#input-neraca-aktiva input[role=spinbutton]', 1000000000);
+            // I.waitForElement('#input-neraca-pasiva input[role=spinbutton]');
+            I.fillField('#input-neraca-pasiva input[role=spinbutton]', 1000000000);
+            // I.waitForElement('#input-neraca-ekuitas input[role=spinbutton]');
+            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', 1000000000);
+            // I.waitForElement('#input-neraca-omzet input[role=spinbutton]');
+            I.fillField('#input-neraca-omzet input[role=spinbutton]', 1000000000);
+            break;
+        case "SPT Tahunan":
+            I.waitForElement('#input-spt-tahun input[class=k-input]');
+            I.fillField('#input-spt-tahun input[class=k-input]' , '2015');
+            I.waitForElement('#input-spt-nomor-dokumen input[class=k-input]');
+            I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
+            I.waitForElement('#input-spt-lampiran input[type=file]');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
         default:
             I.waitForElement(form2);
             break;
@@ -86,8 +139,24 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#submitPemegangSaham');
             I.click('#submitPemegangSaham');
             break;
+        case "Asset":
+            I.waitForElement('#btn-simpan');
+            I.click('#btn-simpan');
+            break;
+        case "Keuangan":
+            I.waitForElement('#btn-simpan-profile-keuangan');
+            I.click('#btn-simpan-profile-keuangan');
+            break;
+        case "Neraca Keuangan":
+            I.waitForElement('#btn-simpan-neraca');
+            I.click('#btn-simpan-neraca');
+            break;
+        case "SPT Tahunan":
+            I.waitForElement('#btn-simpan-spt');
+            I.click('#btn-simpan-spt');
+            break;
         default:
-            I.waitForElement(button2);
+            I.click(button2);
             break;
     }    
 });
