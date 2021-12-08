@@ -5,14 +5,14 @@
 
 /*export const environment = {
   production: false,
-  api_base_path: "http://localhost:8000",
+  api_base_path: "http://192.168.32.64:8000",
   acceptance_test : true
 };*/
 
 
 export const environment = {
   production: false,
-  api_base_path: "http://localhost:8000",
+  api_base_path: "http://192.168.32.40:8000",
   acceptance_test : true
 };
 
