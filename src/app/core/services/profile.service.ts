@@ -32,7 +32,8 @@ export class ProfileService {
         nilaiPekerjaan: params.nilaiPekerjaan,
         tahunPekerjaan: params.tahunPekerjaan,
         buktiPekerjaanFilePath: params.buktiPekerjaanFilePath,
-        file: params.lampiran
+        file: params.lampiran,
+        active: true
       }
     };
 
