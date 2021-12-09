@@ -7,6 +7,7 @@ import { SetPasswordInterface } from '../interfaces/setPassword-interface';
 import { ResetPasswordInterface } from '../interfaces/reset-password-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,15 @@ export class AuthService {
 
   public redirectUrl: string | null = null;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private jwtHelper: JwtHelperService
+  ) { }
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('access_token')!;
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   login(params: LoginInterface): Observable<any> {    
     let api_login: ApiInterface = {

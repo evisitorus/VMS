@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ){}
 
   canActivate(
@@ -21,10 +21,21 @@ export class AuthGuard implements CanActivate {
     return this.checkLogin(url);
   }
 
-  checkLogin(url: string): true|UrlTree {
-    let token = this.authService.getLocalStorage('access_token');
+  checkLogin(url: string): true|UrlTree {   
     this.authService.redirectUrl = url;
-    return token ? true : this.router.parseUrl('/login');
+    if (this.authService.isAuthenticated()) {
+      return true;
+    } else {
+      this.clean();
+      return this.router.parseUrl('/login');
+    }
+  }
+
+  clean(): void {
+    this.authService.setLoggedIn(false);
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('person_id');
+    localStorage.removeItem('vendor_id');
   }
 
 }
