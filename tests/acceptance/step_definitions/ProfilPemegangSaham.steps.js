@@ -86,11 +86,27 @@ Given('The Vendor wants to edit one of record from {string} on {string} which pa
 });
 
 Given('The Vendor can modify data which displayed on {string} form', () => {
-    I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
-    I.click('#BadanUsaha');
-    I.click('#Asing');
-    I.click('#kepemilikanSaham input[role=spinbutton]');
-    I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+    switch (form1) {
+        case "Pemegang Saham":
+            I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
+            I.click('#BadanUsaha');
+            I.click('#Asing');
+            I.click('#kepemilikanSaham input[role=spinbutton]');
+            I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+            break;
+        case "Alamat":
+            I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
+            I.fillField('#alamat input[class=k-input]', 'Jl. Letnan Jenderal S. Parman Kav 102');
+            I.selectOption('#provinsi input[class=k-dropdown-wrap]','Jawa Barat');
+            I.selectOption('#kota input[class=k-dropdown-wrap]','Kabupaten Bandung');
+            I.selectOption('#kecamatan input[class=k-dropdown-wrap]','Cibeunying');
+            I.selectOption('#kelurahan input[class=k-dropdown-wrap]','Cicaheum');
+            I.selectOption('#kodepos input[class=k-dropdown-wrap]','42015');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
 });
 
 Given('The Vendor will see information changes from selected record from {string} on {string}', () => {

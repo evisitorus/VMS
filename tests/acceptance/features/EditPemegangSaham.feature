@@ -21,7 +21,7 @@ Background:
          "message" : "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar."
        }
        """
-       And The Vendor can modify data which displayed on "Edit Pemegang Saham" form 
+       And The Vendor can modify data which displayed on "Pemegang Saham" form 
        """
         {
 
