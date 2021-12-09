@@ -265,7 +265,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.lastName = data.fromParty.lastName;
     this.data.tipeKaryawan = data.sdmType;
     this.data.jabatan = data.jabatan;
-    this.data.bidangPekerjaan = data.sdmBidang;
+    this.selectedBidang = data.sdmBidang;
     this.data.cvFilePath = data.cvFilePath;
 
     this.isNewData = false;
