@@ -14,14 +14,14 @@ Background:
     Given The Vendor still on "Informasi Perusahaan" form 
        And The Vendor wants to delete one of record from "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
        And The Vendor must clicks button "Delete" button from selected record on "Pemegang Saham" form
-       And The Vendor will see pop-up message  
+       And The Vendor will see pop-up message appear
        """
        {
          "message" : "Apakah Pemegang Saham atas nama {nama_pemegang_saham} akan dihapus dari sistem ?"
          "option"  : "Yes/No"
        }
        """ 	
-      And The Vendor must select "Yes" option
+      And The Vendor must select "Yes" option on pop-up message
        And The Vendor will see information changes from selected record from "Pemegang Saham" on "Pemegang Saham Grid" and deleted record will be flag as "Terhapus"
        And The Vendor will see list of "Pemegang Saham" on "Pemegang Saham Grid"
         """

@@ -56,7 +56,7 @@ Given('The Vendor will get warning message tooltip on empty fields', () => {
 Given('The Vendor wants to delete one of record from {string} on {string} which part of {string} form', (form1,form2,form3) => {
     switch (form1) {
         case "Pemegang Saham":
-            I.click('Saham');
+            I.click('.ng-tns-c66-2.k-link');
             break;
         case "Pegawai":
             I.click('Data Pegawai');

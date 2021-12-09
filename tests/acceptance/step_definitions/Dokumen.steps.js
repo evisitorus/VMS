@@ -43,8 +43,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
             break;
         case "Riwayat Pekerjaan":
-            I.waitForElement('#k-panelbar-1-item-sidebar-riwayat-pekerjaan');
-            I.click('#k-panelbar-1-item-sidebar-riwayat-pekerjaan');
+            I.waitForElement('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+            I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
             break;
         case "Asset":
             I.waitForElement('#k-panelbar-0-item-sidebar-aset');
@@ -69,6 +69,9 @@ Given('The Vendor will see {string} form', (form) => {
             break;
         case "Alamat":
             I.amOnPage('/profile-alamat');
+            break;
+        case "Riwayat Pekerjaan":
+            I.amOnPage('/profile-riwayat-pekerjaan');
             break;
         default:
             I.amOnPage(form);

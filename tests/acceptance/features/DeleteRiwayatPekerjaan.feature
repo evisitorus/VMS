@@ -24,14 +24,14 @@ Background:
       """
       And The Vendor must select one of record from "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid" which part of "Riwayat Pekerjaan" form 
       And The Vendor must clicks button "Delete" button from selected record on "Riwayat Pekerjaan" form
-       And The Vendor will see pop-up message  
+       And The Vendor will see pop-up message appear
       """
       {
          "message" : "Apakah Riwayat Pekerjaan {nama_pekerjaan} akan dihapus dari sistem ?"
          "option"  : "Yes/No"
       }
       """
-      And The Vendor must select "Yes" option
+      And The Vendor must select "Yes" option on pop-up message
       And The Vendor will see information changes from selected record from "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid" and deleted record will be flag as "Terhapus"
       And The Vendor will see list of modified "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid"
       """
