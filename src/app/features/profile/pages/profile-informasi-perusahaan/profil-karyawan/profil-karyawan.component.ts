@@ -26,7 +26,8 @@ const messages = {
 export class ProfilKaryawanComponent implements OnInit {
 
   public gridDataPegawai: any = {};
-  // public gridView!: any[];
+  public id!: string;
+  public isNewData: boolean = false;
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
@@ -118,6 +119,17 @@ export class ProfilKaryawanComponent implements OnInit {
       bidangPekerjaan: new FormControl(null, Validators.required)
     });
   }
+
+  // public resetForm(): void {
+  //   this.data.nik ="";
+  //   this.data.firstName = "";
+  //   this.data.lastName = "";
+  //   this.data.tipeKaryawan = "";
+  //   this.data.jabatan = "";
+  //   this.data.bidangPekerjaan = "";
+  //   this.setForm();
+    
+  // }
 
   public submitProfilKaryawan(): void {
     this.pegawaiFormGroup.markAllAsTouched();
@@ -221,6 +233,49 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       () => {
         this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public update(): void {
+    console.log("Update")
+    let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let params: ProfileKaryawanInterface = {
+      nik: this.pegawaiFormGroup.value.nik,
+      firstName: this.pegawaiFormGroup.value.firstName,
+      lastName: this.pegawaiFormGroup.value.lastName,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
+      jabatan:this.pegawaiFormGroup.value.jabatan,
+      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan.id,
+      file: file_id,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
+    this.profileInformationService.update(params, this.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.fetchData();
+        this.close();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+        this.close();
+      }
+    );
+  }
+
+  public delete(id: string): void {
+    console.log("Delete");
+    this.profileInformationService.delete(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
