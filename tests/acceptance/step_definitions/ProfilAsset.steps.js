@@ -62,7 +62,14 @@ Given('The Vendor must clicks button {string} button from selected record on {st
             I.click('#btn-delete');
             break;
         case "Pemegang Saham":
-            I.click('#btn-delete');
+            if(button==="Delete")
+            {
+                I.click('#btn-delete');
+            }
+            else
+            {
+                I.click("#btn-update")
+            }            
             break;
         case "Riwayat Pekerjaan":
             I.click('#btn-delete');
@@ -101,3 +108,6 @@ Given('The Vendor already modify her or his company information by delete record
 
 });
 
+Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', () => {
+
+});

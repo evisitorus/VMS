@@ -61,3 +61,55 @@ Given('The Vendor must select {string} option on pop-up message', () => {
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
+
+Given('The Vendor will see information which state for every changes should be re-check by verificator', (raw_data) => {
+    let data = JSON.parse(raw_data.content);
+    I.see(data.message);
+    I.click('#btn-popup-yes');
+});
+
+Given('The Vendor wants to edit one of record from {string} on {string} which part of {string} form', (form1,form2,form3) => {
+    switch (form1) {
+        case "Pemegang Saham":
+            I.click('.ng-tns-c66-2.k-link');
+            break;
+        case "Pegawai":
+            I.click('Data Pegawai');
+            break;
+        // case "Data Perusahaan":
+        //     I.click('Data Perusahaan');
+        //     break;
+        default:
+            I.click(form1);
+            break;
+    }
+});
+
+Given('The Vendor can modify data which displayed on {string} form', () => {
+    I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
+    I.click('#BadanUsaha');
+    I.click('#Asing');
+    I.click('#kepemilikanSaham input[role=spinbutton]');
+    I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+});
+
+Given('The Vendor will see information changes from selected record from {string} on {string}', () => {
+    I.see('Steven Rogers Barton');
+    I.see('Badan Usaha');
+    I.see('Asing');
+    I.see('35.00');
+});
+
+Given('The Vendor will see that update pop-up form already closed when clicks {string}', () => {
+    I.see('Berhasil memperbarui data');
+    I.click('#btn-popup-yes');
+    I.dontSeeElement('.k-window');
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});

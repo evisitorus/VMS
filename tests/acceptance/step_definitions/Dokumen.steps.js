@@ -9,15 +9,6 @@ Given('The Vendor wants manage {string} which needed for further verification fr
 });
 
 Given('The Vendor must click {string} menu where found on {string} of {string}', (button1, button2, button3) => {
-    // switch (button1) {
-    //     case "Informasi Keuangan":
-    //         I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan')
-    //         I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
-    //         break;
-    //     default:
-    //         I.click(button1);
-    //         break;
-    //     }
 });
 
 Given('The Vendor must click {string} Tab', (sidebar) => {
@@ -203,19 +194,6 @@ Given('The Vendor must click {string} button to save information of {string}', (
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
-    // switch (button2) {
-    //     case "Dokumen":
-            // I.waitForElement('#btn-simpan');
-    //         I.click('#btn-simpan');
-    //         break;
-    //     case "Pemegang Saham":
-    //         I.waitForElement('#submitPemegangSaham');
-    //         I.click('#submitPemegangSaham');
-    //         break;
-    //     default:
-    //         I.waitForElement(button2);
-    //         break;
-    // }
     I.see('Berhasil menyimpan data');
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
