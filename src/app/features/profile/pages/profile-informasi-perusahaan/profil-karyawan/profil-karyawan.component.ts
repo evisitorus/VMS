@@ -99,6 +99,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
         this.gridDataPegawai = response.data;
+        console.log(this.gridDataPegawai)
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data";
@@ -260,6 +261,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public updateForm(data: any): void {
     console.log(data)
+    this.id = data.id;
     this.data.nik = data.nik;
     this.data.firstName = data.fromParty.firstName;
     this.data.lastName = data.fromParty.lastName;
