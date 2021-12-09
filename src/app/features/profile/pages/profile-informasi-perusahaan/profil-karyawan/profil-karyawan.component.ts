@@ -159,13 +159,14 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
+        let id = this.bidangSource.length;
         //add new value into temp array and backend
         this.bidangSource.push({
           name: this.filter,
-          id: 0,
+          id: id,
         });
         //make new added value the selected value
-        this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
+        this.selectedBidang = this.bidangSource[id+1];
         this.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.triggerPopUp();
       },
@@ -264,6 +265,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.tipeKaryawan = data.sdmType;
     this.data.jabatan = data.jabatan;
     this.data.bidangPekerjaan = data.sdmBidang;
+    this.data.cvFilePath = data.cvFilePath;
 
     this.isNewData = false;
 
