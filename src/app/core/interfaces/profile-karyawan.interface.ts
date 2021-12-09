@@ -1,9 +1,10 @@
 export interface ProfileKaryawanInterface {
     nik: string,
-    namaPegawai: string,
+    firstName: string,
+    lastName: string,
     tipeKaryawan: string,
     jabatan: string,
-    bidang: string,
+    bidangPekerjaan: string,
     file: string,
     attachmentFilePath: string,
 }

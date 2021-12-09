@@ -25,55 +25,9 @@ const messages = {
 })
 export class ProfilKaryawanComponent implements OnInit {
 
-  public dataKaryawan = [
-    {
-      "nik": "848e6002",
-      "namaPegawai": "Sig Jeannel",
-      "tipeKaryawan": {
-        id: 1,
-        name: "Tenaga Ahli"
-      },
-      "jabatan": "Human Resources Assistant III",
-      "bidangPekerjaan": "HR",
-      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
-    },
-    {
-      "nik": "19d18d40",
-      "namaPegawai": "Shelden Greyes",
-      "tipeKaryawan": {
-        id: 2,
-        name: "Tenaga Terampil"
-      },
-      "jabatan": "Operator",
-      "bidangPekerjaan": "Engineering",
-      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
-    },
-    {
-      "nik": "bebdc6eb",
-      "namaPegawai": "Megen Cody",
-      "tipeKaryawan": {
-        id: 2,
-        name: "Tenaga Administrasi"
-      },
-      "jabatan": "Operator",
-      "bidangPekerjaan": "Engineering",
-      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
-    },
-    {
-      "nik": "38b08b88",
-      "namaPegawai": "Clevey Thursfield",
-      "tipeKaryawan": {
-        id: 2,
-        name: "Tenaga Terampil"
-      },
-      "jabatan": "VP Quality Control",
-      "bidangPekerjaan": "Engineering",
-      "resume": "https://www.kdp.org/resources/pdf/careercenter/Compiling_a_Curriculum_Vitae.pdf"
-    }
-  ];
-
-  public gridData: any = {};
-  // public gridView!: any[];
+  public gridDataPegawai: any = {};
+  public id!: string;
+  public isNewData: boolean = true;
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
@@ -97,12 +51,13 @@ export class ProfilKaryawanComponent implements OnInit {
   };
 
   public data: any = {
-    nik: "",
-    namaPegawai: "",
-    tipeKaryawan: "",
-    jabatan: "",
-    bidangPekerjaan: "",
-    resume: ""
+    nik: null,
+    firstName: null,
+    lastName: null,
+    tipeKaryawan: null,
+    jabatan: null,
+    bidangPekerjaan: null,
+    cvFilePath: null,
   };
 
   public bidangTemp: Array<Item> = [];
@@ -117,8 +72,6 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.gridView = this.gridData;
-    // this.gridData = this.dataKaryawan;
     this.fetchData();
 
   }
@@ -143,28 +96,66 @@ export class ProfilKaryawanComponent implements OnInit {
       }
     );
 
+    this.profileInformationService.getKaryawan().subscribe(
+      (response) => {
+        this.gridDataPegawai = response.data;
+      },
+      () => {
+        this.popUpMessage = "Gagal mendapatkan data";
+        this.triggerPopUp();
+      }
+    );
+
+
+  }
+
+  public resetForm():void {
+    this.data.nik = null;
+    this.data.firstName = null;
+    this.data.lastName = null;
+    this.data.tipeKaryawan = null;
+    this.data.jabatan = null;
+    this.data.bidangPekerjaan = null;
+    this.data.cvFilePath = null;
+
+    this.setForm();
 
   }
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(null, Validators.required),
-      namaPegawai: new FormControl(null, Validators.required),
-      tipeKaryawan: new FormControl(null, Validators.required),
-      jabatan: new FormControl(null, Validators.required),
-      bidangPekerjaan: new FormControl(null, Validators.required)
+      nik: new FormControl(this.data.nik, Validators.required),
+      firstName: new FormControl(this.data.firstName, Validators.required),
+      lastName: new FormControl(this.data.lastName, Validators.required),
+      tipeKaryawan: new FormControl(this.data.tipeKaryawan, Validators.required),
+      jabatan: new FormControl(this.data.jabatan, Validators.required),
+      bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
     });
   }
 
   public submitProfilKaryawan(): void {
-    this.pegawaiFormGroup.markAllAsTouched();
+    if( this.uploadedFileContentUrl === null){
+      this.popUpMessage = "File tidak valid";
+      this.close();
+      this.triggerPopUp();
+    } else {
+      this.pegawaiFormGroup.markAllAsTouched();
+      if (this.pegawaiFormGroup.valid) {
+        if (this.isNewData) {
+          this.save();
+        } else {
+          this.update();
+        }
+      }
+    }
+    
 
   }
 
   // add new bidang value based on user input
   public filter!: string;
   public selectedBidang!: Item ;
-  public addNew(): void {
+  public addNewBidang(): void {
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
@@ -196,78 +187,38 @@ export class ProfilKaryawanComponent implements OnInit {
     );
   }
 
-  // public mapData(data: any[]): any[] {
-  //   let mappedData:any[] = [];
-  //   for (const key in data) {
-  //     mappedData[key] = {
-  //       nik: data[key]['nik'],
-  //       namaDokumen: data[key]['namaDokumen'],
-  //       berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
-  //       berlakuSampai: formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US"),
-  //       lampiran: data[key]['attachmentFilePath'],
-  //       file: data[key]['file'],
-  //       id: data[key]['id']
-  //     };
-  //   }
-  //   return mappedData;
-  // }
-
-  // public fetchData(): void {
-  //   this.profileInformationService.getProfilKaryawan().subscribe(
-  //     (response) => {
-  //       this.gridData = response['hydra:member'];
-  //       this.gridData = this.mapData(this.gridData);
-  //     },
-  //     () => {
-  //       this.popUpMessage = "Gagal mendapatkan data";
-  //       this.triggerPopUp();
-  //     }
-  //   );
-  // }
-
-  public addToTableFe(): void {
-    let temp: any = {
+  public save(): void {
+    let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
-      namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-      jabatan: this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan: this.pegawaiFormGroup.value.bidangPekerjaan.name,
-      // file: this.uploadedFileId,
-      resume: ApiRoutes.api_base_url + this.uploadedFileContentUrl
-    }
-    this.popUpMessage = "Berhasil menyimpan data";
-    this.triggerPopUp();
-    this.dataKaryawan.push(temp);
+      firstName: this.pegawaiFormGroup.value.firstName,
+      lastName: this.pegawaiFormGroup.value.lastName,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
+      jabatan:this.pegawaiFormGroup.value.jabatan,
+      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan.id,
+      file: file_id,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
+
+    this.profileInformationService.addProfilKaryawan(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.triggerPopUp();
+        this.fetchData();
+        this.close();
+      },
+      () => {
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+        this.close();
+      }
+    );
   }
-
-  // public save(): void {
-  //   let params: ProfileKaryawanInterface = {
-  //     nik: this.pegawaiFormGroup.value.nik,
-  //     namaPegawai: this.pegawaiFormGroup.value.namaPegawai,
-  //     tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan,
-  //     jabatan:this.pegawaiFormGroup.value.jabatan,
-  //     bidang:this.pegawaiFormGroup.value.bidangPekerjaan,
-  //     file: this.uploadedFileId,
-  //     attachmentFilePath: this.uploadedFileContentUrl
-  //   };
-
-  //   this.profileInformationService.addProfilKaryawan(params).subscribe(
-  //     () => {
-  //       this.popUpMessage = "Berhasil menyimpan data";
-  //       this.triggerPopUp();
-  //       // this.fetchData();
-  //       this.close();
-  //     },
-  //     () => {
-  //       this.popUpMessage = "Gagal menyimpan data";
-  //       this.triggerPopUp();
-  //       this.close();
-  //     }
-  //   );
-  // }
 
   public close() {
     this.opened = false;
+    this.resetForm();
+    this.isNewData = true;
   }
 
   public open() {
@@ -275,11 +226,12 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public upload(): void {
-    console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
+        console.log(res)
         this.uploadedFileContentUrl = res.contentUrl; // file url
-        this.uploadedFileId = res["@id"]; //vendor :logo_id
+        this.uploadedFileId = res["@id"]; //vendor :resume_id
+
       },
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
@@ -299,6 +251,64 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       () => {
         this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public updateForm(data: any): void {
+    console.log(data)
+    this.data.nik = data.nik;
+    this.data.firstName = data.fromParty.firstName;
+    this.data.lastName = data.fromParty.lastName;
+    this.data.tipeKaryawan = data.sdmType;
+    this.data.jabatan = data.jabatan;
+    this.data.bidangPekerjaan = data.sdmBidang;
+
+    this.isNewData = false;
+
+    this.setForm();
+    this.open();
+
+  }
+
+
+  public update(): void {
+    let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let params: ProfileKaryawanInterface = {
+      nik: this.pegawaiFormGroup.value.nik,
+      firstName: this.pegawaiFormGroup.value.firstName,
+      lastName: this.pegawaiFormGroup.value.lastName,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
+      jabatan:this.pegawaiFormGroup.value.jabatan,
+      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan.id,
+      file: file_id,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
+    this.profileInformationService.update(params, this.id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.fetchData();
+        this.close();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+        this.close();
+      }
+    );
+  }
+
+  public delete(id: string): void {
+    this.profileInformationService.delete(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
