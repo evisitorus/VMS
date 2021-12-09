@@ -27,7 +27,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public gridDataPegawai: any = {};
   public id!: string;
-  public isNewData: boolean = false;
+  public isNewData: boolean = true;
 
   popUpTitle: string = "Informasi Pemegang Saham";
   popUpMessage: string = messages.default;
@@ -51,13 +51,13 @@ export class ProfilKaryawanComponent implements OnInit {
   };
 
   public data: any = {
-    nik: "",
-    firstName: "",
-    lastName: "",
-    tipeKaryawan: "",
-    jabatan: "",
-    bidangPekerjaan: "",
-    cvFilePath: ""
+    nik: null,
+    firstName: null,
+    lastName: null,
+    tipeKaryawan: null,
+    jabatan: null,
+    bidangPekerjaan: null,
+    cvFilePath: null,
   };
 
   public bidangTemp: Array<Item> = [];
@@ -109,30 +109,46 @@ export class ProfilKaryawanComponent implements OnInit {
 
   }
 
+  public resetForm():void {
+    this.data.nik = null;
+    this.data.firstName = null;
+    this.data.lastName = null;
+    this.data.tipeKaryawan = null;
+    this.data.jabatan = null;
+    this.data.bidangPekerjaan = null;
+    this.data.cvFilePath = null;
+
+    this.setForm();
+
+  }
+
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(null, Validators.required),
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      tipeKaryawan: new FormControl(null, Validators.required),
-      jabatan: new FormControl(null, Validators.required),
-      bidangPekerjaan: new FormControl(null, Validators.required)
+      nik: new FormControl(this.data.nik, Validators.required),
+      firstName: new FormControl(this.data.firstName, Validators.required),
+      lastName: new FormControl(this.data.lastName, Validators.required),
+      tipeKaryawan: new FormControl(this.data.tipeKaryawan, Validators.required),
+      jabatan: new FormControl(this.data.jabatan, Validators.required),
+      bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
     });
   }
 
-  // public resetForm(): void {
-  //   this.data.nik ="";
-  //   this.data.firstName = "";
-  //   this.data.lastName = "";
-  //   this.data.tipeKaryawan = "";
-  //   this.data.jabatan = "";
-  //   this.data.bidangPekerjaan = "";
-  //   this.setForm();
-    
-  // }
-
   public submitProfilKaryawan(): void {
-    this.pegawaiFormGroup.markAllAsTouched();
+    if( this.uploadedFileContentUrl === null){
+      this.popUpMessage = "File tidak valid";
+      this.close();
+      this.triggerPopUp();
+    } else {
+      this.pegawaiFormGroup.markAllAsTouched();
+      if (this.pegawaiFormGroup.valid) {
+        if (this.isNewData) {
+          this.save();
+        } else {
+          this.update();
+        }
+      }
+    }
+    
 
   }
 
@@ -201,6 +217,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public close() {
     this.opened = false;
+    this.resetForm();
+    this.isNewData = true;
   }
 
   public open() {
@@ -238,8 +256,23 @@ export class ProfilKaryawanComponent implements OnInit {
     );
   }
 
+  public updateForm(data: any): void {
+    this.data.nik = data.nik;
+    this.data.firstName = data.firstName;
+    this.data.lastName = data.lastName;
+    this.data.tipeKaryawan = data.tipeKaryawan;
+    this.data.jabatan = data.jabatan;
+    this.data.bidangPekerjaan = data.bidangPekerjaan;
+
+    this.isNewData = false;
+
+    this.setForm();
+    this.open();
+
+  }
+
+
   public update(): void {
-    console.log("Update")
     let file_id = this.uploadedFileId.replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
@@ -267,7 +300,6 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public delete(id: string): void {
-    console.log("Delete");
     this.profileInformationService.delete(id).subscribe(
       () => {
         this.popUpMessage = "Berhasil menghapus data";
