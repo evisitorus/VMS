@@ -257,12 +257,13 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
+    console.log(data)
     this.data.nik = data.nik;
-    this.data.firstName = data.firstName;
-    this.data.lastName = data.lastName;
-    this.data.tipeKaryawan = data.tipeKaryawan;
+    this.data.firstName = data.fromParty.firstName;
+    this.data.lastName = data.fromParty.lastName;
+    this.data.tipeKaryawan = data.sdmType;
     this.data.jabatan = data.jabatan;
-    this.data.bidangPekerjaan = data.bidangPekerjaan;
+    this.data.bidangPekerjaan = data.sdmBidang;
 
     this.isNewData = false;
 
