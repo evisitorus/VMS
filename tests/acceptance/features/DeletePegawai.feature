@@ -1,24 +1,20 @@
 ​# language: en
-
 # workflow
 Feature: Vendor - Delete vendor information - Pegawai
-	#---------------------------------------------------------
-    # Vendor - #4 Vendor can delete pegawai information 
-    #---------------------------------------------------------
 
 As a Vendor  
 I want to delete pegawai  
-So that I can modify pegawai information which has been recorded on the app 
+So that I can modify pegawai information which has been recorded on the app
 
-#================================================================================================================================================
+Background: 
+    Given The Vendor already login to VMS Portal
 
  #Delete Existing "Pegawai"
  Scenario: Delete Selected record from Pegawai
     Given The Vendor still on "Informasi Perusahaan" form 
-      When The Vendor already on information from "Informasi Perusahaan" 
        And The Vendor wants to delete one of record from "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
-       And The Vendor must clicks button "Delete" button from selected record
-	   And The Vendor will see confirmation message  
+       And The Vendor must clicks button "Delete" button from selected record on "Pegawai" form
+	   And The Vendor will see pop-up message  
        """
       {
          "message" : "Apakah Pegawai{nama_pegawai} akan dihapus dari sistem ?"
@@ -27,7 +23,7 @@ So that I can modify pegawai information which has been recorded on the app
       """ 	
       And The Vendor must select "Yes" option
       And The Vendor will see information changes from selected record from "Pegawai" on "Pegawai Grid" and deleted record will be flag as "Terhapus"
-      And The Vendor will see list of "Pegawai" on "Pegawai Grid"
+      And The Vendor will see list of modified "Pegawai" on "Pegawai Grid"
       """
         {
            "No | NIK       | Nama Pegawai         | Tipe Karyawan 	    | Jabatan     | Bidang Pekerjaan      | Resume        |Action       "
@@ -39,6 +35,4 @@ So that I can modify pegawai information which has been recorded on the app
         }
        """
 	 And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Pegawai" on "Pegawai Grid"
-    Then The Vendor already modify pegawai information by deleting selected record of "Pegawai"
-
-#================================================================================================================================================
+    Then The Vendor already modify her or his company information by delete recorded "Pegawai"

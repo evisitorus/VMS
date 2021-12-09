@@ -106,6 +106,15 @@ Given('The Vendor must clicks button {string} button from selected record on {st
         case "Alamat":
             I.click('#btn-delete');
             break;
+        case "Pemegang Saham":
+            I.click('#btn-delete');
+            break;
+        case "Riwayat Pekerjaan":
+            I.click('#btn-delete');
+            break;
+        case "Pegawai":
+            I.click('#btn-delete');
+            break;
         default:
             I.click(form);
             break;

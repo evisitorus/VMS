@@ -27,8 +27,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-dokumen');
             break;
         case "Profil Perusahaan":
-            I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
-            I.click('#k-panelbar-0-item-sidebar-profile-information');
+            I.waitForElement('#k-panelbar-1-item-sidebar-profile-information');
+            I.click('#k-panelbar-1-item-sidebar-profile-information');
             break;
         case "PIC":
             I.waitForElement('#k-panelbar-0-item-sidebar-pic');
@@ -43,8 +43,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
             break;
         case "Riwayat Pekerjaan":
-            I.waitForElement('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
-            I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+            I.waitForElement('#k-panelbar-1-item-sidebar-riwayat-pekerjaan');
+            I.click('#k-panelbar-1-item-sidebar-riwayat-pekerjaan');
             break;
         case "Asset":
             I.waitForElement('#k-panelbar-0-item-sidebar-aset');

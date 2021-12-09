@@ -1,24 +1,20 @@
 # language: en
-
 # workflow
 Feature: Vendor - Delete vendor information - Pemegang Saham
-	#---------------------------------------------------------
-    # Vendor - #4 Vendor can delete pemegang saham information 
-    #---------------------------------------------------------
 
 As a Vendor  
 I want to delete pemegang saham  
-So that I can modify pegawai information which has been recorded on the app 
+So that I can modify pegawai information which has been recorded on the app
 
-#================================================================================================================================================
+Background: 
+    Given The Vendor already login to VMS Portal
 
  #Delete Existing "Pemegang Saham"
  Scenario: Delete Selected record from Pemegang Saham 
     Given The Vendor still on "Informasi Perusahaan" form 
-      When The Vendor already on information from "Informasi Perusahaan" 
        And The Vendor wants to delete one of record from "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
-       And The Vendor must clicks button "Delete" button from selected record
-       And The Vendor will see confirmation message  
+       And The Vendor must clicks button "Delete" button from selected record on "Pemegang Saham" form
+       And The Vendor will see pop-up message  
        """
        {
          "message" : "Apakah Pemegang Saham atas nama {nama_pemegang_saham} akan dihapus dari sistem ?"
@@ -39,4 +35,4 @@ So that I can modify pegawai information which has been recorded on the app
         }
         """
        And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Pemegang Saham" on "Pemegang Saham Grid"
-   Then The Vendor already modify pegawai information by deleting selected record of "Pemegang Saham"
+   Then The Vendor already modify her or his company information by delete recorded "Pemegang Saham"

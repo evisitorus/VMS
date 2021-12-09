@@ -1,9 +1,5 @@
 const { I } = inject();
 
-// Given('The Vendor still on {string} form', () => {
-//     I.amOnPage('/');
-// });
-
 Given('The Vendor already define information from {string}', (form) => {
     switch (form) {
         case "Informasi Perusahaan":

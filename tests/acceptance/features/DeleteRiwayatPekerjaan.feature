@@ -1,23 +1,20 @@
 # language: en
-
 # workflow
 Feature: Vendor - Delete vendor information - Riwayat Pekerjaan
-	#---------------------------------------------------------
-    # Vendor - #4 Vendor can delete Riwayat Pekerjaan information 
-    #---------------------------------------------------------
 
 As a Vendor  
 I want to delete Riwayat Pekerjaan  
-So that I can modify Riwayat Pekerjaan information which has been recorded on the app 
+So that I can modify Riwayat Pekerjaan information which has been recorded on the app
 
-#================================================================================================================================================
+Background: 
+    Given The Vendor already login to VMS Portal
 
  #delete riwayat pekerjaan 
   Scenario: Delete selected record from Riwayat Pekerjaan 
-    Given The Vendor wants to delete selected riwayat pekerjaan which has been recorded 
+    Given The Vendor wants to delete selected document which already uploaded 
      When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
       And The Vendor must click "Riwayat Pekerjaan" Tab 
-      And The Vendor will see "Riwayat Pekerjaan Grid" where found on "Riwayat Pekerjaan form"
+      And The Vendor will see "Riwayat Pekerjaan" form
       """
       {
       	 "No | Nama Pekerjaan          									| Pemberi Pekerjaan 		| Nilai Pekerjaan   | Tahun  | Lampiran           | Action      "
@@ -26,8 +23,8 @@ So that I can modify Riwayat Pekerjaan information which has been recorded on th
       }
       """
       And The Vendor must select one of record from "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid" which part of "Riwayat Pekerjaan" form 
-      And The Vendor must clicks button "Delete" button from selected record 
-       And The Vendor will see confirmation message  
+      And The Vendor must clicks button "Delete" button from selected record on "Riwayat Pekerjaan" form
+       And The Vendor will see pop-up message  
       """
       {
          "message" : "Apakah Riwayat Pekerjaan {nama_pekerjaan} akan dihapus dari sistem ?"
@@ -45,8 +42,4 @@ So that I can modify Riwayat Pekerjaan information which has been recorded on th
       }
       """
       And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid"
-    Then The Vendor already modify her/his company information by deleting recorded riwayat pekerjaan 
-    
-    
-#================================================================================================================================================
-    
+    Then The Vendor already modify her or his company information by delete recorded "Riwayat Pekerjaan"   
