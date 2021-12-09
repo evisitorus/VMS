@@ -2,51 +2,30 @@
   <kendo-label>Pemegang Saham</kendo-label>
   <br>
 
-  <kendo-grid
-  [data]="gridData"
-  style="height: 240px;"
-  >
-  <kendo-grid-column title="No." [width]="60" field="no" >
-    <!-- <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-      {{rowIndex + 1}} 
-    </ng-template> -->
-  </kendo-grid-column>
-
-  <!-- <kendo-grid-column *ngFor="let col of columns" [field]="col.field" [title]="col.title" [width]="col.width"></kendo-grid-column> -->
-
-  <kendo-grid-column title="Nama Pemegang Saham" field="namaPemegangSaham"  [width]="250">
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.toParty.firstName ?   dataItem.toParty.firstName : dataItem.toParty.name}}
-    </ng-template> -->
-  </kendo-grid-column>
-
-  <kendo-grid-column title="Jenis Pemegang Saham" field="pemegangSahamPerseorangan"  >
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.pemegangSahamPerseorangan === true ? "Perseorangan" : "Badan Usaha" }}
-    </ng-template> -->
-  </kendo-grid-column>
-
-
-  <kendo-grid-column title="Pemegang Saham Lokal/Asing" field="pemegangSahamLokal"   [width]="300">
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.pemegangSahamLokal === true ? "Lokal" : "Asing" }}
-    </ng-template> -->
-  </kendo-grid-column>
-
-  <kendo-grid-column title="% Kepemilikan" field="persentaseKepemilikan" >
-    <!-- <ng-template kendoGridCellTemplate let-dataItem>
-      {{ dataItem.persentaseKepemilikan }}
-    </ng-template> -->
-  </kendo-grid-column>
-
+  <kendo-grid [data]="gridData" style="height: 240px;">
+  <kendo-grid-column title="No." [width]="60" field="no" ></kendo-grid-column>
+  <kendo-grid-column title="Nama Pemegang Saham" field="namaPemegangSaham"  [width]="250"></kendo-grid-column>
+  <kendo-grid-column title="Jenis Pemegang Saham" field="pemegangSahamPerseorangan"></kendo-grid-column>
+  <kendo-grid-column title="Pemegang Saham Lokal/Asing" field="pemegangSahamLokal"   [width]="300"></kendo-grid-column>
+  <kendo-grid-column title="% Kepemilikan" field="persentaseKepemilikan" ></kendo-grid-column>
   <kendo-grid-column field="id" title="Action">
     <ng-template kendoGridCellTemplate let-dataItem>
-      <span>
-        <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="openSaham()">
-      </span>
-      <span>
-        <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="openSaham()">
-      </span>
+      <ng-container
+      *ngIf="dataItem.active; then active; else inactive">
+    </ng-container>
+      <ng-template #inactive>
+        <span>
+          <kendo-label class="labelForm">Terhapus</kendo-label>
+        </span>
+      </ng-template>
+      <ng-template #active>
+        <span>
+          <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
+        </span>
+        <span>
+          <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btn-delete">
+        </span>
+      </ng-template>
     </ng-template>
   </kendo-grid-column>
 </kendo-grid>
@@ -134,10 +113,10 @@
               [max]="100"
               [autoCorrect]=true
               [spinners]="false"
-              formControlName="presentaseKepemilikan"
+              formControlName="persentaseKepemilikan"
             >
             </kendo-numerictextbox>
-            <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.presentaseKepemilikan.errors?.required">Kepemilikan Saham tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.persentaseKepemilikan.errors?.required">Kepemilikan Saham tidak boleh kosong</kendo-formerror>
           </div>
         </div>
       </div>
@@ -145,7 +124,7 @@
   </form>
 
     <kendo-dialog-actions>
-      <button id="submitPemegangSaham" kendoButton (click)="submitPemegangSaham()" [primary]="true">
+      <button id="submitPemegangSaham" kendoButton (click)="submit()" [primary]="true">
         Simpan
       </button>
       <button id="closePemegangSaham" kendoButton (click)="closeSaham()" [primary]="false">
@@ -157,3 +136,18 @@
 
 
 <app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>
+
+<kendo-dialog
+  *ngIf="opened"
+  [actions]="myActions"
+  [actionsLayout]="actionsLayout"
+  (action)="onAction($event)"
+  [title]="popUpConfirmationTitle"
+  (close)="close('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center;">
+    {{ popUpConfirmationMessage }}
+  </p>
+</kendo-dialog>
