@@ -13,6 +13,8 @@ import { ApiService } from './api/api.service';
 })
 export class AuthService {
 
+  public redirectUrl: string | null = null;
+
   constructor(private apiService: ApiService) { }
 
   login(params: LoginInterface): Observable<any> {    
