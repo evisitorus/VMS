@@ -198,6 +198,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#btn-simpan-spt');
             I.click('#btn-simpan-spt');
             break;
+        case "Riwayat Pekerjaan":
+            I.waitForElement('#submitPekerjaan');
+            I.click('#submitPekerjaan');
+            break;
         default:
             I.click(button2);
             break;
@@ -214,7 +218,7 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
     switch (list1) {
         case "Dokumen":
             I.seeElement('#btn-update');
-    I.seeElement('#btn-delete');
+            I.seeElement('#btn-delete');
             break;
         case "Pemegang Saham":
             I.see('Steven Rogers');
@@ -262,4 +266,22 @@ Given('The Vendor can not continue to add document information', () => {
     I.see('File tidak valid');
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
+});
+
+Given('The Vendor can not continue to add document information {string}', (grid) => {
+    switch (grid) {
+        case "Riwayat Pekerjaan":
+            I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "Dokumen":
+            I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        default:
+            I.waitForElement(list1);
+            break;
+    }
 });

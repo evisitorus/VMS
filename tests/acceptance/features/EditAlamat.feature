@@ -50,7 +50,7 @@ Background:
       """
       And The Vendor must click "Simpan" button to save information of "Alamat" 
       And The Vendor will see that update pop-up form already closed when clicks "Simpan"
-      And The Vendor will see information changes from selected record from "Alamat" on "Alamat Grid"
+      And The Vendor will see list of modified "Alamat" on "Alamat Grid"
       """
       {
       	 "No | Nama Alamat          | Alamat 									| Provinsi 		| Kota            | Action      "

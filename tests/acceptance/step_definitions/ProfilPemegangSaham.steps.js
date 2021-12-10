@@ -109,9 +109,11 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
         case "Riwayat Pekerjaan":
             I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
             I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
-            I.fillField('#nilaiPekerjaan input[class=k-numeric-wrap]', '1000000000');
-            I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', '2015');
-            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            I.click('#nilaiPekerjaan input[role=spinbutton]');
+            I.fillField('#nilaiPekerjaan input[role=spinbutton]', '1000000000');
+            I.click('#tahunPekerjaan input[role=spinbutton]');
+            I.fillField('#tahunPekerjaan input[role=spinbutton]', '2015');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;
         default:
             I.click(form1);

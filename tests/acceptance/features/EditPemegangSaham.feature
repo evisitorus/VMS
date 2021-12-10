@@ -36,7 +36,7 @@ Background:
         """
         And The Vendor must click "Simpan" button to save information of "Pemegang Saham" 
         And The Vendor will see that update pop-up form already closed when clicks "Simpan"
-        And The Vendor will see information changes from selected record from "Pemegang Saham" on "Pemegang Saham Grid"
+        And The Vendor will see list of modified "Pemegang Saham" on "Pemegang Saham Grid"
         """
         {
            "No | Nama Pemegang Saham             | Jenis Pemegang Saham | Pemegang Saham  | Presentase Kepemilikan | Action      "
