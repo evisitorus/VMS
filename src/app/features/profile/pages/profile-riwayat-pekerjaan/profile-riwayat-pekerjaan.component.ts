@@ -149,12 +149,15 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       nilaiPekerjaan: new FormControl(this.data.nilaiPekerjaan, Validators.required),
       tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)
     });
+    this.lampiranFiles = [];
+    this.uploadedFileContentUrl = "";
+    this.uploadedFileId = "";
   }
 
   public submit(): void {
 
     if (this.isNewData) {
-      if (this.lampiranFiles == null) {
+      if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
         this.popUpMessage = "Periksa kembali file Anda";
         this.triggerPopUp();
       } else {
