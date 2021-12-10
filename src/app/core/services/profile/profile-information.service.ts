@@ -110,8 +110,9 @@ export class ProfileInformationService {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_update_pegawai: ApiInterface = {
       method: ApiRouteMethods.put,
-      url: ApiRoutes.api_pegawai_route.concat("/").concat(id),
+      url: ApiRoutes.api_update_pegawai_route,
       body: {
+        id: id,
         nik: params.nik,
         firstName: params.firstName,
         lastName: params.lastName,
