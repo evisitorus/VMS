@@ -1,15 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { ProfileService } from 'src/app/core/services/profile.service';
+import { DialogAction, ActionsLayout } from "@progress/kendo-angular-dialog";
 
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { AddPemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AddPemegangSahamInterface, UpdatePemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
 
 
 const messages = {
   default: 'Data tidak boleh kosong.',
-  success: 'Sukses'
+  success: 'Sukses',
+  deleteConfirmationTitle: "Konfirmasi hapus data Pemegang Saham",
+  deleteConfirmationMessage: "Apakah Pemegang Saham atas nama .. akan dihapus dari sistem ?",
 };
 
 @Component({
@@ -20,99 +22,56 @@ const messages = {
 export class PemegangSahamComponent implements OnInit {
   @ViewChild('panelbar') private panelbar: any;
 
-  popUpTitle: string = "Informasi Pemegang Saham";
-  popUpMessage: string = messages.default;
-  redirectOnClosePopUp: boolean = true;
-
-  public columns: any[] = [{field: "Nama Pemegang Saham"}, {field: "Jenis Pemegang Saham"}, {field: "Pemegang Saham Lokal/Asing"}, {field:"% Kepemilikan"}];
   public gridData: any = {};
-  access_token = "admin@abadijaya.co.id";
-  vendor_id = "";
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private profileService: ProfileService,
-    private eventEmitterService: EventEmitterService,
-    private authService: AuthService,
-    ) { }
-
-  ngOnInit(): void {
-    this.gridData = this.getPemegangSaham();
-    this.columns = [
-      {field: "toParty.firstName", title:"Nama Pemegang Saham", width:"250px"},
-      {field: "pemegangSahamPerseorangan", title:"Jenis Pemegang Saham"},
-      {field: "pemegangSahamLokal", title:"Pemegang Saham Lokal/Asing", width:"300px"},
-      {field: "persentaseKepemilikan", title:"% Kepemilikan"}
-    ];
-  }
-
-  public opened = false;
+  public id!: string;
+  public deleteId!: string;
+  public deletePemegangSahamName!: string;
+  public isNewData: boolean = true;
+  public disableNamaPemegangSaham: boolean = true;
   public openedSaham = false;
 
-  public close() {
-    this.opened = false;
-  }
-
-  public open() {
-    this.opened = true;
-  }
-  public closeSaham() {
-    this.openedSaham = false;
-  }
-
-  public openSaham() {
-    this.openedSaham = true;
-  }
-
-  public isRequired = true;
+  popUpTitle: string = "Informasi Pemegang Saham";
+  popUpMessage: string = messages.default;
+  popUpConfirmationTitle: string = messages.deleteConfirmationTitle;
+  popUpConfirmationMessage: string = "Apakah Pemegang Saham atas nama " + this.deletePemegangSahamName + " akan dihapus dari sistem ?";
+  redirectOnClosePopUp: boolean = false;
 
   public pemegangSahamFormGroup = new FormGroup({
     namaPemegangSaham: new FormControl(null, Validators.required),
     perseorangan: new FormControl(null, Validators.required),
     lokal: new FormControl(null, Validators.required),
-    presentaseKepemilikan: new FormControl(null, Validators.required),
+    persentaseKepemilikan: new FormControl(null, Validators.required),
   });
 
+  public data: any = {
+    id: "",
+    namaPemegangSaham: "",
+    perseorangan: "",
+    lokal: "",
+    persentaseKepemilikan: ""
+  };
 
-  triggerPopUp() {
-    this.eventEmitterService.trigger();
+
+  constructor(
+    private profileService: ProfileService,
+    private eventEmitterService: EventEmitterService,
+    ) { }
+
+  ngOnInit(): void {
+    this.getPemegangSaham();
   }
 
-  submitPemegangSaham(): void {
-    this.pemegangSahamFormGroup.markAllAsTouched();
-    this.popUpMessage = messages.default;
-
-
-    // stop here if form is invalid
-    if (this.pemegangSahamFormGroup.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = false;
-      return;
-    }
-
-    const dataPemegangSaham = {
-      email: "",
-      namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
-      perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
-      lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
-      presentaseKepemilikan: this.pemegangSahamFormGroup.controls['presentaseKepemilikan'].value
-    }
-
-    let params: AddPemegangSahamInterface= {...dataPemegangSaham}
-    this.profileService.addPemegangSaham(params).subscribe(
+  getPemegangSaham(){
+    this.profileService.getPemegangSaham().subscribe(
       (resp) =>  {
-        this.popUpMessage = "Berhasil menyimpan data";
-        this.redirectOnClosePopUp = false;
-        this.triggerPopUp();
-        this.getPemegangSaham();
-        this.closeSaham();
-        this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
+        this.gridData = resp['hydra:member'];
+        this.gridData = this.mapData(this.gridData);
+        console.log(this.gridData);
+        return this.gridData;
       },
       (error) => {
-        this.popUpMessage = "Gagal menyimpan data";
+        this.popUpMessage = "Gagal mendapatkan data";
         this.triggerPopUp();
-        this.closeSaham();
       }
     );
   }
@@ -124,25 +83,188 @@ export class PemegangSahamComponent implements OnInit {
       mappedData[key] = {
         no: no++,
         namaPemegangSaham: data[key]['toParty']['firstName'] ? data[key]['toParty']['firstName'] : data[key]['toParty']['name'],
+        namaPemegangSahamValue: data[key]['toParty'],
         pemegangSahamPerseorangan: data[key]['pemegangSahamPerseorangan'] ?  "Perseorangan" : "Badan Usaha",
+        pemegangSahamPerseoranganValue: data[key]['pemegangSahamPerseorangan'],
         pemegangSahamLokal: data[key]['pemegangSahamLokal'] ? "Lokal" : "Asing",
-        persentaseKepemilikan: data[key]['persentaseKepemilikan']
+        pemegangSahamLokalValue: data[key]['pemegangSahamLokal'],
+        persentaseKepemilikan: data[key]['persentaseKepemilikan'],
+        id: data[key]['id'],
+        active: data[key]['active']
       };
     }
     return mappedData;
   }
 
-  getPemegangSaham(){
-    this.profileService.getPemegangSaham().subscribe(
+  triggerPopUp() {
+    this.eventEmitterService.trigger();
+  }
+
+  public closeSaham() {
+    this.openedSaham = false;
+    this.isNewData = true;
+    this.setAddForm();
+  }
+
+  public openSaham() {
+    this.openedSaham = true;
+  }
+
+  public setAddForm(): void {
+    this.pemegangSahamFormGroup = new FormGroup({
+      namaPemegangSaham: new FormControl(null, Validators.required),
+      perseorangan: new FormControl(null, Validators.required),
+      lokal: new FormControl(null, Validators.required),
+      persentaseKepemilikan: new FormControl(null, Validators.required)
+    });
+  }
+
+  public submit(): void {
+    this.pemegangSahamFormGroup.markAllAsTouched();
+    if (this.pemegangSahamFormGroup.valid) {
+      if (this.isNewData) {
+        this.submitPemegangSaham();
+      } else {
+        this.updatePemegangSaham();
+      }
+    }
+  }
+
+  submitPemegangSaham(): void {
+    this.pemegangSahamFormGroup.markAllAsTouched();
+    this.popUpMessage = messages.default;
+
+    // stop here if form is invalid
+    if (this.pemegangSahamFormGroup.invalid) {
+      this.popUpMessage = messages.default;
+      this.triggerPopUp();
+      this.redirectOnClosePopUp = false;
+      return;
+    }
+
+    const dataPemegangSaham = {
+      namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
+      perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
+      lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
+      persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value,
+      active: true
+    }
+
+    let params: AddPemegangSahamInterface= {...dataPemegangSaham}
+    this.profileService.addPemegangSaham(params).subscribe(
       (resp) =>  {
-        this.gridData = resp['hydra:member'];
-        this.gridData = this.mapData(this.gridData);
-        return this.gridData;
+        this.popUpMessage = "Berhasil menyimpan data";
+        this.redirectOnClosePopUp = false;
+        this.triggerPopUp();
+        this.getPemegangSaham();
+        this.closeSaham();
+        // this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
       },
       (error) => {
-        this.popUpMessage = "Gagal mendapatkan data";
+        this.popUpMessage = "Gagal menyimpan data";
+        this.triggerPopUp();
+        this.closeSaham();
+      }
+    );
+  }
+
+  public updateForm(data: any): void {
+    this.data.id = data.id;
+    this.data.namaPemegangSahamValue = data.namaPemegangSahamValue;
+    this.data.namaPemegangSaham = data.namaPemegangSaham;
+    this.data.perseorangan = data.pemegangSahamPerseoranganValue;
+    this.data.lokal = data.pemegangSahamLokalValue;
+    this.data.persentaseKepemilikan = parseFloat(data.persentaseKepemilikan);
+    
+    this.isNewData = false;
+    this.disableNamaPemegangSaham = false;
+
+    this.popUpTitle = "Perhatian";
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
+    this.setUpdateForm();
+    this.openSaham();
+  }
+
+
+  public setUpdateForm(): void {
+    this.pemegangSahamFormGroup = new FormGroup({
+      id: new FormControl(this.data.id, Validators.required),
+      namaPemegangSaham: new FormControl({disabled: this.disableNamaPemegangSaham, value: this.data.namaPemegangSahamValue.firstName ? this.data.namaPemegangSahamValue.firstName : this.data.namaPemegangSahamValue.name  }, Validators.required),
+      perseorangan: new FormControl({disabled: this.disableNamaPemegangSaham, value: this.data.perseorangan }, Validators.required),
+      lokal: new FormControl(this.data.lokal, Validators.required),
+      persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
+    });
+  }
+
+  public updatePemegangSaham(): void {
+    const dataPemegangSaham = {
+      id: this.pemegangSahamFormGroup.controls['id'].value,
+      namaPemegangSaham: this.pemegangSahamFormGroup.controls['namaPemegangSaham'].value,
+      perseorangan: this.pemegangSahamFormGroup.controls['perseorangan'].value,
+      lokal: this.pemegangSahamFormGroup.controls['lokal'].value,
+      persentaseKepemilikan: this.pemegangSahamFormGroup.controls['persentaseKepemilikan'].value
+    }
+
+    let params: UpdatePemegangSahamInterface= {...dataPemegangSaham}
+    this.profileService.updatePemegangSaham(params).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.getPemegangSaham();
+        this.closeSaham();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+        this.closeSaham();
+      }
+    );
+  }
+
+  public delete(data: any): void {
+    this.popUpConfirmationTitle= messages.deleteConfirmationTitle;
+    this.popUpConfirmationMessage= 'Apakah Pemegang Saham atas nama "' + data.namaPemegangSaham + '" akan dihapus dari sistem ?';
+    this.opened = true;
+    this.deleteId = data.id;
+  }
+
+  public deletePemegangSaham(id: string): void {
+    this.profileService.deletePemegangSaham(id).subscribe(
+      () => {
+        this.popUpMessage = "Berhasil menghapus data";
+        this.triggerPopUp();
+        this.getPemegangSaham();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
+  }
+
+  public opened = false;
+  public actionsLayout: ActionsLayout = "normal";
+
+  public myActions: DialogAction[] = [
+    { text: "No" },
+    { text: "Yes", primary: true },
+  ];
+
+  public onAction(action: DialogAction): void {
+    console.log(action);
+    if(action.text == "Yes"){
+      this.deletePemegangSaham(this.deleteId);
+    }
+    this.opened = false;
+  }
+
+  public close(status: any) {
+    console.log(status);
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
   }
 }

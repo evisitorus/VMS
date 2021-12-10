@@ -13,6 +13,7 @@ export const ApiRoutes = {
   api_reset_password_route: API_BASE_URL + "/auth/reset-password",
   api_add_pengalaman_kerja: API_BASE_URL + "/vendors/pengalaman_kerja",
   api_post_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
+  api_delete_pekerjaan: API_BASE_URL + "/pengalaman_kerjas",
   api_vendor_information_route: API_BASE_URL + "/vendors/",
   api_get_pengalaman_kerja: API_BASE_URL + "/pengalaman_kerjas",
   api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1",
@@ -25,12 +26,14 @@ export const ApiRoutes = {
   api_documents_route: API_BASE_URL + "/dokumens",
   api_media_object_route: API_BASE_URL + "/media_objects",
   api_get_pemegang_saham_route: API_BASE_URL + "/pemegang_saham_relationships", //TODO: change api route
-  api_add_pemegang_saham: API_BASE_URL + "/vendors/pemegang_saham",
+  api_add_pemegang_saham: API_BASE_URL + "/vendors",
   api_get_organizations: API_BASE_URL + "/organizations?page=1",
   api_jenis_badan_usaha_route: API_BASE_URL + "",
   api_get_tipe_karyawan: API_BASE_URL + "/sdm_types?page=1",
   api_bidang_karyawan: API_BASE_URL + "/sdm_bidangs?page=1",
   api_pegawai_route: API_BASE_URL + "/sdm_relationships",
+  api_get_pegawai_route: API_BASE_URL + "/sdm_relationships/getPegawai/",
+  api_add_pegawai_route: API_BASE_URL + "/sdm_relationships/addPegawai",
   api_spt_route: API_BASE_URL + "/spt_pajaks",
   api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
   api_get_vendor: API_BASE_URL + "/vendors",
@@ -52,6 +55,8 @@ export const ApiRoutes = {
   api_add_companyAddress:  API_BASE_URL + "/vendors/company_address",
   api_get_contact_mechanism: API_BASE_URL + "/party_contact_mechanisms",
   //api_get_companyAddress:  API_BASE_URL + "/vendors/alamat_perusahaan",
+  api_base_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
+  api_delete_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
 };
 
 export const ApiRouteMethods = {
