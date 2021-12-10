@@ -1,7 +1,17 @@
 const { I } = inject();
 
-Given('The Vendor still on {string} form', () => {
-    I.amOnPage('/profile-laporan-keuangan');
+Given('The Vendor still on {string} form', (form) => {
+    switch (form) {
+        case "Laporan Keuangan":
+            I.amOnPage('/profile-laporan-keuangan');
+            break;
+        case "Informasi Perusahaan":
+            I.amOnPage('/profile-information');
+            break;
+        default:
+            I.waitForElement(form);
+            break;
+    }
 });
 
 Given('The Vendor already define information from {string}', () => {
@@ -43,8 +53,21 @@ Given('The Vendor will get warning message tooltip on empty fields', () => {
     I.see('Cabang tidak boleh kosong');
 });
 
-Given('The Vendor wants to delete one of record from {string} on {string} which part of {string} form', () => {
-    
+Given('The Vendor wants to delete one of record from {string} on {string} which part of {string} form', (form1,form2,form3) => {
+    switch (form1) {
+        case "Pemegang Saham":
+            I.click('.ng-tns-c66-2.k-link');
+            break;
+        case "Pegawai":
+            I.click('Data Pegawai');
+            break;
+        // case "Data Perusahaan":
+        //     I.click('Data Perusahaan');
+        //     break;
+        default:
+            I.click(form1);
+            break;
+    }
 });
 
 Given('', () => {

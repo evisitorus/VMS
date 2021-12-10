@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../interfaces/api-interface';
-import { AddPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
+import { AddPekerjaanInterface, UpdateRiwayatPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
-import { AddPegawaiInterface } from '../interfaces/add-pegawai-interface';
+import { UpdatePemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -32,7 +32,8 @@ export class ProfileService {
         nilaiPekerjaan: params.nilaiPekerjaan,
         tahunPekerjaan: params.tahunPekerjaan,
         buktiPekerjaanFilePath: params.buktiPekerjaanFilePath,
-        file: params.lampiran
+        file: params.lampiran,
+        active: true
       }
     };
 
@@ -53,17 +54,48 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pekerjaan);
   }
 
+  updatePekerjaan(params: UpdateRiwayatPekerjaanInterface): Observable<any> {    
+    let api_update_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_base_pemegang_saham + "/" + params.id + "/update" ,
+      body: {
+        vendor: this.vendor_id,
+        namaPekerjaan: params.namaPekerjaan,
+        pemberiPekerjaan: params.pemberiPekerjaan,
+        nilaiPekerjaan: params.nilaiPekerjaan,
+        tahunPekerjaan: params.tahunPekerjaan,
+        buktiPekerjaanFilePath: params.buktiPekerjaanFilePath,
+        file: params.lampiran
+      }
+    };
+
+    return this.apiService.sendRequest(api_update_pemegang_saham);
+  }
+
+  deletePekerjaan(id: string): Observable<any> {    
+    console.log(id);
+    let api_delete_pekerjaan: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_delete_pekerjaan + "/" + id,
+      body: {
+        active: false
+      }
+    };
+
+    return this.apiService.sendRequest(api_delete_pekerjaan);
+  }
 
   addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
     let api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_add_pemegang_saham,
+      url: ApiRoutes.api_add_pemegang_saham + "/" + this.vendor_id + "/pemegang_saham",
       body: {
-        email: this.email,
+        // vendor: this.vendor_id,
         namaPemegangSaham: params.namaPemegangSaham,
         perseorangan: params.perseorangan,
         lokal: params.lokal,
-        presentaseKepemilikan: params.presentaseKepemilikan
+        presentaseKepemilikan: params.persentaseKepemilikan,
+        active: true
       }
     };
 
@@ -83,6 +115,34 @@ export class ProfileService {
     };
 
     return this.apiService.sendRequest(api_get_pemegang_saham);
+  }
+
+  updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
+    let api_update_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_base_pemegang_saham + "/" + params.id + "/update" ,
+      body: {
+        vendor: this.vendor_id,
+        namaPemegangSaham: params.namaPemegangSaham,
+        perseorangan: params.perseorangan,
+        presentaseKepemilikan: params.persentaseKepemilikan.toString(),
+        lokal: params.lokal,
+      }
+    };
+
+    return this.apiService.sendRequest(api_update_pemegang_saham);
+  }
+
+  deletePemegangSaham(id: string): Observable<any> {    
+    let api_delete_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_delete_pemegang_saham + "/" + id,
+      body: {
+        active: false
+      }
+    };
+
+    return this.apiService.sendRequest(api_delete_pemegang_saham);
   }
 
 }
