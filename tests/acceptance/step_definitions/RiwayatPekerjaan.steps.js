@@ -51,3 +51,20 @@ Given('The Vendor upload document more than 2 MB', () => {
 Given('The Vendor warning message tooltip on lampiran {string}', () => {
 
 });
+
+Given('The Vendor can modify data which displayed on {string} form with document more than 2 MB', (form1) => {
+    switch (form1) {
+        case "Riwayat Pekerjaan":
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT.WIKA');
+            I.click('#nilaiPekerjaan input[role=spinbutton]');
+            I.fillField('#nilaiPekerjaan input[role=spinbutton]', '2000000');
+            I.click('#tahunPekerjaan input[role=spinbutton]');
+            I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
+});

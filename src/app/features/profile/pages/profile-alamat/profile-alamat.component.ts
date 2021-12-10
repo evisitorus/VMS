@@ -33,21 +33,38 @@ export class ProfileAlamatComponent implements OnInit {
   public isDisabledKelurahan: boolean = true;
   public isDisabledKodepos: boolean = true;
 
-  public listProvinsi: Array<{ description: string, id: number }> = [];
-  public listKota: Array<{ description: string, id: number }> = [];
-  public listKecamatan: Array<{ description: string, id: number }> = [];
-  public listKelurahan: Array<{ description: string, id: number }> = [];
-  public listKodepos: Array<{ description: string, id: number }> = [];
+  public listProvinsi: Array<{ description: string, id: any }> = [];
+  public listKota: Array<{ description: string, id: any }> = [];
+  public listKecamatan: Array<{ description: string, id: any }> = [];
+  public listKelurahan: Array<{ description: string, id: any }> = [];
+  public listKodepos: Array<{ description: string, id: any }> = [];
 
-  public defaultItemProvinsi: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
-  public defaultItemKota:{ description: string, id: number, provinceId: number } = { description: 'Pilih kota', id: 0 , provinceId: 0};
-  public defaultItemKecamatan: { description: string, id: number, kotaId: number} = { description: 'Pilih Kecamatan', id: 0, kotaId: 0 };
-  public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
-  public defaultItemKodepos: { description: string, id: number } = { description: 'Pilih Kodepos', id: 0 };
+  public defaultItemProvinsi: { description: string, id: any } = { description: 'Pilih provinsi', id: null };
+  public defaultItemKota:{ description: string, id: any, provinceId: number } = { description: 'Pilih kota', id: null , provinceId: 0};
+  public defaultItemKecamatan: { description: string, id: any, kotaId: number} = { description: 'Pilih Kecamatan', id: null, kotaId: 0 };
+  public defaultItemKelurahan: { description: string, id: any } = { description: 'Pilih Kelurahan', id: null };
+  public defaultItemKodepos: { description: string, id: any } = { description: 'Pilih Kodepos', id: null };
+
+  public selectedProvinsi!: any;
+  public selectedKota!: any;
+  public selectedKecamatan!: any;
+  public selectedKelurahan!: any;
+  public selectedKodepos!: any;
 
   public isNewData: boolean = true;
+  public id!: string;
 
   public opened = false;
+
+  public data: any = {
+    namaAlamat: "",
+    alamat: "",
+    provinsi: "",
+    kota: "",
+    kecamatan: "",
+    kelurahan: "",
+    kodepos: "",
+  };
 
   constructor(
     private eventEmitterService: EventEmitterService,
@@ -63,6 +80,8 @@ export class ProfileAlamatComponent implements OnInit {
 
   public close(): void {
     this.opened = false;
+    this.isNewData = true;
+    this.resetForm();
   }
 
   public open(): void  {
@@ -117,8 +136,16 @@ export class ProfileAlamatComponent implements OnInit {
         no: no++,
         namaAlamat: data[key]['address2'],
         alamat: data[key]['address1'],
-        provinsi:data[key]['province']['description'],
+        provinsiId: data[key]['province']['id'],
+        provinsi: data[key]['province']['description'],
+        kotaId: data[key]['city']['id'],
         kota: data[key]['city']['description'],
+        kecamatanId: data[key]['district']['id'],
+        kecamatan: data[key]['district']['description'],
+        kelurahanId: data[key]['village']['id'],
+        kelurahan: data[key]['village']['description'],
+        kodeposId: data[key]['village']['postalCode']['id'],
+        kodepos: data[key]['village']['postalCode']['postalCodeNum'],
         id: data[key]['id'],
         deletedAt: data[key]['deletedAt'],
       };
@@ -240,9 +267,9 @@ export class ProfileAlamatComponent implements OnInit {
 
   public setForm(): void {
     this.form = new FormGroup({
-      namaAlamat: new FormControl(null, Validators.required),
-      alamat: new FormControl(null, Validators.required),
-      provinsi: new FormControl(null, Validators.required),
+      namaAlamat: new FormControl(this.data.namaAlamat, Validators.required),
+      alamat: new FormControl(this.data.alamat, Validators.required),
+      provinsi: new FormControl(this.selectedProvinsi, Validators.required),
       kota: new FormControl(null, Validators.required),
       kecamatan: new FormControl(null, Validators.required),
       kelurahan: new FormControl(null, Validators.required),
@@ -250,8 +277,59 @@ export class ProfileAlamatComponent implements OnInit {
     });
   }
 
-  public updateForm(data: any): void {
+  public resetForm(): void {
+    this.data.namaAlamat = null;
+    this.data.alamat = null;
+    this.data.provinsi = null;
+    this.data.kota = null;
+    this.data.kecamatan = null;
+    this.data.kelurahan = null;
+    this.data.kodepos = null;
 
+    this.selectedProvinsi = null;
+    this.selectedKota = null;
+    this.selectedKecamatan = null;
+    this.selectedKelurahan = null;
+    this.selectedKodepos = null;
+
+    this.isDisabledKota = true;
+    this.isDisabledKecamatan = true;
+    this.isDisabledKelurahan = true;
+    this.isDisabledKodepos = true;
+
+    this.setForm();
+  }
+
+  public updateForm(data: any): void {
+    this.data.namaAlamat = data.namaAlamat;
+    this.data.alamat = data.alamat;
+    
+    this.data.provinsi = data.provinsi;
+    this.selectedProvinsi = data.provinsiId;
+    this.onChangeProvinsi(this.selectedProvinsi);
+
+    this.data.kota = data.kota;
+    this.selectedKota = data.kotaId;
+    this.onChangeKota(this.selectedKota);
+
+    this.data.kecamatan = data.kecamatan;
+    this.selectedKecamatan = data.kecamatanId;
+    this.onChangeKecamatan(this.selectedKecamatan);
+
+    this.data.kelurahan = data.kelurahan;
+    this.selectedKelurahan = data.kelurahanId;
+    this.onChangeKelurahan(this.selectedKelurahan);
+
+    this.data.kodepos = data.kodepos;
+    this.selectedKodepos = data.kodeposId;
+
+    this.isNewData = false;
+    this.id = data.id;
+    this.setForm();
+    this.open();
+    
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
   }
 
   public submit(): void {
@@ -266,8 +344,8 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public save(): void {
-    let param: ProfileAddressInterface = {...this.form.value};
-    this.service.save(param).subscribe(
+    let params: ProfileAddressInterface = {...this.form.value};
+    this.service.save(params).subscribe(
       () => {
         this.close();
         this.popUpMessage = "Berhasil Menyimpan Data";
@@ -282,7 +360,19 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public update(): void {
-
+    let params: ProfileAddressInterface = {...this.form.value};
+    this.service.update(this.id, params).subscribe(
+      () => {
+        this.close();
+        this.popUpMessage = "Berhasil memperbarui data";
+        this.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+      }
+    );
   }
 
   public delete(id: string): void {

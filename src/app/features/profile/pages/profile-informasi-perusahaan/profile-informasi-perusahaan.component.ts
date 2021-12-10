@@ -91,6 +91,8 @@ export class ProfileInformasiPerusahaanComponent {
     {name: "Korporasi", id: 2}
   ];
 
+  public jenisBadanUsahaItems: Array<Item> = [];
+
   public isRequired = true;
 
   public isDisabledKota = true;
@@ -109,9 +111,9 @@ export class ProfileInformasiPerusahaanComponent {
   public contact_mechanism: Array<Address> = [];
 
   public vendor_info: any;
-  public total_karyawan: any;
-  public karyawan_lokal: any;
-  public karyawan_asing:any;
+  public total_karyawan!: number;
+  public karyawan_lokal!: number;
+  public karyawan_asing!: number;
   public vendor_contact_mechanism: any;
 
   public selectedBadanUsaha: Item = this.listItems[0];
@@ -164,7 +166,8 @@ export class ProfileInformasiPerusahaanComponent {
         if(resp.jenisVendor === undefined){
           this.dataPerusahaan.jenisBadanUsaha = null;
         } else {
-          this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
+          // this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
+          this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.id;
         }
         
         if(resp.tipeVendor === undefined){
@@ -189,9 +192,9 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.bumnPengampu = resp.bumnPengampu ? resp.bumnPengampu : "";
         this.dataPerusahaan.organisasiHimpunan = resp.organisasiHimpunan ? resp.organisasiHimpunan : "";
         this.dataPerusahaan.web = resp.website ? resp.website : "";
-        this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : "";
-        this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : "";
         this.dataPerusahaan.bidangUsaha = resp.bidangUsaha ? resp.bidangUsaha : "";
+        this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : 0;
+        this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : 0;
 
         //get jenis penyedia usaha
         this.profileInfoService.getJenisPenyediaUsaha().subscribe(
@@ -236,10 +239,10 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
-        // get list of provinces
-        this.profileInfoService.getProvinces().subscribe(
+        //get jenis badan usaha
+        this.profileInfoService.getJenisVendor().subscribe(
           (resp) => {
-            this.provinsi = resp["hydra:member"];        
+            this.jenisBadanUsahaItems = resp["hydra:member"];
           },
           (error) => {
             console.log(error);
@@ -262,6 +265,16 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
+        // get list of provinces
+        this.profileInfoService.getProvinces().subscribe(
+          (resp) => {
+            this.provinsi = resp["hydra:member"];        
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
       },
       (error) => {
         console.log(console.log(error));
@@ -272,7 +285,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getContactMechanism().subscribe(
       (resp) => {
         this.contact_mechanism = resp["hydra:member"];
-
+        let isFirstAddress = false;
         this.contact_mechanism.forEach( (value) => {
           if(value.contactMechanism.number){
             this.dataPerusahaan.noTelepon = value.contactMechanism.number;
@@ -284,7 +297,8 @@ export class ProfileInformasiPerusahaanComponent {
                 this.provinces = resp["hydra:member"];      
                 const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
                 // this.defaultItemProvinces.description = this.provinces[index].description;  
-                if (value.contactMechanism.deletedAt === undefined) {
+                if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
+                  isFirstAddress = true;
                   this.dataPerusahaan.alamat = value.contactMechanism.address1;
                   this.selectedProvince = this.provinces[index];  
                   this.profileInfoService.getKotaKabupaten(this.dataPerusahaan.address.province.id).subscribe(
@@ -374,8 +388,8 @@ export class ProfileInformasiPerusahaanComponent {
       inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
       jenisBadanUsaha: new FormControl(data.jenisBadanUsaha, Validators.required),
       statusBadanUsaha: new FormControl(data.statusPerusahaanPkp , Validators.required),
-      tipeBadanUsaha: new FormControl(data.tipeBadanUsahaName, Validators.required),
-      kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      tipeBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, []),
       jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsahaUtamaDesctiption, Validators.required),
       jenisPenyediaUsaha: new FormControl(data.jenisPenyediaUsaha, Validators.required),
       npwpPerusahaan: new FormControl(data.npwp, Validators.required),
@@ -469,11 +483,19 @@ export class ProfileInformasiPerusahaanComponent {
   handleKaryawanLokalChange(value:any){
     this.karyawan_lokal = value;
     this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.profileInformationFormGroup.value.jumlahKaryawanTotal = this.total_karyawan;
+    // this.profileInformationFormGroup.setValue({jumlahKaryawanTotal: this.total_karyawan});
+    // this.profileInformationFormGroup.markAllAsTouched();
+    console.log(this.profileInformationFormGroup.value);
   }
 
   handleKaryawanAsingChange(value:any){
     this.karyawan_asing = value;
     this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.profileInformationFormGroup.value.jumlahKaryawanTotal = this.total_karyawan;
+    // this.profileInformationFormGroup.setValue({jumlahKaryawanTotal: this.total_karyawan});
+    // this.profileInformationFormGroup.markAllAsTouched();
+    console.log(this.profileInformationFormGroup.value);
   }
 
   upload(): void {
@@ -498,7 +520,7 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   save() {
-    console.log(this.profileInformationFormGroup.value)
+    console.log(this.profileInformationFormGroup.value);
     this.profileInformationFormGroup.markAllAsTouched();
     if (this.profileInformationFormGroup.valid) {
       this.params = {

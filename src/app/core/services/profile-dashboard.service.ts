@@ -37,6 +37,11 @@ export class ProfileDashboardService {
     let api_get_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_vendor + "/" + this.vendor_id,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
 
     return this.apiService.sendRequest(api_get_vendor);
@@ -46,6 +51,11 @@ export class ProfileDashboardService {
     let api_get_users: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_users + "/dashboard/" + this.user_id,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
 
     return this.apiService.sendRequest(api_get_users);
@@ -55,6 +65,11 @@ export class ProfileDashboardService {
     let api_get_vendor_status_data: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/status_data",
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
 
     return this.apiService.sendRequest(api_get_vendor_status_data);

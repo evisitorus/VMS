@@ -35,7 +35,7 @@ export const ApiRoutes = {
   api_get_pegawai_route: API_BASE_URL + "/sdm_relationships/getPegawai/",
   api_add_pegawai_route: API_BASE_URL + "/sdm_relationships/addPegawai",
   api_spt_route: API_BASE_URL + "/spt_pajaks",
-  api_jenis_vendor_route: API_BASE_URL + "jenis_vendors?page=1",
+  api_jenis_vendor_route: API_BASE_URL + "/jenis_vendors",
   api_get_vendor: API_BASE_URL + "/vendors",
   api_get_users: API_BASE_URL + "/users",
   api_base_url: API_BASE_URL,
