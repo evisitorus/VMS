@@ -100,7 +100,6 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
         this.gridDataPegawai = response.data;
-        console.log(this.gridDataPegawai)
       },
       () => {
         this.popUpMessage = "Gagal mendapatkan data";
@@ -252,7 +251,8 @@ export class ProfilKaryawanComponent implements OnInit {
         let url = window.URL.createObjectURL(blob);
         window.open(url);
       },
-      () => {
+      (error) => {
+        console.log(error)
         this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
         this.triggerPopUp();
       }
