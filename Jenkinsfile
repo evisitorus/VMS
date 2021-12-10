@@ -4,7 +4,8 @@ def vault = new Vault()
 pipeline {
     agent { 
         node { 
-            label 'Docker' 
+            label 'agent-sooltan'
+            // label 'Docker' 
         } 
     } 
     environment {
