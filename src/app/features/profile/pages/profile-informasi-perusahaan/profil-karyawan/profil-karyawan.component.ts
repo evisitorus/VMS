@@ -118,8 +118,6 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.jabatan = null;
     this.data.bidangPekerjaan = null;
     this.data.cvFilePath = null;
-    this.uploadedFileContentUrl = "";
-    this.uploadedFileId = "";
     this.setForm();
 
   }
