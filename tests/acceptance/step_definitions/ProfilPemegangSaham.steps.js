@@ -61,3 +61,97 @@ Given('The Vendor must select {string} option on pop-up message', () => {
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
+
+Given('The Vendor will see information which state for every changes should be re-check by verificator', (raw_data) => {
+    let data = JSON.parse(raw_data.content);
+    I.see(data.message);
+    I.click('#btn-popup-yes');
+});
+
+Given('The Vendor wants to edit one of record from {string} on {string} which part of {string} form', (form1,form2,form3) => {
+    switch (form1) {
+        case "Pemegang Saham":
+            I.click('.ng-tns-c66-2.k-link');
+            break;
+        case "Pegawai":
+            I.click('Data Pegawai');
+            break;
+        // case "Data Perusahaan":
+        //     I.click('Data Perusahaan');
+        //     break;
+        default:
+            I.click(form1);
+            break;
+    }
+});
+
+Given('The Vendor can modify data which displayed on {string} form', (form1) => {
+    switch (form1) {
+        case "Pemegang Saham":
+            I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
+            I.click('#BadanUsaha');
+            I.click('#Asing');
+            I.click('#kepemilikanSaham input[role=spinbutton]');
+            I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+            break;
+        case "Alamat":
+            I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
+            I.fillField('#alamat input[class=k-input]', 'Jl. Letnan Jenderal S. Parman Kav 102');
+            // I.waitForElement('#provinsi.formField');
+            // I.selectOption('#provinsi.formField','Jawa Barat');
+            I.click('#provinsi.formField');
+            I.fillField('#provinsi.formField', 'Jawa Barat');
+            I.pressKey('Enter');
+            I.click('#kota.formField');
+            I.fillField('#kota.formField', 'Kabupaten Bandung');
+            I.pressKey('Enter');
+            I.click('#kecamatan.formField');
+            I.fillField('#kecamatan.formField', 'Cibeunying');
+            I.pressKey('Enter');
+            I.click('#kelurahan.formField');
+            I.fillField('#kelurahan.formField', 'Cicaheum');
+            I.pressKey('Enter');
+            I.click('#kodepos.formField');
+            I.fillField('#kodepos.formField', '42015');
+            I.pressKey('Enter');
+            // I.click("Jawa Barat");
+            // I.selectOption('#kota input[class=k-dropdown-wrap]','Kabupaten Bandung');
+            // I.selectOption('#kecamatan input[class=k-dropdown-wrap]','Cibeunying');
+            // I.selectOption('#kelurahan input[class=k-dropdown-wrap]','Cicaheum');
+            // I.selectOption('#kodepos input[class=k-dropdown-wrap]','42015');
+            break;
+        case "Riwayat Pekerjaan":
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
+            I.click('#nilaiPekerjaan input[role=spinbutton]');
+            I.fillField('#nilaiPekerjaan input[role=spinbutton]', '1000000000');
+            I.click('#tahunPekerjaan input[role=spinbutton]');
+            I.fillField('#tahunPekerjaan input[role=spinbutton]', '2015');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
+});
+
+Given('The Vendor will see information changes from selected record from {string} on {string}', () => {
+    I.see('Steven Rogers Barton');
+    I.see('Badan Usaha');
+    I.see('Asing');
+    I.see('35.00');
+});
+
+Given('The Vendor will see that update pop-up form already closed when clicks {string}', () => {
+    I.see('Berhasil memperbarui data');
+    I.click('#btn-popup-yes');
+    I.dontSeeElement('.k-window');
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});

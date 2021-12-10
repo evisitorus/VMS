@@ -55,6 +55,28 @@ export class ProfileAddressService {
       return this.apiService.sendRequest(api_save_address);
     }
 
+    public update(id: string, params: ProfileAddressInterface): Observable<any> {
+      let token = this.authService.getLocalStorage('access_token')!;
+      let api_update_address: ApiInterface = {
+        method: ApiRouteMethods.put,
+        url: ApiRoutes.api_address_route + "/" + id,
+        body: {
+          address1: params.alamat,
+          address2: params.namaAlamat,
+          province: "api/geo_locations/" + params.provinsi,
+          city: "api/geo_locations/" + params.kota,
+          district: "api/geo_locations/" + params.kecamatan,
+          village: "api/villages/" + params.kelurahan,
+        },
+        options: {
+          headers: {
+            Authorization: token
+          }
+        }
+      };
+      return this.apiService.sendRequest(api_update_address);
+    }
+
     public delete(id: string): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let api_delete_address: ApiInterface = {

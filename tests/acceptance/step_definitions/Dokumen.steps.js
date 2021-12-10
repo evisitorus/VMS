@@ -9,15 +9,6 @@ Given('The Vendor wants manage {string} which needed for further verification fr
 });
 
 Given('The Vendor must click {string} menu where found on {string} of {string}', (button1, button2, button3) => {
-    // switch (button1) {
-    //     case "Informasi Keuangan":
-    //         I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan')
-    //         I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
-    //         break;
-    //     default:
-    //         I.click(button1);
-    //         break;
-    //     }
 });
 
 Given('The Vendor must click {string} Tab', (sidebar) => {
@@ -109,6 +100,10 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.waitForElement('#btn-tambah-alamat');
             I.click('#btn-tambah-alamat');
             break;
+        case "Riwayat Pekerjaan":
+            I.waitForElement('#addPekerjaan');
+            I.click('#addPekerjaan');
+            break;
         default:
             I.click(button3);
             break;
@@ -164,6 +159,13 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.waitForElement('#input-spt-lampiran input[type=file]');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
+        case "Riwayat Pekerjaan":
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Steven Rogers Barton');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'Steven Rogers Barton');
+            I.fillField('#nilaiPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
+            I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
         default:
             I.waitForElement(form2);
             break;
@@ -196,6 +198,14 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#btn-simpan-spt');
             I.click('#btn-simpan-spt');
             break;
+        case "Riwayat Pekerjaan":
+            I.waitForElement('#submitPekerjaan');
+            I.click('#submitPekerjaan');
+            break;
+        case "Alamat":
+            I.waitForElement('#btn-submit-alamat');
+            I.click('#btn-submit-alamat');
+            break;
         default:
             I.click(button2);
             break;
@@ -203,19 +213,6 @@ Given('The Vendor must click {string} button to save information of {string}', (
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
-    // switch (button2) {
-    //     case "Dokumen":
-            // I.waitForElement('#btn-simpan');
-    //         I.click('#btn-simpan');
-    //         break;
-    //     case "Pemegang Saham":
-    //         I.waitForElement('#submitPemegangSaham');
-    //         I.click('#submitPemegangSaham');
-    //         break;
-    //     default:
-    //         I.waitForElement(button2);
-    //         break;
-    // }
     I.see('Berhasil menyimpan data');
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
@@ -225,7 +222,7 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
     switch (list1) {
         case "Dokumen":
             I.seeElement('#btn-update');
-    I.seeElement('#btn-delete');
+            I.seeElement('#btn-delete');
             break;
         case "Pemegang Saham":
             I.see('Steven Rogers');
@@ -273,4 +270,22 @@ Given('The Vendor can not continue to add document information', () => {
     I.see('File tidak valid');
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
+});
+
+Given('The Vendor can not continue to add document information {string}', (grid) => {
+    switch (grid) {
+        case "Riwayat Pekerjaan":
+            I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "Dokumen":
+            I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        default:
+            I.waitForElement(list1);
+            break;
+    }
 });
