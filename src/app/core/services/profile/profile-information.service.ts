@@ -106,7 +106,7 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_post_bidang_karyawan);
   }
 
-  public update(params: ProfileKaryawanInterface, id: string): Observable<any> {
+  public update(params: ProfileKaryawanInterface, id: string, pegawai_id: string): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_update_pegawai: ApiInterface = {
       method: ApiRouteMethods.put,
@@ -120,6 +120,7 @@ export class ProfileInformationService {
         bidangPekerjaan: params.bidangPekerjaan,
         cvFilePath: params.attachmentFilePath,
         file_id: params.file,
+        pegawai_id: pegawai_id
       },
       options: {
         headers: {
