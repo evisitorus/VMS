@@ -97,8 +97,6 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
         case "Alamat":
             I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
             I.fillField('#alamat input[class=k-input]', 'Jl. Letnan Jenderal S. Parman Kav 102');
-            // I.waitForElement('#provinsi.formField');
-            // I.selectOption('#provinsi.formField','Jawa Barat');
             I.click('#provinsi.formField');
             I.fillField('#provinsi.formField', 'Jawa Barat');
             I.pressKey('Enter');
@@ -114,11 +112,6 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
             I.click('#kodepos.formField');
             I.fillField('#kodepos.formField', '42015');
             I.pressKey('Enter');
-            // I.click("Jawa Barat");
-            // I.selectOption('#kota input[class=k-dropdown-wrap]','Kabupaten Bandung');
-            // I.selectOption('#kecamatan input[class=k-dropdown-wrap]','Cibeunying');
-            // I.selectOption('#kelurahan input[class=k-dropdown-wrap]','Cicaheum');
-            // I.selectOption('#kodepos input[class=k-dropdown-wrap]','42015');
             break;
         case "Riwayat Pekerjaan":
             I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');

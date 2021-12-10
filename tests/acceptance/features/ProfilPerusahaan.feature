@@ -4,15 +4,14 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
 
   As a vendor basic 
   I want to completed company information
-  So that I can upgrade my company level to vendor pro 
+  So that I can upgrade my company level to vendor pro
 
   Background: 
-    Given The Vendor already login to VMS Portal
+    Given The Vendor already login to VMS Portal with new account
 
-  #manage company profile ##dipisah fitur "1a1.lengkapi data Informasi Perusahaan"
+  #manage company profile 
     Scenario: Positif Scenario for company profile 
-      Given The Vendor already login into VMS using his or her registered company information
-      When The Vendor gets his or her badge on his or her vendor level on "Vendor Dashboard" as 
+      # Given The Vendor gets his or her badge on his or her vendor level on "Vendor Dashboard" as 
         """
         {
             "vendorLevel"  : "Vendor Basic",
@@ -20,10 +19,11 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
             "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
         }
         """ 
-        And The Vendor wants to completed his or her company profile
-        And The Vendor must click "Profil Perusahaan" menu where found on "Side Menu" of "Vendor Dashboard"
-        And The Vendor will see "Informasi Perusahaan" form 
-        And The Vendor must completed following inputs where found on "Informasi Perusahaan" form 
+        # And The Vendor wants to completed his or her company profile
+        # And The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+        # And The Vendor must click "Profile Perusahaan" Tab 
+        # And The Vendor will see "Informasi Perusahaan" form 
+        # And The Vendor must completed following inputs where found on "Informasi Perusahaan" form 
         """
         {
         
@@ -95,95 +95,10 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
             "pinGeoLocation"			: "Koordinat: (-6.2449089, 106.8447522)" #hasil taging dari map   
         }
         """
-        ##setelah melengkapi form, actionnya apa?
-
-        #1 ##dipisah fitur "1a2.lengkapi data pemegangSaham" 
-        And The Vendor wants to add information in regards to "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
-        And The Vendor must clicks button "Tambah" where found on the left-buttom of "Pemegang Saham Grid" to add records information in regards to "Pemegang Saham"
-        And The Vendor will see pop-up form of "Tambah Pemegang Saham" which appear in front of "Informasi Perusahaan" form
-        """
-        {
-        
-          "no"				  	: "autonumber",
-          "namaPemegangSaham"  	: "Steven Rogers",
-          "jenisPemegangSaham" 	: "pilih salah satu opsi sebagai Perseorangan atau Badan Usaha",
-          "pemegangSaham"	  	: "pilih salah satu opsi sebagai Lokal atau Asing", 
-          "presentaseKepemilikan	: "50 %" 
-                                    #jumlah karakter maksimum 3 karakter numerik jika melebihi maka objek terkunci
-          
-        }
-        """
-        And The Vendor must click "Simpan" button to save information of "Pemegang Saham" 
-        And The Vendor will see that pop-up form already closed when she or he clicks "Simpan"
-        And The Vendor will see list of "Pemegang Saham" on "Pemegang Saham Grid"
-        """
-        {
-          "No | Nama Pemegang Saham             | Jenis Pemegang Saham | Pemegang Saham  | Presentase Kepemilikan | Action      "
-          "---------------------------------------------------------------------------------------------------------------------"
-          "1 .| Steven Rogers       			   | Perseorangan         | Lokal			| 30 %"                  | Edit Delete "
-          "2 .| Natalia Alianovna Romanoff      | Perseorangan         | Asing			| 10 %"                  | Edit Delete "
-          "3 .| SHIELD                          | Badan Usaha          | Lokal 			| 40 %"                  | Edit Delete "
-            
-        }
-        """
-        #repeat process 1 to add another "Pemegang Saham"
-        
-        #2 ##dipisah fitur "1a3. lengkapi data Pegawai" 
-        And The Vendor wants to add information  in regards to "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
-        And The Vendor must clicks button "Tambah" where found on the left-buttom of "Pegawai Grid" to add records information in regards to "Pegawai" 
-        """
-        {
-        
-          "no"				  	: "autonumber",
-          "NIK"					: "1234567",
-          "namaKaryawan"  		: "James Bucky Barnes",
-          "TipeKaryawan" 		: "pilih salah satu opsi sebagai Tenaga Ahli atau Tenaga Terampil atau Tenaga Administrasi",
-          "jabatan"				: "CTO",  
-                                    #jumlah karakter maksimum 25 karakter alphanumerik jika melebihi maka objek terkunci
-                                    
-          "BidangPekerjaan"	  	: "Teknologi Informasi", 
-                                    #jumlah karakter maksimum 25 karakter alphanumerik jika melebihi maka objek terkunci
-                                    
-          "Resume"				: "browse upload", 
-                                    #ekstensi file pdf, doc, docx dengan maksimum 20MB
-          
-        }
-        """
-        And The Vendor will see list of "Pegawai" on "Pegawai Grid"
-        """
-        {
-          "No | NIK       | Nama Pegawai         | Tipe Karyawan 	  | Jabatan       | Bidang Pekerjaan      | Resume        |Action       "
-          "----------------------------------------------------------------------------------------------------------------------------------"
-          "1 .| 1234567   | James Bucky Barnes   | Tenaga Ahli         | CTO			  | Teknologi Informasi   | CV_Barnes.pdf | Edit Delete "
-          "2 .| 8901234   | Sharon Charter       | Tenaga Administrasi | Spv Admin	  | Human Resources       | CV_Charter.pdf| Edit Delete "
-          "3 .| 3456789   | Phil Coulson	        | Tenaga Terampil     | Agent    	  | Operasional           | CV_Coulson.pdf| Edit Delete "
-            
-        }
-        """
-        #repeat process 2 to add another "Pegawai"
-        
-        And The Vendor wants to save information of "Profil Perusahaan" 
-        And The Vendor must click "Simpan" button where found on the left-buttom of "Informasi Perusahaan" form 
-        And The Vendor will see confirmation message 
-        """
-        {
-        
-          "message" : "Simpan profil perusahaan ?",
-          "option"  : "Yes/No"
-        }
-        """
-        And The Vendor must select "Yes" option 
-        And The Vendor will see progress of upgrade level on "Vendor Dashboard"
-        """
-        {
-          
-            "vendorLevel"  : "Vendor Basic",
-            "progressLevel : "75% menuju Vendor Pro"
-            "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
-        }
-        """
-      Then The Vendor already manage her or his company information by adding "Profil Perusahaan"
-
+      # Then The Vendor can continue to fill information in regards to "Pemegang Saham" by clicking "Tambah Pemegang Saham" button where placed on the right-buttom of "Pemegang Saham" Grid
+      #scenario will be define on 1a. VMS_Profil Perusahaan_GridPemegangSaham.feature
+      
+      
     Scenario: Negatif Scenario for company profile 
       Given The Vendor already login into VMS using his or her registered company information
       When The Vendor gets his or her badge on his or her vendor level on "Vendor Dashboard" as 
@@ -197,7 +112,7 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
         And The Vendor wants to completed his or her company profile
         And The Vendor must click "Profil Perusahaan" menu where found on "Side Menu" of "Vendor Dashboard"
         And The Vendor will see "Informasi Perusahaan" form 
-        And The Vendor not define mandatory fields such as 
+        And The Vendor not define one of whole mandatory fields likes 
         """
         {
             "companyLogo" 			: "empty",                                   
@@ -225,19 +140,5 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
             "KodePos"					: "empty", 
         }
         """
-        And The Vendor not define anything on "Pemegang Saham"
-        And The Vendor not define anything on "Pegawai"
-        And The Vendor wants to save information of "Profil Perusahaan" 
-        And The Vendor must click "Simpan" button where found on the left-buttom of "Informasi Perusahaan" form 
-        And The Vendor will see confirmation message 
-        """
-        {
-        
-          "message" : "Simpan profil perusahaan ?",
-          "option"  : "Yes/No"
-        }
-        """
-        And The Vendor must select "Yes" option 
-        And The Vendor warning message tooltip on each mandatory fields as "{namaField} tidak boleh kosong" 
-    
-      Then The Vendor can't continue to process saving data of "Profil Perusahaan"
+      And The Vendor move to the next input
+    Then The Vendor will get warning message tooltip on each mandatory fields as "{namaField} tidak boleh kosong"
