@@ -42,7 +42,7 @@ export class FileService {
     let token = this.authService.getLocalStorage('access_token')!;
     let api_upload_file: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: env.api_base_path.concat(id).concat('/file'),
+      url: ApiRoutes.api_media_object_route.concat('/').concat(id).concat('/file'),
       options: {
         headers: {
           Authorization: token,
