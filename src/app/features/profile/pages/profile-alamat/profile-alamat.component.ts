@@ -327,6 +327,9 @@ export class ProfileAlamatComponent implements OnInit {
     this.id = data.id;
     this.setForm();
     this.open();
+    
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
   }
 
   public submit(): void {
