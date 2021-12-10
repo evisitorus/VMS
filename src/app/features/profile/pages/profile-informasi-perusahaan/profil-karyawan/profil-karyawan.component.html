@@ -34,7 +34,7 @@
     </kendo-grid-column>
     <kendo-grid-column title="Resume">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.cvFilePath }}</a>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
