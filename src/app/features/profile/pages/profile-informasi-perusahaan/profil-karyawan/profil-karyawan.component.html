@@ -138,7 +138,7 @@
           <div class="row">
             <kendo-label class="col">Resume</kendo-label>
             <div class="col">
-              <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+              <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
               </kendo-fileselect>
               <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
