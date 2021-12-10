@@ -27,6 +27,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public gridDataPegawai: any = {};
   public id!: string;
+  public pegawaiId!: string;
   public isNewData: boolean = true;
 
   popUpTitle: string = "Informasi Pemegang Saham";
@@ -218,7 +219,6 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public close() {
-    console.log(this.isNewData)
     this.opened = false;
     this.resetForm();
     this.isNewData = true;
@@ -231,7 +231,6 @@ export class ProfilKaryawanComponent implements OnInit {
   public upload(): void {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
-        console.log(res)
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"]; //vendor :resume_id
 
@@ -260,8 +259,8 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
-    console.log(data)
     this.id = data.id;
+    this.pegawaiId = data.fromParty.id;
     this.data.nik = data.nik;
     this.data.firstName = data.fromParty.firstName;
     this.data.lastName = data.fromParty.lastName;
@@ -290,7 +289,8 @@ export class ProfilKaryawanComponent implements OnInit {
       file: file_id,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-    this.profileInformationService.update(params, this.id).subscribe(
+    //send pegawai ID and sdm relationship ID
+    this.profileInformationService.update(params, this.id, this.pegawaiId).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";
         this.triggerPopUp();
