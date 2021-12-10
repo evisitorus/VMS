@@ -4,7 +4,10 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
 
 As a vendor basic 
 I want to completed company information
-So that I can upgrade my company level to vendor pro 
+So that I can upgrade my company level to vendor pro
+
+Background: 
+    Given The Vendor already login to VMS Portal
 
  #manage company profile Adding "Pemegang Saham"
  Scenario: Positif Scenario for adding information in regards to "Pemegang Saham" 
