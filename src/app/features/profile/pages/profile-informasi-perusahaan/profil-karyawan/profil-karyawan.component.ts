@@ -119,7 +119,8 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.jabatan = null;
     this.data.bidangPekerjaan = null;
     this.data.cvFilePath = null;
-
+    this.uploadedFileContentUrl = "";
+    this.uploadedFileId = "";
     this.setForm();
 
   }
@@ -278,7 +279,10 @@ export class ProfilKaryawanComponent implements OnInit {
 
 
   public update(): void {
-    let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let file_id = "";
+    if(this.uploadedFileId){
+      file_id = this.uploadedFileId.replace(/\D/g,'');
+    }
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
