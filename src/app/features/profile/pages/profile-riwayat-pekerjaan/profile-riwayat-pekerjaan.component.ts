@@ -256,7 +256,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       buktiPekerjaanFilePath: new FormControl(this.data.buktiPekerjaanFilePath, Validators.required),
       lampiran: new FormControl(this.data.lampiran, Validators.required),
     });
-    console.log(this.pekerjaanForm.value);
+    this.lampiranFiles = [];
   }
 
   public updateRiwayatPekerjaan(): void {
@@ -321,11 +321,11 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   ];
 
   public onAction(action: DialogAction): void {
-    console.log(action);
     if(action.text == "Ya"){
       this.deletePekerjaan(this.deleteId);
     }
     this.opened = false;
+    this.lampiranFiles = [];
   }
 
   public close(status: any) {
