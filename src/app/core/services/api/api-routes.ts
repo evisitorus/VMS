@@ -31,6 +31,7 @@ export const ApiRoutes = {
   api_get_tipe_karyawan: API_BASE_URL + "/sdm_types?page=1",
   api_bidang_karyawan: API_BASE_URL + "/sdm_bidangs?page=1",
   api_pegawai_route: API_BASE_URL + "/sdm_relationships",
+  api_update_pegawai_route: API_BASE_URL + "/sdm_relationships/updatePegawai",
   api_get_pegawai_route: API_BASE_URL + "/sdm_relationships/getPegawai/",
   api_add_pegawai_route: API_BASE_URL + "/sdm_relationships/addPegawai",
   api_spt_route: API_BASE_URL + "/spt_pajaks",
