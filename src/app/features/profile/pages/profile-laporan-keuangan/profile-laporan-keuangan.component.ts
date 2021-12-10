@@ -109,7 +109,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public setFormSPT(): void {
-    console.log(this.dataSPT);
     this.formSPT = new FormGroup({
       tahunSPT: new FormControl(this.dataSPT.tahun, [Validators.required]),
       nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required]),
