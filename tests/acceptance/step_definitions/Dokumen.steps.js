@@ -202,6 +202,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#submitPekerjaan');
             I.click('#submitPekerjaan');
             break;
+        case "Alamat":
+            I.waitForElement('#btn-submit-alamat');
+            I.click('#btn-submit-alamat');
+            break;
         default:
             I.click(button2);
             break;
