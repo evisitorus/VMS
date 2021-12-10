@@ -138,7 +138,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.data.pemberiPekerjaan = "";
     this.data.nilaiPekerjaan = "";
     this.data.tahunPekerjaan = "";
-    this.data.buktiPekerjaanFilePath = "";
     this.data.lampiran = "";
     this.setForm();
   }
@@ -153,15 +152,21 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.uploadedFileId == "") {
-      this.popUpMessage = "Periksa kembali file Anda";
-      this.triggerPopUp();
-    } else {
-      this.pekerjaanForm.markAllAsTouched();
-      if (this.pekerjaanForm.valid) {
-          this.save();
+
+    if (this.isNewData) {
+      if (this.lampiranFiles == null) {
+        this.popUpMessage = "Periksa kembali file Anda";
+        this.triggerPopUp();
+      } else {
+        this.pekerjaanForm.markAllAsTouched();
+        if (this.pekerjaanForm.valid) {
+            this.save();
+        }
       }
+    } else {
+      this.updateRiwayatPekerjaan();
     }
+
   }
 
   save(): void {
@@ -228,12 +233,14 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.data.pemberiPekerjaan = data.pemberiPekerjaan;
     this.data.nilaiPekerjaan = data.nilaiPekerjaan;
     this.data.tahunPekerjaan = data.tahunPekerjaan;
+    this.data.buktiPekerjaanFilePath = data.lampiran;
+    this.data.lampiran = data.file;
     
     this.isNewData = false;
 
-    // this.popUpTitle = "Perhatian";
-    // this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
-    // this.triggerPopUp();
+    this.popUpTitle = "Perhatian";
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
     this.setUpdateForm();
     this.openPekerjaan();
   }
@@ -243,10 +250,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.pekerjaanForm = new FormGroup({
       id: new FormControl(this.data.id, Validators.required),
       namaPekerjaan: new FormControl(this.data.namaPekerjaan, Validators.required),
-      pemberiPekerjaan: new FormControl(this.data.pemberiPekerjaa, Validators.required),
-      nilaiPekerjaan: new FormControl(this.data.nilaiPekerjaan, Validators.required),
-      tahunPekerjaan: new FormControl(this.data.tahunPekerjaan, Validators.required)  
+      pemberiPekerjaan: new FormControl(this.data.pemberiPekerjaan, Validators.required),
+      nilaiPekerjaan: new FormControl(Number(this.data.nilaiPekerjaan), Validators.required),
+      tahunPekerjaan: new FormControl(Number(this.data.tahunPekerjaan), Validators.required),
+      buktiPekerjaanFilePath: new FormControl(this.data.buktiPekerjaanFilePath, Validators.required),
+      lampiran: new FormControl(this.data.lampiran, Validators.required),
     });
+    console.log(this.pekerjaanForm.value);
   }
 
   public updateRiwayatPekerjaan(): void {
@@ -254,11 +264,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       id: this.pekerjaanForm.controls['id'].value,
       namaPekerjaan: this.pekerjaanForm.controls['namaPekerjaan'].value,
       pemberiPekerjaan: this.pekerjaanForm.controls['pemberiPekerjaan'].value,
-      nilaiPekerjaan: this.pekerjaanForm.controls['nilaiPekerjaan'].value,
-      tahunPekerjaan: this.pekerjaanForm.controls['tahunPekerjaan'].value,
-      buktiPekerjaanFilePath: this.uploadedFileContentUrl,
-      lampiran: this.uploadedFileId,
+      nilaiPekerjaan: this.pekerjaanForm.controls['nilaiPekerjaan'].value.toString(),
+      tahunPekerjaan: this.pekerjaanForm.controls['tahunPekerjaan'].value.toString(),
+      buktiPekerjaanFilePath: this.uploadedFileContentUrl ? this.uploadedFileContentUrl : this.pekerjaanForm.controls['buktiPekerjaanFilePath'].value,
+      lampiran: this.uploadedFileId ? this.uploadedFileId : this.pekerjaanForm.controls['lampiran'].value,
     }
+
+    console.log(dataRiwayatPekerjaan);
 
     let params: UpdateRiwayatPekerjaanInterface= {...dataRiwayatPekerjaan}
     this.profileService.updatePekerjaan(params).subscribe(
@@ -304,13 +316,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public actionsLayout: ActionsLayout = "normal";
 
   public myActions: DialogAction[] = [
-    { text: "No" },
-    { text: "Yes", primary: true },
+    { text: "Tidak" },
+    { text: "Ya", primary: true },
   ];
 
   public onAction(action: DialogAction): void {
     console.log(action);
-    if(action.text == "Yes"){
+    if(action.text == "Ya"){
       this.deletePekerjaan(this.deleteId);
     }
     this.opened = false;
@@ -329,7 +341,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.openedPekerjaan = false;
     this.resetForm();
     this.isNewData = true;
-    this.lampiranFiles = [];
   }
 
   public openPekerjaan() {

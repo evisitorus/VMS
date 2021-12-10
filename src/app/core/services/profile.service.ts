@@ -55,11 +55,10 @@ export class ProfileService {
   }
 
   updatePekerjaan(params: UpdateRiwayatPekerjaanInterface): Observable<any> {    
-    let api_update_pemegang_saham: ApiInterface = {
-      method: ApiRouteMethods.post,
-      url: ApiRoutes.api_base_pemegang_saham + "/" + params.id + "/update" ,
+    let api_update_pengalaman_kerja: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_post_pengalaman_kerja  + "/" + params.id,
       body: {
-        vendor: this.vendor_id,
         namaPekerjaan: params.namaPekerjaan,
         pemberiPekerjaan: params.pemberiPekerjaan,
         nilaiPekerjaan: params.nilaiPekerjaan,
@@ -69,7 +68,7 @@ export class ProfileService {
       }
     };
 
-    return this.apiService.sendRequest(api_update_pemegang_saham);
+    return this.apiService.sendRequest(api_update_pengalaman_kerja);
   }
 
   deletePekerjaan(id: string): Observable<any> {    
