@@ -79,7 +79,14 @@ Given('The Vendor must clicks button {string} button from selected record on {st
             }            
             break;
         case "Riwayat Pekerjaan":
-            I.click('#btn-delete');
+            if(button==="Delete")
+            {
+                I.click('#btn-delete');
+            }
+            else
+            {
+                I.click("#btn-update")
+            }            
             break;
         case "Pegawai":
             I.click('#btn-delete');

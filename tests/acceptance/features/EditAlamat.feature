@@ -30,7 +30,7 @@ Background:
       And The Vendor will see information which state for every changes should be re-check by verificator 
       """
       {
-         "message" : "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar."
+         "message" : "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar."
       }
       """
       And The Vendor can modify data which displayed on "Alamat" form 

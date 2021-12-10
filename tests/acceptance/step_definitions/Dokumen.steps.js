@@ -100,6 +100,10 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.waitForElement('#btn-tambah-alamat');
             I.click('#btn-tambah-alamat');
             break;
+        case "Riwayat Pekerjaan":
+            I.waitForElement('#addPekerjaan');
+            I.click('#addPekerjaan');
+            break;
         default:
             I.click(button3);
             break;
@@ -154,6 +158,13 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
             I.waitForElement('#input-spt-lampiran input[type=file]');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
+        case "Riwayat Pekerjaan":
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Steven Rogers Barton');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'Steven Rogers Barton');
+            I.fillField('#nilaiPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
+            I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;
         default:
             I.waitForElement(form2);

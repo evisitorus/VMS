@@ -85,7 +85,7 @@ Given('The Vendor wants to edit one of record from {string} on {string} which pa
     }
 });
 
-Given('The Vendor can modify data which displayed on {string} form', () => {
+Given('The Vendor can modify data which displayed on {string} form', (form1) => {
     switch (form1) {
         case "Pemegang Saham":
             I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
@@ -97,11 +97,21 @@ Given('The Vendor can modify data which displayed on {string} form', () => {
         case "Alamat":
             I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
             I.fillField('#alamat input[class=k-input]', 'Jl. Letnan Jenderal S. Parman Kav 102');
-            I.selectOption('#provinsi input[class=k-dropdown-wrap]','Jawa Barat');
-            I.selectOption('#kota input[class=k-dropdown-wrap]','Kabupaten Bandung');
-            I.selectOption('#kecamatan input[class=k-dropdown-wrap]','Cibeunying');
-            I.selectOption('#kelurahan input[class=k-dropdown-wrap]','Cicaheum');
-            I.selectOption('#kodepos input[class=k-dropdown-wrap]','42015');
+            // I.waitForElement('#provinsi.formField');
+            // I.selectOption('#provinsi.formField','Jawa Barat');
+            I.click('#provinsi.formField');
+            I.click("Jawa Barat");
+            // I.selectOption('#kota input[class=k-dropdown-wrap]','Kabupaten Bandung');
+            // I.selectOption('#kecamatan input[class=k-dropdown-wrap]','Cibeunying');
+            // I.selectOption('#kelurahan input[class=k-dropdown-wrap]','Cicaheum');
+            // I.selectOption('#kodepos input[class=k-dropdown-wrap]','42015');
+            break;
+        case "Riwayat Pekerjaan":
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
+            I.fillField('#nilaiPekerjaan input[class=k-numeric-wrap]', '1000000000');
+            I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', '2015');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;
         default:
             I.click(form1);
