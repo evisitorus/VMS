@@ -63,6 +63,49 @@ Given('The Vendor can modify data which displayed on {string} form with document
             I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
             break;
+        case "Pegawai":
+            I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
+            I.fillField('#firstName input[class=k-input]', 'James Bucky');
+            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.click('#tipeKaryawanDropdown input[class=k-input]');
+            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
+            I.click('#bidangPekerjaan input[class=k-input]');
+            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
+});
+
+Given('The Vendor can modify data which displayed on {string} form with invalid file extension', (form1) => {
+    switch (form1) {
+        case "Riwayat Pekerjaan":
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT.WIKA');
+            I.click('#nilaiPekerjaan input[role=spinbutton]');
+            I.fillField('#nilaiPekerjaan input[role=spinbutton]', '2000000');
+            I.click('#tahunPekerjaan input[role=spinbutton]');
+            I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
+            break;
+        case "Riwayat Pekerjaan":
+            I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
+            I.fillField('#firstName input[class=k-input]', 'James Bucky');
+            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.click('#tipeKaryawanDropdown input[class=k-input]');
+            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
+            I.click('#bidangPekerjaan input[class=k-input]');
+            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
         default:
             I.click(form1);
             break;

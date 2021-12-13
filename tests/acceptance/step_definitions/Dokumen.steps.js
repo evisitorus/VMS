@@ -206,6 +206,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#btn-submit-alamat');
             I.click('#btn-submit-alamat');
             break;
+        case "Pegawai":
+            I.waitForElement('#saveKaryawanFormBtn');
+            I.click('#saveKaryawanFormBtn');
+            break;
         default:
             I.click(button2);
             break;
@@ -281,6 +285,11 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             break;
         case "Dokumen":
             I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "Pegawai":
+            I.see('Periksa kembali file Anda');
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
