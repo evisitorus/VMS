@@ -27,6 +27,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public gridDataPegawai: any = {};
   public id!: string;
+  public pegawaiId!: string;
   public isNewData: boolean = true;
 
   popUpTitle: string = "Informasi Pemegang Saham";
@@ -61,6 +62,11 @@ export class ProfilKaryawanComponent implements OnInit {
   };
 
   public bidangTemp: Array<Item> = [];
+
+    // add new bidang value based on user input
+    public filter!: string;
+    public selectedBidang!: Item ;
+    public selectedBidangId:string = "";
 
   constructor(
     private fileService: FileService,
@@ -117,7 +123,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.jabatan = null;
     this.data.bidangPekerjaan = null;
     this.data.cvFilePath = null;
-
+    this.selectedBidangId = "";
     this.setForm();
 
   }
@@ -152,9 +158,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   }
 
-  // add new bidang value based on user input
-  public filter!: string;
-  public selectedBidang!: Item ;
+
   public addNewBidang(): void {
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
@@ -162,10 +166,12 @@ export class ProfilKaryawanComponent implements OnInit {
         //add new value into temp array and backend
         this.bidangSource.push({
           name: this.filter,
-          id: 0,
+          id: this.bidangSource.length
         });
         //make new added value the selected value
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
+        // get selected bidang id as in the id in the db
+        this.selectedBidangId = res.id;
         this.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.triggerPopUp();
       },
@@ -189,13 +195,14 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public save(): void {
     let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
       tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
       jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan.id,
+      bidangPekerjaan:bidang_id,
       file: file_id,
       attachmentFilePath: this.uploadedFileContentUrl
     };
@@ -228,7 +235,6 @@ export class ProfilKaryawanComponent implements OnInit {
   public upload(): void {
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
-        console.log(res)
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"]; //vendor :resume_id
 
@@ -249,7 +255,8 @@ export class ProfilKaryawanComponent implements OnInit {
         let url = window.URL.createObjectURL(blob);
         window.open(url);
       },
-      () => {
+      (error) => {
+        console.log(error)
         this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
         this.triggerPopUp();
       }
@@ -257,13 +264,15 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
-    console.log(data)
+    this.id = data.id;
+    this.pegawaiId = data.fromParty.id;
     this.data.nik = data.nik;
     this.data.firstName = data.fromParty.firstName;
     this.data.lastName = data.fromParty.lastName;
     this.data.tipeKaryawan = data.sdmType;
     this.data.jabatan = data.jabatan;
-    this.data.bidangPekerjaan = data.sdmBidang;
+    this.selectedBidang = data.sdmBidang;
+    this.data.cvFilePath = data.cvFilePath;
 
     this.isNewData = false;
 
@@ -274,18 +283,23 @@ export class ProfilKaryawanComponent implements OnInit {
 
 
   public update(): void {
-    let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let file_id = "";
+    if(this.uploadedFileId){
+      file_id = this.uploadedFileId.replace(/\D/g,'');
+    }
+    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
       tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
       jabatan:this.pegawaiFormGroup.value.jabatan,
-      bidangPekerjaan:this.pegawaiFormGroup.value.bidangPekerjaan.id,
+      bidangPekerjaan:bidang_id,
       file: file_id,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-    this.profileInformationService.update(params, this.id).subscribe(
+    //send pegawai ID and sdm relationship ID
+    this.profileInformationService.update(params, this.id, this.pegawaiId).subscribe(
       () => {
         this.popUpMessage = "Berhasil memperbarui data";
         this.triggerPopUp();
