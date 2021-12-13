@@ -31,7 +31,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public pegawaiId!: string;
   public isNewData: boolean = true;
 
-  popUpTitle: string = "Informasi Pemegang Saham";
+  popUpTitle: string = "Edit Pegawai";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
@@ -282,6 +282,8 @@ export class ProfilKaryawanComponent implements OnInit {
     this.setForm();
     this.open();
 
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
   }
 
 
