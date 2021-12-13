@@ -151,7 +151,7 @@
                                placeholder="Kata sandi lama Anda"
                                [clearButton]="true"
                                #oldPassword
-                               [minlength]="4"
+                               [minlength]="8"
                                [maxlength]="15"
                                (keypress)="enablePasswordTextbox()"
                                (keydown.space)="$event.preventDefault()">
@@ -161,7 +161,7 @@
                 </kendo-textbox>
                 <kendo-formerror *ngIf="formPIC.controls.oldPassword.errors?.minlength">Kata Sandi Lama tidak boleh
                   kurang
-                  dari 4 karakter
+                  dari 8 karakter
                 </kendo-formerror>
                 <kendo-formerror *ngIf="formPIC.controls.oldPassword.errors?.maxlength">Kata Sandi Lama tidak boleh
                   lebih
@@ -181,7 +181,7 @@
                                placeholder="Kata sandi baru Anda"
                                [clearButton]="true"
                                #newPassword
-                               [minlength]="4"
+                               [minlength]="8"
                                [maxlength]="15"
                                [disabled]="passwordTextbox"
                                (keydown.space)="$event.preventDefault()">
@@ -191,7 +191,7 @@
                 </kendo-textbox>
                 <kendo-formerror *ngIf="formPIC.controls.newPassword.errors?.minlength">Kata Sandi Baru tidak boleh
                   kurang
-                  dari 4 karakter
+                  dari 8 karakter
                 </kendo-formerror>
                 <kendo-formerror *ngIf="formPIC.controls.newPassword.errors?.maxlength">Kata Sandi Baru tidak boleh
                   lebih
@@ -211,7 +211,7 @@
                                placeholder="Konfirmasi kata sandi baru Anda"
                                [clearButton]="true"
                                #confirmNewPassword
-                               [minlength]="4"
+                               [minlength]="8"
                                [maxlength]="15"
                                [disabled]="passwordTextbox"
                                (keydown.space)="$event.preventDefault()">
@@ -222,7 +222,7 @@
                 </kendo-textbox>
                 <kendo-formerror *ngIf="formPIC.controls.confirmNewPassword.errors?.minlength">Konfirmasi Kata Sandi
                   Baru
-                  tidak boleh kurang dari 4 karakter
+                  tidak boleh kurang dari 8 karakter
                 </kendo-formerror>
                 <kendo-formerror *ngIf="formPIC.controls.confirmNewPassword.errors?.maxlength">Konfirmasi Kata Sandi
                   Baru
