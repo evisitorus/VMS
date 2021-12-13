@@ -107,7 +107,7 @@ export class ProfilKaryawanComponent implements OnInit {
         this.gridDataPegawai = response.data;
       },
       () => {
-        this.popUpMessage = "Gagal mendapatkan data";
+        this.popUpMessage = "Data pegawai tidak ditemukan";
         this.triggerPopUp();
       }
     );
