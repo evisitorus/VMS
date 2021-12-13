@@ -26,7 +26,8 @@ interface Address {
   contactMechanism: {
     type : string,
     address1 : string,
-    number : string
+    number : string,
+    deletedAt: Date
   };
   party: {}
 }
@@ -90,6 +91,8 @@ export class ProfileInformasiPerusahaanComponent {
     {name: "Korporasi", id: 2}
   ];
 
+  public jenisBadanUsahaItems: Array<Item> = [];
+
   public isRequired = true;
 
   public isDisabledKota = true;
@@ -100,16 +103,17 @@ export class ProfileInformasiPerusahaanComponent {
   public jenis_penyedia_usaha: Array<Hydra> = [];
   public jenis_kegiatan_usaha: Array<Hydra> = [];
   public organizations: Array<Item> = [];
-  public provinces: Array<Hydra> = [];
-  public cities: Array<Hydra> = [];
-  public districts: Array<Hydra> = [];
-  public villages: Array<Hydra> = [];
+  public provinces: Array<any> = [];
+  public cities: Array<any> = [];
+  public districts: Array<any> = [];
+  public villages: Array<any> = [];
+  public postalCodes: Array<any> = [];
   public contact_mechanism: Array<Address> = [];
 
   public vendor_info: any;
-  public total_karyawan: any;
-  public karyawan_lokal: any;
-  public karyawan_asing:any;
+  public total_karyawan!: number;
+  public karyawan_lokal!: number;
+  public karyawan_asing!: number;
   public vendor_contact_mechanism: any;
 
   public selectedBadanUsaha: Item = this.listItems[0];
@@ -135,9 +139,9 @@ export class ProfileInformasiPerusahaanComponent {
 
   public provinsi: Array<{id: number, description: string}> = [];
   public dataKecamatan: Array<{}> = [];
-  public dataResultKota: Array<{}> = [];
-  public dataResultKecamatan: Array<{}> = [];
-  public dataResultKelurahan: Array<{}> = [];
+  public dataResultKota: Array<{id: number, description: string}> = [];
+  public dataResultKecamatan: Array<{id: number, description: string}> = [];
+  public dataResultKelurahan: Array<{id: number, description: string}> = [];
   public dataResultKodepos: Array<{}> = [];
 
   public dataPerusahaan: any = {};
@@ -162,7 +166,8 @@ export class ProfileInformasiPerusahaanComponent {
         if(resp.jenisVendor === undefined){
           this.dataPerusahaan.jenisBadanUsaha = null;
         } else {
-          this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
+          // this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.description == "PT" ? "1" : resp.jenisVendor.description == "CV" ? "2" : "3";
+          this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.id;
         }
         
         if(resp.tipeVendor === undefined){
@@ -187,9 +192,9 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.bumnPengampu = resp.bumnPengampu ? resp.bumnPengampu : "";
         this.dataPerusahaan.organisasiHimpunan = resp.organisasiHimpunan ? resp.organisasiHimpunan : "";
         this.dataPerusahaan.web = resp.website ? resp.website : "";
-        this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : "";
-        this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : "";
-        this.dataPerusahaan.bidangUsaha = resp.website ? "46638" : "";
+        this.dataPerusahaan.bidangUsaha = resp.bidangUsaha ? resp.bidangUsaha : "";
+        this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : 0;
+        this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : 0;
 
         //get jenis penyedia usaha
         this.profileInfoService.getJenisPenyediaUsaha().subscribe(
@@ -234,10 +239,10 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
-        // get list of provinces
-        this.profileInfoService.getProvinces().subscribe(
+        //get jenis badan usaha
+        this.profileInfoService.getJenisVendor().subscribe(
           (resp) => {
-            this.provinsi = resp["hydra:member"];        
+            this.jenisBadanUsahaItems = resp["hydra:member"];
           },
           (error) => {
             console.log(error);
@@ -260,6 +265,16 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
+        // get list of provinces
+        this.profileInfoService.getProvinces().subscribe(
+          (resp) => {
+            this.provinsi = resp["hydra:member"];        
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
       },
       (error) => {
         console.log(console.log(error));
@@ -270,69 +285,87 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getContactMechanism().subscribe(
       (resp) => {
         this.contact_mechanism = resp["hydra:member"];
-
+        let isFirstAddress = false;
         this.contact_mechanism.forEach( (value) => {
-          if(value.contactMechanism.address1 === undefined){
+          if(value.contactMechanism.number){
             this.dataPerusahaan.noTelepon = value.contactMechanism.number;
           } else {
-            this.dataPerusahaan.alamat = value.contactMechanism.address1;
             this.dataPerusahaan.address = value.contactMechanism;
-
             // get list of provinces
             this.profileInfoService.getProvinces().subscribe(
               (resp) => {
                 this.provinces = resp["hydra:member"];      
                 const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
                 // this.defaultItemProvinces.description = this.provinces[index].description;  
-                this.selectedProvince = this.provinces[index];  
+                if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
+                  isFirstAddress = true;
+                  this.dataPerusahaan.alamat = value.contactMechanism.address1;
+                  this.selectedProvince = this.provinces[index];  
+                  this.profileInfoService.getKotaKabupaten(this.dataPerusahaan.address.province.id).subscribe(
+                    (resp) => {
+                      this.cities = resp["hydra:member"];
+                      const index = this.cities.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.city.id);
+                      // this.defaultItemKota.description = this.cities[index].description;  
+                      this.dataResultKota = this.cities;
+                      this.selectedKota = this.cities[index];  
+
+                      this.profileInfoService.getKecamatan(this.dataPerusahaan.address.city.id).subscribe(
+                        (resp) => {
+                          this.districts = resp["hydra:member"];
+                          const index = this.districts.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.district.id);
+                          // this.defaultItemKecamatan.description  = this.districts[index].description;
+                          this.dataResultKecamatan = this.districts;
+                          this.selectedKecamatan = this.districts[index];  
+
+                          this.profileInfoService.getKelurahan(this.dataPerusahaan.address.district.id).subscribe(
+                            (resp) => {                            
+                              this.villages = resp["hydra:member"];
+                              const index = this.villages.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.village.id);
+                              // this.defaultItemKecamatan.description  = this.villages[index].description;
+                              this.dataResultKelurahan = this.villages;
+                              this.selectedKelurahan = this.villages[index];  
+                              
+                              this.profileInfoService.getKodepos(this.dataPerusahaan.address.village.id).subscribe(
+                                (resp) => {
+                                  this.postalCodes = resp["hydra:member"];
+                                  this.dataResultKodepos = this.postalCodes;
+                                  this.selectedKodepos = this.postalCodes[0];
+                                  
+                                  this.setFormPerusahaan(this.dataPerusahaan);
+
+                                },
+                                (error) => {
+                                  console.log(error);
+                                }
+                              );
+
+                            },
+                            (error) => {
+                              console.log(error);
+                            }
+
+                          );
+
+                        },
+                        (error) => {
+                          console.log(error);
+                        }
+                      );
+                      
+                    },
+                    (error) => {
+                      console.log(error);
+                    }
+                  );
+                }              
+
               },
               (error) => {
                 console.log(error);
               }
             );
-
-            // this.profileInfoService.getKotaKabupaten(this.dataPerusahaan.address.province.id).subscribe(
-            //   (resp) => {
-            //     this.cities = resp["hydra:member"];
-            //     const index = this.cities.findIndex(x => x.id === this.dataPerusahaan.address.city.id);
-            //     // this.defaultItemKota.description = this.cities[index].description;  
-            //     this.selectedKota = this.cities[index];  
-            //   },
-            //   (error) => {
-            //     console.log(error);
-            //   }
-            // );
-
-            
-            // this.profileInfoService.getKecamatan(this.dataPerusahaan.address.city.id).subscribe(
-            //   (resp) => {
-            //     this.districts = resp["hydra:member"];
-            //     const index = this.districts.findIndex(x => x.id === this.dataPerusahaan.address.district.id);
-            //     // this.defaultItemKecamatan.description  = this.districts[index].description;
-            //     this.selectedKecamatan = this.districts[index];  
-            //   },
-            //   (error) => {
-            //     console.log(error);
-            //   }
-            // );
-            
-
-            // this.profileInfoService.getKelurahan(this.dataPerusahaan.address.district.id).subscribe(
-            //   (resp) => {
-            //     this.villages = resp["hydra:member"];
-            //     const index = this.villages.findIndex(x => x.id === this.dataPerusahaan.address.district.id);
-            //     // this.defaultItemKecamatan.description  = this.villages[index].description;
-            //     this.selectedKelurahan = this.villages[index];  
-            //   },
-            //   (error) => {
-            //     console.log(error);
-            //   }
-            // );
-
           }
-
         }); 
-
         this.setFormPerusahaan(this.dataPerusahaan);
       },
       (error) => {
@@ -355,8 +388,8 @@ export class ProfileInformasiPerusahaanComponent {
       inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
       jenisBadanUsaha: new FormControl(data.jenisBadanUsaha, Validators.required),
       statusBadanUsaha: new FormControl(data.statusPerusahaanPkp , Validators.required),
-      tipeBadanUsaha: new FormControl(data.tipeBadanUsahaName, Validators.required),
-      kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      tipeBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
+      kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, []),
       jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsahaUtamaDesctiption, Validators.required),
       jenisPenyediaUsaha: new FormControl(data.jenisPenyediaUsaha, Validators.required),
       npwpPerusahaan: new FormControl(data.npwp, Validators.required),
@@ -450,11 +483,19 @@ export class ProfileInformasiPerusahaanComponent {
   handleKaryawanLokalChange(value:any){
     this.karyawan_lokal = value;
     this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.profileInformationFormGroup.value.jumlahKaryawanTotal = this.total_karyawan;
+    // this.profileInformationFormGroup.setValue({jumlahKaryawanTotal: this.total_karyawan});
+    // this.profileInformationFormGroup.markAllAsTouched();
+    console.log(this.profileInformationFormGroup.value);
   }
 
   handleKaryawanAsingChange(value:any){
     this.karyawan_asing = value;
     this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.profileInformationFormGroup.value.jumlahKaryawanTotal = this.total_karyawan;
+    // this.profileInformationFormGroup.setValue({jumlahKaryawanTotal: this.total_karyawan});
+    // this.profileInformationFormGroup.markAllAsTouched();
+    console.log(this.profileInformationFormGroup.value);
   }
 
   upload(): void {
@@ -479,7 +520,7 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   save() {
-    console.log(this.profileInformationFormGroup.value)
+    console.log(this.profileInformationFormGroup.value);
     this.profileInformationFormGroup.markAllAsTouched();
     if (this.profileInformationFormGroup.valid) {
       this.params = {
@@ -500,7 +541,13 @@ export class ProfileInformasiPerusahaanComponent {
         jumlahKaryawanTotal:this.profileInformationFormGroup.value.jumlahKaryawanTotal,
         jumlahKaryawanLokal:this.profileInformationFormGroup.value.jumlahKaryawanLokal,
         jumlahKaryawanAsing:this.profileInformationFormGroup.value.jumlahKaryawanAsing,
-        phoneNumber:this.profileInformationFormGroup.value.noTeleponPerusahaan
+        phoneNumber:this.profileInformationFormGroup.value.noTeleponPerusahaan,
+        alamatPerusahaan: this.profileInformationFormGroup.value.alamatPerusahaan,
+        provinsi: this.profileInformationFormGroup.value.provinsi,
+        kota: this.profileInformationFormGroup.value.kota,
+        kecamatan: this.profileInformationFormGroup.value.kecamatan,
+        keluarahan: this.profileInformationFormGroup.value.kelurahan,
+        kodePos: this.profileInformationFormGroup.value.kodePos
       }
   
       this.profileInformationFormGroup.markAllAsTouched();
