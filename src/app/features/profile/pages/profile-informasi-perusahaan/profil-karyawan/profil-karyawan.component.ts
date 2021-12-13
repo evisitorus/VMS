@@ -48,7 +48,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "doc", "docx"],
-    maxFileSize: 20971520 //20 MB
+    maxFileSize: 2097152 //2 MB
   };
 
   public data: any = {
@@ -240,6 +240,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
       },
       (error) => {
+        console.log(error)
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.triggerPopUp();
         console.log(error);
