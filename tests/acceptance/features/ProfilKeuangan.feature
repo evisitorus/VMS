@@ -44,7 +44,7 @@ Feature: Vendor Basic - Completed vendor information
         And The Vendor must click "Informasi Keuangan" menu where found on "Side Menu" of "Vendor Dashboard"
         And The Vendor will see "Informasi Keuangan" form
         And The Vendor wants to add "Bank Information" on sub form of "Bank" at "Informasi Keuangan" form
-        And The Vendor must define following information with empty field
+        And The Vendor must define following information with empty field "Laporan Keuangan"
         """
         {
         
@@ -56,4 +56,4 @@ Feature: Vendor Basic - Completed vendor information
         """
         # And The Vendor must click "Simpan" button to save information of "Keuangan"
         And The Vendor move to the next input
-        Then The Vendor will get warning message tooltip on empty fields
+        Then The Vendor will get warning message tooltip on empty fields "Laporan Keuangan"

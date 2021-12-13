@@ -73,8 +73,21 @@ Given('The Vendor will see {string} form', (form) => {
     }
 });
 
-Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
-
+Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', (form1, form2, form3) => {
+    switch (form1) {
+        case "Pemegang Saham":
+            I.click('.ng-tns-c66-2.k-link');
+            break;
+        case "Pegawai":
+            I.click('.ng-tns-c66-3.k-link');
+            break;
+        case "Data Perusahaan":
+            I.click('.ng-tns-c66-1.k-link');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
 });
 
 Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', (button1, button2, button3) => {
@@ -107,6 +120,9 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.waitForElement('#addPekerjaan');
             I.click('#addPekerjaan');
             break;
+        // case "Data Perusahaan":
+        //     I.click('.ng-tns-c66-1.k-link');
+        //     break;
         default:
             I.click(button3);
             break;
@@ -177,6 +193,10 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
 
 Given('The Vendor must click {string} button to save information of {string}', (button1, button2) => {
     switch (button2) {
+        case "Profil Perusahaan":
+            I.waitForElement('#saveInformasiPerusahaanBtn');
+            I.click('#saveInformasiPerusahaanBtn');
+            break;
         case "Dokumen":
             I.waitForElement('#btn-simpan');
             I.click('#btn-simpan');
