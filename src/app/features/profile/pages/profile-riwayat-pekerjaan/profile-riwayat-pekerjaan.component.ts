@@ -167,7 +167,15 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         }
       }
     } else {
-      this.updateRiwayatPekerjaan();
+      if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
+        this.popUpMessage = "Periksa kembali file Anda";
+        this.triggerPopUp();
+      } else {
+        this.pekerjaanForm.markAllAsTouched();
+        if (this.pekerjaanForm.valid) {
+          this.updateRiwayatPekerjaan();
+        }
+      }
     }
 
   }
