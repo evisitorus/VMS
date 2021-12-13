@@ -5,7 +5,6 @@ import { AddPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
-import { AddPegawaiInterface } from '../interfaces/add-pegawai-interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -20,11 +19,18 @@ export class ProfileService {
 
   email = this.authService.getLocalStorage('email')!;
   vendor_id = this.authService.getLocalStorage('vendor_id')!;
+  token = this.authService.getLocalStorage('access_token')!;
+  user_id = this.authService.getLocalStorage('person_id')!;
   
   addPekerjaan(params: AddPekerjaanInterface): Observable<any> {    
     let api_add_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_post_pengalaman_kerja,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      },
       body: {
         vendor: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!),
         namaPekerjaan: params.namaPekerjaan,
@@ -44,6 +50,9 @@ export class ProfileService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pengalaman_kerja,
       options: {
+        headers: {
+          Authorization: this.token
+        },
         params: {
           vendor : this.vendor_id
         }
@@ -58,6 +67,11 @@ export class ProfileService {
     let api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pemegang_saham,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      },
       body: {
         email: this.email,
         namaPemegangSaham: params.namaPemegangSaham,
@@ -76,6 +90,9 @@ export class ProfileService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pemegang_saham_route,
       options: {
+        headers: {
+          Authorization: this.token
+        },
         params: {
           fromParty : this.vendor_id
         }

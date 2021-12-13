@@ -61,10 +61,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     get f() { return this.pekerjaanForm.controls; }
 
   ngOnInit(): void {
-    // this.isLoggedIn = true;
-    // this.authService.setLoggedIn(true);
-    // if (!this.isLoggedIn) window.location.href = "/";
-
     this.columns = [
       {field: "namaPekerjaan", title:"Nama Pekerjaan"}, 
       {field: "pemberiPekerjaan", title:"Pemberi Pekerjaan"}, 
