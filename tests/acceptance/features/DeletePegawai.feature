@@ -14,7 +14,7 @@ Background:
     Given The Vendor still on "Informasi Perusahaan" form 
        And The Vendor wants to delete one of record from "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
        And The Vendor must clicks button "Delete" button from selected record on "Pegawai" form
-	   And The Vendor will see pop-up message  
+	   And The Vendor will see pop-up message
        """
       {
          "message" : "Apakah Pegawai{nama_pegawai} akan dihapus dari sistem ?"
