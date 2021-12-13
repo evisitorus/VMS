@@ -31,7 +31,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public pegawaiId!: string;
   public isNewData: boolean = true;
 
-  popUpTitle: string = "Edit Pegawai";
+  popUpTitle: string = "Tambah Pegawai";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
@@ -106,6 +106,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
+        console.log(response)
         this.gridDataPegawai = response.data;
       },
       () => {
@@ -264,6 +265,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
+    this.popUpTitle = "Edit Pegagwai";
     this.id = data.id;
     this.pegawaiId = data.fromParty.id;
     this.data.nik = data.nik;
