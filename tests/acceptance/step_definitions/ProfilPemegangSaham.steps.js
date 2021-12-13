@@ -74,11 +74,11 @@ Given('The Vendor wants to edit one of record from {string} on {string} which pa
             I.click('.ng-tns-c66-2.k-link');
             break;
         case "Pegawai":
-            I.click('Data Pegawai');
+            I.click('.ng-tns-c66-3.k-link');
             break;
-        // case "Data Perusahaan":
-        //     I.click('Data Perusahaan');
-        //     break;
+        case "Data Perusahaan":
+            I.click('.ng-tns-c66-1.k-link');
+            break;
         default:
             I.click(form1);
             break;
@@ -97,14 +97,21 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
         case "Alamat":
             I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
             I.fillField('#alamat input[class=k-input]', 'Jl. Letnan Jenderal S. Parman Kav 102');
-            // I.waitForElement('#provinsi.formField');
-            // I.selectOption('#provinsi.formField','Jawa Barat');
             I.click('#provinsi.formField');
-            I.click("Jawa Barat");
-            // I.selectOption('#kota input[class=k-dropdown-wrap]','Kabupaten Bandung');
-            // I.selectOption('#kecamatan input[class=k-dropdown-wrap]','Cibeunying');
-            // I.selectOption('#kelurahan input[class=k-dropdown-wrap]','Cicaheum');
-            // I.selectOption('#kodepos input[class=k-dropdown-wrap]','42015');
+            I.fillField('#provinsi.formField', 'Jawa Barat');
+            I.pressKey('Enter');
+            I.click('#kota.formField');
+            I.fillField('#kota.formField', 'Kabupaten Bandung');
+            I.pressKey('Enter');
+            I.click('#kecamatan.formField');
+            I.fillField('#kecamatan.formField', 'Cibeunying');
+            I.pressKey('Enter');
+            I.click('#kelurahan.formField');
+            I.fillField('#kelurahan.formField', 'Cicaheum');
+            I.pressKey('Enter');
+            I.click('#kodepos.formField');
+            I.fillField('#kodepos.formField', '42015');
+            I.pressKey('Enter');
             break;
         case "Riwayat Pekerjaan":
             I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
@@ -114,6 +121,19 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
             I.click('#tahunPekerjaan input[role=spinbutton]');
             I.fillField('#tahunPekerjaan input[role=spinbutton]', '2015');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
+        case "Pegawai":
+            I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
+            I.fillField('#firstName input[class=k-input]', 'James Bucky');
+            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.click('#tipeKaryawanDropdown input[class=k-input]');
+            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
+            I.click('#bidangPekerjaan input[class=k-input]');
+            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         default:
             I.click(form1);
