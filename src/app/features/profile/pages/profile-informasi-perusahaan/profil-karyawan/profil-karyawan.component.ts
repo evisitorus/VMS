@@ -7,6 +7,7 @@ import { EventEmitterService } from 'src/app/core/services/event-emitter.service
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
 import { ApiRoutes } from "src/app/core/services/api/api-routes";
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 
 interface Item {
   name: string;
@@ -72,6 +73,7 @@ export class ProfilKaryawanComponent implements OnInit {
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
     private eventEmitterService: EventEmitterService,
+    private dialogService: DialogService
   ) {
     //extract from 0
     this.bidangTemp = this.bidangSource.slice(0);
@@ -327,6 +329,23 @@ export class ProfilKaryawanComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public deleteConfirmation(id: string, name: string): void {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Konfirmasi",
+      content: "Apakah " + name + " akan dihapus dari sistem ?",
+      actions: [{ text: "Ya" }, { text: "Tidak", primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    });
+
+    dialog.result.subscribe((result) => {
+      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+        this.delete(id);
+      } 
+    });
   }
 
   triggerPopUp(): void {
