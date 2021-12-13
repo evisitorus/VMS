@@ -20,9 +20,9 @@ Given('The Vendor will see list of {string} on {string}', () => {
     I.seeElement('.action-button');
 });
 
-Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
+// Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
 
-});
+// });
 
 Given('The Vendor will get flag as {string} for checklist  if already upload at least one record on {string} and will be displayed on {string} form also {string} form', () => {
 
@@ -126,9 +126,5 @@ Given('The Vendor will see list of modified {string} on {string}', () => {
 });
 
 Given('The Vendor already modify her or his company information by delete recorded {string}', () => {
-
-});
-
-Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', () => {
 
 });

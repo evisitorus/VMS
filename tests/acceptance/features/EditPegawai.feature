@@ -79,7 +79,7 @@ So that I can modify my company information which has been recorded
             """
             And The Vendor must click "Simpan" button to save information of "Pegawai" 
             And The Vendor will see that pop-up form already closed when clicks "Simpan"
-            Then The Vendor can not continue to add document information "Riwayat Pekerjaan"
+            Then The Vendor can not continue to add document information "Pegawai"
 
     #Edit Existing "Pegawai"
     Scenario: Negatif Scenario for Uploading Resume (Check File Extention)
