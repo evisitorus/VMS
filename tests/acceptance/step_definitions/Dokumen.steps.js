@@ -275,7 +275,7 @@ Given('The Vendor can not continue to add document information', () => {
 Given('The Vendor can not continue to add document information {string}', (grid) => {
     switch (grid) {
         case "Riwayat Pekerjaan":
-            I.see('File tidak valid');
+            I.see('Periksa kembali file Anda');
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
