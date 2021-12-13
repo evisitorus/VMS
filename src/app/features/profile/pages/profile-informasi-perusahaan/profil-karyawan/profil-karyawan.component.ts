@@ -31,7 +31,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public pegawaiId!: string;
   public isNewData: boolean = true;
 
-  popUpTitle: string = "Tambah Pegawai";
+  popUpTitle: string = "";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
 
@@ -196,6 +196,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public save(): void {
+    this.popUpTitle = "Tambah Pegawai";
     let file_id = this.uploadedFileId.replace(/\D/g,'');
     let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
     let params: ProfileKaryawanInterface = {
@@ -265,7 +266,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
-    this.popUpTitle = "Edit Pegagwai";
+    this.popUpTitle = "Edit Data Pegawai";
     this.id = data.id;
     this.pegawaiId = data.fromParty.id;
     this.data.nik = data.nik;
