@@ -142,9 +142,8 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public submitProfilKaryawan(): void {
-    if( this.uploadedFileContentUrl === null){
-      this.popUpMessage = "File tidak valid";
-      this.close();
+    if( this.uploadedFileContentUrl === null || this.selectedFile === null){
+      this.popUpMessage = "Periksa kembali file Anda";
       this.triggerPopUp();
     } else {
       this.pegawaiFormGroup.markAllAsTouched();
@@ -242,10 +241,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
       },
       (error) => {
-        console.log(error)
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.triggerPopUp();
-        console.log(error);
       }
     );
   }
