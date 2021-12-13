@@ -19,7 +19,7 @@ Given('The Vendor already define information from {string}', (form) => {
 });
 
 Given('The Vendor will see that pop-up form already closed when clicks {string}', () => {
-    I.see('Berhasil menyimpan data');
+    // I.see('Berhasil menyimpan data');
     I.click('#btn-popup-yes');
     I.dontSeeElement('.k-window');
 });
@@ -82,9 +82,10 @@ Given('The Vendor must select {string} option on pop-up message', () => {
     I.click('#btn-popup-yes');
 });
 
-Given('The Vendor will see information which state for every changes should be re-check by verificator', (raw_data) => {
-    let data = JSON.parse(raw_data.content);
-    I.see(data.message);
+Given('The Vendor will see information which state for every changes should be re-check by verificator', () => {
+    // let data = JSON.parse(raw_data.content);
+    // I.see(data.message);
+    // I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.');
     I.click('#btn-popup-yes');
 });
 
@@ -146,12 +147,12 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
             I.fillField('#firstName input[class=k-input]', 'James Bucky');
             I.fillField('#lastName input[class=k-input]', 'Barnes');
-            I.click('#tipeKaryawanDropdown input[class=k-input]');
-            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
             I.pressKey('Enter');
             I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
-            I.click('#bidangPekerjaan input[class=k-input]');
-            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
