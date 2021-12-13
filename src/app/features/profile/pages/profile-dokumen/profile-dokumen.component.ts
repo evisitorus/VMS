@@ -6,6 +6,7 @@ import { ProfileDocumentInterface } from 'src/app/core/interfaces/profile-docume
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileDocumentService } from 'src/app/core/services/profile/profile-document.service';
 import { FileService } from 'src/app/core/services/file.service';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 
 @Component({
   selector: 'app-profile-dokumen',
@@ -51,7 +52,8 @@ export class ProfileDokumenComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
     private profileDocumentService: ProfileDocumentService,
-    private fileService: FileService
+    private fileService: FileService,
+    private dialogService: DialogService
   ){
     this.setForm();
   }
@@ -95,7 +97,8 @@ export class ProfileDokumenComponent implements OnInit {
         berlakuSampai: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "Seumur Hidup",
         lampiran: data[key]['attachmentFilePath'],
         file: data[key]['file'],
-        id: data[key]['id']
+        id: data[key]['id'],
+        deletedAt: data[key]['deletedAt']
       };
     }
     return mappedData;
@@ -227,6 +230,23 @@ export class ProfileDokumenComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public deleteConfirmation(id: string, name: string): void {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Konfirmasi",
+      content: "Apakah " + name + " akan dihapus dari sistem ?",
+      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    });
+
+    dialog.result.subscribe((result) => {
+      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+        this.delete(id);
+      } 
+    });
   }
 
   public selectEventHandler(e: SelectEvent): void {

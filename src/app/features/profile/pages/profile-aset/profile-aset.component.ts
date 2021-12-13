@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { ProfileAssetInterface } from 'src/app/core/interfaces/profile-asset.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
@@ -18,6 +19,7 @@ export class ProfileAsetComponent implements OnInit {
   public popUpMessage: string = "";
   public id!: string;
   public isNewData: boolean = true;
+  public isDelete!: boolean;
 
   public data: any = {
     namaAsset: "",
@@ -27,7 +29,8 @@ export class ProfileAsetComponent implements OnInit {
 
   constructor(
     private profileAssetService: ProfileAssetService,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private dialogService: DialogService
   ){ 
     this.setFormValue();
   }
@@ -45,19 +48,20 @@ export class ProfileAsetComponent implements OnInit {
         nama: data[key]['name'],
         jumlah: data[key]['jumlah'],
         tahunPembuatan: data[key]['tahunPembuatan'],
-        id: data[key]['id']
+        id: data[key]['id'],
+        deletedAt: data[key]['deletedAt']
       };
     }
     return mappedData;
-  }
+  } 
 
-  public close() {
+  public close(): void {
     this.opened = false;
     this.resetForm();
     this.isNewData = true;
   }
 
-  public open() {
+  public open(): void {
     this.opened = true;
   }
   
@@ -162,6 +166,23 @@ export class ProfileAsetComponent implements OnInit {
         this.triggerPopUp();
       }
     );
+  }
+
+  public deleteConfirmation(id: string, name: string): void {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Konfirmasi",
+      content: "Apakah " + name + " akan dihapus dari sistem ?",
+      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    });
+
+    dialog.result.subscribe((result) => {
+      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+        this.delete(id);
+      } 
+    });
   }
 
   setFormValue(): void {
