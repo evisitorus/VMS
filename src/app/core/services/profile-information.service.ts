@@ -19,16 +19,17 @@ export class ProfileInformationService {
   }
 
   token = this.authService.getLocalStorage('access_token')!;
+  vendor_id = this.authService.getLocalStorage('vendor_id')!;
 
   getJenisPenyediaUsaha(): Observable<any>{
     let api_jenis_penyedia_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_penyedia_usaha_route,
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_jenis_penyedia_usaha);
   }
@@ -37,11 +38,11 @@ export class ProfileInformationService {
     let api_jenis_kegiatan_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_jenis_kegiatan_usaha_route,
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_jenis_kegiatan_usaha);
   }
@@ -51,25 +52,38 @@ export class ProfileInformationService {
     let api_tipe_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_tipe_vendor_route,
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_tipe_vendor);
 
+  }
+
+  getJenisVendor(): Observable<any> {
+    let api_jenis_vendor: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_jenis_vendor_route,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_jenis_vendor);
   }
 
   getVendorInformation(): Observable<any>{
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/information',
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_vendor_information);
   }
@@ -78,11 +92,11 @@ export class ProfileInformationService {
     let api_vendor_data: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id'),
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_vendor_data);
 
@@ -92,11 +106,11 @@ export class ProfileInformationService {
     let api_organizations: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_organizations_route,
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_organizations);
   }
@@ -105,11 +119,11 @@ export class ProfileInformationService {
     let api_provinces: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_provinces_route,
-      // options : {
-      //   headers: {
-      //     Authorization: this.token
-      //   }
-      // }
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
     return this.apiService.sendRequest(api_provinces);
   }
@@ -119,9 +133,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kotakab.concat(provinsi),
       options : {
-        // params: {
-        //   provinsi : provinsi
-        // }
+        headers: {
+          Authorization: this.token
+        }
       }
     }
     return this.apiService.sendRequest(api_get_kotakab);
@@ -133,9 +147,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kecamatan.concat(kotakab),
       options : {
-        // params: {
-        //   kotakab : kotakab
-        // }
+        headers: {
+          Authorization: this.token
+        }
       }
     }
     return this.apiService.sendRequest(api_get_kecamatan);
@@ -147,9 +161,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kelurahan.concat(kecamatan),
       options : {
-        // params: {
-        //   kecamatan : kecamatan
-        // }
+        headers: {
+          Authorization: this.token
+        }
       }
     }
     return this.apiService.sendRequest(api_get_kelurahan);
@@ -160,9 +174,9 @@ export class ProfileInformationService {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kodepos.concat(kelurahan),
       options : {
-        // params: {
-        //   kelurahan : kelurahan
-        // }
+        headers: {
+          Authorization: this.token
+        }
       }
     }
     return this.apiService.sendRequest(api_get_kodepos);
@@ -178,6 +192,11 @@ export class ProfileInformationService {
         email: params.email,
         namaPic: params.namaPic,
         noTelepon: params.noTelepon
+      },
+      options: {
+        headers: {
+          Authorization: this.token
+        }
       }
     };
 
@@ -206,16 +225,40 @@ export class ProfileInformationService {
         jumlah_karyawan_total: params.jumlahKaryawanTotal,
         jumlah_karyawan_lokal: params.jumlahKaryawanLokal,
         jumlah_karyawan_asing: params.jumlahKaryawanAsing,
-        phone_number: params.phoneNumber
+        phone_number: params.phoneNumber,
+        alamat_perusahaan: params.alamatPerusahaan,
+        provinsi: params.provinsi,
+        kota: params.kota,
+        kecamatan: params.kecamatan,
+        kelurahan: params.keluarahan,
+        kodePos: params.kodePos,
+        file: params.file
       },
       options: {
         headers: {
+          Authorization: this.token,
           "Content-Type": "application/json"
         }
       },
     }
 
     return this.apiService.sendRequest(api_profile_information);
+  }
+
+  getContactMechanism(): Observable<any>{
+    let api_get_contact_mechanism: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_contact_mechanism,
+      options : {
+        headers: {
+          Authorization: this.token
+        },
+        params: {
+          party : this.vendor_id
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_contact_mechanism);
   }
   
 }

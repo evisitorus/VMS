@@ -1,6 +1,6 @@
 import {ProfilePICService} from "../../../../core/services/profile/profile-pic/profile-pic.service";
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {TextBoxComponent} from "@progress/kendo-angular-inputs";
 import {ProfilePICInterface} from "../../../../core/interfaces/profile/profile-pic-interface";
 import {AuthService} from "../../../../core/services/auth.service";
@@ -29,21 +29,33 @@ export class ProfilePersonInChargeComponent implements OnInit {
   ) {
   }
 
-  public form: FormGroup = new FormGroup({
-    name: new FormControl(),
-    email: new FormControl(),
-    phoneNumber: new FormControl(),
-    oldPassword: new FormControl(),
-    newPassword: new FormControl(),
-    confirmNewPassword: new FormControl(),
-    fileId: new FormControl(),
-  });
+  responseName: string = "";
+  responsePhoneNumber: string = "";
+  responseEmail: string = "";
+  responseFile: string = "";
+  isDisabled: boolean = true;
+  popUpTitle: string = "Informasi";
+  popUpMessage: string = "";
+  redirectOnClosePopUp: boolean = false;
+
+  public formPIC!: FormGroup;
+
+  public setForm(): void {
+    this.formPIC = new FormGroup({
+      name: new FormControl(this.responseName),
+      email: new FormControl(this.responseEmail),
+      phoneNumber: new FormControl(this.responsePhoneNumber),
+      oldPassword: new FormControl(null),
+      newPassword: new FormControl(null),
+      confirmNewPassword: new FormControl(null),
+      fileId: new FormControl(null),
+    });
+  }
 
   public ngAfterViewInit(): void {
     this.oldPasswordTextbox.input.nativeElement.type = "password";
     this.newPasswordTextbox.input.nativeElement.type = "password";
     this.confirmNewPasswordTextbox.input.nativeElement.type = "password";
-
   }
 
   public toggleVisibility(name: string): void {
@@ -72,7 +84,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
   public lampiranFiles!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
-  public popUpMessage: string = "";
   public invalidFileExtension!: boolean;
   public invalidMaxFileSize!: boolean;
   public fileRestrictions: FileRestrictions = {
@@ -82,7 +93,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   public passwordTextbox = true;
 
-  enablePasswordTextbox(){
+  enablePasswordTextbox() {
     this.passwordTextbox = false;
   };
 
@@ -96,27 +107,32 @@ export class ProfilePersonInChargeComponent implements OnInit {
     this.opened = true;
   }
 
-  responseName: string = "";
-  responsePhoneNumber: string = "";
-  responseEmail: string = "";
-  responseFile: string = "";
-  isDisabled: boolean = true;
-
   changeIsDisabled() {
     this.isDisabled = !this.isDisabled;
   }
 
   save() {
-      this.params = {
-        name: this.form.value.name,
-        email: this.form.value.email,
-        phoneNumber: this.form.value.phoneNumber,
-        oldPassword: this.form.value.oldPassword,
-        newPassword: this.form.value.newPassword,
-        confirmNewPassword: this.form.value.confirmNewPassword
-      }
+    if ("" === this.formPIC.value.oldPassword) {
+      this.formPIC.value.oldPassword = null;
+    }
 
-    this.form.markAllAsTouched();
+    if ("" === this.formPIC.value.newPassword) {
+      this.formPIC.value.newPassword = null;
+    }
+
+    if ("" === this.formPIC.value.confirmNewPassword) {
+      this.formPIC.value.confirmNewPassword = null;
+    }
+
+    this.params = {
+      name: this.formPIC.value.name,
+      email: this.formPIC.value.email,
+      phoneNumber: this.formPIC.value.phoneNumber,
+      oldPassword: this.formPIC.value.oldPassword,
+      newPassword: this.formPIC.value.newPassword,
+      confirmNewPassword: this.formPIC.value.confirmNewPassword
+    }
+
     let person_id = this.authService.getLocalStorage('person_id')!;
 
     if (this.uploadedFileId) {
@@ -129,26 +145,49 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responseFile = response.data;
         },
         (error) => {
+          this.popUpMessage = error.error.message;
+          this.redirectOnClosePopUp = false;
+          this.triggerPopUp();
         }
       );
     }
 
-    this.profilePICService.updateProfilePIC(this.params, person_id).subscribe(
-      (response) => {
-        location.reload();
+    if (this.formPIC.valid) {
+      this.formPIC.markAllAsTouched();
+
+      this.profilePICService.updateProfilePIC(this.params, person_id).subscribe(
+        (response) => {
+          this.changePasswordTextboxEnabled = false;
           this.responseName = response.data.name;
           this.responsePhoneNumber = response.data.phone_number;
           this.responseEmail = response.data.email;
-      },
-      (error) => {
-        this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
-        this.triggerPopUp();
-      }
-    )
-    this.changeIsDisabled();
+          this.redirectOnClosePopUp = false;
+          this.popUpMessage = 'Sukses memperbarui data PIC';
+          this.triggerPopUp();
+        },
+        (error) => {
+          this.changePasswordTextboxEnabled = false;
+          this.redirectOnClosePopUp = false;
+          this.popUpMessage = error.error.message;
+          this.triggerPopUp();
+          this.setForm();
+        }
+      )
+      this.changeIsDisabled();
+    } else {
+      this.changePasswordTextboxEnabled = false;
+      this.redirectOnClosePopUp = false;
+      this.popUpMessage = 'Mohon lengkapi data PIC'
+      this.oldPasswordTextbox.clearValue();
+      this.newPasswordTextbox.clearValue();
+      this.confirmNewPasswordTextbox.clearValue();
+      this.triggerPopUp();
+    }
   }
 
   ngOnInit(): void {
+    this.setForm();
+
     let person_id = this.authService.getLocalStorage('person_id')!;
     this.profilePICService.getProfilePIC(person_id).subscribe(
       (response) => {
@@ -161,6 +200,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.responseName = response.data.name;
         this.responsePhoneNumber = response.data.phone_number;
         this.responseEmail = response.data.email;
+
+        this.setForm();
       },
       (error) => {
       }
@@ -168,7 +209,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   clearForm(): void {
-    this.form.reset();
+    this.formPIC.reset();
   }
 
   upload(): void {
@@ -179,7 +220,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.responseFile = environment.api_base_path + res["@id"] + "/file";
       },
       (err) => {
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.popUpMessage = "Gagal memroses berkas, Silakan coba lagi.";
+        this.redirectOnClosePopUp = false;
         this.triggerPopUp();
       }
     );
@@ -193,5 +235,40 @@ export class ProfilePersonInChargeComponent implements OnInit {
     let errors = e.files[0].validationErrors;
     this.invalidMaxFileSize = !!errors?.includes("invalidMaxFileSize");
     this.invalidFileExtension = !!errors?.includes("invalidFileExtension");
+  }
+
+  keyPressAlphaSymbol(event: { keyCode: number; preventDefault: () => void; }) {
+    let input = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z\- ']/.test(input)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  changePasswordTextboxEnabled = false;
+
+  showChangePasswordTextbox() {
+    this.changePasswordTextboxEnabled = true;
+    this.changeHidePasswordChangeLinkStatus();
+  }
+
+  hidePasswordChangeLink = true;
+
+  changeHidePasswordChangeLinkStatus() {
+    this.hidePasswordChangeLink = !this.hidePasswordChangeLink;
   }
 }

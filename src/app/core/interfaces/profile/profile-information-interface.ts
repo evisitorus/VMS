@@ -17,4 +17,13 @@ export interface ProfileInformationInterface {
   jumlahKaryawanLokal: string;
   jumlahKaryawanAsing: string;
   phoneNumber: string;
+
+  alamatPerusahaan?: string;
+  provinsi?: string;
+  kota?: string;
+  kecamatan?: string;
+  keluarahan?: string;
+  kodePos?: string;
+
+  file?: string;
 }

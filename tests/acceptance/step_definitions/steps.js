@@ -275,11 +275,6 @@ When(/^The Vendor \(Basic\) will see "(.*?)" form$/, () => {
   throw new Error('Not implemented yet');
 });
 
-When('The Vendor must completed following inputs where found on {string} form', () => {
-  // From "tests/acceptance/features/ProfilPerusahaan.feature" {"line":24,"column":7}
-  throw new Error('Not implemented yet');
-});
-
 When(/^The Vendor \(Basic\) wants to add information in regards to "(.*?)" on "(.*?)" which part of "(.*?)" form$/, () => {
   // From "tests/acceptance/features/RiwayatPekerjaan.feature" {"line":74,"column":7}
   throw new Error('Not implemented yet');

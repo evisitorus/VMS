@@ -1,7 +1,7 @@
 <div>
   <kendo-label>Pegawai</kendo-label>
   <br>
-  <kendo-grid [pageSize]="5" [data]="dataKaryawan" [pageable]="true" [resizable]="true">
+  <kendo-grid [pageSize]="5" [data]="gridDataPegawai" [pageable]="true" [resizable]="true">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
         {{rowIndex + 1}}
@@ -14,12 +14,12 @@
     </kendo-grid-column>
     <kendo-grid-column title="Nama Pegawai">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.namaPegawai }}
+        {{ dataItem.fromParty.firstName + " " + dataItem.fromParty.lastName }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Tipe Karyawan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.tipeKaryawan.name }}
+        {{ dataItem.sdmType.name }}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Jabatan">
@@ -29,23 +29,26 @@
     </kendo-grid-column>
     <kendo-grid-column title="Bidang Pekerjaan">
       <ng-template kendoGridCellTemplate let-dataItem>
-        {{ dataItem.bidangPekerjaan }}
+        {{ dataItem.sdmBidang.name }}
       </ng-template>
     </kendo-grid-column>
-    <!-- <kendo-grid-column title="Resume">
+    <kendo-grid-column title="Resume">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.resume }}</a>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
       </ng-template>
-    </kendo-grid-column> -->
+    </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <span>
-          <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update">
-        </span>
-        <span>
-          <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete">
-        </span>
-      </ng-template>>
+        <div *ngIf="!dataItem.deletedAt">
+          <span>
+            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
+          </span>
+          <span>
+            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
+          </span>
+        </div>
+        <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+      </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
   <br>
@@ -70,12 +73,23 @@
         </kendo-formfield>
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">Nama Karyawan</kendo-label>
+            <kendo-label class="col">First Name</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="namaKaryawanInput" class="col-md" formControlName="namaPegawai"
+              <kendo-textbox id="firstName" class="col-md" formControlName="firstName"
               placeholder="Type your message here" #namaPegawai [clearButton]="true">
             </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.namaPegawai.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pegawaiFormGroup">
+          <div class="row">
+            <kendo-label class="col">Last Name</kendo-label>
+            <div class="col k-vstack">
+              <kendo-textbox id="lastName" class="col-md" formControlName="lastName"
+              placeholder="Type your message here" #namaPegawai [clearButton]="true">
+            </kendo-textbox>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -112,14 +126,13 @@
                   Data bidang pekerjaan tidak ditemukan
                   <ng-container *ngIf="filter">Apakah anda mau menambahkan - "{{ filter }}" ?</ng-container>
                   <br />
-                  <button *ngIf="filter" class="k-button" (click)="addNew()">
+                  <button *ngIf="filter" class="k-button" (click)="addNewBidang()">
                     Tambah bidang baru
                   </button>
                 </div>
               </ng-template>
             </kendo-dropdownlist>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang
-              Pekerjaan tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang Pekerjaan tidak boleh kosong</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -127,7 +140,14 @@
           <div class="row">
             <kendo-label class="col">Resume</kendo-label>
             <div class="col">
-              <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+              <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+                <kendo-fileselect-messages
+                dropFilesHere="Tidak ada file terpilih"
+                select="Pilih file"
+                invalidFileExtension="Ekstensi file harus berformat pdf, doc, docx"
+                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                >
+                </kendo-fileselect-messages>
               </kendo-fileselect>
               <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
@@ -138,10 +158,11 @@
     </div>
 
     <kendo-dialog-actions>
-      <button kendoButton id="saveKaryawanFormBtn" (click)="addToTableFe()" [primary]="true">Simpan</button>
+      <button kendoButton id="saveKaryawanFormBtn" (click)="submitProfilKaryawan()" [primary]="true">Simpan</button>
       <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
     </kendo-dialog-actions>
   </kendo-dialog>
 </div>
 
+<div kendoDialogContainer></div>
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

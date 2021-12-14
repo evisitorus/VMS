@@ -37,7 +37,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-dropdownlist id ="provinsi" class="formField" [defaultItem]="defaultItemProvinsi" [data]="listProvinsi" textField="description" valueField="id" formControlName="provinsi" [valuePrimitive]="true" (valueChange)="onChangeProvinsi($event)"></kendo-dropdownlist>
+              <kendo-dropdownlist id ="provinsi" class="formField" [defaultItem]="defaultItemProvinsi" [data]="listProvinsi" textField="description" valueField="id" [(ngModel)]="selectedProvinsi" formControlName="provinsi" [valuePrimitive]="true" (valueChange)="onChangeProvinsi($event)" #provinsi></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Provinsi tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-dropdownlist id ="kota" class="formField" [defaultItem]="defaultItemKota" [data]="listKota" textField="description" valueField="id" formControlName="kota" [valuePrimitive]="true" [disabled]="isDisabledKota" [valuePrimitive]="true" (valueChange)="onChangeKota($event)"></kendo-dropdownlist>
+              <kendo-dropdownlist id ="kota" class="formField" [defaultItem]="defaultItemKota" [data]="listKota" textField="description" valueField="id" [(ngModel)]="selectedKota" formControlName="kota" [valuePrimitive]="true" [disabled]="isDisabledKota" [valuePrimitive]="true" (valueChange)="onChangeKota($event)" #kota></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Kota / Kabupaten tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -63,7 +63,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-dropdownlist id ="kecamatan" class="formField" [defaultItem]="defaultItemKecamatan" [data]="listKecamatan" textField="description" valueField="id" formControlName="kecamatan" [valuePrimitive]="true" [disabled]="isDisabledKecamatan" [valuePrimitive]="true" (valueChange)="onChangeKecamatan($event)"></kendo-dropdownlist>
+              <kendo-dropdownlist id ="kecamatan" class="formField" [defaultItem]="defaultItemKecamatan" [data]="listKecamatan" textField="description" valueField="id" [(ngModel)]="selectedKecamatan" formControlName="kecamatan" [valuePrimitive]="true" [disabled]="isDisabledKecamatan" [valuePrimitive]="true" (valueChange)="onChangeKecamatan($event)" #kecamatan></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Kecamatan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -76,7 +76,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-dropdownlist id ="kelurahan" class="formField" [defaultItem]="defaultItemKelurahan" [data]="listKelurahan" textField="description" valueField="id" formControlName="kelurahan" [valuePrimitive]="true" [disabled]="isDisabledKelurahan" [valuePrimitive]="true" (valueChange)="onChangeKelurahan($event)"></kendo-dropdownlist>
+              <kendo-dropdownlist id ="kelurahan" class="formField" [defaultItem]="defaultItemKelurahan" [data]="listKelurahan" textField="description" valueField="id" [(ngModel)]="selectedKelurahan" formControlName="kelurahan" [valuePrimitive]="true" [disabled]="isDisabledKelurahan" [valuePrimitive]="true" (valueChange)="onChangeKelurahan($event)" #kelurahan></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Kelurahan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -89,7 +89,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-dropdownlist id ="kosepos" class="formField" [defaultItem]="defaultItemKodepos" [data]="listKodepos" textField="description" valueField="id" formControlName="kodepos" [valuePrimitive]="true" [disabled]="isDisabledKodepos" [valuePrimitive]="true"></kendo-dropdownlist>
+              <kendo-dropdownlist id ="kodepos" class="formField" [defaultItem]="defaultItemKodepos" [data]="listKodepos" textField="description" valueField="id" [(ngModel)]="selectedKodepos" formControlName="kodepos" [valuePrimitive]="true" [disabled]="isDisabledKodepos" [valuePrimitive]="true" #kodepos></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Kode Pos tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -126,7 +126,7 @@
       </div>
   
       <div>
-        <kendo-grid [data]="gridData">
+        <kendo-grid [data]="gridData" class="vms-kendo-grid">
           <kendo-grid-column field="no" title="No.">
           </kendo-grid-column>
           <kendo-grid-column field="namaAlamat" title="Nama Alamat">
@@ -139,12 +139,15 @@
           </kendo-grid-column>
           <kendo-grid-column field="id" title="Action">
             <ng-template kendoGridCellTemplate let-dataItem>
-              <span>
-                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
-              </span>
-              <span>
-                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem.id)" id="btn-delete">
-              </span>
+              <div *ngIf="!dataItem.deletedAt">
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat)" id="btn-delete">
+                </span>
+              </div>
+              <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
@@ -163,5 +166,7 @@
   </div>
 
 </div>
+
+<div kendoDialogContainer></div>
 
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
