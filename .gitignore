@@ -45,4 +45,4 @@ testem.log
 Thumbs.db
 
 .scannerwork/
-test/acceptance/_output/
+tests/acceptance/_output/
