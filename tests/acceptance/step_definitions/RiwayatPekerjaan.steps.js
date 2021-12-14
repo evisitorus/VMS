@@ -12,10 +12,6 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
 
 });
 
-Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', () => {
-
-});
-
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
 
 });
@@ -59,12 +55,12 @@ Given('The Vendor can modify data which displayed on {string} form with document
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
             I.fillField('#firstName input[class=k-input]', 'James Bucky');
             I.fillField('#lastName input[class=k-input]', 'Barnes');
-            I.click('#tipeKaryawanDropdown input[class=k-input]');
-            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
             I.pressKey('Enter');
-            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
-            I.click('#bidangPekerjaan input[class=k-input]');
-            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CTO');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
             break;
@@ -85,16 +81,16 @@ Given('The Vendor can modify data which displayed on {string} form with invalid 
             I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
             break;
-        case "Riwayat Pekerjaan":
+        case "Pegawai":
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
             I.fillField('#firstName input[class=k-input]', 'James Bucky');
             I.fillField('#lastName input[class=k-input]', 'Barnes');
-            I.click('#tipeKaryawanDropdown input[class=k-input]');
-            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
             I.pressKey('Enter');
-            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
-            I.click('#bidangPekerjaan input[class=k-input]');
-            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CTO');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;

@@ -39,13 +39,16 @@
     </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <span>
-          <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
-        </span>
-        <span>
-          <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="delete(dataItem.id)">
-        </span>
-      </ng-template>>
+        <div *ngIf="!dataItem.deletedAt">
+          <span>
+            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
+          </span>
+          <span>
+            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
+          </span>
+        </div>
+        <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+      </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
   <br>
@@ -129,8 +132,7 @@
                 </div>
               </ng-template>
             </kendo-dropdownlist>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang
-              Pekerjaan tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang Pekerjaan tidak boleh kosong</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -139,6 +141,13 @@
             <kendo-label class="col">Resume</kendo-label>
             <div class="col">
               <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+                <kendo-fileselect-messages
+                dropFilesHere="Tidak ada file terpilih"
+                select="Pilih file"
+                invalidFileExtension="Ekstensi file harus berformat pdf, doc, docx"
+                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                >
+                </kendo-fileselect-messages>
               </kendo-fileselect>
               <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
@@ -155,4 +164,5 @@
   </kendo-dialog>
 </div>
 
+<div kendoDialogContainer></div>
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

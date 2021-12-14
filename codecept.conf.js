@@ -39,6 +39,7 @@ exports.config = {
           './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
           './tests/acceptance/step_definitions/LandingPageTenderInformation.steps.js',
           './tests/acceptance/step_definitions/LandingPageTenderInformationDetails.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformationFilter.steps.js',
           './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
           './tests/acceptance/step_definitions/RiwayatPekerjaan.steps.js',
           './tests/acceptance/step_definitions/ForgotPassword.steps.js',
@@ -50,6 +51,8 @@ exports.config = {
           './tests/acceptance/step_definitions/ProfilKeuangan.steps.js',
           './tests/acceptance/step_definitions/ProfilAlamat.steps.js',
           './tests/acceptance/step_definitions/ProfilPerusahaan.steps.js',
+          './tests/acceptance/step_definitions/ProfilPegawai.steps.js',
+          './tests/acceptance/step_definitions/ProfilPIC.steps.js',
         ]
   },
   plugins: {

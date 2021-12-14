@@ -14,9 +14,9 @@ Given('The Vendor still on {string} form', (form) => {
     }
 });
 
-Given('The Vendor already define information from {string}', () => {
-    I.amOnPage('/profile-laporan-keuangan');
-});
+// Given('The Vendor already define information from {string}', () => {
+//     I.amOnPage('/profile-laporan-keuangan');
+// });
 
 Given('The Vendor wants to add {string} on sub form of {string} at {string} form', () => {
     
@@ -122,7 +122,7 @@ Given('The Vendor wants to delete one of record from {string} on {string} which 
             I.click('.ng-tns-c66-2.k-link');
             break;
         case "Pegawai":
-            I.click('Data Pegawai');
+            I.click('.ng-tns-c66-3.k-link');
             break;
         default:
             I.click(form1);

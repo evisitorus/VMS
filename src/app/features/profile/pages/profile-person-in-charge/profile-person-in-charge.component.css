@@ -1,50 +1,12 @@
-/* .profile-section {
-  border-style: groove;
-} */
-
-/* .profile-menu {
-  border-style: groove;
-  float: left;
-} */
-/* .profile-menu {
-  border-style: groove;
-  float: left;
-} */
-
-/*.profile-content {*/
-/*  border-style: groove;*/
-/*  float: right;*/
-/*}*/
-
 .align-items-center {
   margin-top: 19px;
 }
-
-
-/*
-.profile-content {
-  border-style: groove;
-  float: right;
-} */
-
-/* .profile-menu {
-  float: left;
-  height: 100vh;
-}
-
-.profile-content {
-  padding: 40px;
-  display: table;
-  width: 82%;
-} */
 
 .button-right {
   float: right;
 }
 
 .k-form-buttons {
-  /*display: flex;*/
-  /*flex-direction: row;*/
   align-items: center;
   padding: 8px 16px;
 
@@ -53,39 +15,6 @@
   height: 36px;
   left: 0px;
   top: 0px;
-
-  /*!*background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #0193AC;*!*/
-  /*!*border-radius: 2px;*!*/
-
-  /*!* Inside Auto Layout *!*/
-
-  /*flex: none;*/
-  /*order: 0;*/
-  /*flex-grow: 1;*/
-  /*margin: 0px 10px;*/
-}
-
-.vms-btn {
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*align-items: center;*/
-  /*padding: 8px 16px;*/
-
-  /*position: static;*/
-  /*width: 132px;*/
-  /*height: 36px;*/
-  /*left: 0px;*/
-  /*top: 0px;*/
-
-  /*background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #0193AC;*/
-  /*!*border-radius: 2px;*!*/
-
-  /*!* Inside Auto Layout *!*/
-
-  /*flex: none;*/
-  /*order: 0;*/
-  /*flex-grow: 1;*/
-  /*margin: 0px 10px;*/
 }
 
 .vms-btn:hover {
@@ -97,4 +26,8 @@
   font-weight: lighter;
   font-style: italic;
   margin: 20px 0 20px 0;
+}
+
+.bank-field {
+  margin-bottom: 1em;
 }

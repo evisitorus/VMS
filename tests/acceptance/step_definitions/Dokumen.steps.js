@@ -66,6 +66,8 @@ Given('The Vendor will see {string} form', (form) => {
             break;
         case "Informasi Perusahaan":
             I.amOnPage('/profile-information');
+        case "Akun PIC":
+            I.amOnPage('/profile-person-in-charge');
             break;
         default:
             I.amOnPage(form);
@@ -73,7 +75,7 @@ Given('The Vendor will see {string} form', (form) => {
     }
 });
 
-Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', (form1, form2, form3) => {
+Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', (form1,form2,form3) => {
     switch (form1) {
         case "Pemegang Saham":
             I.click('.ng-tns-c66-2.k-link');
@@ -120,9 +122,10 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.waitForElement('#addPekerjaan');
             I.click('#addPekerjaan');
             break;
-        // case "Data Perusahaan":
-        //     I.click('.ng-tns-c66-1.k-link');
-        //     break;
+        case "Pegawai":
+            I.waitForElement('#addPegawaiBtn');
+            I.click('#addPegawaiBtn');
+            break;
         default:
             I.click(button3);
             break;
@@ -184,6 +187,19 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#nilaiPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
             I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
+        case "Pegawai":
+            I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
+            I.fillField('#firstName input[class=k-input]', 'James Bucky');
+            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CTO');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         default:
             I.waitForElement(form2);
@@ -256,6 +272,12 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
             I.see('Perseorangan');
             I.see('Lokal');
             I.see('50');
+            break;
+        case "Pegawai":
+            I.see('James Bucky Barnes');
+            I.see('Tenaga Ahli');
+            I.see('CTO');
+            I.see('IT');
             break;
         default:
             I.waitForElement(list1);

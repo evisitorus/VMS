@@ -5,6 +5,9 @@ Given('The Vendor already define information from {string}', (form) => {
         case "Informasi Perusahaan":
             I.amOnPage('/profile-information');
             break;
+        case "Laporan Keuangan":
+            I.amOnPage('/profile-laporan-keuangan');
+            break;
         case "Informasi Bank":
             I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
             I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
@@ -16,15 +19,14 @@ Given('The Vendor already define information from {string}', (form) => {
 });
 
 Given('The Vendor will see that pop-up form already closed when clicks {string}', () => {
-    I.see('Informasi Pemegang Saham');
-    I.see('Sukses');
+    // I.see('Berhasil menyimpan data');
     I.click('#btn-popup-yes');
     I.dontSeeElement('.k-window');
 });
 
-Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
+// Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
 
-});
+// });
 
 Given('The Vendor can repeat process to add {string} by repeat process from line 21 to 46', () => {
 
@@ -34,9 +36,27 @@ Given('The Vendor can continue to fill information in regards to {string} by cli
 
 });
 
-Given('The Vendor not define anything on {string} form or only define several fields which needed', () => {
-    I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
-    I.click('#submitPemegangSaham');
+Given('The Vendor not define anything on {string} form only define several fields which needed', (form) => {
+    switch (form) {
+        case "Tambah Pemegang Saham":
+            I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
+            I.click('#submitPemegangSaham');
+            break;
+        case "Tambah Pegawai":
+            I.fillField('#nikPegawaiInput input[class=k-input]', '');
+            I.fillField('#firstName input[class=k-input]', '');
+            I.fillField('#lastName input[class=k-input]', '');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', '');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
+        default:
+            I.waitForElement(form);
+            break;
+    }
 });
 
 Given('The Vendor will get warning message tooltip on each mandatory fields as {string}', () => {
@@ -62,9 +82,10 @@ Given('The Vendor must select {string} option on pop-up message', () => {
     I.click('#btn-popup-yes');
 });
 
-Given('The Vendor will see information which state for every changes should be re-check by verificator', (raw_data) => {
-    let data = JSON.parse(raw_data.content);
-    I.see(data.message);
+Given('The Vendor will see information which state for every changes should be re-check by verificator', () => {
+    // let data = JSON.parse(raw_data.content);
+    // I.see(data.message);
+    // I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.');
     I.click('#btn-popup-yes');
 });
 
@@ -126,12 +147,12 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
             I.fillField('#firstName input[class=k-input]', 'James Bucky');
             I.fillField('#lastName input[class=k-input]', 'Barnes');
-            I.click('#tipeKaryawanDropdown input[class=k-input]');
-            I.fillField('#tipeKaryawanDropdown input[class=k-input]', 'Tenaga Ahli');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
             I.pressKey('Enter');
             I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CIO');
-            I.click('#bidangPekerjaan input[class=k-input]');
-            I.fillField('#bidangPekerjaan input[class=k-input]', 'IT');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
