@@ -21,7 +21,7 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
         """ 
         And The Vendor wants to completed his or her company profile
         And The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
-        And The Vendor must click "Profile Perusahaan" Tab 
+        And The Vendor must click "Profil Perusahaan" Tab 
         And The Vendor will see "Informasi Perusahaan" form
         And The Vendor wants to add information in regards to "Data Perusahaan" on "Data Perusahaan Grid" which part of "Informasi Perusahaan" form 
         And The Vendor must completed following inputs where found on "Informasi Perusahaan" form 
@@ -99,47 +99,47 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
 
         Then The Vendor must click "Simpan" button to save information of "Profil Perusahaan"      
       
-    # Scenario: Negatif Scenario for company profile 
-    #   Given The Vendor gets his or her badge on his or her vendor level on "Vendor Dashboard" as 
-    #     """
-    #     {
-    #         "vendorLevel"  : "Vendor Basic",
-    #         "progressLevel : "95% menuju Vendor Pro"
-    #         "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
-    #     }
-    #     """ 
-    #     And The Vendor wants to completed his or her company profile
-    #     And The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
-    #     And The Vendor must click "Profile Perusahaan" Tab 
-    #     And The Vendor will see "Informasi Perusahaan" form
-    #     And The Vendor wants to add information in regards to "Data Perusahaan" on "Data Perusahaan Grid" which part of "Informasi Perusahaan" form  
-    #     And The Vendor must define following information with empty field "Data Perusahaan" 
-    #     """
-    #     {
-    #         "companyLogo" 			: "empty",                                   
-    #         "namaPerusahaan" 			: "empty",
-    #         "jenisBadanUsaha" 		: "empty",
-    #         "statusBadanUsaha" 		: "empty",
-    #         "tipeBadanUsaha" 			: "empty",
-    #         "kategoriBadanUsaha" 		: "empty",                                    
-    #         "jenisKegiatanUsahaUtama" : "empty",                                      
-    #         "jenisPenyediaUsaha"      : "empty",                                       
-    #         "NPWPPerusahaan"			: "muncul dari NPWP yang diinputkan saat melakukan registrasi"           
-    #         "nomorIndukBerusaha" 		: "empty",                                    
-    #         "bidangUsaha"             : "empty",          
-    #         "BUMNPengampu" 			: "empty",
-    #         "websitePerusahaan"		: "empty",
-    #         "jumlahKaryawanTotal"		: "empty",        
-    #         "jumlahKaryawanLokal"		: "empty",                     
-    #         "jumlahKaryawanAsing" 	: "empty",                
-    #         "noTeleponPerusahaan"		: "empty",
-    #         "alamatPerusahaan" 		: "empty",
-    #         "Provinsi"				: "empty",
-    #         "Kota/Kabupaten"			: "empty",
-    #         "Kecamatan"				: "empty",
-    #         "Kelurahan"				: "empty",
-    #         "KodePos"					: "empty", 
-    #     }
-    #     """
-    #   And The Vendor must click "Simpan" button to save information of "Profil Perusahaan"
-    # Then The Vendor will get warning message tooltip on empty fields "Informasi Perusahaan"
+    Scenario: Negatif Scenario for company profile 
+      Given The Vendor gets his or her badge on his or her vendor level on "Vendor Dashboard" as 
+        """
+        {
+            "vendorLevel"  : "Vendor Basic",
+            "progressLevel : "95% menuju Vendor Pro"
+            "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
+        }
+        """ 
+        And The Vendor wants to completed his or her company profile
+        And The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+        And The Vendor must click "Profil Perusahaan" Tab 
+        And The Vendor will see "Informasi Perusahaan" form
+        And The Vendor wants to add information in regards to "Data Perusahaan" on "Data Perusahaan Grid" which part of "Informasi Perusahaan" form  
+        And The Vendor must define following information with empty field "Data Perusahaan" 
+        """
+        {
+            "companyLogo" 			: "empty",                                   
+            "namaPerusahaan" 			: "empty",
+            "jenisBadanUsaha" 		: "empty",
+            "statusBadanUsaha" 		: "empty",
+            "tipeBadanUsaha" 			: "empty",
+            "kategoriBadanUsaha" 		: "empty",                                    
+            "jenisKegiatanUsahaUtama" : "empty",                                      
+            "jenisPenyediaUsaha"      : "empty",                                       
+            "NPWPPerusahaan"			: "muncul dari NPWP yang diinputkan saat melakukan registrasi"           
+            "nomorIndukBerusaha" 		: "empty",                                    
+            "bidangUsaha"             : "empty",          
+            "BUMNPengampu" 			: "empty",
+            "websitePerusahaan"		: "empty",
+            "jumlahKaryawanTotal"		: "empty",        
+            "jumlahKaryawanLokal"		: "empty",                     
+            "jumlahKaryawanAsing" 	: "empty",                
+            "noTeleponPerusahaan"		: "empty",
+            "alamatPerusahaan" 		: "empty",
+            "Provinsi"				: "empty",
+            "Kota/Kabupaten"			: "empty",
+            "Kecamatan"				: "empty",
+            "Kelurahan"				: "empty",
+            "KodePos"					: "empty", 
+        }
+        """
+      And The Vendor must click "Simpan" button to save information of "Profil Perusahaan"
+    Then The Vendor will get warning message tooltip on empty fields "Informasi Perusahaan"

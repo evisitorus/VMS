@@ -98,16 +98,19 @@ Given('The Vendor will get warning message tooltip on empty fields {string}', (f
             I.see('Cabang tidak boleh kosong');
             break;
         case "Informasi Perusahaan":
-            I.see('Jenis Badan Usaha tidak boleh kosong');
-            I.see('Status Badan Usaha tidak boleh kosong');
-            I.see('Tipe Badan Usaha tidak boleh kosong');
-            I.see('Jenis Kegiatan Usaha Utama tidak boleh kosong');
-            I.see('Jenis Penyedia Usaha tidak boleh kosong');
-            I.see('Nomor Induk Berusaha tidak boleh kosong');
-            I.see('Bidang Usaha tidak boleh kosong');
+            // I.see('Jenis Badan Usaha tidak boleh kosong');
+            // I.see('Status Badan Usaha tidak boleh kosong');
+            // I.see('Tipe Badan Usaha tidak boleh kosong');
+            // I.see('Jenis Kegiatan Usaha Utama tidak boleh kosong');
+            // I.see('Jenis Penyedia Usaha tidak boleh kosong');
+            // I.see('Nomor Induk Berusaha tidak boleh kosong');
+            // I.see('Bidang Usaha tidak boleh kosong');
             I.see('BUMN Pengampu tidak boleh kosong');
-            I.see('Website Perusahaan tidak boleh kosong');
-            I.see('Alamat Perusahaan tidak boleh kosong');
+            // I.see('Website Perusahaan tidak boleh kosong');
+            // I.see('Alamat Perusahaan tidak boleh kosong');
+            I.see('Jumlah Karyawan Total tidak boleh kosong');
+            I.see('Jumlah Karyawan Lokal tidak boleh kosong');
+            I.see('Jumlah Karyawan Asing tidak boleh kosong');
             break;
         default:
             I.waitForElement(form);
