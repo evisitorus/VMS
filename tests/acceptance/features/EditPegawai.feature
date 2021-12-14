@@ -14,7 +14,7 @@ So that I can modify my company information which has been recorded
         Given The Vendor still on "Informasi Perusahaan" form 
         And The Vendor wants to edit one of record from "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
         And The Vendor must clicks button "Edit" button from selected record on "Pegawai" form
-        And The Vendor will see pop-up form of "Edit Pegawai" which appear in front of "Informasi Perusahaan" form
+        # And The Vendor will see pop-up form of "Edit Pegawai" which appear in front of "Informasi Perusahaan" form
         And The Vendor will see information which state for every changes should be re-check by verificator
         """
         {
@@ -55,7 +55,7 @@ So that I can modify my company information which has been recorded
         Given The Vendor still on "Informasi Perusahaan" form 
         And The Vendor wants to edit one of record from "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
         And The Vendor must clicks button "Edit" button from selected record on "Pegawai" form
-        And The Vendor will see pop-up form of "Edit Pegawai" which appear in front of "Informasi Perusahaan" form
+        # And The Vendor will see pop-up form of "Edit Pegawai" which appear in front of "Informasi Perusahaan" form
         And The Vendor will see information which state for every changes should be re-check by verificator
         """
         {
@@ -78,7 +78,6 @@ So that I can modify my company information which has been recorded
             }
             """
             And The Vendor must click "Simpan" button to save information of "Pegawai" 
-            And The Vendor will see that pop-up form already closed when clicks "Simpan"
             Then The Vendor can not continue to add document information "Pegawai"
 
     #Edit Existing "Pegawai"
@@ -86,11 +85,11 @@ So that I can modify my company information which has been recorded
         Given The Vendor still on "Informasi Perusahaan" form 
         And The Vendor wants to edit one of record from "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
         And The Vendor must clicks button "Edit" button from selected record on "Pegawai" form
-        And The Vendor will see pop-up form of "Edit Pegawai" which appear in front of "Informasi Perusahaan" form
-        And The Vendor will see information which state for every changes should be re-check by verificator
+        # And The Vendor will see pop-up form of "Edit Pegawai" which appear in front of "Informasi Perusahaan" form
+        And The Vendor will see information which state for every changes should be re-check by verificator 
         """
         {
-            "message" : "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar."
+            "message" : "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar."
         }
         """
         And The Vendor can modify data which displayed on "Pegawai" form with invalid file extension

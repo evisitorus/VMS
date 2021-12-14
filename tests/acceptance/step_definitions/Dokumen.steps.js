@@ -64,6 +64,9 @@ Given('The Vendor will see {string} form', (form) => {
         case "Riwayat Pekerjaan":
             I.amOnPage('/profile-riwayat-pekerjaan');
             break;
+        case "Akun PIC":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
             I.amOnPage(form);
             break;

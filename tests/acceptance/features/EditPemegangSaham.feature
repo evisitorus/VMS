@@ -14,7 +14,7 @@ Background:
     Given The Vendor still on "Informasi Perusahaan" form 
        And The Vendor wants to edit one of record from "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
        And The Vendor must clicks button "Edit" button from selected record on "Pemegang Saham" form
-       And The Vendor will see pop-up form of "Edit Pemegang Saham" which appear in front of "Informasi Perusahaan" form
+      #  And The Vendor will see pop-up form of "Edit Pemegang Saham" which appear in front of "Informasi Perusahaan" form
        And The Vendor will see information which state for every changes should be re-check by verificator 
        """
        {

@@ -59,7 +59,7 @@ Given('The Vendor wants to delete one of record from {string} on {string} which 
             I.click('.ng-tns-c66-2.k-link');
             break;
         case "Pegawai":
-            I.click('Data Pegawai');
+            I.click('.ng-tns-c66-3.k-link');
             break;
         // case "Data Perusahaan":
         //     I.click('Data Perusahaan');
