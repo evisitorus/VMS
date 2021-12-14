@@ -32,20 +32,20 @@
         {{ dataItem.sdmBidang.name }}
       </ng-template>
     </kendo-grid-column>
-    <!-- <kendo-grid-column title="Resume">
+    <kendo-grid-column title="Resume">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.cvFilePath }}</a>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
       </ng-template>
-    </kendo-grid-column> -->
+    </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-dataItem>
         <span>
           <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
         </span>
         <span>
-          <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="delete(dataItem.id)">
+          <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
         </span>
-      </ng-template>>
+      </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
   <br>
@@ -129,8 +129,7 @@
                 </div>
               </ng-template>
             </kendo-dropdownlist>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang
-              Pekerjaan tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang Pekerjaan tidak boleh kosong</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -138,7 +137,14 @@
           <div class="row">
             <kendo-label class="col">Resume</kendo-label>
             <div class="col">
-              <kendo-fileselect id="resumeKaryawanUpload" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+              <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+                <kendo-fileselect-messages
+                dropFilesHere="Tidak ada file terpilih"
+                select="Pilih file"
+                invalidFileExtension="Ekstensi file harus berformat pdf, doc, docx"
+                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                >
+                </kendo-fileselect-messages>
               </kendo-fileselect>
               <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
             </div>
@@ -149,10 +155,11 @@
     </div>
 
     <kendo-dialog-actions>
-      <button kendoButton id="saveKaryawanFormBtn" (click)="save()" [primary]="true">Simpan</button>
+      <button kendoButton id="saveKaryawanFormBtn" (click)="submitProfilKaryawan()" [primary]="true">Simpan</button>
       <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
     </kendo-dialog-actions>
   </kendo-dialog>
 </div>
 
+<div kendoDialogContainer></div>
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

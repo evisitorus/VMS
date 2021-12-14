@@ -70,8 +70,21 @@ Given('The Vendor will see {string} form', (form) => {
     }
 });
 
-Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
-
+Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', (form1,form2,form3) => {
+    switch (form1) {
+        case "Pemegang Saham":
+            I.click('.ng-tns-c66-2.k-link');
+            break;
+        case "Pegawai":
+            I.click('.ng-tns-c66-3.k-link');
+            break;
+        case "Data Perusahaan":
+            I.click('.ng-tns-c66-1.k-link');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
 });
 
 Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', (button1, button2, button3) => {
@@ -103,6 +116,10 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
         case "Riwayat Pekerjaan":
             I.waitForElement('#addPekerjaan');
             I.click('#addPekerjaan');
+            break;
+        case "Pegawai":
+            I.waitForElement('#addPegawaiBtn');
+            I.click('#addPegawaiBtn');
             break;
         default:
             I.click(button3);
@@ -166,6 +183,19 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;
+        case "Pegawai":
+            I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
+            I.fillField('#firstName input[class=k-input]', 'James Bucky');
+            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CTO');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
         default:
             I.waitForElement(form2);
             break;
@@ -206,6 +236,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#btn-submit-alamat');
             I.click('#btn-submit-alamat');
             break;
+        case "Pegawai":
+            I.waitForElement('#saveKaryawanFormBtn');
+            I.click('#saveKaryawanFormBtn');
+            break;
         default:
             I.click(button2);
             break;
@@ -229,6 +263,12 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
             I.see('Perseorangan');
             I.see('Lokal');
             I.see('50');
+            break;
+        case "Pegawai":
+            I.see('James Bucky Barnes');
+            I.see('Tenaga Ahli');
+            I.see('CTO');
+            I.see('IT');
             break;
         default:
             I.waitForElement(list1);
@@ -275,12 +315,17 @@ Given('The Vendor can not continue to add document information', () => {
 Given('The Vendor can not continue to add document information {string}', (grid) => {
     switch (grid) {
         case "Riwayat Pekerjaan":
-            I.see('File tidak valid');
+            I.see('Periksa kembali file Anda');
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
         case "Dokumen":
             I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "Pegawai":
+            I.see('Periksa kembali file Anda');
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
