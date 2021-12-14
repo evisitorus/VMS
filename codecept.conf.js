@@ -39,6 +39,7 @@ exports.config = {
           './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
           './tests/acceptance/step_definitions/LandingPageTenderInformation.steps.js',
           './tests/acceptance/step_definitions/LandingPageTenderInformationDetails.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformationFilter.steps.js',
           './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
           './tests/acceptance/step_definitions/RiwayatPekerjaan.steps.js',
           './tests/acceptance/step_definitions/ForgotPassword.steps.js',
