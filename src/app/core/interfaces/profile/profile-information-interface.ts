@@ -24,4 +24,6 @@ export interface ProfileInformationInterface {
   kecamatan?: string;
   keluarahan?: string;
   kodePos?: string;
+
+  file?: string;
 }

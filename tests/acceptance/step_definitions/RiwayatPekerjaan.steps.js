@@ -8,17 +8,9 @@ Given('The Vendor wants manage {string} from the Company', () => {
 
 });
 
-Given('The Vendor wants to add information in regards to {string} on {string} which part of {string} form', () => {
+Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', () => {
 
 });
-
-// Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', () => {
-
-// });
-
-// Given('The Vendor must click {string} button to save information of {string}', () => {
-
-// });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
 

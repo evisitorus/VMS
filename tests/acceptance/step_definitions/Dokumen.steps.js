@@ -18,8 +18,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-dokumen');
             break;
         case "Profil Perusahaan":
-            I.waitForElement('#k-panelbar-1-item-sidebar-profile-information');
-            I.click('#k-panelbar-1-item-sidebar-profile-information');
+            I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
+            I.click('#k-panelbar-0-item-sidebar-profile-information');
             break;
         case "PIC":
             I.waitForElement('#k-panelbar-0-item-sidebar-pic');
@@ -63,6 +63,9 @@ Given('The Vendor will see {string} form', (form) => {
             break;
         case "Riwayat Pekerjaan":
             I.amOnPage('/profile-riwayat-pekerjaan');
+            break;
+        case "Informasi Perusahaan":
+            I.amOnPage('/profile-information');
             break;
         case "Akun PIC":
             I.amOnPage('/profile-person-in-charge');
@@ -207,6 +210,10 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
 
 Given('The Vendor must click {string} button to save information of {string}', (button1, button2) => {
     switch (button2) {
+        case "Profil Perusahaan":
+            I.waitForElement('#saveInformasiPerusahaanBtn');
+            I.click('#saveInformasiPerusahaanBtn');
+            break;
         case "Dokumen":
             I.waitForElement('#btn-simpan');
             I.click('#btn-simpan');

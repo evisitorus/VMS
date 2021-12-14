@@ -50,6 +50,7 @@ exports.config = {
           './tests/acceptance/step_definitions/ProfilAsset.steps.js',
           './tests/acceptance/step_definitions/ProfilKeuangan.steps.js',
           './tests/acceptance/step_definitions/ProfilAlamat.steps.js',
+          './tests/acceptance/step_definitions/ProfilPerusahaan.steps.js',
           './tests/acceptance/step_definitions/ProfilPegawai.steps.js',
           './tests/acceptance/step_definitions/ProfilPIC.steps.js',
         ]
