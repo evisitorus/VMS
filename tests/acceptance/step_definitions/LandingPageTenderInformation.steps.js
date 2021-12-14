@@ -2,10 +2,8 @@ const { I } = inject();
 
 Given('The User is on VMS Landing Page', () => {
     I.amOnPage('/');
-    I.see('Governance, Transaparansi dan Digital Procurement');
-    I.see('Efisiensi dan Sinergi Berkelanjutan');
-    I.see('Mendorong Pemberdayaan UMKM');
-    I.see('Optimalisasi TKDN');
+    I.see('Tender BUMN');
+    I.see('Portal Informasi Tender BUMN');
 });
 
 Given('The User accesses {string} section', () => {
@@ -34,5 +32,5 @@ Given('The User can move to another page by clicking "pagination button"  to nex
 });
 
 Given('The User can see list of Tender on {string}', () => {
-
+  I.seeElement('.k-listview-item');
 });
