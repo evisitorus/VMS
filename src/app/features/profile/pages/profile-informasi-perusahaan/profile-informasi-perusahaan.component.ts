@@ -520,8 +520,14 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   save() {
-    console.log(this.profileInformationFormGroup.value);
     this.profileInformationFormGroup.markAllAsTouched();
+    
+    let fileId;
+    if (this.uploadedFileId) {
+      fileId = this.uploadedFileId.split("/");
+      fileId = fileId[fileId.length - 1];
+    }
+
     if (this.profileInformationFormGroup.valid) {
       this.params = {
         name: this.profileInformationFormGroup.value.namaPerusahaan,
@@ -547,23 +553,22 @@ export class ProfileInformasiPerusahaanComponent {
         kota: this.profileInformationFormGroup.value.kota,
         kecamatan: this.profileInformationFormGroup.value.kecamatan,
         keluarahan: this.profileInformationFormGroup.value.kelurahan,
-        kodePos: this.profileInformationFormGroup.value.kodePos
+        kodePos: this.profileInformationFormGroup.value.kodePos,
+        file: fileId
       }
   
       this.profileInformationFormGroup.markAllAsTouched();
       let vendorID = this.authService.getLocalStorage('vendor_id')!;
   
       this.profileInfoService.updateProfileInformation(this.params, vendorID).subscribe(
-        (response) => {
+        () => {
           location.reload();
         },
-        (error) => {
+        () => {
           this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
           this.triggerPopUp();
         }
       )
-  
-      console.log(this.params);
     }
   }
 
