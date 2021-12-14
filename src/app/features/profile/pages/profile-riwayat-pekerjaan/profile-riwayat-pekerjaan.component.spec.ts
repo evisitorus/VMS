@@ -72,12 +72,6 @@ describe('ProfileRiwayatPekerjaanComponent', () => {
     expect(eventEmitterService.trigger).toHaveBeenCalled();
   });
 
-  it('test clearForm function', () => {
-    spyOn(component, 'close');
-    component.close();
-    expect(component.close).toHaveBeenCalled();
-  });
-
 
   it('test clearForm function', () => {
     spyOn(component, 'open');
@@ -85,17 +79,6 @@ describe('ProfileRiwayatPekerjaanComponent', () => {
     expect(component.open).toHaveBeenCalled();
   });
 
-  it('test clearForm function', () => {
-    spyOn(component, 'openSaham');
-    component.openSaham();
-    expect(component.openSaham).toHaveBeenCalled();
-  });
-
-  it('test clearForm function', () => {
-    spyOn(component, 'closeSaham');
-    component.closeSaham();
-    expect(component.closeSaham).toHaveBeenCalled();
-  });
 
   it('test add pekerjaan basic function', () => {
     spyOn(component.pekerjaanForm, 'markAllAsTouched');
