@@ -162,7 +162,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responsePhoneNumber = response.data.phone_number;
           this.responseEmail = response.data.email;
           this.redirectOnClosePopUp = false;
-          this.popUpMessage = 'Sukses memperbarui data PIC';
+          this.popUpTitle = "Perhatian";
+          this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
           this.triggerPopUp();
         },
         (error) => {
