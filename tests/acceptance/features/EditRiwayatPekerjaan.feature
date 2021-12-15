@@ -92,25 +92,3 @@ Feature: Vendor - Edit vendor information - Company Profile
         """
         And The Vendor must click "Simpan" button to save information of "Riwayat Pekerjaan" 
         Then The Vendor can not continue to add document information "Riwayat Pekerjaan"
-
-#  #edit Riwayat Pekerjaan
-#   Scenario: Upload Riwayat Document more than 2 MB
-#     Given The Vendor on edit "riwayat pekerjaan"
-#      When The Vendor wants to upload document from riwayat pekerjaan 
-#       And The Vendor must click "browse" on "Lampiran Bukti" field 
-#       And The Vendor puts the document into "Lampiran Bukti" field 
-#       """
-#       {
-      
-#         "namaPekerjaan"     : "Konstruksi Gedung Apartemen Untuk Anggota Avengers", 
-#         "pemberiPekerjaan"  : "PT. Wijaya Karya (WIKA)",
-#         "nilaiPekerjaan"    : "Rp. 1.000.000.000"
-#                                #prefiks Rp. muncul otomatis, diinputkan dengan karakter bertipe integer 
-#         "tahunPekerjaan"    : "2012"
-#                                #maksimal karakter 10 karakter numerik,jika melebihi maka objek terkunci
-#         "lampiranBukti"     :  "BuktiPekerjaan.pdf"
-#                                #lampiran dapat berupa JPG, PNG, PDF, maks 2MB
-#       }
-#       """
-#       And The Vendor upload document more than 2 MB
-#     Then The Vendor will get warning message tooltip on lampiran bukti "Maksimum ukuran file adalah 2 MB"

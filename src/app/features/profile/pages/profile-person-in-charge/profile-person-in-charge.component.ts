@@ -141,9 +141,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
       }
 
       this.profilePICService.updateUserFile(this.userFileParam, person_id).subscribe(
-        (response) => {
-          this.responseFile = response.data;
-        },
+        () => {},
         (error) => {
           this.popUpMessage = error.error.message;
           this.redirectOnClosePopUp = false;
@@ -219,6 +217,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
         this.responseFile = environment.api_base_path + res["@id"] + "/file";
+        console.log(this.responseFile);
+        
       },
       (err) => {
         this.popUpMessage = "Gagal memroses berkas, Silakan coba lagi.";

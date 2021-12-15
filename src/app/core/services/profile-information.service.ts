@@ -231,7 +231,8 @@ export class ProfileInformationService {
         kota: params.kota,
         kecamatan: params.kecamatan,
         kelurahan: params.keluarahan,
-        kodePos: params.kodePos
+        kodePos: params.kodePos,
+        file: params.file
       },
       options: {
         headers: {

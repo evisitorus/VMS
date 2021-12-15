@@ -18,8 +18,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-dokumen');
             break;
         case "Profil Perusahaan":
-            I.waitForElement('#k-panelbar-1-item-sidebar-profile-information');
-            I.click('#k-panelbar-1-item-sidebar-profile-information');
+            I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
+            I.click('#k-panelbar-0-item-sidebar-profile-information');
             break;
         case "PIC":
             I.waitForElement('#k-panelbar-0-item-sidebar-pic');
@@ -64,6 +64,12 @@ Given('The Vendor will see {string} form', (form) => {
         case "Riwayat Pekerjaan":
             I.amOnPage('/profile-riwayat-pekerjaan');
             break;
+        case "Informasi Perusahaan":
+            I.amOnPage('/profile-information');
+            break;
+        case "Akun PIC":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
             I.amOnPage(form);
             break;
@@ -80,6 +86,9 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
             break;
         case "Data Perusahaan":
             I.click('.ng-tns-c66-1.k-link');
+            break;
+        case "Riwayat Pekerjaan":
+            I.amOnPage('/profile-riwayat-pekerjaan');
             break;
         default:
             I.click(form1);
@@ -177,11 +186,13 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         case "Riwayat Pekerjaan":
-            I.fillField('#namaPekerjaan input[class=k-input]', 'Steven Rogers Barton');
-            I.fillField('#pemberiPekerjaan input[class=k-input]', 'Steven Rogers Barton');
-            I.fillField('#nilaiPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
-            I.fillField('#tahunPekerjaan input[class=k-numeric-wrap]', 'Steven Rogers Barton');
-            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
+            I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
+            I.click('#nilaiPekerjaan input[role=spinbutton]');
+            I.fillField('#nilaiPekerjaan input[role=spinbutton]', '1000000000');
+            I.click('#tahunPekerjaan input[role=spinbutton]');
+            I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;
         case "Pegawai":
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
@@ -204,6 +215,10 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
 
 Given('The Vendor must click {string} button to save information of {string}', (button1, button2) => {
     switch (button2) {
+        case "Profil Perusahaan":
+            I.waitForElement('#saveInformasiPerusahaanBtn');
+            I.click('#saveInformasiPerusahaanBtn');
+            break;
         case "Dokumen":
             I.waitForElement('#btn-simpan');
             I.click('#btn-simpan');

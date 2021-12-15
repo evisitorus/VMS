@@ -18,11 +18,18 @@ export class ProfilePICService {
   ) {
   }
 
+  token = this.authService.getLocalStorage('access_token')!;
+
   getProfilePIC(personID: string): Observable<any> {
     let person_id = this.authService.getLocalStorage('person_id')!;
     let api_profile_pic: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_profile_pic.concat("/").concat(person_id),
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
     }
 
     return this.apiService.sendRequest(api_profile_pic);
@@ -43,7 +50,8 @@ export class ProfilePICService {
       },
       options: {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: this.token
         }
       },
     }
@@ -61,7 +69,8 @@ export class ProfilePICService {
       },
       options: {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: this.token
         }
       },
     }

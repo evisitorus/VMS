@@ -65,14 +65,6 @@ describe('PemegangSahamComponent', () => {
     expect(eventEmitterService.trigger).toHaveBeenCalled();
   });
 
-
-  it('test clearForm function', () => {
-    spyOn(component, 'close');
-    component.close();
-    expect(component.close).toHaveBeenCalled();
-  });
-
-
   it('test clearForm function', () => {
     spyOn(component, 'open');
     component.open();

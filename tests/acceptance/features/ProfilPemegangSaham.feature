@@ -2,9 +2,12 @@
 #workflow
 Feature: Vendor Basic - Completed vendor information - Company Profile 
 
-   As a vendor basic 
-   I want to completed company information
-   So that I can upgrade my company level to vendor pro
+As a vendor basic 
+I want to completed company information
+So that I can upgrade my company level to vendor pro
+
+Background: 
+    Given The Vendor already login to VMS Portal
 
    Background: 
       Given The Vendor already login to VMS Portal
@@ -52,7 +55,6 @@ Feature: Vendor Basic - Completed vendor information - Company Profile
          When The Vendor already define information from "Informasi Perusahaan" 
          And The Vendor wants to add information in regards to "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
          And The Vendor must clicks button "Tambah" where found on the left-buttom of "Pemegang Saham Grid" to add records information in regards to "Pemegang Saham"
-         #  And The Vendor will see pop-up form of "Tambah Pemegang Saham" which appear in front of "Informasi Perusahaan" form
          And The Vendor not define anything on "Tambah Pemegang Saham" form or only define several fields which needed
          """
          {
