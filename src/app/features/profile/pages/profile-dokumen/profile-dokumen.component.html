@@ -32,6 +32,7 @@
         <kendo-formfield [formGroup]="form">
           <kendo-label text="Lampiran File" ></kendo-label>
           <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+          <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
           <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
           <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
         </kendo-formfield>
