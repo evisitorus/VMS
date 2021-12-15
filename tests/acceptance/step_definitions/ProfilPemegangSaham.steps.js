@@ -19,14 +19,9 @@ Given('The Vendor already define information from {string}', (form) => {
 });
 
 Given('The Vendor will see that pop-up form already closed when clicks {string}', () => {
-    // I.see('Berhasil menyimpan data');
     I.click('#btn-popup-yes');
     I.dontSeeElement('.k-window');
 });
-
-// Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
-
-// });
 
 Given('The Vendor can repeat process to add {string} by repeat process from line 21 to 46', () => {
 
