@@ -235,8 +235,6 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getOrganizations().subscribe(
           (resp) => {
             this.organizations = resp["hydra:member"];
-            this.selectedOrganization,this.selectedBumnPengampu = Array(this.organizations[0]);
-            console.log(this.selectedBumnPengampu)
           },
           (error) => {
             console.log(error);

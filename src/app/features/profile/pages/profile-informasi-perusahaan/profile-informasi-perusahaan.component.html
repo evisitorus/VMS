@@ -224,7 +224,7 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">BUMN Pengampu</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-multiselect id="bumnPengampu" class="col w-100" [data]="organizations" textField="name" placeholder="BUMN Pengampu" formControlName="bumnPengampu" [(ngModel)]="selectedBumnPengampu">
+                        <kendo-multiselect id="bumnPengampu" class="col w-100" [data]="organizations" textField="name" placeholder="BUMN Pengampu" formControlName="bumnPengampu" [(ngModel)]="dataPerusahaan.bumnPengampu">
                         </kendo-multiselect>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">BUMN Pengampu tidak
@@ -238,7 +238,7 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-multiselect id="organisasiHimpunan" class="col w-100" [data]="organizations" textField="name" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan" [(ngModel)]="selectedOrganization">
+                        <kendo-multiselect id="organisasiHimpunan" class="col w-100" [data]="organizations" textField="name" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan" [(ngModel)]="dataPerusahaan.organisasiHimpunan">
                       </kendo-multiselect>
                       </div>
                     </div>
