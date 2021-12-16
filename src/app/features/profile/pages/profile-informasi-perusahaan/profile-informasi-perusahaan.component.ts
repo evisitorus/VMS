@@ -116,6 +116,8 @@ export class ProfileInformasiPerusahaanComponent {
   public karyawan_asing!: number;
   public vendor_contact_mechanism: any;
 
+  public selectedOrganization: Array<any> = [];
+  public selectedBumnPengampu: Array<any> = [];
   public selectedBadanUsaha: Item = this.listItems[0];
   public selectedJenisKegiatan: Hydra = this.items[0];
   public selectedJenisPenyedia: Hydra = this.items[0];
@@ -233,6 +235,8 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getOrganizations().subscribe(
           (resp) => {
             this.organizations = resp["hydra:member"];
+            this.selectedOrganization,this.selectedBumnPengampu = Array(this.organizations[0]);
+            console.log(this.selectedBumnPengampu)
           },
           (error) => {
             console.log(error);

@@ -224,10 +224,8 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">BUMN Pengampu</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-autocomplete id="bumnPengampu" class="col w-100" [kendoDropDownFilter]="{ operator: 'contains' }"
-                                            [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu"
-                                            formControlName="bumnPengampu">
-                        </kendo-autocomplete>
+                        <kendo-multiselect id="bumnPengampu" class="col w-100" [data]="organizations" textField="name" placeholder="BUMN Pengampu" formControlName="bumnPengampu" [(ngModel)]="selectedBumnPengampu">
+                        </kendo-multiselect>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">BUMN Pengampu tidak
                           boleh
@@ -240,10 +238,8 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-autocomplete id="organisasiHimpunan" class="col w-100"
-                                          [kendoDropDownFilter]="{ operator: 'contains' }" [data]="organizations" valueField="name"
-                                          [filterable]="true" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan">
-                      </kendo-autocomplete>
+                        <kendo-multiselect id="organisasiHimpunan" class="col w-100" [data]="organizations" textField="name" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan" [(ngModel)]="selectedOrganization">
+                      </kendo-multiselect>
                       </div>
                     </div>
                   </kendo-formfield>
