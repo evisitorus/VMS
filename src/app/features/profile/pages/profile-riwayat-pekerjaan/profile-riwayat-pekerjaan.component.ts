@@ -51,6 +51,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public openedPekerjaan = false;
 
+  public loaderVisible = false;
+  public buttonText = "Submit";
+  public submitDisable = true;
+
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
     maxFileSize: 2097152
@@ -368,11 +372,4 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.openedPekerjaan = true;
   }
 
-  public loaderVisible = false;
-  public buttonText = "Submit";
-  public submitDisable = true;
-
-  public onButtonClick(): void {
-    this.loaderVisible = !this.loaderVisible;
-  }
 }
