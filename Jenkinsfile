@@ -33,10 +33,11 @@ pipeline {
                     sh 'mv docker/Dockerfile docker/nginx.conf .'
                     if (env.BRANCH_NAME == 'master') {
                         sh 'echo dunia'
-                        // sh 'vault kv get --format json smb/mysooltan/master/cluster | jq -r .data.data.cluster | base64 -di > $(pwd)/devops/k8s/config'
+                        // sh 'vault kv get --format json smb/mysooltan/master/cluster | jq -r .data.data.cluster | base64 -di > $(pwd)/docker/deploy/config'
                         // sh 'vault kv get --format json smb/mysooltan/master/fe | jq -r .data.data.env | base64 -di > .env'
                     } else if (env.BRANCH_NAME == 'develop') {
-                        sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'
+                        // sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'
+                        sh 'vault kv get --format json smb/mysooltan/develop/cluster-vms-develop | jq -r .data.data.cluster | base64 -di > $(pwd)/docker/deploy/config'
                     } else {
                         error "BRANCH TIDAK DIKETAHUI"
                     }
@@ -170,15 +171,18 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo "IMAGE_FE: $REGISTRY_NAME:$BRANCH_NAME-$TAG" > docker/deploy/external_vars.yaml'
+                // sh 'echo "IMAGE_FE: $REGISTRY_NAME:$BRANCH_NAME-$TAG" > docker/deploy/external_vars.yaml'
+                sh 'docker run --rm -i -v $(pwd)/docker/deploy:/generate/k8s -e NAME=$REPO_NAME -e IMAGE=$REGISTRY_NAME:$BRANCH_NAME-$TAG baskaraerbasakti/generate generate_deployment.py'
                 sh 'ls -lha ./docker/deploy'                
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         sh 'echo dunia'
                         // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
-                        // sh 'docker run --rm -i -v $(pwd)/devops/k8s:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply --namespace=app -f /root/.kube/deployment.yaml'
+                        // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply --namespace=app -f /root/.kube/deployment.yaml'
                     } else if (env.BRANCH_NAME == 'develop') {
-                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
+                        // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
+                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/secret.yaml'
+                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
                     }
                 }
                 sh 'sudo rm -rf docker'
