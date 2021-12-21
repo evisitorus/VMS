@@ -51,6 +51,11 @@ pipeline {
                 script { 
                     sh 'echo $BRANCH_NAME'
                     sh "rm -Rf hasil hasil_test" 
+                    try {
+                        sh 'sudo rm -rf $(pwd)/docker/deploy/cache'
+                    } catch (err) {
+                        echo err.getMessage()
+                    }
                 }
             }
         }
