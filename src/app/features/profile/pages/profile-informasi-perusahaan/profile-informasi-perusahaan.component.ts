@@ -148,6 +148,9 @@ export class ProfileInformasiPerusahaanComponent {
 
   public dataPerusahaan: any = {};
 
+  public orgHimpunan: any;
+  public orgPengampu:any;
+
   public getDataPerusahaan(): void{
     this.profileDashboardService.getVendor().subscribe(
       (resp) => {
@@ -277,9 +280,29 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
+        //get himpunan
+        this.profileInfoService.getPartyRole("Himpunan").subscribe(
+          (resp) => {
+            this.orgHimpunan = resp["hydra:member"];       
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get pengampu
+        this.profileInfoService.getPartyRole("Pengampu").subscribe(
+          (resp) => {
+            this.orgPengampu = resp["hydra:member"];    
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
       },
       (error) => {
-        console.log(console.log(error));
+        console.log(error);
       }
     );
 
