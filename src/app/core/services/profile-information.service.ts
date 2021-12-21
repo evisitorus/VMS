@@ -260,5 +260,21 @@ export class ProfileInformationService {
     }
     return this.apiService.sendRequest(api_get_contact_mechanism);
   }
+
+  getPartyRole(role: string): Observable<any>{
+    let api_get_party_role: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_party_role_route,
+      options : {
+        headers: {
+          Authorization: this.token
+        },
+        params: {
+          "roleType.name" : role
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_party_role);
+  }
   
 }
