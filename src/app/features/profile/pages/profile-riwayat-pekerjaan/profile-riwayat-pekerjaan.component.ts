@@ -168,6 +168,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       }
     } else {
       if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
+        console.log(this.lampiranFiles);
+        console.log(this.uploadedFileContentUrl);
         this.popUpMessage = "Periksa kembali file Anda";
         this.triggerPopUp();
       } else {
@@ -225,10 +227,16 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
 
   public upload(): void {
+    this.loaderVisible = true;
+    this.submitDisable = true;
+    this.buttonText = "Uploading file ..";
     this.fileService.upload(this.lampiranFiles[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
+        this.loaderVisible = false;
+        this.buttonText = "Submit";
+        this.submitDisable = false;
       },
       (err) => {
         this.popUpMessage = err.error.message;
@@ -248,6 +256,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.data.lampiran = data.file;
     
     this.isNewData = false;
+
+    console.log(this.data);
 
     this.popUpTitle = "Perhatian";
     this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
@@ -358,4 +368,11 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.openedPekerjaan = true;
   }
 
+  public loaderVisible = false;
+  public buttonText = "Submit";
+  public submitDisable = true;
+
+  public onButtonClick(): void {
+    this.loaderVisible = !this.loaderVisible;
+  }
 }

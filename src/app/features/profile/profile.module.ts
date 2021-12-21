@@ -35,6 +35,7 @@ import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/profil-karyawan/profil-karyawan.component';
 import { DataPegawaiComponent } from './pages/profile-informasi-perusahaan/data-pegawai/data-pegawai.component';
+import { IndicatorsModule } from "@progress/kendo-angular-indicators";
 
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
@@ -92,6 +93,7 @@ import { DataPegawaiComponent } from './pages/profile-informasi-perusahaan/data-
     UploadsModule,
     IntlModule,
     WindowModule,
+    IndicatorsModule
     // RouterModule.forRoot(drawerRoutes)
   ],
   // providers: [
