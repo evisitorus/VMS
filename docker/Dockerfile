@@ -9,6 +9,7 @@ RUN apt update && apt -y install google-chrome-stable
 # RUN apt install -y ./google-chrome*.deb;
 LABEL stage="builder"
 WORKDIR /app
+ENV KENDO_UI_LICENSE=$KENDO_UI_LICENSE
 RUN npm install --save @progress/kendo-licensing
 COPY package*.json ./
 RUN npm install
