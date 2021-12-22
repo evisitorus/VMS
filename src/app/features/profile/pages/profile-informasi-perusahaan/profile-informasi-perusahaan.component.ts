@@ -579,7 +579,7 @@ export class ProfileInformasiPerusahaanComponent {
         tipeBadanUsaha: this.profileInformationFormGroup.value.tipeBadanUsaha,
         kategoriBadanUsaha:this.profileInformationFormGroup.value.kategoriBadanUsaha,
         jenisKegiatanUsaha:this.profileInformationFormGroup.value.jenisKegiatanUsahaUtama,
-        jenisPenyediaUsaha:this.profileInformationFormGroup.value.jenisPenyediaUsaha.id,
+        jenisPenyediaUsaha:this.profileInformationFormGroup.value.jenisPenyediaUsaha,
         npwp: this.profileInformationFormGroup.value.npwpPerusahaan,
         nib:this.profileInformationFormGroup.value.nomorIndukBerusaha,
         bidangUsaha:this.profileInformationFormGroup.value.bidangUsaha,
