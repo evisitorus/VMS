@@ -1,3 +1,5 @@
+ARG KENDO_UI_LICENSE
+
 FROM mcr.microsoft.com/playwright:focal as build-stage
 RUN apt update && apt install -y wget
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
