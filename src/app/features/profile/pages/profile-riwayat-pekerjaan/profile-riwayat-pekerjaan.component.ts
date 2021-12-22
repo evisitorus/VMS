@@ -239,15 +239,17 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
 
   public upload(): void {
-    this.loaderVisible = true;
-    this.submitDisable = true;
-    this.buttonText = "Uploading file ..";
+    if(!this.invalidFileExtension && !this.invalidMaxFileSize){
+      this.buttonText = "Uploading file ..";
+      this.loaderVisible = true;
+      this.submitDisable = true;
+    }
     this.fileService.upload(this.lampiranFiles[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
-        this.loaderVisible = false;
         this.buttonText = "Submit";
+        this.loaderVisible = false;
         this.submitDisable = false;
       },
       (err) => {
