@@ -27,7 +27,7 @@ spec:
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: regcred
+      - name: ecrcred 
 ---
 apiVersion: v1
 kind: Service

@@ -178,6 +178,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.popUpTitle = 'Informasi';
           this.popUpMessage = 'Berhasil memperbarui data';
           this.triggerPopUp();
+          this.setForm();
         },
         (error) => {
           this.changePasswordTextboxEnabled = false;

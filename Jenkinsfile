@@ -51,6 +51,11 @@ pipeline {
                 script { 
                     sh 'echo $BRANCH_NAME'
                     sh "rm -Rf hasil hasil_test" 
+                    try {
+                        sh 'sudo rm -rf $(pwd)/docker/deploy/cache'
+                    } catch (err) {
+                        echo err.getMessage()
+                    }
                 }
             }
         }
@@ -172,6 +177,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // sh 'echo "IMAGE_FE: $REGISTRY_NAME:$BRANCH_NAME-$TAG" > docker/deploy/external_vars.yaml'
+                sh 'docker run --rm -i -v $(pwd)/docker/deploy:/generate/k8s -e PASS=$(docker run --rm -i -v $(pwd)/docker/.aws:/root/.aws amazon/aws-cli ecr get-login-password) baskaraerbasakti/generate generate_secret.py'
                 sh 'docker run --rm -i -v $(pwd)/docker/deploy:/generate/k8s -e NAME=$REPO_NAME -e IMAGE=$REGISTRY_NAME:$BRANCH_NAME-$TAG baskaraerbasakti/generate generate_deployment.py'
                 sh 'ls -lha ./docker/deploy'                
                 script {
