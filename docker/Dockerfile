@@ -1,5 +1,3 @@
-ARG KENDO_UI_LICENSE
-
 FROM mcr.microsoft.com/playwright:focal as build-stage
 RUN apt update && apt install -y wget
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -9,12 +7,11 @@ RUN apt update && apt -y install google-chrome-stable
 # RUN apt install -y ./google-chrome*.deb;
 LABEL stage="builder"
 WORKDIR /app
-ENV KENDO_UI_LICENSE=$KENDO_UI_LICENSE
 RUN npm install --save @progress/kendo-licensing
 COPY package*.json ./
 RUN npm install
-RUN npx kendo-ui-license activate
 COPY . .
+RUN npx kendo-ui-license activate && rm kendo-ui-license.txt
 RUN npm run build
 
 

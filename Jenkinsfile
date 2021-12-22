@@ -38,8 +38,7 @@ pipeline {
                     } else if (env.BRANCH_NAME == 'develop') {
                         // sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'
                         sh 'vault kv get --format json smb/mysooltan/develop/cluster-vms-develop | jq -r .data.data.cluster | base64 -di > $(pwd)/docker/deploy/config'
-                        env.KENDOLICENSE=sh(returnStdout: true, script:'vault kv get --format json smb/mysooltan/develop/license-kendo-ui | jq -r .data.data.license')
-                        sh 'echo $KENDOLICENSE'
+                        sh 'vault kv get --format json smb/mysooltan/develop/license-kendo-ui | jq -r .data.data.license > $(pwd)/kendo-ui-license.txt'                        
                     } else {
                         error "BRANCH TIDAK DIKETAHUI"
                     }
@@ -66,7 +65,7 @@ pipeline {
                 stage('Build Frontend') {
                     steps {
                         script {
-                            sh 'docker build --build-arg KENDO_UI_LICENSE=$KENDOLICENSE --target build-prod -t $REGISTRY_NAME:$BRANCH_NAME-$TAG .'
+                            sh 'docker build --target build-prod -t $REGISTRY_NAME:$BRANCH_NAME-$TAG .'
                             sh 'docker images'
                         }                        
                     }
