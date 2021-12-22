@@ -38,6 +38,7 @@ pipeline {
                     } else if (env.BRANCH_NAME == 'develop') {
                         // sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'
                         sh 'vault kv get --format json smb/mysooltan/develop/cluster-vms-develop | jq -r .data.data.cluster | base64 -di > $(pwd)/docker/deploy/config'
+                        sh 'vault kv get --format json smb/mysooltan/develop/license-kendo-ui | jq -r .data.data.license > $(pwd)/kendo-ui-license.txt'                        
                     } else {
                         error "BRANCH TIDAK DIKETAHUI"
                     }
