@@ -280,7 +280,7 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
-        //get himpunan
+        //get all himpunan
         this.profileInfoService.getPartyRole("Himpunan").subscribe(
           (resp) => {
             this.orgHimpunan = resp["hydra:member"];       
@@ -290,8 +290,28 @@ export class ProfileInformasiPerusahaanComponent {
           }
         );
 
-        //get pengampu
+        //get all pengampu
         this.profileInfoService.getPartyRole("Pengampu").subscribe(
+          (resp) => {
+            this.orgPengampu = resp["hydra:member"];    
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get vendor's himpunan
+        this.profileInfoService.getVendorsOrganization("Himpunan").subscribe(
+          (resp) => {
+            this.orgHimpunan = resp["hydra:member"];       
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get vendor's pengampu
+        this.profileInfoService.getVendorsOrganization("Pengampu").subscribe(
           (resp) => {
             this.orgPengampu = resp["hydra:member"];    
           },
