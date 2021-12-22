@@ -453,7 +453,6 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
-    console.log(data.bumnPengampu)
     this.karyawan_lokal = data.jumlahKaryawanDomestik;
     this.karyawan_asing = data.jumlahKaryawanAsing;
   }
