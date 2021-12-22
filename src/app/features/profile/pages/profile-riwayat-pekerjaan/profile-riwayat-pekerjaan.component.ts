@@ -227,9 +227,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     } else {
       this.invalidFileExtension = false;
     }
-    this.buttonText = "Submit";
-    this.loaderVisible = false;
-    this.submitDisable = false;
   }
 
 
