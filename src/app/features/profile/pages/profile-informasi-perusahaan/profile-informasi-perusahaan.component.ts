@@ -194,8 +194,6 @@ export class ProfileInformasiPerusahaanComponent {
         }
         this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
         this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
-        this.dataPerusahaan.bumnPengampu = resp.bumnPengampu ? resp.bumnPengampu : "";
-        this.dataPerusahaan.organisasiHimpunan = resp.organisasiHimpunan ? resp.organisasiHimpunan : "";
         this.dataPerusahaan.web = resp.website ? resp.website : "";
         this.dataPerusahaan.bidangUsaha = resp.bidangUsaha ? resp.bidangUsaha : "";
         this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : 0;
@@ -302,8 +300,8 @@ export class ProfileInformasiPerusahaanComponent {
 
         //get vendor's himpunan
         this.profileInfoService.getVendorsOrganization("Himpunan").subscribe(
-          (resp) => {
-            this.orgHimpunan = resp["hydra:member"];       
+          (resp) => {            
+            this.dataPerusahaan.organisasiHimpunan = resp.data ? resp.data : "";   
           },
           (error) => {
             console.log(error);
@@ -313,7 +311,7 @@ export class ProfileInformasiPerusahaanComponent {
         //get vendor's pengampu
         this.profileInfoService.getVendorsOrganization("Pengampu").subscribe(
           (resp) => {
-            this.orgPengampu = resp["hydra:member"];    
+            this.dataPerusahaan.bumnPengampu = resp.data ? resp.data : "";
           },
           (error) => {
             console.log(error);
@@ -455,7 +453,7 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
-
+    console.log(data.bumnPengampu)
     this.karyawan_lokal = data.jumlahKaryawanDomestik;
     this.karyawan_asing = data.jumlahKaryawanAsing;
   }
