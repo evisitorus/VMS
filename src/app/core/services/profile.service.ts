@@ -68,6 +68,11 @@ export class ProfileService {
     let api_update_pengalaman_kerja: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_post_pengalaman_kerja  + "/" + params.id,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      },
       body: {
         namaPekerjaan: params.namaPekerjaan,
         pemberiPekerjaan: params.pemberiPekerjaan,
