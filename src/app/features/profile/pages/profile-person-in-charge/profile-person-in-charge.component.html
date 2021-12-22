@@ -154,6 +154,7 @@
               <kendo-formfield [formGroup]="formPIC">
                 <kendo-textbox id="input-old-password" class="col-md" formControlName="oldPassword"
                                placeholder="Kata sandi lama Anda"
+                               autocomplete="off"
                                [clearButton]="true"
                                #oldPassword
                                [minlength]="8"
@@ -184,6 +185,7 @@
               <kendo-formfield [formGroup]="formPIC">
                 <kendo-textbox id="input-new-password" class="col-md" formControlName="newPassword"
                                placeholder="Kata sandi baru Anda"
+                               autocomplete="off"
                                [clearButton]="true"
                                #newPassword
                                [minlength]="8"
@@ -214,6 +216,7 @@
               <kendo-formfield [formGroup]="formPIC">
                 <kendo-textbox id="input-confirm-new-password" class="col-md" formControlName="confirmNewPassword"
                                placeholder="Konfirmasi kata sandi baru Anda"
+                               autocomplete="off"
                                [clearButton]="true"
                                #confirmNewPassword
                                [minlength]="8"
