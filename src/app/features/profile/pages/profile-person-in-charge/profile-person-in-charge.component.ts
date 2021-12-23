@@ -37,6 +37,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   popUpTitle: string = "Informasi";
   popUpMessage: string = "";
   redirectOnClosePopUp: boolean = false;
+  popUpID = "";
 
   public formPIC!: FormGroup;
 
@@ -106,6 +107,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   public open() {
     if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
       this.popUpMessage = "Periksa kembali file Anda";
+      this.popUpID = "popup-check-your-file-again"
       this.triggerPopUp();
     } else if (this.formPIC.invalid) {
       this.opened = false;
@@ -120,6 +122,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   attention() {
     this.redirectOnClosePopUp = false;
+    this.popUpID = "popup-attention";
     this.popUpTitle = "Perhatian";
     this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
     this.triggerPopUp();
@@ -160,6 +163,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
         (error) => {
           this.popUpMessage = error.error.message;
           this.redirectOnClosePopUp = false;
+          this.popUpID ="popup-failed-save-upload-file-to-database";
           this.triggerPopUp();
         }
       );
@@ -177,6 +181,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.redirectOnClosePopUp = false;
           this.popUpTitle = 'Informasi';
           this.popUpMessage = 'Berhasil memperbarui data';
+          this.popUpID = "popup-update-pic-success";
           this.triggerPopUp();
           this.setForm();
         },
@@ -184,6 +189,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.changePasswordTextboxEnabled = false;
           this.redirectOnClosePopUp = false;
           this.popUpMessage = error.error.message;
+          this.popUpID = "popup-update-pic-failed";
           this.triggerPopUp();
           this.setForm();
         }
@@ -194,6 +200,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
       this.redirectOnClosePopUp = false;
       this.popUpTitle = 'Informasi';
       this.popUpMessage = 'Mohon lengkapi data PIC'
+      this.popUpID = "popup-please-complete-your-data";
       this.triggerPopUp();
     }
   }
@@ -220,6 +227,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.redirectOnClosePopUp = false;
         this.popUpTitle = 'Informasi';
         this.popUpMessage = 'Gagal menampilkan data PIC';
+        this.popUpID = "popup-pic-data-failed-to-load";
         this.triggerPopUp();
       }
     )
@@ -239,6 +247,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
       (err) => {
         this.popUpMessage = "Gagal memroses berkas, Silakan coba lagi.";
         this.redirectOnClosePopUp = false;
+        this.popUpID = "popup-failed-to-upload";
         this.triggerPopUp();
       }
     );
