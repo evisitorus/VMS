@@ -58,7 +58,8 @@ export const ApiRoutes = {
   //api_get_companyAddress:  API_BASE_URL + "/vendors/alamat_perusahaan",
   api_base_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
   api_delete_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
-  api_get_party_role_route: API_BASE_URL + "/party_roles"
+  api_get_party_role_route: API_BASE_URL + "/party_roles",
+  api_get_kbli: API_BASE_URL + "/bidang_usahas"
 };
 
 export const ApiRouteMethods = {
