@@ -212,7 +212,7 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Bidang Usaha (KBLI 2020)</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-multiselect id="bidangUsaha" class="col w-100" [data]="orgPengampu" valueField="@id" textField="party.name" placeholder="BUMN Pengampu" formControlName="bidangUsaha" [valuePrimitive]="false">
+                        <kendo-multiselect id="bidangUsaha" class="col w-100" [data]="bidangUsahaKbli" valueField="id" textField="title" placeholder="Bidang Usaha (KBLI 2020)" formControlName="bidangUsaha" [valuePrimitive]="false">
                         </kendo-multiselect>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.bidangUsaha.errors?.required">Bidang Usaha tidak boleh
