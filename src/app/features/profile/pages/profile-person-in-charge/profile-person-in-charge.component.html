@@ -162,7 +162,7 @@
                                (keypress)="enablePasswordTextbox()"
                                (keydown.space)="$event.preventDefault()">
                   <ng-template kendoTextBoxSuffixTemplate>
-                    <button kendoButton id="button-eye-old-password" look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
+                    <button kendoButton id="btn-eye-old-password" look="clear" icon="eye" (click)="toggleVisibility('oldPassword')"></button>
                   </ng-template>
                 </kendo-textbox>
                 <kendo-formerror id="error-old-password-less-than-8-characters" *ngIf="formPIC.controls.oldPassword.errors?.minlength">Kata Sandi Lama tidak boleh
@@ -193,7 +193,7 @@
                                [disabled]="passwordTextbox"
                                (keydown.space)="$event.preventDefault()">
                   <ng-template kendoTextBoxSuffixTemplate>
-                    <button id="button-eye-new-password" kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
+                    <button id="btn-eye-new-password" kendoButton look="clear" icon="eye" (click)="toggleVisibility('newPassword')"></button>
                   </ng-template>
                 </kendo-textbox>
                 <kendo-formerror id="error-new-password-less-than-8-characters" *ngIf="formPIC.controls.newPassword.errors?.minlength">Kata Sandi Baru tidak boleh
@@ -224,7 +224,7 @@
                                [disabled]="passwordTextbox"
                                (keydown.space)="$event.preventDefault()">
                   <ng-template kendoTextBoxSuffixTemplate>
-                    <button id="button-eye-confirm-new-password" kendoButton look="clear" icon="eye"
+                    <button id="btn-eye-confirm-new-password" kendoButton look="clear" icon="eye"
                             (click)="toggleVisibility('confirmNewPassword')"></button>
                   </ng-template>
                 </kendo-textbox>
@@ -246,17 +246,17 @@
 
           <ng-template #showUpdateButton>
             <div class="k-form-buttons k-float-right">
-              <button id="button-perbarui" class="k-button k-primary vms-btn" (click)="perbaruiClicked()" *ngIf="isDisabled">Perbarui
+              <button id="btn-perbarui" class="k-button k-primary vms-btn" (click)="perbaruiClicked()" *ngIf="isDisabled">Perbarui
               </button>
             </div>
           </ng-template>
           <ng-template #showSaveButton>
             <div class="k-form-buttons k-float-right">
-              <button id="button-simpan" class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan</button>
+              <button id="btn-simpan" class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan</button>
             </div>
           </ng-template>
 
-          <kendo-dialog id="dialog-confirm-save"
+          <kendo-dialog id="popup-confirm-save"
             title="Konfirmasi"
             *ngIf="opened"
             (close)="close('cancel')"
@@ -265,9 +265,9 @@
             <p style="margin: 30px; text-align: center;">
               Simpan perubahan data PIC Perusahaan?
             </p>
-            <kendo-dialog-actions id="dialog-action-confirm-save">
-              <button kendoButton id="dialog-action-confirm-save-button-no" (click)="close('no')">Tidak</button>
-              <button kendoButton id="dialog-action-confirm-save-button-yes" (click)="save(); close('yes')" [primary]="true">Ya</button>
+            <kendo-dialog-actions id="popup-action-confirm-save">
+              <button kendoButton id="btn-popup-no" (click)="close('no')">Tidak</button>
+              <button kendoButton id="btn-popup-yes" (click)="save(); close('yes')" [primary]="true">Ya</button>
             </kendo-dialog-actions>
           </kendo-dialog>
 
