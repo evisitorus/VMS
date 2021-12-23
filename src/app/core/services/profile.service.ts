@@ -4,8 +4,7 @@ import { ApiInterface } from '../interfaces/api-interface';
 import { AddPekerjaanInterface, UpdateRiwayatPekerjaanInterface } from '../interfaces/add-pekerjaan-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
-import { AddPemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
-import { UpdatePemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
+import { AddPemegangSahamInterface, UpdatePemegangSahamInterface } from '../interfaces/add-pemegang-saham-interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -91,6 +90,11 @@ export class ProfileService {
     let api_delete_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_delete_pekerjaan + "/" + id,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      },
       body: {
         active: false
       }
@@ -142,6 +146,11 @@ export class ProfileService {
     let api_update_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_base_pemegang_saham + "/" + params.id + "/update" ,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      },
       body: {
         vendor: this.vendor_id,
         namaPemegangSaham: params.namaPemegangSaham,
@@ -158,6 +167,11 @@ export class ProfileService {
     let api_delete_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_delete_pemegang_saham + "/" + id,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      },
       body: {
         active: false
       }

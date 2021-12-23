@@ -119,7 +119,15 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public download(fileId: string, filename: string) {
-    this.fileService.download(fileId).subscribe(
+    let ids;
+    let longId = fileId.split("/");
+    if (longId.length > 0) {
+      ids = longId[longId.length - 1];
+    } else {
+      ids = fileId;
+    }
+
+    this.fileService.download(ids).subscribe(
       (res) => {
         let mime = this.fileService.getMimeType(filename);
         let blob = new Blob([res], { type: mime });

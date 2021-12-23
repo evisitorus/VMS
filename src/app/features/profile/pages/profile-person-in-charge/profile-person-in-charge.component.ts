@@ -104,11 +104,25 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   public open() {
-    this.opened = true;
+    if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
+      this.popUpMessage = "Periksa kembali file Anda";
+      this.triggerPopUp();
+    } else if (this.formPIC.invalid) {
+      this.opened = false;
+    } else if (this.formPIC.valid) {
+      this.opened = true;
+    }
   }
 
   changeIsDisabled() {
     this.isDisabled = !this.isDisabled;
+  }
+
+  attention() {
+    this.redirectOnClosePopUp = false;
+    this.popUpTitle = "Perhatian";
+    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.triggerPopUp();
   }
 
   save() {
@@ -141,8 +155,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
       }
 
       this.profilePICService.updateUserFile(this.userFileParam, person_id).subscribe(
-        (response) => {
-          this.responseFile = response.data;
+        () => {
         },
         (error) => {
           this.popUpMessage = error.error.message;
@@ -162,8 +175,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responsePhoneNumber = response.data.phone_number;
           this.responseEmail = response.data.email;
           this.redirectOnClosePopUp = false;
-          this.popUpMessage = 'Sukses memperbarui data PIC';
+          this.popUpTitle = 'Informasi';
+          this.popUpMessage = 'Berhasil memperbarui data';
           this.triggerPopUp();
+          this.setForm();
         },
         (error) => {
           this.changePasswordTextboxEnabled = false;
@@ -177,10 +192,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
     } else {
       this.changePasswordTextboxEnabled = false;
       this.redirectOnClosePopUp = false;
+      this.popUpTitle = 'Informasi';
       this.popUpMessage = 'Mohon lengkapi data PIC'
-      this.oldPasswordTextbox.clearValue();
-      this.newPasswordTextbox.clearValue();
-      this.confirmNewPasswordTextbox.clearValue();
       this.triggerPopUp();
     }
   }
@@ -204,6 +217,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.setForm();
       },
       (error) => {
+        this.redirectOnClosePopUp = false;
+        this.popUpTitle = 'Informasi';
+        this.popUpMessage = 'Gagal menampilkan data PIC';
+        this.triggerPopUp();
       }
     )
   }
@@ -270,5 +287,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   changeHidePasswordChangeLinkStatus() {
     this.hidePasswordChangeLink = !this.hidePasswordChangeLink;
+  }
+
+  perbaruiClicked() {
+    this.attention();
+    this.changeIsDisabled();
   }
 }
