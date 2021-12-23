@@ -148,6 +148,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public dataPerusahaan: any = {};
 
+  public bidangUsahaKbli: any;
   public orgHimpunan: any;
   public orgPengampu:any;
 
@@ -246,6 +247,16 @@ export class ProfileInformasiPerusahaanComponent {
         this.profileInfoService.getJenisVendor().subscribe(
           (resp) => {
             this.jenisBadanUsahaItems = resp["hydra:member"];
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        //get kbli bidang usaha
+        this.profileInfoService.getBidangUsaha().subscribe(
+          (resp) => { 
+            this.bidangUsahaKbli = resp["hydra:member"];
           },
           (error) => {
             console.log(error);
