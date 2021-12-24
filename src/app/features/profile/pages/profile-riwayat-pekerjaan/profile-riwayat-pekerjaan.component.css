@@ -29,3 +29,8 @@
 .button-right {
   float: right;
 }
+
+
+.k-button .k-loader {
+  margin-right: 8px;
+}
