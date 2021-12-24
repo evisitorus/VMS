@@ -451,10 +451,12 @@
           </kendo-panelbar>
         </kendo-card-body>
         <kendo-card-actions style="justify-content:right;">
-          <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit" (click)="save()">Simpan</button>
+          <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit" (click)="submitFormVendor()">Simpan</button>
         </kendo-card-actions>
       </kendo-card>
     </div>
   </div>
+  <div kendoDialogContainer></div>
+  <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
 
 </div>
