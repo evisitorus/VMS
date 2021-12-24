@@ -212,11 +212,10 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Bidang Usaha (KBLI 2020)</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-textbox id="bidangUsaha" class="col-md w-100" placeholder="Type your message here"
-                                       [clearButton]="true" [maxlength]="10" formControlName="bidangUsaha"></kendo-textbox>
+                        <kendo-multiselect id="bidangUsaha" class="col w-100" [data]="bidangUsahaKbli" valueField="id" textField="title" placeholder="Bidang Usaha (KBLI 2020)" formControlName="bidangUsaha" [valuePrimitive]="false">
+                        </kendo-multiselect>
                         <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.bidangUsaha.errors?.required">Bidang Usaha tidak boleh
-                          kosong</kendo-formerror>
+                                         *ngIf="profileInformationFormGroup.controls.bidangUsaha.errors?.required">Pilih salah satu bidang usaha</kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
@@ -224,14 +223,10 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">BUMN Pengampu</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-autocomplete id="bumnPengampu" class="col w-100" [kendoDropDownFilter]="{ operator: 'contains' }"
-                                            [data]="organizations" valueField="name" [filterable]="true" placeholder="BUMN Pengampu"
-                                            formControlName="bumnPengampu">
-                        </kendo-autocomplete>
+                        <kendo-multiselect id="bumnPengampu" class="col w-100" [data]="orgPengampu" valueField="@id" textField="party.name" placeholder="BUMN Pengampu" formControlName="bumnPengampu" [valuePrimitive]="false">
+                        </kendo-multiselect>
                         <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">BUMN Pengampu tidak
-                          boleh
-                          kosong</kendo-formerror>
+                                         *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">Pilih salah satu BUMN Pengampu</kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
@@ -240,10 +235,8 @@
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Organisasi Himpunan</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-autocomplete id="organisasiHimpunan" class="col w-100"
-                                          [kendoDropDownFilter]="{ operator: 'contains' }" [data]="organizations" valueField="name"
-                                          [filterable]="true" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan">
-                      </kendo-autocomplete>
+                        <kendo-multiselect id="organisasiHimpunan" class="col w-100" [data]="orgHimpunan" valueField="@id" textField="party.name" placeholder="Organisasi Himpunan" formControlName="organisasiHimpunan" [valuePrimitive]="false">
+                      </kendo-multiselect>
                       </div>
                     </div>
                   </kendo-formfield>
@@ -458,10 +451,12 @@
           </kendo-panelbar>
         </kendo-card-body>
         <kendo-card-actions style="justify-content:right;">
-          <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit" (click)="save()">Simpan</button>
+          <button kendoButton id="saveInformasiPerusahaanBtn" class="k-button k-primary" type="submit" (click)="submitFormVendor()">Simpan</button>
         </kendo-card-actions>
       </kendo-card>
     </div>
   </div>
+  <div kendoDialogContainer></div>
+  <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
 
 </div>
