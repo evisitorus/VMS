@@ -215,8 +215,7 @@
                         <kendo-multiselect id="bidangUsaha" class="col w-100" [data]="bidangUsahaKbli" valueField="id" textField="title" placeholder="Bidang Usaha (KBLI 2020)" formControlName="bidangUsaha" [valuePrimitive]="false">
                         </kendo-multiselect>
                         <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.bidangUsaha.errors?.required">Bidang Usaha tidak boleh
-                          kosong</kendo-formerror>
+                                         *ngIf="profileInformationFormGroup.controls.bidangUsaha.errors?.required">Pilih salah satu bidang usaha</kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
@@ -227,9 +226,7 @@
                         <kendo-multiselect id="bumnPengampu" class="col w-100" [data]="orgPengampu" valueField="@id" textField="party.name" placeholder="BUMN Pengampu" formControlName="bumnPengampu" [valuePrimitive]="false">
                         </kendo-multiselect>
                         <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">BUMN Pengampu tidak
-                          boleh
-                          kosong</kendo-formerror>
+                                         *ngIf="profileInformationFormGroup.controls.bumnPengampu.errors?.required">Pilih salah satu BUMN Pengampu</kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
