@@ -536,19 +536,11 @@ export class ProfileInformasiPerusahaanComponent {
   handleKaryawanLokalChange(value:any){
     this.karyawan_lokal = value;
     this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
-    // this.profileInformationFormGroup.value.jumlahKaryawanTotal = this.total_karyawan;
-    // this.profileInformationFormGroup.setValue({jumlahKaryawanTotal: this.total_karyawan});
-    // this.profileInformationFormGroup.markAllAsTouched();
-    console.log(this.profileInformationFormGroup.value);
   }
 
   handleKaryawanAsingChange(value:any){
     this.karyawan_asing = value;
     this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
-    // this.profileInformationFormGroup.value.jumlahKaryawanTotal = this.total_karyawan;
-    // this.profileInformationFormGroup.setValue({jumlahKaryawanTotal: this.total_karyawan});
-    // this.profileInformationFormGroup.markAllAsTouched();
-    console.log(this.profileInformationFormGroup.value);
   }
 
   upload(): void {
