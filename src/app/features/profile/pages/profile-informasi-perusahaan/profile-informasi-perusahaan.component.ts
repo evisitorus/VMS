@@ -448,7 +448,7 @@ export class ProfileInformasiPerusahaanComponent {
       statusBadanUsaha: new FormControl(data.statusPerusahaanPkp, Validators.required),
       tipeBadanUsaha: new FormControl(data.tipeBadanUsaha, Validators.required),
       kategoriBadanUsaha: new FormControl(data.tipeBadanUsaha, []),
-      jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsahaUtamaDesctiption, Validators.required),
+      jenisKegiatanUsahaUtama: new FormControl(data.jenisKegiatanUsaha, Validators.required),
       jenisPenyediaUsaha: new FormControl(data.jenisPenyediaUsaha, Validators.required),
       npwpPerusahaan: new FormControl(data.npwp, Validators.required),
       nomorIndukBerusaha: new FormControl(data.nib, Validators.required),
