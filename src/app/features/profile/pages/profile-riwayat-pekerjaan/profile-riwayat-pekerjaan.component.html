@@ -100,13 +100,13 @@
                     <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
                   </div>
                 </div>
-
               </div>
           </form>
   
           <kendo-dialog-actions>
-            <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true">
-              Simpan
+            <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true" [disabled]="submitDisable">
+              {{ buttonText }}
+              <kendo-loader *ngIf="loaderVisible" size="small"> </kendo-loader>
             </button>
             <button id="closeButtonDialog" kendoButton (click)="closePekerjaan()" [primary]="false">
               Batal

@@ -51,6 +51,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public openedPekerjaan = false;
 
+  public loaderVisible = false;
+  public buttonText = "Submit";
+  public submitDisable = false;
+
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
     maxFileSize: 2097152
@@ -160,10 +164,12 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.lampiranFiles = [];
     this.uploadedFileContentUrl = "";
     this.uploadedFileId = "";
+    this.invalidMaxFileSize = false;
+    this.invalidFileExtension = false;
   }
 
   public submit(): void {
-
+    console.log("submit");
     if (this.isNewData) {
       if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
         this.popUpMessage = "Periksa kembali file Anda";
@@ -175,12 +181,21 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         }
       }
     } else {
+      console.log("submit");
+      console.log(this.lampiranFiles);
+      console.log(this.uploadedFileContentUrl);
       if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
+        console.log("submit");
+        console.log(this.lampiranFiles);
+        console.log(this.uploadedFileContentUrl);
         this.popUpMessage = "Periksa kembali file Anda";
         this.triggerPopUp();
       } else {
+        console.log("submit");
         this.pekerjaanForm.markAllAsTouched();
+        console.log(this.pekerjaanForm.value);
         if (this.pekerjaanForm.valid) {
+          console.log("submit");
           this.updateRiwayatPekerjaan();
         }
       }
@@ -233,10 +248,20 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
 
   public upload(): void {
+    if(!this.invalidFileExtension && !this.invalidMaxFileSize){
+      this.buttonText = "Uploading file ..";
+      this.loaderVisible = true;
+      this.submitDisable = true;
+    }
     this.fileService.upload(this.lampiranFiles[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
+        this.buttonText = "Submit";
+        this.loaderVisible = false;
+        this.submitDisable = false;
+        console.log(this.uploadedFileContentUrl);
+        console.log(this.uploadedFileId);
       },
       (err) => {
         this.popUpMessage = err.error.message;
@@ -257,6 +282,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     
     this.isNewData = false;
 
+    console.log(this.data);
+
     this.popUpTitle = "Perhatian";
     this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
     this.triggerPopUp();
@@ -273,9 +300,10 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       nilaiPekerjaan: new FormControl(Number(this.data.nilaiPekerjaan), Validators.required),
       tahunPekerjaan: new FormControl(Number(this.data.tahunPekerjaan), Validators.required),
       buktiPekerjaanFilePath: new FormControl(this.data.buktiPekerjaanFilePath, Validators.required),
-      lampiran: new FormControl(this.data.lampiran, Validators.required),
+      lampiran: new FormControl(this.data.lampiran ? this.data.lampiran : "" , Validators.required),
     });
     this.lampiranFiles = [];
+    console.log(this.pekerjaanForm.value);
   }
 
   public updateRiwayatPekerjaan(): void {
