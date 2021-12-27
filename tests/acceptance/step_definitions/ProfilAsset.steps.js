@@ -49,7 +49,7 @@ Given('The Vendor must clicks button {string} button from selected record on {st
             I.click('#btn-delete');
             break;
         case "PIC":
-            I.click('.k-form-buttons.vms-btn');
+            I.click('#btn-perbarui');
             break;
         case "Neraca Keuangan":
             I.click('#btn-delete-neraca');

@@ -1,19 +1,19 @@
 const { I } = inject();
 
-After(async (test) => {
-    if (test.tags.includes('@run_after_test')) {
-        I.amOnPage('/profile-person-in-charge');
-        I.click('#');
-        I.click('#btn-popup-yes');
-        I.click('col-md.k-label-empty');
-        I.fillField('#input-old-password.k-textbox', '87654321');
-        I.fillField('#input-new-password.k-textbox', '12345678');
-        I.fillField('#input-confirm-new-password.k-textbox', '12345678');
-        I.click('#simpan');
-        I.click('#button Yes');
-        I.click('#btn-popup-yes');
-    }
-});
+// After(async (test) => {
+//     if (test.tags.includes('@run_after_test')) {
+//         I.amOnPage('/profile-person-in-charge');
+//         I.click('#');
+//         I.click('#btn-popup-yes');
+//         I.click('.col-md.k-label-empty');
+//         I.fillField('#input-old-password.k-textbox', '87654321');
+//         I.fillField('#input-new-password.k-textbox', '12345678');
+//         I.fillField('#input-confirm-new-password.k-textbox', '12345678');
+//         I.click('#simpan');
+//         I.click('#button Yes');
+//         I.click('#btn-popup-yes');
+//     }
+// });
 
 Given('The Vendor already login into VMS using his or her registered company information', () => {
     I.amOnPage('/login');
@@ -44,13 +44,13 @@ Given('The Vendor wants to change their password', () => {
 });
 
 Given('The Vendor must define new password on {string} form', () => {
-    I.click('col-md.k-label-empty');
+    I.click('.col-3.col-md');
     // I.attachFile('#input-pic-avatar input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
-    // I.fillField('#input-name.k-textbox', 'George Bush');
-    // I.fillField('#input-phone-number.k-textbox', 'George Bush');
-    I.fillField('#input-old-password.k-textbox', '87654321');
-    I.fillField('#input-new-password.k-textbox', '12345678');
-    I.fillField('#input-confirm-new-password.k-textbox', '12345678');
+    // I.fillField('#input-name input[class=k-input]', 'George Bush');
+    // I.fillField('#input-phone-number input[class=k-input]', 'George Bush');
+    I.fillField('#input-old-password input[class=k-input]', '87654321');
+    I.fillField('#input-new-password input[class=k-input]', '12345678');
+    I.fillField('#input-confirm-new-password input[class=k-input]', '12345678');
 });
 
 Given('The Vendor select {string} option', () => {

@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  api_base_path: "http://172.17.90.150:8000",
+  api_base_path: "http://172.18.86.83:8000",
   acceptance_test : true
 };
 
