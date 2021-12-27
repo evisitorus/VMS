@@ -197,18 +197,17 @@ export class ProfilKaryawanComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.uploadedFileId.replace(/\D/g,'');
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
+    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan["@id"].replace(/\D/g,''),
       jabatan:this.pegawaiFormGroup.value.jabatan,
       bidangPekerjaan:bidang_id,
       file: file_id,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-
     this.profileInformationService.addProfilKaryawan(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
