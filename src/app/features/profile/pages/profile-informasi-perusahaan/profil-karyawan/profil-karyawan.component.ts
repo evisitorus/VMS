@@ -31,6 +31,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public pegawaiId!: string;
   public isNewData: boolean = true;
 
+  popUpID: string = "";
   popUpTitle: string = "";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
@@ -80,7 +81,11 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.popUpTitle = 'Informasi';
+        this.popUpMessage = 'Gagal menampilkan data PIC';
+        this.popUpID = "popup-pic-data-failed-to-load";
+        this.triggerPopUp();
+    // this.fetchData();
 
   }
 
@@ -143,6 +148,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public submitProfilKaryawan(): void {
     if( this.uploadedFileContentUrl === null || this.selectedFile === null){
+      this.popUpID = "popup-wrong-file";
       this.popUpMessage = "Periksa kembali file Anda";
       this.triggerPopUp();
     } else {
@@ -173,10 +179,12 @@ export class ProfilKaryawanComponent implements OnInit {
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res.id;
+        this.popUpID = "popup-bidang-pekerjaan-success";
         this.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.triggerPopUp();
       },
       (error) => {
+        this.popUpID = "popup-bidang-pekerjaan-failed";
         this.popUpMessage = "Gagal menambahkan bidang pekerjaan";
         this.triggerPopUp();
       });
@@ -241,6 +249,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
       },
       (error) => {
+        this.popUpID = "popup-upload-file-failed";
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.triggerPopUp();
       }
@@ -256,7 +265,7 @@ export class ProfilKaryawanComponent implements OnInit {
         window.open(url);
       },
       (error) => {
-        console.log(error)
+        this.popUpID = "popup-failed-download";
         this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
         this.triggerPopUp();
       }
@@ -264,6 +273,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
+    this.popUpID = "popup-edit-data-pegawai";
     this.popUpTitle = "Edit Data Pegawai";
     this.id = data.id;
     this.pegawaiId = data.fromParty.id;
@@ -304,6 +314,7 @@ export class ProfilKaryawanComponent implements OnInit {
     //send pegawai ID and sdm relationship ID
     this.profileInformationService.update(params, this.id, this.pegawaiId).subscribe(
       () => {
+        this.popUpID = "popup-success-update-pegawai";
         this.popUpMessage = "Berhasil memperbarui data";
         this.triggerPopUp();
         this.fetchData();
