@@ -106,12 +106,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
-        console.log(response)
         this.gridDataPegawai = response.data;
+        return this.gridDataPegawai;
       },
-      () => {
-        this.popUpMessage = "Data pegawai tidak ditemukan";
-        this.triggerPopUp();
+      (error) => {
+        console.log(error);
       }
     );
 
