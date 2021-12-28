@@ -182,6 +182,19 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_kodepos);
   }
 
+  getBidangUsaha(): Observable<any>{
+    let api_get_bidang_usaha: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_kbli,
+      options : {
+        headers: {
+          Authorization: this.token
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_bidang_usaha);
+  }
+
   updateProfile(params: ProfileInterface): Observable<any> {    
     let api_update_profile: ApiInterface = {
       method: 'POST',
@@ -259,6 +272,39 @@ export class ProfileInformationService {
       }
     }
     return this.apiService.sendRequest(api_get_contact_mechanism);
+  }
+
+  getPartyRole(role: string): Observable<any>{
+    let api_get_party_role: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_party_role_route,
+      options : {
+        headers: {
+          Authorization: this.token
+        },
+        params: {
+          "roleType.name" : role
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_party_role);
+  }
+
+  getVendorsOrganization(type: string): Observable<any>{
+    let api_vendor_organization: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/organizations',
+      options : {
+        headers: {
+          Authorization: this.token
+        },
+        params: {
+          "type": type
+        }
+        
+      }
+    }
+    return this.apiService.sendRequest(api_vendor_organization);
   }
   
 }

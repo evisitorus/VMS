@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataBindingDirective } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
-import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
 import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan.component';
 
 interface Item {
   name: string;
@@ -31,6 +31,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public pegawaiId!: string;
   public isNewData: boolean = true;
 
+  popUpID: string = "";
   popUpTitle: string = "";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
@@ -72,8 +73,8 @@ export class ProfilKaryawanComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
-    private eventEmitterService: EventEmitterService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private parent: ProfileInformasiPerusahaanComponent
   ) {
     //extract from 0
     this.bidangTemp = this.bidangSource.slice(0);
@@ -106,12 +107,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
-        console.log(response)
         this.gridDataPegawai = response.data;
+        return this.gridDataPegawai;
       },
-      () => {
-        this.popUpMessage = "Data pegawai tidak ditemukan";
-        this.triggerPopUp();
+      (error) => {
+        console.log(error);
       }
     );
 
@@ -144,8 +144,9 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public submitProfilKaryawan(): void {
     if( this.uploadedFileContentUrl === null || this.selectedFile === null){
-      this.popUpMessage = "Periksa kembali file Anda";
-      this.triggerPopUp();
+      this.popUpID = "popup-wrong-file";
+      this.parent.popUpMessage = "Periksa kembali file Anda";
+      this.parent.triggerPopUp();
     } else {
       this.pegawaiFormGroup.markAllAsTouched();
       if (this.pegawaiFormGroup.valid) {
@@ -174,12 +175,14 @@ export class ProfilKaryawanComponent implements OnInit {
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res.id;
-        this.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
-        this.triggerPopUp();
+        // this.popUpID = "popup-bidang-pekerjaan-success";
+        this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
+        this.parent.triggerPopUp();
       },
       (error) => {
-        this.popUpMessage = "Gagal menambahkan bidang pekerjaan";
-        this.triggerPopUp();
+        this.popUpID = "popup-bidang-pekerjaan-failed";
+        this.parent.popUpMessage = "Gagal menambahkan bidang pekerjaan";
+        this.parent.triggerPopUp();
       });
 
 
@@ -198,28 +201,27 @@ export class ProfilKaryawanComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.uploadedFileId.replace(/\D/g,'');
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
+    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
+      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan["@id"].replace(/\D/g,''),
       jabatan:this.pegawaiFormGroup.value.jabatan,
       bidangPekerjaan:bidang_id,
       file: file_id,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-
     this.profileInformationService.addProfilKaryawan(params).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menyimpan data";
-        this.triggerPopUp();
+        this.parent.popUpMessage = "Berhasil menyimpan data";
+        this.parent.triggerPopUp();
         this.fetchData();
         this.close();
       },
       () => {
-        this.popUpMessage = "Gagal menyimpan data";
-        this.triggerPopUp();
+        this.parent.popUpMessage = "Gagal menyimpan data";
+        this.parent.triggerPopUp();
         this.close();
       }
     );
@@ -243,8 +245,9 @@ export class ProfilKaryawanComponent implements OnInit {
 
       },
       (error) => {
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
-        this.triggerPopUp();
+        this.popUpID = "popup-upload-file-failed";
+        this.parent.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.parent.triggerPopUp();
       }
     );
   }
@@ -258,14 +261,15 @@ export class ProfilKaryawanComponent implements OnInit {
         window.open(url);
       },
       (error) => {
-        console.log(error)
-        this.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
-        this.triggerPopUp();
+        this.popUpID = "popup-failed-download";
+        this.parent.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+        this.parent.triggerPopUp();
       }
     );
   }
 
   public updateForm(data: any): void {
+    this.popUpID = "popup-edit-data-pegawai";
     this.popUpTitle = "Edit Data Pegawai";
     this.id = data.id;
     this.pegawaiId = data.fromParty.id;
@@ -282,8 +286,8 @@ export class ProfilKaryawanComponent implements OnInit {
     this.setForm();
     this.open();
 
-    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
-    this.triggerPopUp();
+    this.parent.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.parent.triggerPopUp();
   }
 
 
@@ -306,14 +310,15 @@ export class ProfilKaryawanComponent implements OnInit {
     //send pegawai ID and sdm relationship ID
     this.profileInformationService.update(params, this.id, this.pegawaiId).subscribe(
       () => {
-        this.popUpMessage = "Berhasil memperbarui data";
-        this.triggerPopUp();
+        this.popUpID = "popup-success-update-pegawai";
+        this.parent.popUpMessage = "Berhasil memperbarui data";
+        this.parent.triggerPopUp();
         this.fetchData();
         this.close();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
         this.close();
       }
     );
@@ -322,13 +327,14 @@ export class ProfilKaryawanComponent implements OnInit {
   public delete(id: string): void {
     this.profileInformationService.delete(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
-        this.triggerPopUp();
+        this.parent.popUpMessage = "Berhasil menghapus data";
+        this.parent.triggerPopUp();
         this.fetchData();
+        window.location.reload();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
       }
     );
   }
@@ -348,10 +354,6 @@ export class ProfilKaryawanComponent implements OnInit {
         this.delete(id);
       } 
     });
-  }
-
-  triggerPopUp(): void {
-    this.eventEmitterService.trigger();
   }
 
 }
