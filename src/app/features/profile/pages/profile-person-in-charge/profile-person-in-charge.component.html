@@ -130,7 +130,7 @@
             *ngIf="!changePasswordTextboxEnabled; then showClickToChangePassword; else hideClickToChangePassword">
           </ng-container>
           <ng-template #showClickToChangePassword>
-            <div class="row align-items-center" [hidden]="isDisabled">
+            <div class="row align-items-center text-password" [hidden]="isDisabled">
               <p class="col-3"></p>
               <kendo-label id="label-click-to-change-password-showed-up" class="col-md" [hidden]="changePasswordTextboxEnabled" (click)="showChangePasswordTextbox()">
                 Klik di sini untuk mengganti kata sandi Anda

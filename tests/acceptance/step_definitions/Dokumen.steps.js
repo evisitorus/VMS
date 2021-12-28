@@ -256,8 +256,8 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.click('#saveKaryawanFormBtn');
             break;
         case "PIC":
-            I.waitForElement('.k-form-buttons.vms-btn');
-            I.click('.k-form-buttons.vms-btn');
+            I.waitForElement('#btn-simpan');
+            I.click('#btn-simpan');
             break;
         default:
             I.click(button2);

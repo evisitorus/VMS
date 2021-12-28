@@ -44,7 +44,10 @@ Given('The Vendor wants to change their password', () => {
 });
 
 Given('The Vendor must define new password on {string} form', () => {
-    I.click('.col-3.col-md');
+    I.seeElement('.text-password>kendo-label');
+    I.click('.text-password>kendo-label');
+    // I.click('Klik di sini untuk mengganti kata sandi Anda');
+    // I.click('.col-3.col-md');
     // I.attachFile('#input-pic-avatar input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
     // I.fillField('#input-name input[class=k-input]', 'George Bush');
     // I.fillField('#input-phone-number input[class=k-input]', 'George Bush');
@@ -54,7 +57,7 @@ Given('The Vendor must define new password on {string} form', () => {
 });
 
 Given('The Vendor select {string} option', () => {
-    I.click('#');
+    // I.click('#');
 });
 
 Given('The Vendor define new password not the same with new confirmation password', () => {
