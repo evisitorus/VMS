@@ -171,34 +171,20 @@ export class ProfileInformasiPerusahaanComponent {
       responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
       responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
       responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu")
-    }).subscribe(({
-      responseVendorData,
-      responseContactMechanism,
-      responseJenisPenyediaUsaha,
-      responseJenisKegiatanUsaha,
-      responseOrganizations,
-      responseJenisVendor,
-      responseBidangUsaha,
-      responseTipeVendor,
-      responseProvinces,
-      responseHimpunan,
-      responsePengampu,
-      responseVendorHimpunan,
-      responseVendorPengampu
-    }) => {
-      this.setResponseVendorData(responseVendorData);
-      this.setResponseContactMechanism(responseContactMechanism);
-      this.setJenisPenyediaUsaha(responseJenisPenyediaUsaha);
-      this.setJenisKegiatanUsaha(responseJenisKegiatanUsaha);
-      this.setOrganizations(responseOrganizations);
-      this.setJenisVendor(responseJenisVendor);
-      this.setBidangUsaha(responseBidangUsaha);
-      this.setTipeVendor(responseTipeVendor);
-      this.setProvinces(responseProvinces);
-      this.setHimpunan(responseHimpunan);
-      this.setPengampu(responsePengampu);
-      this.setVendorHimpunan(responseVendorHimpunan);
-      this.setVendorPengampu(responseVendorPengampu);
+    }).subscribe((response) => {
+      this.setResponseVendorData(response.responseVendorData);
+      this.setResponseContactMechanism(response.responseContactMechanism);
+      this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
+      this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
+      this.setOrganizations(response.responseOrganizations);
+      this.setJenisVendor(response.responseJenisVendor);
+      this.setBidangUsaha(response.responseBidangUsaha);
+      this.setTipeVendor(response.responseTipeVendor);
+      this.setProvinces(response.responseProvinces);
+      this.setHimpunan(response.responseHimpunan);
+      this.setPengampu(response.responsePengampu);
+      this.setVendorHimpunan(response.responseVendorHimpunan);
+      this.setVendorPengampu(response.responseVendorPengampu);
     });
   }
 
