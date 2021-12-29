@@ -16,7 +16,7 @@ spec:
         app: eproc-fe
     spec:
       containers:
-      - image: 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com/eproc-fe:develop-25ba96e
+      - image: 
         name: eproc-fe
         resources:
           limits:
