@@ -175,6 +175,7 @@ export class ProfileInformasiPerusahaanComponent {
       responseVendorData,
       responseContactMechanism,
       responseJenisPenyediaUsaha,
+      responseJenisKegiatanUsaha,
       responseOrganizations,
       responseJenisVendor,
       responseBidangUsaha,
@@ -188,6 +189,7 @@ export class ProfileInformasiPerusahaanComponent {
       this.setResponseVendorData(responseVendorData);
       this.setResponseContactMechanism(responseContactMechanism);
       this.setJenisPenyediaUsaha(responseJenisPenyediaUsaha);
+      this.setJenisKegiatanUsaha(responseJenisKegiatanUsaha);
       this.setOrganizations(responseOrganizations);
       this.setJenisVendor(responseJenisVendor);
       this.setBidangUsaha(responseBidangUsaha);
