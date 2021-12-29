@@ -2,7 +2,7 @@ exports.config = {
   output: 'tests/acceptance/_output',
   helpers: {
     Playwright: {
-      url: 'http://localhost',
+      url: 'http://localhost:4200',
       show: true,
       browser: 'chromium',
       waitForTimeout: 10000,
@@ -32,7 +32,28 @@ exports.config = {
   hooks: [],
   gherkin: {
     features: './tests/acceptance/features/*.feature',
-    steps: ['./tests/acceptance/step_definitions/steps.js']
+    steps: [
+          // './tests/acceptance/step_definitions/steps.js'
+          './tests/acceptance/step_definitions/RegisterNPWP.steps.js',
+          './tests/acceptance/step_definitions/ActivationAccount.steps.js',
+          './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformation.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformationDetails.steps.js',
+          './tests/acceptance/step_definitions/LandingPageTenderInformationFilter.steps.js',
+          './tests/acceptance/step_definitions/LandingPageShortcut.steps.js',
+          './tests/acceptance/step_definitions/RiwayatPekerjaan.steps.js',
+          './tests/acceptance/step_definitions/ForgotPassword.steps.js',
+          './tests/acceptance/step_definitions/Login.steps.js',
+          './tests/acceptance/step_definitions/Logout.steps.js',
+          './tests/acceptance/step_definitions/Dokumen.steps.js',
+          './tests/acceptance/step_definitions/ProfilPemegangSaham.steps.js',
+          './tests/acceptance/step_definitions/ProfilAsset.steps.js',
+          './tests/acceptance/step_definitions/ProfilKeuangan.steps.js',
+          './tests/acceptance/step_definitions/ProfilAlamat.steps.js',
+          './tests/acceptance/step_definitions/ProfilPerusahaan.steps.js',
+          './tests/acceptance/step_definitions/ProfilPegawai.steps.js',
+          './tests/acceptance/step_definitions/ProfilPIC.steps.js',
+        ]
   },
   plugins: {
     screenshotOnFail: {
@@ -50,7 +71,27 @@ exports.config = {
       deleteSuccessful: false,
       fullPageScreenshots: true
     },
-  },
+    autoLogin: {
+      enabled: true,
+      inject: 'loginAs',
+      users: {
+          user: {
+              login: (I) => {
+                  I.amOnPage('login');
+                  I.waitForElement('#input-email input[class=k-input]');
+                  I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
+                  I.waitForElement('#input-password input[class=k-input]');
+                  I.fillField('#input-password input[class=k-input]', '1234');
+                  I.waitForElement('#btn-login');
+                  I.click('#btn-login');
+              },
+              check: () => {},
+              fetch: () => {},
+              restore: () => {}
+          },
+        }
+      }
+    },
   tests: 'tests/acceptance/*_test.js',
   name: 'eproc-fe'
 }

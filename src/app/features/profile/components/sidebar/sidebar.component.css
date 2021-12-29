@@ -1,0 +1,9 @@
+.layout {
+    display: table-cell;
+    display: flex;
+    width: 100%;
+}
+
+.navigation-pane {
+    min-width: 100% !important;
+}

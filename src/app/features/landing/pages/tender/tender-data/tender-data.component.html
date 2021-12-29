@@ -1,0 +1,25 @@
+<div class="tender" routerLink="tender/detail/{{tender.id}}">
+    <kendo-card-body class="k-hstack top justify-content-between">
+      <div class="top-avatar">
+          <img src='{{ "assets/images/" + tender.cparent.id + ".png" }}' id="logoPerusahaan" class="avatar" alt="avatar" />
+          <div class="k-card-titles nama-perusahaan" id="namaPerusahaan">{{ tender.cparent.name }} </div>
+      </div>
+      <div [ngClass]="tender.status.name == 'Aktif' ? 'status label tender-aktif' : 'Pemenang Terpilih' ? 'status label tender-terpilih' : 'Calon Pemenang Terpilih' ? 'status label tender-calon' : 'Masa Sanggah' ? 'status label tender-sanggah' : 'Dibatalkan' ? 'status label tender-batal' : 'status label tender-selesai' " id="statusTender">{{ tender.status.name }} </div>
+    </kendo-card-body>
+    <kendo-card-body class="k-hstack-body" style="padding: 0px 16px;">
+      <div class="tender-title" id="namaTender">{{ tender.name }}</div>
+      <div class="middle">
+          <img src="./assets/images/calendar.png" class="icon" alt="calendar"/>
+          <div class="mid1" id="batasAkhirRegistrasi">{{ tender.registration_end }}</div>
+          <img src="./assets/images/Vector.png" class="icon" alt="amount"/>
+          <div class="mid1" id="nilaiHPS">{{ tender.hps_hide ? "Rp. " + tender.hps_total : (tender.hps_total | currency:'Rp. ':'symbol':'4.0-2') }}</div>
+          <img src="./assets/images/pin.png" class="icon" alt="pin"/>
+          <div class="mid1" id="lokasi">{{ tender.province ? tender.province.name : "Lokasi tidak ditemukan" }}</div>
+      </div>
+      <div class="k-hstack">
+          <div [ngClass]="tender.method.name == 'Umum' ? 'label tender-umum' : 'label'" id="metodeTender">{{ tender.method.name }}</div>
+          <div class="mx-3 mid label bidang-usaha" id="bidangUsaha">{{ tender.category.name }}</div>
+      </div>
+      <div class="mid" id="tanggalPosting">{{getDiffDate(tender.publish_at)}}</div>
+    </kendo-card-body>
+</div>

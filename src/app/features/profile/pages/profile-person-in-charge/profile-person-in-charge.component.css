@@ -1,13 +1,33 @@
-.profile-section {
-  border-style: groove;
+.align-items-center {
+  margin-top: 19px;
 }
 
-.profile-menu {
-  border-style: groove;
-  float: left;
-}
-
-.profile-content {
-  border-style: groove;
+.button-right {
   float: right;
+}
+
+.k-form-buttons {
+  align-items: center;
+  padding: 8px 16px;
+
+  position: static;
+  width: 132px;
+  height: 36px;
+  left: 0px;
+  top: 0px;
+}
+
+.vms-btn:hover {
+  /*border-radius: 2px;*/
+}
+
+#attention {
+  font-size: small;
+  font-weight: lighter;
+  font-style: italic;
+  margin: 20px 0 20px 0;
+}
+
+.bank-field {
+  margin-bottom: 1em;
 }

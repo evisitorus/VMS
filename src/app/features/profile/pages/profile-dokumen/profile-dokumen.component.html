@@ -1,60 +1,116 @@
-<div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
+<div class="row profile-section">
 
-    <kendo-label>Dokumen</kendo-label>
-    <br><br>
+  <div class="profile-content-modal">
+    <kendo-dialog title="Tambah Dokumen" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+      <form class="k-form">
 
-    <div>
-      <kendo-grid>
-        <kendo-grid-column field="no" title="No.">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Berlaku Dari">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Berlaku Sampai">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Lampiran">
-        </kendo-grid-column>
-        <kendo-grid-column field="action" title="Action">
-        </kendo-grid-column>
-      </kendo-grid>
-      <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
-        Tambah Dokumen
-      </button>
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="nomorDokumen" text="Nomor Dokumen"></kendo-label>
+          <kendo-textbox id="input-nomor-dokumen" formControlName="nomorDokumen" [clearButton]="true" #nomorDokumen required></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Nomor Dokumen tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
 
-      <kendo-dialog title="Tambah Dokumen" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <div>
-            <kendo-label>No</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="namaDokumen" text="Nama Dokumen"></kendo-label>
+          <kendo-textbox id="input-nama-dokumen" formControlName="namaDokumen" [clearButton]="true" #namaDokumen required></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Nama Dokumen tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield [formGroup]="form" *ngIf="!isLifeTime">
+          <kendo-label [for]="berlakuSampai" text="Berlaku Sampai"></kendo-label>
+          <kendo-datepicker id="input-berlaku-sampai" arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+          <kendo-formerror></kendo-formerror>
+        </kendo-formfield>
+
+        <div class="k-checkbox-wrap">
+          <input type="checkbox" kendoCheckBox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}" (change)="setIsLifeTime()"/>
+          <kendo-label text="Seumur hidup" ></kendo-label>
+        </div>
+
+        <kendo-formfield [formGroup]="form">
+          <kendo-label text="Lampiran File" ></kendo-label>
+          <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+          <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
+          <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+          <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+        </kendo-formfield>
+
+        <div class="k-actions k-actions-end">
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan">
+              Simpan
+            </button>
           </div>
-          <div>
-            <kendo-label>Berlaku Sampai</kendo-label>
-            <input type="radio" #terms kendoRadioButton/>
-            <kendo-datepicker [(value)]="value"></kendo-datepicker>
-            <br>
-            <input type="radio" #terms kendoRadioButton/>
-            <kendo-label class="k-radio-label" [for]="terms" text="Seumur Hidup"></kendo-label>
-          </div>
-          <div>
-            <kendo-label>Lampiran</kendo-label>
-            <kendo-fileselect [title]="'Pilih File'"></kendo-fileselect>
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal">
+              Batal
+            </button>
           </div>
         </div>
 
-        <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
-            Simpan
-          </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
-    </div>
+      </form>
+    </kendo-dialog>
 
   </div>
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="col-10 profile-content-container">
+
+    <div class="profile-content">
+
+      <div class="profile-content-title">
+        <kendo-label>Dokumen</kendo-label>
+      </div>
+
+      <div class="profile-content-grid">
+        <kendo-grid [data]="gridData">
+          <kendo-grid-column field="no" title="No.">
+          </kendo-grid-column>
+          <kendo-grid-column field="namaDokumen" title="Nama Dokumen">
+          </kendo-grid-column>
+          <kendo-grid-column field="berlakuDari" title="Berlaku Dari">
+          </kendo-grid-column>
+          <kendo-grid-column field="berlakuSampai" title="Berlaku Sampai">
+          </kendo-grid-column>
+          <kendo-grid-column field="lampiran" title="Lampiran">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="id" title="Action">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div *ngIf="!dataItem.deletedAt">
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaDokumen)" id="btn-delete">
+                </span>
+              </div>
+              <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+
+        <div class="k-actions k-actions-end">
+          <div class="col-2 profile-content-grid-button">
+            <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-dokumen">
+              Tambah Dokumen
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </div>
+
+<div kendoDialogContainer></div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

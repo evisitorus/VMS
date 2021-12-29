@@ -5,8 +5,10 @@ import {ProfilePersonInChargeComponent} from "./pages/profile-person-in-charge/p
 import {ProfileAsetComponent} from "./pages/profile-aset/profile-aset.component";
 import {ProfileDokumenComponent} from "./pages/profile-dokumen/profile-dokumen.component";
 import {ProfileRiwayatPekerjaanComponent} from "./pages/profile-riwayat-pekerjaan/profile-riwayat-pekerjaan.component";
-import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component";
 import {ProfileLaporanKeuanganComponent} from "./pages/profile-laporan-keuangan/profile-laporan-keuangan.component";
+import {ProfileDashboardComponent} from "./pages/profile-dashboard/profile-dashboard.component";
+import {PemegangSahamComponent} from "./pages/profile-informasi-perusahaan/pemegang-saham/pemegang-saham.component";
+import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component"
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -22,14 +24,38 @@ import {LayoutModule} from "@progress/kendo-angular-layout";
 import {ButtonsModule} from "@progress/kendo-angular-buttons";
 import {MenusModule} from "@progress/kendo-angular-menu";
 import {DropDownsModule} from "@progress/kendo-angular-dropdowns";
-import {DialogModule} from "@progress/kendo-angular-dialog";
+import {DialogModule, WindowModule} from "@progress/kendo-angular-dialog";
 import {HttpClientModule} from "@angular/common/http";
 import {GridModule} from "@progress/kendo-angular-grid";
 import {UploadsModule} from "@progress/kendo-angular-upload";
 import { IntlModule } from "@progress/kendo-angular-intl";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
+import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/profil-karyawan/profil-karyawan.component';
+import { DataPegawaiComponent } from './pages/profile-informasi-perusahaan/data-pegawai/data-pegawai.component';
+import { IndicatorsModule } from "@progress/kendo-angular-indicators";
+
+// const drawerRoutes = [
+//   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
+//   { title: "Kelola Akun",
+//     selected: false,
+//     expanded: true,
+//     parent: true,
+//     children: [
+//       {
+//         path: 'profile-information',
+//         component: ProfileInformasiPerusahaanComponent,
+//         text: 'Informasi Perusahaan'
+//       }
+//     ]
+//   }
+// ];
 
 @NgModule({
   declarations: [
+    SidebarComponent,
     ProfileMenuComponent,
     ProfileVerifikasiKelengkapanComponent,
     ProfileInformasiPerusahaanComponent,
@@ -39,6 +65,11 @@ import { IntlModule } from "@progress/kendo-angular-intl";
     ProfileRiwayatPekerjaanComponent,
     ProfileAlamatComponent,
     ProfileLaporanKeuanganComponent,
+    ProfileDashboardComponent,
+    PemegangSahamComponent,
+    DrawerComponent,
+    ProfilKaryawanComponent,
+    DataPegawaiComponent
   ],
   imports: [
     CommonModule,
@@ -60,8 +91,17 @@ import { IntlModule } from "@progress/kendo-angular-intl";
     GridModule,
     InputsModule,
     UploadsModule,
-    IntlModule
-  ]
+    IntlModule,
+    WindowModule,
+    IndicatorsModule
+    // RouterModule.forRoot(drawerRoutes)
+  ],
+  // providers: [
+  //   {
+  //     provide: APP_BASE_HREF,
+  //     useValue: window.location.pathname
+  //   }
+  // ],
 })
 export class ProfileModule {
 }

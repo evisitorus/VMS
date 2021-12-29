@@ -1,13 +1,13 @@
-.profile-section {
-  border-style: groove;
+.k-checkbox-wrap {
+  display: inline-flex;
+  margin-top: 1em;
 }
 
-.profile-menu {
-  border-style: groove;
-  float: left;
+.k-checkbox-wrap input {
+  margin-right: 5px;
 }
 
-.profile-content {
-  border-style: groove;
-  float: right;
+.lampiran-url {
+  color: #0058E9;
+  cursor: pointer;
 }

@@ -1,0 +1,71 @@
+<div class="container mb-3">
+
+  <div class="filter">
+    <p>Informasi Pengadaan</p>
+    <div class="row">
+      <div class="col-4 filter-category">
+        <kendo-label [for]="filterCategory" text=""></kendo-label> <br>
+        <kendo-dropdownlist id="select-filter-category" [(ngModel)]="selectedFilterCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+      </div>
+      <div class="col-4 filter-by-bumn">
+        <kendo-label [for]="filterBUMN" text=""></kendo-label> <br>
+        <kendo-dropdownlist id="select-filter-bumn" [(ngModel)]="selectedFilterBUMNItem" [data]="filterBUMN" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+      </div>
+      <div class="col-4 filter-created-at">
+        <kendo-label [for]="orderBy" text="Urutkan Berdasarkan"></kendo-label>
+        <kendo-dropdownlist id="select-order-by" [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+      </div>
+    </div>
+
+    <div class="k-actions k-actions-end">
+      <div class="profile-content-modal-btn">
+        <button kendoButton class="btn-toggle-filter" (click)="toggleFilter()" id="btn-toggle-filter">
+          {{hiddenFilter ? 'Buka' : 'Tutup'}} filter <span class="{{hiddenFilter ? 'k-icon k-i-arrow-60-down' : 'k-icon k-i-arrow-60-up'}}"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hidden-filter" *ngIf="!hiddenFilter">
+
+      <div class="row hidden-filter-content">
+        <div class="col-6 filter-keyword">
+          <kendo-label [for]="filterKeyword" text="Cari Berdasarkan"></kendo-label>
+          <kendo-textbox placeholder="Cari" id="input-filter-keyword" [clearButton]="true" [(value)]="filterKeyword" (change)="filter()"></kendo-textbox>
+        </div>
+        <div class="col-6 filter-register-end">
+          <kendo-label text="Akhir Registrasi"></kendo-label> <br>
+          <kendo-dropdownlist id="select-filter-register-end" [(ngModel)]="selectedFilterRegisterEndItem" [data]="filterRegisterEnd" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+        </div>
+      </div>
+
+      <div class="row hidden-filter-content">
+        <div class="col-6 filter-status">
+          <kendo-label [for]="filterStatus" text="Status Tender"></kendo-label> <br>
+          <kendo-dropdownlist id="select-filter-status" [(ngModel)]="selectedFilterStatusItem" [data]="filterStatus" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+        </div>
+        <div class="col-6 filter-hps-range">
+          <kendo-label text="Rentang HPS"></kendo-label> <br>
+          <kendo-numerictextbox (change)="filter()" [(value)]="filterHpsStart" placeholder="Dari Rp" format="Rp\ ##,#" id="input-hps-begin" hpsBegin #hpsBegin></kendo-numerictextbox>
+          <kendo-numerictextbox (change)="filter()" [(value)]="filterHpsEnd" placeholder="Sampai Rp" format="Rp\ ##,#" id="input-hps-end" hpsEnd #hpsEnd></kendo-numerictextbox>
+        </div>
+      </div>
+
+      <div class="k-actions k-actions-end">
+        <div class="profile-content-modal-btn">
+          <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="resetFilter()" id="btn-reset-filter">
+            Reset Filter
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <kendo-listview class="text-center" [data]="view" [loading]="loading" [itemStyle]="{display: 'inline-flex'}" [pageable]="pagerSettings" [pageSize]="pageSize" [skip]="skip" (pageChange)="handlePageChange($event)">
+    <ng-template kendoListViewItemTemplate let-dataItem="dataItem">
+      <app-tender-data [tender]="dataItem"></app-tender-data>
+    </ng-template>
+  </kendo-listview>
+</div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

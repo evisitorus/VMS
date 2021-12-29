@@ -9,7 +9,8 @@ import { EventEmitterService } from 'src/app/core/services/event-emitter.service
 const messages = {
   default: 'Data tidak boleh kosong. Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
   success: 'Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun',
-  disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi'
+  disclaimer: 'Silahkan klik syarat dan ketentuan serta kebijakan privasi penggunaan aplikasi',
+  failed: 'Terjadi kesalahan, silakan ulangi proses registrasi',
 };
 
 @Component({
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
   public mask: string = "99.999.999.9-999.999";
 
   popUpTitle: string = "Informasi Registrasi Akun";
-  popUpMessage: string = messages.success;
+  popUpMessage: string = messages.failed;
   redirectOnClosePopUp: boolean = true;
 
   public minlength = 8;
@@ -34,7 +35,7 @@ export class RegisterComponent implements OnInit {
   public counter = `${this.charachtersCount}/${this.maxlength}`;
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private eventEmitterService: EventEmitterService
   ) { }
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit {
       disclaimer: ['', Validators.requiredTrue]
     });
   }
-  
+
   register(): void {
     this.registerForm.markAllAsTouched();
 
@@ -66,17 +67,15 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.validasiForm();
-
     let params: RegisterInterface= {...this.registerForm.value};
     this.authService.register(params).subscribe(
-      (resp) =>  { 
+      (resp) =>  {
         this.submitted = true;
         this.popUpMessage = resp.message;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
       },
-      (error) => { 
+      (error) => {
         if(error.error.message){
           this.popUpMessage = error.error.message;
         }
@@ -95,14 +94,14 @@ export class RegisterComponent implements OnInit {
     this.eventEmitterService.trigger();
   }
 
-  validasiForm(){
-    if (this.registerForm.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = true;
-      return;
-    }
-  }
+  // validasiForm(){
+  //   if (this.registerForm.invalid) {
+  //     this.popUpMessage = messages.default;
+  //     this.triggerPopUp();
+  //     this.redirectOnClosePopUp = true;
+  //     return;
+  //   }
+  // }
 
   public onValueChange(ev: any): void {
     this.charachtersCount = ev.length;

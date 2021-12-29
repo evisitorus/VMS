@@ -1,96 +1,124 @@
-<div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
+<div class="row profile-section">
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
   </div>
-  <div class="profile-content">
+  
+  <div class="col-10 profile-content-container">
 
-    <kendo-label>Verifikasi Kelengkapan</kendo-label>
-    <br><br>
-    <div class="verification-checklist">
-      <div class="checklist">
-        <kendo-label>Profil Perusahaan</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
+    <div class="profile-content">
+
+      <div class="profile-content-title">
+        <kendo-label>Verifikasi Kelengkapan</kendo-label>
       </div>
 
-      <div class="checklist">
-        <kendo-label>PIC Perusahaan</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
+      <div class="profile-verifikasi-field">
+        <form>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">Profile Perusahaan</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.profilePerusahaan" #profilePerusahaan kendoCheckBox/>
+              <label for="profilePerusahaan">Completed</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">PIC Perusahaan</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.PICPerusahaan" #PICPerusahaan kendoCheckBox/>
+              <label for="PICPerusahaan">Completed</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">Dokumen</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.dokumen" #dokumen kendoCheckBox/>
+              <label for="dokumen">Completed</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">Alamat</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.alamat" #alamat kendoCheckBox/>
+              <label for="alamat">Completed</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">Laporan Keuangan</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.laporanKeuangan" #laporanKeuangan kendoCheckBox/>
+              <label for="laporanKeuangan">Completed</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">Riwayat Pekerjaan</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.riwayatPekerjaan" #riwayatPekerjaan kendoCheckBox/>
+              <label for="riwayatPekerjaan">Completed</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-2">
+              <kendo-label class="verifikasi-label">Asset</kendo-label>
+            </div>
+            <div class="col-10">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.asset"  #asset kendoCheckBox/>
+              <label for="asset">Completed</label>
+            </div>
+          </div>
+
+        </form>
       </div>
 
-      <div class="checklist">
-        <kendo-label>Dokumen</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
+      <div class="profile-verifikasi-field">
+        <kendo-label class="verifikasi-label">Disclaimer</kendo-label>
+        <div class="row">
+          <div class="col">
+            <form class="k-form" [formGroup]="form">
+              <kendo-formfield showHints="initial">
+                <div class="k-form-field-checkbox-wrap">
+                  <input *ngIf="isDisabled" kendoCheckBox id="disclaimer" type="checkbox" disabled [checked]="true"/>
+                  <input *ngIf="!isDisabled" kendoCheckBox id="disclaimer" type="checkbox" formControlName="disclaimer"/>
+                  <kendo-label class="k-checkbox-label" for="disclaimer" text="Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR"></kendo-label>
+                </div>
+                <!-- <kendo-formhint>Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR</kendo-formhint> -->
+                <kendo-formerror>This field is required</kendo-formerror>
+              </kendo-formfield>
+            </form>
+          </div>
+        </div>
       </div>
 
-      <div class="checklist">
-        <kendo-label>Alamat</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
+      <div class="k-actions k-actions-end">
+        <div class="col-2 profile-content-grid-button">
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-tambah-dokumen" (click)="verify()" *ngIf="!isDisabled">
+            Rekam Data
+          </button>
+          <kendo-label class="verifikasi-label" *ngIf="isDisabled">Sedang dalam proses verifikasi</kendo-label>
+        </div>
       </div>
 
-      <div class="checklist">
-        <kendo-label>Laporan Keuangan</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
-      </div>
-
-      <div class="checklist">
-        <kendo-label>Riwayat Pekerjaan</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
-      </div>
-
-      <div class="checklist">
-        <kendo-label>Asset</kendo-label>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Completed"
-        ></kendo-label>
-      </div>
     </div>
-
-    <div class="verification-checklist">
-      <div class="checklist">
-        <kendo-label>Disclaimer</kendo-label>
-        <br><br>
-        <input type="checkbox" #notification kendoCheckBox/>
-        <kendo-label
-          class="k-checkbox-label"
-          [for]="notification"
-          text="Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR"
-        ></kendo-label>
-      </div>
-    </div>
-    <br>
-    <button kendoButton look="outline">Rekam Data</button>
   </div>
+  
 </div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-verification'"></app-popup-message>

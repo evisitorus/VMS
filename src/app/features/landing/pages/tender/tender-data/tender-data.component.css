@@ -1,0 +1,140 @@
+.middle {
+    display: inline-block;
+    width: 100%;
+}
+
+.mid1 {
+    display: inline-block;
+    padding: 10px 10px 10px 0px;
+    margin-right: 30px;
+    font-size: 10px
+}
+
+.mid {
+    display: inline-block;
+    padding: 10px 10px 10px 0px;
+    margin-right: 50px;
+    font-size: 12px
+}
+
+.top {
+    justify-content: space-between;
+}
+
+.k-card-titles{
+    
+    /* Body/Body 2 - Bold */
+    
+    /* font-family: Roboto; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 40px;
+    /* identical to box height, or 143% */
+    
+    letter-spacing: 0.25px;
+    margin: 0px 20px;
+    color: #000000;
+    vertical-align: middle;
+}
+
+.k-card-body{
+    /* margin: 10px 50px; */
+}
+.status{
+    /* font-family: Roboto; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 40px;
+    vertical-align: middle;
+    min-width: 8em;
+    text-align: center
+}
+
+.top-avatar {
+    display: inherit;
+    width: 100%;
+}
+
+.tender-title {
+    /* Body/Body 2 */
+    
+    /* font-family: Roboto; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    padding: 0px 10px 10px 0px;
+    letter-spacing: 0.25px;
+}
+
+.icon{
+    margin-right: 10px;
+}
+
+
+.avatar{
+    max-height: 20px;
+    margin-top: 10px;
+}
+
+.k-listview {
+    border: none !important;
+}
+
+.nama-perusahaan {
+    font-size: 13px;
+    line-height: 25px;
+    margin-top: 5px;
+}
+
+.label {
+    padding: 1px;
+    border-radius: 8px;
+}
+
+.tender-aktif {
+    background: #B7E7A1;
+    color: #37B400;
+}
+
+.tender-terpilih {
+    background: #CBDFFF;
+    color: #0058E9;
+}
+
+.tender-calon {
+    color: #00839A;
+    background: #A0D5DF;
+}
+
+.tender-sanggah {
+    color: #F27043;
+    background: #F9CFC1;
+}
+
+.tender-batal {
+    background: #F0AAA3;
+    color: #F31700;
+}
+
+.tender-selesai {
+    background: #C4C4C4;
+    color: #000000;
+}
+
+.tender-umum {
+    background: #B6D7DD;
+    color: #000000;
+    width: fit-content;
+    font-size: 12px;
+    padding: 4px;
+}
+
+.bidang-usaha {
+    padding: 4px;
+    font-weight: bold;
+    background: #E5E5E5;
+}

@@ -1,77 +1,172 @@
-<div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
+<div class="row profile-section">
 
-    <kendo-label>Alamat</kendo-label>
-    <br><br>
+  <div class="profile-content-modal">
 
-    <div>
-      <kendo-grid>
-        <kendo-grid-column field="no" title="No.">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Nama Alamat">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Alamat">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Provinsi">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Kota">
-        </kendo-grid-column>
-        <kendo-grid-column field="action" title="Action">
-        </kendo-grid-column>
-      </kendo-grid>
-      <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
-        Tambah Alamat
-      </button>
+    <kendo-dialog title="Tambah Alamat" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+      <form  class="k-form modal-form">
 
-      <kendo-dialog title="Tambah Alamat" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <div>
-            <kendo-label>No</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Nama Alamat</p>
           </div>
-          <div>
-            <kendo-label>Nama Alamat</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Alamat</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Provinsi / Kota</kendo-label>
-            <kendo-dropdownlist defaultItem="Pilih Provinsi / Kota" [data]="listItems" [valuePrimitive]="true">
-            </kendo-dropdownlist>
-          </div>
-
-          <div>
-            <kendo-label>Kecamatan / Kelurahan</kendo-label>
-            <kendo-dropdownlist defaultItem="Pilih Kecamatan / Kelurahan" [data]="listItems" [valuePrimitive]="true">
-            </kendo-dropdownlist>
-          </div>
-          <div>
-            <kendo-label>Kode Pos</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Pin Geolocation</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Type your message here" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Nama Alamat tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
           </div>
         </div>
 
-        <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
-            Simpan
-          </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
-    </div>
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Alamat</p>
+          </div>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-textbox class="formField" id="alamat" placeholder="Type your message here" formControlName="alamat" [clearButton]="true" #alamat required></kendo-textbox>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Alamat tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Provinsi</p>
+          </div>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-dropdownlist id ="provinsi" class="formField" [defaultItem]="defaultItemProvinsi" [data]="listProvinsi" textField="description" valueField="id" [(ngModel)]="selectedProvinsi" formControlName="provinsi" [valuePrimitive]="true" (valueChange)="onChangeProvinsi($event)" #provinsi></kendo-dropdownlist>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Provinsi tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Kota / Kabupaten</p>
+          </div>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-dropdownlist id ="kota" class="formField" [defaultItem]="defaultItemKota" [data]="listKota" textField="description" valueField="id" [(ngModel)]="selectedKota" formControlName="kota" [valuePrimitive]="true" [disabled]="isDisabledKota" [valuePrimitive]="true" (valueChange)="onChangeKota($event)" #kota></kendo-dropdownlist>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Kota / Kabupaten tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Kecamatan</p>
+          </div>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-dropdownlist id ="kecamatan" class="formField" [defaultItem]="defaultItemKecamatan" [data]="listKecamatan" textField="description" valueField="id" [(ngModel)]="selectedKecamatan" formControlName="kecamatan" [valuePrimitive]="true" [disabled]="isDisabledKecamatan" [valuePrimitive]="true" (valueChange)="onChangeKecamatan($event)" #kecamatan></kendo-dropdownlist>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Kecamatan tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Kelurahan</p>
+          </div>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-dropdownlist id ="kelurahan" class="formField" [defaultItem]="defaultItemKelurahan" [data]="listKelurahan" textField="description" valueField="id" [(ngModel)]="selectedKelurahan" formControlName="kelurahan" [valuePrimitive]="true" [disabled]="isDisabledKelurahan" [valuePrimitive]="true" (valueChange)="onChangeKelurahan($event)" #kelurahan></kendo-dropdownlist>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Kelurahan tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>Kode Pos</p>
+          </div>
+          <div class="col-8 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-dropdownlist id ="kodepos" class="formField" [defaultItem]="defaultItemKodepos" [data]="listKodepos" textField="description" valueField="id" [(ngModel)]="selectedKodepos" formControlName="kodepos" [valuePrimitive]="true" [disabled]="isDisabledKodepos" [valuePrimitive]="true" #kodepos></kendo-dropdownlist>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Kode Pos tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>        
+
+        <div class="k-actions k-actions-end">
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal-alamat">
+              Batal
+            </button>
+          </div>
+          <div class="profile-content-modal-btn">
+            <button type="button" id="btn-submit-alamat" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()">
+              Simpan
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </kendo-dialog>
 
   </div>
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="col-10 profile-content-container">
+    <div class="profile-content">
+      
+      <div class="profile-content-title">
+        <kendo-label>Alamat</kendo-label>
+      </div>
+  
+      <div>
+        <kendo-grid [data]="gridData" class="vms-kendo-grid">
+          <kendo-grid-column field="no" title="No.">
+          </kendo-grid-column>
+          <kendo-grid-column field="namaAlamat" title="Nama Alamat">
+          </kendo-grid-column>
+          <kendo-grid-column field="alamat" title="Alamat">
+          </kendo-grid-column>
+          <kendo-grid-column field="provinsi" title="Provinsi">
+          </kendo-grid-column>
+          <kendo-grid-column field="kota" title="Kota">
+          </kendo-grid-column>
+          <kendo-grid-column field="id" title="Action">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div *ngIf="!dataItem.deletedAt">
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat)" id="btn-delete">
+                </span>
+              </div>
+              <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+
+        <div class="k-actions k-actions-end">
+          <div class="col-2 profile-content-grid-button">
+            <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-alamat">
+              Tambah Alamat
+            </button>
+          </div>
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+
 </div>
+
+<div kendoDialogContainer></div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

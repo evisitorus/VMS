@@ -1,13 +1,36 @@
-.profile-section {
-  border-style: groove;
-}
-
 .profile-menu {
-  border-style: groove;
   float: left;
+  height: 100vh;
 }
 
 .profile-content {
-  border-style: groove;
+  padding: 40px;
+  display: table;
+}
+
+.wrap {
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 10px;
+}
+
+.labelForm {
+  width: 250px;
+}
+
+.formField{
+  width: 100% !important;
+}
+
+.formHint {
+  width: 350px;
+}
+
+.button-right {
   float: right;
+}
+
+
+.k-button .k-loader {
+  margin-right: 8px;
 }

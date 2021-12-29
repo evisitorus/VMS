@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './layouts/main/main.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { CardComponent } from './layouts/card/card.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -17,9 +16,15 @@ import { CoreModule } from './core/core.module';
 
 import { AuthModule } from './features/auth/auth.module';
 import { ProfileModule } from './features/profile/profile.module';
-import { DialogsModule } from '@progress/kendo-angular-dialog';
 import { LandingModule } from './features/landing/landing.module';
 import { LayoutModule } from '@progress/kendo-angular-layout';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+import { ListViewModule } from '@progress/kendo-angular-listview';
+import { IconsModule } from '@progress/kendo-angular-icons';
+import { TentangKamiComponent } from './layouts/tentang-kami/tentang-kami.component';
+import { IndicatorsModule } from '@progress/kendo-angular-indicators';
+
+
 
 
 
@@ -30,7 +35,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     MainComponent,
     FooterComponent,
     NavbarComponent,
-    CardComponent,
+    TentangKamiComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,10 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     SharedModule,
 
     AppRoutingModule,
-    DialogsModule,
     LayoutModule,
+    ListViewModule,
+    IconsModule,
+    IndicatorsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,17 +1,3 @@
-.profile-section {
-  border-style: groove;
-}
-
-.profile-menu {
-  border-style: groove;
-  float: left;
-}
-
-.profile-content {
-  border-style: groove;
-  float: right;
-}
-
 .checklist {
   border-style: groove;
 }
@@ -92,4 +78,53 @@
 .demo {
   display: flex;
   justify-content: space-evenly;
+}
+
+.row {
+  margin-bottom: 0.5rem;
+}
+
+.k-panelbar-content {
+  padding: 1em;
+}
+
+/* .profile-content {
+  display: flex;
+  background-color: transparent!important;
+} */
+
+/* .profile-menu {
+  float: left;
+  height: 100vh;
+} */
+
+.profile-content-title {
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+
+.profile-content-grid-button {
+  float: right;
+  margin-top: 1em;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+#profile-information-panelbar > kendo-panelbar-item  .k-link ,#profile-information-panelbar > kendo-panelbar-item  .k-link.k-state-focused, #profile-information-panelbar  > kendo-panelbar-item >  .k-link.k-state-selected{
+  background-color: #0193AC !important;
+  border-color: #0193AC !important;
+  color: white !important;
+}
+
+.k-dropdown .k-dropdown-wrap, .k-dropdowntree .k-dropdown-wrap {
+  border-color: #0193AC;
+  color: #212529;
+  background-color: transparent;
+  padding: 0;
 }

@@ -1,11 +1,19 @@
 .landing-carousel {
     width: 100%;
-    min-height: 400px;
-    background-image: url("/assets/images/carousel-bg.jpg");
+    min-height: 150px;
+    background: linear-gradient(262.6deg, #0F2459 0%, #0092AC 100%);
     background-size: cover;
     text-align: center;
     display: grid;
     color: white;
+}
+
+.image-1 {
+    background-image: url("/assets/images/Rectangle2.png"), url("/assets/images/Rectangle.png");
+    background-repeat: no-repeat;
+    background-position: right top, left center;
+    align-items: center;
+    display: grid;
 }
 
 .content {
@@ -14,6 +22,14 @@
 
 .landing-carousel-content {
     align-self: center;
+    align-items: center;
+    padding: 0 17%;
+    opacity: 100%;
+}
+
+.landing-carousel-content > h3 {
+    margin-bottom: 0.25em;
+    font-weight: bold;
 }
 
 .landing-carousel h3,p{

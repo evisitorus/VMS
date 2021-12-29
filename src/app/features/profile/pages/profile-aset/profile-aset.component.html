@@ -1,55 +1,103 @@
-<div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
-  </div>
-  <div class="profile-content">
+<div class="row profile-section">
 
-    <kendo-label>Asset</kendo-label>
-    <br><br>
+  <div class="profile-content-modal">
+    <kendo-dialog title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+      <form class="k-form">
 
-    <div>
-      <kendo-grid>
-        <kendo-grid-column field="no" title="No.">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Nama Asset">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Jumlah (Unit)">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Tahun Pembuatan">
-        </kendo-grid-column>
-        <kendo-grid-column field="action" title="Action">
-        </kendo-grid-column>
-      </kendo-grid>
-      <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
-        Tambah Asset
-      </button>
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
+          <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" #namaAsset required></kendo-textbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
 
-      <kendo-dialog title="Tambah Asset" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <div>
-            <kendo-label>Nama Asset</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>
+          <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" #jumlah required></kendo-numerictextbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
+          <kendo-numerictextbox id="input-tahun-asset" formControlName="tahunPembuatan" [maxlength]="4" format="#" #tahunPembuatan required></kendo-numerictextbox>
+          <!-- <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox> -->
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Tahun Pembuatan tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+
+        <div class="k-actions k-actions-end">
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan">
+              Simpan
+            </button>
           </div>
-          <div>
-            <kendo-label>Jumlah</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Tahun Pembuatan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
+          <div class="profile-content-modal-btn">
+            <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal">
+              Batal
+            </button>
           </div>
         </div>
 
-        <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
-            Simpan
-          </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
-    </div>
+      </form>
+    </kendo-dialog>
+
   </div>
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="col-10 profile-content-container">
+
+    <div class="profile-content">
+
+      <div class="profile-content-title">
+        <kendo-label>Asset</kendo-label>
+      </div>
+
+      <div class="profile-content-grid">
+        <kendo-grid [data]="gridData" class="vms-kendo-grid">
+          <kendo-grid-column field="no" title="No.">
+          </kendo-grid-column>
+          <kendo-grid-column field="nama" title="Nama Asset">
+          </kendo-grid-column>
+          <kendo-grid-column field="jumlah" title="Jumlah (Unit)">
+          </kendo-grid-column>
+          <kendo-grid-column field="tahunPembuatan" title="Tahun Pembuatan">
+          </kendo-grid-column>
+          <kendo-grid-column field="id" title="Action">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div *ngIf="!dataItem.deletedAt">
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update-asset">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.nama)" id="btn-delete-asset">
+                </span>
+              </div>   
+              <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+
+        <div class="k-actions k-actions-end">
+          <div class="col-2 profile-content-grid-button">
+            <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
+              Tambah Asset
+            </button>
+          </div>
+        </div>
+        
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
+
+<div kendoDialogContainer></div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

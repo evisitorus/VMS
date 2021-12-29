@@ -1,13 +1,17 @@
-.profile-section {
-  border-style: groove;
+.modal-label {
+  padding: unset;
+  vertical-align: middle;
 }
 
-.profile-menu {
-  border-style: groove;
-  float: left;
+.modal-field {
+padding: unset;
+margin-bottom: 0.5em;
 }
 
-.profile-content {
-  border-style: groove;
-  float: right;
+.modal-field > kendo-formfield {
+margin-top: unset !important;
+}
+
+.modal-form {
+padding: 1em !important;
 }

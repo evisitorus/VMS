@@ -1,68 +1,138 @@
-<div class="profile-section">
-  <div class="profile-menu">
-    <app-profile-menu></app-profile-menu>
+<div class="row profile-section">
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
   </div>
-  <div class="profile-content">
 
-    <kendo-label>Riwayat Pekerjaan</kendo-label>
-    <br><br>
+  <div class="col-10 profile-content-container">
+    <div class="profile-content">
+      <kendo-label>Riwayat Pekerjaan</kendo-label>
+      <br><br>
+  
+      <div>
+        <kendo-grid [data]="gridData" style="height: 240px;">
+          <kendo-grid-column title="No." [width]="60">
+            <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+              {{rowIndex + 1}} 
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="namaPekerjaan" title="Nama Pekerjaan"></kendo-grid-column>
+          <kendo-grid-column field="pemberiPekerjaan" title="Pemberi Pekerjaan"></kendo-grid-column>
+          <kendo-grid-column field="nilaiPekerjaan" title="Nilai Pekerjaan">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{ dataItem.nilaiPekerjaan | currency:'Rp. ':'symbol':'4.0-2' }}
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="tahunPekerjaan" title="Tahun"></kendo-grid-column>
+          <kendo-grid-column field="buktiPekerjaanFilePath" title="Lampiran">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column title="Action">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <ng-container
+              *ngIf="dataItem.active; then active; else inactive">
+            </ng-container>
+              <ng-template #inactive>
+                <span>
+                  <kendo-label class="labelForm">Terhapus</kendo-label>
+                </span>
+              </ng-template>
+              <ng-template #active>
+                <span>
+                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
+                </span>
+                <span>
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btn-delete">
+                </span>
+              </ng-template>
+            </ng-template>
+          </kendo-grid-column>
+        </kendo-grid>
+        <br>
+        <button id="addPekerjaan" kendoButton *ngIf="!openedPekerjaan" (click)="openPekerjaan()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
+          Tambah Riwayat Pekerjaan
+        </button>
+  
+        <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedPekerjaan" (close)="closePekerjaan()">
+            <form class="k-form login-form modal-form" [formGroup]="pekerjaanForm">
+              <div>
+                <div class="wrap">
+                  <kendo-label class="labelForm">Nama Pekerjaan</kendo-label>
+                  <div>
+                    <kendo-textbox class="formField" id="namaPekerjaan" formControlName="namaPekerjaan"></kendo-textbox>                
+                    <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.namaPekerjaan.errors?.required">Nama Pekerjaan tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
 
-    <div>
-      <kendo-grid>
-        <kendo-grid-column field="no" title="No.">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_name" title="Nama Pekerjaan">
-        </kendo-grid-column>
-        <kendo-grid-column field="shareholder_type" title="Pemberi Pekerjaan">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Nilai Pekerjaan">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Tahun">
-        </kendo-grid-column>
-        <kendo-grid-column field="is_domestic_shareholder" title="Lampiran">
-        </kendo-grid-column>
-        <kendo-grid-column field="action" title="Action">
-        </kendo-grid-column>
-      </kendo-grid>
-      <br>
-      <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" icon="k-icon k-i-plus-outline">
-        Tambah Riwayat Pekerjaan
-      </button>
+                <div class="wrap">
+                  <kendo-label class="labelForm">Pemberi Pekerjaan</kendo-label>
+                  <div>
+                    <kendo-textbox class="formField" id="pemberiPekerjaan" formControlName="pemberiPekerjaan"></kendo-textbox>
+                    <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.pemberiPekerjaan.errors?.required">Pemberi Pekerjaan tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
 
-      <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedSaham" (close)="closeSaham()">
-        <div>
-          <div>
-            <kendo-label>Nama Pekerjaan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Pemberi Pekerjaan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Nilai Pekerjaan</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Tahun</kendo-label>
-            <kendo-textbox placeholder="Type your message here" [clearButton]="true"></kendo-textbox>
-          </div>
-          <div>
-            <kendo-label>Lampiran</kendo-label>
-            <kendo-fileselect [title]="'Pilih File'"></kendo-fileselect>
-          </div>
-        </div>
+                <div class="wrap">
+                  <kendo-label class="labelForm">Nilai Pekerjaan</kendo-label>
+                  <div>
+                    <kendo-numerictextbox class="formField" id="nilaiPekerjaan" formControlName="nilaiPekerjaan" format="Rp\ ##,#" [min]="0" [maxlength]="15" [spinners]="false"></kendo-numerictextbox>
+                    <kendo-formhint>satuan Rupiah</kendo-formhint>
+                    <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.nilaiPekerjaan.errors?.required">Nilai Pekerjaan tidak boleh kosong</kendo-formerror>
+                  </div>
+                </div>
 
-        <kendo-dialog-actions>
-          <button kendoButton (click)="closeSaham()" [primary]="true">
-            Simpan
-          </button>
-          <button kendoButton (click)="closeSaham()" [primary]="false">
-            Batal
-          </button>
-        </kendo-dialog-actions>
-      </kendo-dialog>
+                <div class="wrap">
+                  <kendo-label class="labelForm">Tahun</kendo-label>
+                  <div>
+                    <kendo-numerictextbox class="formField"  id="tahunPekerjaan" formControlName="tahunPekerjaan" format="#" [maxlength]="4" [min]="1900" [spinners]="false"></kendo-numerictextbox>
+                    <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.tahunPekerjaan.errors?.required">Tahun tidak boleh kosong, pastikan benar</kendo-formerror>
+                  </div>
+                </div>
+
+                <div class="wrap">
+                  <kendo-label class="labelForm">Lampiran Bukti Pekerjaan</kendo-label>
+                  <div>
+                    <kendo-fileselect class="formField"  id="lampiran" (select)="selectEventHandler($event)" [multiple]="false" id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+                    <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
+                    <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+                    <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+                  </div>
+                </div>
+              </div>
+          </form>
+  
+          <kendo-dialog-actions>
+            <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true" [disabled]="submitDisable">
+              {{ buttonText }}
+              <kendo-loader *ngIf="loaderVisible" size="small"> </kendo-loader>
+            </button>
+            <button id="closeButtonDialog" kendoButton (click)="closePekerjaan()" [primary]="false">
+              Batal
+            </button>
+          </kendo-dialog-actions>
+        </kendo-dialog>
+      </div>
+  
     </div>
-
   </div>
+  
 </div>
+
+<app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>
+
+<kendo-dialog
+  *ngIf="opened"
+  [actions]="myActions"
+  [actionsLayout]="actionsLayout"
+  (action)="onAction($event)"
+  [title]="popUpConfirmationTitle"
+  (close)="close('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center;">
+    {{ popUpConfirmationMessage }}
+  </p>
+</kendo-dialog>
