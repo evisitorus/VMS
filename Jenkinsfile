@@ -159,8 +159,8 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                sh 'echo $AWS_CRED | base64 -di > ./docker/.aws/credentials'
-                sh 'docker run --rm -i -v $(pwd)/docker/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
+                sh 'echo $AWS_CRED | base64 -di > ./devops/.aws/credentials'
+                sh 'docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
                 sh 'docker images'
                 sh 'docker push $REGISTRY_NAME:$BRANCH_NAME-$TAG'
                 sh 'docker logout 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
@@ -168,7 +168,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {                
-                sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e PASS=$(docker run --rm -i -v $(pwd)/docker/.aws:/root/.aws amazon/aws-cli ecr get-login-password) baskaraerbasakti/generate generate_secret.py'
+                sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e PASS=$(docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password) baskaraerbasakti/generate generate_secret.py'
                 sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e NAME=$REPO_NAME -e IMAGE=$REGISTRY_NAME:$BRANCH_NAME-$TAG baskaraerbasakti/generate generate_deployment.py'
                 sh 'ls -lha ./devops/deploy'                
                 script {
