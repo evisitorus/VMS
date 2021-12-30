@@ -218,6 +218,8 @@ Given('The Vendor must click {string} button to save information of {string}', (
         case "Profil Perusahaan":
             I.waitForElement('#saveInformasiPerusahaanBtn');
             I.click('#saveInformasiPerusahaanBtn');
+            I.click("Yes");
+            // I.see('Berhasil menyimpan data');
             break;
         case "Dokumen":
             I.waitForElement('#btn-simpan');
