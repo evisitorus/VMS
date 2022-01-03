@@ -350,8 +350,13 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
+        case "PIC":
+            I.see('Periksa kembali file Anda');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
         default:
-            I.waitForElement(list1);
+            I.waitForElement(grid);
             break;
     }
 });
