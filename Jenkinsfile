@@ -30,15 +30,13 @@ pipeline {
                     echo "get COMMIT_ID"
                     sh 'echo -n $TAG > ./commit-id'
                     commitId = readFile('./commit-id')
-                    sh 'mv docker/Dockerfile docker/nginx.conf .'
+                    sh 'mv devops/Dockerfile devops/nginx.conf .'
+                    sh 'vault kv get --format json smb/mysooltan/develop/license-kendo-ui | jq -r .data.data.license > $(pwd)/kendo-ui-license.txt'
                     if (env.BRANCH_NAME == 'master') {
                         sh 'echo dunia'
-                        // sh 'vault kv get --format json smb/mysooltan/master/cluster | jq -r .data.data.cluster | base64 -di > $(pwd)/docker/deploy/config'
-                        // sh 'vault kv get --format json smb/mysooltan/master/fe | jq -r .data.data.env | base64 -di > .env'
-                    } else if (env.BRANCH_NAME == 'develop') {
-                        // sh 'vault kv get --format json smb/mysooltan/develop/vms-ansible-hosts | jq -r .data.data.hosts | base64 -di > $(pwd)/docker/deploy/hosts'
-                        sh 'vault kv get --format json smb/mysooltan/develop/cluster-vms-develop | jq -r .data.data.cluster | base64 -di > $(pwd)/docker/deploy/config'
-                        sh 'vault kv get --format json smb/mysooltan/develop/license-kendo-ui | jq -r .data.data.license > $(pwd)/kendo-ui-license.txt'                        
+                        sh 'vault kv get --format json smb/mysooltan/master/cluster-vms-prod | jq -r .data.data.cluster | base64 -di > $(pwd)/devops/deploy/config'                        
+                    } else if (env.BRANCH_NAME == 'develop') {                        
+                        sh 'vault kv get --format json smb/mysooltan/develop/cluster-vms-develop | jq -r .data.data.cluster | base64 -di > $(pwd)/devops/deploy/config'                        
                     } else {
                         error "BRANCH TIDAK DIKETAHUI"
                     }
@@ -53,7 +51,7 @@ pipeline {
                     sh 'echo $BRANCH_NAME'
                     sh "rm -Rf hasil hasil_test" 
                     try {
-                        sh 'sudo rm -rf $(pwd)/docker/deploy/cache'
+                        sh 'sudo rm -rf $(pwd)/devops/deploy/cache'
                     } catch (err) {
                         echo err.getMessage()
                     }
@@ -145,14 +143,7 @@ pipeline {
         stage('SonarQube Test') {
             agent { label "nodejs" }
             steps {
-                script {
-                    // if (env.BRANCH_NAME == 'develop') {
-                    //     sh 'printf "\nsonar.branch.name=develop" >> sonar-project.properties'
-                    //     sh 'docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_LOGIN="bb039f114a310a2f488d628a081f74713d1095f9" -e SONAR_PROJECT_BASE_DIR="/app" -v "${PWD}:/app" sonarsource/sonar-scanner-cli:4.6'                        
-                    // } else {
-                    //     sh 'printf "\nsonar.branch.name=master" >> sonar-project.properties'
-                    //     sh 'docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_LOGIN="bb039f114a310a2f488d628a081f74713d1095f9" -e SONAR_PROJECT_BASE_DIR="/app" -v "${PWD}:/app" sonarsource/sonar-scanner-cli:4.6'
-                    // }                                      
+                script {                                    
                     echo "defining sonar-scanner"
                     def scannerHome = tool 'SonarScanner';
                     withSonarQubeEnv('SonarQube') {
@@ -168,28 +159,26 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                sh 'echo $AWS_CRED | base64 -di > ./docker/.aws/credentials'
-                sh 'docker run --rm -i -v $(pwd)/docker/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
+                sh 'echo $AWS_CRED | base64 -di > ./devops/.aws/credentials'
+                sh 'docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
                 sh 'docker images'
                 sh 'docker push $REGISTRY_NAME:$BRANCH_NAME-$TAG'
                 sh 'docker logout 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
             }
         }
         stage('Deploy') {
-            steps {
-                // sh 'echo "IMAGE_FE: $REGISTRY_NAME:$BRANCH_NAME-$TAG" > docker/deploy/external_vars.yaml'
-                sh 'docker run --rm -i -v $(pwd)/docker/deploy:/generate/k8s -e PASS=$(docker run --rm -i -v $(pwd)/docker/.aws:/root/.aws amazon/aws-cli ecr get-login-password) baskaraerbasakti/generate generate_secret.py'
-                sh 'docker run --rm -i -v $(pwd)/docker/deploy:/generate/k8s -e NAME=$REPO_NAME -e IMAGE=$REGISTRY_NAME:$BRANCH_NAME-$TAG baskaraerbasakti/generate generate_deployment.py'
-                sh 'ls -lha ./docker/deploy'                
+            steps {                
+                sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e PASS=$(docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password) baskaraerbasakti/generate generate_secret.py'
+                sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e NAME=$REPO_NAME -e IMAGE=$REGISTRY_NAME:$BRANCH_NAME-$TAG baskaraerbasakti/generate generate_deployment.py'
+                sh 'ls -lha ./devops/deploy'                
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         sh 'echo dunia'
-                        // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
-                        // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply --namespace=app -f /root/.kube/deployment.yaml'
-                    } else if (env.BRANCH_NAME == 'develop') {
-                        // sh 'docker run --rm -i -v $(pwd)/docker/deploy:/etc/ansible baskaraerbasakti/vms-ansible vms-dev.yaml -vv'
-                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/secret.yaml'
-                        sh 'docker run --rm -i -v $(pwd)/docker/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/secret.yaml'
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
+                    } else if (env.BRANCH_NAME == 'develop') {                        
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/secret.yaml'
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
                     }
                 }
                 sh 'sudo rm -rf docker'
