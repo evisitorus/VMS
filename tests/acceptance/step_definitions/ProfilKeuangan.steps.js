@@ -94,10 +94,7 @@ Given('The Vendor will get warning message tooltip on empty fields {string}', (f
             I.see('Cabang tidak boleh kosong');
             break;
         case "Informasi Perusahaan":
-            I.see('BUMN Pengampu tidak boleh kosong');
-            I.see('Jumlah Karyawan Total tidak boleh kosong');
-            I.see('Jumlah Karyawan Lokal tidak boleh kosong');
-            I.see('Jumlah Karyawan Asing tidak boleh kosong');
+            I.see('Mohon lengkapi Data Perusahaan Anda');
             break;
         default:
             I.waitForElement(form);
