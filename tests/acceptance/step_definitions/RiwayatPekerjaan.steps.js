@@ -12,10 +12,6 @@ Given('The Vendor must click {string} button where found on the left-buttom of {
 
 });
 
-Given('The Vendor select "Yes" option', () => {
-
-});
-
 Given('The Vendor will see progress of upgrade level on {string}', () => {
 
 });
@@ -90,6 +86,11 @@ Given('The Vendor can modify data which displayed on {string} form with document
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
             break;
+        case "PIC":
+            I.attachFile('#input-pic-avatar input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
+            I.fillField('#input-name.k-textbox', 'George Grey');
+            I.fillField('#input-phone-number.k-textbox', '08777777777');
+            break;
         default:
             I.click(form1);
             break;
@@ -119,6 +120,11 @@ Given('The Vendor can modify data which displayed on {string} form with invalid 
             I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
+        case "PIC":
+            I.attachFile('#input-pic-avatar input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            I.fillField('#input-name.k-textbox', 'George Grey');
+            I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
         default:
             I.click(form1);

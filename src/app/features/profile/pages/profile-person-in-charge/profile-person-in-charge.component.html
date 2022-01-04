@@ -95,22 +95,22 @@
             <div class="col-9 content-field">
               <kendo-formfield id="formfield-phone-number" [formGroup]="formPIC">
                 <kendo-textbox id="input-phone-number" class="col-md" formControlName="phoneNumber"
-                               placeholder="Nomor Telepon Anda"
+                               placeholder="No. Handphone Anda"
                                [clearButton]="true"
                                #phoneNumber
                                required
                                [readonly]=isDisabled
                                [value]=responsePhoneNumber
-                               [minlength]="9"
-                               [maxlength]="13"
+                               [minlength]="7"
+                               [maxlength]="20"
                                (keypress)="keyPressNumbers($event)">
                 </kendo-textbox>
-                <kendo-formerror id="error-phone-number-less-than-9-digits" *ngIf="formPIC.controls.phoneNumber.errors?.minlength">No. Handphone tidak boleh kurang
-                  dari 9
+                <kendo-formerror id="error-phone-number-less-than-7-digits" *ngIf="formPIC.controls.phoneNumber.errors?.minlength">No. Handphone tidak boleh kurang
+                  dari 7
                   digit
                 </kendo-formerror>
-                <kendo-formerror id="error-phone-number-greater-than-13-digits" *ngIf="formPIC.controls.phoneNumber.errors?.maxlength">No. Handphone tidak boleh lebih
-                  dari 13
+                <kendo-formerror id="error-phone-number-greater-than-20-digits" *ngIf="formPIC.controls.phoneNumber.errors?.maxlength">No. Handphone tidak boleh lebih
+                  dari 20
                   digit
                 </kendo-formerror>
                 <kendo-formerror id="error-phone-number-required" *ngIf="formPIC.controls.phoneNumber.errors?.required">No. Handphone tidak boleh kosong
@@ -130,7 +130,7 @@
             *ngIf="!changePasswordTextboxEnabled; then showClickToChangePassword; else hideClickToChangePassword">
           </ng-container>
           <ng-template #showClickToChangePassword>
-            <div class="row align-items-center" [hidden]="isDisabled">
+            <div class="row align-items-center text-password" [hidden]="isDisabled">
               <p class="col-3"></p>
               <kendo-label id="label-click-to-change-password-showed-up" class="col-md" [hidden]="changePasswordTextboxEnabled" (click)="showChangePasswordTextbox()">
                 Klik di sini untuk mengganti kata sandi Anda
