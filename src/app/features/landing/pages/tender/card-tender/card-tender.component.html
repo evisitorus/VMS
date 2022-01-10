@@ -9,7 +9,7 @@
       </div>
       <div class="col-4 filter-by-bumn">
         <kendo-label [for]="filterBUMN" text=""></kendo-label> <br>
-        <kendo-dropdownlist id="select-filter-bumn" [(ngModel)]="selectedFilterBUMNItem" [data]="filterBUMN" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+        <kendo-dropdownlist id="select-filter-bumn" [(ngModel)]="selectedFilterBUMNItem" [data]="filterBUMN" [filterable]="true" textField="name" valueField="id" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
       </div>
       <div class="col-4 filter-created-at">
         <kendo-label [for]="orderBy" text="Urutkan Berdasarkan"></kendo-label>

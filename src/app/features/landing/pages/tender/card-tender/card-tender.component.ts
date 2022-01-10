@@ -70,6 +70,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.fetchListBUMN()
     this.setFilter();
     this.fetchData();
   }
@@ -102,7 +103,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     }
 
     if (this.selectedFilterBUMNItem.value !== null) {
-      this.query = this.query + "q=" + this.selectedFilterBUMNItem.value + "&";
+      this.query = this.query + "cparent-ids=" + this.selectedFilterBUMNItem.id + "&";
     }
 
     if (!this.hiddenFilter) {
@@ -171,6 +172,27 @@ export class CardTenderComponent implements OnInit, OnDestroy {
       },
       () => {
         this.popUpMessage = "Gagal menemukan data tender";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public fetchListBUMN(): void {
+    this.tenderService.getListBUMN().subscribe(
+      (resp) =>  {      
+          let data = resp.data;
+
+          let arr: any[] = [];
+          Object.keys(data).map(function(key){  
+            arr.push(data[key])  
+            return arr;  
+          });  
+
+          this.listFilterBUMN = this.listFilterBUMN.concat(arr)
+          this.filterBUMN = this.listFilterBUMN.slice();
+      },
+      () => {
+        this.popUpMessage = "Gagal menemukan data list BUMN";
         this.triggerPopUp();
       }
     );
@@ -251,10 +273,5 @@ const registerEndTender: Array<any> = [
 ];
 
 const BUMNTender: Array<any> = [
-  { value: null, text: "Semua BUMN" },
-  { value: 'Pegadaian', text: "Pegadaian" },
-  { value: 'Pertamina', text: "Pertamina" },
-  { value: 'PLN', text: "PLN" },
-  { value: 'PNM', text: "PNM" },
-  { value: 'Telkom', text: "Telkom" },
+  { id: null, name: "Semua BUMN" }
 ];
