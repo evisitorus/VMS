@@ -52,7 +52,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public listOrderBy: Array<any> = tenderOrderBy;
   public listFilterCategory: Array<any> = categoryTender;
   public listFilterBUMN: Array<any> = BUMNTender;
-  public listFilterStatus: Array<string> = statusTender;
+  public listFilterStatus: Array<any> = statusTender;
   public listFilterRegisterEnd: Array<any> = registerEndTender;
 
   public selectedOrderByItem: any = this.listOrderBy[0];
@@ -70,6 +70,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.fetchListBUMN()
     this.setFilter();
     this.fetchData();
   }
@@ -102,7 +103,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     }
 
     if (this.selectedFilterBUMNItem.value !== null) {
-      this.query = this.query + "q=" + this.selectedFilterBUMNItem.value + "&";
+      this.query = this.query + "cparent-ids=" + this.selectedFilterBUMNItem.id + "&";
     }
 
     if (!this.hiddenFilter) {
@@ -132,10 +133,43 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.fetchData();
   }
 
-  public handleFilter(value: any): void {
-    this.filterCategory = this.listFilterCategory.filter(
-      (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
-    );
+  public handleFilter(value: any, type?: string): void {
+    switch (type) {
+      
+      case "category":
+        this.filterCategory = this.listFilterCategory.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "bumn":
+        this.filterBUMN = this.listFilterBUMN.filter(
+          (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "order":
+        this.orderBy = this.listOrderBy.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "register":
+        this.filterRegisterEnd = this.listFilterRegisterEnd.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "status":
+        this.filterStatus = this.listFilterStatus.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+    
+      default:
+        break;
+    }
+    
   }
 
   public toggleFilter(): void {
@@ -171,6 +205,27 @@ export class CardTenderComponent implements OnInit, OnDestroy {
       },
       () => {
         this.popUpMessage = "Gagal menemukan data tender";
+        this.triggerPopUp();
+      }
+    );
+  }
+
+  public fetchListBUMN(): void {
+    this.tenderService.getListBUMN().subscribe(
+      (resp) =>  {      
+          let data = resp.data;
+
+          let arr: any[] = [];
+          Object.keys(data).map(function(key){  
+            arr.push(data[key])  
+            return arr;  
+          });  
+
+          this.listFilterBUMN = this.listFilterBUMN.concat(arr)
+          this.filterBUMN = this.listFilterBUMN.slice();
+      },
+      () => {
+        this.popUpMessage = "Gagal menemukan data list BUMN";
         this.triggerPopUp();
       }
     );
@@ -251,10 +306,5 @@ const registerEndTender: Array<any> = [
 ];
 
 const BUMNTender: Array<any> = [
-  { value: null, text: "Semua BUMN" },
-  { value: 'Pegadaian', text: "Pegadaian" },
-  { value: 'Pertamina', text: "Pertamina" },
-  { value: 'PLN', text: "PLN" },
-  { value: 'PNM', text: "PNM" },
-  { value: 'Telkom', text: "Telkom" },
+  { id: "", name: "Semua BUMN" }
 ];

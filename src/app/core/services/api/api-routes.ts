@@ -22,6 +22,7 @@ export const ApiRoutes = {
   api_penyedia_usaha_route: API_BASE_URL + "/jenis_penyedia_usahas?page=1",
   api_tenders_route: API_BASE_URL + "/tenders",
   api_list_tender: API_BASE_URL + "/tenders/page/",
+  api_list_bumn_tender: API_BASE_URL + "/tenders/company/list",
   api_token_route: API_BASE_URL + "/users/token",
   api_documents_route: API_BASE_URL + "/dokumens",
   api_media_object_route: API_BASE_URL + "/media_objects",
