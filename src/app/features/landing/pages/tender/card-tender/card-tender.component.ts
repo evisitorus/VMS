@@ -52,7 +52,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public listOrderBy: Array<any> = tenderOrderBy;
   public listFilterCategory: Array<any> = categoryTender;
   public listFilterBUMN: Array<any> = BUMNTender;
-  public listFilterStatus: Array<string> = statusTender;
+  public listFilterStatus: Array<any> = statusTender;
   public listFilterRegisterEnd: Array<any> = registerEndTender;
 
   public selectedOrderByItem: any = this.listOrderBy[0];
@@ -133,10 +133,43 @@ export class CardTenderComponent implements OnInit, OnDestroy {
     this.fetchData();
   }
 
-  public handleFilter(value: any): void {
-    this.filterCategory = this.listFilterCategory.filter(
-      (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
-    );
+  public handleFilter(value: any, type?: string): void {
+    switch (type) {
+      
+      case "category":
+        this.filterCategory = this.listFilterCategory.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "bumn":
+        this.filterBUMN = this.listFilterBUMN.filter(
+          (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "order":
+        this.orderBy = this.listOrderBy.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "register":
+        this.filterRegisterEnd = this.listFilterRegisterEnd.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+
+      case "status":
+        this.filterStatus = this.listFilterStatus.filter(
+          (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+        break;
+    
+      default:
+        break;
+    }
+    
   }
 
   public toggleFilter(): void {
@@ -273,5 +306,5 @@ const registerEndTender: Array<any> = [
 ];
 
 const BUMNTender: Array<any> = [
-  { id: null, name: "Semua BUMN" }
+  { id: "", name: "Semua BUMN" }
 ];

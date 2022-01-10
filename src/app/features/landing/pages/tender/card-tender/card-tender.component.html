@@ -5,15 +5,15 @@
     <div class="row">
       <div class="col-4 filter-category">
         <kendo-label [for]="filterCategory" text=""></kendo-label> <br>
-        <kendo-dropdownlist id="select-filter-category" [(ngModel)]="selectedFilterCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+        <kendo-dropdownlist id="select-filter-category" [(ngModel)]="selectedFilterCategoryItem" [data]="filterCategory" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event, 'category')" (valueChange)="filter()"> </kendo-dropdownlist>
       </div>
       <div class="col-4 filter-by-bumn">
         <kendo-label [for]="filterBUMN" text=""></kendo-label> <br>
-        <kendo-dropdownlist id="select-filter-bumn" [(ngModel)]="selectedFilterBUMNItem" [data]="filterBUMN" [filterable]="true" textField="name" valueField="id" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+        <kendo-dropdownlist id="select-filter-bumn" [(ngModel)]="selectedFilterBUMNItem" [data]="filterBUMN" [filterable]="true" textField="name" valueField="id" (filterChange)="handleFilter($event, 'bumn')" (valueChange)="filter()"> </kendo-dropdownlist>
       </div>
       <div class="col-4 filter-created-at">
         <kendo-label [for]="orderBy" text="Urutkan Berdasarkan"></kendo-label>
-        <kendo-dropdownlist id="select-order-by" [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+        <kendo-dropdownlist id="select-order-by" [(ngModel)]="selectedOrderByItem" [data]="orderBy" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event, 'order')" (valueChange)="filter()"> </kendo-dropdownlist>
       </div>
     </div>
 
@@ -34,14 +34,14 @@
         </div>
         <div class="col-6 filter-register-end">
           <kendo-label text="Akhir Registrasi"></kendo-label> <br>
-          <kendo-dropdownlist id="select-filter-register-end" [(ngModel)]="selectedFilterRegisterEndItem" [data]="filterRegisterEnd" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+          <kendo-dropdownlist id="select-filter-register-end" [(ngModel)]="selectedFilterRegisterEndItem" [data]="filterRegisterEnd" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event, 'register')" (valueChange)="filter()"> </kendo-dropdownlist>
         </div>
       </div>
 
       <div class="row hidden-filter-content">
         <div class="col-6 filter-status">
           <kendo-label [for]="filterStatus" text="Status Tender"></kendo-label> <br>
-          <kendo-dropdownlist id="select-filter-status" [(ngModel)]="selectedFilterStatusItem" [data]="filterStatus" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event)" (valueChange)="filter()"> </kendo-dropdownlist>
+          <kendo-dropdownlist id="select-filter-status" [(ngModel)]="selectedFilterStatusItem" [data]="filterStatus" [filterable]="true" textField="text" valueField="value" (filterChange)="handleFilter($event, 'status')" (valueChange)="filter()"> </kendo-dropdownlist>
         </div>
         <div class="col-6 filter-hps-range">
           <kendo-label text="Rentang HPS"></kendo-label> <br>
