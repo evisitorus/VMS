@@ -2,14 +2,6 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-//for QA testing
-// export const environment = {
-//   production: false,
-//   api_base_path: "http://172.20.130.132:8000",
-//   acceptance_test : true
-// };
-
-
 export const environment = {
   production: false,
   api_base_path: "http://localhost:8000",
