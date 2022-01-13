@@ -143,7 +143,8 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public submitProfilKaryawan(): void {
-    if( this.uploadedFileContentUrl === null || this.selectedFile === null){
+    //if( this.uploadedFileContentUrl === null || this.selectedFile === null){
+    if( this.uploadedFileContentUrl == undefined || this.selectedFile == undefined){
       this.popUpID = "popup-wrong-file";
       this.parent.popUpMessage = "Periksa kembali file Anda";
       this.parent.triggerPopUp();
@@ -157,10 +158,7 @@ export class ProfilKaryawanComponent implements OnInit {
         }
       }
     }
-    
-
   }
-
 
   public addNewBidang(): void {
 
@@ -200,7 +198,12 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
-    let file_id = this.uploadedFileId.replace(/\D/g,'');
+
+    let file_id = this.uploadedFileId;
+    if (file_id != undefined) {
+      file_id = file_id.replace(/\D/g,'');//this.uploadedFileId.replace(/\D/g,'');
+    }
+
     let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
@@ -352,7 +355,7 @@ export class ProfilKaryawanComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      } 
+      }
     });
   }
 

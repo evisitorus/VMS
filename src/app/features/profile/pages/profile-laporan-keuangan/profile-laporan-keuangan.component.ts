@@ -328,8 +328,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public submitSPT(): void {
-    console.log(this.formSPT.valid);
-    if (this.lampiranFiles === null) {
+    if (this.lampiranFiles == undefined) {
       this.popUpMessage = "File tidak valid";
       this.triggerModal('spt');
       this.triggerPopUp();
@@ -475,11 +474,11 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         height: 200,
         minWidth: 250,
       });
-  
+
       dialog.result.subscribe((result) => {
         if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
           this.deleteNeraca(id);
-        } 
+        }
       });
     } else {
       const dialog: DialogRef = this.sptDialogService.open({
@@ -490,11 +489,11 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         height: 200,
         minWidth: 250,
       });
-  
+
       dialog.result.subscribe((result) => {
         if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
           this.deleteSPT(id);
-        } 
+        }
       });
     }
   }
@@ -578,7 +577,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public gridViewSPT!: GridDataResult;
   public skip: number = 0;
   public pageSize: number = 5;
-  
+
   public pageChangeNeraca(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItemsNeraca();

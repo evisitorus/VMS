@@ -125,7 +125,7 @@ export class ProfileDokumenComponent implements OnInit {
       this.setIsLifeTime();
     } else {
       this.checked = false;
-      this.setIsLifeTime();      
+      this.setIsLifeTime();
     }
   }
 
@@ -153,7 +153,7 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.lampiranFiles === null) {
+    if (this.lampiranFiles == undefined) {
       this.popUpMessage = "File tidak valid";
       this.close();
       this.triggerPopUp();
@@ -178,7 +178,7 @@ export class ProfileDokumenComponent implements OnInit {
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-    
+
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
@@ -245,7 +245,7 @@ export class ProfileDokumenComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      } 
+      }
     });
   }
 
