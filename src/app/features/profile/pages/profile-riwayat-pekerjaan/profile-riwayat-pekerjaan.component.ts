@@ -5,7 +5,6 @@ import { AddPekerjaanInterface, UpdateRiwayatPekerjaanInterface } from 'src/app/
 
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { samplePekerjaans } from './pekerjaan';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { DialogAction, ActionsLayout } from "@progress/kendo-angular-dialog";
@@ -37,7 +36,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   isLoggedIn: boolean = true;
   
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
-  public gridData: any = samplePekerjaans;
+  public gridData: any = {};
   record = 0;
 
   public invalidFileExtension!: boolean;

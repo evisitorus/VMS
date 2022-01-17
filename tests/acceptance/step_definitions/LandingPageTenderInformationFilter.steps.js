@@ -18,6 +18,11 @@ Given('The User must define parameter on filter section of {string} likes {strin
   I.fillField('#select-filter-category', 'Material Konstruksi');
   I.pressKey("Enter");
 
+  // Filter by BUMN
+  I.click('#select-filter-bumn');
+  I.fillField('#select-filter-bumn', 'PT Pertamina');
+  I.pressKey("Enter");
+
   // Order by
   I.click('#select-order-by');
   I.fillField('#select-order-by', 'Terbaru');
@@ -30,7 +35,7 @@ Given('The User must define parameter on filter section of {string} likes {strin
 
 Given('The User will see list of {string} based on parameters which define on {string} section', (string1, string2, doc)  => {
   I.see('Material Konstruksi', '#bidangUsaha');
-  I.see('Aktif', '#statusTender');
+  I.see('Pemenang Terpilih', '#statusTender');
   I.seeElement('#namaPerusahaan');
   I.seeElement('#namaTender');
   I.seeElement('#batasAkhirRegistrasi');
@@ -41,13 +46,17 @@ Given('The User already filter Tender Information', () => {
   I.fillField('#select-order-by', 'Terbaru');
   I.pressKey("Enter");
 
+  I.click('#select-filter-bumn');
+  I.fillField('#select-filter-bumn', 'Madani');
+  I.pressKey("Enter");
+
   I.click('#select-filter-category');
   I.fillField('#select-filter-category', 'Material Konstruksi');
   I.pressKey("Enter");
 
   I.click('#btn-toggle-filter');
   I.waitForElement('#input-filter-keyword');
-  I.fillField('#input-filter-keyword', 'Mobil');
+  I.fillField('#input-filter-keyword', 'Laptop');
 });
 
 Given('The User already see list information of "Tender" on "Tender Information Board"', () => {
