@@ -38,6 +38,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   popUpMessage: string = "";
   redirectOnClosePopUp: boolean = false;
   popUpID = "";
+  person_id = this.authService.getLocalStorage('person_id')!;
 
   public formPIC!: FormGroup;
 
@@ -104,17 +105,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
     this.opened = false;
   }
 
-  public open() {
-    if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
-      this.popUpMessage = "Periksa kembali file Anda";
-      this.popUpID = "popup-check-your-file-again"
-      this.triggerPopUp();
-    } else if (this.formPIC.invalid) {
-      this.opened = false;
-    } else if (this.formPIC.valid) {
-      this.opened = true;
-    }
-  }
 
   changeIsDisabled() {
     this.isDisabled = !this.isDisabled;
@@ -127,6 +117,26 @@ export class ProfilePersonInChargeComponent implements OnInit {
     this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
     this.triggerPopUp();
   }
+
+  saveFileIdToUser() {
+    if (this.uploadedFileId) {
+      this.userFileParam = {
+        fileID: this.uploadedFileId
+      }
+
+      this.profilePICService.updateUserFile(this.userFileParam, this.person_id).subscribe(
+        () => {
+        },
+        (error) => {
+          this.popUpMessage = error.error.message;
+          this.redirectOnClosePopUp = false;
+          this.popUpID = "popup-failed-save-upload-file-to-database";
+          this.triggerPopUp();
+        }
+      );
+    }
+  }
+
 
   save() {
     if ("" === this.formPIC.value.oldPassword) {
@@ -141,6 +151,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
       this.formPIC.value.confirmNewPassword = null;
     }
 
+    this.lampiranFiles = [];
+
     this.params = {
       name: this.formPIC.value.name,
       email: this.formPIC.value.email,
@@ -150,29 +162,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
       confirmNewPassword: this.formPIC.value.confirmNewPassword
     }
 
-    let person_id = this.authService.getLocalStorage('person_id')!;
-
-    if (this.uploadedFileId) {
-      this.userFileParam = {
-        fileID: this.uploadedFileId
-      }
-
-      this.profilePICService.updateUserFile(this.userFileParam, person_id).subscribe(
-        () => {
-        },
-        (error) => {
-          this.popUpMessage = error.error.message;
-          this.redirectOnClosePopUp = false;
-          this.popUpID ="popup-failed-save-upload-file-to-database";
-          this.triggerPopUp();
-        }
-      );
-    }
-
     if (this.formPIC.valid) {
       this.formPIC.markAllAsTouched();
 
-      this.profilePICService.updateProfilePIC(this.params, person_id).subscribe(
+      this.profilePICService.updateProfilePIC(this.params, this.person_id).subscribe(
         (response) => {
           this.changePasswordTextboxEnabled = false;
           this.responseName = response.data.name;
@@ -208,8 +201,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   ngOnInit(): void {
     this.setForm();
 
-    let person_id = this.authService.getLocalStorage('person_id')!;
-    this.profilePICService.getProfilePIC(person_id).subscribe(
+    this.profilePICService.getProfilePIC(this.person_id).subscribe(
       (response) => {
         if (response.data.file_id) {
           this.responseFile = this.responseFile = environment.api_base_path.concat('/api/media_objects/').concat(response.data.file_id).concat('/file');
@@ -243,6 +235,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.uploadedFileContentUrl = res.contentUrl;
         this.uploadedFileId = res["@id"];
         this.responseFile = environment.api_base_path + res["@id"] + "/file";
+        this.saveFileIdToUser();
       },
       (err) => {
         this.popUpMessage = "Gagal memroses berkas, Silakan coba lagi.";
@@ -301,5 +294,15 @@ export class ProfilePersonInChargeComponent implements OnInit {
   perbaruiClicked() {
     this.attention();
     this.changeIsDisabled();
+  }
+
+  public open() {
+    if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
+      this.popUpMessage = "Periksa kembali file Anda";
+      this.popUpID = "popup-check-your-file-again"
+      this.triggerPopUp();
+    } else if (this.formPIC.valid && this.responseFile) {
+      this.opened = true;
+    }
   }
 }

@@ -1,18 +1,18 @@
-import { Component, Injectable, ViewEncapsulation } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { FileRestrictions } from "@progress/kendo-angular-upload";
-import { forkJoin, from } from "rxjs";
-import { ApiRoutes } from "src/app/core/services/api/api-routes";
-import { EventEmitterService } from "src/app/core/services/event-emitter.service";
-import { FileService } from "src/app/core/services/file.service";
-import { ProfileInformationService } from "src/app/core/services/profile-information.service";
-import { environment as env, environment } from "src/environments/environment";
-import { ProfileInformationInterface } from "../../../../core/interfaces/profile/profile-information-interface";
-import { AuthService } from "../../../../core/services/auth.service";
-import { ProfileDashboardService } from "src/app/core/services/profile-dashboard.service";
-import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
-import { DialogCloseResult, DialogRef, DialogService } from "@progress/kendo-angular-dialog";
-import { DropDownFilterSettings } from "@progress/kendo-angular-dropdowns";
+import {Component, Injectable, ViewEncapsulation} from "@angular/core";
+import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
+import {FileRestrictions} from "@progress/kendo-angular-upload";
+import {forkJoin, from} from "rxjs";
+import {ApiRoutes} from "src/app/core/services/api/api-routes";
+import {EventEmitterService} from "src/app/core/services/event-emitter.service";
+import {FileService} from "src/app/core/services/file.service";
+import {ProfileInformationService} from "src/app/core/services/profile-information.service";
+import {environment as env, environment} from "src/environments/environment";
+import {ProfileInformationInterface} from "../../../../core/interfaces/profile/profile-information-interface";
+import {AuthService} from "../../../../core/services/auth.service";
+import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service";
+import {ProfileAddressService} from 'src/app/core/services/profile/profile-address.service';
+import {DialogCloseResult, DialogRef, DialogService} from "@progress/kendo-angular-dialog";
+import {DropDownFilterSettings} from "@progress/kendo-angular-dropdowns";
 
 interface Item {
   name: string;
@@ -54,6 +54,7 @@ export class ProfileInformasiPerusahaanComponent {
     private dialogService: DialogService
   ) {
   }
+
   public params!: ProfileInformationInterface;
   public profileInformationFormGroup!: FormGroup;
 
@@ -81,19 +82,19 @@ export class ProfileInformasiPerusahaanComponent {
 
   // TODO: ambil dari table tipe vendor. jangan static
   public kategoriUmkmItems: Array<Item> = [
-    { name: "Kecil", id: 1 },
-    { name: "Menengah", id: 2 },
-    { name: "Mikro", id: 3 },
+    {name: "Kecil", id: 1},
+    {name: "Menengah", id: 2},
+    {name: "Mikro", id: 3},
   ];
 
   public kategoriCorpItems: Array<Item> = [
-    { name: "BUMN (Grup)", id: 1 },
-    { name: "Swasta", id: 2 }
+    {name: "BUMN (Grup)", id: 1},
+    {name: "Swasta", id: 2}
   ];
 
   public tipeBadanUsahaItems: Array<Item> = [
-    { name: "UMKM", id: 1 },
-    { name: "Korporasi", id: 2 }
+    {name: "UMKM", id: 1},
+    {name: "Korporasi", id: 2}
   ];
 
   public jenisBadanUsahaItems: Array<Item> = [];
@@ -138,11 +139,19 @@ export class ProfileInformasiPerusahaanComponent {
   public kategoriVendor: any;
   public pkpStatus = false;
 
-  public defaultItemProvinces: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
-  public defaultItemKota: { description: string, id: number, provinceId: number } = { description: 'Pilih kota', id: 0, provinceId: 0 };
-  public defaultItemKecamatan: { description: string, id: number, kotaId: number } = { description: 'Pilih Kecamatan', id: 0, kotaId: 0 };
-  public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
-  public defaultItemKodepos: { description: string, id: number } = { description: 'Pilih Kodepos', id: 0 };
+  public defaultItemProvinces: { description: string, id: number } = {description: 'Pilih provinsi', id: 0};
+  public defaultItemKota: { description: string, id: number, provinceId: number } = {
+    description: 'Pilih kota',
+    id: 0,
+    provinceId: 0
+  };
+  public defaultItemKecamatan: { description: string, id: number, kotaId: number } = {
+    description: 'Pilih Kecamatan',
+    id: 0,
+    kotaId: 0
+  };
+  public defaultItemKelurahan: { description: string, id: number } = {description: 'Pilih Kelurahan', id: 0};
+  public defaultItemKodepos: { description: string, id: number } = {description: 'Pilih Kodepos', id: 0};
 
   public provinsi: Array<{ id: number, description: string }> = [];
   public dataKecamatan: Array<{}> = [];
@@ -197,7 +206,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.getDataPerusahaan();
   }
 
-  public setResponseVendorData(resp: any){
+  public setResponseVendorData(resp: any) {
     if (resp.logo) {
       this.logoImg = environment.api_base_path + resp.logo.concat('/file');
     }
@@ -244,7 +253,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   }
 
-  public setResponseContactMechanism(resp: any){
+  public setResponseContactMechanism(resp: any) {
     this.contact_mechanism = resp["hydra:member"];
     let isFirstAddress = false;
     this.contact_mechanism.forEach((value) => {
@@ -257,7 +266,7 @@ export class ProfileInformasiPerusahaanComponent {
           (resp) => {
             this.provinces = resp["hydra:member"];
             const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
-            // this.defaultItemProvinces.description = this.provinces[index].description;  
+            // this.defaultItemProvinces.description = this.provinces[index].description;
             if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
               isFirstAddress = true;
               this.dataPerusahaan.alamat = value.contactMechanism.address1;
@@ -266,7 +275,7 @@ export class ProfileInformasiPerusahaanComponent {
                 (resp) => {
                   this.cities = resp["hydra:member"];
                   const index = this.cities.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.city.id);
-                  // this.defaultItemKota.description = this.cities[index].description;  
+                  // this.defaultItemKota.description = this.cities[index].description;
                   this.dataResultKota = this.cities;
                   this.selectedKota = this.cities[index];
 
@@ -296,33 +305,27 @@ export class ProfileInformasiPerusahaanComponent {
 
                             },
                             (error) => {
-                              console.log(error);
                             }
                           );
 
                         },
                         (error) => {
-                          console.log(error);
                         }
-
                       );
 
                     },
                     (error) => {
-                      console.log(error);
                     }
                   );
 
                 },
                 (error) => {
-                  console.log(error);
                 }
               );
             }
 
           },
           (error) => {
-            console.log(error);
           }
         );
       }
@@ -330,7 +333,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.setFormPerusahaan(this.dataPerusahaan);
   }
 
-  public setJenisPenyediaUsaha(resp:any){
+  public setJenisPenyediaUsaha(resp: any) {
     //get jenis penyedia usaha
     this.jenis_penyedia_usaha = resp["hydra:member"];
 
@@ -342,7 +345,7 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  public setJenisKegiatanUsaha(resp: any){
+  public setJenisKegiatanUsaha(resp: any) {
     //get jenis kegiatan usaha
     this.jenis_kegiatan_usaha = resp["hydra:member"];
     if (this.dataPerusahaan.jenisKegiatanUsaha == null) {
@@ -353,22 +356,22 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  public setOrganizations(resp: any){
+  public setOrganizations(resp: any) {
     //get list of organizations
     this.organizations = resp["hydra:member"];
   }
 
-  public setJenisVendor(resp: any){
+  public setJenisVendor(resp: any) {
     //get jenis badan usaha
     this.jenisBadanUsahaItems = resp["hydra:member"];
   }
 
-  public setBidangUsaha(resp: any){
+  public setBidangUsaha(resp: any) {
     //get kbli bidang usaha
     this.bidangUsahaKbli = resp["hydra:member"];
   }
 
-  public setTipeVendor(resp: any){
+  public setTipeVendor(resp: any) {
     //get tipe badan usaha
     this.tipeBadanUsahaItems = resp["hydra:member"];
     if (this.dataPerusahaan.tipeBadanUsaha == null) {
@@ -379,24 +382,24 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  public setProvinces(resp: any){
+  public setProvinces(resp: any) {
     // get list of provinces
     this.provinsi = resp["hydra:member"];
   }
 
-  public setHimpunan(resp: any){
+  public setHimpunan(resp: any) {
     this.orgHimpunan = resp["hydra:member"];
   }
 
-  public setPengampu(resp: any){
+  public setPengampu(resp: any) {
     this.orgPengampu = resp["hydra:member"];
   }
 
-  public setVendorHimpunan(resp: any){
+  public setVendorHimpunan(resp: any) {
     this.dataPerusahaan.organisasiHimpunan = resp.data ? resp.data : "";
   }
 
-  public setVendorPengampu(resp: any){
+  public setVendorPengampu(resp: any) {
     this.dataPerusahaan.bumnPengampu = resp.data ? resp.data : "";
   }
 
@@ -436,7 +439,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.submitted = true;
 
     if (valid) {
-      console.log("File uploaded");
     } else {
       this.logoForm.markAllAsTouched();
     }
@@ -457,7 +459,6 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKota = resp["hydra:member"];
       },
       (error) => {
-        console.log(error);
       }
     );
   }
@@ -468,10 +469,8 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKecamatan = resp["hydra:member"];
       },
       (error) => {
-        console.log(error);
       }
     );
-
   }
 
   handleKecamatanChange(value: any) {
@@ -480,7 +479,6 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKelurahan = resp["hydra:member"];
       },
       (error) => {
-        console.log(error);
       }
     );
   }
@@ -491,7 +489,6 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKodepos = resp["hydra:member"];
       },
       (error) => {
-        console.log(error);
       }
     );
   }
@@ -507,7 +504,6 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   upload(): void {
-    console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
@@ -518,7 +514,6 @@ export class ProfileInformasiPerusahaanComponent {
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.triggerPopUp();
-        console.log(error);
       }
     );
   }
@@ -527,22 +522,23 @@ export class ProfileInformasiPerusahaanComponent {
     this.eventEmitterService.trigger();
   }
 
-
   public submitFormVendor(): void {
-    const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi",
-      content: "Simpan profil perusahaan ?",
-      actions: [{ text: "Yes", primary: true }, { text: "No" }],
-      width: 450,
-      height: 200,
-      minWidth: 250,
-    });
+     if (this.profileInformationFormGroup.valid && this.logoImg) {
+      const dialog: DialogRef = this.dialogService.open({
+        title: "Konfirmasi",
+        content: "Simpan profil perusahaan ?",
+        actions: [{text: "Yes", primary: true}, {text: "No"}],
+        width: 450,
+        height: 200,
+        minWidth: 250,
+      });
 
-    dialog.result.subscribe((result) => {
-      if (!(result instanceof DialogCloseResult) && result.text === "Yes") {
-        this.save();
-      }
-    });
+      dialog.result.subscribe((result) => {
+        if (!(result instanceof DialogCloseResult) && result.text === "Yes") {
+          this.save();
+        }
+      });
+    }
   }
 
   save() {
@@ -614,5 +610,4 @@ export class ProfileInformasiPerusahaanComponent {
     caseSensitive: false,
     operator: "contains",
   };
-
 }
