@@ -12,6 +12,7 @@ import { AuthService } from "../../../../core/services/auth.service";
 import { ProfileDashboardService } from "src/app/core/services/profile-dashboard.service";
 import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
 import { DialogCloseResult, DialogRef, DialogService } from "@progress/kendo-angular-dialog";
+import { DropDownFilterSettings } from "@progress/kendo-angular-dropdowns";
 
 interface Item {
   name: string;
@@ -608,5 +609,10 @@ export class ProfileInformasiPerusahaanComponent {
   public open() {
     this.opened = true;
   }
+
+  public filterSettings: DropDownFilterSettings = {
+    caseSensitive: false,
+    operator: "contains",
+  };
 
 }
