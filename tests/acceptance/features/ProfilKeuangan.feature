@@ -38,22 +38,22 @@ Feature: Vendor Basic - Completed vendor information
         Then The Vendor can continue to fill information in regards to "Neraca Keuangan" by clicking "Tambah Neraca" button where placed on the right-buttom of "Neraca Keuangan" Grid
     
     #manage Keuangan
-    # Scenario: Fill several information / empty data for Bank Information 
-    #     Given The Vendor already add information in regards to "Alamat"
-    #     When The Vendor wants manage "Informasi Keuangan" from the Company
-    #     And The Vendor must click "Informasi Keuangan" menu where found on "Side Menu" of "Vendor Dashboard"
-    #     And The Vendor will see "Informasi Keuangan" form
-    #     And The Vendor wants to add "Bank Information" on sub form of "Bank" at "Informasi Keuangan" form
-    #     And The Vendor must define following information with empty field "Laporan Keuangan"
-    #     """
-    #     {
+    Scenario: Fill several information / empty data for Bank Information 
+        Given The Vendor already add information in regards to "Alamat"
+        When The Vendor wants manage "Informasi Keuangan" from the Company
+        And The Vendor must click "Informasi Keuangan" menu where found on "Side Menu" of "Vendor Dashboard"
+        And The Vendor will see "Informasi Keuangan" form
+        And The Vendor wants to add "Bank Information" on sub form of "Bank" at "Informasi Keuangan" form
+        And The Vendor must define following information with empty field "Laporan Keuangan"
+        """
+        {
         
-    #         "namaBank"      : "empty"
-    #         "cabang"        : "Utama Wisma BNI 46 Kota",
-    #         "nomorRekening" : "1234567",
-    #         "atasNama"     :  "empty"
-    #     }
-    #     """
-    #     # And The Vendor must click "Simpan" button to save information of "Keuangan"
-    #     And The Vendor move to the next input
-    #     Then The Vendor will get warning message tooltip on empty fields "Laporan Keuangan"
+            "namaBank"      : "empty"
+            "cabang"        : "Utama Wisma BNI 46 Kota",
+            "nomorRekening" : "1234567",
+            "atasNama"     :  "empty"
+        }
+        """
+        # And The Vendor must click "Simpan" button to save information of "Keuangan"
+        And The Vendor move to the next input
+        Then The Vendor will get warning message tooltip on empty fields "Laporan Keuangan"
