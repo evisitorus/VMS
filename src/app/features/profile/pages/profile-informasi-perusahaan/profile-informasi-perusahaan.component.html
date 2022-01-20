@@ -119,6 +119,7 @@
                       <div class="col-md k-vstack">
                         <kendo-dropdownlist id="tipeBadanUsaha" class="col-md w-100"
                                             [defaultItem]="{ name: 'Pilih Tipe Badan Usaha', id: null }" [data]="tipeBadanUsahaItems"
+                                            [itemDisabled]="itemDisabled"
                                             textField="name" valueField="id" [(ngModel)]="selectedBadanUsaha" formControlName="tipeBadanUsaha"
                                             (valueChange)="onChangeList()" required>
                         </kendo-dropdownlist>

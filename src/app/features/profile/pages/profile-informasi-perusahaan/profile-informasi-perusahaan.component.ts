@@ -379,6 +379,10 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
+  public itemDisabled(itemArgs: { dataItem: any; index: number }) {
+    return !itemArgs.dataItem.leaf;
+  }
+
   public setProvinces(resp: any){
     // get list of provinces
     this.provinsi = resp["hydra:member"];
