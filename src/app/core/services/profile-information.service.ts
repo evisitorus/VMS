@@ -195,7 +195,7 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_bidang_usaha);
   }
 
-  updateProfile(params: ProfileInterface): Observable<any> {    
+  updateProfile(params: ProfileInterface): Observable<any> {
     let api_update_profile: ApiInterface = {
       method: 'POST',
       url: ApiRoutes.api_update_profile,
@@ -235,9 +235,9 @@ export class ProfileInformationService {
         oragnisasi_himpunan: params.oragnisasiHimpunan,
         bumn_pengampu: params.bumnPengampu,
         website: params.website,
-        jumlah_karyawan_total: params.jumlahKaryawanTotal,
-        jumlah_karyawan_lokal: params.jumlahKaryawanLokal,
-        jumlah_karyawan_asing: params.jumlahKaryawanAsing,
+        jumlah_karyawan_total: 0,
+        jumlah_karyawan_lokal: 0,
+        jumlah_karyawan_asing: 0,
         phone_number: params.phoneNumber,
         alamat_perusahaan: params.alamatPerusahaan,
         provinsi: params.provinsi,
@@ -301,10 +301,10 @@ export class ProfileInformationService {
         params: {
           "type": type
         }
-        
+
       }
     }
     return this.apiService.sendRequest(api_vendor_organization);
   }
-  
+
 }

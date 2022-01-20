@@ -116,9 +116,9 @@ export class ProfileInformasiPerusahaanComponent {
   public contact_mechanism: Array<Address> = [];
 
   public vendor_info: any;
-  public total_karyawan!: number;
-  public karyawan_lokal!: number;
-  public karyawan_asing!: number;
+  // public total_karyawan!: number;
+  // public karyawan_lokal!: number;
+  // public karyawan_asing!: number;
   public vendor_contact_mechanism: any;
 
   public selectedOrganization: Array<any> = [];
@@ -257,7 +257,7 @@ export class ProfileInformasiPerusahaanComponent {
           (resp) => {
             this.provinces = resp["hydra:member"];
             const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
-            // this.defaultItemProvinces.description = this.provinces[index].description;  
+            // this.defaultItemProvinces.description = this.provinces[index].description;
             if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
               isFirstAddress = true;
               this.dataPerusahaan.alamat = value.contactMechanism.address1;
@@ -266,7 +266,7 @@ export class ProfileInformasiPerusahaanComponent {
                 (resp) => {
                   this.cities = resp["hydra:member"];
                   const index = this.cities.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.city.id);
-                  // this.defaultItemKota.description = this.cities[index].description;  
+                  // this.defaultItemKota.description = this.cities[index].description;
                   this.dataResultKota = this.cities;
                   this.selectedKota = this.cities[index];
 
@@ -416,9 +416,9 @@ export class ProfileInformasiPerusahaanComponent {
       bumnPengampu: new FormControl(data.bumnPengampu, Validators.required),
       organisasiHimpunan: new FormControl(data.organisasiHimpunan, []),
       websitePerusahaan: new FormControl(data.web, Validators.required),
-      jumlahKaryawanTotal: new FormControl(data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing, Validators.required),
-      jumlahKaryawanLokal: new FormControl(data.jumlahKaryawanDomestik, Validators.required),
-      jumlahKaryawanAsing: new FormControl(data.jumlahKaryawanAsing, Validators.required),
+      // jumlahKaryawanTotal: new FormControl(data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing, Validators.required),
+      // jumlahKaryawanLokal: new FormControl(data.jumlahKaryawanDomestik, Validators.required),
+      // jumlahKaryawanAsing: new FormControl(data.jumlahKaryawanAsing, Validators.required),
       noTeleponPerusahaan: new FormControl(data.noTelepon, Validators.required),
       alamatPerusahaan: new FormControl(data.alamat, Validators.required),
       provinsi: new FormControl(this.selectedProvince, Validators.required),
@@ -428,8 +428,8 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
-    this.karyawan_lokal = data.jumlahKaryawanDomestik;
-    this.karyawan_asing = data.jumlahKaryawanAsing;
+    // this.karyawan_lokal = data.jumlahKaryawanDomestik;
+    // this.karyawan_asing = data.jumlahKaryawanAsing;
   }
 
   public saveImage(value: any, valid: boolean): void {
@@ -497,13 +497,13 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   handleKaryawanLokalChange(value: any) {
-    this.karyawan_lokal = value;
-    this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.karyawan_lokal = value;
+    // this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
   }
 
   handleKaryawanAsingChange(value: any) {
-    this.karyawan_asing = value;
-    this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.karyawan_asing = value;
+    // this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
   }
 
   upload(): void {
@@ -568,9 +568,9 @@ export class ProfileInformasiPerusahaanComponent {
         oragnisasiHimpunan: this.profileInformationFormGroup.value.organisasiHimpunan,
         bumnPengampu: this.profileInformationFormGroup.value.bumnPengampu,
         website: this.profileInformationFormGroup.value.websitePerusahaan,
-        jumlahKaryawanTotal: this.profileInformationFormGroup.value.jumlahKaryawanTotal,
-        jumlahKaryawanLokal: this.profileInformationFormGroup.value.jumlahKaryawanLokal,
-        jumlahKaryawanAsing: this.profileInformationFormGroup.value.jumlahKaryawanAsing,
+        // jumlahKaryawanTotal: "null",
+        // jumlahKaryawanLokal: "null",
+        // jumlahKaryawanAsing: "null",
         phoneNumber: this.profileInformationFormGroup.value.noTeleponPerusahaan,
         alamatPerusahaan: this.profileInformationFormGroup.value.alamatPerusahaan,
         provinsi: this.profileInformationFormGroup.value.provinsi,
