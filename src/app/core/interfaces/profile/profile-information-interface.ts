@@ -13,9 +13,9 @@ export interface ProfileInformationInterface {
   oragnisasiHimpunan: string;
   bumnPengampu: string;
   website: string;
-  jumlahKaryawanTotal: string;
-  jumlahKaryawanLokal: string;
-  jumlahKaryawanAsing: string;
+  // jumlahKaryawanTotal: string;
+  // jumlahKaryawanLokal: string;
+  // jumlahKaryawanAsing: string;
   phoneNumber: string;
 
   alamatPerusahaan?: string;
