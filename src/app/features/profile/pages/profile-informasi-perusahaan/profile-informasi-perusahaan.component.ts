@@ -13,6 +13,7 @@ import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.s
 import {ProfileAddressService} from 'src/app/core/services/profile/profile-address.service';
 import {DialogCloseResult, DialogRef, DialogService} from "@progress/kendo-angular-dialog";
 import {DropDownFilterSettings} from "@progress/kendo-angular-dropdowns";
+import {VendorLogoInterface} from "../../../../core/interfaces/profile/vendor-logo-interface";
 
 interface Item {
   name: string;
@@ -160,6 +161,10 @@ export class ProfileInformasiPerusahaanComponent {
   public bidangUsahaKbli: any;
   public orgHimpunan: any;
   public orgPengampu: any;
+  public vendorLogoParam!: VendorLogoInterface;
+  public vendorID = this.authService.getLocalStorage('vendor_id')!;
+  public redirectOnClosePopUp: boolean = false;
+  public popUpID = "";
 
   public getDataPerusahaan(): void {
     forkJoin({
@@ -500,6 +505,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"];
         this.logoImg = env.api_base_path + res["@id"] + "/file";
+        this.saveLogoIdToVendor();
       },
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
@@ -566,9 +572,8 @@ export class ProfileInformasiPerusahaanComponent {
       }
 
       this.profileInformationFormGroup.markAllAsTouched();
-      let vendorID = this.authService.getLocalStorage('vendor_id')!;
 
-      this.profileInfoService.updateProfileInformation(this.params, vendorID).subscribe(
+      this.profileInfoService.updateProfileInformation(this.params, this.vendorID).subscribe(
         () => {
           this.popUpMessage = "Berhasil menyimpan data";
           this.triggerPopUp();
@@ -597,5 +602,24 @@ export class ProfileInformasiPerusahaanComponent {
   public filterSettings: DropDownFilterSettings = {
     caseSensitive: false,
     operator: "contains",
-  };
+  }
+
+  saveLogoIdToVendor() {
+    if (this.uploadedFileId) {
+      this.vendorLogoParam = {
+        logoID: this.uploadedFileId
+      }
+
+      this.profileInfoService.updateVendorLogo(this.vendorLogoParam, this.vendorID).subscribe(
+        () => {
+        },
+        (error) => {
+          this.popUpMessage = "Mohon upload logo perusahaan";
+          this.redirectOnClosePopUp = false;
+          this.popUpID = "popup-failed-save-upload-file-to-database";
+          this.triggerPopUp();
+        }
+      );
+    }
+  }
 }

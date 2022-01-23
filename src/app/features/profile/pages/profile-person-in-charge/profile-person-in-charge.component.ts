@@ -137,7 +137,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
     }
   }
 
-
   save() {
     if ("" === this.formPIC.value.oldPassword) {
       this.formPIC.value.oldPassword = null;

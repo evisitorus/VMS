@@ -65,7 +65,7 @@ export class ProfilePICService {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_profile_pic.concat("/").concat(person_id).concat("/media"),
       body: {
-        file_id_sting: userFileParam.fileID,
+        file_id_string: userFileParam.fileID,
       },
       options: {
         headers: {
