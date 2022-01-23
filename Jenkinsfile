@@ -10,8 +10,7 @@ pipeline {
     } 
     environment {
         REPO_NAME       = 'eproc-fe'
-        REGISTRY_NAME   = '153829871065.dkr.ecr.ap-southeast-1.amazonaws.com/eproc-fe'
-        AWS_CRED        = credentials('registry-aws-1-mysooltan')
+        REGISTRY_NAME   = 'registry.gitlab.com/ditapril/vms-telkom/eproc-fe'        
         TAG             = sh(returnStdout: true, script: 'echo $(git rev-parse --short HEAD)')
         VAULT_ADDR      = "https://vault.playcourt.id"
         TESTING         = "berhasil"
@@ -31,6 +30,7 @@ pipeline {
                     sh 'echo -n $TAG > ./commit-id'
                     commitId = readFile('./commit-id')
                     sh 'mv devops/Dockerfile devops/nginx.conf .'
+                    env.REGISTRY_CRED = sh(returnStdout: true, script: 'vault kv get --format json smb/mysooltan/develop/vms-gitlab-registry | jq -r .data.data.token').trim()
                     sh 'vault kv get --format json smb/mysooltan/develop/license-kendo-ui | jq -r .data.data.license > $(pwd)/kendo-ui-license.txt'
                     if (env.BRANCH_NAME == 'master') {
                         sh 'echo dunia'
@@ -158,29 +158,29 @@ pipeline {
             }
         }
         stage('Push Image') {
-            steps {
-                sh 'echo $AWS_CRED | base64 -di > ./devops/.aws/credentials'
-                sh 'docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password | docker login --username AWS --password-stdin 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
+            steps {                
+                sh 'docker login registry.gitlab.com -u tenderbumn -p $REGISTRY_CRED'
                 sh 'docker images'
                 sh 'docker push $REGISTRY_NAME:$BRANCH_NAME-$TAG'
-                sh 'docker logout 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com'
+                sh 'docker logout registry.gitlab.com'
             }
         }
         stage('Deploy') {
-            steps {                
-                sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e PASS=$(docker run --rm -i -v $(pwd)/devops/.aws:/root/.aws amazon/aws-cli ecr get-login-password) baskaraerbasakti/generate generate_secret.py'
+            steps {                                
                 sh 'docker run --rm -i -v $(pwd)/devops/deploy:/generate/k8s -e NAME=$REPO_NAME -e IMAGE=$REGISTRY_NAME:$BRANCH_NAME-$TAG baskaraerbasakti/generate generate_deployment.py'
                 sh 'ls -lha ./devops/deploy'                
                 script {
-                    if (env.BRANCH_NAME == 'master') {
-                        sh 'echo dunia'
-                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/secret.yaml'
+                    if (env.BRANCH_NAME == 'master') {                        
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config delete secret/gitlab-registry'
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config create secret docker-registry gitlab-registry --docker-server=registry.gitlab.com --docker-username=tenderbumn --docker-password=$REGISTRY_CRED'
                         sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
                     } else if (env.BRANCH_NAME == 'develop') {                        
-                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/secret.yaml'
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config delete secret/gitlab-registry'
+                        sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config create secret docker-registry gitlab-registry --docker-server=registry.gitlab.com --docker-username=tenderbumn --docker-password=$REGISTRY_CRED'
                         sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
                     }
                 }
+                sh 'docker rmi $REGISTRY_NAME:$BRANCH_NAME-$TAG'
                 sh 'sudo rm -rf docker'
             }
         }

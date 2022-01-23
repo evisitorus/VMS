@@ -117,9 +117,9 @@ export class ProfileInformasiPerusahaanComponent {
   public contact_mechanism: Array<Address> = [];
 
   public vendor_info: any;
-  public total_karyawan!: number;
-  public karyawan_lokal!: number;
-  public karyawan_asing!: number;
+  // public total_karyawan!: number;
+  // public karyawan_lokal!: number;
+  // public karyawan_asing!: number;
   public vendor_contact_mechanism: any;
 
   public selectedOrganization: Array<any> = [];
@@ -305,27 +305,33 @@ export class ProfileInformasiPerusahaanComponent {
 
                             },
                             (error) => {
+                              console.log(error);
                             }
                           );
 
                         },
                         (error) => {
+                          console.log(error);
                         }
+
                       );
 
                     },
                     (error) => {
+                      console.log(error);
                     }
                   );
 
                 },
                 (error) => {
+                  console.log(error);
                 }
               );
             }
 
           },
           (error) => {
+            console.log(error);
           }
         );
       }
@@ -382,7 +388,11 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  public setProvinces(resp: any) {
+  public itemDisabled(itemArgs: { dataItem: any; index: number }) {
+    return !itemArgs.dataItem.leaf;
+  }
+
+  public setProvinces(resp: any){
     // get list of provinces
     this.provinsi = resp["hydra:member"];
   }
@@ -419,9 +429,9 @@ export class ProfileInformasiPerusahaanComponent {
       bumnPengampu: new FormControl(data.bumnPengampu, Validators.required),
       organisasiHimpunan: new FormControl(data.organisasiHimpunan, []),
       websitePerusahaan: new FormControl(data.web, Validators.required),
-      jumlahKaryawanTotal: new FormControl(data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing, Validators.required),
-      jumlahKaryawanLokal: new FormControl(data.jumlahKaryawanDomestik, Validators.required),
-      jumlahKaryawanAsing: new FormControl(data.jumlahKaryawanAsing, Validators.required),
+      // jumlahKaryawanTotal: new FormControl(data.jumlahKaryawanDomestik + data.jumlahKaryawanAsing, Validators.required),
+      // jumlahKaryawanLokal: new FormControl(data.jumlahKaryawanDomestik, Validators.required),
+      // jumlahKaryawanAsing: new FormControl(data.jumlahKaryawanAsing, Validators.required),
       noTeleponPerusahaan: new FormControl(data.noTelepon, Validators.required),
       alamatPerusahaan: new FormControl(data.alamat, Validators.required),
       provinsi: new FormControl(this.selectedProvince, Validators.required),
@@ -431,14 +441,15 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       // pinGeoLoc: new FormControl(null, []),
     });
-    this.karyawan_lokal = data.jumlahKaryawanDomestik;
-    this.karyawan_asing = data.jumlahKaryawanAsing;
+    // this.karyawan_lokal = data.jumlahKaryawanDomestik;
+    // this.karyawan_asing = data.jumlahKaryawanAsing;
   }
 
   public saveImage(value: any, valid: boolean): void {
     this.submitted = true;
 
     if (valid) {
+      console.log("File uploaded");
     } else {
       this.logoForm.markAllAsTouched();
     }
@@ -459,6 +470,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKota = resp["hydra:member"];
       },
       (error) => {
+        console.log(error);
       }
     );
   }
@@ -469,8 +481,10 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKecamatan = resp["hydra:member"];
       },
       (error) => {
+        console.log(error);
       }
     );
+
   }
 
   handleKecamatanChange(value: any) {
@@ -479,6 +493,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKelurahan = resp["hydra:member"];
       },
       (error) => {
+        console.log(error);
       }
     );
   }
@@ -489,21 +504,23 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataResultKodepos = resp["hydra:member"];
       },
       (error) => {
+        console.log(error);
       }
     );
   }
 
   handleKaryawanLokalChange(value: any) {
-    this.karyawan_lokal = value;
-    this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.karyawan_lokal = value;
+    // this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
   }
 
   handleKaryawanAsingChange(value: any) {
-    this.karyawan_asing = value;
-    this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
+    // this.karyawan_asing = value;
+    // this.total_karyawan = this.karyawan_lokal + this.karyawan_asing;
   }
 
   upload(): void {
+    console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
@@ -514,6 +531,7 @@ export class ProfileInformasiPerusahaanComponent {
       (error) => {
         this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.triggerPopUp();
+        console.log(error);
       }
     );
   }
@@ -523,7 +541,7 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public submitFormVendor(): void {
-     if (this.profileInformationFormGroup.valid && this.logoImg) {
+    if (this.profileInformationFormGroup.valid && this.logoImg) {
       const dialog: DialogRef = this.dialogService.open({
         title: "Konfirmasi",
         content: "Simpan profil perusahaan ?",
@@ -564,9 +582,9 @@ export class ProfileInformasiPerusahaanComponent {
         oragnisasiHimpunan: this.profileInformationFormGroup.value.organisasiHimpunan,
         bumnPengampu: this.profileInformationFormGroup.value.bumnPengampu,
         website: this.profileInformationFormGroup.value.websitePerusahaan,
-        jumlahKaryawanTotal: this.profileInformationFormGroup.value.jumlahKaryawanTotal,
-        jumlahKaryawanLokal: this.profileInformationFormGroup.value.jumlahKaryawanLokal,
-        jumlahKaryawanAsing: this.profileInformationFormGroup.value.jumlahKaryawanAsing,
+        // jumlahKaryawanTotal: "null",
+        // jumlahKaryawanLokal: "null",
+        // jumlahKaryawanAsing: "null",
         phoneNumber: this.profileInformationFormGroup.value.noTeleponPerusahaan,
         alamatPerusahaan: this.profileInformationFormGroup.value.alamatPerusahaan,
         provinsi: this.profileInformationFormGroup.value.provinsi,

@@ -68,12 +68,6 @@ Given('The Vendor must define following information with empty field {string}', 
             I.fillField('#organisasiHimpunan input[class=k-input]', '');
             I.pressKey('Enter');
             I.fillField('#websitePerusahaan input[class=k-input]', '');
-            I.click('#jumlahKaryawanTotal input[role=spinbutton]');
-            I.fillField('#jumlahKaryawanTotal input[role=spinbutton]', '');
-            I.click('#jumlahKaryawanLokal input[role=spinbutton]');
-            I.fillField('#jumlahKaryawanLokal input[role=spinbutton]', '');
-            I.click('#jumlahKaryawanAsing input[role=spinbutton]');
-            I.fillField('#jumlahKaryawanAsing input[role=spinbutton]', '');
             I.fillField('#noTeleponPerusahaan input[class=k-input]', '');
             I.fillField('#alamatPerusahaan input[class=k-input]', '');
             I.click('#provDropdown.k-dropdown');

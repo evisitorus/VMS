@@ -137,6 +137,7 @@
                         <kendo-dropdownlist id="tipeBadanUsaha" class="col-md w-100"
                                             [defaultItem]="{ name: 'Pilih Tipe Badan Usaha', id: null }"
                                             [data]="tipeBadanUsahaItems"
+                                            [itemDisabled]="itemDisabled"
                                             textField="name" valueField="id" [(ngModel)]="selectedBadanUsaha"
                                             formControlName="tipeBadanUsaha"
                                             (valueChange)="onChangeList()" required>
@@ -270,63 +271,6 @@
                                          *ngIf="profileInformationFormGroup.controls.websitePerusahaan.errors?.required">
                           Website Perusahaan
                           tidak boleh kosong
-                        </kendo-formerror>
-                      </div>
-                    </div>
-                  </kendo-formfield>
-
-                  <kendo-formfield [formGroup]="profileInformationFormGroup">
-                    <div class="row align-items-center">
-                      <kendo-label class="col-3">Jumlah Karyawan Total</kendo-label>
-                      <div class="col k-vstack">
-                        <kendo-numerictextbox id="jumlahKaryawanTotal" class="col w-100"
-                                              placeholder="Type your message here"
-                                              [spinners]="false" [maxlength]="10" [decimals]="0" [min]=0
-                                              [value]="total_karyawan" [readonly]="true"
-                                              formControlName="jumlahKaryawanTotal" format="#">
-                        </kendo-numerictextbox>
-                        <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.jumlahKaryawanTotal.errors?.required">
-                          Jumlah Karyawan
-                          Total tidak boleh kosong
-                        </kendo-formerror>
-                      </div>
-                    </div>
-                  </kendo-formfield>
-
-                  <kendo-formfield [formGroup]="profileInformationFormGroup">
-                    <div class="row align-items-center">
-                      <div class="col-3"></div>
-                      <kendo-label class="col-md-auto">Jumlah Karyawan Lokal</kendo-label>
-                      <div class="col k-vstack">
-                        <kendo-numerictextbox id="jumlahKaryawanLokal" class="col w-100"
-                                              placeholder="Type your message here" [spinners]="false" [maxlength]="10"
-                                              [decimals]="0" [min]=0 formControlName="jumlahKaryawanLokal"
-                                              (ngModelChange)="handleKaryawanLokalChange($event)" format="#">
-                        </kendo-numerictextbox>
-                        <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.jumlahKaryawanLokal.errors?.required">
-                          Jumlah Karyawan
-                          Lokal tidak boleh kosong
-                        </kendo-formerror>
-                      </div>
-                    </div>
-                  </kendo-formfield>
-
-                  <kendo-formfield [formGroup]="profileInformationFormGroup">
-                    <div class="row align-items-center">
-                      <div class="col-3"></div>
-                      <kendo-label class="col-md-auto">Jumlah Karyawan Asing</kendo-label>
-                      <div class="col k-vstack">
-                        <kendo-numerictextbox id="jumlahKaryawanAsing" class="col w-100"
-                                              placeholder="Type your message here" [spinners]="false" [maxlength]="10"
-                                              [decimals]="0" [min]=0 formControlName="jumlahKaryawanAsing"
-                                              (ngModelChange)="handleKaryawanAsingChange($event)" format="#">
-                        </kendo-numerictextbox>
-                        <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.jumlahKaryawanAsing.errors?.required">
-                          Jumlah Karyawan
-                          Asing tidak boleh kosong
                         </kendo-formerror>
                       </div>
                     </div>

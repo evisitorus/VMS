@@ -44,9 +44,6 @@ When('The Vendor must completed following inputs where found on {string} form', 
     I.fillField('#organisasiHimpunan input[class=k-input]', 'Telkom');
     I.pressKey('Enter');
     I.fillField('#websitePerusahaan input[class=k-input]', 'www.vms.com');
-    I.click('#jumlahKaryawanLokal input[role=spinbutton]');
-    I.fillField('#jumlahKaryawanLokal input[role=spinbutton]', '50');
-    I.click('#jumlahKaryawanAsing input[role=spinbutton]');
     I.fillField('#jumlahKaryawanAsing input[role=spinbutton]', '25');
     I.fillField('#noTeleponPerusahaan input[class=k-input]', '0211234567');
     I.fillField('#alamatPerusahaan input[class=k-input]', 'Jl. Jenderal Gatot Soebroto Kav 52');
