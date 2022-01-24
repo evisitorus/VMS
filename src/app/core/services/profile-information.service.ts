@@ -6,6 +6,7 @@ import {ApiService} from './api/api.service';
 import {AuthService} from './auth.service';
 import {ProfileInformationInterface} from "../interfaces/profile/profile-information-interface";
 import { ProfileInterface } from '../interfaces/profile-interface';
+import {VendorLogoInterface} from "../interfaces/profile/vendor-logo-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -307,4 +308,21 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_vendor_organization);
   }
 
+  updateVendorLogo(vendorLogoParam: VendorLogoInterface, vendorID: string): Observable<any> {
+    let api_profile_vendor: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_get_vendor.concat("/").concat(this.vendor_id).concat("/media"),
+      body: {
+        logo_id_string: vendorLogoParam.logoID,
+      },
+      options: {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: this.token
+        }
+      },
+    }
+
+    return this.apiService.sendRequest(api_profile_vendor);
+  }
 }
