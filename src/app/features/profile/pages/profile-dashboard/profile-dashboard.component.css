@@ -1,16 +1,16 @@
-.vendor-steps-row{
+.vendor-steps-row {
   margin: 0 0 1rem;
 }
 
-.vendor-profile-detail{
+.vendor-profile-detail {
   margin-left: 1em;
 }
 
-.vendor-profile{
+.vendor-profile {
   margin-bottom: 1em;
 }
 
-.vendor-hint{
+.vendor-hint {
   font-style: italic;
   font-size: smaller;
 }
@@ -39,4 +39,14 @@
 .container-profile-avatar {
   max-width: 30%;
   padding: 10px;
+}
+
+.name-vendor-type {
+  font-size: 1.3rem;
+  font-weight: BOLD;
+  text-decoration: underline;
+}
+
+.status-vendor {
+  font-style: oblique;
 }

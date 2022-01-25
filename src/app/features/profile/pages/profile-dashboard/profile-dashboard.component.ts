@@ -13,7 +13,7 @@ export class ProfileDashboardComponent implements OnInit {
     private profileService:ProfileDashboardService
   ) { }
 
-  phone_number:string = "";
+  phone_number:string = ""; // sample
   name:string="";
   is_active:string="";
   registered_at:string="";
@@ -28,6 +28,9 @@ export class ProfileDashboardComponent implements OnInit {
   aset: string = "";
   alamat: string = "";
   star: string = "";
+
+  vendor_type:string = "Loading...";
+  status_vendor:string = "Loading...";
   public logoImg!: any;
 
 
@@ -52,6 +55,7 @@ export class ProfileDashboardComponent implements OnInit {
         this.address_vendor = resp.data.address;
         this.registered_at = resp.data.registered_at;
         this.vendor_name = resp.data.name;
+        this.status_vendor = resp.data.is_active;
       },
       (error) => {
       }
@@ -59,7 +63,6 @@ export class ProfileDashboardComponent implements OnInit {
 
     this.profileService.getVendorStatusData().subscribe(
       (resp) => {
-        // console.log(resp)
         this.profil = resp.data.profil_perusahaan;
         this.pic = resp.data.pic_perusahaan;
         this.dokumen = resp.data.dokumen;
@@ -72,6 +75,10 @@ export class ProfileDashboardComponent implements OnInit {
         hasValue ?
         this.star = "bi-star-half" :
         this.star = "bi-star-fill";
+
+        hasValue ?
+        this.vendor_type = "Vendor Basic" :
+        this.vendor_type = "Vendor Pro";
       },
       (error) => {
       }
