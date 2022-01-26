@@ -6,6 +6,7 @@ import {ApiService} from './api/api.service';
 import {AuthService} from './auth.service';
 import {ProfileInformationInterface} from "../interfaces/profile/profile-information-interface";
 import { ProfileInterface } from '../interfaces/profile-interface';
+import {VendorLogoInterface} from "../interfaces/profile/vendor-logo-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -195,7 +196,7 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_bidang_usaha);
   }
 
-  updateProfile(params: ProfileInterface): Observable<any> {    
+  updateProfile(params: ProfileInterface): Observable<any> {
     let api_update_profile: ApiInterface = {
       method: 'POST',
       url: ApiRoutes.api_update_profile,
@@ -235,9 +236,9 @@ export class ProfileInformationService {
         oragnisasi_himpunan: params.oragnisasiHimpunan,
         bumn_pengampu: params.bumnPengampu,
         website: params.website,
-        jumlah_karyawan_total: params.jumlahKaryawanTotal,
-        jumlah_karyawan_lokal: params.jumlahKaryawanLokal,
-        jumlah_karyawan_asing: params.jumlahKaryawanAsing,
+        jumlah_karyawan_total: 0,
+        jumlah_karyawan_lokal: 0,
+        jumlah_karyawan_asing: 0,
         phone_number: params.phoneNumber,
         alamat_perusahaan: params.alamatPerusahaan,
         provinsi: params.provinsi,
@@ -301,10 +302,27 @@ export class ProfileInformationService {
         params: {
           "type": type
         }
-        
+
       }
     }
     return this.apiService.sendRequest(api_vendor_organization);
   }
-  
+
+  updateVendorLogo(vendorLogoParam: VendorLogoInterface, vendorID: string): Observable<any> {
+    let api_profile_vendor: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_get_vendor.concat("/").concat(this.vendor_id).concat("/media"),
+      body: {
+        logo_id_string: vendorLogoParam.logoID,
+      },
+      options: {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: this.token
+        }
+      },
+    }
+
+    return this.apiService.sendRequest(api_profile_vendor);
+  }
 }

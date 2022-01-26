@@ -19,26 +19,37 @@ Given('The Vendor wants to add {string} on sub form of {string} at {string} form
 });
 
 Given('The Vendor must define following information', () => {
-    I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
-    I.fillField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
-    I.waitForElement('#input-keuangan-cabang input[class=k-input]');
+    I.click('#input-keuangan-nama-bank');
+    I.pressKey(['Control','A']);
+    I.pressKey('Backspace');
+    I.fillField('#input-keuangan-nama-bank', 'Bank BRI');
+    I.pressKey("Enter");
     I.fillField('#input-keuangan-cabang input[class=k-input]', 'DKI Jakarta');
-    I.waitForElement('#input-keuangan-nomor-rekening input[class=k-input]');
     I.fillField('#input-keuangan-nomor-rekening input[class=k-input]', '0811111111');
-    I.waitForElement('#input-keuangan-nama-pemilik-rekening input[class=k-input]');
     I.fillField('#input-keuangan-nama-pemilik-rekening input[class=k-input]', 'John Doe');   
 });
 
 Given('The Vendor must define following information with empty field {string}', (form) => {
     switch (form) {
         case "Laporan Keuangan":
-            I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
-            I.fillField('#input-keuangan-nama-bank input[class=k-input]', '');
-            I.waitForElement('#input-keuangan-cabang input[class=k-input]');
-            I.fillField('#input-keuangan-cabang input[class=k-input]', 'Utama Wisma BNI 46 Kota');
-            I.waitForElement('#input-keuangan-nomor-rekening input[class=k-input]');
-            I.fillField('#input-keuangan-nomor-rekening input[class=k-input]', '1234567');
-            I.waitForElement('#input-keuangan-nama-pemilik-rekening input[class=k-input]');
+            I.click('#input-keuangan-nama-bank');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.click('#input-keuangan-nama-bank');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-nama-bank', '');
+            I.click('#input-keuangan-cabang input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-cabang input[class=k-input]', '');
+            I.click('#input-keuangan-nomor-rekening input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-nomor-rekening input[class=k-input]', '');
+            I.click('#input-keuangan-nama-pemilik-rekening input[class=k-input]', '');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
             I.fillField('#input-keuangan-nama-pemilik-rekening input[class=k-input]', '');
             break;
         case "Data Perusahaan":
@@ -57,12 +68,6 @@ Given('The Vendor must define following information with empty field {string}', 
             I.fillField('#organisasiHimpunan input[class=k-input]', '');
             I.pressKey('Enter');
             I.fillField('#websitePerusahaan input[class=k-input]', '');
-            I.click('#jumlahKaryawanTotal input[role=spinbutton]');
-            I.fillField('#jumlahKaryawanTotal input[role=spinbutton]', '');
-            I.click('#jumlahKaryawanLokal input[role=spinbutton]');
-            I.fillField('#jumlahKaryawanLokal input[role=spinbutton]', '');
-            I.click('#jumlahKaryawanAsing input[role=spinbutton]');
-            I.fillField('#jumlahKaryawanAsing input[role=spinbutton]', '');
             I.fillField('#noTeleponPerusahaan input[class=k-input]', '');
             I.fillField('#alamatPerusahaan input[class=k-input]', '');
             I.click('#provDropdown.k-dropdown');
@@ -94,10 +99,7 @@ Given('The Vendor will get warning message tooltip on empty fields {string}', (f
             I.see('Cabang tidak boleh kosong');
             break;
         case "Informasi Perusahaan":
-            I.see('BUMN Pengampu tidak boleh kosong');
-            I.see('Jumlah Karyawan Total tidak boleh kosong');
-            I.see('Jumlah Karyawan Lokal tidak boleh kosong');
-            I.see('Jumlah Karyawan Asing tidak boleh kosong');
+            I.see('Mohon lengkapi Data Perusahaan Anda');
             break;
         default:
             I.waitForElement(form);

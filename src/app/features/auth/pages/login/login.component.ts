@@ -56,11 +56,12 @@ export class LoginComponent implements OnInit{
         this.authService.setToken(resp.data.access_token);
         this.authService.setLocalStorage('person_id', resp.data.person_id);
         this.authService.setLocalStorage('vendor_id', resp.data.vendor_id);
+        this.authService.setLocalStorage('vendor_name', resp.data.vendor_name);
         this.authService.setLocalStorage('email', resp.data.email);
-
-        console.log(this.authService.getLocalStorage('email'));
         
-        this.popUpMessage = resp.message;
+        let message = resp.message;
+
+        this.popUpMessage = message.substring(0, 15) + resp.data.vendor_name.concat(" ") + message.substring(15, message.length);
         this.redirectOnClosePopUp = true;
         this.triggerPopUp();
       },

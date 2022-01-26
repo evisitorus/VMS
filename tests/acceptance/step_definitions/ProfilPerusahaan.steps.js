@@ -5,7 +5,7 @@ Given('The Vendor already login to VMS Portal with new account', () => {
     I.waitForElement('#input-email input[class=k-input]');
     I.fillField('#input-email input[class=k-input]', 'vmsnew@tmpbox.id');
     I.waitForElement('#input-password input[class=k-input]');
-    I.fillField('#input-password input[class=k-input]', '1234');
+    I.fillField('#input-password input[class=k-input]', '87654321');
     I.waitForElement('#btn-login');
     I.click('#btn-login');
     I.waitForElement('#btn-popup-yes');
@@ -44,9 +44,6 @@ When('The Vendor must completed following inputs where found on {string} form', 
     I.fillField('#organisasiHimpunan input[class=k-input]', 'Telkom');
     I.pressKey('Enter');
     I.fillField('#websitePerusahaan input[class=k-input]', 'www.vms.com');
-    I.click('#jumlahKaryawanLokal input[role=spinbutton]');
-    I.fillField('#jumlahKaryawanLokal input[role=spinbutton]', '50');
-    I.click('#jumlahKaryawanAsing input[role=spinbutton]');
     I.fillField('#jumlahKaryawanAsing input[role=spinbutton]', '25');
     I.fillField('#noTeleponPerusahaan input[class=k-input]', '0211234567');
     I.fillField('#alamatPerusahaan input[class=k-input]', 'Jl. Jenderal Gatot Soebroto Kav 52');
@@ -65,32 +62,4 @@ When('The Vendor must completed following inputs where found on {string} form', 
     I.click('#kposDropdown.k-dropdown');
     I.fillField('#kposDropdown.k-dropdown', '42015');
     I.pressKey('Enter');
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
 });

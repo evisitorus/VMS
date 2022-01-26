@@ -26,4 +26,12 @@ export class TenderService {
     return this.apiService.sendRequest(request);
   }
 
+  getListBUMN(): Observable<any> {
+    let request: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_list_bumn_tender,
+    };
+    return this.apiService.sendRequest(request);
+  }
+
 }
