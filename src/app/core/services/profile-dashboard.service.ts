@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../interfaces/api-interface';
-import { ApiRoutes,ApiRouteMethods } from './api/api-routes';
+import { ApiRoutes, ApiRouteMethods } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { AuthService } from './auth.service';
 
@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 export class ProfileDashboardService {
 
   constructor(
-    private apiService:ApiService,
+    private apiService: ApiService,
     private authService: AuthService
   ) { }
 
@@ -23,7 +23,7 @@ export class ProfileDashboardService {
     let api_dashboard_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -46,11 +46,25 @@ export class ProfileDashboardService {
 
     return this.apiService.sendRequest(api_get_vendor);
   }
- 
+
   getDashboard(): Observable<any> {
     let api_get_users: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_users + "/dashboard/" + this.user_id,
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
+    }
+
+    return this.apiService.sendRequest(api_get_users);
+  }
+
+  getVendorType(): Observable<any> {
+    let api_get_users: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/verification",
       options: {
         headers: {
           Authorization: this.token
