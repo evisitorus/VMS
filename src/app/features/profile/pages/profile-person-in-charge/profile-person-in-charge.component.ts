@@ -293,6 +293,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   perbaruiClicked() {
     this.attention();
     this.changeIsDisabled();
+    this.responsePhoneNumber = ('No. Handphone tidak ditemukan' !== this.responsePhoneNumber) ? this.responsePhoneNumber : "";
   }
 
   public open() {
