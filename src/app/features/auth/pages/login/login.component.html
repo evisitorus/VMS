@@ -6,14 +6,14 @@
         </div>
 
         <fieldset class="k-form-fieldset">
-            
+
             <kendo-formfield>
                 <kendo-label [for]="email" text="Alamat Email"></kendo-label>
-                <kendo-textbox id="input-email" formControlName="email" [clearButton]="true" #email required></kendo-textbox>                
+                <kendo-textbox id="input-email" formControlName="email" [clearButton]="true" #email required></kendo-textbox>
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror>Email tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
-            
+
             <kendo-formfield>
                 <kendo-label [for]="password" text="Kata Sandi"> </kendo-label>
                 <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
@@ -30,7 +30,7 @@
                     <kendo-formhint>Lupa Kata Sandi?</kendo-formhint>
                 </a>
             </div>
-            
+
             <!-- <kendo-formfield>
                 <div class="k-checkbox-wrap">
                     <input #loggedin type="checkbox" kendoCheckBox formControlName="loggedin"/>
@@ -38,18 +38,18 @@
                     <kendo-formhint> Next time, you will be logged in automatically </kendo-formhint>
                 </div>
             </kendo-formfield> -->
-            
+
             <div class="k-form-buttons my-3">
                 <button class="k-button k-primary vms-btn" (click)="login()" id="btn-login">Login</button>
             </div>
-            
+
         </fieldset>
 
         <div class="reg">
             Belum punya akun? <a href="register" id="btn-register"> Daftar sebagai Vendor</a>
         </div>
         <div class="reg">
-            Bukan Vendor? <a href="#" id="btn-register-bumn">Klik di sini</a>
+            Bukan Vendor? <a href="https://web.tenderbumn.id" id="btn-register-bumn">Klik di sini</a>
         </div>
 
     </form>
