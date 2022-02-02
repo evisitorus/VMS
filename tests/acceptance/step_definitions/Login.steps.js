@@ -108,6 +108,6 @@ Given('The Verificator / BUMN click "Bukan Vendor? Klik di sini"', () => {
     I.click('#btn-register-bumn');
 });
 
-Given('The Verificator / BUMN will redirect to Login Verificator/BUMN', () => {
+Given('The Verificator / BUMN will redirect to Login Verificator / BUMN', () => {
     I.seeInCurrentUrl('/web.tenderbumn.id/login');
 });
