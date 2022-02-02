@@ -11,7 +11,7 @@ Given('The Vendor must login on {string} form by entering their credential', () 
     I.waitForElement('#input-email input[class=k-input]');
     I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
     I.waitForElement('#input-password input[class=k-input]');
-    I.fillField('#input-password input[class=k-input]', '1234');
+    I.fillField('#input-password input[class=k-input]', '12345678');
 });
 
 Given('The Vendor clicks {string} button', (button) => {
@@ -94,4 +94,20 @@ Given('The Vendor will get warning message', (raw_data) => {
 
 Given('The Vendor must type right password on {string} input-type on {string} Form', () => {
     I.amOnPage('/login');
+});
+
+Given('The Verificator / BUMN already registered on VMS', () => {
+
+});
+
+Given('The Verificator / BUMN wants to enter to VMS Portal', () => {
+    I.amOnPage('/login');
+});
+
+Given('The Verificator / BUMN click "Bukan Vendor? Klik di sini"', () => {
+    I.click('#btn-register-bumn');
+});
+
+Given('The Verificator / BUMN will redirect to Login Verificator/BUMN', () => {
+    I.seeInCurrentUrl('/web.tenderbumn.id/login');
 });
