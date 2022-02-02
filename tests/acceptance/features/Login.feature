@@ -30,6 +30,12 @@ So that I can manage my VMS Account
        And The Vendor selects "Yes" button
     Then The Vendor already enter to VMS Portal and can continue their activity into it
 
+  Scenario: Login Verificator/BUMN
+    Given The Verificator / BUMN already registered on VMS
+     When The Verificator / BUMN wants to enter to VMS Portal 
+      And The Verificator / BUMN click "Bukan Vendor? Klik di sini"
+     Then The Verificator / BUMN will redirect to Login Verificator / BUMN
+
   Scenario Outline: The Vendor input wrong Email and Password
     Given The Vendor is on "Login" Form on VMS Portal
     And The Vendor input "Email" with value "<email>"
