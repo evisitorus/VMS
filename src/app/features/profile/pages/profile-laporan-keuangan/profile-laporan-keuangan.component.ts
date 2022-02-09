@@ -84,6 +84,10 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     modalDitempatkan: ""
   }
 
+  private messages: any = {
+    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
+  };
+
   public setAllForm(): void {
     this.setFormKeuangan();
     this.setFormNeraca();
@@ -229,6 +233,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateFormNeraca(data: any): void {
+    this.popUpMessage = this.messages.updateData;
+    this.triggerPopUp();
+
     this.id = data.id;
     this.dataNeraca.tahun = data.tahun;
     this.dataNeraca.aktiva = data.aktiva;
@@ -242,6 +249,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateFormSPT(data: any): void {
+    this.popUpMessage = this.messages.updateData;
+    this.triggerPopUp();
+    
     this.id = data.id;
     this.dataSPT.tahun = data.tahun;
     this.dataSPT.nomorDokumen = data.nomor;
