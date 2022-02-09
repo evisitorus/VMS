@@ -39,8 +39,8 @@
 
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan">
-              Simpan
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan" [disabled]="disableSubmit">
+              {{ submitButtonText }}
             </button>
           </div>
           <div class="profile-content-modal-btn">

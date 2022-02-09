@@ -60,6 +60,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public listNamaBank: Array<string> = [];
 
+  public disableSubmit: boolean = false;
+  public submitButtonText: string = "Simpan";
+
   public dataNeraca: any = {
     tahun: "",
     aktiva: "",
@@ -548,16 +551,24 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public upload(): void {
-    this.fileService.upload(this.lampiranFiles[0]).subscribe(
-      (res) => {
-        this.uploadedFileContentUrl = res.contentUrl;
-        this.uploadedFileId = res["@id"];
-      },
-      (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
-      }
-    );
+    if (this.lampiranFiles !== null) {
+      this.disableSubmit = true;
+      this.submitButtonText = "Uploading...";
+      this.fileService.upload(this.lampiranFiles[0]).subscribe(
+        (res) => {
+          this.uploadedFileContentUrl = res.contentUrl;
+          this.uploadedFileId = res["@id"];
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
+        },
+        (err) => {
+          this.popUpMessage = err.error.message;
+          this.triggerPopUp();
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
+        }
+      );
+    }  
   }
 
   public download(fileId: string, filename: string) {

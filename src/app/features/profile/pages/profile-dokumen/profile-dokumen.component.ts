@@ -30,6 +30,9 @@ export class ProfileDokumenComponent implements OnInit {
   public value: Date = new Date();
   public checked: boolean = false;
 
+  public disableSubmit: boolean = false;
+  public submitButtonText: string = "Simpan";
+
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
     maxFileSize: 2097152
@@ -272,14 +275,21 @@ export class ProfileDokumenComponent implements OnInit {
 
   public upload(): void {
     if (this.lampiranFiles !== null) {
+      this.disableSubmit = true;
+      this.submitButtonText = "Uploading...";
+
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
         },
         (err) => {
           this.popUpMessage = err.error.message;
           this.triggerPopUp();
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
         }
       );
     }

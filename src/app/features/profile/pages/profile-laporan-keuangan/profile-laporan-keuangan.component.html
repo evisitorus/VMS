@@ -140,8 +140,8 @@
             </button>
           </div>
           <div class="profile-content-modal-btn">
-            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitSPT()" id="btn-simpan-spt">
-              Simpan
+            <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submitSPT()" id="btn-simpan-spt" [disabled]="disableSubmit">
+              {{ submitButtonText }}
             </button>
           </div>
         </div>
