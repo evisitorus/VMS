@@ -16,7 +16,7 @@ import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-ang
 export class ProfileDokumenComponent implements OnInit {
 
   private messages: any = {
-    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar."
+    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
   };
 
   public form!: FormGroup;
