@@ -10,7 +10,7 @@ So that I can manage my VMS Account
   Scenario:
     Given The Vendor already registered on VMS
      When The Vendor wants to enter to VMS Portal  
-       And The Vendor must login on "Login" form by entering their credential
+      And The Vendor must login on "Login" form by entering their credential
        """
        {
            "Email" : "admin@abadijaya.co.id",

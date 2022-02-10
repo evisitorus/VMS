@@ -6,9 +6,6 @@ As a vendor basic
 I want to completed company information
 So that I can upgrade my company level to vendor pro
 
-Background: 
-    Given The Vendor already login to VMS Portal
-
    Background: 
       Given The Vendor already login to VMS Portal
 

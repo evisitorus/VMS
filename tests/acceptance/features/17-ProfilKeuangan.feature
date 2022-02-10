@@ -11,8 +11,8 @@ Feature: Vendor Basic - Completed vendor information
 
  #manage Keuangan
     Scenario: Define Bank Information 
-        Given The Vendor already add information in regards to "Alamat"
-        When The Vendor wants manage "Informasi Keuangan" from the Company
+      Given The Vendor already add information in regards to "Alamat"
+       When The Vendor wants manage "Informasi Keuangan" from the Company
         And The Vendor must click "Informasi Keuangan" menu where found on "Side Menu" of "Vendor Dashboard"
         And The Vendor will see "Informasi Keuangan" form
         And The Vendor wants to add "Bank Information" on sub form of "Bank" at "Informasi Keuangan" form

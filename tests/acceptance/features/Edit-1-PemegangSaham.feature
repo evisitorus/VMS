@@ -6,8 +6,8 @@ As a Vendor
 I want to edit company information
 So that I can modify my company information which has been recorded
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
  #Edit Existing "Pemegang Saham"
  Scenario: Edit Selected record from Pemegang Saham 

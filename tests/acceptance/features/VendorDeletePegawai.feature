@@ -6,10 +6,10 @@ As a Vendor
 I want to delete pegawai  
 So that I can modify pegawai information which has been recorded on the app
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
- Scenario: Delete Selected record from Pegawai
+   Scenario: Delete Selected record from Pegawai
     Given The Vendor still on "Informasi Perusahaan" form 
        When The Vendor wants to delete one of record from "Pegawai" on "Pegawai Grid" which part of "Informasi Perusahaan" form 
        And The Vendor must clicks button "Delete" button from selected record on "Pegawai" form

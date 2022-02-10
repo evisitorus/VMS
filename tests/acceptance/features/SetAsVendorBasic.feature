@@ -8,8 +8,8 @@ Feature: Vendor - Set As Vendor Basic
 
  #positive scenario 
   Scenario:
-    Given The Vendor already finished activation process 
-     When The Vendor clicks "Yes" button on latest process of activation 
+     Given The Vendor already finished activation process 
+      When The Vendor clicks "Yes" button on latest process of activation 
        And The Vendor will brings to "Login" Form from VMS  
        And The Vendor must enter their credential by typing
        """

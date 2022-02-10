@@ -6,8 +6,8 @@ As a Vendor
 I want to delete asset  
 So that I can modify asset information which has been recorded on the app 
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
   #Delete Asset
   Scenario: Delete selected record from Asset
