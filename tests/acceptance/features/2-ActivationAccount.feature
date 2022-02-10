@@ -31,7 +31,7 @@ Feature: Vendor - Activation Account
     #     # """
     #     #untuk template email ada pada gambar terpisah 
         
-        And The Vendor clicks "linkActivation"
+        And The Vendor clicks link "linkActivation"
         And The Vendor will bring to "Define Password" form 
         And The Vendor should define his or her new password to access VMS 
         """
@@ -68,7 +68,7 @@ Feature: Vendor - Activation Account
       #     "linkActivation" : "http://vms.padiumkm.id/activate/uid1"
       #   }
       #   """
-        And The Vendor clicks "linkActivation Expired"
+        And The Vendor clicks link "linkActivation Expired"
         And The Vendor will bring to "Activation Confirmation" form 
         And The Vendor will see warning message which stated that activation failed
         """
@@ -76,47 +76,4 @@ Feature: Vendor - Activation Account
           "message" : "Aktivasi akun anda gagal dilakukan, karena link hanya berlaku selama 2x24 jam dari sejak anda melakukan registrasi, Silahkan ulangi proses registrasi akun anda untuk mendapatkan link aktivasi terbaru"
         }
         """
-      # Then The Vendor cant continue to activate his or her account due activation link was expired 
-  
- #negative scenario for account activation, wrong password 
-    # Scenario: Input Wrong Password 
-    #   Given The Vendor already finished registration process 
-    #   # When The Vendor clicks "Daftar" button where found on "Registration" Form 
-    #   #   And The Vendor will see success message from the system 
-    #   #   """
-    #   #   {
-    #   #       "message" : "Selamat anda telah terdaftar sebagai Vendor PaDi, silahkan cek email anda untuk melakukan aktivasi akun",
-    #   #       "button"  : "Yes"
-    #   #   }
-    #   #   """ 
-    #   #   And The Vendor must selects "Yes" button
-    #   #   And The Vendor must check "Activation Email" on his or her email address 
-    #   #   And The Vendor already on his or her email 
-    #   #   And The Vendor must open "Activation Message" from VMS 
-    #   #   """
-    #   #   {
-        
-    #   #     "messageContent" : "Selamat, Anda telah berhasil registrasi. 
-    #   #                         Untuk dapat mempergunakan seluruh fitur yang tersedia, Silakan klik link berikut ini untuk mengaktivasi akun Anda: "
-    #   #     "linkActivation" : "http://vms.padiumkm.id/activate/uid1"
-    #   #   }
-    #   #   """
-    #     And The Vendor clicks "linkActivation"
-    #     And The Vendor will bring to "Setting Password" form 
-    #     And The Vendor should define his or her new password for accessing VMS 
-    #     """
-    #     {        
-    #         "password" : "P0intBreak!23",
-    #         "repeatPassword : "P0intBreak"
-    #     }
-    #     """
-    #     And The Vendor clicks "Save" button from "Define Password" form 
-    #     And The Vendor will see warning message from the system 
-    #     """
-    #     {
-    #         "message" : "Maaf, password anda tidak sesuai. Silahkan ulangi input password!.",
-    #         "button"  : "Yes"
-    #     }
-    #     """ 
-    #     And The Vendor must selects "Yes" button 
-    #   Then The Vendor will back to "Setting Password" form to define his or her new password for accessing VMS
+      # Then The Vendor cant continue to activate his or her account due activation link was expired

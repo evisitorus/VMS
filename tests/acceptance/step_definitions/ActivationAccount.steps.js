@@ -4,12 +4,12 @@ Given('The Vendor already finished registration process', () => {
     I.amOnPage('/');
 });
 
-When('The Vendor clicks "linkActivation"', () => {
+When('The Vendor clicks link "linkActivation"', () => {
     I.amOnPage('/set-password?token=3a6c326de8b8a65efb646c667f426977');
 
 });
 
-When('The Vendor clicks "linkActivation Expired"', () => {
+When('The Vendor clicks link "linkActivation Expired"', () => {
     I.amOnPage('/set-password?token=3a6c326de8b8a65efb646c667f426977');
 
 });

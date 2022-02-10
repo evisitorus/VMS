@@ -15,7 +15,7 @@ So that I can upgrade my company level to vendor pro
          When The Vendor already define information from "Informasi Perusahaan" 
          And The Vendor wants to add information in regards to "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
          And The Vendor must clicks button "Tambah" where found on the left-buttom of "Pemegang Saham Grid" to add records information in regards to "Pemegang Saham"
-         And The Vendor will see pop-up form of "Tambah Pemegang Saham" which appear in front of "Informasi Perusahaan" form
+         And The Vendor will see pop-up form of "Tambah Pemegang Saham" which appear in front of "Pemegang Saham" form
          """
          {
 
@@ -52,7 +52,7 @@ So that I can upgrade my company level to vendor pro
          When The Vendor already define information from "Informasi Perusahaan" 
          And The Vendor wants to add information in regards to "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
          And The Vendor must clicks button "Tambah" where found on the left-buttom of "Pemegang Saham Grid" to add records information in regards to "Pemegang Saham"
-         And The Vendor not define anything on "Tambah Pemegang Saham" form or only define several fields which needed
+         And The Vendor not define anything on "Tambah Pemegang Saham" form only define several fields which needed
          """
          {
 
