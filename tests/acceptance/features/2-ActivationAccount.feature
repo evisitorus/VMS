@@ -7,8 +7,8 @@ Feature: Vendor - Activation Account
   So that I can activated my VMS Account 
 
  #positive scenario for account activation, link activation will be active for 48 hours 
-    # Scenario: Link Activation 
-    #   Given The Vendor already finished registration process 
+    Scenario: Link Activation 
+      Given The Vendor already finished registration process 
     #   # When The Vendor clicks "Daftar" button where found on "Registration" Form 
     #   #   And The Vendor will see success message from the system 
     #   #   """
@@ -31,26 +31,26 @@ Feature: Vendor - Activation Account
     #     # """
     #     #untuk template email ada pada gambar terpisah 
         
-    #     And The Vendor clicks "linkActivation"
-    #     And The Vendor will bring to "Define Password" form 
-    #     And The Vendor should define his or her new password to access VMS 
-    #     """
-    #     {
+        And The Vendor clicks "linkActivation"
+        And The Vendor will bring to "Define Password" form 
+        And The Vendor should define his or her new password to access VMS 
+        """
+        {
         
-    #         "password" : "P0intBreak!23", #password must me combination cointains numeric, alphanumeric and special character with maximum input 15 
-    #                                       #if user input more than 15 chars, input type locked
-    #         "repeatPassword : "P0intBreak!23"
-    #     }
-    #     """
-    #     And The Vendor clicks "Save" button from "Define Password" form 
-    #     And The Vendor will see success message from the system 
-    #     """
-    #     {
-    #         "message" : "Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda",
-    #         "button"  : "Yes"
-    #     }
-    #     """ 
-    #     And The Vendor must selects "Yes" button
+            "password" : "P0intBreak!23", #password must me combination cointains numeric, alphanumeric and special character with maximum input 15 
+                                          #if user input more than 15 chars, input type locked
+            "repeatPassword : "P0intBreak!23"
+        }
+        """
+        And The Vendor clicks "Save" button from "Define Password" form 
+        And The Vendor will see success message from the system 
+        """
+        {
+            "message" : "Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda",
+            "button"  : "Yes"
+        }
+        """ 
+        And The Vendor must selects "Yes" button
     #     And The Vendor will be flag as "Aktif" also will get "Vendor Basic" badge 
     #   Then The Vendor already activated his or her account for VMS and can continue to test the account by Log-in to the app
     #for login scenario after activation will be describe on next story
@@ -68,7 +68,7 @@ Feature: Vendor - Activation Account
       #     "linkActivation" : "http://vms.padiumkm.id/activate/uid1"
       #   }
       #   """
-        And The Vendor clicks "linkActivation"
+        And The Vendor clicks "linkActivation Expired"
         And The Vendor will bring to "Activation Confirmation" form 
         And The Vendor will see warning message which stated that activation failed
         """
