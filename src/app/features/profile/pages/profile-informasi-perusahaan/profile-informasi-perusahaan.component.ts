@@ -353,7 +353,7 @@ export class ProfileInformasiPerusahaanComponent {
 
       }
     });
-    // this.setFormPerusahaan(this.dataPerusahaan);
+    this.setFormPerusahaan(this.dataPerusahaan);
   }
 
   public setJenisPenyediaUsaha(resp: any) {
