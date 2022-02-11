@@ -109,7 +109,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
   public jenis_kegiatan_usaha: Array<Hydra> = [];
-  public organizations: Array<Item> = [];
+  // public organizations: Array<Item> = [];
   public provinces: Array<any> = [];
   public cities: Array<any> = [];
   public districts: Array<any> = [];
@@ -172,7 +172,7 @@ export class ProfileInformasiPerusahaanComponent {
       responseContactMechanism: this.profileInfoService.getContactMechanism(),
       responseJenisPenyediaUsaha: this.profileInfoService.getJenisPenyediaUsaha(),
       responseJenisKegiatanUsaha: this.profileInfoService.getJenisKegiatanUsaha(),
-      responseOrganizations: this.profileInfoService.getOrganizations(),
+      // responseOrganizations: this.profileInfoService.getOrganizations(),
       responseJenisVendor: this.profileInfoService.getJenisVendor(),
       responseBidangUsaha: this.profileInfoService.getBidangUsaha(),
       responseTipeVendor: this.profileInfoService.getTipeVendor(),
@@ -186,7 +186,7 @@ export class ProfileInformasiPerusahaanComponent {
       this.setResponseContactMechanism(response.responseContactMechanism);
       this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
       this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
-      this.setOrganizations(response.responseOrganizations);
+      // this.setOrganizations(response.responseOrganizations);
       this.setJenisVendor(response.responseJenisVendor);
       this.setBidangUsaha(response.responseBidangUsaha);
       this.setTipeVendor(response.responseTipeVendor);
@@ -357,10 +357,10 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  public setOrganizations(resp: any) {
-    //get list of organizations
-    this.organizations = resp["hydra:member"];
-  }
+  // public setOrganizations(resp: any) {
+  //   //get list of organizations
+  //   this.organizations = resp["hydra:member"];
+  // }
 
   public setJenisVendor(resp: any) {
     //get jenis badan usaha
