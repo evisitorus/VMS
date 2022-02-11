@@ -200,7 +200,6 @@ export class ProfilKaryawanComponent implements OnInit {
     this.bidangTemp = this.bidangSource.filter(
       (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
-    console.log(this.bidangTemp)
   }
 
   public valueChange(value: any): void {
@@ -209,7 +208,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public selectionChange(value: any): void {
-    console.log("valueChange", value);
+    console.log("selectionChange", value);
     this.selectedBidang = value;
 }
 
