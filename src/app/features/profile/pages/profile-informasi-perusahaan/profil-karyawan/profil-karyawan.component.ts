@@ -305,15 +305,18 @@ export class ProfilKaryawanComponent implements OnInit {
     this.parent.triggerPopUp();
   }
 
+  public extractNumber(value: string){
+    return value.replace(/\D/g,'');
+  }
 
   public update(): void {
     let file_id = "";
     if(this.uploadedFileId){
-      file_id = this.uploadedFileId.replace(/\D/g,'');
+      file_id = this.extractNumber(this.uploadedFileId);
     }
     console.log(this.selectedBidangId)
     console.log(this.pegawaiFormGroup.value.bidangPekerjaan.id)
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId.replace(/\D/g,'') : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan["@id"]);
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
