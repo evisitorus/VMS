@@ -213,15 +213,15 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
-    let file_id = this.uploadedFileId.replace(/\D/g,'');
+    let file_id = this.extractNumber(this.uploadedFileId);
     console.log(this.selectedBidangId)
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan["@id"]);
     console.log(bidang_id)
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan["@id"].replace(/\D/g,''),
+      tipeKaryawan: this.extractNumber(this.pegawaiFormGroup.value.tipeKaryawan["@id"]),
       jabatan:this.pegawaiFormGroup.value.jabatan,
       bidangPekerjaan:bidang_id,
       file: file_id,
@@ -284,6 +284,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
+    console.log(data)
     this.popUpID = "popup-edit-data-pegawai";
     this.popUpTitle = "Edit Data Pegawai";
     this.id = data.id;
