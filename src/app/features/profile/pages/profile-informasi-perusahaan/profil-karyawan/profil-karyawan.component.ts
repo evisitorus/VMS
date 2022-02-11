@@ -163,6 +163,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
 
   public addNewBidang(): void {
+    console.log(this.filter)
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
@@ -175,6 +176,8 @@ export class ProfilKaryawanComponent implements OnInit {
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res.id;
+        console.log(this.selectedBidangId)
+        console.log(this.selectedBidang)
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
@@ -193,6 +196,7 @@ export class ProfilKaryawanComponent implements OnInit {
   // searching handler
   public handleFilter(value: any) {
     this.filter = value;
+    console.log(value)
     this.bidangTemp = this.bidangSource.filter(
       (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
@@ -296,6 +300,8 @@ export class ProfilKaryawanComponent implements OnInit {
     if(this.uploadedFileId){
       file_id = this.uploadedFileId.replace(/\D/g,'');
     }
+    console.log(this.selectedBidangId)
+    console.log(this.pegawaiFormGroup.value.bidangPekerjaan.id)
     let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
