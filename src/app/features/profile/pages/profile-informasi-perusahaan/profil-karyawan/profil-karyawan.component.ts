@@ -76,8 +76,6 @@ export class ProfilKaryawanComponent implements OnInit {
     private dialogService: DialogService,
     private parent: ProfileInformasiPerusahaanComponent
   ) {
-    //extract from 0
-    // this.bidangTemp = this.bidangSource.slice(0);
   }
 
   ngOnInit(): void {
@@ -205,6 +203,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public valueChange(value: any): void {
     console.log("valueChange", value);
     this.selectedBidang = value;
+    this.selectedBidangId = value["@id"];
   }
 
   public selectionChange(value: any): void {
@@ -217,6 +216,7 @@ export class ProfilKaryawanComponent implements OnInit {
     let file_id = this.uploadedFileId.replace(/\D/g,'');
     console.log(this.selectedBidangId)
     let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
+    console.log(bidang_id)
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
@@ -313,7 +313,7 @@ export class ProfilKaryawanComponent implements OnInit {
     }
     console.log(this.selectedBidangId)
     console.log(this.pegawaiFormGroup.value.bidangPekerjaan.id)
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
+    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId.replace(/\D/g,'') : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
