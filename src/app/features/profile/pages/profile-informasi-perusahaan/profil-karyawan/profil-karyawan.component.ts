@@ -65,10 +65,10 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public bidangTemp: Array<Item> = [];
 
-    // add new bidang value based on user input
-    public filter!: string;
-    public selectedBidang!: Item ;
-    public selectedBidangId:string = "";
+  // add new bidang value based on user input
+  public filter!: string;
+  public selectedBidang!: Item ;
+  public selectedBidangId:string = "";
 
   constructor(
     private fileService: FileService,
@@ -77,7 +77,7 @@ export class ProfilKaryawanComponent implements OnInit {
     private parent: ProfileInformasiPerusahaanComponent
   ) {
     //extract from 0
-    this.bidangTemp = this.bidangSource.slice(0);
+    // this.bidangTemp = this.bidangSource.slice(0);
   }
 
   ngOnInit(): void {
@@ -173,7 +173,7 @@ export class ProfilKaryawanComponent implements OnInit {
           id: this.bidangSource.length
         });
         //make new added value the selected value
-        this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
+        this.selectedBidang = this.bidangSource[this.bidangSource.length];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res.id;
         console.log(this.selectedBidangId)
@@ -181,6 +181,7 @@ export class ProfilKaryawanComponent implements OnInit {
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
+        this.fetchData();
       },
       (error) => {
         this.popUpID = "popup-bidang-pekerjaan-failed";
@@ -196,15 +197,26 @@ export class ProfilKaryawanComponent implements OnInit {
   // searching handler
   public handleFilter(value: any) {
     this.filter = value;
-    console.log(value)
     this.bidangTemp = this.bidangSource.filter(
       (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
+    console.log(this.bidangTemp)
   }
+
+  public valueChange(value: any): void {
+    console.log("valueChange", value);
+    this.selectedBidang = value;
+  }
+
+  public selectionChange(value: any): void {
+    console.log("valueChange", value);
+    this.selectedBidang = value;
+}
 
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.uploadedFileId.replace(/\D/g,'');
+    console.log(this.selectedBidangId)
     let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
