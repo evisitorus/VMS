@@ -174,8 +174,6 @@ export class ProfilKaryawanComponent implements OnInit {
 
 
   public addNewBidang(): void {
-    this.resetForm()
-
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
         //add new value into temp array and backend
@@ -258,6 +256,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public open() {
     this.opened = true;
+    this.resetForm();
   }
 
   public upload(): void {
