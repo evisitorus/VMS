@@ -182,7 +182,7 @@ export class ProfilKaryawanComponent implements OnInit {
           id: this.bidangSource.length
         });
         //make new added value the selected value
-        this.selectedBidang = this.bidangSource[this.bidangSource.length];
+        this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res.id;
         // this.popUpID = "popup-bidang-pekerjaan-success";
