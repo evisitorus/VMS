@@ -256,7 +256,6 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public open() {
     this.opened = true;
-    this.resetForm();
   }
 
   public upload(): void {
@@ -348,6 +347,7 @@ export class ProfilKaryawanComponent implements OnInit {
         this.close();
       }
     );
+    this.resetForm();
   }
 
   public delete(id: string): void {
