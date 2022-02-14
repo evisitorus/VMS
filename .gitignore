@@ -46,3 +46,6 @@ Thumbs.db
 
 .scannerwork/
 tests/acceptance/_output
+
+#env.local
+/src/environments/environment.local.ts

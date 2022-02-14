@@ -5,7 +5,7 @@ Given('The Vendor already login to VMS Portal', () => {
     I.waitForElement('#input-email input[class=k-input]');
     I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
     I.waitForElement('#input-password input[class=k-input]');
-    I.fillField('#input-password input[class=k-input]', '1234');
+    I.fillField('#input-password input[class=k-input]', '12345678');
     I.waitForElement('#btn-login');
     I.click('#btn-login');
     I.waitForElement('#btn-popup-yes');

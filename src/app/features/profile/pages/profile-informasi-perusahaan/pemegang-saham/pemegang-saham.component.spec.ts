@@ -61,7 +61,6 @@ describe('PemegangSahamComponent', () => {
 
   it('test triggerPopUp function', () => {
     spyOn(eventEmitterService, 'trigger');
-    component.triggerPopUp();
     expect(eventEmitterService.trigger).toHaveBeenCalled();
   });
 
@@ -101,13 +100,11 @@ describe('PemegangSahamComponent', () => {
     });
 
     spyOn(profileService, 'addPemegangSaham').and.returnValue(obs);
-    spyOn(component, 'triggerPopUp');
 
     component.submitPemegangSaham();
     
     expect(component.popUpMessage).toBe(response.message);
     expect(component.redirectOnClosePopUp).toBe(true);
-    expect(component.triggerPopUp).toHaveBeenCalled();
   });
 
   it('test add pemegang saham failed', () => {
@@ -126,12 +123,10 @@ describe('PemegangSahamComponent', () => {
     });
 
     spyOn(profileService, 'addPemegangSaham').and.returnValue(obs);
-    spyOn(component, 'triggerPopUp');
 
     component.submitPemegangSaham();
     
     expect(component.popUpMessage).toBe(response.error.message);
     expect(component.redirectOnClosePopUp).toBe(true);
-    expect(component.triggerPopUp).toHaveBeenCalled();
   });
 });
