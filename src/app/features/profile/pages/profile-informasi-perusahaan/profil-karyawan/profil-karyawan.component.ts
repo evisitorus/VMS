@@ -223,7 +223,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.extractNumber(this.uploadedFileId);
     console.log(this.selectedBidangId)
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan["@id"]);
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : "";
     console.log(bidang_id)
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
@@ -326,7 +326,7 @@ export class ProfilKaryawanComponent implements OnInit {
     }
     console.log(this.selectedBidangId)
     console.log(this.pegawaiFormGroup.value.bidangPekerjaan.id)
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan["@id"]);
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
