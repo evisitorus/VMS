@@ -119,8 +119,7 @@
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
             <div class="col k-vstack">
-              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col"
-              [defaultItem]="{ name: 'Masukkan nama bidang pekerjaan, contoh: IT, Human Resource...', id: null }" textField="name" valueField="@id" [data]="bidangSource" (filterChange)="handleFilter($event)" (valueChange)="valueChange($event)" (selectionChange)="selectionChange($event)" #bidangPekerjaan [(ngModel)]="selectedBidang">
+              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col" textField="name" valueField="@id" [data]="bidangTemp" (filterChange)="handleFilter($event)" (valueChange)="valueChange($event)" (selectionChange)="selectionChange($event)" #bidangPekerjaan [(ngModel)]="selectedBidang">
               <ng-template kendoDropDownListNoDataTemplate>
                 <div>
                   Data bidang pekerjaan tidak ditemukan

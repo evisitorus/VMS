@@ -76,6 +76,7 @@ export class ProfilKaryawanComponent implements OnInit {
     private dialogService: DialogService,
     private parent: ProfileInformasiPerusahaanComponent
   ) {
+    this.bidangTemp = this.bidangSource.slice(0);
   }
 
   ngOnInit(): void {
@@ -97,6 +98,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getBidangKaryawan().subscribe(
       (resp) => {
         this.bidangSource = resp['hydra:member'];
+        this.bidangTemp = this.bidangSource;
       },
       (error) => {
         console.log(error);
@@ -125,11 +127,16 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.bidangPekerjaan = null;
     this.data.cvFilePath = null;
     this.selectedBidangId = "";
+    this.selectedBidang = {
+      name: "Masukkan nama bidang pekerjaan, contoh: IT, Human Resource...",
+      id: 0,
+    };
     this.setForm();
 
   }
 
   public setForm(): void {
+    console.log(this.data)
     this.pegawaiFormGroup = new FormGroup({
       nik: new FormControl(this.data.nik, Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
@@ -162,6 +169,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public addNewBidang(): void {
     console.log(this.filter)
+    this.resetForm()
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
@@ -294,6 +302,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.lastName = data.fromParty.lastName;
     this.data.tipeKaryawan = data.sdmType;
     this.data.jabatan = data.jabatan;
+    this.data.bidangPekerjaan = data.sdmBidang;
     this.selectedBidang = data.sdmBidang;
     this.data.cvFilePath = data.cvFilePath;
 
