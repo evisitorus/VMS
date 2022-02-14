@@ -93,7 +93,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeProvinsi(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKota = false;
       this.fetchDataKota(value);
     } else {
@@ -102,7 +102,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeKota(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKecamatan = false;
       this.fetchDataKecamatan(value);
     } else {
@@ -111,7 +111,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeKecamatan(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKelurahan = false;
       this.fetchDataKelurahan(value);
     } else {
@@ -120,7 +120,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeKelurahan(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKodepos = false;
       this.fetchDataKodepos(value);
     } else {
@@ -136,16 +136,16 @@ export class ProfileAlamatComponent implements OnInit {
         no: no++,
         namaAlamat: data[key]['address2'],
         alamat: data[key]['address1'],
-        provinsiId: data[key]['province']['id'],
-        provinsi: data[key]['province']['description'],
-        kotaId: data[key]['city']['id'],
-        kota: data[key]['city']['description'],
-        kecamatanId: data[key]['district']['id'],
-        kecamatan: data[key]['district']['description'],
-        kelurahanId: data[key]['village']['id'],
-        kelurahan: data[key]['village']['description'],
-        kodeposId: data[key]['village']['postalCode']['id'],
-        kodepos: data[key]['village']['postalCode']['postalCodeNum'],
+        provinsiId: data[key]['province'] ? data[key]['province']['id'] : "",
+        provinsi: data[key]['province'] ? data[key]['province']['description'] : "",
+        kotaId: data[key]['city'] ? data[key]['city']['id'] : "",
+        kota: data[key]['city'] ? data[key]['city']['description'] : "",
+        kecamatanId: data[key]['district'] ? data[key]['district']['id'] : "",
+        kecamatan: data[key]['district'] ? data[key]['district']['description'] : "",
+        kelurahanId: data[key]['village'] ? data[key]['village']['id'] : "",
+        kelurahan: data[key]['village'] ? data[key]['village']['description'] : "",
+        kodeposId: data[key]['village'] ? data[key]['village']['postalCode']['id'] : "",
+        kodepos: data[key]['village'] ? data[key]['village']['postalCode']['postalCodeNum'] : "",
         id: data[key]['id'],
         deletedAt: data[key]['deletedAt'],
       };
