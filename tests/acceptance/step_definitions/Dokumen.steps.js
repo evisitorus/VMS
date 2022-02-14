@@ -218,6 +218,8 @@ Given('The Vendor must click {string} button to save information of {string}', (
         case "Profil Perusahaan":
             I.waitForElement('#saveInformasiPerusahaanBtn');
             I.click('#saveInformasiPerusahaanBtn');
+            I.click("Yes");
+            // I.see('Berhasil menyimpan data');
             break;
         case "Dokumen":
             I.waitForElement('#btn-simpan');
@@ -254,6 +256,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
         case "Pegawai":
             I.waitForElement('#saveKaryawanFormBtn');
             I.click('#saveKaryawanFormBtn');
+            break;
+        case "PIC":
+            I.waitForElement('#btn-simpan');
+            I.click('#btn-simpan');
             break;
         default:
             I.click(button2);
@@ -344,8 +350,13 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
+        case "PIC":
+            I.see('Periksa kembali file Anda');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
         default:
-            I.waitForElement(list1);
+            I.waitForElement(grid);
             break;
     }
 });

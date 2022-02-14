@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
+    app-stack: eproc
     app: eproc-fe
   name: eproc-fe
 spec:
@@ -15,7 +16,7 @@ spec:
         app: eproc-fe
     spec:
       containers:
-      - image: 153829871065.dkr.ecr.ap-southeast-1.amazonaws.com/eproc-fe:develop-25ba96e
+      - image: 
         name: eproc-fe
         resources:
           limits:
@@ -27,12 +28,14 @@ spec:
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: ecrcred 
+      - name: gitlab-registry
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: eproc-fe
+  labels:
+    app-stack: eproc
 spec:
   ports:
   - port: 80
@@ -40,6 +43,6 @@ spec:
     targetPort: 80
   # - port: 443
   #   protocol: TCP
-  #   name: https    
+  #   name: https
   selector:
     app: eproc-fe

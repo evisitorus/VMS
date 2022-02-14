@@ -8,6 +8,7 @@ import { ResetPasswordInterface } from '../interfaces/reset-password-interface';
 import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
 import { ApiService } from './api/api.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,8 @@ export class AuthService {
       url: ApiRoutes.api_login_route,
       body: {
         email: params.email,
-        password: params.password
+        password: params.password,
+        loginAs: environment.login_as
       }
     };
 

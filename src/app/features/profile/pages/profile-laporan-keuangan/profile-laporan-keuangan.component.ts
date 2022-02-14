@@ -328,8 +328,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public submitSPT(): void {
-    console.log(this.formSPT.valid);
-    if (this.lampiranFiles === null) {
+    if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
       this.popUpMessage = "File tidak valid";
       this.triggerModal('spt');
       this.triggerPopUp();

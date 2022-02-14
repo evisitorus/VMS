@@ -16,8 +16,9 @@ export class ProfileInformationService {
     private authService: AuthService
   ) { }
 
+  token = this.authService.getLocalStorage('access_token')!;
+
   public addProfilKaryawan(params: ProfileKaryawanInterface): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_add_profil_karyawan: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pegawai_route,
@@ -36,7 +37,7 @@ export class ProfileInformationService {
           id: (this.authService.getLocalStorage("vendor_id")!)
         },
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     }
@@ -45,13 +46,12 @@ export class ProfileInformationService {
   }
 
   public getKaryawan(): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_get_profil_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pegawai_route + localStorage.getItem('vendor_id'),
       options: {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     };
@@ -59,13 +59,12 @@ export class ProfileInformationService {
   }
 
   public getTipeKaryawan(): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_get_tipe_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_tipe_karyawan,
       options: {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     };
@@ -74,13 +73,12 @@ export class ProfileInformationService {
   }
 
   public getBidangKaryawan(): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_get_bidang_karyawan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_bidang_karyawan,
       options: {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     }
@@ -89,7 +87,6 @@ export class ProfileInformationService {
   }
 
   public postBidangKaryawan(bidang: string): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_post_bidang_karyawan: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_bidang_karyawan,
@@ -98,7 +95,7 @@ export class ProfileInformationService {
       },
       options: {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     }
@@ -107,7 +104,6 @@ export class ProfileInformationService {
   }
 
   public update(params: ProfileKaryawanInterface, id: string, pegawai_id: string): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_update_pegawai: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_update_pegawai_route,
@@ -125,7 +121,7 @@ export class ProfileInformationService {
       },
       options: {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     };
@@ -133,13 +129,12 @@ export class ProfileInformationService {
   }
 
   public delete(id: string): Observable<any> {
-    let token = this.authService.getLocalStorage('access_token')!;
     let api_delete_pegawai_info: ApiInterface = {
       method: ApiRouteMethods.delete,
       url: ApiRoutes.api_pegawai_route.concat('/').concat(id),
       options: {
         headers: {
-          Authorization: token
+          Authorization: this.token
         }
       }
     };

@@ -170,7 +170,7 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-autocomplete class="content-input-field" formControlName="namaBank" [data]="listNamaBank" [kendoDropDownFilter]="{ operator: 'contains' }" required></kendo-autocomplete>
+              <kendo-autocomplete class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [data]="listNamaBank" [kendoDropDownFilter]="{ operator: 'contains' }" required></kendo-autocomplete>
               <!-- <kendo-textbox class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [clearButton]="true" #namaBank required></kendo-textbox>                 -->
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nama Bank tidak boleh kosong</kendo-formerror>

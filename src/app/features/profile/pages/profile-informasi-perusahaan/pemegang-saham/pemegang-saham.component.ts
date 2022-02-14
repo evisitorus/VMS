@@ -59,6 +59,32 @@ export class PemegangSahamComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPemegangSaham();
+    if (this.eventEmitterService.subsVar == undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.invokeFunction.subscribe(
+        () => { this.trigger() }
+      );
+    }
+  }
+
+  message!: string;
+  title!: string;
+  noButton: boolean = false;
+  yesButton: boolean = false;
+
+  redirectOnClose: boolean = false;
+  redirectUrl!: string;
+
+  public openedPopUp = false;
+
+  public closePopUp() {
+    this.openedPopUp = false;
+    if (this.redirectOnClose) {
+      window.location.href = this.redirectUrl;
+    }
+  }
+
+  public trigger() {
+    this.openedPopUp = !this.openedPopUp;
   }
 
   getPemegangSaham(){
@@ -66,12 +92,10 @@ export class PemegangSahamComponent implements OnInit {
       (resp) =>  {
         this.gridData = resp['hydra:member'];
         this.gridData = this.mapData(this.gridData);
-        console.log(this.gridData);
         return this.gridData;
       },
       (error) => {
-        this.popUpMessage = "Gagal mendapatkan data";
-        this.triggerPopUp();
+        this.triggerSuccess("Gagal mendapatkan data");
       }
     );
   }
@@ -94,10 +118,6 @@ export class PemegangSahamComponent implements OnInit {
       };
     }
     return mappedData;
-  }
-
-  triggerPopUp() {
-    this.eventEmitterService.trigger();
   }
 
   public closeSaham() {
@@ -136,9 +156,10 @@ export class PemegangSahamComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.pemegangSahamFormGroup.invalid) {
-      this.popUpMessage = messages.default;
-      this.triggerPopUp();
-      this.redirectOnClosePopUp = false;
+      this.title = "Perhatian";
+      this.message = messages.default;
+      this.yesButton = true;
+      this.trigger();
       return;
     }
 
@@ -153,16 +174,12 @@ export class PemegangSahamComponent implements OnInit {
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.addPemegangSaham(params).subscribe(
       (resp) =>  {
-        this.popUpMessage = "Berhasil menyimpan data";
-        this.redirectOnClosePopUp = false;
-        this.triggerPopUp();
+        this.triggerSuccess("Berhasil menyimpan data");
         this.getPemegangSaham();
         this.closeSaham();
-        // this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
       },
       (error) => {
-        this.popUpMessage = "Gagal menyimpan data";
-        this.triggerPopUp();
+        this.triggerFailed("Gagal menyimpan data");
         this.closeSaham();
       }
     );
@@ -179,9 +196,7 @@ export class PemegangSahamComponent implements OnInit {
     this.isNewData = false;
     this.disableNamaPemegangSaham = false;
 
-    this.popUpTitle = "Perhatian";
-    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
-    this.triggerPopUp();
+    this.triggerSuccess("Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.");
     this.setUpdateForm();
     this.openSaham();
   }
@@ -209,14 +224,12 @@ export class PemegangSahamComponent implements OnInit {
     let params: UpdatePemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.updatePemegangSaham(params).subscribe(
       () => {
-        this.popUpMessage = "Berhasil memperbarui data";
-        this.triggerPopUp();
+        this.triggerSuccess("Berhasil memperbarui data");
         this.getPemegangSaham();
         this.closeSaham();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
+        this.triggerFailed(err);
         this.closeSaham();
       }
     );
@@ -232,13 +245,11 @@ export class PemegangSahamComponent implements OnInit {
   public deletePemegangSaham(id: string): void {
     this.profileService.deletePemegangSaham(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
-        this.triggerPopUp();
+        this.triggerSuccess("Berhasil menghapus data");
         this.getPemegangSaham();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
+        this.triggerFailed(err);
       }
     );
   }
@@ -260,11 +271,24 @@ export class PemegangSahamComponent implements OnInit {
   }
 
   public close(status: any) {
-    console.log(status);
     this.opened = false;
   }
 
   public open() {
     this.opened = true;
+  }
+
+  triggerFailed(err: any){
+    this.title = "Informasi Pemegang Saham";
+    this.message = err.error.message;
+    this.yesButton = true;
+    this.trigger();
+  }
+
+  triggerSuccess(message: string){
+    this.title = "Perhatian";
+    this.message = message;
+    this.yesButton = true;
+    this.trigger();
   }
 }

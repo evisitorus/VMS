@@ -1,10 +1,10 @@
 <div>
   <kendo-label>Pegawai</kendo-label>
   <br>
-  <kendo-grid [pageSize]="5" [data]="gridDataPegawai" [pageable]="true" [resizable]="true">
+  <kendo-grid [pageSize]="5" [data]="gridViewPegawai" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-        {{rowIndex + 1}}
+        {{rowIndex + 1 + skip}}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="NIK">
@@ -119,8 +119,7 @@
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
             <div class="col k-vstack">
-              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col"
-              [defaultItem]="{ name: 'Masukkan nama bidang pekerjaan, contoh: IT, Human Resource...', id: null }" textField="name" valueField="id" [data]="bidangTemp" (filterChange)="handleFilter($event)" #bidangPekerjaan [(ngModel)]="selectedBidang" >
+              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col" textField="name" valueField="@id" [data]="bidangTemp" (filterChange)="handleFilter($event)" (valueChange)="valueChange($event)" (selectionChange)="selectionChange($event)" #bidangPekerjaan [(ngModel)]="selectedBidang">
               <ng-template kendoDropDownListNoDataTemplate>
                 <div>
                   Data bidang pekerjaan tidak ditemukan

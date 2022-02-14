@@ -5,7 +5,7 @@ Given('The Vendor already login to VMS Portal', () => {
     I.waitForElement('#input-email input[class=k-input]');
     I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
     I.waitForElement('#input-password input[class=k-input]');
-    I.fillField('#input-password input[class=k-input]', '1234');
+    I.fillField('#input-password input[class=k-input]', '12345678');
     I.waitForElement('#btn-login');
     I.click('#btn-login');
     I.waitForElement('#btn-popup-yes');
@@ -19,10 +19,6 @@ Given('The Vendor wants manage {string} from the Company', () => {
 Given('The Vendor will see list of {string} on {string}', () => {
     I.seeElement('.action-button');
 });
-
-// Given('The Vendor can {string} the {string} where found on the right-side of grid to see another list of {string} on {string}', () => {
-
-// });
 
 Given('The Vendor will get flag as {string} for checklist  if already upload at least one record on {string} and will be displayed on {string} form also {string} form', () => {
 
@@ -51,6 +47,9 @@ Given('The Vendor must clicks button {string} button from selected record on {st
             break;
         case "Dokumen":
             I.click('#btn-delete');
+            break;
+        case "PIC":
+            I.click('#btn-perbarui');
             break;
         case "Neraca Keuangan":
             I.click('#btn-delete-neraca');
