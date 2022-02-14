@@ -7,7 +7,7 @@ Feature: Vendor - Edit vendor information - Company Profile
     So that I can modify my company information which has been recorded
 
     Background: 
-    Given The Vendor already login to VMS Portal 
+        Given The Vendor already login to VMS Portal 
 
     #edit riwayat pekerjaan 
     Scenario: Edit selected record from Riwayat Pekerjaan 

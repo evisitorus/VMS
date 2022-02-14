@@ -9,7 +9,7 @@ Feature: User - Tender Information
    Scenario: Tender Information (Default as Card List)
     Given The User is on VMS Landing Page  
      When The User accesses "Informasi Pengadaan" section 
-       And The User will see first ten list of Tenders which conduct by BUMN on "Tender Informations Board" as default state
+      And The User will see first ten list of Tenders which conduct by BUMN on "Tender Informations Board" as default state
        #sort by newest tender
        """
        { 

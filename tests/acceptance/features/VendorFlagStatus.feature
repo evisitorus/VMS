@@ -1,9 +1,6 @@
 #language: en
 #workflow
 Feature: Vendor - Flag Status of Vendor
-	#-------------------------------------------------------------------------
-    # Vendor - #Flag Status
-    #-------------------------------------------------------------------------
 
   #Definisi flag "Terdaftar" adalah Vendor yang sudah melakukan Registrasi pada laman VMS  
   Scenario:

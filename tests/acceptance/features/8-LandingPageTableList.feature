@@ -9,10 +9,10 @@ So that I can get more information in regards to Tender that posted on VMS
    Scenario: Tender Information View as Table List 
     Given The User is on VMS Landing Page  
      When The User accesses "Informasi Pengadaan" section 
-       And The User will see first ten list of Tenders which conduct by BUMN on "Tender Informations Board" as default state 
-       And The User wants to change view of "Tender" as Table 
-       And The User must clicks "Table Icon" button on "Informasi Pengadaan" section 
-       And The User will list of "Tender" as "Table" 
+      And The User will see first ten list of Tenders which conduct by BUMN on "Tender Informations Board" as default state 
+      And The User wants to change view of "Tender" as Table 
+      And The User must clicks "Table Icon" button on "Informasi Pengadaan" section 
+      And The User will list of "Tender" as "Table" 
        """
        {
        

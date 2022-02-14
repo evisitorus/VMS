@@ -6,7 +6,6 @@ As a vendor basic
 I want to completed company information
 So that I can upgrade my company level to vendor pro 
 
-
 #manage Alamat
   Scenario: Manage Alamat
     Given The Vendor (Basic) already add information in regards to "Dokumen"

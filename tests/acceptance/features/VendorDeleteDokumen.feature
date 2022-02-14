@@ -6,8 +6,8 @@ As a Vendor
 I want to delete document  
 So that I can modify document which has been recorded on the app 
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
   #Delete Existing Document 
   Scenario: Delete Selected Record from Document 

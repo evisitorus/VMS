@@ -6,12 +6,12 @@ As a Vendor
 I want to delete pemegang saham  
 So that I can modify pegawai information which has been recorded on the app
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
  #Delete Existing "Pemegang Saham"
- Scenario: Delete Selected record from Pemegang Saham 
-    Given The Vendor still on "Informasi Perusahaan" form 
+   Scenario: Delete Selected record from Pemegang Saham 
+     Given The Vendor still on "Informasi Perusahaan" form 
        And The Vendor wants to delete one of record from "Pemegang Saham" on "Pemegang Saham Grid" which part of "Informasi Perusahaan" form 
        And The Vendor must clicks button "Delete" button from selected record on "Pemegang Saham" form
        And The Vendor will see pop-up message appear
