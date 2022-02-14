@@ -174,7 +174,6 @@ export class ProfilKaryawanComponent implements OnInit {
 
 
   public addNewBidang(): void {
-    console.log(this.filter)
     this.resetForm()
 
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
@@ -213,21 +212,19 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public valueChange(value: any): void {
-    console.log("valueChange", value);
     this.selectedBidang = value;
     this.selectedBidangId = value["@id"];
   }
 
   public selectionChange(value: any): void {
-    console.log("selectionChange", value);
     this.selectedBidang = value;
+    this.selectedBidangId = value["@id"];
 }
 
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.extractNumber(this.uploadedFileId);
     let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
-    console.log(bidang_id)
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
@@ -295,7 +292,6 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
-    console.log(data)
     this.popUpID = "popup-edit-data-pegawai";
     this.popUpTitle = "Edit Data Pegawai";
     this.id = data.id;
@@ -327,8 +323,6 @@ export class ProfilKaryawanComponent implements OnInit {
     if(this.uploadedFileId){
       file_id = this.extractNumber(this.uploadedFileId);
     }
-    console.log(this.selectedBidangId)
-    console.log(this.pegawaiFormGroup.value.bidangPekerjaan.id)
     let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
