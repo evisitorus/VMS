@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataBindingDirective } from '@progress/kendo-angular-grid';
+import { DataBindingDirective, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
@@ -27,6 +27,10 @@ const messages = {
 export class ProfilKaryawanComponent implements OnInit {
 
   public gridDataPegawai: any = {};
+  public gridViewPegawai!: GridDataResult;
+  public pageSize = 5;
+  public skip = 0;
+
   public id!: string;
   public pegawaiId!: string;
   public isNewData: boolean = true;
@@ -65,10 +69,10 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public bidangTemp: Array<Item> = [];
 
-    // add new bidang value based on user input
-    public filter!: string;
-    public selectedBidang!: Item ;
-    public selectedBidangId:string = "";
+  // add new bidang value based on user input
+  public filter!: string;
+  public selectedBidang!: Item ;
+  public selectedBidangId:string = "";
 
   constructor(
     private fileService: FileService,
@@ -76,7 +80,6 @@ export class ProfilKaryawanComponent implements OnInit {
     private dialogService: DialogService,
     private parent: ProfileInformasiPerusahaanComponent
   ) {
-    //extract from 0
     this.bidangTemp = this.bidangSource.slice(0);
   }
 
@@ -99,6 +102,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getBidangKaryawan().subscribe(
       (resp) => {
         this.bidangSource = resp['hydra:member'];
+        this.bidangTemp = this.bidangSource;
       },
       (error) => {
         console.log(error);
@@ -108,13 +112,16 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
         this.gridDataPegawai = response.data;
+        this.gridViewPegawai = {
+          data: this.gridDataPegawai.slice(this.skip, this.skip + this.pageSize),
+          total: this.gridDataPegawai.length,
+        }
         return this.gridDataPegawai;
       },
       (error) => {
         console.log(error);
       }
     );
-
 
   }
 
@@ -127,6 +134,10 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.bidangPekerjaan = null;
     this.data.cvFilePath = null;
     this.selectedBidangId = "";
+    this.selectedBidang = {
+      name: "Masukkan nama bidang pekerjaan, contoh: IT, Human Resource...",
+      id: 0,
+    };
     this.setForm();
 
   }
@@ -163,7 +174,6 @@ export class ProfilKaryawanComponent implements OnInit {
 
 
   public addNewBidang(): void {
-
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
       (res) => {
         //add new value into temp array and backend
@@ -178,6 +188,7 @@ export class ProfilKaryawanComponent implements OnInit {
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
+        this.fetchData();
       },
       (error) => {
         this.popUpID = "popup-bidang-pekerjaan-failed";
@@ -198,15 +209,25 @@ export class ProfilKaryawanComponent implements OnInit {
     );
   }
 
+  public valueChange(value: any): void {
+    this.selectedBidang = value;
+    this.selectedBidangId = value["@id"];
+  }
+
+  public selectionChange(value: any): void {
+    this.selectedBidang = value;
+    this.selectedBidangId = value["@id"];
+}
+
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
-    let file_id = this.uploadedFileId.replace(/\D/g,'');
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan["@id"].replace(/\D/g,'');
+    let file_id = this.extractNumber(this.uploadedFileId);
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
-      tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan["@id"].replace(/\D/g,''),
+      tipeKaryawan: this.extractNumber(this.pegawaiFormGroup.value.tipeKaryawan["@id"]),
       jabatan:this.pegawaiFormGroup.value.jabatan,
       bidangPekerjaan:bidang_id,
       file: file_id,
@@ -278,6 +299,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.data.lastName = data.fromParty.lastName;
     this.data.tipeKaryawan = data.sdmType;
     this.data.jabatan = data.jabatan;
+    this.data.bidangPekerjaan = data.sdmBidang;
     this.selectedBidang = data.sdmBidang;
     this.data.cvFilePath = data.cvFilePath;
 
@@ -290,13 +312,16 @@ export class ProfilKaryawanComponent implements OnInit {
     this.parent.triggerPopUp();
   }
 
+  public extractNumber(value: string){
+    return value.replace(/\D/g,'');
+  }
 
   public update(): void {
     let file_id = "";
     if(this.uploadedFileId){
-      file_id = this.uploadedFileId.replace(/\D/g,'');
+      file_id = this.extractNumber(this.uploadedFileId);
     }
-    let bidang_id = (this.selectedBidangId) ? this.selectedBidangId : this.pegawaiFormGroup.value.bidangPekerjaan.id;
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
@@ -322,6 +347,7 @@ export class ProfilKaryawanComponent implements OnInit {
         this.close();
       }
     );
+    this.resetForm();
   }
 
   public delete(id: string): void {
@@ -354,6 +380,11 @@ export class ProfilKaryawanComponent implements OnInit {
         this.delete(id);
       } 
     });
+  }
+
+  public pageChange(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.fetchData();
   }
 
 }
