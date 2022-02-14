@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataBindingDirective } from '@progress/kendo-angular-grid';
+import { DataBindingDirective, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
@@ -27,6 +27,10 @@ const messages = {
 export class ProfilKaryawanComponent implements OnInit {
 
   public gridDataPegawai: any = {};
+  public gridViewPegawai!: GridDataResult;
+  public pageSize = 5;
+  public skip = 0;
+
   public id!: string;
   public pegawaiId!: string;
   public isNewData: boolean = true;
@@ -108,13 +112,16 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.getKaryawan().subscribe(
       (response) => {
         this.gridDataPegawai = response.data;
+        this.gridViewPegawai = {
+          data: this.gridDataPegawai.slice(this.skip, this.skip + this.pageSize),
+          total: this.gridDataPegawai.length,
+        }
         return this.gridDataPegawai;
       },
       (error) => {
         console.log(error);
       }
     );
-
 
   }
 
@@ -380,6 +387,11 @@ export class ProfilKaryawanComponent implements OnInit {
         this.delete(id);
       } 
     });
+  }
+
+  public pageChange(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.fetchData();
   }
 
 }

@@ -1,10 +1,10 @@
 <div>
   <kendo-label>Pegawai</kendo-label>
   <br>
-  <kendo-grid [pageSize]="5" [data]="gridDataPegawai" [pageable]="true" [resizable]="true">
+  <kendo-grid [pageSize]="5" [data]="gridViewPegawai" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-        {{rowIndex + 1}}
+        {{rowIndex + 1 + skip}}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="NIK">
