@@ -136,7 +136,6 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public setForm(): void {
-    console.log(this.data)
     this.pegawaiFormGroup = new FormGroup({
       nik: new FormControl(this.data.nik, Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
@@ -182,8 +181,6 @@ export class ProfilKaryawanComponent implements OnInit {
         this.selectedBidang = this.bidangSource[this.bidangSource.length];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res.id;
-        console.log(this.selectedBidangId)
-        console.log(this.selectedBidang)
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
@@ -222,8 +219,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.extractNumber(this.uploadedFileId);
-    console.log(this.selectedBidangId)
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : "";
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     console.log(bidang_id)
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
@@ -326,7 +322,7 @@ export class ProfilKaryawanComponent implements OnInit {
     }
     console.log(this.selectedBidangId)
     console.log(this.pegawaiFormGroup.value.bidangPekerjaan.id)
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : "";
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
