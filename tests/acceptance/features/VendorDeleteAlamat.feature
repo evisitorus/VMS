@@ -6,8 +6,8 @@ As a Vendor
 I want to delete Alamat  
 So that I can modify Alamat information which has been recorded on the app 
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
  #delete Alamat
   Scenario: Delete selected record from Alamat 

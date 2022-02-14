@@ -6,7 +6,10 @@ Feature: Vendor - Edit vendor information - Company Profile
  I want to edit company information
  So that I can modify my company information which has been recorded
 
-@run_after_test
+   # Background: 
+   #    Given The Vendor already login to VMS Portal
+
+# @run_after_test
   Scenario: Edit PIC Information 
     Given The Vendor already login into VMS using his or her registered company information
      When The Vendor wants to edit several data from his or her company information 

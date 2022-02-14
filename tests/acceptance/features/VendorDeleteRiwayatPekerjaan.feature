@@ -6,8 +6,8 @@ As a Vendor
 I want to delete Riwayat Pekerjaan  
 So that I can modify Riwayat Pekerjaan information which has been recorded on the app
 
-Background: 
-    Given The Vendor already login to VMS Portal
+   Background: 
+      Given The Vendor already login to VMS Portal
 
  #delete riwayat pekerjaan 
   Scenario: Delete selected record from Riwayat Pekerjaan 

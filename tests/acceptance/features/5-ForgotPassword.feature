@@ -18,9 +18,6 @@ So that I can login into VMS
        }
        """
        And The Vendor clicks "Reset Password" button on Reset Password form
-      #  And The Vendor will get link for typing new password on his or her email
-      #  And The Vendor must checks his or her email
-      #  And The Vendor must select "Renew Password" email 
        And The Vendor should be define his or her new password on "Renew Password" Form
        """
        {

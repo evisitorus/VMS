@@ -9,10 +9,10 @@ Feature: User - Tender Information - Filter
 
   Scenario: Tender Information Filter (Default as Card List)
     Given The User is on VMS Landing Page
-    When The User accesses Informasi Pengadaan section
-    And The User wants to filter information to specific list
-    And The User must define parameter on filter section of "Informasi Pengadaan" likes "namaPerusahaan" or "namaTender" or "waktuRegistrasi" or "statusTender" or "nilaiHPS"
-    And The User will see list of "Informasi Pengadaan" based on parameters which define on "Pencarian" section
+     When The User accesses Informasi Pengadaan section
+      And The User wants to filter information to specific list
+      And The User must define parameter on filter section of "Informasi Pengadaan" likes "namaPerusahaan" or "namaTender" or "waktuRegistrasi" or "statusTender" or "nilaiHPS"
+      And The User will see list of "Informasi Pengadaan" based on parameters which define on "Pencarian" section
     """
     {
       "logoPerusahaan"        : "be.visible",

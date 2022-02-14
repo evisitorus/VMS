@@ -67,9 +67,18 @@ Given('The Vendor must define following information with empty field {string}', 
             I.pressKey('Enter');
             I.fillField('#organisasiHimpunan input[class=k-input]', '');
             I.pressKey('Enter');
-            I.fillField('#websitePerusahaan input[class=k-input]', '');
-            I.fillField('#noTeleponPerusahaan input[class=k-input]', '');
-            I.fillField('#alamatPerusahaan input[class=k-input]', '');
+            I.click('#websitePerusahaan');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.click('#noTeleponPerusahaan');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.click('#alamatPerusahaan');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            // I.fillField('#websitePerusahaan input[class=k-input]', '');
+            // I.fillField('#noTeleponPerusahaan input[class=k-input]', '');
+            // I.fillField('#alamatPerusahaan input[class=k-input]', '');
             I.click('#provDropdown.k-dropdown');
             I.pressKey('Enter');
             I.click('#kotaDropdown.k-dropdown');
@@ -82,7 +91,6 @@ Given('The Vendor must define following information with empty field {string}', 
             I.pressKey('Enter');
             break;
         default:
-            I.waitForElement(form);
             break;
     }
     
@@ -99,7 +107,9 @@ Given('The Vendor will get warning message tooltip on empty fields {string}', (f
             I.see('Cabang tidak boleh kosong');
             break;
         case "Informasi Perusahaan":
-            I.see('Mohon lengkapi Data Perusahaan Anda');
+            I.see('Website Perusahaan tidak boleh kosong');
+            I.see('Nomor Telepon Perusahaan tidak boleh kosong');
+            I.see('Alamat Perusahaan tidak boleh kosong');
             break;
         default:
             I.waitForElement(form);

@@ -11,8 +11,8 @@ So that I can upgrade my company level to vendor pro
 
  #manage Keuangan
     Scenario: Positif Scenario for adding information in regards to SPT Tahunan
-        Given The Vendor still on "Laporan Keuangan" form 
-        When The Vendor already define information from "Informasi Bank", "Neraca Keuangan"
+      Given The Vendor still on "Laporan Keuangan" form 
+       When The Vendor already define information from "Informasi Bank", "Neraca Keuangan"
         And The Vendor wants to add information in regards to "SPT Tahunan" on "SPT Tahunan" which part of "Informasi Keuangan" form 
         And The Vendor must clicks button "Tambah" where found on the left-buttom of "SPT Tahunan Grid" to add records information in regards to "SPT Tahunan"
         And The Vendor will see pop-up form of "Tambah SPT Tahunan" which appear in front of "SPT Tahunan" form

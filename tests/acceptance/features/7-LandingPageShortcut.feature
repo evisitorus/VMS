@@ -9,7 +9,7 @@ So that I continue my activation on VMS Portal such as Login (if I have an accou
    Scenario: Visit VMS Portal
     Given The User already type VMS address on his or her browser 
      When The User clicks enter 
-       And The User will see "Landing Page" of VMS 
+      And The User will see "Landing Page" of VMS 
      Then The User can see information which displayed on VMS such as shortcut for "Daftar" or "Masuk" or information in regards to Tender on "Informasi Pengadaan"
 
   Scenario: Register Shortcut for those who haven't account on VMS
