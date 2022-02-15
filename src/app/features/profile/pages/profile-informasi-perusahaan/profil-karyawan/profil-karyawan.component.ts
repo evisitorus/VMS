@@ -189,7 +189,7 @@ export class ProfilKaryawanComponent implements OnInit {
         //make new added value the selected value
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
-        this.selectedBidangId = res.id;
+        this.selectedBidangId = res["@id"];
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
@@ -226,7 +226,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.extractNumber(this.uploadedFileId);
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) ? this.pegawaiFormGroup.value.bidangPekerjaan.id : "";
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
@@ -316,8 +316,11 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public extractNumber(value: string){
-    if (typeof value === 'string') return value.replace(/\D/g,'');
-    return value;
+    if (typeof value === 'string') {
+      return value.replace(/\D/g,'')
+    } else {
+      return String(value);
+    }
   }
 
   public update(): void {
@@ -343,6 +346,7 @@ export class ProfilKaryawanComponent implements OnInit {
         this.parent.popUpMessage = "Berhasil memperbarui data";
         this.parent.triggerPopUp();
         this.fetchData();
+        this.resetForm();
         this.close();
       },
       (err) => {
@@ -351,7 +355,6 @@ export class ProfilKaryawanComponent implements OnInit {
         this.close();
       }
     );
-    this.resetForm();
   }
 
   public delete(id: string): void {
