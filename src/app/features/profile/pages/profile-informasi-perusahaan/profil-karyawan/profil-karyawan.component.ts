@@ -172,6 +172,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
   }
 
+  public addPegawai(){
+    this.resetForm();
+    this.open();
+  }
+
 
   public addNewBidang(): void {
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
@@ -184,11 +189,10 @@ export class ProfilKaryawanComponent implements OnInit {
         //make new added value the selected value
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
-        this.selectedBidangId = res.id;
+        this.selectedBidangId = res["@id"];
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
-        this.fetchData();
       },
       (error) => {
         this.popUpID = "popup-bidang-pekerjaan-failed";
@@ -250,7 +254,6 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public close() {
     this.opened = false;
-    this.resetForm();
     this.isNewData = true;
   }
 
@@ -313,7 +316,11 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public extractNumber(value: string){
-    return value.replace(/\D/g,'');
+    if (typeof value === 'string') {
+      return value.replace(/\D/g,'')
+    } else {
+      return String(value);
+    }
   }
 
   public update(): void {
@@ -339,6 +346,7 @@ export class ProfilKaryawanComponent implements OnInit {
         this.parent.popUpMessage = "Berhasil memperbarui data";
         this.parent.triggerPopUp();
         this.fetchData();
+        this.resetForm();
         this.close();
       },
       (err) => {
@@ -347,7 +355,6 @@ export class ProfilKaryawanComponent implements OnInit {
         this.close();
       }
     );
-    this.resetForm();
   }
 
   public delete(id: string): void {
