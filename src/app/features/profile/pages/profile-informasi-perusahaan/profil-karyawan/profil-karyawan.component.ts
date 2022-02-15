@@ -250,7 +250,6 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public close() {
     this.opened = false;
-    this.resetForm();
     this.isNewData = true;
   }
 
