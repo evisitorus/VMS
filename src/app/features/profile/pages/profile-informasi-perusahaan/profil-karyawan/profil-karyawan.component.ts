@@ -193,7 +193,6 @@ export class ProfilKaryawanComponent implements OnInit {
         // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
         this.parent.triggerPopUp();
-        this.fetchData();
       },
       (error) => {
         this.popUpID = "popup-bidang-pekerjaan-failed";
@@ -227,7 +226,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
     let file_id = this.extractNumber(this.uploadedFileId);
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
+    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) ? this.pegawaiFormGroup.value.bidangPekerjaan.id : "";
     let params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik,
       firstName: this.pegawaiFormGroup.value.firstName,
@@ -317,7 +316,8 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public extractNumber(value: string){
-    return value.replace(/\D/g,'');
+    if (typeof value === 'string') return value.replace(/\D/g,'');
+    return value;
   }
 
   public update(): void {
