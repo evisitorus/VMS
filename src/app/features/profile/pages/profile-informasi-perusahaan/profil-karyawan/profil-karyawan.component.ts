@@ -172,6 +172,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
   }
 
+  public addPegawai(){
+    this.resetForm();
+    this.open();
+  }
+
 
   public addNewBidang(): void {
     this.profileInformationService.postBidangKaryawan(this.filter).subscribe(
