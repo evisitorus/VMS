@@ -23,6 +23,9 @@ import { ListViewModule } from '@progress/kendo-angular-listview';
 import { IconsModule } from '@progress/kendo-angular-icons';
 import { TentangKamiComponent } from './layouts/tentang-kami/tentang-kami.component';
 import { IndicatorsModule } from '@progress/kendo-angular-indicators';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CustomHttpInterceptor } from './layouts/vms-loader/http-interceptor';
+import { VmsLoader } from './layouts/vms-loader/vms-loader.component';
 
 
 
@@ -35,7 +38,8 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
     MainComponent,
     FooterComponent,
     NavbarComponent,
-    TentangKamiComponent
+    TentangKamiComponent,
+    VmsLoader
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,13 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
     IconsModule,
     IndicatorsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
