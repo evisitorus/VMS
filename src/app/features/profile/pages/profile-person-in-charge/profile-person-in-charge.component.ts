@@ -39,6 +39,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   redirectOnClosePopUp: boolean = false;
   popUpID = "";
   person_id = this.authService.getLocalStorage('person_id')!;
+  disabledWhenError: boolean = false;
 
   public formPIC!: FormGroup;
 
@@ -198,6 +199,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.disabledWhenError = true;
     this.setForm();
 
     this.profilePICService.getProfilePIC(this.person_id).subscribe(
@@ -211,10 +213,11 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.responseName = response.data.name;
         this.responsePhoneNumber = response.data.phone_number;
         this.responseEmail = response.data.email;
-
         this.setForm();
+        this.disabledWhenError = false;
       },
       (error) => {
+        this.disabledWhenError = true;
         this.redirectOnClosePopUp = false;
         this.popUpTitle = 'Informasi';
         this.popUpMessage = 'Gagal menampilkan data PIC';
@@ -293,6 +296,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   perbaruiClicked() {
     this.attention();
     this.changeIsDisabled();
+    this.responsePhoneNumber = ('No. Handphone tidak ditemukan' !== this.responsePhoneNumber) ? this.responsePhoneNumber : "";
   }
 
   public open() {

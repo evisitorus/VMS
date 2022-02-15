@@ -273,7 +273,7 @@
           <ng-template #showUpdateButton>
             <div class="k-form-buttons k-float-right">
               <button id="btn-perbarui" class="k-button k-primary vms-btn" (click)="perbaruiClicked()"
-                      *ngIf="isDisabled">Perbarui
+                      *ngIf="isDisabled" [disabled]="disabledWhenError">Perbarui
               </button>
             </div>
           </ng-template>
