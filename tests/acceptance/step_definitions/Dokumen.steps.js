@@ -14,8 +14,8 @@ Given('The Vendor must click {string} menu where found on {string} of {string}',
 Given('The Vendor must click {string} Tab', (sidebar) => {
     switch (sidebar) {
         case "Dokumen":
-            I.waitForElement('#k-panelbar-0-item-sidebar-dokumen');
-            I.click('#k-panelbar-0-item-sidebar-dokumen');
+            I.waitForElement('#k-panelbar-1-item-sidebar-dokumen');
+            I.click('#k-panelbar-1-item-sidebar-dokumen');
             break;
         case "Profil Perusahaan":
             I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
@@ -42,7 +42,6 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-aset');
             break;
         default:
-            I.click(sidebar);
             break;
     }
 });
@@ -71,7 +70,6 @@ Given('The Vendor will see {string} form', (form) => {
             I.amOnPage('/profile-person-in-charge');
             break;
         default:
-            I.amOnPage(form);
             break;
     }
 });
@@ -91,7 +89,6 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
             I.amOnPage('/profile-riwayat-pekerjaan');
             break;
         default:
-            I.click(form1);
             break;
     }
 });
@@ -131,7 +128,6 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.click('#addPegawaiBtn');
             break;
         default:
-            I.click(button3);
             break;
     }
 });
@@ -208,7 +204,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         default:
-            I.waitForElement(form2);
             break;
     }
 });
@@ -260,7 +255,6 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.click('#btn-simpan');
             break;
         default:
-            I.click(button2);
             break;
     }    
 });
@@ -294,7 +288,6 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
             I.see('Action');
             break;
         default:
-            I.waitForElement(list1);
             break;
     }
 });
@@ -358,7 +351,6 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             I.click('#btn-popup-yes');
             break;
         default:
-            I.waitForElement(grid);
             break;
     }
 });
