@@ -6,18 +6,21 @@ As a vendor basic
 I want to completed company information
 So that I can upgrade my company level to vendor pro 
 
+Background: 
+    Given The Vendor already login to VMS Portal
+
 #manage Alamat
   Scenario: Manage Alamat
-    Given The Vendor (Basic) already add information in regards to "Dokumen"
-     When The Vendor (Basic) wants manage "Alamat" from the Company
-       And The Vendor (Basic) must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
-      And The Vendor (Basic) must click "Alamat" Tab 
-      And The Vendor (Basic) will see "Alamat" form 
+    Given The Vendor already add information in regards to "Dokumen"
+     When The Vendor wants manage "Alamat" from the Company
+       And The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+      And The Vendor must click "Alamat" Tab 
+      And The Vendor will see "Alamat" form 
       
       #1
-      And The Vendor (Basic) wants to add information in regards to "Alamat" on "Alamat Grid" which part of "Alamat" form 
-      And The Vendor (Basic) must clicks button "Tambah" where found on the left-buttom of "Alamat Grid" to add records information in regards to "Alamat"
-      And The Vendor (Basic) will see pop-up form of "Tambah Alamat" which appear in front of "Alamat" form
+      And The Vendor wants to add information in regards to "Alamat" on "Alamat Grid" which part of "Alamat" form 
+      And The Vendor must clicks button "Tambah" where found on the left-buttom of "Alamat Grid" to add records information in regards to "Alamat"
+      And The Vendor will see pop-up form of "Tambah Alamat" which appear in front of "Alamat" form
       """
       {
       
@@ -38,9 +41,9 @@ So that I can upgrade my company level to vendor pro
          
       }
       """
-      And The Vendor (Basic) must click "Simpan" button to save information of "Alamat" 
-      And The Vendor (Basic) will see that pop-up form already closed when she/he clicks "Simpan"
-      And The Vendor (Basic) will see list of "Alamat" on "Alamat Grid"
+      And The Vendor must click "Simpan" button to save information of "Alamat" 
+      And The Vendor will see that pop-up form already closed when she or he clicks "Simpan"
+      And The Vendor will see list of "Alamat" on "Alamat Grid"
       """
       {
       	 "No | Nama Alamat          | Alamat 									| Provinsi 		| Kota            | Action      "
@@ -54,18 +57,7 @@ So that I can upgrade my company level to vendor pro
       }
       """
       #repeat process 1 to add another "Alamat"
-     
-      And The Vendor (Basic) must click "Simpan" button where found on the left-buttom of "Alamat" form 
-      And The Vendor (Basic) will see confirmation message 
-      """
-      {
-      
-        "message" : "Simpan Alamat ?",
-        "option"  : "Yes/No"
-      }
-      """
-      And The Vendor (Basic) must select "Yes" option
-      And The Vendor (Basic) will see progress of upgrade level on "Vendor Dashboard"
+      And The Vendor will see progress of upgrade level on "Vendor Dashboard"
       """
       {
          
@@ -74,4 +66,4 @@ So that I can upgrade my company level to vendor pro
           "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
       }
       """
-    Then The Vendor (Basic) already manage her/his company information by adding another address from the company 
+    Then The Vendor already manage her or his company information by adding another address from the company 

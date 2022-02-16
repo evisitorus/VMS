@@ -12,10 +12,6 @@ Given('The Vendor must click {string} button where found on the left-buttom of {
 
 });
 
-Given('The Vendor will see progress of upgrade level on {string}', () => {
-
-});
-
 Given('The Vendor already manage her or his company information by adding Riwayat Pekerjaan from the company', () => {
 
 });

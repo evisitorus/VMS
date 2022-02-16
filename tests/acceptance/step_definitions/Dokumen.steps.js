@@ -26,8 +26,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-pic');
             break;
         case "Alamat":
-            I.waitForElement('#k-panelbar-0-item-sidebar-alamat');
-            I.click('#k-panelbar-0-item-sidebar-alamat');
+            I.waitForElement('#k-panelbar-1-item-sidebar-alamat');
+            I.click('#k-panelbar-1-item-sidebar-alamat');
             break;
         case "Laporan Keuangan":
             I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan');
@@ -143,6 +143,25 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#input-berlaku-sampai input[class=k-input]', '11242021');
             I.waitForElement('#input-lampiran-file input[type=file]');
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
+            break;
+        case "Alamat":
+            I.fillField('#namaAlamat input[class=k-input]', 'Kantor BDV');
+            I.fillField('#alamat input[class=k-input]', 'Jl. Jenderal Ahmad Yani no. 19-65 A');
+            I.click('#provinsi.k-dropdown');
+            I.fillField('#provinsi.k-dropdown', 'Jawa Barat');
+            I.pressKey('Enter');
+            I.click('#kota.k-dropdown');
+            I.fillField('#kota.k-dropdown', 'Kota Bandung');
+            I.pressKey('Enter');
+            I.click('#kecamatan.k-dropdown');
+            I.fillField('#kecamatan.k-dropdown', 'Kiara Condong');
+            I.pressKey('Enter');
+            I.click('#kelurahan.k-dropdown');
+            I.fillField('#kelurahan.k-dropdown', 'Cicaheum');
+            I.pressKey('Enter');
+            I.click('#kodepos.k-dropdown');
+            I.fillField('#kodepos.k-dropdown', '00000');
+            I.pressKey('Enter');
             break;
         case "Pemegang Saham":
             I.fillField('#namaPemegangSaham input[class=k-input]', 'Dua Lipa');
