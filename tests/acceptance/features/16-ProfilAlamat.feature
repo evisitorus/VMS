@@ -42,7 +42,7 @@ Background:
       }
       """
       And The Vendor must click "Simpan" button to save information of "Alamat" 
-      And The Vendor will see that pop-up form already closed when she or he clicks "Simpan"
+      And The Vendor will see that pop-up form already closed when she or he clicks "Simpan" Alamat
       And The Vendor will see list of "Alamat" on "Alamat Grid"
       """
       {

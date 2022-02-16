@@ -36,7 +36,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
             break;
         default:
-            I.click(form2);
             break;
     }
 });
@@ -53,7 +52,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image.gif');
             break;
         default:
-            I.click(form2);
             break;
     }
 });
@@ -88,7 +86,6 @@ Given('The Vendor can modify data which displayed on {string} form with document
             I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
         default:
-            I.click(form1);
             break;
     }
 });
@@ -123,7 +120,6 @@ Given('The Vendor can modify data which displayed on {string} form with invalid 
             I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
         default:
-            I.click(form1);
             break;
     }
 });

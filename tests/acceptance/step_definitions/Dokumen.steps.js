@@ -190,11 +190,9 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#input-neraca-omzet input[role=spinbutton]', 5000000000);
             break;
         case "SPT Tahunan":
-            I.waitForElement('#input-spt-tahun input[class=k-input]');
-            I.fillField('#input-spt-tahun input[class=k-input]' , '2015');
-            I.waitForElement('#input-spt-nomor-dokumen input[class=k-input]');
+            I.click('#input-spt-tahun input[role=spinbutton]');
+            I.fillField('#input-spt-tahun input[role=spinbutton]', 2020);
             I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
-            I.waitForElement('#input-spt-lampiran input[type=file]');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         case "Riwayat Pekerjaan":
@@ -363,6 +361,11 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             break;
         case "PIC":
             I.see('Periksa kembali file Anda');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "SPT Tahunan":
+            I.see('File tidak valid');
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;

@@ -13,7 +13,6 @@ Given('The Vendor already define information from {string}', (form) => {
             I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
             break;
         default:
-            I.waitForElement(form);
             break;
     }
 });
@@ -78,9 +77,6 @@ Given('The Vendor must select {string} option on pop-up message', () => {
 });
 
 Given('The Vendor will see information which state for every changes should be re-check by verificator', () => {
-    // let data = JSON.parse(raw_data.content);
-    // I.see(data.message);
-    // I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.');
     I.click('#btn-popup-yes');
 });
 
