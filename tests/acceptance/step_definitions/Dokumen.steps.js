@@ -38,8 +38,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
             break;
         case "Asset":
-            I.waitForElement('#k-panelbar-0-item-sidebar-aset');
-            I.click('#k-panelbar-0-item-sidebar-aset');
+            I.waitForElement('#k-panelbar-1-item-sidebar-aset');
+            I.click('#k-panelbar-1-item-sidebar-aset');
             break;
         default:
             break;
@@ -170,12 +170,11 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
             break;
         case "Asset":
-            I.waitForElement('#input-nama-asset input[class=k-input]');
             I.fillField('#input-nama-asset input[class=k-input]', 'Crane');
-            I.waitForElement('#input-jumlah-asset input[role=spinbutton]');
+            I.click('#input-jumlah-asset input[role=spinbutton]');
             I.fillField('#input-jumlah-asset input[role=spinbutton]', 100);
-            I.waitForElement('#input-tahun-asset input[class=k-input]');
-            I.fillField('#input-tahun-asset input[class=k-input]', '2012');
+            I.click('#input-tahun-asset input[role=spinbutton]');
+            I.fillField('#input-tahun-asset input[role=spinbutton]', '2020');
             break;
         case "Neraca Keuangan":
             I.click('#input-neraca-tahun input[role=spinbutton]');
@@ -314,7 +313,7 @@ Given('The Vendor can {string} the {string} where found on the right-side of gri
 
 });
 
-Given('The Vendor will get flag as {string} for checklist  if already upload at least one record on {string} and will be displayed on {string} form also {string} form', () => {
+Given('The Vendor will get flag as {string} for checklist if already upload at least one record on {string} and will be displayed on {string} form also {string} form', () => {
 
 });
 

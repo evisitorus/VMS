@@ -43,15 +43,15 @@ Feature: Vendor Basic - Completed vendor information
       }
       """
       #repeat process 1 to add another "Asset"
-    #   And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Asset" on "Asset Grid"
-	  #   And The Vendor will get flag as "Completed" for checklist  if already upload at least one record on "Asset" and will be displayed on "Verifikasi Kelengkapan" form also "Dashboard" form     
-    #   And The Vendor will see progress of upgrade level on "Vendor Dashboard"
-    #   """
-    #   {
+      And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Asset" on "Asset Grid"
+	    And The Vendor will get flag as "Completed" for checklist if already upload at least one record on "Asset" and will be displayed on "Verifikasi Kelengkapan" form also "Dashboard" form     
+      And The Vendor will see progress of upgrade level on "Vendor Dashboard"
+      """
+      {
          
-    #       "vendorLevel"  : "Vendor Basic",
-    #       "progressLevel : "5% menuju Vendor Pro"
-    #       "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
-    #   }
-    #   """
-    # Then The Vendor already manage Asset from his or her company
+          "vendorLevel"  : "Vendor Basic",
+          "progressLevel : "5% menuju Vendor Pro"
+          "informasi"    : "Perhatian : Silahkan lengkapi profil anda agar bisa mendapatkan banyak keuntungan sebagai Vendor PaDi"
+      }
+      """
+    Then The Vendor already manage Asset from his or her company
