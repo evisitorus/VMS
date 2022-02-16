@@ -142,6 +142,20 @@ export class ProfileService {
     return this.apiService.sendRequest(api_get_pemegang_saham);
   }
 
+  getPemegangSahamVendor(): Observable<any> {    
+    let api_get_pemegang_saham: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_vendor_information_route + this.vendor_id + "/pemegang_saham",
+      options: {
+        headers: {
+          Authorization: this.token
+        }
+      }
+    };
+
+    return this.apiService.sendRequest(api_get_pemegang_saham);
+  }
+
   updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
     let api_update_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,

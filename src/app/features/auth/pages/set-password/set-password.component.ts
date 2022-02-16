@@ -12,7 +12,8 @@ import { MustMatch } from './must-match.validator';
 const messages = {
   success: '\r\n Selamat anda telah melakukan aktivasi akun, silahkan masuk ke halaman VMS untuk melengkapi profil anda',
   default: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!.',
-  wrongPattern: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!'
+  wrongPattern: 'Maaf, password anda tidak sesuai. Silahkan ulangi input password!',
+  isActivated: 'Akun sudah teraktivasi sebelumnya, silakan login menggunakan kata sandi yang telah ditentukan'
 };
 
 @Component({
@@ -146,7 +147,11 @@ export class SetPasswordComponent implements OnInit {
       (error) => { 
         this.popUpMessage = error.error.message;
         this.redirectOnClosePopUp = true;
-        this.redirectUrl = "/register";
+        if (error.error.message === messages.isActivated) {
+          this.redirectUrl = "/login";
+        } else {
+          this.redirectUrl = "/register";
+        }
         this.triggerPopUp();
       }
     );

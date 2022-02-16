@@ -88,9 +88,9 @@ export class PemegangSahamComponent implements OnInit {
   }
 
   getPemegangSaham(){
-    this.profileService.getPemegangSaham().subscribe(
+    this.profileService.getPemegangSahamVendor().subscribe(
       (resp) =>  {
-        this.gridData = resp['hydra:member'];
+        this.gridData = resp.data;
         this.gridData = this.mapData(this.gridData);
         return this.gridData;
       },
