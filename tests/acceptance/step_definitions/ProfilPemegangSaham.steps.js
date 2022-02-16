@@ -104,7 +104,7 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
             I.click('#BadanUsaha');
             I.click('#Asing');
             I.click('#kepemilikanSaham input[role=spinbutton]');
-            I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+            I.fillField('#kepemilikanSaham input[role=spinbutton]', 35);
             break;
         case "Alamat":
             I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
