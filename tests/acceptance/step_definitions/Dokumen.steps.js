@@ -178,19 +178,16 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#input-tahun-asset input[class=k-input]', '2012');
             break;
         case "Neraca Keuangan":
-            // I.waitForElement('#input-neraca-tahun input[role=spinbutton]');
-            // I.click('#input-neraca-tahun input[role=spinbutton]');
-            I.fillField('#input-neraca-tahun input[role=spinbutton]', 2015);
-            I.wait(10);
-            I.seeInField('#input-neraca-tahun input[role=spinbutton]', 2015);
-            // I.waitForElement('#input-neraca-aktiva input[role=spinbutton]');
-            I.fillField('#input-neraca-aktiva input[role=spinbutton]', 1000000000);
-            // I.waitForElement('#input-neraca-pasiva input[role=spinbutton]');
-            I.fillField('#input-neraca-pasiva input[role=spinbutton]', 1000000000);
-            // I.waitForElement('#input-neraca-ekuitas input[role=spinbutton]');
-            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', 1000000000);
-            // I.waitForElement('#input-neraca-omzet input[role=spinbutton]');
-            I.fillField('#input-neraca-omzet input[role=spinbutton]', 1000000000);
+            I.click('#input-neraca-tahun input[role=spinbutton]');
+            I.fillField('#input-neraca-tahun input[role=spinbutton]', 2021);
+            I.click('#input-neraca-aktiva input[role=spinbutton]');
+            I.fillField('#input-neraca-aktiva input[role=spinbutton]', 5000000000);
+            I.click('#input-neraca-pasiva input[role=spinbutton]');
+            I.fillField('#input-neraca-pasiva input[role=spinbutton]', 5000000000);
+            I.click('#input-neraca-ekuitas input[role=spinbutton]');
+            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', 5000000000);
+            I.click('#input-neraca-omzet input[role=spinbutton]');
+            I.fillField('#input-neraca-omzet input[role=spinbutton]', 5000000000);
             break;
         case "SPT Tahunan":
             I.waitForElement('#input-spt-tahun input[class=k-input]');
