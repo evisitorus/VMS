@@ -64,9 +64,9 @@
           <div class="row">
             <kendo-label class="col">NIK</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="nikPegawaiInput" formControlName="nik" class="col-md"
-              placeholder="Type your message here" [clearButton]="true" #nik>
-            </kendo-textbox>
+              <kendo-numerictextbox id="nikPegawaiInput" formControlName="nik" class="col-md"
+              placeholder="Type your message here" [maxlength]="16" [spinners]="false" format="d" #nik>
+            </kendo-numerictextbox>
             <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan harus diisi</kendo-formerror>
             </div>
           </div>

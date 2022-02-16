@@ -144,7 +144,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(this.data.nik, Validators.required),
+      nik: new FormControl(parseInt(this.data.nik), Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
       tipeKaryawan: new FormControl(this.data.tipeKaryawan, Validators.required),
@@ -228,7 +228,7 @@ export class ProfilKaryawanComponent implements OnInit {
     let file_id = this.extractNumber(this.uploadedFileId);
     let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
-      nik: this.pegawaiFormGroup.value.nik,
+      nik: this.pegawaiFormGroup.value.nik.toString(),
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
       tipeKaryawan: this.extractNumber(this.pegawaiFormGroup.value.tipeKaryawan["@id"]),
@@ -330,7 +330,7 @@ export class ProfilKaryawanComponent implements OnInit {
     }
     let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
     let params: ProfileKaryawanInterface = {
-      nik: this.pegawaiFormGroup.value.nik,
+      nik: this.pegawaiFormGroup.value.nik.toString(),
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
       tipeKaryawan: this.pegawaiFormGroup.value.tipeKaryawan.id,
