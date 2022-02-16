@@ -65,7 +65,7 @@
             <kendo-label class="col">NIK</kendo-label>
             <div class="col k-vstack">
               <kendo-numerictextbox id="nikPegawaiInput" formControlName="nik" class="col-md"
-              placeholder="Type your message here" [maxlength]="16" [spinners]="false" format="d" #nik>
+              placeholder="NIK" [maxlength]="16" [spinners]="false" format="d" #nik>
             </kendo-numerictextbox>
             <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan harus diisi</kendo-formerror>
             </div>
@@ -73,10 +73,10 @@
         </kendo-formfield>
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">First Name</kendo-label>
+            <kendo-label class="col">Nama Depan</kendo-label>
             <div class="col k-vstack">
               <kendo-textbox id="firstName" class="col-md" formControlName="firstName"
-              placeholder="Type your message here" #namaPegawai [clearButton]="true">
+              placeholder="Nama Depan" #namaPegawai [clearButton]="true">
             </kendo-textbox>
             <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
             </div>
@@ -84,10 +84,10 @@
         </kendo-formfield>
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">Last Name</kendo-label>
+            <kendo-label class="col">Nama Belakang</kendo-label>
             <div class="col k-vstack">
               <kendo-textbox id="lastName" class="col-md" formControlName="lastName"
-              placeholder="Type your message here" #namaPegawai [clearButton]="true">
+              placeholder="Nama Belakang" #namaPegawai [clearButton]="true">
             </kendo-textbox>
             <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
             </div>
@@ -109,7 +109,7 @@
           <div class="row">
             <kendo-label class="col">Jabatan</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Type your message here"
+              <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Jabatan"
               [maxlength]="25" [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
               <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.jabatan.errors?.required">Jabatan tidak boleh kosong</kendo-formerror>
             </div>

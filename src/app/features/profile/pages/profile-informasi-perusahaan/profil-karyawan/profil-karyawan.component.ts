@@ -144,7 +144,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(parseInt(this.data.nik), Validators.required),
+      nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null, Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
       tipeKaryawan: new FormControl(this.data.tipeKaryawan, Validators.required),
