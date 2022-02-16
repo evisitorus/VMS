@@ -149,7 +149,7 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
             break;
         case "Pemegang Saham":
-            I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers');
+            I.fillField('#namaPemegangSaham input[class=k-input]', 'Dua Lipa');
             I.click('#Perseorangan');
             I.click('#Lokal');
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
