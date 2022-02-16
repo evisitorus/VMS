@@ -309,7 +309,7 @@ export class ProfileInformasiPerusahaanComponent {
                                     this.postalCodes = resp["hydra:member"];
                                     this.dataResultKodepos = this.postalCodes;
       
-                                    if (this.dataPerusahaan.village) {
+                                    if (this.dataPerusahaan.address.village) {
                                       this.selectedKodepos = this.postalCodes[0];
                                     }
       
