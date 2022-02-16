@@ -196,8 +196,8 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             break;
         case "Pegawai":
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
-            I.fillField('#firstName input[class=k-input]', 'James Bucky');
-            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.fillField('#firstName input[class=k-input]', 'Justin');
+            I.fillField('#lastName input[class=k-input]', 'Bieber');
             I.click('#tipeKaryawanDropdown.k-dropdown');
             I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
             I.pressKey('Enter');
@@ -284,10 +284,14 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
             I.see('50');
             break;
         case "Pegawai":
-            I.see('James Bucky Barnes');
-            I.see('Tenaga Ahli');
-            I.see('CTO');
-            I.see('IT');
+            I.see('No.');
+            I.see('NIK');
+            I.see('Nama Pegawai');
+            I.see('Tipe Karyawan');
+            I.see('Jabatan');
+            I.see('Bidang Pekerjaan');
+            I.see('Resume');
+            I.see('Action');
             break;
         default:
             I.waitForElement(list1);
