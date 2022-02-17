@@ -24,10 +24,6 @@ Given('The Vendor will get flag as {string} for checklist  if already upload at 
 
 });
 
-Given('The Vendor will see progress of upgrade level on {string}', () => {
-
-});
-
 Given('The Vendor already manage Asset from his or her company', () => {
 
 });

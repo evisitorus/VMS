@@ -43,9 +43,6 @@ Feature: Vendor Basic - Completed vendor information
          "1 .| Konstruksi Gedung Apartemen Untuk Anggota Avengers     | PT. Wijaya Karya (WIKA)  | Rp. 1.000.000.000	| 2012   | BuktiPekerjaan.pdf | Edit Delete "             
       }
       """
-
-      And The Vendor must click "Simpan" button where found on the left-buttom of "Riwayat Pekerjaan" form 
-      And The Vendor select "Yes" option
       And The Vendor will see progress of upgrade level on "Vendor Dashboard"
       """
       {

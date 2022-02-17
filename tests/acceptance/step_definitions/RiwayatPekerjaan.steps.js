@@ -12,10 +12,6 @@ Given('The Vendor must click {string} button where found on the left-buttom of {
 
 });
 
-Given('The Vendor will see progress of upgrade level on {string}', () => {
-
-});
-
 Given('The Vendor already manage her or his company information by adding Riwayat Pekerjaan from the company', () => {
 
 });
@@ -40,7 +36,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
             break;
         default:
-            I.click(form2);
             break;
     }
 });
@@ -57,7 +52,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image.gif');
             break;
         default:
-            I.click(form2);
             break;
     }
 });
@@ -92,7 +86,6 @@ Given('The Vendor can modify data which displayed on {string} form with document
             I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
         default:
-            I.click(form1);
             break;
     }
 });
@@ -127,7 +120,6 @@ Given('The Vendor can modify data which displayed on {string} form with invalid 
             I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
         default:
-            I.click(form1);
             break;
     }
 });

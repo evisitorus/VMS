@@ -76,9 +76,6 @@ Given('The Vendor must define following information with empty field {string}', 
             I.click('#alamatPerusahaan');
             I.pressKey(['Control','A']);
             I.pressKey('Backspace');
-            // I.fillField('#websitePerusahaan input[class=k-input]', '');
-            // I.fillField('#noTeleponPerusahaan input[class=k-input]', '');
-            // I.fillField('#alamatPerusahaan input[class=k-input]', '');
             I.click('#provDropdown.k-dropdown');
             I.pressKey('Enter');
             I.click('#kotaDropdown.k-dropdown');
@@ -98,6 +95,15 @@ Given('The Vendor must define following information with empty field {string}', 
 
 Given('The Vendor move to the next input', () => {
     
+});
+
+Given('The Vendor can continue to fill information in regards to "Modal" where placed on the last part of "Laporan Keuangan" Form', () => {
+    
+});
+
+Given('The Vendor is on "Tambah SPT Tahunan" pop-up form', () => {
+    I.amOnPage('/profile-laporan-keuangan');
+    I.click('#btn-tambah-spt');
 });
 
 Given('The Vendor will get warning message tooltip on empty fields {string}', (form) => {
@@ -130,4 +136,18 @@ Given('The Vendor wants to delete one of record from {string} on {string} which 
             I.click(form1);
             break;
     }
+});
+
+Given('The Vendor upload "Lampiran" with not jpg, png or pdf format', () => {
+    I.click('#input-spt-tahun input[role=spinbutton]');
+    I.fillField('#input-spt-tahun input[role=spinbutton]', 2020);
+    I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
+    I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image.gif');
+});
+
+Given('The Vendor upload "Lampiran" with size more than 2MB', () => {
+    I.click('#input-spt-tahun input[role=spinbutton]');
+    I.fillField('#input-spt-tahun input[role=spinbutton]', 2020);
+    I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
+    I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
 });

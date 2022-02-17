@@ -13,7 +13,6 @@ Given('The Vendor already define information from {string}', (form) => {
             I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
             break;
         default:
-            I.waitForElement(form);
             break;
     }
 });
@@ -55,9 +54,9 @@ Given('The Vendor not define anything on {string} form only define several field
 });
 
 Given('The Vendor will get warning message tooltip on each mandatory fields as {string}', () => {
-    I.seeElement('.k-window');
-    I.see('Data tidak boleh kosong.');
-    I.click('#btn-popup-yes');
+    I.see('Nama Pemegang Saham tidak boleh kosong');
+    I.see('Jenis Pemegang Saham tidak boleh kosong');
+    I.see('Pemegang Saham Lokal/Asing tidak boleh kosong');
 });
 
 Given('The Vendor must define right information from {string} while can continue to next process to define {string}', () => {
@@ -78,9 +77,6 @@ Given('The Vendor must select {string} option on pop-up message', () => {
 });
 
 Given('The Vendor will see information which state for every changes should be re-check by verificator', () => {
-    // let data = JSON.parse(raw_data.content);
-    // I.see(data.message);
-    // I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.');
     I.click('#btn-popup-yes');
 });
 
@@ -108,7 +104,7 @@ Given('The Vendor can modify data which displayed on {string} form', (form1) => 
             I.click('#BadanUsaha');
             I.click('#Asing');
             I.click('#kepemilikanSaham input[role=spinbutton]');
-            I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+            I.fillField('#kepemilikanSaham input[role=spinbutton]', 35);
             break;
         case "Alamat":
             I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');

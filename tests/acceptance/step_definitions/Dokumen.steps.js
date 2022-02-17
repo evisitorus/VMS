@@ -14,8 +14,8 @@ Given('The Vendor must click {string} menu where found on {string} of {string}',
 Given('The Vendor must click {string} Tab', (sidebar) => {
     switch (sidebar) {
         case "Dokumen":
-            I.waitForElement('#k-panelbar-0-item-sidebar-dokumen');
-            I.click('#k-panelbar-0-item-sidebar-dokumen');
+            I.waitForElement('#k-panelbar-1-item-sidebar-dokumen');
+            I.click('#k-panelbar-1-item-sidebar-dokumen');
             break;
         case "Profil Perusahaan":
             I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
@@ -26,8 +26,8 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-pic');
             break;
         case "Alamat":
-            I.waitForElement('#k-panelbar-0-item-sidebar-alamat');
-            I.click('#k-panelbar-0-item-sidebar-alamat');
+            I.waitForElement('#k-panelbar-1-item-sidebar-alamat');
+            I.click('#k-panelbar-1-item-sidebar-alamat');
             break;
         case "Laporan Keuangan":
             I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan');
@@ -38,11 +38,10 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
             break;
         case "Asset":
-            I.waitForElement('#k-panelbar-0-item-sidebar-aset');
-            I.click('#k-panelbar-0-item-sidebar-aset');
+            I.waitForElement('#k-panelbar-1-item-sidebar-aset');
+            I.click('#k-panelbar-1-item-sidebar-aset');
             break;
         default:
-            I.click(sidebar);
             break;
     }
 });
@@ -71,7 +70,6 @@ Given('The Vendor will see {string} form', (form) => {
             I.amOnPage('/profile-person-in-charge');
             break;
         default:
-            I.amOnPage(form);
             break;
     }
 });
@@ -91,7 +89,6 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
             I.amOnPage('/profile-riwayat-pekerjaan');
             break;
         default:
-            I.click(form1);
             break;
     }
 });
@@ -131,7 +128,6 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.click('#addPegawaiBtn');
             break;
         default:
-            I.click(button3);
             break;
     }
 });
@@ -148,41 +144,54 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.waitForElement('#input-lampiran-file input[type=file]');
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
             break;
+        case "Alamat":
+            I.fillField('#namaAlamat input[class=k-input]', 'Kantor BDV');
+            I.fillField('#alamat input[class=k-input]', 'Jl. Jenderal Ahmad Yani no. 19-65 A');
+            I.click('#provinsi.k-dropdown');
+            I.fillField('#provinsi.k-dropdown', 'Jawa Barat');
+            I.pressKey('Enter');
+            I.click('#kota.k-dropdown');
+            I.fillField('#kota.k-dropdown', 'Kota Bandung');
+            I.pressKey('Enter');
+            I.click('#kecamatan.k-dropdown');
+            I.fillField('#kecamatan.k-dropdown', 'Kiara Condong');
+            I.pressKey('Enter');
+            I.click('#kelurahan.k-dropdown');
+            I.fillField('#kelurahan.k-dropdown', 'Cicaheum');
+            I.pressKey('Enter');
+            I.click('#kodepos.k-dropdown');
+            I.fillField('#kodepos.k-dropdown', '00000');
+            I.pressKey('Enter');
+            break;
         case "Pemegang Saham":
-            I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers');
+            I.fillField('#namaPemegangSaham input[class=k-input]', 'Dua Lipa');
             I.click('#Perseorangan');
             I.click('#Lokal');
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
             break;
         case "Asset":
-            I.waitForElement('#input-nama-asset input[class=k-input]');
             I.fillField('#input-nama-asset input[class=k-input]', 'Crane');
-            I.waitForElement('#input-jumlah-asset input[role=spinbutton]');
+            I.click('#input-jumlah-asset input[role=spinbutton]');
             I.fillField('#input-jumlah-asset input[role=spinbutton]', 100);
-            I.waitForElement('#input-tahun-asset input[class=k-input]');
-            I.fillField('#input-tahun-asset input[class=k-input]', '2012');
+            I.click('#input-tahun-asset input[role=spinbutton]');
+            I.fillField('#input-tahun-asset input[role=spinbutton]', '2020');
             break;
         case "Neraca Keuangan":
-            // I.waitForElement('#input-neraca-tahun input[role=spinbutton]');
-            // I.click('#input-neraca-tahun input[role=spinbutton]');
-            I.fillField('#input-neraca-tahun input[role=spinbutton]', 2015);
-            I.wait(10);
-            I.seeInField('#input-neraca-tahun input[role=spinbutton]', 2015);
-            // I.waitForElement('#input-neraca-aktiva input[role=spinbutton]');
-            I.fillField('#input-neraca-aktiva input[role=spinbutton]', 1000000000);
-            // I.waitForElement('#input-neraca-pasiva input[role=spinbutton]');
-            I.fillField('#input-neraca-pasiva input[role=spinbutton]', 1000000000);
-            // I.waitForElement('#input-neraca-ekuitas input[role=spinbutton]');
-            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', 1000000000);
-            // I.waitForElement('#input-neraca-omzet input[role=spinbutton]');
-            I.fillField('#input-neraca-omzet input[role=spinbutton]', 1000000000);
+            I.click('#input-neraca-tahun input[role=spinbutton]');
+            I.fillField('#input-neraca-tahun input[role=spinbutton]', 2021);
+            I.click('#input-neraca-aktiva input[role=spinbutton]');
+            I.fillField('#input-neraca-aktiva input[role=spinbutton]', 5000000000);
+            I.click('#input-neraca-pasiva input[role=spinbutton]');
+            I.fillField('#input-neraca-pasiva input[role=spinbutton]', 5000000000);
+            I.click('#input-neraca-ekuitas input[role=spinbutton]');
+            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', 5000000000);
+            I.click('#input-neraca-omzet input[role=spinbutton]');
+            I.fillField('#input-neraca-omzet input[role=spinbutton]', 5000000000);
             break;
         case "SPT Tahunan":
-            I.waitForElement('#input-spt-tahun input[class=k-input]');
-            I.fillField('#input-spt-tahun input[class=k-input]' , '2015');
-            I.waitForElement('#input-spt-nomor-dokumen input[class=k-input]');
+            I.click('#input-spt-tahun input[role=spinbutton]');
+            I.fillField('#input-spt-tahun input[role=spinbutton]', 2020);
             I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
-            I.waitForElement('#input-spt-lampiran input[type=file]');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         case "Riwayat Pekerjaan":
@@ -196,8 +205,8 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             break;
         case "Pegawai":
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
-            I.fillField('#firstName input[class=k-input]', 'James Bucky');
-            I.fillField('#lastName input[class=k-input]', 'Barnes');
+            I.fillField('#firstName input[class=k-input]', 'Justin');
+            I.fillField('#lastName input[class=k-input]', 'Bieber');
             I.click('#tipeKaryawanDropdown.k-dropdown');
             I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
             I.pressKey('Enter');
@@ -208,7 +217,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
         default:
-            I.waitForElement(form2);
             break;
     }
 });
@@ -260,7 +268,6 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.click('#btn-simpan');
             break;
         default:
-            I.click(button2);
             break;
     }    
 });
@@ -284,13 +291,16 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
             I.see('50');
             break;
         case "Pegawai":
-            I.see('James Bucky Barnes');
-            I.see('Tenaga Ahli');
-            I.see('CTO');
-            I.see('IT');
+            I.see('No.');
+            I.see('NIK');
+            I.see('Nama Pegawai');
+            I.see('Tipe Karyawan');
+            I.see('Jabatan');
+            I.see('Bidang Pekerjaan');
+            I.see('Resume');
+            I.see('Action');
             break;
         default:
-            I.waitForElement(list1);
             break;
     }
 });
@@ -303,7 +313,7 @@ Given('The Vendor can {string} the {string} where found on the right-side of gri
 
 });
 
-Given('The Vendor will get flag as {string} for checklist  if already upload at least one record on {string} and will be displayed on {string} form also {string} form', () => {
+Given('The Vendor will get flag as {string} for checklist if already upload at least one record on {string} and will be displayed on {string} form also {string} form', () => {
 
 });
 
@@ -353,8 +363,12 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
+        case "SPT Tahunan":
+            I.see('File tidak valid');
+            I.waitForElement('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
         default:
-            I.waitForElement(grid);
             break;
     }
 });
