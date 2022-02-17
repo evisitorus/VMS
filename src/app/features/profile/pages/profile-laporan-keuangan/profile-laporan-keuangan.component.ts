@@ -284,7 +284,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.service.fetchDataKeuangan().subscribe(
       (resp) => {
         if (resp.data) {
-          let data = resp.data;
+          let data = resp.data[0];
           this.dataKeuangan.namaBank = data.fromParty.name;
           this.dataKeuangan.cabang = data.cabang;
           this.dataKeuangan.nomorRekening = data.nomorRekening;
