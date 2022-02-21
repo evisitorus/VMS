@@ -29,6 +29,13 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public popUpMessage: string = "";
   public redirectOnClosePopUp: boolean = true;
 
+  public verificationStatus: string = "";
+  public roles : any = {
+    vendorBasic : "Vendor Basic",
+    vendorBasicVerifying : "Vendor Basic (sedang diverifikasi)",
+    vendorPro : "Vendor Pro"
+  };
+
   constructor(
     private service: ProfileKelengkapanService,
     private eventEmitterService: EventEmitterService,
@@ -58,8 +65,9 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
         this.data.laporanKeuangan = kelengkapan.laporan_keuangan;
         
         this.role = resp.data.role_vendor.roleType.name;
-        if (this.role === "Vendor Basic (sedang diverifikasi)") {
+        if (this.role === this.roles.vendorBasicVerifying || this.role === this.roles.vendorPro) {
           this.isDisabled = true;
+          this.verificationStatus = this.role === this.roles.vendorBasicVerifying ? "Sedang dalam proses verifikasi" : "Terverifikasi";
         }
       },
       () => {

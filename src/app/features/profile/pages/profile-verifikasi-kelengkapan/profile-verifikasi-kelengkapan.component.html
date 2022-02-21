@@ -88,7 +88,7 @@
         </form>
       </div>
 
-      <div class="profile-verifikasi-field">
+      <div class="profile-verifikasi-field" *ngIf="!isDisabled">
         <kendo-label class="verifikasi-label">Disclaimer</kendo-label>
         <div class="row">
           <div class="col">
@@ -99,7 +99,6 @@
                   <input *ngIf="!isDisabled" kendoCheckBox id="disclaimer" type="checkbox" formControlName="disclaimer"/>
                   <kendo-label class="k-checkbox-label" for="disclaimer" text="Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR"></kendo-label>
                 </div>
-                <!-- <kendo-formhint>Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR</kendo-formhint> -->
                 <kendo-formerror>This field is required</kendo-formerror>
               </kendo-formfield>
             </form>
@@ -112,7 +111,7 @@
           <button kendoButton class="vms-btn vms-btn-primary" id="btn-tambah-dokumen" (click)="verify()" *ngIf="!isDisabled">
             Rekam Data
           </button>
-          <kendo-label class="verifikasi-label" *ngIf="isDisabled">Sedang dalam proses verifikasi</kendo-label>
+          <kendo-label class="verifikasi-label" *ngIf="isDisabled">{{verificationStatus}}</kendo-label>
         </div>
       </div>
 
