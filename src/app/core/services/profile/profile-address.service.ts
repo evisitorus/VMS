@@ -57,16 +57,17 @@ export class ProfileAddressService {
 
     public update(id: string, params: ProfileAddressInterface): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
+      let vendor_id = this.authService.getLocalStorage('vendor_id')!;
       let api_update_address: ApiInterface = {
         method: ApiRouteMethods.put,
-        url: ApiRoutes.api_address_route + "/" + id,
+        url: ApiRoutes.api_vendor_route + "/" + vendor_id + "/address" + "/" + id,
         body: {
           address1: params.alamat,
           address2: params.namaAlamat,
-          province: "api/geo_locations/" + params.provinsi,
-          city: "api/geo_locations/" + params.kota,
-          district: "api/geo_locations/" + params.kecamatan,
-          village: "api/villages/" + params.kelurahan,
+          province: params.provinsi,
+          city: params.kota,
+          district: params.kecamatan,
+          village: params.kelurahan,
         },
         options: {
           headers: {
