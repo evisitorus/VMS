@@ -13,13 +13,34 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public form!: FormGroup;
   public disclaimer!: boolean;
   public data: any = {
-    profilePerusahaan: false,
-    PICPerusahaan: false,
-    dokumen: false,
-    alamat: false,
-    laporanKeuangan: false,
-    riwayatPekerjaan: false,
-    asset: false,    
+    profilePerusahaan: {
+      status: false,
+      text: "Completed"
+    },
+    PICPerusahaan: {
+      status: false,
+      text: "Completed"
+    },
+    dokumen: {
+      status: false,
+      text: "Completed"
+    },
+    alamat: {
+      status: false,
+      text: "Completed"
+    },
+    laporanKeuangan: {
+      status: false,
+      text: "Completed"
+    },
+    riwayatPekerjaan: {
+      status: false,
+      text: "Completed"
+    },
+    asset: {
+      status: false,
+      text: "Completed"
+    },    
   };
 
   public role!: string;
@@ -56,13 +77,20 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     this.service.getDataKelengkapan().subscribe(
       (resp) => {
         let kelengkapan = resp.data.kelengkapan;
-        this.data.profilePerusahaan = kelengkapan.profile_perusahaan;
-        this.data.PICPerusahaan = kelengkapan.pic_perusahaan;
-        this.data.dokumen = kelengkapan.document;
-        this.data.asset = kelengkapan.asset;
-        this.data.alamat = kelengkapan.alamat;
-        this.data.riwayatPekerjaan = kelengkapan.riwayat_pekerjaan;
-        this.data.laporanKeuangan = kelengkapan.laporan_keuangan;
+        this.data.profilePerusahaan.status = kelengkapan.profile_perusahaan.status;
+        this.data.profilePerusahaan.text = kelengkapan.profile_perusahaan.text;
+        this.data.PICPerusahaan.status = kelengkapan.pic_perusahaan.status;
+        this.data.PICPerusahaan.text = kelengkapan.pic_perusahaan.text;
+        this.data.dokumen.status = kelengkapan.document.status;
+        this.data.dokumen.text = kelengkapan.document.text;
+        this.data.asset.status = kelengkapan.asset.status;
+        this.data.asset.text = kelengkapan.asset.text;
+        this.data.alamat.status = kelengkapan.alamat.status;
+        this.data.alamat.text = kelengkapan.alamat.text;
+        this.data.riwayatPekerjaan.status = kelengkapan.riwayat_pekerjaan.status;
+        this.data.riwayatPekerjaan.text = kelengkapan.riwayat_pekerjaan.text;
+        this.data.laporanKeuangan.status = kelengkapan.laporan_keuangan.status;
+        this.data.laporanKeuangan.text = kelengkapan.laporan_keuangan.text;
         
         this.role = resp.data.role_vendor.roleType.name;
         if (this.role === this.roles.vendorBasicVerifying || this.role === this.roles.vendorPro) {
