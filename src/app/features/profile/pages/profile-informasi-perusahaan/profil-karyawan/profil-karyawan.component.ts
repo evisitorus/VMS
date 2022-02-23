@@ -144,7 +144,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null, Validators.required),
+      nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null,[Validators.max(9999999999999999), Validators.min(1000000000000000), Validators.required]),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
       tipeKaryawan: new FormControl(this.data.tipeKaryawan, Validators.required),
@@ -393,5 +393,4 @@ export class ProfilKaryawanComponent implements OnInit {
     this.skip = event.skip;
     this.fetchData();
   }
-
 }

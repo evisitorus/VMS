@@ -68,6 +68,7 @@
               placeholder="NIK" [maxlength]="16" [spinners]="false" format="d" #nik>
             </kendo-numerictextbox>
             <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan harus diisi</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.min || pegawaiFormGroup.controls.nik.errors?.max">NIK Karyawan harus 16 digit</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
