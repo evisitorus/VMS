@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { CoreModule } from 'src/app/core/core.module';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ProfileAsetComponent } from './profile-aset.component';
@@ -130,7 +131,7 @@ describe('ProfileAsetComponent', () => {
 
     spyOn(profileAssetService, "save").and.returnValue(success);
     component.save();
-    expect(component.popUpMessage).toBe("Berhasil menyimpan data");
+    expect(component.popUpMessage).toBe(dictionary.save_data_success);
   });
 
   it("test update function success", () => {
@@ -145,7 +146,7 @@ describe('ProfileAsetComponent', () => {
 
     spyOn(profileAssetService, "update").and.returnValue(success);
     component.update();
-    expect(component.popUpMessage).toBe("Berhasil memperbarui data");
+    expect(component.popUpMessage).toBe(dictionary.update_data_success);
   });
 
   it("test delete function success", () => {
@@ -162,7 +163,7 @@ describe('ProfileAsetComponent', () => {
 
     spyOn(profileAssetService, "delete").and.returnValue(success);
     component.delete(id);
-    expect(component.popUpMessage).toBe("Berhasil menghapus data");
+    expect(component.popUpMessage).toBe(dictionary.delete_data_success);
   });
 
   it("test save function failed", () => {
@@ -177,7 +178,7 @@ describe('ProfileAsetComponent', () => {
 
     spyOn(profileAssetService, "save").and.returnValue(failed);
     component.save();
-    expect(component.popUpMessage).toBe("Gagal menyimpan data");
+    expect(component.popUpMessage).toBe(dictionary.save_data_failed);
   });
 
   it("test update function failed", () => {
@@ -192,7 +193,7 @@ describe('ProfileAsetComponent', () => {
 
     spyOn(profileAssetService, "update").and.returnValue(failed);
     component.update();
-    expect(component.popUpMessage).toBe("Gagal memperbarui data");
+    expect(component.popUpMessage).toBe(dictionary.update_data_failed);
   });
 
   it("test delete function failed", () => {
@@ -209,7 +210,7 @@ describe('ProfileAsetComponent', () => {
 
     spyOn(profileAssetService, "delete").and.returnValue(failed);
     component.delete(id);
-    expect(component.popUpMessage).toBe("Gagal menghapus data");
+    expect(component.popUpMessage).toBe(dictionary.delete_data_failed);
   });
 
 });

@@ -14,6 +14,7 @@ import {ProfileAddressService} from 'src/app/core/services/profile/profile-addre
 import {DialogCloseResult, DialogRef, DialogService} from "@progress/kendo-angular-dialog";
 import {DropDownFilterSettings} from "@progress/kendo-angular-dropdowns";
 import {VendorLogoInterface} from "../../../../core/interfaces/profile/vendor-logo-interface";
+import { dictionary } from "src/app/dictionary/dictionary";
 
 interface Item {
   name: string;
@@ -530,7 +531,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.saveLogoIdToVendor();
       },
       (error) => {
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.popUpMessage = dictionary.select_file_failed;
         this.triggerPopUp();
         console.log(error);
       }
@@ -597,18 +598,18 @@ export class ProfileInformasiPerusahaanComponent {
 
       this.profileInfoService.updateProfileInformation(this.params, this.vendorID).subscribe(
         () => {
-          this.popUpMessage = "Berhasil menyimpan data";
+          this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
           location.reload();
         },
         () => {
-          this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
+          this.popUpMessage = dictionary.update_data_failed;
           this.triggerPopUp();
           this.close();
         }
       )
     } else {
-      this.popUpMessage = "Mohon lengkapi Data Perusahaan Anda";
+      this.popUpMessage = dictionary.incomplete_data_company;
       this.triggerPopUp();
     }
   }
@@ -636,7 +637,7 @@ export class ProfileInformasiPerusahaanComponent {
         () => {
         },
         (error) => {
-          this.popUpMessage = "Mohon upload logo perusahaan";
+          this.popUpMessage = dictionary.incomplete_data_logo;
           this.redirectOnClosePopUp = false;
           this.popUpID = "popup-failed-save-upload-file-to-database";
           this.triggerPopUp();

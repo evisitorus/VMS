@@ -13,7 +13,7 @@ Given('The Vendor already manage her or his company information by adding anothe
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks "Simpan" Alamat', () => {
-    I.see('Berhasil Menyimpan Data');
+    I.see(dictionary.save_data_success);
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });

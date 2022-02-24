@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKelengkapanService } from 'src/app/core/services/profile/profile-kelengkapan.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-profile-verifikasi-kelengkapan',
@@ -99,7 +100,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
         }
       },
       () => {
-        this.popUpMessage = "Gagal mendapatkan kelengkapan data";
+        this.popUpMessage = dictionary.fetch_data_kelengkapan_failed;
         this.triggerPopUp();
       }
     );
@@ -110,18 +111,18 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     if (this.form.valid) {
       for (let d in this.data) {
         if (!this.data[d]) {
-          this.popUpMessage = "Lengkapi data terlebih dahulu";
+          this.popUpMessage = dictionary.incomplete_data;
           this.triggerPopUp();
           return false;
         }
       }
       this.service.verifikasiKelengkapan().subscribe(
         () => {
-          this.popUpMessage = "Data anda sudah kami rekam dan sedang dalam tahap verifikasi";
+          this.popUpMessage = dictionary.verification_submited;
           this.triggerPopUp();
         },
         () => {
-          this.popUpMessage = "Pengajuan Verifikasi Gagal";
+          this.popUpMessage = dictionary.verification_failed;
           this.triggerPopUp();
         }
       );

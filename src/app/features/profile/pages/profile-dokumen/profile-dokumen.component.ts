@@ -7,6 +7,7 @@ import { EventEmitterService } from 'src/app/core/services/event-emitter.service
 import { ProfileDocumentService } from 'src/app/core/services/profile/profile-document.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-profile-dokumen',
@@ -154,7 +155,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public submit(): void {
     if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
-      this.popUpMessage = "File tidak valid";
+      this.popUpMessage = dictionary.invalid_file;
       this.close();
       this.triggerPopUp();
     } else {
@@ -181,7 +182,7 @@ export class ProfileDokumenComponent implements OnInit {
     
     this.profileDocumentService.save(params).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menyimpan data";
+        this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchData();
         this.close();
@@ -205,7 +206,7 @@ export class ProfileDokumenComponent implements OnInit {
     };
     this.profileDocumentService.update(params, this.id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil memperbarui data";
+        this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchData();
         this.close();
@@ -221,7 +222,7 @@ export class ProfileDokumenComponent implements OnInit {
   public delete(id: string): void {
     this.profileDocumentService.delete(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
+        this.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchData();
       },

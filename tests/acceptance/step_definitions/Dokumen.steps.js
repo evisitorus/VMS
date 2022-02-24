@@ -273,7 +273,7 @@ Given('The Vendor must click {string} button to save information of {string}', (
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
-    I.see('Berhasil menyimpan data');
+    I.see(dictionary.save_data_success);
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });

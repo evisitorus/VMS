@@ -4,6 +4,7 @@ import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-ang
 import { ProfileAssetInterface } from 'src/app/core/interfaces/profile-asset.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-profile-aset',
@@ -116,7 +117,7 @@ export class ProfileAsetComponent implements OnInit {
     };
     this.profileAssetService.save(params).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menyimpan data";
+        this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.getData();
         this.close();
@@ -139,7 +140,7 @@ export class ProfileAsetComponent implements OnInit {
     };
     this.profileAssetService.update(params, this.id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil memperbarui data";
+        this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.getData();
         this.close();
@@ -157,7 +158,7 @@ export class ProfileAsetComponent implements OnInit {
   public delete(id: string): void {
     this.profileAssetService.delete(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
+        this.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.getData();
       },

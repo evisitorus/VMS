@@ -5,6 +5,7 @@ import { ListViewDataResult, PageChangeEvent, PagerSettings } from "@progress/ke
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { TenderService } from 'src/app/core/services/tender.service';
 import { FormControl, FormGroup } from "@angular/forms";
+import { dictionary } from "src/app/dictionary/dictionary";
   
 @Component({
   selector: 'app-card-tender',
@@ -204,7 +205,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
             .subscribe((response) => (this.view = response));
       },
       () => {
-        this.popUpMessage = "Gagal menemukan data tender";
+        this.popUpMessage = dictionary.fetch_data_tender_failed;
         this.triggerPopUp();
       }
     );
@@ -225,7 +226,7 @@ export class CardTenderComponent implements OnInit, OnDestroy {
           this.filterBUMN = this.listFilterBUMN.slice();
       },
       () => {
-        this.popUpMessage = "Gagal menemukan data list BUMN";
+        this.popUpMessage = dictionary.fetch_data_list_bumn_failed;
         this.triggerPopUp();
       }
     );
