@@ -80,9 +80,10 @@ export class ProfileAddressService {
 
     public delete(id: string): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
+      let vendor_id = this.authService.getLocalStorage('vendor_id')!;
       let api_delete_address: ApiInterface = {
         method: ApiRouteMethods.delete,
-        url: ApiRoutes.api_address_route + "/" + id,
+        url: ApiRoutes.api_vendor_route + "/" + vendor_id + "/address/" + id,
         options: {
           headers: {
             Authorization: token
