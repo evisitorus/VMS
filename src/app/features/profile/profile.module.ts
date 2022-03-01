@@ -36,7 +36,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/profil-karyawan/profil-karyawan.component';
 import { DataPegawaiComponent } from './pages/profile-informasi-perusahaan/data-pegawai/data-pegawai.component';
 import { IndicatorsModule } from "@progress/kendo-angular-indicators";
-
+import { ProfilPimpinanDanPengurusComponent } from './pages/profile-person-in-charge/profil-pimpinan-dan-pengurus/profil-pimpinan-dan-pengurus.component';
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
 //   { title: "Kelola Akun",
@@ -69,7 +69,8 @@ import { IndicatorsModule } from "@progress/kendo-angular-indicators";
     PemegangSahamComponent,
     DrawerComponent,
     ProfilKaryawanComponent,
-    DataPegawaiComponent
+    DataPegawaiComponent,
+    ProfilPimpinanDanPengurusComponent
   ],
   imports: [
     CommonModule,
