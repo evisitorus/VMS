@@ -258,6 +258,12 @@ export class ProfilKaryawanComponent implements OnInit {
     this.isNewData = true;
   }
 
+  public cancelAddUpdatePegawai(){
+    this.fetchData();
+    this.resetForm();
+    this.close();
+  }
+
   public open() {
     this.opened = true;
   }
