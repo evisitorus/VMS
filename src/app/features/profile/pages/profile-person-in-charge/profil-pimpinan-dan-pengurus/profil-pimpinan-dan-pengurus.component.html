@@ -2,10 +2,10 @@
   <kendo-label>Pimpinan dan Pengurus Perusahaan</kendo-label>
 </div>
 <div>
-  <kendo-grid [pageSize]="5" [data]="gridViewPengurus" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
+  <kendo-grid [pageSize]="5" [skip]="skip" [data]="gridViewPengurus" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-        {{rowIndex + 1 + skip}}
+        {{rowIndex + 1}}
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-column title="Nama Pengurus">

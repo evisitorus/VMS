@@ -308,7 +308,15 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
-    this.fetchData();
+    this.loadItems();
   }
+
+  private loadItems(): void {
+    this.gridViewPengurus = {
+      data: this.gridDataPengurus.slice(this.skip, this.skip + this.pageSize),
+      total: this.gridDataPengurus.length,
+    };
+  }
+
 
 }
