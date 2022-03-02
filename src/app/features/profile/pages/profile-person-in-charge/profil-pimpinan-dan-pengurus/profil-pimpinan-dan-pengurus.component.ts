@@ -162,7 +162,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     };
     this.pimpinanDanPengurusService.addProfilPimpinanDanPengurus(params).subscribe(
       () => {
-        this.parent.popUpMessage = "Berhasil menyimpan data";
+        this.parent.popUpMessage = "Berhasil menyimpan data, silakan ajukan verifikasi";
         this.parent.triggerPopUp();
         this.fetchData();
         this.close();
@@ -260,7 +260,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.pimpinanDanPengurusService.update(params, this.id, this.pengurusId).subscribe(
       () => {
         this.popUpID = "popup-success-update-pengurus";
-        this.parent.popUpMessage = "Berhasil memperbarui data";
+        this.parent.popUpMessage = "Berhasil memperbarui data, silakan ajukan verifikasi";
         this.parent.triggerPopUp();
         this.fetchData();
         this.resetForm();

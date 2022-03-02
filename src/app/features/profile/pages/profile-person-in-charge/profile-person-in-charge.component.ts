@@ -173,7 +173,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responseEmail = response.data.email;
           this.redirectOnClosePopUp = false;
           this.popUpTitle = 'Informasi';
-          this.popUpMessage = 'Berhasil memperbarui data';
+          this.popUpMessage = 'Berhasil memperbarui data, silakan ajukan verifikasi';
           this.popUpID = "popup-update-pic-success";
           this.triggerPopUp();
           this.setForm();
