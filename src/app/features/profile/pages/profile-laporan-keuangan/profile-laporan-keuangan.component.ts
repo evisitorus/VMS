@@ -33,6 +33,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.fetchDataKeuangan();
   }
 
+  public maxLength = 13;
+
   public openNeraca = false;
   public openSPT = false;
 

@@ -30,6 +30,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   public deleteId!: string;
   public deletePekerjaanName!: string;
 
+  public maxLength = 13;
+
   popUpTitle: string = "Informasi Pengalaman Kerja";
   popUpMessage: string = messages.success;
   popUpConfirmationTitle: string = messages.deleteConfirmationTitle;
@@ -170,7 +172,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log("submit");
     if (this.isNewData) {
       if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
         this.popUpMessage = dictionary.invalid_file;
@@ -182,21 +183,12 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         }
       }
     } else {
-      console.log("submit");
-      console.log(this.lampiranFiles);
-      console.log(this.uploadedFileContentUrl);
       if (this.lampiranFiles == null || this.uploadedFileContentUrl == "") {
-        console.log("submit");
-        console.log(this.lampiranFiles);
-        console.log(this.uploadedFileContentUrl);
         this.popUpMessage = dictionary.invalid_file;
         this.triggerPopUp();
       } else {
-        console.log("submit");
         this.pekerjaanForm.markAllAsTouched();
-        console.log(this.pekerjaanForm.value);
         if (this.pekerjaanForm.valid) {
-          console.log("submit");
           this.updateRiwayatPekerjaan();
         }
       }
@@ -261,8 +253,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
         this.buttonText = "Submit";
         this.loaderVisible = false;
         this.submitDisable = false;
-        console.log(this.uploadedFileContentUrl);
-        console.log(this.uploadedFileId);
       },
       (err) => {
         this.popUpMessage = err.error.message;
@@ -282,8 +272,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.data.lampiran = data.file;
     
     this.isNewData = false;
-
-    console.log(this.data);
 
     this.popUpTitle = "Perhatian";
     this.popUpMessage = dictionary.update_data_notification;
@@ -318,8 +306,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       lampiran: this.uploadedFileId ? this.uploadedFileId : this.pekerjaanForm.controls['lampiran'].value,
     }
 
-    console.log(dataRiwayatPekerjaan);
-
     let params: UpdateRiwayatPekerjaanInterface= {...dataRiwayatPekerjaan}
     this.profileService.updatePekerjaan(params).subscribe(
       () => {
@@ -338,7 +324,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
 
   public delete(data: any): void {
-    console.log(data);
     this.popUpConfirmationTitle= messages.deleteConfirmationTitle;
     this.popUpConfirmationMessage= 'Apakah Riwayat Pekerjaan "' + data.namaPekerjaan + '" akan dihapus dari sistem ?';
     this.opened = true;
@@ -377,7 +362,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public close(status: any) {
-    console.log(status);
     this.opened = false;
   }
 

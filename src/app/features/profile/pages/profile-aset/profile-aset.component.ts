@@ -21,6 +21,8 @@ export class ProfileAsetComponent implements OnInit {
   public id!: string;
   public isNewData: boolean = true;
   public isDelete!: boolean;
+  public maxLengthNama = 100;
+  public maxLengthJumlah = 9;
 
   public data: any = {
     namaAsset: "",
