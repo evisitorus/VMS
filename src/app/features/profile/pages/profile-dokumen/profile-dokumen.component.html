@@ -4,19 +4,19 @@
     <kendo-dialog title="Tambah Dokumen" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
       <form class="k-form">
         <kendo-formfield [formGroup]="form">
-          <kendo-label [for]="kategoriDokumen"  text="Kategori Dokumen"></kendo-label>
-          <kendo-dropdownlist id="tipeKategoriDokumen" #kategoriDokumen
-          [defaultItem]="{ name: 'Pilih Kategori Dokumen', id: null }"
-          [data]="this.groupedDataKategoriDokumen"
+          <kendo-label [for]="tipeDokumen"  text="Tipe Dokumen"></kendo-label>
+          <kendo-dropdownlist id="tipeDokumen" #tipeDokumen
+          [defaultItem]="{ name: 'Pilih Tipe Dokumen', id: null }"
+          [data]="this.groupedDataTipeDokumen"
           textField="name"
           valueField="id"
           [valuePrimitive]="true"
-          [(ngModel)]="this.selectedKategoriDokumen"
-          formControlName="kategoriDokumen"
+          [(ngModel)]="this.selectedTipeDokumen"
+          formControlName="tipeDokumen"
            required>
         </kendo-dropdownlist>
-          <kendo-formerror class="formHint" *ngIf="form.controls.kategoriDokumen.errors?.required">
-            Kategori dokumen tidak boleh kosong
+          <kendo-formerror class="formHint" *ngIf="form.controls.tipeDokumen.errors?.required">
+            Tipe dokumen tidak boleh kosong
           </kendo-formerror>
         </kendo-formfield>
 

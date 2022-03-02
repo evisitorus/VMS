@@ -22,9 +22,9 @@ interface Item {
 })
 export class ProfileDokumenComponent implements OnInit {
   public listItems: Array<Item> = [];
-  public selectedKategoriDokumen: Item = this.listItems[0];
+  public selectedTipeDokumen: Item = this.listItems[0];
 
-  public tipeKategoriDokumen: Array<any> = [
+  public tipeTipeDokumen: Array<any> = [
     { name: "Dokumen Akta (Mandatory)", category: "Profil Perusahaan", id: "Dokumen Akta (Mandatory)" },
     { name: "Dokumen AD/ART (Mandatory)", category: "Profil Perusahaan", id: "Dokumen AD/ART (Mandatory)" },
     { name: "Dokumen Akta Perubahan (Optional)", category: "Profil Perusahaan", id: "Dokumen Akta Perubahan (Optional)" },
@@ -39,7 +39,7 @@ export class ProfileDokumenComponent implements OnInit {
   ];
 
 
-  public groupedDataKategoriDokumen: GroupResult[] = groupBy(this.tipeKategoriDokumen, [
+  public groupedDataTipeDokumen: GroupResult[] = groupBy(this.tipeTipeDokumen, [
     { field: "category" },
   ]);
 
@@ -75,6 +75,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public data: any = {
     id: "",
+    tipeDokumen:"",
     nomorDokumen: "",
     namaDokumen: "",
     berlakuDari: "",
@@ -114,7 +115,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public setForm(): void {
     this.form = new FormGroup({
-      kategoriDokumen: new FormControl(this.data.kategoriDokumen, Validators.required),
+      tipeDokumen: new FormControl(this.data.tipeDokumen, Validators.required),
       nomorDokumen: new FormControl(this.data.nomorDokumen, Validators.required),
       namaDokumen: new FormControl(this.data.namaDokumen, Validators.required),
       berlakuSampai: new FormControl(this.data.berlakuSampai, [])
@@ -147,6 +148,7 @@ export class ProfileDokumenComponent implements OnInit {
   public updateForm(data: any): void {
     this.id = data.id;
     this.data.nomorDokumen = data.no;
+    this.selectedTipeDokumen = data.tipeDokumen;
     this.data.namaDokumen = data.namaDokumen;
     this.data.berlakuSampai = data.berlakuSampai !== "Seumur Hidup" ? new Date(this.mapDateFormat(data.berlakuSampai)) : null;
 
@@ -179,7 +181,7 @@ export class ProfileDokumenComponent implements OnInit {
       (response) => {
         this.gridData = response['hydra:member'];
         this.gridData = this.mapData(this.gridData);
-        console.log(this.gridData);
+
       },
       (err) => {
         this.popUpMessage = err.error.message;
@@ -207,7 +209,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public save(): void {
     let params: ProfileDocumentInterface = {
-      tipeDokumen:this.form.value.kategoriDokumen,
+      tipeDokumen:this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
       berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
@@ -233,7 +235,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public update(): void {
     let params: ProfileDocumentInterface = {
-      tipeDokumen: this.form.value.kategoriDokumen,
+      tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
       berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
