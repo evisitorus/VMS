@@ -8,6 +8,9 @@ Given('The Vendor still on {string} form', (form) => {
         case "Informasi Perusahaan":
             I.amOnPage('/profile-information');
             break;
+        case "PIC":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
             I.waitForElement(form);
             break;
@@ -151,3 +154,4 @@ Given('The Vendor upload "Lampiran" with size more than 2MB', () => {
     I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
     I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
 });
+

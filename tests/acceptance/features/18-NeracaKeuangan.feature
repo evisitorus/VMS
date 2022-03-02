@@ -31,36 +31,4 @@ So that I can upgrade my company level to vendor pro
 
             }
             """
-        And The Vendor must click "Simpan" button to save information of "Neraca Keuangan" 
-        # And The Vendor will see that pop-up form already closed when she or he clicks "Simpan"
-        # And The Vendor will see first 5 lists of "Neraca Keuangan" on "Neraca Keuangan Grid"
-        #     """
-        #     {
-        #     "No | Tahun   | Aktiva 		     | Pasiva 		       | Ekuitas              | Nett-Omzet           | Action      "
-        #     "-------------------------------------------------------------------------------------------------------------------"
-        #     "1 .| 2015    | Rp. 1.000.000.000 | Rp. 1.000.000.000   | Rp. 1.000.000.000    | Rp. 1.000.000.000    | Edit Delete "
-        #     "2 .| 2016    | Rp. 1.000.000.000 | Rp. 1.000.000.000   | Rp. 1.000.000.000    | Rp. 1.000.000.000    | Edit Delete "
-        #     "3 .| 2017    | Rp. 1.000.000.000 | Rp. 1.000.000.000   | Rp. 1.000.000.000    | Rp. 1.000.000.000    | Edit Delete " 
-
-        #     }
-        
-        #     """
-        #     And The Vendor can "scroll down" the "scroll button" where found on the right-side of grid to see another list of "Neraca Keuangan" on "Neraca Keuangan Grid"
-        # Then The Vendor can continue to fill information in regards to "SPT Tahunan" by clicking "Tambah SPT" button where placed on the right-buttom of "SPT Tahunan" Grid
-        #spt tahunan scenario will be define on 1e. VMS_ManageLaporanKeuangan_GridSPTTahunan.feature
-        
-    #manage Keuangan
-    # Scenario: Fill several information / empty data for Laporan Keuangan
-    #     Given The Vendor is on "Tambah Neraca" pop-up form
-    #     And The Vendor not define or only define several information on "Tambah Neraca" pop-up form 
-    #     """
-    #     {
-    #         "Tahun"	   : "2015", 
-    #         "Aktiva"    : "Rp. 1.000.000.000"
-    #         "Pasiva"    : "empty"
-    #         "Ekuitas"   : "empty"
-    #         "nettOmzet" : "Rp. 1.000.000.000"
-    #     }
-    #     """
-    #     And The Vendor move to the next input
-    #     Then The Vendor will get warning message tooltip on each mandatory fields as "{namaField} tidak boleh kosong" 
+        And The Vendor must click "Simpan" button to save information of "Neraca Keuangan"

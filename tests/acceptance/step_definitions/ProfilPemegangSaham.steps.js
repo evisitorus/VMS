@@ -12,6 +12,9 @@ Given('The Vendor already define information from {string}', (form) => {
             I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
             I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
             break;
+        case "Pimpinan dan Pengurus":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
             break;
     }

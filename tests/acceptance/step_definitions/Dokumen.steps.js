@@ -88,6 +88,9 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
         case "Riwayat Pekerjaan":
             I.amOnPage('/profile-riwayat-pekerjaan');
             break;
+        case "Pimpinan Perusahaan":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
             break;
     }
@@ -216,6 +219,14 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
+        case "PIC":
+            I.fillField('#firstName input[class=k-input]', 'Steven');
+            I.fillField('#lastName input[class=k-input]', 'Rogers');
+            I.fillField('#jabatanPimpinanDanPengurusInput input[class=k-input]', 'Direktur Utama');
+            I.click('#noIdentitasPengurusInput input[role=spinbutton]');
+            I.fillField('#noIdentitasPengurusInput input[role=spinbutton]', 123456789);
+            I.attachFile('#resumePimpinanDanPengurusUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
         default:
             break;
     }
@@ -267,6 +278,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#btn-simpan');
             I.click('#btn-simpan');
             break;
+        case "Pimpinan dan Pengurus":
+            I.waitForElement('#savePimpinanDanPengurusFormBtn');
+            I.click('#savePimpinanDanPengurusFormBtn');
+            break;
         default:
             break;
     }    
@@ -298,6 +313,14 @@ Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2
             I.see('Jabatan');
             I.see('Bidang Pekerjaan');
             I.see('Resume');
+            I.see('Action');
+            break;
+        case "Pimpinan dan Pengurus":
+            I.see('No.');
+            I.see('Nama Pengurus');
+            I.see('Jabatan');
+            I.see('No. Identitas');
+            I.see('Kartu Identitas');
             I.see('Action');
             break;
         default:
