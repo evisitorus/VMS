@@ -162,7 +162,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     };
     this.pimpinanDanPengurusService.addProfilPimpinanDanPengurus(params).subscribe(
       () => {
-        this.parent.popUpMessage = "Berhasil menyimpan data";
+        this.parent.popUpMessage = "Berhasil menyimpan data, silakan ajukan verifikasi";
         this.parent.triggerPopUp();
         this.fetchData();
         this.close();
@@ -260,7 +260,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.pimpinanDanPengurusService.update(params, this.id, this.pengurusId).subscribe(
       () => {
         this.popUpID = "popup-success-update-pengurus";
-        this.parent.popUpMessage = "Berhasil memperbarui data";
+        this.parent.popUpMessage = "Berhasil memperbarui data, silakan ajukan verifikasi";
         this.parent.triggerPopUp();
         this.fetchData();
         this.resetForm();
@@ -308,7 +308,15 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
-    this.fetchData();
+    this.loadItems();
   }
+
+  private loadItems(): void {
+    this.gridViewPengurus = {
+      data: this.gridDataPengurus.slice(this.skip, this.skip + this.pageSize),
+      total: this.gridDataPengurus.length,
+    };
+  }
+
 
 }
