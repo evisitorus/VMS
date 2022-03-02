@@ -24,7 +24,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" format="Rp\ ##,#" [maxlength]="maxLengthNeraca" #aktiva required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" format="Rp\ ##,#" [maxlength]="maxLength" #aktiva required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Aktiva (Asset) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -37,7 +37,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" format="Rp\ ##,#" #pasiva [maxlength]="maxLengthNeraca" required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" format="Rp\ ##,#" #pasiva [maxlength]="maxLength" required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Passiva (Liability) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" format="Rp\ ##,#" #equitas [maxlength]="maxLengthNeraca" required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" format="Rp\ ##,#" #equitas [maxlength]="maxLength" required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Ekuitas (Equity) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -63,7 +63,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" format="Rp\ ##,#" [maxlength]="maxLengthNeraca" #omzet required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" format="Rp\ ##,#" [maxlength]="maxLength" #omzet required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Omzet Bersih tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -334,7 +334,7 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">              
-              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" #modalDasar required></kendo-numerictextbox> 
+              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -347,7 +347,7 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" #modalDitempatkan required></kendo-numerictextbox>               
+              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
