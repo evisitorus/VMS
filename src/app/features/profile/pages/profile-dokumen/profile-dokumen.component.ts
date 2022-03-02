@@ -7,6 +7,13 @@ import { EventEmitterService } from 'src/app/core/services/event-emitter.service
 import { ProfileDocumentService } from 'src/app/core/services/profile/profile-document.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { GroupResult, groupBy } from "@progress/kendo-data-query";
+
+interface Item {
+  name: string;
+  category: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-profile-dokumen',
@@ -14,6 +21,31 @@ import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-ang
   styleUrls: ['./profile-dokumen.component.css']
 })
 export class ProfileDokumenComponent implements OnInit {
+  public listItems: Array<Item> = [];
+  public selectedKategoriDokumen: Item = this.listItems[0];
+
+  public tipeKategoriDokumen: Array<any> = [
+    { name: "Dokumen Akta (Mandatory)", category: "Profil Perusahaan", id: "Dokumen Akta (Mandatory)" },
+    { name: "Dokumen AD/ART (Mandatory)", category: "Profil Perusahaan", id: "Dokumen AD/ART (Mandatory)" },
+    { name: "Dokumen Akta Perubahan (Optional)", category: "Profil Perusahaan", id: "Dokumen Akta Perubahan (Optional)" },
+    { name: "Dokumen Surat Kuasa (Optional)", category: "Profil Perusahaan", id: "Dokumen Surat Kuasa (Optional)" },
+    { name: "Dokumen NPWP Perusahaan (Mandatory)", category: "Profil Perusahaan", id: "Dokumen NPWP Perusahaan (Mandatory)" },
+
+    { name: "Dokumen Perizinan (Mandatory)", category: "Legalitas Perusahaan", id: "Dokumen Perizinan (Mandatory)" },
+    { name: "Dokumen Sertifikasi (Optional)", category: "Legalitas Perusahaan", id: "Dokumen Sertifikasi (Optional)" },
+
+    { name: "Surat Pernyataan Pakta Integritas", category: "Dokumen Lainnya", id: "Surat Pernyataan Pakta Integritas" },
+    { name: "Dokumen HSE", category: "Dokumen Lainnya", id: "Dokumen HSE" },
+  ];
+
+
+  public groupedDataKategoriDokumen: GroupResult[] = groupBy(this.tipeKategoriDokumen, [
+    { field: "category" },
+  ]);
+
+  public itemDisabled(itemArgs: { dataItem: any; index: number }) {
+    return !itemArgs.dataItem.leaf;
+  }
 
   public form!: FormGroup;
   public gridData: any[] = [];
@@ -31,6 +63,7 @@ export class ProfileDokumenComponent implements OnInit {
     maxFileSize: 2097152
   };
   public lampiranFiles!: Array<any>;
+
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
   public invalidFileExtension!: boolean;
@@ -54,7 +87,7 @@ export class ProfileDokumenComponent implements OnInit {
     private profileDocumentService: ProfileDocumentService,
     private fileService: FileService,
     private dialogService: DialogService
-  ){
+  ) {
     this.setForm();
   }
 
@@ -81,6 +114,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public setForm(): void {
     this.form = new FormGroup({
+      kategoriDokumen: new FormControl(this.data.kategoriDokumen, Validators.required),
       nomorDokumen: new FormControl(this.data.nomorDokumen, Validators.required),
       namaDokumen: new FormControl(this.data.namaDokumen, Validators.required),
       berlakuSampai: new FormControl(this.data.berlakuSampai, [])
@@ -88,11 +122,12 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public mapData(data: any[]): any[] {
-    let mappedData:any[] = [];
+    let mappedData: any[] = [];
     for (const key in data) {
       mappedData[key] = {
         no: data[key]['nomorDokumen'],
         namaDokumen: data[key]['namaDokumen'],
+        tipeDokumen: data[key]['tipeDokumen'],
         berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
         berlakuSampai: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "Seumur Hidup",
         lampiran: data[key]['attachmentFilePath'],
@@ -125,7 +160,7 @@ export class ProfileDokumenComponent implements OnInit {
       this.setIsLifeTime();
     } else {
       this.checked = false;
-      this.setIsLifeTime();      
+      this.setIsLifeTime();
     }
   }
 
@@ -144,6 +179,7 @@ export class ProfileDokumenComponent implements OnInit {
       (response) => {
         this.gridData = response['hydra:member'];
         this.gridData = this.mapData(this.gridData);
+        console.log(this.gridData);
       },
       (err) => {
         this.popUpMessage = err.error.message;
@@ -171,6 +207,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public save(): void {
     let params: ProfileDocumentInterface = {
+      tipeDokumen:this.form.value.kategoriDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
       berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
@@ -178,7 +215,7 @@ export class ProfileDokumenComponent implements OnInit {
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-    
+
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = "Berhasil menyimpan data";
@@ -196,6 +233,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public update(): void {
     let params: ProfileDocumentInterface = {
+      tipeDokumen: this.form.value.kategoriDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
       berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
@@ -245,7 +283,7 @@ export class ProfileDokumenComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      } 
+      }
     });
   }
 
@@ -291,7 +329,7 @@ export class ProfileDokumenComponent implements OnInit {
       (res) => {
         let mime = this.fileService.getMimeType(filename);
         let blob = new Blob([res], { type: mime });
-        let url= window.URL.createObjectURL(blob);
+        let url = window.URL.createObjectURL(blob);
         window.open(url);
       },
       (err) => {
@@ -301,7 +339,8 @@ export class ProfileDokumenComponent implements OnInit {
     );
   }
 
-  triggerPopUp():void  {
+  triggerPopUp(): void {
     this.eventEmitterService.trigger();
   }
+
 }

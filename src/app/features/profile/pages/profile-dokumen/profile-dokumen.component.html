@@ -3,6 +3,22 @@
   <div class="profile-content-modal">
     <kendo-dialog title="Tambah Dokumen" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
       <form class="k-form">
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="kategoriDokumen"  text="Kategori Dokumen"></kendo-label>
+          <kendo-dropdownlist id="tipeKategoriDokumen" #kategoriDokumen
+          [defaultItem]="{ name: 'Pilih Kategori Dokumen', id: null }"
+          [data]="this.groupedDataKategoriDokumen"
+          textField="name"
+          valueField="id"
+          [valuePrimitive]="true"
+          [(ngModel)]="this.selectedKategoriDokumen"
+          formControlName="kategoriDokumen"
+           required>
+        </kendo-dropdownlist>
+          <kendo-formerror class="formHint" *ngIf="form.controls.kategoriDokumen.errors?.required">
+            Kategori dokumen tidak boleh kosong
+          </kendo-formerror>
+        </kendo-formfield>
 
         <kendo-formfield [formGroup]="form">
           <kendo-label [for]="nomorDokumen" text="Nomor Dokumen"></kendo-label>
@@ -72,6 +88,8 @@
           <kendo-grid-column field="no" title="No.">
           </kendo-grid-column>
           <kendo-grid-column field="namaDokumen" title="Nama Dokumen">
+          </kendo-grid-column>
+          <kendo-grid-column field="tipeDokumen" title="Tipe Dokumen">
           </kendo-grid-column>
           <kendo-grid-column field="berlakuDari" title="Berlaku Dari">
           </kendo-grid-column>
