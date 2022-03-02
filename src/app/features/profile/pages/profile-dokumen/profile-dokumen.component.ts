@@ -25,14 +25,14 @@ export class ProfileDokumenComponent implements OnInit {
   public selectedTipeDokumen: Item = this.listItems[0];
 
   public tipeTipeDokumen: Array<any> = [
-    { name: "Dokumen Akta (Mandatory)", category: "Profil Perusahaan", id: "Dokumen Akta (Mandatory)" },
-    { name: "Dokumen AD/ART (Mandatory)", category: "Profil Perusahaan", id: "Dokumen AD/ART (Mandatory)" },
-    { name: "Dokumen Akta Perubahan (Optional)", category: "Profil Perusahaan", id: "Dokumen Akta Perubahan (Optional)" },
-    { name: "Dokumen Surat Kuasa (Optional)", category: "Profil Perusahaan", id: "Dokumen Surat Kuasa (Optional)" },
-    { name: "Dokumen NPWP Perusahaan (Mandatory)", category: "Profil Perusahaan", id: "Dokumen NPWP Perusahaan (Mandatory)" },
+    { name: "Dokumen Akta (Mandatory)", category: "Profil Perusahaan", id: "Dokumen Akta" },
+    { name: "Dokumen AD/ART (Mandatory)", category: "Profil Perusahaan", id: "Dokumen AD/ART" },
+    { name: "Dokumen Akta Perubahan (Optional)", category: "Profil Perusahaan", id: "Dokumen Akta Perubahan" },
+    { name: "Dokumen Surat Kuasa (Optional)", category: "Profil Perusahaan", id: "Dokumen Surat Kuasa" },
+    { name: "Dokumen NPWP Perusahaan (Mandatory)", category: "Profil Perusahaan", id: "Dokumen NPWP Perusahaan" },
 
-    { name: "Dokumen Perizinan (Mandatory)", category: "Legalitas Perusahaan", id: "Dokumen Perizinan (Mandatory)" },
-    { name: "Dokumen Sertifikasi (Optional)", category: "Legalitas Perusahaan", id: "Dokumen Sertifikasi (Optional)" },
+    { name: "Dokumen Perizinan (Mandatory)", category: "Legalitas Perusahaan", id: "Dokumen Perizinan" },
+    { name: "Dokumen Sertifikasi (Optional)", category: "Legalitas Perusahaan", id: "Dokumen Sertifikasi" },
 
     { name: "Surat Pernyataan Pakta Integritas", category: "Dokumen Lainnya", id: "Surat Pernyataan Pakta Integritas" },
     { name: "Dokumen HSE", category: "Dokumen Lainnya", id: "Dokumen HSE" },
