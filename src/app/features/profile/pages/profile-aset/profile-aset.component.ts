@@ -22,7 +22,7 @@ export class ProfileAsetComponent implements OnInit {
   public isNewData: boolean = true;
   public isDelete!: boolean;
   public maxLengthNama = 100;
-  public maxLengthJumlah = 50;
+  public maxLengthJumlah = 15;
 
   public data: any = {
     namaAsset: "",
