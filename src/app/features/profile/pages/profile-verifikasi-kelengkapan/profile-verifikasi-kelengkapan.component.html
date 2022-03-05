@@ -20,8 +20,8 @@
               <kendo-label class="verifikasi-label">Profile Perusahaan</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.profilePerusahaan" #profilePerusahaan kendoCheckBox/>
-              <label for="profilePerusahaan">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.profilePerusahaan.status" #profilePerusahaan kendoCheckBox/>
+              <label for="profilePerusahaan">{{data.profilePerusahaan.text}}</label>
             </div>
           </div>
 
@@ -30,8 +30,8 @@
               <kendo-label class="verifikasi-label">PIC Perusahaan</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.PICPerusahaan" #PICPerusahaan kendoCheckBox/>
-              <label for="PICPerusahaan">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.PICPerusahaan.status" #PICPerusahaan kendoCheckBox/>
+              <label for="PICPerusahaan">{{data.PICPerusahaan.text}}</label>
             </div>
           </div>
 
@@ -40,8 +40,8 @@
               <kendo-label class="verifikasi-label">Dokumen</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.dokumen" #dokumen kendoCheckBox/>
-              <label for="dokumen">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.dokumen.status" #dokumen kendoCheckBox/>
+              <label for="dokumen">{{data.dokumen.text}}</label>
             </div>
           </div>
 
@@ -50,8 +50,8 @@
               <kendo-label class="verifikasi-label">Alamat</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.alamat" #alamat kendoCheckBox/>
-              <label for="alamat">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.alamat.status" #alamat kendoCheckBox/>
+              <label for="alamat">{{data.alamat.text}}</label>
             </div>
           </div>
 
@@ -60,8 +60,8 @@
               <kendo-label class="verifikasi-label">Laporan Keuangan</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.laporanKeuangan" #laporanKeuangan kendoCheckBox/>
-              <label for="laporanKeuangan">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.laporanKeuangan.status" #laporanKeuangan kendoCheckBox/>
+              <label for="laporanKeuangan">{{data.laporanKeuangan.text}}</label>
             </div>
           </div>
 
@@ -70,8 +70,8 @@
               <kendo-label class="verifikasi-label">Riwayat Pekerjaan</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.riwayatPekerjaan" #riwayatPekerjaan kendoCheckBox/>
-              <label for="riwayatPekerjaan">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.riwayatPekerjaan.status" #riwayatPekerjaan kendoCheckBox/>
+              <label for="riwayatPekerjaan">{{data.riwayatPekerjaan.text}}</label>
             </div>
           </div>
 
@@ -80,8 +80,8 @@
               <kendo-label class="verifikasi-label">Asset</kendo-label>
             </div>
             <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.asset"  #asset kendoCheckBox/>
-              <label for="asset">Completed</label>
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.asset.status"  #asset kendoCheckBox/>
+              <label for="asset">{{data.asset.text}}</label>
             </div>
           </div>
 

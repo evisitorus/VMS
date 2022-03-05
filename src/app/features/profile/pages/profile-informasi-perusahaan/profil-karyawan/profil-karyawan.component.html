@@ -68,6 +68,7 @@
               placeholder="NIK" [maxlength]="16" [spinners]="false" format="d" #nik>
             </kendo-numerictextbox>
             <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan harus diisi</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.max">NIK Karyawan maksimal 16 digit</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -158,7 +159,7 @@
 
     <kendo-dialog-actions>
       <button kendoButton id="saveKaryawanFormBtn" (click)="submitProfilKaryawan()" [primary]="true">Simpan</button>
-      <button kendoButton id="closeKaryawanFormBtn" (click)="close()" [primary]="false">Batal</button>
+      <button kendoButton id="closeKaryawanFormBtn" (click)="cancelAddUpdatePegawai()" [primary]="false">Batal</button>
     </kendo-dialog-actions>
   </kendo-dialog>
 

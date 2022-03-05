@@ -8,6 +8,7 @@ import { ProfileKeuanganInterface, ProfileKeuanganNeracaInterface, ProfileKeuang
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKeuanganService } from 'src/app/core/services/profile/profile-keuangan.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-profile-laporan-keuangan',
@@ -31,6 +32,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.fetchDataSPT();
     this.fetchDataKeuangan();
   }
+
+  public maxLength = 13;
 
   public openNeraca = false;
   public openSPT = false;
@@ -329,7 +332,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public submitSPT(): void {
     if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
-      this.popUpMessage = "File tidak valid";
+      this.popUpMessage = dictionary.invalid_file;
       this.triggerModal('spt');
       this.triggerPopUp();
     } else {
@@ -354,7 +357,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     };
     this.service.saveDataNeraca(params).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menyimpan data";
+        this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchDataNeraca();
         this.triggerModal('neraca');
@@ -377,7 +380,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     };
     this.service.saveDataSPT(params).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menyimpan data";
+        this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchDataSPT();
         this.triggerModal('spt');
@@ -400,7 +403,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     };
     this.service.updateDataNeraca(params, this.id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil memperbarui data";
+        this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchDataNeraca();
         this.triggerModal('neraca');
@@ -423,7 +426,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     };
     this.service.updateDataSPT(params, this.id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil memperbarui data";
+        this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchDataSPT();
         this.triggerModal('spt');
@@ -439,7 +442,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public deleteNeraca(id: string): void {
     this.service.deleteDataNeraca(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
+        this.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchDataNeraca();
       },
@@ -453,7 +456,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public deleteSPT(id: string): void {
     this.service.deleteDataSPT(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
+        this.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchDataSPT();
       },
@@ -511,7 +514,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       };
       this.service.postDataKeuangan(params).subscribe(
         () => {
-          this.popUpMessage = "Berhasil menyimpan data";
+          this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
           this.fetchDataKeuangan();
         },

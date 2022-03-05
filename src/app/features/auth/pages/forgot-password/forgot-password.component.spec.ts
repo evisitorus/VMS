@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CoreModule } from 'src/app/core/core.module';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 import { ForgotPasswordComponent } from './forgot-password.component';
 
@@ -63,7 +64,7 @@ describe('ForgotPasswordComponent', () => {
   it('test sendEmail function failed', () => {
     const data = {
       error: {
-        message: "Gagal mengirim email",
+        message: dictionary.send_email_failed,
       }
     };
 

@@ -6,6 +6,10 @@
   float: right;
 }
 
+.row {
+  margin-bottom: 0.5rem;
+}
+
 .k-form-buttons {
   align-items: center;
   padding: 8px 16px;
@@ -30,4 +34,12 @@
 
 .bank-field {
   margin-bottom: 1em;
+}
+
+.profile-content-pic{
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #d8d8d8;
+  padding: 2em 1em 1em 1em;
+  margin: 0em 0em 2em 0em;
 }

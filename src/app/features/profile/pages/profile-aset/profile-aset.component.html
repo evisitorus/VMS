@@ -6,14 +6,14 @@
 
         <kendo-formfield [formGroup]="form">
           <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
-          <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" #namaAsset required></kendo-textbox>
+          <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" [maxlength]="maxLengthNama" #namaAsset required></kendo-textbox>
           <kendo-formhint></kendo-formhint>
           <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield [formGroup]="form">
           <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>
-          <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" #jumlah required></kendo-numerictextbox>
+          <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" [maxlength]="maxLengthJumlah" #jumlah required></kendo-numerictextbox>
           <kendo-formhint></kendo-formhint>
           <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
         </kendo-formfield>

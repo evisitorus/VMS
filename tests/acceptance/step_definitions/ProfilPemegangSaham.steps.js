@@ -12,6 +12,9 @@ Given('The Vendor already define information from {string}', (form) => {
             I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
             I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
             break;
+        case "Pimpinan dan Pengurus":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
             break;
     }
@@ -71,7 +74,7 @@ Given('The Vendor will see pop-up message appear', () => {
 
 Given('The Vendor must select {string} option on pop-up message', () => {
     I.click('Yes');
-    I.see('Berhasil menghapus data');
+    I.see(dictionary.delete_data_success);
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
@@ -161,7 +164,7 @@ Given('The Vendor will see information changes from selected record from {string
 });
 
 Given('The Vendor will see that update pop-up form already closed when clicks {string}', () => {
-    I.see('Berhasil memperbarui data');
+    I.see(dictionary.update_data_success);
     I.click('#btn-popup-yes');
     I.dontSeeElement('.k-window');
 });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { TenderService } from 'src/app/core/services/tender.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-tender-info',
@@ -29,7 +30,7 @@ export class TenderInfoComponent implements OnInit {
         this.data = res.data.tender;
       },
       () => {
-        this.popUpMessage = "Gagal menemukan data tender";
+        this.popUpMessage = dictionary.fetch_data_tender_failed;
         this.triggerPopUp();
       }
     );
