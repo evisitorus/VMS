@@ -11,8 +11,8 @@ Feature: Vendor - Edit vendor information - Company Profile
 
     #edit riwayat pekerjaan 
     Scenario: Edit selected record from Riwayat Pekerjaan 
-    Given The Vendor wants to edit selected document which has been recorded 
-        When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+      Given The Vendor wants to edit selected document which has been recorded 
+       When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
         And The Vendor must click "Riwayat Pekerjaan" Tab 
         And The Vendor will see "Riwayat Pekerjaan" form
         """
@@ -58,8 +58,8 @@ Feature: Vendor - Edit vendor information - Company Profile
 
     #edit Riwayat Pekerjaan
     Scenario: Upload Riwayat Document more than 2 MB
-    Given The Vendor wants to edit selected document which has been recorded 
-        When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+      Given The Vendor wants to edit selected document which has been recorded 
+       When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
         And The Vendor must click "Riwayat Pekerjaan" Tab 
         And The Vendor will see "Riwayat Pekerjaan" form
         """
@@ -91,4 +91,4 @@ Feature: Vendor - Edit vendor information - Company Profile
         }
         """
         And The Vendor must click "Simpan" button to save information of "Riwayat Pekerjaan" 
-        Then The Vendor can not continue to add document information "Riwayat Pekerjaan"
+       Then The Vendor can not continue to add document information "Riwayat Pekerjaan"

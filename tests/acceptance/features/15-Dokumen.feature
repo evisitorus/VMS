@@ -70,6 +70,7 @@ So that I can upgrade my company level to vendor pro
       And The Vendor will see "Dokumen" form
       And The Vendor wants to add information in regards to "Dokumen" on "Dokumen Grid" which part of "Dokumen" form 
       And The Vendor must clicks button "Tambah" where found on the left-buttom of "Dokumen Grid" to add records information in regards to "Dokumen"
+      And The Vendor input field "Tipe Dokumen" with "tipe dokumen"
       And The Vendor input "Nomor Dokumen" with value "<nomor dokumen>"
       And The Vendor input "Nama Dokumen" with value "<nama dokumen>"
       And The Vendor input "Berlaku Sampai" with value "<berlaku sampai>"
@@ -79,8 +80,8 @@ So that I can upgrade my company level to vendor pro
       
       Examples:
         | case              | result  | nomor dokumen  | nama dokumen                | berlaku sampai | lampiran                                    | copywriting	|
-        | [positive case]   | passed  | bumn/vms/01    | Akta Pendirian Perusahaan   | 12252025       | ./tests/acceptance/_fixture/image_10kb.jpg  |             |
-        | [positive case]   | passed  | bumn/vms/02    | Surat Pendirian Perusahaan  | 10252025       | ./tests/acceptance/_fixture/sample_pdf.pdf  |             |
+        | [positive case]   | passed  | bumn/vms/01    | Akta Pendirian Perusahaan   | 12252025       | ./tests/acceptance/_fixture/image_10kb.jpg  |              |
+        | [positive case]   | passed  | bumn/vms/02    | Surat Pendirian Perusahaan  | 10252025       | ./tests/acceptance/_fixture/sample_pdf.pdf  |              |
 
     Scenario Outline: The Vendor add information to Document form with the wrong format file
     Given The Vendor already add information in regards to "Akun PIC"
@@ -90,6 +91,7 @@ So that I can upgrade my company level to vendor pro
       And The Vendor will see "Dokumen" form
       And The Vendor wants to add information in regards to "Dokumen" on "Dokumen Grid" which part of "Dokumen" form 
       And The Vendor must clicks button "Tambah" where found on the left-buttom of "Dokumen Grid" to add records information in regards to "Dokumen"
+      And The Vendor input field "Tipe Dokumen" with "tipe dokumen"
       And The Vendor input "Nomor Dokumen" with value "<nomor dokumen>"
       And The Vendor input "Nama Dokumen" with value "<nama dokumen>"
       And The Vendor input "Berlaku Sampai" with value "<berlaku sampai>"

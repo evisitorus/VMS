@@ -5,6 +5,7 @@ class Alias extends Helper {
   fieldAliases = {
     "Email": "#input-email input[class=k-input]",
     "Password": "#input-password input[class=k-input]",
+    // "Tipe Dokumen": "#tipeDokumen.k-dropdown",
     "Nomor Dokumen": "#input-nomor-dokumen input[class=k-input]",
     "Nama Dokumen": "#input-nama-dokumen input[class=k-input]",
     "Berlaku Sampai": "#input-berlaku-sampai input[class=k-input]",
