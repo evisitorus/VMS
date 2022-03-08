@@ -158,6 +158,9 @@ export class ProfileDokumenComponent implements OnInit {
     this.setForm();
     this.open();
 
+    this.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
+
     if (this.data.berlakuSampai === null) {
       this.checked = true;
       this.setIsLifeTime();
