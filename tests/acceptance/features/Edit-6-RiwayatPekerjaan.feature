@@ -24,7 +24,7 @@ Feature: Vendor - Edit vendor information - Company Profile
         """
         And The Vendor must select one of record from "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid" which part of "Riwayat Pekerjaan" form 
         And The Vendor must clicks button "Edit" button from selected record on "Riwayat Pekerjaan" form
-        And The Vendor will see pop-up form of "Edit Riwayat Pekerjaan" which appear in front of "Riwayat Pekerjaan" form
+        # And The Vendor will see pop-up form of "Edit Riwayat Pekerjaan" which appear in front of "Riwayat Pekerjaan" form
         And The Vendor will see information which state for every changes should be re-check by verificator 
         """
         {

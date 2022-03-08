@@ -26,7 +26,7 @@ So that I can modify my company information which has been recorded
       """
       And The Vendor must select one of record from "Alamat" on "Alamat Grid" which part of "Alamat" form 
       And The Vendor must clicks button "Edit" button from selected record on "Alamat" form
-      And The Vendor will see pop-up form of "Edit Alamat" which appear in front of "Alamat" form
+      # And The Vendor will see pop-up form of "Edit Alamat" which appear in front of "Alamat" form
       And The Vendor will see information which state for every changes should be re-check by verificator 
       """
       {

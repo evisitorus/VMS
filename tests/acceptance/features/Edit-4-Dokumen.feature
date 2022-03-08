@@ -28,7 +28,7 @@ So that I can modify my company information which has been recorded
       """
       And The Vendor must select one of record from "Dokumen" on "Dokumen Grid" which part of "Dokumen" form 
       And The Vendor must clicks button "Edit" button from selected record on "Dokumen" form
-      And The Vendor will see pop-up form of "Edit Dokumen" which appear in front of "Dokumen" form
+      # And The Vendor will see pop-up form of "Edit Dokumen" which appear in front of "Dokumen" form
       And The Vendor will see information which state for every changes should be re-check by verificator 
       """
       {
@@ -84,7 +84,7 @@ So that I can modify my company information which has been recorded
       """
       And The Vendor must select one of record from "Dokumen" on "Dokumen Grid" which part of "Dokumen" form 
       And The Vendor must clicks button "Edit" button from selected record on "Dokumen" form
-      And The Vendor will see pop-up form of "Edit Dokumen" which appear in front of "Dokumen" form
+      # And The Vendor will see pop-up form of "Edit Dokumen" which appear in front of "Dokumen" form
       And The Vendor will see information which state for every changes should be re-check by verificator 
       """
       {
