@@ -7,9 +7,8 @@ import { EventEmitterService } from 'src/app/core/services/event-emitter.service
 import { ProfileDocumentService } from 'src/app/core/services/profile/profile-document.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { dictionary } from 'src/app/dictionary/dictionary';
 import { GroupResult, groupBy } from "@progress/kendo-data-query";
-
+import { dictionary } from 'src/app/dictionary/dictionary';
 interface Item {
   name: string;
   category: string;
@@ -157,6 +156,9 @@ export class ProfileDokumenComponent implements OnInit {
 
     this.setForm();
     this.open();
+
+    this.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
 
     if (this.data.berlakuSampai === null) {
       this.checked = true;
