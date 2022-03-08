@@ -107,7 +107,7 @@ Given('The Vendor will see pop-up message', () => {
 
 Given('The Vendor must select {string} option', () => {
     I.click('Ya');
-    I.see('Berhasil menghapus data');
+    I.see(dictionary.delete_data_success);
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });

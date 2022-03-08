@@ -8,6 +8,7 @@ import { ProfileAddressService } from 'src/app/core/services/profile/profile-add
 import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
 import { ProfileAddressInterface } from 'src/app/core/interfaces/profile-address-interface';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 const messages = {
   default: 'Data tidak boleh kosong.',
@@ -328,7 +329,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.setForm();
     this.open();
     
-    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
   }
 
@@ -348,7 +349,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.save(params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = "Berhasil Menyimpan Data";
+        this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
@@ -364,7 +365,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.update(this.id, params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = "Berhasil memperbarui data";
+        this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
@@ -378,7 +379,7 @@ export class ProfileAlamatComponent implements OnInit {
   public delete(id: string): void {
     this.service.delete(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
+        this.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchData();
       },

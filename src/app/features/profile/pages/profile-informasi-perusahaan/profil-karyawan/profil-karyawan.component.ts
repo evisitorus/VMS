@@ -8,6 +8,7 @@ import { ProfileInformationService } from 'src/app/core/services/profile/profile
 import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan.component';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 interface Item {
   name: string;
@@ -144,7 +145,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public setForm(): void {
     this.pegawaiFormGroup = new FormGroup({
-      nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null, Validators.required),
+      nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null, [Validators.max(9999999999999999), Validators.required]),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
       tipeKaryawan: new FormControl(this.data.tipeKaryawan, Validators.required),
@@ -191,12 +192,12 @@ export class ProfilKaryawanComponent implements OnInit {
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res["@id"];
         // this.popUpID = "popup-bidang-pekerjaan-success";
-        this.parent.popUpMessage = "Berhasil menambahkan bidang pekerjaan ke database";
+        this.parent.popUpMessage = dictionary.save_data_bidang_success;
         this.parent.triggerPopUp();
       },
       (error) => {
         this.popUpID = "popup-bidang-pekerjaan-failed";
-        this.parent.popUpMessage = "Gagal menambahkan bidang pekerjaan";
+        this.parent.popUpMessage = dictionary.save_data_bidang_failed;
         this.parent.triggerPopUp();
       });
 
@@ -239,13 +240,13 @@ export class ProfilKaryawanComponent implements OnInit {
     };
     this.profileInformationService.addProfilKaryawan(params).subscribe(
       () => {
-        this.parent.popUpMessage = "Berhasil menyimpan data";
+        this.parent.popUpMessage = dictionary.save_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         this.close();
       },
       () => {
-        this.parent.popUpMessage = "Gagal menyimpan data";
+        this.parent.popUpMessage = dictionary.save_data_failed;
         this.parent.triggerPopUp();
         this.close();
       }
@@ -255,6 +256,12 @@ export class ProfilKaryawanComponent implements OnInit {
   public close() {
     this.opened = false;
     this.isNewData = true;
+  }
+
+  public cancelAddUpdatePegawai(){
+    this.fetchData();
+    this.resetForm();
+    this.close();
   }
 
   public open() {
@@ -270,7 +277,7 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       (error) => {
         this.popUpID = "popup-upload-file-failed";
-        this.parent.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.parent.popUpMessage = dictionary.select_file_failed;
         this.parent.triggerPopUp();
       }
     );
@@ -286,7 +293,7 @@ export class ProfilKaryawanComponent implements OnInit {
       },
       (error) => {
         this.popUpID = "popup-failed-download";
-        this.parent.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
+        this.parent.popUpMessage = dictionary.download_file_failed;
         this.parent.triggerPopUp();
       }
     );
@@ -343,7 +350,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.profileInformationService.update(params, this.id, this.pegawaiId).subscribe(
       () => {
         this.popUpID = "popup-success-update-pegawai";
-        this.parent.popUpMessage = "Berhasil memperbarui data";
+        this.parent.popUpMessage = dictionary.update_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         this.resetForm();
@@ -360,7 +367,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public delete(id: string): void {
     this.profileInformationService.delete(id).subscribe(
       () => {
-        this.parent.popUpMessage = "Berhasil menghapus data";
+        this.parent.popUpMessage = dictionary.delete_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         window.location.reload();
@@ -393,5 +400,4 @@ export class ProfilKaryawanComponent implements OnInit {
     this.skip = event.skip;
     this.fetchData();
   }
-
 }

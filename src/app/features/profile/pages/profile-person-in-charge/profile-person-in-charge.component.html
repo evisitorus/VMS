@@ -7,7 +7,6 @@
   <div class="col-10 profile-content-container">
 
     <div class="profile-content">
-
       <div class="profile-content-title">
         <kendo-label id="pic-label">PIC</kendo-label>
       </div>
@@ -19,7 +18,7 @@
       </div>
       <form id="form-pic" class="k-form auth-form">
         <fieldset id="fieldset-pic" class="k-form-fieldset">
-
+          <div class="profile-content-pic">
           <ng-container
             *ngIf="responseFile; then showPICPicture; else showDefaultPicture">
           </ng-container>
@@ -265,42 +264,48 @@
               </kendo-formfield>
             </div>
           </div>
-
-          <ng-container
-            *ngIf="isDisabled; then showUpdateButton; else showSaveButton">
-          </ng-container>
-
-          <ng-template #showUpdateButton>
-            <div class="k-form-buttons k-float-right">
-              <button id="btn-perbarui" class="k-button k-primary vms-btn" (click)="perbaruiClicked()"
-                      *ngIf="isDisabled" [disabled]="disabledWhenError">Perbarui
-              </button>
-            </div>
-          </ng-template>
-          <ng-template #showSaveButton>
-            <div class="k-form-buttons k-float-right">
-              <button id="btn-simpan" class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan
-              </button>
-            </div>
-          </ng-template>
-
-          <kendo-dialog id="popup-confirm-save"
-                        title="Konfirmasi"
-                        *ngIf="opened"
-                        (close)="close('cancel')"
-                        [minWidth]="250"
-                        [width]="450">
-            <p style="margin: 30px; text-align: center;">
-              Simpan perubahan data PIC Perusahaan?
-            </p>
-            <kendo-dialog-actions id="popup-action-confirm-save">
-              <button kendoButton id="btn-popup-no" (click)="close('no')">Tidak</button>
-              <button kendoButton id="btn-popup-yes" (click)="save(); close('yes')" [primary]="true">Ya</button>
-            </kendo-dialog-actions>
-          </kendo-dialog>
+          </div>
+          
 
         </fieldset>
       </form>
+      <div class="mb-5">
+        <app-profil-pimpinan-dan-pengurus></app-profil-pimpinan-dan-pengurus>
+      </div>
+      <div class="pt-5 pb-5">
+        <ng-container
+          *ngIf="isDisabled; then showUpdateButton; else showSaveButton">
+        </ng-container>
+
+        <ng-template #showUpdateButton>
+          <div class="k-form-buttons k-float-right">
+            <button id="btn-perbarui" class="k-button k-primary vms-btn" (click)="perbaruiClicked()"
+                    *ngIf="isDisabled" [disabled]="disabledWhenError">Perbarui
+            </button>
+          </div>
+        </ng-template>
+        <ng-template #showSaveButton>
+          <div class="k-form-buttons k-float-right">
+            <button id="btn-simpan" class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan
+            </button>
+          </div>
+        </ng-template>
+
+        <kendo-dialog id="popup-confirm-save"
+                      title="Konfirmasi"
+                      *ngIf="opened"
+                      (close)="close('cancel')"
+                      [minWidth]="250"
+                      [width]="450">
+          <p style="margin: 30px; text-align: center;">
+            Simpan perubahan data PIC Perusahaan?
+          </p>
+          <kendo-dialog-actions id="popup-action-confirm-save">
+            <button kendoButton id="btn-popup-no" (click)="close('no')">Tidak</button>
+            <button kendoButton id="btn-popup-yes" (click)="save(); close('yes')" [primary]="true">Ya</button>
+          </kendo-dialog-actions>
+        </kendo-dialog>
+      </div>
     </div>
   </div>
 </div>
