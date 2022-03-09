@@ -170,32 +170,30 @@ export class ProfileInformasiPerusahaanComponent {
   public getDataPerusahaan(): void {
     forkJoin({
       responseVendorData: this.profileDashboardService.getVendor(),
+      responseHimpunan: this.profileInfoService.getPartyRole("Himpunan"),
+      responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
+      responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
+      responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu"),
       responseContactMechanism: this.profileInfoService.getContactMechanism(),
       responseJenisPenyediaUsaha: this.profileInfoService.getJenisPenyediaUsaha(),
       responseJenisKegiatanUsaha: this.profileInfoService.getJenisKegiatanUsaha(),
-      // responseOrganizations: this.profileInfoService.getOrganizations(),
       responseJenisVendor: this.profileInfoService.getJenisVendor(),
       responseBidangUsaha: this.profileInfoService.getBidangUsaha(),
       responseTipeVendor: this.profileInfoService.getTipeVendor(),
       responseProvinces: this.profileInfoService.getProvinces(),
-      responseHimpunan: this.profileInfoService.getPartyRole("Himpunan"),
-      responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
-      responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
-      responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu")
     }).subscribe((response) => {
       this.setResponseVendorData(response.responseVendorData);
-      this.setResponseContactMechanism(response.responseContactMechanism);
-      this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
-      this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
-      // this.setOrganizations(response.responseOrganizations);
-      this.setJenisVendor(response.responseJenisVendor);
-      this.setBidangUsaha(response.responseBidangUsaha);
-      this.setTipeVendor(response.responseTipeVendor);
-      this.setProvinces(response.responseProvinces);
       this.setHimpunan(response.responseHimpunan);
       this.setPengampu(response.responsePengampu);
       this.setVendorHimpunan(response.responseVendorHimpunan);
       this.setVendorPengampu(response.responseVendorPengampu);
+      this.setResponseContactMechanism(response.responseContactMechanism);
+      this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
+      this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
+      this.setJenisVendor(response.responseJenisVendor);
+      this.setBidangUsaha(response.responseBidangUsaha);
+      this.setTipeVendor(response.responseTipeVendor);
+      this.setProvinces(response.responseProvinces);
     });
   }
 
@@ -261,6 +259,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.dataPerusahaan.noTelepon = value.contactMechanism.number;
       } else {
         this.dataPerusahaan.address = value.contactMechanism;
+        this.dataPerusahaan.alamat = value.contactMechanism.address1;
 
         // get list of provinces
         this.profileInfoService.getProvinces().subscribe(
@@ -270,7 +269,6 @@ export class ProfileInformasiPerusahaanComponent {
             if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
               
               isFirstAddress = true;
-              this.dataPerusahaan.alamat = value.contactMechanism.address1;
 
               const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
               this.selectedProvince = this.provinces[index];
@@ -428,7 +426,9 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public setVendorPengampu(resp: any) {
+    console.log(resp.data);
     this.dataPerusahaan.bumnPengampu = resp.data ? resp.data : "";
+    console.log(this.dataPerusahaan.bumnPengampu);
   }
 
   public setFormPerusahaan(data: any): void {
