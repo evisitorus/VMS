@@ -121,6 +121,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       lastName: new FormControl(this.data.lastName, Validators.required),
       jabatan: new FormControl(this.data.jabatan, Validators.required)
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.pengurusFormGroup.disable() : null;
   }
 
 
@@ -139,7 +140,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
         }
       }
     }
-    
+
 
   }
 
@@ -302,7 +303,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      } 
+      }
     });
   }
 

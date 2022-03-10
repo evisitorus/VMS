@@ -1,19 +1,19 @@
-import {Component, Injectable, ViewEncapsulation} from "@angular/core";
-import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
-import {FileRestrictions} from "@progress/kendo-angular-upload";
-import {forkJoin, from} from "rxjs";
-import {ApiRoutes} from "src/app/core/services/api/api-routes";
-import {EventEmitterService} from "src/app/core/services/event-emitter.service";
-import {FileService} from "src/app/core/services/file.service";
-import {ProfileInformationService} from "src/app/core/services/profile-information.service";
-import {environment as env, environment} from "src/environments/environment";
-import {ProfileInformationInterface} from "../../../../core/interfaces/profile/profile-information-interface";
-import {AuthService} from "../../../../core/services/auth.service";
-import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service";
-import {ProfileAddressService} from 'src/app/core/services/profile/profile-address.service';
-import {DialogCloseResult, DialogRef, DialogService} from "@progress/kendo-angular-dialog";
-import {DropDownFilterSettings} from "@progress/kendo-angular-dropdowns";
-import {VendorLogoInterface} from "../../../../core/interfaces/profile/vendor-logo-interface";
+import { Component, Injectable, ViewEncapsulation } from "@angular/core";
+import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { FileRestrictions } from "@progress/kendo-angular-upload";
+import { forkJoin, from } from "rxjs";
+import { ApiRoutes } from "src/app/core/services/api/api-routes";
+import { EventEmitterService } from "src/app/core/services/event-emitter.service";
+import { FileService } from "src/app/core/services/file.service";
+import { ProfileInformationService } from "src/app/core/services/profile-information.service";
+import { environment as env, environment } from "src/environments/environment";
+import { ProfileInformationInterface } from "../../../../core/interfaces/profile/profile-information-interface";
+import { AuthService } from "../../../../core/services/auth.service";
+import { ProfileDashboardService } from "src/app/core/services/profile-dashboard.service";
+import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
+import { DialogCloseResult, DialogRef, DialogService } from "@progress/kendo-angular-dialog";
+import { DropDownFilterSettings } from "@progress/kendo-angular-dropdowns";
+import { VendorLogoInterface } from "../../../../core/interfaces/profile/vendor-logo-interface";
 import { dictionary } from "src/app/dictionary/dictionary";
 
 interface Item {
@@ -59,6 +59,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public params!: ProfileInformationInterface;
   public profileInformationFormGroup!: FormGroup;
+  public isAdaNib = false;
 
   public logoForm: FormGroup = undefined!;
   public data: any = {
@@ -84,19 +85,19 @@ export class ProfileInformasiPerusahaanComponent {
 
   // TODO: ambil dari table tipe vendor. jangan static
   public kategoriUmkmItems: Array<Item> = [
-    {name: "Kecil", id: 1},
-    {name: "Menengah", id: 2},
-    {name: "Mikro", id: 3},
+    { name: "Kecil", id: 1 },
+    { name: "Menengah", id: 2 },
+    { name: "Mikro", id: 3 },
   ];
 
   public kategoriCorpItems: Array<Item> = [
-    {name: "BUMN (Grup)", id: 1},
-    {name: "Swasta", id: 2}
+    { name: "BUMN (Grup)", id: 1 },
+    { name: "Swasta", id: 2 }
   ];
 
   public tipeBadanUsahaItems: Array<Item> = [
-    {name: "UMKM", id: 1},
-    {name: "Korporasi", id: 2}
+    { name: "UMKM", id: 1 },
+    { name: "Korporasi", id: 2 }
   ];
 
   public jenisBadanUsahaItems: Array<Item> = [];
@@ -136,7 +137,7 @@ export class ProfileInformasiPerusahaanComponent {
   public kategoriVendor: any;
   public pkpStatus = false;
 
-  public defaultItemProvinces: { description: string, id: number } = {description: 'Pilih provinsi', id: 0};
+  public defaultItemProvinces: { description: string, id: number } = { description: 'Pilih provinsi', id: 0 };
   public defaultItemKota: { description: string, id: number, provinceId: number } = {
     description: 'Pilih kota',
     id: 0,
@@ -147,8 +148,8 @@ export class ProfileInformasiPerusahaanComponent {
     id: 0,
     kotaId: 0
   };
-  public defaultItemKelurahan: { description: string, id: number } = {description: 'Pilih Kelurahan', id: 0};
-  public defaultItemKodepos: { description: string, id: number } = {description: 'Pilih Kodepos', id: 0};
+  public defaultItemKelurahan: { description: string, id: number } = { description: 'Pilih Kelurahan', id: 0 };
+  public defaultItemKodepos: { description: string, id: number } = { description: 'Pilih Kodepos', id: 0 };
 
   public provinsi: Array<{ id: number, description: string }> = [];
   public dataKecamatan: Array<{}> = [];
@@ -197,12 +198,17 @@ export class ProfileInformasiPerusahaanComponent {
     });
   }
 
+  // ngDoCheck(): void {
+  //   console.log(this.profileInformationFormGroup.value.isAdaNib)
+  // }
+
   ngOnInit(): void {
     this.logoForm = new FormGroup({
       files: new FormControl(this.data.files),
     });
 
     this.getDataPerusahaan();
+    localStorage.getItem('disableEditData') === 'yes' ? this.logoForm.disable() : null;
   }
 
   public setResponseVendorData(resp: any) {
@@ -267,7 +273,7 @@ export class ProfileInformasiPerusahaanComponent {
             this.provinces = resp["hydra:member"];
 
             if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
-              
+
               isFirstAddress = true;
 
               const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
@@ -288,7 +294,7 @@ export class ProfileInformasiPerusahaanComponent {
                         this.districts = resp["hydra:member"];
                         this.dataResultKecamatan = this.districts;
                         this.setFormPerusahaan(this.dataPerusahaan);
-  
+
                         if (this.dataPerusahaan.address.district) {
                           const index = this.districts.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.district.id);
                           this.selectedKecamatan = this.districts[index];
@@ -298,7 +304,7 @@ export class ProfileInformasiPerusahaanComponent {
                               this.villages = resp["hydra:member"];
                               this.dataResultKelurahan = this.villages;
                               this.setFormPerusahaan(this.dataPerusahaan);
-    
+
                               if (this.dataPerusahaan.address.village) {
                                 const index = this.villages.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.village.id);
                                 this.selectedKelurahan = this.villages[index];
@@ -307,28 +313,28 @@ export class ProfileInformasiPerusahaanComponent {
                                   (resp) => {
                                     this.postalCodes = resp["hydra:member"];
                                     this.dataResultKodepos = this.postalCodes;
-      
+
                                     if (this.dataPerusahaan.address.village) {
                                       this.selectedKodepos = this.postalCodes[0];
                                     }
-      
+
                                     this.setFormPerusahaan(this.dataPerusahaan);
-      
+
                                   },
                                   (error) => {
                                     console.log(error);
                                   }
                                 );
                               }
-    
+
                             },
                             (error) => {
                               console.log(error);
                             }
-    
+
                           );
                         }
-  
+
                       },
                       (error) => {
                         console.log(error);
@@ -408,7 +414,7 @@ export class ProfileInformasiPerusahaanComponent {
     return !itemArgs.dataItem.leaf;
   }
 
-  public setProvinces(resp: any){
+  public setProvinces(resp: any) {
     // get list of provinces
     this.provinsi = resp["hydra:member"];
   }
@@ -454,7 +460,9 @@ export class ProfileInformasiPerusahaanComponent {
       kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
       kelurahan: new FormControl(this.selectedKelurahan, Validators.required),
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
+      isAdaNib: new FormControl(true, Validators.required),
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.profileInformationFormGroup.disable() : null;
   }
 
   public saveImage(value: any, valid: boolean): void {
@@ -547,7 +555,7 @@ export class ProfileInformasiPerusahaanComponent {
       const dialog: DialogRef = this.dialogService.open({
         title: "Konfirmasi",
         content: "Simpan profil perusahaan ?",
-        actions: [{text: "Yes", primary: true}, {text: "No"}],
+        actions: [{ text: "Yes", primary: true }, { text: "No" }],
         width: 450,
         height: 200,
         minWidth: 250,
@@ -644,5 +652,32 @@ export class ProfileInformasiPerusahaanComponent {
         }
       );
     }
+  }
+
+
+  public setIsAdaNib(b: boolean) {
+    if (b) {
+      this.profileInformationFormGroup.patchValue({ nomorIndukBerusaha: this.dataPerusahaan.nib })
+      this.profileInformationFormGroup.controls['nomorIndukBerusaha'].enable();
+    } else {
+      this.profileInformationFormGroup.patchValue({ nomorIndukBerusaha: '' })
+      this.profileInformationFormGroup.controls['nomorIndukBerusaha'].disable();
+    }
+  }
+
+  public cekStatusVendor() {
+    this.profileInfoService.cekStatusVendor().subscribe(
+      (resp) => {
+        if (resp.data.is_verifying) {
+          this.profileInformationFormGroup.disable();
+        }
+      },
+      (error) => {
+        this.popUpMessage = dictionary.incomplete_data_logo;
+        this.redirectOnClosePopUp = false;
+        this.popUpID = "popup-failed-save-upload-file-to-database";
+        this.triggerPopUp();
+      }
+    );
   }
 }

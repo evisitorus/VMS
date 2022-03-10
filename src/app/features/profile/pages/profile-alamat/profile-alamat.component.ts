@@ -204,8 +204,8 @@ export class ProfileAlamatComponent implements OnInit {
   public fetchDataProvince(): void {
     this.addressService.getProvinces().subscribe(
       (resp) => {
-        this.listProvinsi = resp["hydra:member"]; 
-        this.listProvinsi = this.mapDataProvinsi(this.listProvinsi);       
+        this.listProvinsi = resp["hydra:member"];
+        this.listProvinsi = this.mapDataProvinsi(this.listProvinsi);
       },
       (err) => {
         this.popUpMessage = err.error.message;
@@ -276,6 +276,7 @@ export class ProfileAlamatComponent implements OnInit {
       kelurahan: new FormControl(null, Validators.required),
       kodepos: new FormControl(null, Validators.required),
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   public resetForm(): void {
@@ -304,7 +305,7 @@ export class ProfileAlamatComponent implements OnInit {
   public updateForm(data: any): void {
     this.data.namaAlamat = data.namaAlamat;
     this.data.alamat = data.alamat;
-    
+
     this.data.provinsi = data.provinsi;
     this.selectedProvinsi = data.provinsiId;
     this.onChangeProvinsi(this.selectedProvinsi);
@@ -328,7 +329,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.id = data.id;
     this.setForm();
     this.open();
-    
+
     this.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
   }
@@ -403,8 +404,8 @@ export class ProfileAlamatComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      } 
+      }
     });
   }
-  
+
 }

@@ -54,6 +54,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
       confirmNewPassword: new FormControl(null),
       fileId: new FormControl(null),
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.formPIC.disable() : null;
   }
 
   public ngAfterViewInit(): void {

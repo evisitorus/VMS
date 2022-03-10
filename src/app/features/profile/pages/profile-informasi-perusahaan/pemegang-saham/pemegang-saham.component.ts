@@ -138,6 +138,7 @@ export class PemegangSahamComponent implements OnInit {
       lokal: new FormControl(null, Validators.required),
       persentaseKepemilikan: new FormControl(null, Validators.required)
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.pemegangSahamFormGroup.disable() : null;
   }
 
   public submit(): void {
@@ -193,7 +194,7 @@ export class PemegangSahamComponent implements OnInit {
     this.data.perseorangan = data.pemegangSahamPerseoranganValue;
     this.data.lokal = data.pemegangSahamLokalValue;
     this.data.persentaseKepemilikan = parseFloat(data.persentaseKepemilikan);
-    
+
     this.isNewData = false;
     this.disableNamaPemegangSaham = false;
 
@@ -211,6 +212,7 @@ export class PemegangSahamComponent implements OnInit {
       lokal: new FormControl(this.data.lokal, Validators.required),
       persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.pemegangSahamFormGroup.disable() : null;
   }
 
   public updatePemegangSaham(): void {

@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ApiInterface} from '../interfaces/api-interface';
-import {ApiRouteMethods, ApiRoutes} from './api/api-routes';
-import {ApiService} from './api/api.service';
-import {AuthService} from './auth.service';
-import {ProfileInformationInterface} from "../interfaces/profile/profile-information-interface";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ApiInterface } from '../interfaces/api-interface';
+import { ApiRouteMethods, ApiRoutes } from './api/api-routes';
+import { ApiService } from './api/api.service';
+import { AuthService } from './auth.service';
+import { ProfileInformationInterface } from "../interfaces/profile/profile-information-interface";
 import { ProfileInterface } from '../interfaces/profile-interface';
-import {VendorLogoInterface} from "../interfaces/profile/vendor-logo-interface";
+import { VendorLogoInterface } from "../interfaces/profile/vendor-logo-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +22,11 @@ export class ProfileInformationService {
   token = this.authService.getLocalStorage('access_token')!;
   vendor_id = this.authService.getLocalStorage('vendor_id')!;
 
-  getJenisPenyediaUsaha(): Observable<any>{
+  getJenisPenyediaUsaha(): Observable<any> {
     let api_jenis_penyedia_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_penyedia_usaha_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -39,7 +39,7 @@ export class ProfileInformationService {
     let api_jenis_kegiatan_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_jenis_kegiatan_usaha_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -49,11 +49,11 @@ export class ProfileInformationService {
   }
 
 
-  getTipeVendor(): Observable<any>{
+  getTipeVendor(): Observable<any> {
     let api_tipe_vendor: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_tipe_vendor_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -76,11 +76,11 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_jenis_vendor);
   }
 
-  getVendorInformation(): Observable<any>{
+  getVendorInformation(): Observable<any> {
     let api_vendor_information: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/information',
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -89,11 +89,11 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_vendor_information);
   }
 
-  getVendorData(): Observable<any>{
+  getVendorData(): Observable<any> {
     let api_vendor_data: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id'),
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -103,11 +103,11 @@ export class ProfileInformationService {
 
   }
 
-  getOrganizations(): Observable<any>{
+  getOrganizations(): Observable<any> {
     let api_organizations: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_organizations_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -120,7 +120,7 @@ export class ProfileInformationService {
     let api_provinces: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_provinces_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -129,11 +129,11 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_provinces);
   }
 
-  getKotaKabupaten(provinsi:any): Observable<any>{
+  getKotaKabupaten(provinsi: any): Observable<any> {
     let api_get_kotakab: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kotakab.concat(provinsi),
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -143,11 +143,11 @@ export class ProfileInformationService {
 
   }
 
-  getKecamatan(kotakab:any): Observable<any>{
+  getKecamatan(kotakab: any): Observable<any> {
     let api_get_kecamatan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kecamatan.concat(kotakab),
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -157,11 +157,11 @@ export class ProfileInformationService {
 
   }
 
-  getKelurahan(kecamatan:any): Observable<any>{
+  getKelurahan(kecamatan: any): Observable<any> {
     let api_get_kelurahan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kelurahan.concat(kecamatan),
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -170,11 +170,11 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_kelurahan);
   }
 
-  getKodepos(kelurahan:any): Observable<any>{
+  getKodepos(kelurahan: any): Observable<any> {
     let api_get_kodepos: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kodepos.concat(kelurahan),
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -183,11 +183,11 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_get_kodepos);
   }
 
-  getBidangUsaha(): Observable<any>{
+  getBidangUsaha(): Observable<any> {
     let api_get_bidang_usaha: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_kbli,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         }
@@ -259,43 +259,43 @@ export class ProfileInformationService {
     return this.apiService.sendRequest(api_profile_information);
   }
 
-  getContactMechanism(): Observable<any>{
+  getContactMechanism(): Observable<any> {
     let api_get_contact_mechanism: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_contact_mechanism,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         },
         params: {
-          party : this.vendor_id
+          party: this.vendor_id
         }
       }
     }
     return this.apiService.sendRequest(api_get_contact_mechanism);
   }
 
-  getPartyRole(role: string): Observable<any>{
+  getPartyRole(role: string): Observable<any> {
     let api_get_party_role: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_party_role_route,
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         },
         params: {
-          "roleType.name" : role
+          "roleType.name": role
         }
       }
     }
     return this.apiService.sendRequest(api_get_party_role);
   }
 
-  getVendorsOrganization(type: string): Observable<any>{
+  getVendorsOrganization(type: string): Observable<any> {
     let api_vendor_organization: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route + localStorage.getItem('vendor_id') + '/organizations',
-      options : {
+      options: {
         headers: {
           Authorization: this.token
         },
@@ -325,4 +325,22 @@ export class ProfileInformationService {
 
     return this.apiService.sendRequest(api_profile_vendor);
   }
+
+  cekStatusVendor(): Observable<any> {
+    let api_profile_vendor: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_vendor.concat("/").concat(this.vendor_id).concat("/verification_status"),
+      body: {},
+      options: {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: this.token
+        }
+      },
+    }
+
+    return this.apiService.sendRequest(api_profile_vendor);
+  }
+
+
 }
