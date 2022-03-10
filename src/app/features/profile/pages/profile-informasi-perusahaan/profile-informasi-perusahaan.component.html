@@ -50,6 +50,55 @@
                 <form>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
+                      <kendo-label class="col-3">Apakah Anda Memiliki NIB</kendo-label>
+                      <div class="col">
+                        <input
+                          id="yesnib"
+                          type="radio"
+                          required
+                          value="true"
+                          formControlName="isAdaNib"
+                          kendoRadioButton
+                          (click)="setIsAdaNib(true)"
+                        />
+                        <kendo-label class="k-radio-label" for="yesnib">Ya</kendo-label>
+                        <input
+                          id="nonib"
+                          type="radio"
+                          required
+                          value="false"
+                          formControlName="isAdaNib"
+                          kendoRadioButton
+                          (click)="setIsAdaNib(false)"
+                        />
+                        <kendo-label class="k-radio-label" for="nonib">Tidak</kendo-label>
+                        <kendo-formerror class="formHint"
+                                         *ngIf="profileInformationFormGroup.controls.isAdaNib.errors?.required">
+                                         Apakah Anda Memiliki NIB
+                        </kendo-formerror>
+                      </div>
+
+                    </div>
+                  </kendo-formfield>
+
+                  <kendo-formfield [formGroup]="profileInformationFormGroup">
+                    <div class="row align-items-center">
+                      <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
+                      <div class="col k-vstack">
+                        <kendo-textbox id="nomorIndukBerusaha" class="col-md w-100" placeholder="Type your message here"
+                                       [clearButton]="true" [maxlength]="10"
+                                       formControlName="nomorIndukBerusaha"></kendo-textbox>
+                        <kendo-formerror class="formHint"
+                                         *ngIf="profileInformationFormGroup.controls.nomorIndukBerusaha.errors?.required">
+                          Nomor Induk
+                          Berusaha tidak boleh kosong
+                        </kendo-formerror>
+                      </div>
+                    </div>
+                  </kendo-formfield>
+
+                  <kendo-formfield [formGroup]="profileInformationFormGroup">
+                    <div class="row align-items-center">
                       <kendo-label class="col-3">Nama Perusahaan</kendo-label>
                       <div class="col-md k-vstack">
                         <kendo-textbox id="namaPerusahaan" class="col-md w-100" placeholder="Nama Perusahaan"
@@ -61,6 +110,7 @@
                       </div>
                     </div>
                   </kendo-formfield>
+
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
                       <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
@@ -200,24 +250,6 @@
                           NPWP tidak boleh kosong
                         </kendo-formerror>
                       </div>
-                    </div>
-                  </kendo-formfield>
-
-                  <kendo-formfield [formGroup]="profileInformationFormGroup">
-                    <div class="row align-items-center">
-
-                      <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
-                      <div class="col k-vstack">
-                        <kendo-textbox id="nomorIndukBerusaha" class="col-md w-100" placeholder="Type your message here"
-                                       [clearButton]="true" [maxlength]="10"
-                                       formControlName="nomorIndukBerusaha"></kendo-textbox>
-                        <kendo-formerror class="formHint"
-                                         *ngIf="profileInformationFormGroup.controls.nomorIndukBerusaha.errors?.required">
-                          Nomor Induk
-                          Berusaha tidak boleh kosong
-                        </kendo-formerror>
-                      </div>
-
                     </div>
                   </kendo-formfield>
 

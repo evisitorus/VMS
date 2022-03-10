@@ -152,6 +152,7 @@ export class ProfilKaryawanComponent implements OnInit {
       jabatan: new FormControl(this.data.jabatan, Validators.required),
       bidangPekerjaan: new FormControl(this.data.bidangPekerjaan, Validators.required)
     });
+    localStorage.getItem('disableEditData') === 'yes' ? this.pegawaiFormGroup.disable() : null;
   }
 
   public submitProfilKaryawan(): void {
@@ -169,7 +170,7 @@ export class ProfilKaryawanComponent implements OnInit {
         }
       }
     }
-    
+
 
   }
 
@@ -392,7 +393,7 @@ export class ProfilKaryawanComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      } 
+      }
     });
   }
 

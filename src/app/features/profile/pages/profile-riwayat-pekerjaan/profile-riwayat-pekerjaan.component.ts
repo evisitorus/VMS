@@ -38,7 +38,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   popUpConfirmationMessage: string = "Apakah Pemegang Saham atas nama " + this.deletePekerjaanName + " akan dihapus dari sistem ?";
   redirectOnClosePopUp: boolean = false;
   isLoggedIn: boolean = true;
-  
+
   public columns: any[] = [{field: "Nama Pekerjaan"}, {field: "pemberiPekerjaan"}, {field: "nilaiPekerjaan"}, {field:"tahunPekerjaan"}, {field:"buktiPekerjaanFilePath"}];
   public gridData: any = samplePekerjaans;
   record = 0;
@@ -67,7 +67,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     namaPekerjaan: new FormControl(null, Validators.required),
     pemberiPekerjaan: new FormControl(null, Validators.required),
     nilaiPekerjaan: new FormControl(null, Validators.required),
-    tahunPekerjaan: new FormControl(null, Validators.required)  
+    tahunPekerjaan: new FormControl(null, Validators.required)
   });
 
   public data: any = {
@@ -89,14 +89,14 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   ngOnInit(): void {
     this.getPekerjaan();
   }
-  
+
   getPekerjaan(){
     this.profileService.getPekerjaan().subscribe(
-      (resp) =>  { 
+      (resp) =>  {
         this.gridData = resp['hydra:member'];
         this.gridData = this.mapData(this.gridData);
       },
-      (error) => { 
+      (error) => {
         this.popUpMessage = error;
         this.triggerPopUp();
         this.redirectOnClosePopUp = true;
@@ -169,6 +169,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.uploadedFileId = "";
     this.invalidMaxFileSize = false;
     this.invalidFileExtension = false;
+    localStorage.getItem('disableEditData') === 'yes' ? this.pekerjaanForm.disable() : null;
   }
 
   public submit(): void {
@@ -206,13 +207,13 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       lampiran: this.uploadedFileId,
     };
     this.profileService.addPekerjaan(params).subscribe(
-      (resp) =>  { 
+      (resp) =>  {
         this.popUpMessage = messages.success;
         this.triggerPopUp();
         this.getPekerjaan();
         this.closePekerjaan();
       },
-      (error) => { 
+      (error) => {
         console.log(params);
         console.log(console.error());
         // if(error.error.message){
@@ -270,7 +271,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     this.data.tahunPekerjaan = data.tahunPekerjaan;
     this.data.buktiPekerjaanFilePath = data.lampiran;
     this.data.lampiran = data.file;
-    
+
     this.isNewData = false;
 
     this.popUpTitle = "Perhatian";
@@ -292,7 +293,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       lampiran: new FormControl(this.data.lampiran ? this.data.lampiran : "" , Validators.required),
     });
     this.lampiranFiles = [];
-    console.log(this.pekerjaanForm.value);
+    localStorage.getItem('disableEditData') === 'yes' ? this.pekerjaanForm.disable() : null;
   }
 
   public updateRiwayatPekerjaan(): void {
@@ -345,7 +346,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
   }
 
   public opened = false;
-  
+
   public actionsLayout: ActionsLayout = "normal";
 
   public myActions: DialogAction[] = [
