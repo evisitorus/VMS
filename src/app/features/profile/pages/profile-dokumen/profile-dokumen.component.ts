@@ -86,7 +86,6 @@ export class ProfileDokumenComponent implements OnInit {
       namaDokumen: new FormControl(this.data.namaDokumen, Validators.required),
       berlakuSampai: new FormControl(this.data.berlakuSampai, [])
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   public mapData(data: any[]): any[] {
@@ -127,7 +126,7 @@ export class ProfileDokumenComponent implements OnInit {
       this.setIsLifeTime();
     } else {
       this.checked = false;
-      this.setIsLifeTime();
+      this.setIsLifeTime();      
     }
   }
 
@@ -180,7 +179,7 @@ export class ProfileDokumenComponent implements OnInit {
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-
+    
     this.profileDocumentService.save(params).subscribe(
       () => {
         this.popUpMessage = dictionary.save_data_success;
@@ -247,7 +246,7 @@ export class ProfileDokumenComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      }
+      } 
     });
   }
 

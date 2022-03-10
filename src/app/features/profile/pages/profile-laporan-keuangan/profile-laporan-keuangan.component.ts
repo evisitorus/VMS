@@ -102,7 +102,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       modalDasar: new FormControl(this.dataKeuangan.modalDasar, [Validators.required]),
       modalDitempatkan: new FormControl(this.dataKeuangan.modalDitempatkan, [Validators.required]),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.formKeuangan.disable() : null;
   }
 
   public setFormNeraca(): void {
@@ -113,7 +112,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       equitas: new FormControl(this.dataNeraca.equitas, [Validators.required]),
       omzet: new FormControl(this.dataNeraca.omzet, [Validators.required]),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.formNeraca.disable() : null;
   }
 
   public setFormSPT(): void {
@@ -122,7 +120,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required]),
       // lampiran: new FormControl(this.dataSPT.lampiran, [Validators.required]),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.formSPT.disable() : null;
 
   }
 
@@ -480,11 +477,11 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         height: 200,
         minWidth: 250,
       });
-
+  
       dialog.result.subscribe((result) => {
         if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
           this.deleteNeraca(id);
-        }
+        } 
       });
     } else {
       const dialog: DialogRef = this.sptDialogService.open({
@@ -495,11 +492,11 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         height: 200,
         minWidth: 250,
       });
-
+  
       dialog.result.subscribe((result) => {
         if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
           this.deleteSPT(id);
-        }
+        } 
       });
     }
   }
@@ -583,7 +580,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public gridViewSPT!: GridDataResult;
   public skip: number = 0;
   public pageSize: number = 5;
-
+  
   public pageChangeNeraca(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.loadItemsNeraca();

@@ -34,7 +34,7 @@ export class ProfileAsetComponent implements OnInit {
     private profileAssetService: ProfileAssetService,
     private eventEmitterService: EventEmitterService,
     private dialogService: DialogService
-  ) {
+  ){ 
     this.setFormValue();
   }
 
@@ -42,8 +42,8 @@ export class ProfileAsetComponent implements OnInit {
     this.getData();
   }
 
-  public mapData(data: any[]) {
-    let mappedData: any[] = [];
+  public mapData(data:any[]) {
+    let mappedData:any[] = [];
     let no = 1;
     for (const key in data) {
       mappedData[key] = {
@@ -56,7 +56,7 @@ export class ProfileAsetComponent implements OnInit {
       };
     }
     return mappedData;
-  }
+  } 
 
   public close(): void {
     this.opened = false;
@@ -67,7 +67,7 @@ export class ProfileAsetComponent implements OnInit {
   public open(): void {
     this.opened = true;
   }
-
+  
   public submit(): void {
     this.form.markAllAsTouched();
     if (this.form.valid) {
@@ -97,7 +97,7 @@ export class ProfileAsetComponent implements OnInit {
     this.data.namaAsset = data.nama;
     this.data.jumlah = data.jumlah;
     this.data.tahunPembuatan = parseInt(data.tahunPembuatan);
-
+    
     this.isNewData = false;
 
     this.setFormValue();
@@ -124,7 +124,7 @@ export class ProfileAsetComponent implements OnInit {
         this.getData();
         this.close();
         this.resetForm();
-      },
+      }, 
       (err) => {
         this.popUpMessage = err.error.message;
         this.triggerPopUp();
@@ -184,7 +184,7 @@ export class ProfileAsetComponent implements OnInit {
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
         this.delete(id);
-      }
+      } 
     });
   }
 
@@ -194,7 +194,6 @@ export class ProfileAsetComponent implements OnInit {
       jumlah: new FormControl(this.data.jumlah, [Validators.required]),
       tahunPembuatan: new FormControl(this.data.tahunPembuatan, [Validators.required])
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   triggerPopUp() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileDashboardService } from 'src/app/core/services/profile-dashboard.service';
-import { ApiRoutes } from "src/app/core/services/api/api-routes";
-import { ProfileInformationService } from "src/app/core/services/profile-information.service";
+import {ApiRoutes} from "src/app/core/services/api/api-routes";
+
 @Component({
   selector: 'app-profile-dashboard',
   templateUrl: './profile-dashboard.component.html',
@@ -10,16 +10,15 @@ import { ProfileInformationService } from "src/app/core/services/profile-informa
 export class ProfileDashboardComponent implements OnInit {
 
   constructor(
-    private profileService: ProfileDashboardService,
-    private profileInfoService: ProfileInformationService,
+    private profileService:ProfileDashboardService
   ) { }
 
-  phone_number: string = "";
-  name: string = "";
-  is_active: string = "";
-  registered_at: string = "";
-  jenis_kegiatan_usaha: string = "";
-  address_vendor: string = "";
+  phone_number:string = "";
+  name:string="";
+  is_active:string="";
+  registered_at:string="";
+  jenis_kegiatan_usaha:string = "";
+  address_vendor:string = "";
   vendor_name: string = "";
   profil: string = "";
   pic: string = "";
@@ -65,32 +64,17 @@ export class ProfileDashboardComponent implements OnInit {
         this.pic = resp.data.pic_perusahaan;
         this.dokumen = resp.data.dokumen;
         this.alamat = resp.data.alamat;
-        this.keuangan = resp.data.keuangan;
-        this.pekerjaan = resp.data.pekerjaan;
+        this.keuangan= resp.data.keuangan;
+        this.pekerjaan= resp.data.pekerjaan;
         this.aset = resp.data.aset;
 
         const hasValue = Object.values(resp.data).includes(false);
         hasValue ?
-          this.star = "bi-star-half" :
-          this.star = "bi-star-fill";
-      },
-      (error) => {
-      }
-    );
-
-    this.cekStatusVendor();
-  }
-
-  public cekStatusVendor() {
-    this.profileInfoService.cekStatusVendor().subscribe(
-      (resp) => {
-        if (resp.data.is_verifying) {
-          localStorage.setItem('disableEditData', 'yes');
-        }
+        this.star = "bi-star-half" :
+        this.star = "bi-star-fill";
       },
       (error) => {
       }
     );
   }
-
 }

@@ -41,7 +41,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     asset: {
       status: false,
       text: "Completed"
-    },
+    },    
   };
 
   public role!: string;
@@ -72,7 +72,6 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     this.form = new FormGroup({
       disclaimer: new FormControl(this.disclaimer, [Validators.requiredTrue])
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   public getDataKelengkapan(): void {
@@ -93,7 +92,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
         this.data.riwayatPekerjaan.text = kelengkapan.riwayat_pekerjaan.text;
         this.data.laporanKeuangan.status = kelengkapan.laporan_keuangan.status;
         this.data.laporanKeuangan.text = kelengkapan.laporan_keuangan.text;
-
+        
         this.role = resp.data.role_vendor.roleType.name;
         if (this.role === this.roles.vendorBasicVerifying || this.role === this.roles.vendorPro) {
           this.isDisabled = true;
