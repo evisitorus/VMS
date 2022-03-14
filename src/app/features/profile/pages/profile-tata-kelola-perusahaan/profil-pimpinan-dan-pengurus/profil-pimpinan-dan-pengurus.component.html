@@ -28,6 +28,16 @@
         <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
       </ng-template>
     </kendo-grid-column>
+    <kendo-grid-column title="NPWP">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Kartu NPWP">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
+      </ng-template>
+    </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-dataItem>
         <div *ngIf="!dataItem.deletedAt">
@@ -98,6 +108,35 @@
             <kendo-label class="col">Kartu Identitas</kendo-label>
             <div class="col">
               <kendo-fileselect [style.width]="'100%'" id="resumePimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+                <kendo-fileselect-messages
+                dropFilesHere="Tidak ada file terpilih"
+                select="Pilih file"
+                invalidFileExtension="Ekstensi file harus berformat jpg, png, atau pdf"
+                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                >
+                </kendo-fileselect-messages>
+              </kendo-fileselect>
+              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa jpg, png, PDF, maks 2MB</p>
+            </div>
+          </div>
+
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">No. NPWP</kendo-label>
+            <div class="col k-vstack">
+              <kendo-numerictextbox [style.width]="'100%'" id="npwpPengurusInput" formControlName="npwp" class="col-md"
+              placeholder="No. NPWP" [maxlength]="15" [spinners]="false" format="d" #npwp>
+            </kendo-numerictextbox>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">No. NPWP tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">Kartu NPWP</kendo-label>
+            <div class="col">
+              <kendo-fileselect [style.width]="'100%'" id="npwpPimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
                 <kendo-fileselect-messages
                 dropFilesHere="Tidak ada file terpilih"
                 select="Pilih file"
