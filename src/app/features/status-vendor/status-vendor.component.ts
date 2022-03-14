@@ -14,18 +14,14 @@ export class StatusVendorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cekStatusVendor();
-    setInterval(() => {
-      this.cekStatusVendor();
-    }, 60000)
   }
 
   public cekStatusVendor() {
     this.profileInfoService.cekStatusVendor().subscribe(
       (resp) => {
-        // if (resp.data.is_verifying) {
-        //   // localStorage.setItem('disableEditData', 'yes');
-        // }
-        console.log(resp.data.is_verifying);
+        if (resp.data.is_verifying) {
+          localStorage.setItem('isDisableEditData', 'yes');
+        }
       },
       (error) => {
       }

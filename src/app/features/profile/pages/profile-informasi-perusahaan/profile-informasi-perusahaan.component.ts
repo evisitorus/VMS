@@ -168,6 +168,8 @@ export class ProfileInformasiPerusahaanComponent {
   public redirectOnClosePopUp: boolean = false;
   public popUpID = "";
 
+  public isDisableEditData = false;
+
   public getDataPerusahaan(): void {
     forkJoin({
       responseVendorData: this.profileDashboardService.getVendor(),
@@ -198,17 +200,13 @@ export class ProfileInformasiPerusahaanComponent {
     });
   }
 
-  // ngDoCheck(): void {
-  //   console.log(this.profileInformationFormGroup.value.isAdaNib)
-  // }
-
   ngOnInit(): void {
     this.logoForm = new FormGroup({
       files: new FormControl(this.data.files),
     });
 
     this.getDataPerusahaan();
-    localStorage.getItem('disableEditData') === 'yes' ? this.logoForm.disable() : null;
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   public setResponseVendorData(resp: any) {
@@ -462,7 +460,7 @@ export class ProfileInformasiPerusahaanComponent {
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
       isAdaNib: new FormControl(true, Validators.required),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.profileInformationFormGroup.disable() : null;
+    this.isDisableEditData === true ? this.profileInformationFormGroup.disable() : null;
   }
 
   public saveImage(value: any, valid: boolean): void {

@@ -32,15 +32,16 @@ export class DataPegawaiComponent implements OnInit {
   popUpTitle: string = "Informasi Pegawai";
   popUpMessage: string = messages.default;
   redirectOnClosePopUp: boolean = true;
-
+  public isDisableEditData = false;
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private profileService: ProfileService,
     private eventEmitterService: EventEmitterService
     ) { }
 
   ngOnInit(): void {
     // this.tipeKaryawan = this.getTipeKaryawan();
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   public isRequired = true;
@@ -65,7 +66,7 @@ export class DataPegawaiComponent implements OnInit {
   public openSaham() {
     this.openedSaham = true;
   }
-  
+
   public placeHolder: TipeKaryawan = {
     name: "Pilih Tipe Karyawan",
     id: 0,
@@ -73,12 +74,12 @@ export class DataPegawaiComponent implements OnInit {
 
   // getTipeKaryawan(){
   //   this.profileService.getTipeKaryawan().subscribe(
-  //     (resp:any) =>  { 
+  //     (resp:any) =>  {
   //       this.tipeKaryawan = resp['hydra:member'];
   //       // const results = resp.map(country => ({name: country.name, continent: country.region}));
   //       return this.tipeKaryawan;
   //     },
-  //     (error) => { 
+  //     (error) => {
   //       return error;
   //     }
   //   );
@@ -113,14 +114,14 @@ export class DataPegawaiComponent implements OnInit {
     console.log(dataPemegangSaham);
     let params: AddPegawaiInterface= {...dataPemegangSaham}
     // this.profileService.addPegawai(params).subscribe(
-    //   (resp) =>  { 
+    //   (resp) =>  {
     //     this.popUpMessage = messages.success;
     //     this.triggerPopUp();
     //     this.redirectOnClosePopUp = true;
     //     this.closeSaham();
     //     // this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
     //   },
-    //   (error) => { 
+    //   (error) => {
     //     this.popUpMessage = error;
     //     this.triggerPopUp();
     //     this.redirectOnClosePopUp = true;

@@ -74,6 +74,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public filter!: string;
   public selectedBidang!: Item ;
   public selectedBidangId:string = "";
+  public isDisableEditData = false;
 
   constructor(
     private fileService: FileService,
@@ -86,7 +87,7 @@ export class ProfilKaryawanComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
-
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   public fetchData(): void {

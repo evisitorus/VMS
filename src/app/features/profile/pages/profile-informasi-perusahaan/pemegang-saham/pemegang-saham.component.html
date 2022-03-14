@@ -20,10 +20,10 @@
       </ng-template>
       <ng-template #active>
         <span>
-          <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
+          <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
         </span>
         <span>
-          <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btn-delete">
+          <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btn-delete">
         </span>
       </ng-template>
     </ng-template>
@@ -31,9 +31,11 @@
 </kendo-grid>
 
   <br>
+  <div *ngIf="this.isDisableEditData ? false : true">
   <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" style="float: right; color:#0193AC;" look="flat" icon="k-icon k-i-plus-outline">
     Tambah Pemegang Saham
   </button>
+  </div>
 
   <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
 
@@ -104,10 +106,10 @@
         <div class="wrap">
           <kendo-label class="labelForm">% Kepemilikan Saham</kendo-label>
           <div>
-            <kendo-numerictextbox 
+            <kendo-numerictextbox
               id="kepemilikanSaham"
               class="formField"
-              [decimals]="2" 
+              [decimals]="2"
               [format]="'# \\%'"
               [min]="0"
               [max]="100"

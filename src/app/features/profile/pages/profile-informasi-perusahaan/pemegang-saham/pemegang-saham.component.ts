@@ -57,7 +57,7 @@ export class PemegangSahamComponent implements OnInit {
     private profileService: ProfileService,
     private eventEmitterService: EventEmitterService,
     ) { }
-
+    public isDisableEditData = false;
   ngOnInit(): void {
     this.getPemegangSaham();
     if (this.eventEmitterService.subsVar == undefined) {
@@ -65,6 +65,8 @@ export class PemegangSahamComponent implements OnInit {
         () => { this.trigger() }
       );
     }
+
+  localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   message!: string;
@@ -138,7 +140,6 @@ export class PemegangSahamComponent implements OnInit {
       lokal: new FormControl(null, Validators.required),
       persentaseKepemilikan: new FormControl(null, Validators.required)
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.pemegangSahamFormGroup.disable() : null;
   }
 
   public submit(): void {
@@ -212,7 +213,6 @@ export class PemegangSahamComponent implements OnInit {
       lokal: new FormControl(this.data.lokal, Validators.required),
       persentaseKepemilikan: new FormControl(this.data.persentaseKepemilikan, Validators.required),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.pemegangSahamFormGroup.disable() : null;
   }
 
   public updatePemegangSaham(): void {
