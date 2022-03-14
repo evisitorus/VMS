@@ -1,6 +1,7 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import { ProfileDashboardService } from 'src/app/core/services/profile-dashboard.service';
-import {ApiRoutes} from "src/app/core/services/api/api-routes";
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -10,71 +11,95 @@ import {ApiRoutes} from "src/app/core/services/api/api-routes";
 export class ProfileDashboardComponent implements OnInit {
 
   constructor(
-    private profileService:ProfileDashboardService
+    private profileService:ProfileDashboardService,
+    private notification: NotificationService
   ) { }
 
-  phone_number:string = "";
-  name:string="";
-  is_active:string="";
-  registered_at:string="";
-  jenis_kegiatan_usaha:string = "";
-  address_vendor:string = "";
-  vendor_name: string = "";
-  profil: string = "";
-  pic: string = "";
-  dokumen: string = "";
-  keuangan: string = "";
-  pekerjaan: string = "";
-  aset: string = "";
-  alamat: string = "";
-  star: string = "";
-  public logoImg!: any;
+  star: string = "bi-star";
 
+  public tenders: any = {
+    total: 0,
+    followed: 0,
+    onGoing: 0,
+    denied: 0
+  };
+
+  public vendor: any = {
+    type: "-",
+    status: "-",
+    registeredDate: "-",
+    lastUpdatedDate: "-",
+    verifiedDate: "-"
+  }
 
   ngOnInit(): void {
-    this.profileService.getVendor().subscribe(
+    this.getDataTenders();
+    this.getVerificationStatus();
+    this.getVerificationData();
+  }
+
+  private getDataTenders() {
+    this.profileService.getTenders().subscribe(
       (resp) => {
-        this.jenis_kegiatan_usaha = resp.jenisKegiatanUsaha[0].description;
-
-        if (null === resp.logo) {
-          this.logoImg = null;
-        } else {
-          this.logoImg = ApiRoutes.api_env + resp.logo + "/file";
-        }
+        this.tenders = resp;
       },
-      (error) => {
-      }
-    );
-
-    this.profileService.getDashboard().subscribe(
-      (resp) => {
-        this.phone_number = resp.data.phone_number;
-        this.address_vendor = resp.data.address;
-        this.registered_at = resp.data.registered_at;
-        this.vendor_name = resp.data.name;
-      },
-      (error) => {
-      }
-    );
-
-    this.profileService.getVendorStatusData().subscribe(
-      (resp) => {
-        // console.log(resp)
-        this.profil = resp.data.profil_perusahaan;
-        this.pic = resp.data.pic_perusahaan;
-        this.dokumen = resp.data.dokumen;
-        this.alamat = resp.data.alamat;
-        this.keuangan= resp.data.keuangan;
-        this.pekerjaan= resp.data.pekerjaan;
-        this.aset = resp.data.aset;
-
-        const hasValue = Object.values(resp.data).includes(false);
-        hasValue ?
-        this.star = "bi-star-half" :
-        this.star = "bi-star-fill";
-      },
-      (error) => {
+      () => {
+        this.showNotification("error", "Gagal mendapatkan data tender");
       }
     );
   }
+
+  private getVerificationStatus() {
+    this.profileService.getVerificationStatus().subscribe(
+      (resp) => {
+        let data = resp.data;
+        this.vendor.type = data.vendor_type;
+        this.vendor.status = data.verified_at !== null ? "Terverifikasi" : data.vendor_type === VENDOR_IS_VERIFYING ? "Menunggu Verifikasi" : "Belum Terverifikasi";
+        this.vendor.registeredDate = data.registered_at ? formatDate(data.registered_at.date, "dd MMMM YYYY", "en-US") : "-";
+        this.vendor.lastUpdatedDate = data.updated_at ? formatDate(data.updated_at.date, "dd MMMM YYYY", "en-US") : "-";
+        this.vendor.verifiedDate = data.verified_at ? formatDate(data.verified_at.date, "dd MMMM YYYY", "en-US") : "-"
+
+        switch (data.vendor_type) {
+          case VENDOR_IS_VERIFYING:
+            this.star = "bi-star-half";
+            break;
+          case VENDOR_PRO:
+            this.star = "bi-star-fill";
+            break;
+          default:
+            this.star = "bi-star";
+            break;
+        }
+      },
+      () => {
+        this.showNotification("error", "Gagal mendapatkan data status verifikasi");
+      }
+    );
+  }
+
+  private getVerificationData() {
+    this.profileService.getVerificationData().subscribe(
+      (resp) => {
+        console.debug(resp.data.kelengkapan);
+      },
+      () => {
+
+      }
+    );
+  }
+
+  public showNotification(type: "success" | "none" | "warning" | "error" | "info" | undefined, message: string): void {
+    this.notification.show({
+      content: message,
+      closable: true,
+      hideAfter: 2000,
+      position: { horizontal: "right", vertical: "top" },
+      animation: { type: "fade", duration: 500 },
+      type: { style: type, icon: true },
+    });
+  }
+
 }
+
+const VENDOR_PRO = "Vendor Pro";
+const VENDOR_IS_VERIFYING = "Vendor Basic (sedang diverifikasi)";
