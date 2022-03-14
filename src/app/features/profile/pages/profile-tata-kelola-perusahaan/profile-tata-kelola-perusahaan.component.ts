@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {EventEmitterService} from "../../../../core/services/event-emitter.service";
 
 @Component({
   selector: 'app-profile-tata-kelola-perusahaan',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileTataKelolaPerusahaanComponent implements OnInit {
 
-  constructor() { }
+  popUpMessage: string = "";
+  redirectOnClosePopUp: boolean = false;
+  constructor(
+    private eventEmitterService: EventEmitterService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  triggerPopUp(): void {
+    this.eventEmitterService.trigger();
   }
 
 }
