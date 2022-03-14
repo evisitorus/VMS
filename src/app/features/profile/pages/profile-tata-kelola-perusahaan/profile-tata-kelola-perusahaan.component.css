@@ -1,0 +1,52 @@
+.text-bold {
+  font-weight: 600;
+}
+
+.row {
+  margin-bottom: 0.5rem;
+}
+
+.k-panelbar-content {
+  padding: 1em;
+}
+
+/* .profile-content {
+  display: flex;
+  background-color: transparent!important;
+} */
+
+/* .profile-menu {
+  float: left;
+  height: 100vh;
+} */
+
+.profile-content-title {
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+
+.profile-content-grid-button {
+  float: right;
+  margin-top: 1em;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+kendo-panelbar#tata-kelola-perusahaan-panelbar > kendo-panelbar-item  .k-link , kendo-panelbar#tata-kelola-perusahaan-panelbar > kendo-panelbar-item  .k-link.k-state-focused, kendo-panelbar#tata-kelola-perusahaan-panelbar  > kendo-panelbar-item >  .k-link.k-state-selected, kendo-panelbar#tata-kelola-perusahaan-panelbar > .k-item > .k-link, kendo-panelbar#tata-kelola-perusahaan-panelbar.k-panelbar kendo-panelbar-item#k-panelbar-0-item-default-0.ng-tns-c67-0.k-level-0.k-item.k-state-default.k-state-expanded.k-panelbar-header.ng-star-inserted span.ng-tns-c67-0.k-link {
+  background-color: #0193AC !important;
+  border-color: #0193AC !important;
+  color: white !important;
+}
+
+.k-dropdown .k-dropdown-wrap, .k-dropdowntree .k-dropdown-wrap {
+  border-color: #0193AC;
+  color: #212529;
+  background-color: transparent;
+  padding: 0;
+}
