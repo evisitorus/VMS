@@ -1,6 +1,33 @@
 <div>
-  <kendo-label>Pegawai</kendo-label>
-  <br>
+  <kendo-label class="mb-3">Pegawai</kendo-label>
+  <div class="container mb-3">
+    <div class="row k-hstack">
+      <form>
+        <div class="col-5">
+          <div class="row">
+            <div class="col k-hstack">
+              <span>Jumlah Pegawai Domestik</span>
+              <kendo-numerictextbox id="pegawaiDomestikInput" class="col-md"
+              placeholder="Jumlah pegawai domestik" [spinners]="false" format="d" #pegawaidomestik></kendo-numerictextbox>
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="col k-hstack">
+            <span>Jumlah Pegawai Asing</span>
+            <kendo-numerictextbox id="pegawaiAsingInput" class="col-md"
+            placeholder="Jumlah pegawai asing" [spinners]="false" format="d" #pegawaiasing></kendo-numerictextbox>
+          </div>
+        </div>
+      
+      <div class="col-2">
+        <button id="editJumlahPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()" icon="k-icon k-i-edit"
+        style="float: right; color:#0193AC;"></button>
+      </div>
+    </form>
+    </div>
+
+  </div>
   <kendo-grid [pageSize]="5" [data]="gridViewPegawai" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
