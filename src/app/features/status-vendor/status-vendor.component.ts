@@ -21,6 +21,8 @@ export class StatusVendorComponent implements OnInit {
       (resp) => {
         if (resp.data.is_verifying) {
           localStorage.setItem('isDisableEditData', 'yes');
+        } else {
+          localStorage.setItem('isDisableEditData', 'no');
         }
       },
       (error) => {

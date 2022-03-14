@@ -72,7 +72,6 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     this.form = new FormGroup({
       disclaimer: new FormControl(this.disclaimer, [Validators.requiredTrue])
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   public getDataKelengkapan(): void {
