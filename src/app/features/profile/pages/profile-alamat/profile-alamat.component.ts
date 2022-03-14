@@ -279,7 +279,6 @@ export class ProfileAlamatComponent implements OnInit {
       kelurahan: new FormControl(null, Validators.required),
       kodepos: new FormControl(null, Validators.required),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   public resetForm(): void {
