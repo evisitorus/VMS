@@ -210,8 +210,15 @@ export class ProfileInformasiPerusahaanComponent {
       this.logoImg = environment.api_base_path + resp.logo.concat('/file');
     }
 
+    if (resp.pemilikNIB === undefined) {
+      this.dataPerusahaan.pemilikNIB = null;
+    } else {
+      this.dataPerusahaan.pemilikNIB = resp.pemilikNIB ? "true" : "false";
+    }
+    
     this.dataPerusahaan.namaPerusahaan = resp.name ? resp.name : "";
     this.dataPerusahaan.inisialPerusahaan = resp.altName ? resp.altName : "";
+    this.dataPerusahaan.emailPerusahaan = resp.emailPerusahaan ? resp.emailPerusahaan : "";
 
     if (resp.statusPerusahaanPkp === undefined) {
       this.dataPerusahaan.statusPerusahaanPkp = null;
@@ -433,6 +440,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setFormPerusahaan(data: any): void {
     this.profileInformationFormGroup = this.fb.group({
+      pemilikNIB: new FormControl(data.pemilikNIB, Validators.required),
       namaPerusahaan: new FormControl(data.namaPerusahaan, Validators.required),
       inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
       jenisBadanUsaha: new FormControl(data.jenisBadanUsaha, Validators.required),
@@ -454,6 +462,7 @@ export class ProfileInformasiPerusahaanComponent {
       kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
       kelurahan: new FormControl(this.selectedKelurahan, Validators.required),
       kodePos: new FormControl(this.selectedKodepos, Validators.required),
+      emailPerusahaan: new FormControl(this.data.emailPerusahaan, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
     });
   }
 
@@ -570,6 +579,7 @@ export class ProfileInformasiPerusahaanComponent {
 
     if (this.profileInformationFormGroup.valid) {
       this.params = {
+        pemilikNIB: this.profileInformationFormGroup.value.pemilikNIB,
         name: this.profileInformationFormGroup.value.namaPerusahaan,
         initial: this.profileInformationFormGroup.value.inisialPerusahaan,
         jenisBadanUsaha: this.profileInformationFormGroup.value.jenisBadanUsaha,
@@ -591,6 +601,7 @@ export class ProfileInformasiPerusahaanComponent {
         kecamatan: this.profileInformationFormGroup.value.kecamatan,
         keluarahan: this.profileInformationFormGroup.value.kelurahan,
         kodePos: this.profileInformationFormGroup.value.kodePos,
+        emailPerusahaan: this.profileInformationFormGroup.value.emailPerusahaan,
         file: fileId
       }
 

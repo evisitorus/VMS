@@ -18,7 +18,6 @@ const routes: Routes = [
   {path: 'profile-aset', component: ProfileAsetComponent, canActivate: [AuthGuard]},
   {path: 'profile-dokumen', component: ProfileDokumenComponent, canActivate: [AuthGuard]},
   {path: 'profile-riwayat-pekerjaan', component: ProfileRiwayatPekerjaanComponent, canActivate: [AuthGuard]},
-  {path: 'profile-alamat', component: ProfileAlamatComponent, canActivate: [AuthGuard]},
   {path: 'profile-laporan-keuangan', component: ProfileLaporanKeuanganComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: ProfileDashboardComponent, canActivate: [AuthGuard]},
 ];

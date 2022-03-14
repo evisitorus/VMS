@@ -1,4 +1,5 @@
 export interface ProfileInformationInterface {
+  pemilikNIB: string;
   name: string;
   initial: string;
   jenisBadanUsaha: string;
@@ -24,6 +25,6 @@ export interface ProfileInformationInterface {
   kecamatan?: string;
   keluarahan?: string;
   kodePos?: string;
-
+  emailPerusahaan?: string;
   file?: string;
 }
