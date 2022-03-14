@@ -24,7 +24,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" format="Rp\ ##,#" [maxlength]="maxLength" #aktiva required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" format="Rp\ ##,#" [maxlength]="maxLength" #aktiva required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Aktiva (Asset) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -37,7 +37,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" format="Rp\ ##,#" #pasiva [maxlength]="maxLength" required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" format="Rp\ ##,#" #pasiva [maxlength]="maxLength" required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Passiva (Liability) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" format="Rp\ ##,#" #equitas [maxlength]="maxLength" required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" format="Rp\ ##,#" #equitas [maxlength]="maxLength" required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Ekuitas (Equity) tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -63,13 +63,13 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
-              <kendo-numerictextbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" format="Rp\ ##,#" [maxlength]="maxLength" #omzet required></kendo-numerictextbox>                
+              <kendo-numerictextbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" format="Rp\ ##,#" [maxlength]="maxLength" #omzet required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Omzet Bersih tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
-        
+
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
             <button type="button" class="k-button vms-btn" (click)="triggerModal('neraca')" id="btn-batal-neraca">
@@ -82,7 +82,7 @@
             </button>
           </div>
         </div>
-        
+
       </form>
     </kendo-dialog>
 
@@ -92,7 +92,7 @@
 
     <kendo-dialog title="Tambah SPT Tahunan" *ngIf="openSPT" (close)="triggerModal('spt')" [minWidth]="250" [width]="600">
       <form class="k-form modal-form">
-        
+
         <div class="row">
           <div class="col-3 modal-label">
             <p>Tahun</p>
@@ -112,7 +112,7 @@
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formSPT">
-              <kendo-textbox class="content-input-field" id="input-spt-nomor-dokumen" formControlName="nomorDokumen" [clearButton]="true" #nomorDokumen required></kendo-textbox>                
+              <kendo-textbox class="content-input-field" id="input-spt-nomor-dokumen" formControlName="nomorDokumen" [clearButton]="true" #nomorDokumen required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nomor Dokumen tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -163,7 +163,7 @@
       </div>
 
       <div class="profile-keuangan-field">
-        
+
         <div class="row bank-field">
           <div class="col-3 content-label">
             <kendo-label>Nama Bank</kendo-label>
@@ -184,7 +184,7 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-cabang" formControlName="cabang" [clearButton]="true" #cabang required></kendo-textbox>                
+              <kendo-textbox class="content-input-field" id="input-keuangan-cabang" formControlName="cabang" [clearButton]="true" #cabang required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -197,7 +197,7 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-nomor-rekening" formControlName="nomorRekening" [clearButton]="true" #nomorRekening required></kendo-textbox>                
+              <kendo-textbox class="content-input-field" id="input-keuangan-nomor-rekening" formControlName="nomorRekening" [clearButton]="true" #nomorRekening required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nomor Rekening tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -210,17 +210,17 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-nama-pemilik-rekening" formControlName="namaPemilikRekening" [clearButton]="true" #namaPemilikRekening required></kendo-textbox>                
+              <kendo-textbox class="content-input-field" id="input-keuangan-nama-pemilik-rekening" formControlName="namaPemilikRekening" [clearButton]="true" #namaPemilikRekening required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
-        
+
       </div>
 
       <div class="profile-keuangan-table">
-        
+
         <div class="profile-content-title">
           <kendo-label>Neraca Keuangan</kendo-label>
         </div>
@@ -253,10 +253,10 @@
               <ng-template kendoGridCellTemplate let-dataItem>
                 <div *ngIf="!dataItem.deletedAt">
                   <span>
-                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)" id="btn-update-neraca">
+                    <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)" id="btn-update-neraca">
                   </span>
                   <span>
-                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)" id="btn-delete-neraca">
+                    <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)" id="btn-delete-neraca">
                   </span>
                 </div>
                 <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
@@ -265,19 +265,19 @@
           </kendo-grid>
 
           <div class="k-actions k-actions-end">
-            <div class="col-2 profile-content-grid-button">
+            <div *ngIf="this.isDisableEditData ? false : true" class="col-2 profile-content-grid-button">
               <button kendoButton *ngIf="!openNeraca" (click)="triggerModal('neraca')" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-neraca">
                 Tambah Neraca
               </button>
             </div>
-          </div> 
-          
+          </div>
+
         </div>
 
       </div>
 
       <div class="profile-keuangan-table">
-        
+
         <div class="profile-content-title">
           <kendo-label>SPT Tahunan</kendo-label>
         </div>
@@ -299,25 +299,25 @@
               <ng-template kendoGridCellTemplate let-dataItem>
                 <div *ngIf="!dataItem.deletedAt">
                   <span>
-                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)" id="btn-update-spt">
+                    <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)" id="btn-update-spt">
                   </span>
                   <span>
-                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)" id="btn-delete-spt">
+                    <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)" id="btn-delete-spt">
                   </span>
                 </div>
-                <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>                
+                <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
               </ng-template>
             </kendo-grid-column>
           </kendo-grid>
 
           <div class="k-actions k-actions-end">
-            <div class="col-2 profile-content-grid-button">
+            <div *ngIf="this.isDisableEditData ? false : true"  class="col-2 profile-content-grid-button">
               <button kendoButton *ngIf="!openSPT" (click)="triggerModal('spt')" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-spt">
                 Tambah SPT Tahunan
               </button>
             </div>
           </div>
-          
+
         </div>
 
       </div>
@@ -325,7 +325,7 @@
       <div class="profile-content-title">
         <kendo-label>Modal</kendo-label>
       </div>
-      
+
       <div class="profile-keuangan-field">
 
         <div class="row bank-field">
@@ -333,8 +333,8 @@
             <kendo-label>Modal Dasar (Sesuai Akta)</kendo-label>
           </div>
           <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">              
-              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
+            <kendo-formfield [formGroup]="formKeuangan">
+              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -347,13 +347,13 @@
           </div>
           <div class="col-9 content-field">
             <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
+              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
-        
+
       </div>
 
       <div class="k-actions k-actions-center">

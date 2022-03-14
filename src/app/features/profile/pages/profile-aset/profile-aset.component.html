@@ -70,25 +70,25 @@
             <ng-template kendoGridCellTemplate let-dataItem>
               <div *ngIf="!dataItem.deletedAt">
                 <span>
-                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update-asset">
+                  <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update-asset">
                 </span>
                 <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.nama)" id="btn-delete-asset">
+                  <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.nama)" id="btn-delete-asset">
                 </span>
-              </div>   
+              </div>
               <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
 
         <div class="k-actions k-actions-end">
-          <div class="col-2 profile-content-grid-button">
+          <div *ngIf="this.isDisableEditData ? false : true" class="col-2 profile-content-grid-button">
             <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
               Tambah Asset
             </button>
           </div>
         </div>
-        
+
 
       </div>
 

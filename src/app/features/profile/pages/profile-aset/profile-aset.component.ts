@@ -30,6 +30,8 @@ export class ProfileAsetComponent implements OnInit {
     tahunPembuatan: ""
   };
 
+  public isDisableEditData = false;
+
   constructor(
     private profileAssetService: ProfileAssetService,
     private eventEmitterService: EventEmitterService,
@@ -40,6 +42,10 @@ export class ProfileAsetComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
+
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
+
   }
 
   public mapData(data: any[]) {
@@ -194,7 +200,6 @@ export class ProfileAsetComponent implements OnInit {
       jumlah: new FormControl(this.data.jumlah, [Validators.required]),
       tahunPembuatan: new FormControl(this.data.tahunPembuatan, [Validators.required])
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.form.disable() : null;
   }
 
   triggerPopUp() {

@@ -79,6 +79,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
     lampiran: ""
   };
 
+  public isDisableEditData = false;
+
   constructor(
     private profileService: ProfileService,
     private eventEmitterService: EventEmitterService,
@@ -88,6 +90,8 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPekerjaan();
+
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   getPekerjaan(){

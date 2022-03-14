@@ -11,7 +11,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Type your message here" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
+              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Type your message here" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nama Alamat tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -94,7 +94,7 @@
               <kendo-formerror>Kode Pos tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
           </div>
-        </div>        
+        </div>
 
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
@@ -120,11 +120,11 @@
 
   <div class="col-10 profile-content-container">
     <div class="profile-content">
-      
+
       <div class="profile-content-title">
         <kendo-label>Alamat</kendo-label>
       </div>
-  
+
       <div>
         <kendo-grid [data]="gridData" class="vms-kendo-grid">
           <kendo-grid-column field="no" title="No.">
@@ -141,10 +141,10 @@
             <ng-template kendoGridCellTemplate let-dataItem>
               <div *ngIf="!dataItem.deletedAt">
                 <span>
-                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
+                  <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
                 </span>
                 <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat)" id="btn-delete">
+                  <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat)" id="btn-delete">
                 </span>
               </div>
               <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
@@ -153,15 +153,15 @@
         </kendo-grid>
 
         <div class="k-actions k-actions-end">
-          <div class="col-2 profile-content-grid-button">
+          <div *ngIf="this.isDisableEditData ? false : true" class="col-2 profile-content-grid-button">
             <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-alamat">
               Tambah Alamat
             </button>
           </div>
         </div>
-  
+
       </div>
-  
+
     </div>
   </div>
 

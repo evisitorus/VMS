@@ -8,12 +8,12 @@
     <div class="profile-content">
       <kendo-label>Riwayat Pekerjaan</kendo-label>
       <br><br>
-  
+
       <div>
         <kendo-grid [data]="gridData" style="height: 240px;">
           <kendo-grid-column title="No." [width]="60">
             <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
-              {{rowIndex + 1}} 
+              {{rowIndex + 1}}
             </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="namaPekerjaan" title="Nama Pekerjaan"></kendo-grid-column>
@@ -41,27 +41,29 @@
               </ng-template>
               <ng-template #active>
                 <span>
-                  <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
+                  <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btn-update">
                 </span>
                 <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btn-delete">
+                  <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btn-delete">
                 </span>
               </ng-template>
             </ng-template>
           </kendo-grid-column>
         </kendo-grid>
         <br>
+        <div *ngIf="this.isDisableEditData ? false : true">
         <button id="addPekerjaan" kendoButton *ngIf="!openedPekerjaan" (click)="openPekerjaan()" icon="k-icon k-i-plus-outline" class="vms-btn-primary button-right">
           Tambah Riwayat Pekerjaan
         </button>
-  
+      </div>
+
         <kendo-dialog title="Tambah Riwayat Pekerjaan" *ngIf="openedPekerjaan" (close)="closePekerjaan()">
             <form class="k-form login-form modal-form" [formGroup]="pekerjaanForm">
               <div>
                 <div class="wrap">
                   <kendo-label class="labelForm">Nama Pekerjaan</kendo-label>
                   <div>
-                    <kendo-textbox class="formField" id="namaPekerjaan" formControlName="namaPekerjaan"></kendo-textbox>                
+                    <kendo-textbox class="formField" id="namaPekerjaan" formControlName="namaPekerjaan"></kendo-textbox>
                     <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.namaPekerjaan.errors?.required">Nama Pekerjaan tidak boleh kosong</kendo-formerror>
                   </div>
                 </div>
@@ -102,7 +104,7 @@
                 </div>
               </div>
           </form>
-  
+
           <kendo-dialog-actions>
             <button id="submitPekerjaan" kendoButton (click)="submit()" [primary]="true" [disabled]="submitDisable">
               {{ buttonText }}
@@ -114,10 +116,10 @@
           </kendo-dialog-actions>
         </kendo-dialog>
       </div>
-  
+
     </div>
   </div>
-  
+
 </div>
 
 <app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message>

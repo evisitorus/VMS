@@ -50,6 +50,8 @@ export class ProfileDokumenComponent implements OnInit {
     lampiran: ""
   };
 
+  public isDisableEditData = false;
+
   constructor(
     private eventEmitterService: EventEmitterService,
     private profileDocumentService: ProfileDocumentService,
@@ -61,6 +63,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   public close(): void {

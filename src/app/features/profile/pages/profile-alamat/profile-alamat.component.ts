@@ -67,6 +67,8 @@ export class ProfileAlamatComponent implements OnInit {
     kodepos: "",
   };
 
+  public isDisableEditData = false;
+
   constructor(
     private eventEmitterService: EventEmitterService,
     private service: ProfileAddressService,
@@ -77,6 +79,7 @@ export class ProfileAlamatComponent implements OnInit {
   ngOnInit(): void {
     this.fetchData();
     this.setForm();
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   public close(): void {

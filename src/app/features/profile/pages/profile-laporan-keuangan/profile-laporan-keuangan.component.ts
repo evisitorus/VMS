@@ -31,7 +31,12 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.fetchDataNeraca();
     this.fetchDataSPT();
     this.fetchDataKeuangan();
+
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
+    this.isDisableEditData === true ? this.formKeuangan.disable() : this.formKeuangan.enable();
   }
+
+  public isDisableEditData = false;
 
   public maxLength = 13;
 
@@ -102,7 +107,6 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       modalDasar: new FormControl(this.dataKeuangan.modalDasar, [Validators.required]),
       modalDitempatkan: new FormControl(this.dataKeuangan.modalDitempatkan, [Validators.required]),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.formKeuangan.disable() : null;
   }
 
   public setFormNeraca(): void {
