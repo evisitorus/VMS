@@ -51,7 +51,6 @@ const items = [
     expanded: "true",
     children: [
       { title: "Informasi Umum", route:"/profile-information", id: "sidebar-profile-information"  },
-      { title: "PIC", route:"/profile-person-in-charge", id: "sidebar-pic"  },
       { title: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
       { title: "Laporan Keuangan", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
       { title: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan", id: "sidebar-riwayat-pekerjaan"  },

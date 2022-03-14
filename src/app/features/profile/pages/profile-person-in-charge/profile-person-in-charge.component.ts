@@ -10,6 +10,7 @@ import {FileRestrictions, SelectEvent} from "@progress/kendo-angular-upload";
 import {environment} from "../../../../../environments/environment";
 import {UserFileInterface} from "../../../../core/interfaces/profile/user-file-interface";
 import { dictionary } from "src/app/dictionary/dictionary";
+import { ProfileInformasiPerusahaanComponent } from "../profile-informasi-perusahaan/profile-informasi-perusahaan.component";
 
 @Component({
   selector: 'app-profile-person-in-charge',
@@ -27,6 +28,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
               private authService: AuthService,
               private fileService: FileService,
               private eventEmitterService: EventEmitterService,
+              private parent: ProfileInformasiPerusahaanComponent,
   ) {
   }
 
@@ -35,10 +37,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
   responseEmail: string = "";
   responseFile: string = "";
   isDisabled: boolean = true;
-  popUpTitle: string = "Informasi";
-  popUpMessage: string = "";
-  redirectOnClosePopUp: boolean = false;
-  popUpID = "";
   person_id = this.authService.getLocalStorage('person_id')!;
   disabledWhenError: boolean = false;
 
@@ -113,10 +111,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   attention() {
-    this.redirectOnClosePopUp = false;
-    this.popUpID = "popup-attention";
-    this.popUpTitle = "Perhatian";
-    this.popUpMessage = dictionary.update_data_notification;
+    this.parent.redirectOnClosePopUp = false;
+    this.parent.popUpID = "popup-attention";
+    this.parent.popUpTitle = "Perhatian";
+    this.parent.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
   }
 
@@ -130,9 +128,9 @@ export class ProfilePersonInChargeComponent implements OnInit {
         () => {
         },
         (error) => {
-          this.popUpMessage = error.error.message;
-          this.redirectOnClosePopUp = false;
-          this.popUpID = "popup-failed-save-upload-file-to-database";
+          this.parent.popUpMessage = error.error.message;
+          this.parent.redirectOnClosePopUp = false;
+          this.parent.popUpID = "popup-failed-save-upload-file-to-database";
           this.triggerPopUp();
         }
       );
@@ -172,18 +170,18 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responseName = response.data.name;
           this.responsePhoneNumber = response.data.phone_number;
           this.responseEmail = response.data.email;
-          this.redirectOnClosePopUp = false;
-          this.popUpTitle = 'Informasi';
-          this.popUpMessage = dictionary.update_data_success;
-          this.popUpID = "popup-update-pic-success";
+          this.parent.redirectOnClosePopUp = false;
+          this.parent.popUpTitle = 'Informasi';
+          this.parent.popUpMessage = dictionary.update_data_success;
+          this.parent.popUpID = "popup-update-pic-success";
           this.triggerPopUp();
           this.setForm();
         },
         (error) => {
           this.changePasswordTextboxEnabled = false;
-          this.redirectOnClosePopUp = false;
-          this.popUpMessage = error.error.message;
-          this.popUpID = "popup-update-pic-failed";
+          this.parent.redirectOnClosePopUp = false;
+          this.parent.popUpMessage = error.error.message;
+          this.parent.popUpID = "popup-update-pic-failed";
           this.triggerPopUp();
           this.setForm();
         }
@@ -191,10 +189,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
       this.changeIsDisabled();
     } else {
       this.changePasswordTextboxEnabled = false;
-      this.redirectOnClosePopUp = false;
-      this.popUpTitle = 'Informasi';
-      this.popUpMessage = 'Mohon lengkapi data PIC'
-      this.popUpID = "popup-please-complete-your-data";
+      this.parent.redirectOnClosePopUp = false;
+      this.parent.popUpTitle = 'Informasi';
+      this.parent.popUpMessage = 'Mohon lengkapi data PIC'
+      this.parent.popUpID = "popup-please-complete-your-data";
       this.triggerPopUp();
     }
   }
@@ -219,10 +217,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
       },
       (error) => {
         this.disabledWhenError = true;
-        this.redirectOnClosePopUp = false;
-        this.popUpTitle = 'Informasi';
-        this.popUpMessage = 'Gagal menampilkan data PIC';
-        this.popUpID = "popup-pic-data-failed-to-load";
+        this.parent.redirectOnClosePopUp = false;
+        this.parent.popUpTitle = 'Informasi';
+        this.parent.popUpMessage = 'Gagal menampilkan data PIC';
+        this.parent.popUpID = "popup-pic-data-failed-to-load";
         this.triggerPopUp();
       }
     )
@@ -241,9 +239,9 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.saveFileIdToUser();
       },
       (err) => {
-        this.popUpMessage = dictionary.invalid_file;
-        this.redirectOnClosePopUp = false;
-        this.popUpID = "popup-failed-to-upload";
+        this.parent.popUpMessage = dictionary.invalid_file;
+        this.parent.redirectOnClosePopUp = false;
+        this.parent.popUpID = "popup-failed-to-upload";
         this.triggerPopUp();
       }
     );
@@ -302,8 +300,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   public open() {
     if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
-      this.popUpMessage = dictionary.invalid_file;
-      this.popUpID = "popup-check-your-file-again"
+      this.parent.popUpMessage = dictionary.invalid_file;
+      this.parent.popUpID = "popup-check-your-file-again"
       this.triggerPopUp();
     } else if (this.formPIC.valid && this.responseFile) {
       this.opened = true;

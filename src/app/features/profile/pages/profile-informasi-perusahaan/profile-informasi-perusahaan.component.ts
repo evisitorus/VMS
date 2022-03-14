@@ -174,26 +174,27 @@ export class ProfileInformasiPerusahaanComponent {
       responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
       responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
       responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu"),
-      responseContactMechanism: this.profileInfoService.getContactMechanism(),
+      // responseContactMechanism: this.profileInfoService.getContactMechanism(),
       responseJenisPenyediaUsaha: this.profileInfoService.getJenisPenyediaUsaha(),
       responseJenisKegiatanUsaha: this.profileInfoService.getJenisKegiatanUsaha(),
       responseJenisVendor: this.profileInfoService.getJenisVendor(),
       responseBidangUsaha: this.profileInfoService.getBidangUsaha(),
       responseTipeVendor: this.profileInfoService.getTipeVendor(),
-      responseProvinces: this.profileInfoService.getProvinces(),
+      // responseProvinces: this.profileInfoService.getProvinces(),
     }).subscribe((response) => {
       this.setResponseVendorData(response.responseVendorData);
       this.setHimpunan(response.responseHimpunan);
       this.setPengampu(response.responsePengampu);
       this.setVendorHimpunan(response.responseVendorHimpunan);
       this.setVendorPengampu(response.responseVendorPengampu);
-      this.setResponseContactMechanism(response.responseContactMechanism);
+      // this.setResponseContactMechanism(response.responseContactMechanism);
       this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
       this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
       this.setJenisVendor(response.responseJenisVendor);
       this.setBidangUsaha(response.responseBidangUsaha);
       this.setTipeVendor(response.responseTipeVendor);
-      this.setProvinces(response.responseProvinces);
+      this.setFormPerusahaan(this.dataPerusahaan);
+      // this.setProvinces(response.responseProvinces);
     });
   }
 
@@ -455,13 +456,6 @@ export class ProfileInformasiPerusahaanComponent {
       bumnPengampu: new FormControl(data.bumnPengampu, Validators.required),
       organisasiHimpunan: new FormControl(data.organisasiHimpunan, []),
       websitePerusahaan: new FormControl(data.web, Validators.required),
-      noTeleponPerusahaan: new FormControl(data.noTelepon, Validators.required),
-      alamatPerusahaan: new FormControl(data.alamat, Validators.required),
-      provinsi: new FormControl(this.selectedProvince, Validators.required),
-      kota: new FormControl(this.selectedKota, Validators.required),
-      kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
-      kelurahan: new FormControl(this.selectedKelurahan, Validators.required),
-      kodePos: new FormControl(this.selectedKodepos, Validators.required),
       emailPerusahaan: new FormControl(this.data.emailPerusahaan, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
     });
   }
@@ -594,13 +588,6 @@ export class ProfileInformasiPerusahaanComponent {
         oragnisasiHimpunan: this.profileInformationFormGroup.value.organisasiHimpunan,
         bumnPengampu: this.profileInformationFormGroup.value.bumnPengampu,
         website: this.profileInformationFormGroup.value.websitePerusahaan,
-        phoneNumber: this.profileInformationFormGroup.value.noTeleponPerusahaan,
-        alamatPerusahaan: this.profileInformationFormGroup.value.alamatPerusahaan,
-        provinsi: this.profileInformationFormGroup.value.provinsi,
-        kota: this.profileInformationFormGroup.value.kota,
-        kecamatan: this.profileInformationFormGroup.value.kecamatan,
-        keluarahan: this.profileInformationFormGroup.value.kelurahan,
-        kodePos: this.profileInformationFormGroup.value.kodePos,
         emailPerusahaan: this.profileInformationFormGroup.value.emailPerusahaan,
         file: fileId
       }
