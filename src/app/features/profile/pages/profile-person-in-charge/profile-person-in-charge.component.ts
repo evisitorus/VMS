@@ -54,7 +54,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
       confirmNewPassword: new FormControl(null),
       fileId: new FormControl(null),
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.formPIC.disable() : null;
   }
 
   public ngAfterViewInit(): void {
@@ -82,6 +81,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
     inputEl.type = inputEl.type === "text" ? "password" : "text";
   }
+
+  public isDisableEditData = false;
 
   public params!: ProfilePICInterface;
   public userFileParam!: UserFileInterface;
@@ -201,6 +202,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
     this.disabledWhenError = true;
     this.setForm();
 

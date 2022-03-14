@@ -70,6 +70,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public filter!: string;
   public selectedBidang!: Item ;
   public selectedBidangId:string = "";
+  public isDisableEditData = false;
 
   constructor(
     private fileService: FileService,
@@ -82,7 +83,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
-
+    localStorage.getItem('isDisableEditData') === 'yes' ? this.isDisableEditData = true :  this.isDisableEditData = false;
   }
 
   public fetchData(): void {
@@ -121,7 +122,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       lastName: new FormControl(this.data.lastName, Validators.required),
       jabatan: new FormControl(this.data.jabatan, Validators.required)
     });
-    localStorage.getItem('disableEditData') === 'yes' ? this.pengurusFormGroup.disable() : null;
+    this.isDisableEditData ? this.pengurusFormGroup.disable() : null;
   }
 
 

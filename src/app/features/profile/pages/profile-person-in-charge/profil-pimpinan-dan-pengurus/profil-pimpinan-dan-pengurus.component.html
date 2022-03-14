@@ -32,20 +32,22 @@
       <ng-template kendoGridCellTemplate let-dataItem>
         <div *ngIf="!dataItem.deletedAt">
           <span>
-            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
+            <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
           </span>
           <span>
-            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
+            <img *ngIf="this.isDisableEditData ? false : true" src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
           </span>
         </div>
         <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
       </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
+  <div *ngIf="this.isDisableEditData ? false : true">
   <button id="addPengurusBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPengurus()" icon="k-icon k-i-plus-outline"
     style="float: right; color:#0193AC;">
     Tambah
   </button>
+</div>
 
   <kendo-dialog id="addPengurusDialog" [title]="popUpTitle" *ngIf="opened" (close)="close()">
     <div class="container">
