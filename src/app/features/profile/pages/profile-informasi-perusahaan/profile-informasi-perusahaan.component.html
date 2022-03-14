@@ -45,7 +45,7 @@
                 </div>
               </ng-template>
             </kendo-panelbar-item>
-            <kendo-panelbar-item title="Data Perusahaan">
+            <kendo-panelbar-item title="Data Perusahaan" [expanded]="true">
               <ng-template kendoPanelBarContent>
                 <form>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
@@ -354,12 +354,6 @@
                                         [value]="selectedKodepos"></kendo-dropdownlist>
                   </div>
                 </form>
-              </ng-template>
-            </kendo-panelbar-item>
-            <kendo-panelbar-item title="Data Pegawai">
-              <ng-template kendoPanelBarContent>
-                <!-- data pegawai -->
-                <app-profil-karyawan></app-profil-karyawan>
               </ng-template>
             </kendo-panelbar-item>
           </kendo-panelbar>
