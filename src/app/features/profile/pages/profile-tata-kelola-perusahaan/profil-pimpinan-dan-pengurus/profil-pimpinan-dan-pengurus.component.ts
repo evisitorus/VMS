@@ -6,7 +6,7 @@ import { FileService } from 'src/app/core/services/file.service';
 import { ProfilePimpinanDanPengurusInterface } from 'src/app/core/interfaces/profile/profile-pimpinan-dan-pengurus.interface';
 import { PimpinanDanPengurusService } from 'src/app/core/services/profile/profile-pic/pimpinan-dan-pengurus.service';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { ProfilePersonInChargeComponent } from '../profile-person-in-charge.component';
+import { ProfilePersonInChargeComponent } from '../../profile-person-in-charge/profile-person-in-charge.component';
 
 interface Item {
   name: string;

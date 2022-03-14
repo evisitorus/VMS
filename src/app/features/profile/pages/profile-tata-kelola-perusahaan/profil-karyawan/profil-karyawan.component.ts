@@ -7,7 +7,7 @@ import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyaw
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
 import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan.component';
+import { ProfileInformasiPerusahaanComponent } from '../../profile-informasi-perusahaan/profile-informasi-perusahaan.component';
 import { dictionary } from 'src/app/dictionary/dictionary';
 
 interface Item {
