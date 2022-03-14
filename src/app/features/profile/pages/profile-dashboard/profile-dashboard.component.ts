@@ -32,6 +32,34 @@ export class ProfileDashboardComponent implements OnInit {
     verifiedDate: "-"
   }
 
+  public verification: any = {
+    informasi_umum: {
+      status: false,
+      text: "Belum Diisi",
+      submission_status: "Belum Diisi"
+    },
+    tata_kelola_perusahaan: {
+      status: false,
+      text: "Belum Diisi",
+      submission_status: "Belum Diisi"
+    },
+    aspek_finansial: {
+      status: false,
+      text: "Belum Diisi",
+      submission_status: "Belum Diisi"
+    },
+    aspek_legal: {
+      status: false,
+      text: "Belum Diisi",
+      submission_status: "Belum Diisi"
+    },
+    riwayat_pekerjaan: {
+      status: false,
+      text: "Belum Diisi",
+      submission_status: "Belum Diisi"
+    }
+  };
+
   ngOnInit(): void {
     this.getDataTenders();
     this.getVerificationStatus();
@@ -81,9 +109,10 @@ export class ProfileDashboardComponent implements OnInit {
     this.profileService.getVerificationData().subscribe(
       (resp) => {
         console.debug(resp.data.kelengkapan);
+        this.verification = resp.data.kelengkapan;
       },
       () => {
-
+        this.showNotification("error", "Gagal mendapatkan data verifikasi kelengkapan");
       }
     );
   }

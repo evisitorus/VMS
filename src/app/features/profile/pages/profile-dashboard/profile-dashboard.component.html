@@ -103,11 +103,11 @@
             Informasi Umum
           </div>
           <div class="col-md-4 status-checklist">
-            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="true" #informasiUmum kendoCheckBox/>
-            Completed
+            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="verification.informasi_umum.status" #informasiUmum kendoCheckBox/>
+            {{verification.informasi_umum.text}}
           </div>
           <div class="col-md-4 status-date">
-            Terverifikasi pada 10 Maret 2022
+            {{verification.tata_kelola_perusahaan.submission_status}}
           </div>
         </div>
 
@@ -116,11 +116,11 @@
             Tata Kelola Perusahaan
           </div>
           <div class="col-md-4 status-checklist">
-            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="true" #informasiUmum kendoCheckBox/>
-            Completed
+            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="verification.tata_kelola_perusahaan.status" #informasiUmum kendoCheckBox/>
+            {{verification.tata_kelola_perusahaan.text}}
           </div>
           <div class="col-md-4 status-date">
-            Terverifikasi pada 10 Maret 2022
+            {{verification.tata_kelola_perusahaan.submission_status}}
           </div>
         </div>
 
@@ -129,11 +129,11 @@
             Aspek Finansial
           </div>
           <div class="col-md-4 status-checklist">
-            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="true" #informasiUmum kendoCheckBox/>
-            Completed
+            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="verification.aspek_finansial.status" #informasiUmum kendoCheckBox/>
+            {{verification.aspek_finansial.text}}
           </div>
           <div class="col-md-4 status-date">
-            Terverifikasi pada 10 Maret 2022
+            {{verification.aspek_finansial.submission_status}}
           </div>
         </div>
 
@@ -142,11 +142,11 @@
             Aspek Legal
           </div>
           <div class="col-md-4 status-checklist">
-            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="true" #informasiUmum kendoCheckBox/>
-            Completed
+            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="verification.aspek_legal.status" #informasiUmum kendoCheckBox/>
+            {{verification.aspek_legal.text}}
           </div>
           <div class="col-md-4 status-date">
-            Terverifikasi pada 10 Maret 2022
+            {{verification.aspek_legal.submission_status}}
           </div>
         </div>
 
@@ -155,11 +155,11 @@
             Riwayat Pekerjaan
           </div>
           <div class="col-md-4 status-checklist">
-            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="true" #informasiUmum kendoCheckBox/>
-            Completed
+            <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="verification.riwayat_pekerjaan.status" #informasiUmum kendoCheckBox/>
+            {{verification.riwayat_pekerjaan.text}}
           </div>
           <div class="col-md-4 status-date">
-            Terverifikasi pada 10 Maret 2022
+            {{verification.riwayat_pekerjaan.submission_status}}
           </div>
         </div>
 
