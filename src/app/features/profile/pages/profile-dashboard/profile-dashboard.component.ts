@@ -77,20 +77,6 @@ export class ProfileDashboardComponent implements OnInit {
       (error) => {
       }
     );
-
-    this.cekStatusVendor();
-  }
-
-  public cekStatusVendor() {
-    this.profileInfoService.cekStatusVendor().subscribe(
-      (resp) => {
-        if (resp.data.is_verifying) {
-          localStorage.setItem('disableEditData', 'yes');
-        }
-      },
-      (error) => {
-      }
-    );
   }
 
 }

@@ -664,20 +664,4 @@ export class ProfileInformasiPerusahaanComponent {
       this.profileInformationFormGroup.controls['nomorIndukBerusaha'].disable();
     }
   }
-
-  public cekStatusVendor() {
-    this.profileInfoService.cekStatusVendor().subscribe(
-      (resp) => {
-        if (resp.data.is_verifying) {
-          this.profileInformationFormGroup.disable();
-        }
-      },
-      (error) => {
-        this.popUpMessage = dictionary.incomplete_data_logo;
-        this.redirectOnClosePopUp = false;
-        this.popUpID = "popup-failed-save-upload-file-to-database";
-        this.triggerPopUp();
-      }
-    );
-  }
 }

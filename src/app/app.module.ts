@@ -26,6 +26,7 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from './layouts/vms-loader/http-interceptor';
 import { VmsLoader } from './layouts/vms-loader/vms-loader.component';
+import { StatusVendorComponent } from './features/status-vendor/status-vendor.component';
 
 
 
@@ -39,7 +40,8 @@ import { VmsLoader } from './layouts/vms-loader/vms-loader.component';
     FooterComponent,
     NavbarComponent,
     TentangKamiComponent,
-    VmsLoader
+    VmsLoader,
+    StatusVendorComponent
   ],
   imports: [
     BrowserModule,
