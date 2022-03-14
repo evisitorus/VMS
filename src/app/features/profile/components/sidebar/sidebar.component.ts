@@ -50,8 +50,8 @@ const items = [
     title: "Kelola Akun",
     expanded: "true",
     children: [
-      { title: "Profil Perusahaan", route:"/profile-information", id: "sidebar-profile-information"  },
-      { title: "PIC", route:"/profile-person-in-charge", id: "sidebar-pic"  },
+      { title: "Informasi Umum", route:"/profile-information", id: "sidebar-profile-information"  },
+      { title: "Tata Kelola Perusahaan", route:"/profile-tata-kelola-perusahaan", id: "sidebar-tata-kelola"  },
       { title: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
       { title: "Alamat", route:"/profile-alamat", id: "sidebar-alamat"  },
       { title: "Laporan Keuangan", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
