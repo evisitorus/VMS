@@ -50,6 +50,9 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
+  public selectedNpwpFile!: Array<any>;
+  public uploadedNpwpContentUrl!: string;
+  public uploadedNpwpId!: string;
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "jpg", "png", "jpeg"],
@@ -163,7 +166,10 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       lastName: this.pengurusFormGroup.value.lastName,
       jabatan:this.pengurusFormGroup.value.jabatan,
       file: file_id,
-      kartuIdentitas: this.uploadedFileContentUrl
+      kartuIdentitas: this.uploadedFileContentUrl,
+      npwp: this.pengurusFormGroup.value.npwp,
+      kartuNpwp: this.uploadedNpwpContentUrl,
+      fileNpwp: this.uploadedNpwpId
     };
     this.pimpinanDanPengurusService.addProfilPimpinanDanPengurus(params).subscribe(
       () => {
@@ -259,7 +265,10 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       lastName: this.pengurusFormGroup.value.lastName,
       jabatan:this.pengurusFormGroup.value.jabatan,
       file: file_id,
-      kartuIdentitas: this.uploadedFileContentUrl
+      kartuIdentitas: this.uploadedFileContentUrl,
+      npwp: this.pengurusFormGroup.value.npwp,
+      kartuNpwp: this.uploadedNpwpContentUrl,
+      fileNpwp: this.uploadedNpwpId
     };
     //send pengurus ID and sdm relationship ID
     this.pimpinanDanPengurusService.update(params, this.id, this.pengurusId).subscribe(

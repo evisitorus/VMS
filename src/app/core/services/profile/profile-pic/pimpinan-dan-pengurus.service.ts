@@ -29,6 +29,9 @@ export class PimpinanDanPengurusService {
         jabatan: params.jabatan,
         kartuIdentitas: params.kartuIdentitas,
         file_id: params.file,
+        npwp: params.npwp,
+        kartuNpwp: params.kartuNpwp,
+        file_id_npwp: params.fileNpwp
       },
       options: {
         params: {
