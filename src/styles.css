@@ -133,6 +133,16 @@ label{
 }
 /* --- LABEL --- */
 
+/* --- PANEL BAR --- */
+.vms-panelbar > kendo-panelbar-item  .k-link ,.vms-panelbar > kendo-panelbar-item  .k-link.k-state-focused, .vms-panelbar  > kendo-panelbar-item >  .k-link.k-state-selected{
+    background-color: #0193AC !important;
+    border-color: #0193AC !important;
+    color: white !important;
+}
+.k-panelbar-content {
+    padding: 1em;
+}
+/* --- END PANEL BAR --- */
 
 /* --- SIDEBAR --- */
 .k-grid-header, .k-window-titlebar, .k-dialog-titlebar{

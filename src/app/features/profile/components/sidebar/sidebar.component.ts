@@ -52,9 +52,8 @@ const items = [
     children: [
       { title: "Informasi Umum", route:"/profile-information", id: "sidebar-profile-information"  },
       { title: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
-      { title: "Laporan Keuangan", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
+      { title: "Aspek Finansial", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
       { title: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan", id: "sidebar-riwayat-pekerjaan"  },
-      { title: "Asset", route:"/profile-aset", id: "sidebar-aset"  },
       { title: "Verifikasi Kelengkapan", route:"/profile-verification", id: "sidebar-verification"  },
       { title: " ", id: ""}
     ]

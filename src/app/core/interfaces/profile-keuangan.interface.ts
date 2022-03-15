@@ -22,3 +22,15 @@ export interface ProfileKeuanganInterface {
     modalDasar: number,
     modalDitempatkan: number
 }
+
+export interface ProfileKeuanganBankInterface {
+    namaBank: string,
+    cabang: string,
+    nomorRekening: string,
+    namaPemilikRekening: string,
+}
+
+export interface ProfileKeuanganModalDasarInterface {
+    modalDasar: number,
+    modalDitempatkan: number
+}

@@ -1,5 +1,6 @@
 export interface ProfileAssetInterface {
     namaAsset: string,
     jumlah: number,
-    tahunPembuatan: string
+    tahunPembuatan: string,
+    estimasiNilaiAsset: number,
 }
