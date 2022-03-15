@@ -1,34 +1,23 @@
 <div>
   <kendo-label class="mb-3">Pegawai</kendo-label>
-  <div class="container mb-3">
-    <div class="row k-hstack">
-      <form>
-        <div class="col-5">
-          <div class="row">
-            <div class="col k-hstack">
-              <span>Jumlah Pegawai Domestik</span>
-              <kendo-numerictextbox id="pegawaiDomestikInput" class="col-md"
-              placeholder="Jumlah pegawai domestik" [spinners]="false" format="d" #pegawaidomestik></kendo-numerictextbox>
-            </div>
-          </div>
-        </div>
-        <div class="col-5">
-          <div class="col k-hstack">
-            <span>Jumlah Pegawai Asing</span>
-            <kendo-numerictextbox id="pegawaiAsingInput" class="col-md"
-            placeholder="Jumlah pegawai asing" [spinners]="false" format="d" #pegawaiasing></kendo-numerictextbox>
-          </div>
-        </div>
-      
-      <div class="col-2">
-        <button id="editJumlahPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()" icon="k-icon k-i-edit"
-        style="float: right; color:#0193AC;"></button>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-6 k-hstack align-items-center">
+        <kendo-label class="font-weight-bold">Jumlah Pegawai Domestik</kendo-label>
+        <kendo-numerictextbox id="pegawaiDomestikInput" class="p-3" [spinners]="false" format="d" [min]="0" #pegawaidomestik></kendo-numerictextbox>
       </div>
-    </form>
+      <div class="col-5 k-hstack align-items-center">
+        <kendo-label class="font-weight-bold">Jumlah Pegawai Asing</kendo-label>
+        <kendo-numerictextbox id="pegawaiAsingInput" class="p-3" [spinners]="false" format="d" [min]="0" #pegawaiasing></kendo-numerictextbox>
+      </div>
+      <div class="col-1">
+        <button id="editJumlahPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()"
+        icon="k-icon k-i-edit" style="float: right; color:#0193AC;"></button>
+      </div>
     </div>
-
   </div>
-  <kendo-grid [pageSize]="5" [data]="gridViewPegawai" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
+  <kendo-grid [pageSize]="5" [data]="gridViewPegawai" [pageable]="true" [resizable]="true"
+    (pageChange)="pageChange($event)">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
         {{rowIndex + 1 + skip}}
@@ -61,17 +50,20 @@
     </kendo-grid-column>
     <kendo-grid-column title="Resume">
       <ng-template kendoGridCellTemplate let-dataItem>
-        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath
+          }}</a>
       </ng-template>
     </kendo-grid-column>
     <kendo-grid-command-column field="action" title="Action">
       <ng-template kendoGridCellTemplate let-dataItem>
         <div *ngIf="!dataItem.deletedAt">
           <span>
-            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update" (click)="updateForm(dataItem)">
+            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update"
+              (click)="updateForm(dataItem)">
           </span>
           <span>
-            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
+            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete"
+              (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
           </span>
         </div>
         <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
@@ -79,8 +71,8 @@
     </kendo-grid-command-column>
   </kendo-grid>
   <br>
-  <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()" icon="k-icon k-i-plus-outline"
-    style="float: right; color:#0193AC;">
+  <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()"
+    icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
     Tambah Pegawai
   </button>
 
@@ -91,11 +83,13 @@
           <div class="row">
             <kendo-label class="col">NIK</kendo-label>
             <div class="col k-vstack">
-              <kendo-numerictextbox id="nikPegawaiInput" formControlName="nik" class="col-md"
-              placeholder="NIK" [maxlength]="16" [spinners]="false" format="d" #nik>
-            </kendo-numerictextbox>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan harus diisi</kendo-formerror>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.max">NIK Karyawan maksimal 16 digit</kendo-formerror>
+              <kendo-numerictextbox id="nikPegawaiInput" formControlName="nik" class="col-md" placeholder="NIK"
+                [maxlength]="16" [spinners]="false" format="d" #nik>
+              </kendo-numerictextbox>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan
+                harus diisi</kendo-formerror>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.max">NIK Karyawan
+                maksimal 16 digit</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -103,10 +97,11 @@
           <div class="row">
             <kendo-label class="col">Nama Depan</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="firstName" class="col-md" formControlName="firstName"
-              placeholder="Nama Depan" #namaPegawai [clearButton]="true">
-            </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+              <kendo-textbox id="firstName" class="col-md" formControlName="firstName" placeholder="Nama Depan"
+                #namaPegawai [clearButton]="true">
+              </kendo-textbox>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">Nama
+                Karyawan harus diisi</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -114,10 +109,11 @@
           <div class="row">
             <kendo-label class="col">Nama Belakang</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="lastName" class="col-md" formControlName="lastName"
-              placeholder="Nama Belakang" #namaPegawai [clearButton]="true">
-            </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">Nama Karyawan harus diisi</kendo-formerror>
+              <kendo-textbox id="lastName" class="col-md" formControlName="lastName" placeholder="Nama Belakang"
+                #namaPegawai [clearButton]="true">
+              </kendo-textbox>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">Nama
+                Karyawan harus diisi</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -126,10 +122,11 @@
             <kendo-label class="col">Tipe Karyawan</kendo-label>
             <div class="col k-vstack">
               <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md"
-              [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id"
-              [data]="tipeSource" #tipeKaryawan>
-            </kendo-dropdownlist>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.tipeKaryawan.errors?.required">Mohon pilih salah satu opsi tipe karyawan</kendo-formerror>
+                [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id"
+                [data]="tipeSource" #tipeKaryawan>
+              </kendo-dropdownlist>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.tipeKaryawan.errors?.required">
+                Mohon pilih salah satu opsi tipe karyawan</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -137,9 +134,10 @@
           <div class="row">
             <kendo-label class="col">Jabatan</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Jabatan"
-              [maxlength]="25" [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
-              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.jabatan.errors?.required">Jabatan tidak boleh kosong</kendo-formerror>
+              <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Jabatan" [maxlength]="25"
+                [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.jabatan.errors?.required">Jabatan
+                tidak boleh kosong</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -147,19 +145,23 @@
           <div class="row">
             <kendo-label class="col">Bidang Pekerjaan</kendo-label>
             <div class="col k-vstack">
-              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col" textField="name" valueField="@id" [data]="bidangTemp" (filterChange)="handleFilter($event)" (valueChange)="valueChange($event)" (selectionChange)="selectionChange($event)" #bidangPekerjaan [(ngModel)]="selectedBidang">
-              <ng-template kendoDropDownListNoDataTemplate>
-                <div>
-                  Data bidang pekerjaan tidak ditemukan
-                  <ng-container *ngIf="filter">Apakah anda mau menambahkan - "{{ filter }}" ?</ng-container>
-                  <br />
-                  <button *ngIf="filter" class="k-button" (click)="addNewBidang()">
-                    Tambah bidang baru
-                  </button>
-                </div>
-              </ng-template>
-            </kendo-dropdownlist>
-            <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">Bidang Pekerjaan tidak boleh kosong</kendo-formerror>
+              <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col"
+                textField="name" valueField="@id" [data]="bidangTemp" (filterChange)="handleFilter($event)"
+                (valueChange)="valueChange($event)" (selectionChange)="selectionChange($event)" #bidangPekerjaan
+                [(ngModel)]="selectedBidang">
+                <ng-template kendoDropDownListNoDataTemplate>
+                  <div>
+                    Data bidang pekerjaan tidak ditemukan
+                    <ng-container *ngIf="filter">Apakah anda mau menambahkan - "{{ filter }}" ?</ng-container>
+                    <br />
+                    <button *ngIf="filter" class="k-button" (click)="addNewBidang()">
+                      Tambah bidang baru
+                    </button>
+                  </div>
+                </ng-template>
+              </kendo-dropdownlist>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">
+                Bidang Pekerjaan tidak boleh kosong</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -167,13 +169,11 @@
           <div class="row">
             <kendo-label class="col">Resume</kendo-label>
             <div class="col">
-              <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
-                <kendo-fileselect-messages
-                dropFilesHere="Tidak ada file terpilih"
-                select="Pilih file"
-                invalidFileExtension="Ekstensi file harus berformat pdf, doc, docx"
-                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
-                >
+              <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions"
+                [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+                <kendo-fileselect-messages dropFilesHere="Tidak ada file terpilih" select="Pilih file"
+                  invalidFileExtension="Ekstensi file harus berformat pdf, doc, docx"
+                  invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB">
                 </kendo-fileselect-messages>
               </kendo-fileselect>
               <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
