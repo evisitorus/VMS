@@ -53,6 +53,9 @@ export class ProfilKaryawanComponent implements OnInit {
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
 
+  public disableEditPegawai = true;
+  public editButtonVisible = true;
+
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "doc", "docx"],
     maxFileSize: 2097152 //2 MB
