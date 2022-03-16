@@ -9,6 +9,7 @@ import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileTataKelolaPerusahaanComponent } from '../profile-tata-kelola-perusahaan.component';
+import { ProfileInformationService as VendorInformationService} from 'src/app/core/services/profile-information.service';
 
 interface Item {
   name: string;
@@ -85,6 +86,7 @@ export class ProfilKaryawanComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
+    private vendorInformationService: VendorInformationService,
     private dialogService: DialogService,
     private parent: ProfileTataKelolaPerusahaanComponent
   ) {
@@ -98,6 +100,16 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public fetchData(): void {
     this.setForm();
+
+    this.vendorInformationService.getVendorData().subscribe(
+      (resp) => {
+        this.jumlahPegawai.domestik = resp.jumlahKaryawanDomestik;
+        this.jumlahPegawai.asing = resp.jumlahKaryawanAsing;
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
     this.profileInformationService.getTipeKaryawan().subscribe(
       (resp) => {
         this.tipeSource = resp['hydra:member'];
@@ -427,10 +439,11 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.updateJumlahKaryawan(params).subscribe(
       () => {
-        this.parent.popUpMessage = dictionary.save_data_success;
+        this.parent.popUpMessage = "Berhasil update jumlah pegawai";
         this.parent.triggerPopUp();
         this.fetchData();
-        window.location.reload();
+        this.close();
+        // window.location.reload();
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
