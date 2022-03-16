@@ -1,4 +1,4 @@
-<div>
+<div class="k-vstack">
   <kendo-label class="mb-3">Pegawai</kendo-label>
   <div class="container" style="padding:0%;">
     <div class="row align-items-center box">
@@ -19,6 +19,12 @@
         icon="k-icon k-i-check" class="button-layout" ></button>
       </div>
     </div>
+  </div>
+  <div class="mb-3">
+    <button id="addPegawaiBtn" class="button-layout" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()"
+    icon="k-icon k-i-plus-outline">
+    Tambah Pegawai
+    </button>
   </div>
   <kendo-grid [pageSize]="5" [data]="gridViewPegawai" [pageable]="true" [resizable]="true"
     (pageChange)="pageChange($event)">
@@ -75,10 +81,6 @@
     </kendo-grid-command-column>
   </kendo-grid>
   <br>
-  <button id="addPegawaiBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPegawai()"
-    icon="k-icon k-i-plus-outline" style="float: right; color:#0193AC;">
-    Tambah Pegawai
-  </button>
 
   <kendo-dialog id="addPegawaiDialog" title="Tambah Pegawai" *ngIf="opened" (close)="close()">
     <div class="container">
