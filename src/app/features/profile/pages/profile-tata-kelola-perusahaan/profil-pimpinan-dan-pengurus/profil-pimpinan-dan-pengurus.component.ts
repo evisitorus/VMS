@@ -133,7 +133,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
 
   public submitProfilPimpinanDanPengurus(): void {
-    if( this.uploadedFileContentUrl === null || this.selectedFile === null){
+    if( this.uploadedFileContentUrl === null || this.selectedFile === null || this.uploadedNpwpContentUrl === null || this.selectedNpwpFile === null ){
       this.popUpID = "popup-wrong-file";
       this.parent.popUpMessage = "Periksa kembali file Anda";
       this.parent.triggerPopUp();
@@ -160,6 +160,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pimpinan";
     let file_id = this.extractNumber(this.uploadedFileId);
+    let npwp_id = this.extractNumber(this.uploadedNpwpId)
     let params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
@@ -167,9 +168,9 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       jabatan:this.pengurusFormGroup.value.jabatan,
       file: file_id,
       kartuIdentitas: this.uploadedFileContentUrl,
-      npwp: this.pengurusFormGroup.value.npwp,
+      npwp: this.pengurusFormGroup.value.npwp.toString(),
       kartuNpwp: this.uploadedNpwpContentUrl,
-      fileNpwp: this.uploadedNpwpId
+      fileNpwp: npwp_id
     };
     this.pimpinanDanPengurusService.addProfilPimpinanDanPengurus(params).subscribe(
       () => {
@@ -200,6 +201,21 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"]; //vendor :resume_id
+
+      },
+      (error) => {
+        this.popUpID = "popup-upload-file-failed";
+        this.parent.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.parent.triggerPopUp();
+      }
+    );
+  }
+
+  public uploadNpwp(): void {
+    this.fileService.upload(this.selectedNpwpFile[0]).subscribe(
+      (res) => {
+        this.uploadedNpwpContentUrl = res.contentUrl; // file url
+        this.uploadedNpwpId = res["@id"]; //vendor :resume_id
 
       },
       (error) => {
@@ -266,7 +282,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       jabatan:this.pengurusFormGroup.value.jabatan,
       file: file_id,
       kartuIdentitas: this.uploadedFileContentUrl,
-      npwp: this.pengurusFormGroup.value.npwp,
+      npwp: this.pengurusFormGroup.value.npwp.toString(),
       kartuNpwp: this.uploadedNpwpContentUrl,
       fileNpwp: this.uploadedNpwpId
     };
