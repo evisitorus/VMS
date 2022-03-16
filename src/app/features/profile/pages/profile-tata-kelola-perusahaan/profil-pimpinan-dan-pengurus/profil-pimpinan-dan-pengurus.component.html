@@ -1,7 +1,12 @@
 <div class="profile-content-title">
   <kendo-label>Pimpinan dan Pengurus Perusahaan</kendo-label>
 </div>
-<div>
+<div class="k-vstack">
+  <div class="my-3">
+    <button id="addPengurusBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPengurus()" icon="k-icon k-i-plus-outline" class="button-layout">
+    Tambah
+  </button>
+  </div>
   <kendo-grid [pageSize]="5" [skip]="skip" [data]="gridViewPengurus" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
@@ -52,10 +57,6 @@
       </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
-  <button id="addPengurusBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPengurus()" icon="k-icon k-i-plus-outline"
-    style="float: right; color:#0193AC;">
-    Tambah
-  </button>
 
   <kendo-dialog id="addPengurusDialog" [title]="popUpTitle" *ngIf="opened" (close)="close()">
     <div class="container">
