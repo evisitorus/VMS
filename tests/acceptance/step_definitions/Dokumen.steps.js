@@ -14,8 +14,8 @@ Given('The Vendor must click {string} menu where found on {string} of {string}',
 Given('The Vendor must click {string} Tab', (sidebar) => {
     switch (sidebar) {
         case "Dokumen":
-            I.waitForElement('#k-panelbar-0-item-sidebar-dokumen');
-            I.click('#k-panelbar-0-item-sidebar-dokumen');
+            I.waitForElement('#k-panelbar-1-item-sidebar-dokumen');
+            I.click('#k-panelbar-1-item-sidebar-dokumen');
             break;
         case "Profil Perusahaan":
             I.waitForElement('#k-panelbar-0-item-sidebar-profile-information');
