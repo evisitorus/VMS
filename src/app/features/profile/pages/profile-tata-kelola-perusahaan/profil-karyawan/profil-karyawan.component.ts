@@ -421,8 +421,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public updateJumlahPegawai(){
     let params = {
-      jumlahKaryawanDomestik: this.jumlahPegawai.domestik.toString(),
-      jumlahKaryawanAsing: this.jumlahPegawai.asing.toString()
+      jumlahKaryawanDomestik: this.jumlahPegawai.domestik,
+      jumlahKaryawanAsing: this.jumlahPegawai.asing
     };
 
     this.profileInformationService.updateJumlahKaryawan(params).subscribe(
