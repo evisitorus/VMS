@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JumlahPegawaiInterface } from 'src/app/core/interfaces/profile/jumlah-pegawai-interface';
 import { ApiInterface } from '../../../interfaces/api-interface';
 import { ProfilePimpinanDanPengurusInterface } from '../../../interfaces/profile/profile-pimpinan-dan-pengurus.interface';
 import { ApiRouteMethods, ApiRoutes } from '../../api/api-routes';
@@ -87,26 +86,6 @@ export class PimpinanDanPengurusService {
       }
     };
     return this.apiService.sendRequest(api_update_pengurus);
-  }
-
-  public updateJumlahKaryawan(params: JumlahPegawaiInterface): Observable<any> {
-    let api_update_jumlah_karyawan: ApiInterface = {
-      method: ApiRouteMethods.put,
-      url: ApiRoutes.api_vendor_route,
-      body: {
-        jumlahKaryawanDomestik: params.jumlahKaryawanDomestik,
-        jumlahKaryawanAsing: params.jumlahKaryawanAsing
-      },
-      options: {
-        params: {
-          id: (this.authService.getLocalStorage("vendor_id")!)
-        },
-        headers: {
-          Authorization: this.token
-        }
-      }
-    };
-    return this.apiService.sendRequest(api_update_jumlah_karyawan);
   }
 
   public delete(id: string): Observable<any> {

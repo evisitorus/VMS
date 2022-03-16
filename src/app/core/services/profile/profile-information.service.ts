@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiInterface } from '../../interfaces/api-interface';
 import { ProfileKaryawanInterface } from '../../interfaces/profile-karyawan.interface';
+import { JumlahPegawaiInterface } from '../../interfaces/profile/jumlah-pegawai-interface';
 import { ApiRouteMethods, ApiRoutes } from '../api/api-routes';
 import { ApiService } from '../api/api.service';
 import { AuthService } from '../auth.service';
@@ -126,6 +127,27 @@ export class ProfileInformationService {
       }
     };
     return this.apiService.sendRequest(api_update_pegawai);
+  }
+
+  
+  public updateJumlahKaryawan(params: JumlahPegawaiInterface): Observable<any> {
+    let api_update_jumlah_karyawan: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_vendor_route,
+      body: {
+        jumlahKaryawanDomestik: params.jumlahKaryawanDomestik,
+        jumlahKaryawanAsing: params.jumlahKaryawanAsing
+      },
+      options: {
+        params: {
+          id: (this.authService.getLocalStorage("vendor_id")!)
+        },
+        headers: {
+          Authorization: this.token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_update_jumlah_karyawan);
   }
 
   public delete(id: string): Observable<any> {
