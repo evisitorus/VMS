@@ -160,7 +160,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pimpinan";
     let file_id = this.extractNumber(this.uploadedFileId);
-    let npwp_id = this.extractNumber(this.uploadedNpwpId)
+    let npwp_id = this.extractNumber(this.uploadedNpwpId);
     let params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
@@ -272,21 +272,18 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   }
 
   public update(): void {
-    let file_id = "";
-    if(this.uploadedFileId){
-      file_id = this.extractNumber(this.uploadedFileId);
-    }
     let params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
       lastName: this.pengurusFormGroup.value.lastName,
       jabatan:this.pengurusFormGroup.value.jabatan,
-      file: file_id,
+      file: this.uploadedFileId ? this.extractNumber(this.uploadedFileId) : "",
       kartuIdentitas: this.uploadedFileContentUrl,
       npwp: this.pengurusFormGroup.value.npwp.toString(),
       kartuNpwp: this.uploadedNpwpContentUrl,
-      fileNpwp: this.uploadedNpwpId
+      fileNpwp: this.uploadedNpwpId ? this.extractNumber(this.uploadedNpwpId) : ""
     };
+    
     //send pengurus ID and sdm relationship ID
     this.pimpinanDanPengurusService.update(params, this.id, this.pengurusId).subscribe(
       () => {

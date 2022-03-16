@@ -71,9 +71,15 @@ export class PimpinanDanPengurusService {
         jabatan: params.jabatan,
         kartuIdentitas: params.kartuIdentitas,
         file_id: params.file,
-        pegawai_id: pegawai_id
+        pegawai_id: pegawai_id,
+        npwp: params.npwp,
+        kartuNpwp: params.kartuNpwp,
+        file_id_npwp: params.fileNpwp
       },
       options: {
+        params: {
+          id: (this.authService.getLocalStorage("vendor_id")!)
+        },
         headers: {
           Authorization: this.token
         }
