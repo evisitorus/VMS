@@ -124,7 +124,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public setForm(): void {
     this.pengurusFormGroup = new FormGroup({
       nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null, Validators.required),
-      npwp: new FormControl(this.data.npwp ? parseInt(this.data.npwpw) : null, Validators.required),
+      npwp: new FormControl(this.data.npwp ? parseInt(this.data.npwp) : null, Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
       jabatan: new FormControl(this.data.jabatan, Validators.required)
@@ -252,6 +252,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.data.lastName = data.fromParty.lastName;
     this.data.jabatan = data.jabatan;
     this.data.kartuIdentitas = data.kartuIdentitas;
+    this.data.npwp = data.npwp;
 
     this.isNewData = false;
 
