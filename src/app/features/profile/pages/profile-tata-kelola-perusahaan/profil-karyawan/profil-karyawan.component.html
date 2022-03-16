@@ -5,15 +5,17 @@
       <div class="col-6 k-hstack align-items-center">
         <kendo-label class="font-weight-bold">Jumlah Pegawai Domestik</kendo-label>
         <kendo-numerictextbox id="pegawaiDomestikInput" class="p-3" [spinners]="false" format="d" [min]="0" [disabled]="disableEditPegawai" #pegawaidomestik></kendo-numerictextbox>
+        <span>Orang</span>
       </div>
       <div class="col-5 k-hstack align-items-center">
         <kendo-label class="font-weight-bold">Jumlah Pegawai Asing</kendo-label>
         <kendo-numerictextbox id="pegawaiAsingInput" class="p-3" [spinners]="false" format="d" [min]="0" [disabled]="disableEditPegawai" #pegawaiasing></kendo-numerictextbox>
+        <span>Orang</span>
       </div>
       <div class="col-1">
-        <button id="editJumlahPegawaiBtn" class="button-layout" kendoButton look="flat" *ngIf="editButtonVisible" (click)="addPegawai()"
+        <button id="editJumlahPegawaiBtn" class="button-layout" kendoButton look="flat" *ngIf="editButtonVisible" (click)="editJumlahPegawai()"
         icon="k-icon k-i-edit"></button>
-        <button id="submitJumlahPegawaiBtn" kendoButton look="flat" *ngIf="!editButtonVisible" (click)="addPegawai()"
+        <button id="submitJumlahPegawaiBtn" kendoButton look="flat" *ngIf="!editButtonVisible" (click)="submitJumlahPegawai()"
         icon="k-icon k-i-check" class="button-layout" ></button>
       </div>
     </div>

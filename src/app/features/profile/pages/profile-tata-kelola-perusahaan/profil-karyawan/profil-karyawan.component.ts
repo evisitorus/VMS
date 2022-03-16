@@ -403,4 +403,14 @@ export class ProfilKaryawanComponent implements OnInit {
     this.skip = event.skip;
     this.fetchData();
   }
+
+  public editJumlahPegawai(){
+    this.disableEditPegawai = false;
+    this.editButtonVisible = false;
+  }
+
+  public submitJumlahPegawai(){
+    this.disableEditPegawai = true;
+    this.editButtonVisible = true;
+  }
 }
