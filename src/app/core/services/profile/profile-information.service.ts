@@ -133,15 +133,12 @@ export class ProfileInformationService {
   public updateJumlahKaryawan(params: JumlahPegawaiInterface): Observable<any> {
     let api_update_jumlah_karyawan: ApiInterface = {
       method: ApiRouteMethods.put,
-      url: ApiRoutes.api_vendor_route,
+      url: ApiRoutes.api_vendor_route + "/" + this.authService.getLocalStorage("vendor_id")!,
       body: {
         jumlahKaryawanDomestik: params.jumlahKaryawanDomestik,
         jumlahKaryawanAsing: params.jumlahKaryawanAsing
       },
       options: {
-        params: {
-          id: (this.authService.getLocalStorage("vendor_id")!)
-        },
         headers: {
           Authorization: this.token
         }
