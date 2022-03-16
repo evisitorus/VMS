@@ -102,6 +102,19 @@ Given('The Vendor wants to edit one of record from {string} on {string} which pa
 
 Given('The Vendor can modify data which displayed on {string} form', (form1) => {
     switch (form1) {
+        case "Dokumen":
+            I.click('#tipeDokumen.k-dropdown');
+            I.fillField('#tipeDokumen.k-dropdown', 'Dokumen Akta (Mandatory)');
+            I.pressKey('Enter');
+            I.waitForElement('#input-nomor-dokumen input[class=k-input]');
+            I.fillField('#input-nomor-dokumen input[class=k-input]', '12345678');
+            I.waitForElement('#input-nama-dokumen input[class=k-input]');
+            I.fillField('#input-nama-dokumen input[class=k-input]', 'Akta Perusahaan');
+            I.waitForElement('#input-berlaku-sampai input[class=k-input]');
+            I.fillField('#input-berlaku-sampai input[class=k-input]', '11242025');
+            I.waitForElement('#input-lampiran-file input[type=file]');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
+            break;
         case "Pemegang Saham":
             I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
             I.click('#BadanUsaha');
@@ -164,7 +177,7 @@ Given('The Vendor will see information changes from selected record from {string
 });
 
 Given('The Vendor will see that update pop-up form already closed when clicks {string}', () => {
-    I.see(dictionary.update_data_success);
+    I.see('Berhasil memperbarui data, silakan ajukan verifikasi');
     I.click('#btn-popup-yes');
     I.dontSeeElement('.k-window');
 });

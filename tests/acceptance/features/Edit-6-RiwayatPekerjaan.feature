@@ -11,8 +11,8 @@ Feature: Vendor - Edit vendor information - Company Profile
 
     #edit riwayat pekerjaan 
     Scenario: Edit selected record from Riwayat Pekerjaan 
-    Given The Vendor wants to edit selected document which has been recorded 
-        When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+      Given The Vendor wants to edit selected document which has been recorded 
+       When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
         And The Vendor must click "Riwayat Pekerjaan" Tab 
         And The Vendor will see "Riwayat Pekerjaan" form
         """
@@ -24,7 +24,7 @@ Feature: Vendor - Edit vendor information - Company Profile
         """
         And The Vendor must select one of record from "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid" which part of "Riwayat Pekerjaan" form 
         And The Vendor must clicks button "Edit" button from selected record on "Riwayat Pekerjaan" form
-        And The Vendor will see pop-up form of "Edit Riwayat Pekerjaan" which appear in front of "Riwayat Pekerjaan" form
+        # And The Vendor will see pop-up form of "Edit Riwayat Pekerjaan" which appear in front of "Riwayat Pekerjaan" form
         And The Vendor will see information which state for every changes should be re-check by verificator 
         """
         {
@@ -58,8 +58,8 @@ Feature: Vendor - Edit vendor information - Company Profile
 
     #edit Riwayat Pekerjaan
     Scenario: Upload Riwayat Document more than 2 MB
-    Given The Vendor wants to edit selected document which has been recorded 
-        When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
+      Given The Vendor wants to edit selected document which has been recorded 
+       When The Vendor must click "Kelola Akun" menu where found on "Side Menu" of "Vendor Portal"
         And The Vendor must click "Riwayat Pekerjaan" Tab 
         And The Vendor will see "Riwayat Pekerjaan" form
         """
@@ -91,4 +91,4 @@ Feature: Vendor - Edit vendor information - Company Profile
         }
         """
         And The Vendor must click "Simpan" button to save information of "Riwayat Pekerjaan" 
-        Then The Vendor can not continue to add document information "Riwayat Pekerjaan"
+       Then The Vendor can not continue to add document information "Riwayat Pekerjaan"
