@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./grid-logo.component.css']
 })
 export class GridLogoComponent implements OnInit {
-  
+
   constructor() { }
-  
+
   ngOnInit(): void {
   }
-  
+
   public mediaCards: Array<any> = [
     {
       imageSrc: "./assets/images/landing/pnm.png",
@@ -26,6 +26,10 @@ export class GridLogoComponent implements OnInit {
       last: false
     },
     {
+      imageSrc: "./assets/images/landing/mind-id.png",
+      last: false
+    },
+    {
       imageSrc: "./assets/images/landing/telkom.png",
       last: false
     },
@@ -34,5 +38,5 @@ export class GridLogoComponent implements OnInit {
       last: true
     }
   ];
-  
+
 }
