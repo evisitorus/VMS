@@ -55,6 +55,10 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public disableEditPegawai = true;
   public editButtonVisible = true;
+  public jumlahPegawai = {
+    domestik: 0,
+    asing: 0
+  }
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "doc", "docx"],
@@ -410,7 +414,28 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public submitJumlahPegawai(){
+    this.updateJumlahPegawai();
     this.disableEditPegawai = true;
     this.editButtonVisible = true;
+  }
+
+  public updateJumlahPegawai(){
+    let params = {
+      jumlahKaryawanDomestik: this.jumlahPegawai.domestik.toString(),
+      jumlahKaryawanAsing: this.jumlahPegawai.asing.toString()
+    };
+
+    this.profileInformationService.updateJumlahKaryawan(params).subscribe(
+      () => {
+        this.parent.popUpMessage = dictionary.save_data_success;
+        this.parent.triggerPopUp();
+        this.fetchData();
+        window.location.reload();
+      },
+      (err) => {
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
   }
 }
