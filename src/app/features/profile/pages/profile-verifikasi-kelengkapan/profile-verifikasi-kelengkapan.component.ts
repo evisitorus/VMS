@@ -1,6 +1,5 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKelengkapanService } from 'src/app/core/services/profile/profile-kelengkapan.service';
 import { dictionary } from 'src/app/dictionary/dictionary';
