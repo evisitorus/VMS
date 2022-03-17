@@ -9,6 +9,7 @@ import { ProfileInformationService } from 'src/app/core/services/profile-informa
 import { ProfileAddressInterface } from 'src/app/core/interfaces/profile-address-interface';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { dictionary } from 'src/app/dictionary/dictionary';
+import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan/profile-informasi-perusahaan.component';
 
 const messages = {
   default: 'Data tidak boleh kosong.',
@@ -27,7 +28,6 @@ export class ProfileAlamatComponent implements OnInit {
   public gridData: any[] = [];
 
   public popUpTitle: string = "Profile Alamat";
-  public popUpMessage: string = "";
 
   public isDisabledKota: boolean = true;
   public isDisabledKecamatan: boolean = true;
@@ -65,13 +65,15 @@ export class ProfileAlamatComponent implements OnInit {
     kecamatan: "",
     kelurahan: "",
     kodepos: "",
+    noTelepon: "",
   };
 
   constructor(
     private eventEmitterService: EventEmitterService,
     private service: ProfileAddressService,
     private addressService: ProfileInformationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private parent: ProfileInformasiPerusahaanComponent
   ) { }
 
   ngOnInit(): void {
@@ -147,6 +149,7 @@ export class ProfileAlamatComponent implements OnInit {
         kelurahan: data[key]['village'] ? data[key]['village']['description'] : "",
         kodeposId: data[key]['village'] ? data[key]['village']['postalCode']['id'] : "",
         kodepos: data[key]['village'] ? data[key]['village']['postalCode']['postalCodeNum'] : "",
+        noTelepon: data[key]['noTelepon'],
         id: data[key]['id'],
         deletedAt: data[key]['deletedAt'],
       };
@@ -195,7 +198,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.fetchDataProvince();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -208,7 +211,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listProvinsi = this.mapDataProvinsi(this.listProvinsi);       
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -221,7 +224,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKota = this.mapDataKKK(this.listKota);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -234,7 +237,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKecamatan = this.mapDataKKK(this.listKecamatan);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -247,7 +250,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKelurahan = this.mapDataKKK(this.listKelurahan);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -260,7 +263,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKodepos = this.mapDataKodepos(this.listKodepos);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -275,6 +278,7 @@ export class ProfileAlamatComponent implements OnInit {
       kecamatan: new FormControl(null, Validators.required),
       kelurahan: new FormControl(null, Validators.required),
       kodepos: new FormControl(null, Validators.required),
+      noTelepon: new FormControl(null, Validators.required),
     });
   }
 
@@ -286,6 +290,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.data.kecamatan = null;
     this.data.kelurahan = null;
     this.data.kodepos = null;
+    this.data.noTelepon = null
 
     this.selectedProvinsi = null;
     this.selectedKota = null;
@@ -304,6 +309,7 @@ export class ProfileAlamatComponent implements OnInit {
   public updateForm(data: any): void {
     this.data.namaAlamat = data.namaAlamat;
     this.data.alamat = data.alamat;
+    this.data.noTelepon = data.noTelepon;
     
     this.data.provinsi = data.provinsi;
     this.selectedProvinsi = data.provinsiId;
@@ -329,7 +335,8 @@ export class ProfileAlamatComponent implements OnInit {
     this.setForm();
     this.open();
     
-    this.popUpMessage = dictionary.update_data_notification;
+    this.parent.popUpMessage = dictionary.update_data_notification;
+    console.log('parent.popUpMessage', this.parent.popUpMessage)
     this.triggerPopUp();
   }
 
@@ -349,12 +356,12 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.save(params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = dictionary.save_data_success;
+        this.parent.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -365,12 +372,12 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.update(this.id, params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = dictionary.update_data_success;
+        this.parent.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -379,12 +386,12 @@ export class ProfileAlamatComponent implements OnInit {
   public delete(id: string): void {
     this.service.delete(id).subscribe(
       () => {
-        this.popUpMessage = dictionary.delete_data_success;
+        this.parent.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );

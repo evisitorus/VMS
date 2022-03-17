@@ -1,4 +1,4 @@
-<div class="row profile-section">
+<div>
 
   <div class="profile-content-modal">
     <kendo-dialog title="Tambah Asset" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
@@ -18,6 +18,13 @@
           <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
         </kendo-formfield>
 
+        <kendo-formfield [formGroup]="form">
+          <kendo-label [for]="estimasiNilaiAsset" text="Estimasi Nilai Aset"></kendo-label>
+          <kendo-numerictextbox id="input-estimasiNilaiAsset-asset" formControlName="estimasiNilaiAsset" [min]="0" format="n0" #estimasiNilaiAsset required></kendo-numerictextbox>
+          <kendo-formhint></kendo-formhint>
+          <kendo-formerror>Estimasi Nilai Aset tidak boleh kosong</kendo-formerror>
+        </kendo-formfield>
+        
         <kendo-formfield [formGroup]="form">
           <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
           <kendo-numerictextbox id="input-tahun-asset" formControlName="tahunPembuatan" [maxlength]="4" format="#" #tahunPembuatan required></kendo-numerictextbox>
@@ -44,27 +51,20 @@
 
   </div>
 
-  <div class="col-2 profile-menu">
-    <app-sidebar></app-sidebar>
-  </div>
+  <div>
 
-  <div class="col-10 profile-content-container">
-
-    <div class="profile-content">
-
-      <div class="profile-content-title">
-        <kendo-label>Asset</kendo-label>
-      </div>
-
+    <div>
       <div class="profile-content-grid">
         <kendo-grid [data]="gridData" class="vms-kendo-grid">
-          <kendo-grid-column field="no" title="No.">
+          <kendo-grid-column field="no" title="No." [width]="60">
           </kendo-grid-column>
           <kendo-grid-column field="nama" title="Nama Asset">
           </kendo-grid-column>
           <kendo-grid-column field="jumlah" title="Jumlah (Unit)">
           </kendo-grid-column>
-          <kendo-grid-column field="tahunPembuatan" title="Tahun Pembuatan">
+          <kendo-grid-column field="estimasiNilaiAsset" title="Estimasi Nilai Aset">
+          </kendo-grid-column>
+          <kendo-grid-column field="tahunPembuatan" title="Tahun Perolehan">
           </kendo-grid-column>
           <kendo-grid-column field="id" title="Action">
             <ng-template kendoGridCellTemplate let-dataItem>
@@ -81,8 +81,8 @@
           </kendo-grid-column>
         </kendo-grid>
 
-        <div class="k-actions k-actions-end">
-          <div class="col-2 profile-content-grid-button">
+        <div class="k-actions k-actions-end pe-0">
+          <div class="profile-content-grid-button">
             <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-asset">
               Tambah Asset
             </button>
@@ -99,5 +99,3 @@
 </div>
 
 <div kendoDialogContainer></div>
-
-<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
