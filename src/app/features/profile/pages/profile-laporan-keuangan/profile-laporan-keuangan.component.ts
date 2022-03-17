@@ -305,8 +305,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
           this.dataKeuangan.cabang = data.cabang;
           this.dataKeuangan.nomorRekening = data.nomorRekening;
           this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
-          this.dataKeuangan.modalDasar = parseInt(data.toParty.modalDasar);
-          this.dataKeuangan.modalDitempatkan = parseInt(data.toParty.modalDitempatkan);
+          this.dataKeuangan.modalDasar = data.toParty.modalDasar? parseInt(data.toParty.modalDasar) : null;
+          this.dataKeuangan.modalDitempatkan = data.toParty.modalDitempatkan ? parseInt(data.toParty.modalDitempatkan) : null;
           this.setFormKeuangan();
         }
       },
