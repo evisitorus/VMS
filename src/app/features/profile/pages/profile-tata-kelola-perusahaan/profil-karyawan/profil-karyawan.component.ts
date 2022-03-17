@@ -10,6 +10,7 @@ import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-ang
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileTataKelolaPerusahaanComponent } from '../profile-tata-kelola-perusahaan.component';
 import { ProfileInformationService as VendorInformationService} from 'src/app/core/services/profile-information.service';
+import { NotificationService } from "@progress/kendo-angular-notification";
 
 interface Item {
   name: string;
@@ -88,7 +89,8 @@ export class ProfilKaryawanComponent implements OnInit {
     private profileInformationService: ProfileInformationService,
     private vendorInformationService: VendorInformationService,
     private dialogService: DialogService,
-    private parent: ProfileTataKelolaPerusahaanComponent
+    private parent: ProfileTataKelolaPerusahaanComponent,
+    private notificationService: NotificationService
   ) {
     this.bidangTemp = this.bidangSource.slice(0);
   }
@@ -439,11 +441,14 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.updateJumlahKaryawan(params).subscribe(
       () => {
-        this.parent.popUpMessage = "Berhasil update jumlah pegawai";
-        this.parent.triggerPopUp();
-        this.fetchData();
-        this.close();
-        // window.location.reload();
+        this.notificationService.show({
+          content: "Jumlah karyawan berhasil diupdate",
+          cssClass: "button-notification",
+          animation: { type: "slide", duration: 400 },
+          position: { horizontal: "center", vertical: "top" },
+          type: { style: "success", icon: true },
+          closable: true,
+        });
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
