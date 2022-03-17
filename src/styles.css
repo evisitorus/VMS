@@ -267,3 +267,9 @@ div.profile-content  > .k-link, div.profile-content  > kendo-panelbar-item > .k-
 .vms-kendo-grid {
     color: #0193AC !important;
 }
+
+#tata-kelola-perusahaan-panelbar > kendo-panelbar-item  .k-link ,#tata-kelola-perusahaan-panelbar > kendo-panelbar-item  .k-link.k-state-focused, #tata-kelola-perusahaan-panelbar  > kendo-panelbar-item >  .k-link.k-state-selected{
+  background-color: #0193AC !important;
+  border-color: #0193AC !important;
+  color: white !important;
+}
