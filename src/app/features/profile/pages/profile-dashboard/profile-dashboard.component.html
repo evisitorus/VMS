@@ -13,24 +13,52 @@
 
       <div class="dashboard-tender">
         <div class="row">
-          <div class="col-md-3 dashboard-tender-content align-center">
+          <div class="col-md-3 dashboard-tender-content">
             <div class="tender-info-item">
-              {{tenders.total}} Total Tender
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="tender-info-item-number">{{tenders.total}}</div>
+                </div>
+                <div class="col-md-12">
+                  <div>Total Tender</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-3 dashboard-tender-content align-center">
+          <div class="col-md-3 dashboard-tender-content">
             <div class="tender-info-item">
-              {{tenders.followed}} Tender Diikuti
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="tender-info-item-number">{{tenders.followed}}</div>
+                </div>
+                <div class="col-md-12">
+                  <div>Tender Diikuti</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-3 dashboard-tender-content align-center">
+          <div class="col-md-3 dashboard-tender-content">
             <div class="tender-info-item">
-              {{tenders.onGoing}} Tender Berjalan
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="tender-info-item-number">{{tenders.onGoing}}</div>
+                </div>
+                <div class="col-md-12">
+                  <div>Tender Berjalan</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-3 dashboard-tender-content align-center">
+          <div class="col-md-3 dashboard-tender-content">
             <div class="tender-info-item">
-              {{tenders.denied}} Tender Ditolak
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="tender-info-item-number">{{tenders.denied}}</div>
+                </div>
+                <div class="col-md-12">
+                  <div>Tender Ditolak</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -42,12 +70,12 @@
 
       <div class="dashboard-info dashboard-status">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-1">
             <div class="center-logo">
               <i class="col-md-auto" [class]="star" style="font-size: 4.5em; color: #0193AC;"></i>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="center-text">
               <p>
                 <b class="sub-title">{{vendor.type}}</b>
@@ -56,7 +84,7 @@
               </p>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="row status-content">
               <div class="col-6 status-item">
                 Terdaftar Sejak:
