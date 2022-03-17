@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
@@ -10,6 +11,8 @@ import { dictionary } from 'src/app/dictionary/dictionary';
   styleUrls: ['./profile-verifikasi-kelengkapan.component.css']
 })
 export class ProfileVerifikasiKelengkapanComponent implements OnInit {
+
+  public now: any = formatDate(new Date, "dd MMMM YYYY", "en-US");
 
   public data: any = {
     informasiUmum: {

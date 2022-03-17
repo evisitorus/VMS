@@ -21,7 +21,7 @@
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.informasiUmum.status" #informasiUmum kendoCheckBox/>
-              <label for="informasiUmum">{{data.informasiUmum.text}}</label>
+              <label for="informasiUmum">{{data.informasiUmum.text}} {{data.informasiUmum.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
@@ -31,7 +31,7 @@
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.tataKelolaPerusahaan.status" #tataKelolaPerusahaan kendoCheckBox/>
-              <label for="tataKelolaPerusahaan">{{data.tataKelolaPerusahaan.text}}</label>
+              <label for="tataKelolaPerusahaan">{{data.tataKelolaPerusahaan.text}} {{data.tataKelolaPerusahaan.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
@@ -41,7 +41,7 @@
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.aspekFinansial.status" #aspekFinansial kendoCheckBox/>
-              <label for="aspekFinansial">{{data.aspekFinansial.text}}</label>
+              <label for="aspekFinansial">{{data.aspekFinansial.text}} {{data.aspekFinansial.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
@@ -51,7 +51,7 @@
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.aspekLegal.status" #aspekLegal kendoCheckBox/>
-              <label for="aspekLegal">{{data.aspekLegal.text}}</label>
+              <label for="aspekLegal">{{data.aspekLegal.text}} {{data.aspekLegal.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
@@ -61,7 +61,7 @@
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.riwayatPekerjaan.status" #riwayatPekerjaan kendoCheckBox/>
-              <label for="riwayatPekerjaan">{{data.riwayatPekerjaan.text}}</label>
+              <label for="riwayatPekerjaan">{{data.riwayatPekerjaan.text}} {{data.riwayatPekerjaan.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
