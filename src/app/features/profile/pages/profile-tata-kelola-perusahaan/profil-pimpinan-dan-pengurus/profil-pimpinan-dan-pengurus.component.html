@@ -6,7 +6,7 @@
     Tambah
   </button>
   </div>
-  <kendo-grid [pageSize]="5" [skip]="skip" [data]="gridViewPengurus" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)">
+  <kendo-grid [pageSize]="5" [skip]="skip" [data]="gridViewPengurus" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)" class="mb-2">
     <kendo-grid-column field="no" title="No.">
       <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
         {{rowIndex + 1}}
