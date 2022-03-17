@@ -441,14 +441,8 @@ export class ProfilKaryawanComponent implements OnInit {
 
     this.profileInformationService.updateJumlahKaryawan(params).subscribe(
       () => {
-        this.notificationService.show({
-          content: "Jumlah karyawan berhasil diupdate",
-          cssClass: "button-notification",
-          animation: { type: "slide", duration: 400 },
-          position: { horizontal: "center", vertical: "top" },
-          type: { style: "success", icon: true },
-          closable: true,
-        });
+        this.parent.popUpMessage = dictionary.update_data_success;
+        this.parent.triggerPopUp();
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;

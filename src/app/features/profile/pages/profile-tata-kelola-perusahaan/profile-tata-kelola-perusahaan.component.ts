@@ -8,6 +8,7 @@ import {EventEmitterService} from "../../../../core/services/event-emitter.servi
 })
 export class ProfileTataKelolaPerusahaanComponent implements OnInit {
 
+  popUpTitle: string = "";
   popUpMessage: string = "";
   redirectOnClosePopUp: boolean = false;
   constructor(
