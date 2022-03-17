@@ -48,8 +48,8 @@
             <!-- <kendo-panelbar-item title="Overview" [expanded]="true">
               
             </kendo-panelbar-item> -->
-            <kendo-panelbar-item title="Data Perusahaan">
-              <ng-template kendoPanelBarContent>
+            <kendo-panelbar-item title="Data Perusahaan" [expanded]="true">
+              <ng-template kendoPanelBarContent *ngIf="profileInformationFormGroup">
                 <form>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
@@ -80,7 +80,7 @@
 
                       <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-textbox id="nomorIndukBerusaha" class="col-md w-100" placeholder="Nomor Induk Berusaha (NIB)"
+                        <kendo-textbox id="nomorIndukBerusaha" [disabled]="!this.profileInformationFormGroup.get('pemilikNIB')?.value" class="col-md w-100" placeholder="Nomor Induk Berusaha (NIB)"
                                        [clearButton]="true" [maxlength]="10"
                                        formControlName="nomorIndukBerusaha"></kendo-textbox>
                         <kendo-formerror class="formHint"
@@ -328,13 +328,13 @@
                 </div>
               </ng-template>
             </kendo-panelbar-item>
-            <kendo-panelbar-item title="PIC">
+            <kendo-panelbar-item title="PIC" [expanded]="true">
               <ng-template kendoPanelBarContent>
                 <!-- data PIC -->
                 <app-profile-person-in-charge></app-profile-person-in-charge>
               </ng-template>
             </kendo-panelbar-item>
-            <kendo-panelbar-item title="Korespondensi">
+            <kendo-panelbar-item title="Korespondensi" [expanded]="true">
               <ng-template kendoPanelBarContent>
                 <!-- data Korespondensi -->
                 <app-profile-alamat></app-profile-alamat>

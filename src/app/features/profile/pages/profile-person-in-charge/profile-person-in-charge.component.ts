@@ -37,6 +37,11 @@ export class ProfilePersonInChargeComponent implements OnInit {
   responseEmail: string = "";
   responseFile: string = "";
   isDisabled: boolean = true;
+  popUpTitle: string = "Informasi";
+  popUpMessage: string = "";
+  redirectOnClosePopUp: boolean = false;
+  popUpID = "";
+
   person_id = this.authService.getLocalStorage('person_id')!;
   disabledWhenError: boolean = false;
 
@@ -55,9 +60,9 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   public ngAfterViewInit(): void {
-    this.oldPasswordTextbox.input.nativeElement.type = "password";
-    this.newPasswordTextbox.input.nativeElement.type = "password";
-    this.confirmNewPasswordTextbox.input.nativeElement.type = "password";
+    // this.oldPasswordTextbox.input.nativeElement.type = "password";
+    // this.newPasswordTextbox.input.nativeElement.type = "password";
+    // this.confirmNewPasswordTextbox.input.nativeElement.type = "password";
   }
 
   public toggleVisibility(name: string): void {
@@ -160,7 +165,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
       newPassword: this.formPIC.value.newPassword,
       confirmNewPassword: this.formPIC.value.confirmNewPassword
     }
-
+    
     if (this.formPIC.valid) {
       this.formPIC.markAllAsTouched();
 
@@ -170,18 +175,18 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responseName = response.data.name;
           this.responsePhoneNumber = response.data.phone_number;
           this.responseEmail = response.data.email;
-          this.parent.redirectOnClosePopUp = false;
-          this.parent.popUpTitle = 'Informasi';
-          this.parent.popUpMessage = dictionary.update_data_success;
-          this.parent.popUpID = "popup-update-pic-success";
+          this.redirectOnClosePopUp = false;
+          this.popUpTitle = 'Informasi';
+          this.popUpMessage = dictionary.update_data_success;
+          this.popUpID = "popup-update-pic-success";
           this.triggerPopUp();
           this.setForm();
         },
         (error) => {
           this.changePasswordTextboxEnabled = false;
-          this.parent.redirectOnClosePopUp = false;
-          this.parent.popUpMessage = error.error.message;
-          this.parent.popUpID = "popup-update-pic-failed";
+          this.redirectOnClosePopUp = false;
+          this.popUpMessage = error.error.message;
+          this.popUpID = "popup-update-pic-failed";
           this.triggerPopUp();
           this.setForm();
         }
@@ -300,10 +305,10 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   public open() {
     if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
-      this.parent.popUpMessage = dictionary.invalid_file;
-      this.parent.popUpID = "popup-check-your-file-again"
+      this.popUpMessage = dictionary.invalid_file;
+      this.popUpID = "popup-check-your-file-again"
       this.triggerPopUp();
-    } else if (this.formPIC.valid && this.responseFile) {
+    } else if (this.formPIC.valid) {
       this.opened = true;
     }
   }
