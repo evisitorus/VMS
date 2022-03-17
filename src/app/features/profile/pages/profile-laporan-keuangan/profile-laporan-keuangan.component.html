@@ -164,7 +164,7 @@
     <kendo-card orientation="vertical" style="width: 100%;">
     <kendo-card-body class="k-vstack">
     <kendo-panelbar id="aspek-finansial-panelbar" class="vms-panelbar">
-      <kendo-panelbar-item title="Bank">
+      <kendo-panelbar-item title="Bank" [expanded]="true">
         <ng-template kendoPanelBarContent>
           <div class="row bank-field">
             <div class="col-3 content-label">
@@ -227,7 +227,7 @@
           </div>
         </ng-template>
       </kendo-panelbar-item>
-      <kendo-panelbar-item title="Modal Dasar">
+      <kendo-panelbar-item title="Modal Dasar" [expanded]="true">
         <ng-template kendoPanelBarContent>
           <div class="row bank-field">
             <div class="col-3 content-label">
@@ -235,7 +235,7 @@
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganModalDasar">              
-                <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
+                <kendo-numerictextbox placeholder="Masukan Modal Dasar (Sesuai Akta)" class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
               </kendo-formfield>
@@ -247,7 +247,7 @@
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganModalDasar">
-                <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
+                <kendo-numerictextbox placeholder="Masukan Modal Ditempatkan (Sesuai Akta)" class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
                 <kendo-formhint></kendo-formhint>
                 <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
               </kendo-formfield>
@@ -262,7 +262,7 @@
           </div>
         </ng-template>
       </kendo-panelbar-item>
-      <kendo-panelbar-item title="Neraca Keuangan">
+      <kendo-panelbar-item title="Neraca Keuangan" [expanded]="true">
         <ng-template kendoPanelBarContent>
           <div class="profile-content-grid">
             <kendo-grid class="vms-kendo-grid" [data]="gridViewNeraca" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeNeraca($event)">
@@ -314,7 +314,7 @@
           </div>
         </ng-template>
       </kendo-panelbar-item>
-      <kendo-panelbar-item title="SPT">
+      <kendo-panelbar-item title="SPT" [expanded]="true">
         <ng-template kendoPanelBarContent>
           <div class="profile-content-grid">
             <kendo-grid class="vms-kendo-grid" [data]="gridViewSPT" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeSPT($event)">
@@ -355,7 +355,7 @@
           </div>
         </ng-template>
       </kendo-panelbar-item>
-      <kendo-panelbar-item title="Asset">
+      <kendo-panelbar-item title="Asset" [expanded]="true">
         <ng-template kendoPanelBarContent>
           <app-profile-aset></app-profile-aset>
         </ng-template>
