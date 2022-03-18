@@ -196,6 +196,9 @@ export class ProfileInformasiPerusahaanComponent {
       this.setTipeVendor(response.responseTipeVendor);
       this.setFormPerusahaan(this.dataPerusahaan);
       // this.setProvinces(response.responseProvinces);
+    }, (error) => {
+      this.popUpMessage = dictionary.fetch_data_failed + ' Perusahaan';
+      this.triggerPopUp();
     });
   }
 
@@ -209,6 +212,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setResponseVendorData(resp_: any) {
     let resp = resp_.data
+    console.log('resp', resp_)
     if (resp.logo) {
       this.logoImg = environment.api_base_path + resp.logo.concat('/file');
     }
