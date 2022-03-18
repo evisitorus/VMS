@@ -212,9 +212,11 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setResponseVendorData(resp_: any) {
     let resp = resp_.data
-    console.log('resp', resp_)
     if (resp.logo) {
-      this.logoImg = environment.api_base_path + resp.logo.concat('/file');
+      let logo = resp.logo
+      if (logo){
+        this.logoImg = environment.api_base_path.concat('/api/media_objects/').concat(logo.id).concat('/file');
+      }
     }
 
     if (resp.pemilikNIB === undefined && resp.nomorIndukBerusaha === undefined) {
@@ -604,6 +606,7 @@ export class ProfileInformasiPerusahaanComponent {
         () => {
           this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
+          this.getDataPerusahaan();
           // location.reload();
         },
         () => {

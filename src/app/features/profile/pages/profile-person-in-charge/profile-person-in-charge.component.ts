@@ -176,17 +176,17 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responsePhoneNumber = response.data.phone_number;
           this.responseEmail = response.data.email;
           this.redirectOnClosePopUp = false;
-          this.popUpTitle = 'Informasi';
-          this.popUpMessage = dictionary.update_data_success;
-          this.popUpID = "popup-update-pic-success";
+          this.parent.popUpTitle = 'Informasi';
+          this.parent.popUpMessage = dictionary.update_data_success;
+          this.parent.popUpID = "popup-update-pic-success";
           this.triggerPopUp();
           this.setForm();
         },
         (error) => {
           this.changePasswordTextboxEnabled = false;
           this.redirectOnClosePopUp = false;
-          this.popUpMessage = error.error.message;
-          this.popUpID = "popup-update-pic-failed";
+          this.parent.popUpMessage = error.error.message;
+          this.parent.popUpID = "popup-update-pic-failed";
           this.triggerPopUp();
           this.setForm();
         }
@@ -305,8 +305,8 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   public open() {
     if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
-      this.popUpMessage = dictionary.invalid_file;
-      this.popUpID = "popup-check-your-file-again"
+      this.parent.popUpMessage = dictionary.invalid_file;
+      this.parent.popUpID = "popup-check-your-file-again"
       this.triggerPopUp();
     } else if (this.formPIC.valid) {
       this.opened = true;
