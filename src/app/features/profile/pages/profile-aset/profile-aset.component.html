@@ -20,7 +20,7 @@
 
         <kendo-formfield [formGroup]="form">
           <kendo-label [for]="estimasiNilaiAsset" text="Estimasi Nilai Aset"></kendo-label>
-          <kendo-numerictextbox id="input-estimasiNilaiAsset-asset" formControlName="estimasiNilaiAsset" [min]="0" format="n0" #estimasiNilaiAsset required></kendo-numerictextbox>
+          <kendo-numerictextbox [maxlength]="maxLengthEstimasiNilai" id="input-estimasiNilaiAsset-asset" formControlName="estimasiNilaiAsset" [min]="0" format="n0" #estimasiNilaiAsset required></kendo-numerictextbox>
           <kendo-formhint></kendo-formhint>
           <kendo-formerror>Estimasi Nilai Aset tidak boleh kosong</kendo-formerror>
         </kendo-formfield>
@@ -63,6 +63,9 @@
           <kendo-grid-column field="jumlah" title="Jumlah (Unit)">
           </kendo-grid-column>
           <kendo-grid-column field="estimasiNilaiAsset" title="Estimasi Nilai Aset">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{ dataItem.estimasiNilaiAsset | currency:'Rp. ':'symbol':'4.0-2' }}
+            </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="tahunPembuatan" title="Tahun Perolehan">
           </kendo-grid-column>
