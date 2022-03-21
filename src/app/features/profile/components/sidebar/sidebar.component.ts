@@ -51,6 +51,7 @@ const items = [
     expanded: "true",
     children: [
       { title: "Informasi Umum", route:"/profile-information", id: "sidebar-profile-information"  },
+      { title: "Tata Kelola Perusahaan", route:"/profile-tata-kelola-perusahaan", id: "sidebar-tata-kelola"  },
       { title: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
       { title: "Aspek Finansial", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
       { title: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan", id: "sidebar-riwayat-pekerjaan"  },

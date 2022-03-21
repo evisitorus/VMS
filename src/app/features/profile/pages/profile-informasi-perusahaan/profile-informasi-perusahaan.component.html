@@ -23,32 +23,8 @@
                   <img class="col-3" [src]="logoImg"/>
                 </div>
               </ng-template>
-              <ng-template #showDefaultLogo>
-                <div class="row align-items-center k-justify-content-center">
-                  <div class="row align-items-center k-justify-content-center">
-                    <img class="col-3" src="/assets/images/nologo.png" style="width: 15%; height: 15%"/>
-                  </div>
-                  <div class="row align-items-center k-justify-content-center">
-                    <kendo-formerror *ngIf="!logoImg" class="col-3" style="text-align: center">Mohon upload logo
-                      perusahaan
-                    </kendo-formerror>
-                  </div>
-                </div>
-              </ng-template>
-
-              <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false" #files="ngModel"
-                [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
-                <kendo-fileselect-messages id="file-upload-error-message" dropFilesHere="Tidak ada gambar terpilih"
-                  select="Pilih gambar" invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
-                  invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
-                </kendo-fileselect-messages>
-              </kendo-fileselect>
-            </div>
-          <kendo-panelbar id="profile-information-panelbar">
-            <!-- <kendo-panelbar-item title="Overview" [expanded]="true">
-              
-            </kendo-panelbar-item> -->
-            <kendo-panelbar-item title="Data Perusahaan">
+            </kendo-panelbar-item>
+            <kendo-panelbar-item title="Data Perusahaan" [expanded]="true">
               <ng-template kendoPanelBarContent>
                 <form>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">

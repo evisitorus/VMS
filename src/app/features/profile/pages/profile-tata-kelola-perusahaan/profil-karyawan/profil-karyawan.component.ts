@@ -7,8 +7,10 @@ import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyaw
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
 import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan.component';
 import { dictionary } from 'src/app/dictionary/dictionary';
+import { ProfileTataKelolaPerusahaanComponent } from '../profile-tata-kelola-perusahaan.component';
+import { ProfileInformationService as VendorInformationService} from 'src/app/core/services/profile-information.service';
+import { NotificationService } from "@progress/kendo-angular-notification";
 
 interface Item {
   name: string;
@@ -53,6 +55,13 @@ export class ProfilKaryawanComponent implements OnInit {
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
 
+  public disableEditPegawai = true;
+  public editButtonVisible = true;
+  public jumlahPegawai = {
+    domestik: 0,
+    asing: 0
+  }
+
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "doc", "docx"],
     maxFileSize: 2097152 //2 MB
@@ -78,8 +87,10 @@ export class ProfilKaryawanComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private profileInformationService: ProfileInformationService,
+    private vendorInformationService: VendorInformationService,
     private dialogService: DialogService,
-    private parent: ProfileInformasiPerusahaanComponent
+    private parent: ProfileTataKelolaPerusahaanComponent,
+    private notificationService: NotificationService
   ) {
     this.bidangTemp = this.bidangSource.slice(0);
   }
@@ -91,6 +102,16 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public fetchData(): void {
     this.setForm();
+
+    this.vendorInformationService.getVendorData().subscribe(
+      (resp) => {
+        this.jumlahPegawai.domestik = resp.jumlahKaryawanDomestik;
+        this.jumlahPegawai.asing = resp.jumlahKaryawanAsing;
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
     this.profileInformationService.getTipeKaryawan().subscribe(
       (resp) => {
         this.tipeSource = resp['hydra:member'];
@@ -399,5 +420,34 @@ export class ProfilKaryawanComponent implements OnInit {
   public pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.fetchData();
+  }
+
+  public editJumlahPegawai(){
+    this.disableEditPegawai = false;
+    this.editButtonVisible = false;
+  }
+
+  public submitJumlahPegawai(){
+    this.updateJumlahPegawai();
+    this.disableEditPegawai = true;
+    this.editButtonVisible = true;
+  }
+
+  public updateJumlahPegawai(){
+    let params = {
+      jumlahKaryawanDomestik: this.jumlahPegawai.domestik,
+      jumlahKaryawanAsing: this.jumlahPegawai.asing
+    };
+
+    this.profileInformationService.updateJumlahKaryawan(params).subscribe(
+      () => {
+        this.parent.popUpMessage = dictionary.update_data_success;
+        this.parent.triggerPopUp();
+      },
+      (err) => {
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
   }
 }

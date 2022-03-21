@@ -1,0 +1,46 @@
+.text-bold {
+  font-weight: 600;
+}
+
+.row {
+  margin-bottom: 0.5rem;
+}
+
+.k-panelbar-content {
+  padding: 1em;
+}
+
+/* .profile-content {
+  display: flex;
+  background-color: transparent!important;
+} */
+
+/* .profile-menu {
+  float: left;
+  height: 100vh;
+} */
+
+.profile-content-title {
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+
+.profile-content-grid-button {
+  float: right;
+  margin-top: 1em;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+.profile-content-modal-btn {
+  min-width: 100px !important;
+}
+
+.k-dropdown .k-dropdown-wrap, .k-dropdowntree .k-dropdown-wrap {
+  border-color: #0193AC;
+  color: #212529;
+  background-color: transparent;
+  padding: 0;
+}

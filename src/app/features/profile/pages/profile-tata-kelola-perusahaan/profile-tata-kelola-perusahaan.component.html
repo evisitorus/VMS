@@ -1,0 +1,39 @@
+<div class="row profile-section">
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="col-10 profile-content-container">
+
+    <div class="profile-content">
+      <kendo-label id="tata-kelola-label" class="mb-3 text-bold">Tata Kelola Perusahaan</kendo-label>
+      <kendo-card orientation="vertical" style="width: 100%;">
+        <kendo-card-body class="k-vstack">
+          <kendo-panelbar id="tata-kelola-perusahaan-panelbar">
+            <kendo-panelbar-item title="Pemegang Saham" [expanded]="true">
+              <ng-template kendoPanelBarContent>
+                <app-pemegang-saham></app-pemegang-saham>
+              </ng-template>
+            </kendo-panelbar-item>
+            <kendo-panelbar-item title="Pimpinan dan Pengurus Perusahaan" [expanded]="true">
+              <ng-template kendoPanelBarContent>
+                <app-profil-pimpinan-dan-pengurus></app-profil-pimpinan-dan-pengurus>
+              </ng-template>
+            </kendo-panelbar-item>
+            <kendo-panelbar-item title="Pegawai" [expanded]="true">
+              <ng-template kendoPanelBarContent>
+                <app-profil-karyawan></app-profil-karyawan>
+              </ng-template>
+            </kendo-panelbar-item>
+          </kendo-panelbar>
+        </kendo-card-body>
+      </kendo-card>
+
+    </div>
+  </div>
+</div>
+
+<div kendoDialogContainer></div>
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
+
