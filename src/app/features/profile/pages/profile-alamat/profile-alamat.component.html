@@ -2,7 +2,7 @@
 
   <div class="profile-content-modal">
 
-    <kendo-dialog title="Tambah Alamat" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+    <kendo-dialog title="{{isNewData? 'Tambah Alamat' : 'Ubah Alamat'}}" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
       <form  class="k-form modal-form">
 
         <div class="row">
@@ -11,7 +11,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Type your message here" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
+              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Masukan Nama Alamat" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nama Alamat tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -24,7 +24,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-textbox class="formField" id="alamat" placeholder="Type your message here" formControlName="alamat" [clearButton]="true" #alamat required></kendo-textbox>
+              <kendo-textbox class="formField" id="alamat" placeholder="Masukan Alamat" formControlName="alamat" [clearButton]="true" #alamat required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Alamat tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -99,9 +99,15 @@
           <div class="col-4 modal-label">
             <p>No. Telepon</p>
           </div>
-          <div class="col-8 modal-field">
+          <div class="col-2 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-textbox class="formField" id="noTelepon" placeholder="Masukan No. Telepon" formControlName="noTelepon" [clearButton]="true" #noTelepon required></kendo-textbox>
+              <kendo-textbox class="formField" [maxlength]="4" id="noTeleponKodeArea" placeholder="Kode Area" formControlName="noTelponKodeArea" #noTelponKodeArea required></kendo-textbox>
+              <kendo-formerror>Kode Area tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+          <div class="col-6 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-textbox class="formField" [maxlength]="15" id="noTelepon" placeholder="Masukan No. Telepon" formControlName="noTelepon" [clearButton]="true" #noTelepon required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>No. Telepon tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -135,6 +141,9 @@
           <kendo-grid-column field="kota" title="Kota">
           </kendo-grid-column>
           <kendo-grid-column field="noTelepon" title="No. Telepon">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              ({{dataItem.noTelponKodeArea}}) {{dataItem.noTelepon}}
+            </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="id" title="Action">
             <ng-template kendoGridCellTemplate let-dataItem>
@@ -143,7 +152,7 @@
                   <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
                 </span>
                 <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat)" id="btn-delete">
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat, dataItem.telcoId)" id="btn-delete">
                 </span>
               </div>
               <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
