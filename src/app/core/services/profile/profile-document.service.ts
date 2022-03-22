@@ -79,7 +79,7 @@ export class ProfileDocumentService {
     public update(params: ProfileDocumentInterface, id: string): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let body: any = {
-        tipeDokumen:params.tipeDokumen,
+        tipeDokumen:`${params.tipeDokumen}`,
         nomorDokumen: params.nomorDokumen,
         namaDokumen: params.namaDokumen,
         submitDate: params.submitDate,

@@ -81,8 +81,8 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchData();
     this.getListTipeDokumen();
+    this.fetchData();
   }
 
   public close(): void {
@@ -111,13 +111,23 @@ export class ProfileDokumenComponent implements OnInit {
     });
   }
 
+  getTipeDokumenString(idTipeDokumen: number) {
+    let name = "";
+    for (const key of this.tipeTipeDokumen) {
+      if (idTipeDokumen == key.id) {
+        name = key.name;
+      }
+    }
+    return name;
+  }
+
   public mapData(data: any[]): any[] {
     let mappedData: any[] = [];
     for (const key in data) {
       mappedData[key] = {
         no: data[key]['nomorDokumen'],
         namaDokumen: data[key]['namaDokumen'],
-        tipeDokumen: data[key]['tipeDokumen'],
+        tipeDokumen: this.getTipeDokumenString(data[key]['tipeDokumen']) ,
         berlakuDari: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
         berlakuSampai: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "Seumur Hidup",
         lampiran: data[key]['attachmentFilePath'],
