@@ -127,17 +127,18 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       npwp: new FormControl(this.data.npwp ? parseInt(this.data.npwp) : null, Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
-      jabatan: new FormControl(this.data.jabatan, Validators.required)
+      jabatan: new FormControl(this.data.jabatan, Validators.required),
+      kartuIdentitas: new FormControl(this.data.kartuIdentitas, Validators.required),
+      kartuNpwp: new FormControl(this.data.kartuNpwp, Validators.required)
     });
   }
 
 
   public submitProfilPimpinanDanPengurus(): void {
-    let fileVar = [this.uploadedNpwpContentUrl,this.uploadedFileContentUrl,this.selectedFile, this.selectedNpwpFile];
+    let fileVar = [this.uploadedFileContentUrl, this.uploadedNpwpContentUrl, this.selectedFile, this.selectedNpwpFile];
 
     fileVar.every(file => {
-      if( file === null || file === undefined ){
-        console.log(file)
+      if( file === null || typeof file === 'undefined' ){
         this.popUpID = "popup-wrong-file";
         this.parent.popUpMessage = "Periksa kembali file Anda";
         this.parent.triggerPopUp();
@@ -145,6 +146,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       } else {
         this.pengurusFormGroup.markAllAsTouched();
         if (this.pengurusFormGroup.valid) {
+          console.log(this.pengurusFormGroup.valid)
           if (this.isNewData) {
             this.save();
           } else {
@@ -184,6 +186,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
         this.parent.popUpMessage = "Berhasil menyimpan data, silakan ajukan verifikasi";
         this.parent.triggerPopUp();
         this.fetchData();
+        this.resetForm();
         this.close();
       },
       () => {
