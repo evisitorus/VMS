@@ -107,7 +107,7 @@
           <div class="row">
             <kendo-label class="col">Kartu Identitas</kendo-label>
             <div class="col">
-              <kendo-fileselect [style.width]="'100%'" id="resumePimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()" formControlName="kartuIdentitas">
+              <kendo-fileselect [style.width]="'100%'" id="resumePimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" (change)="upload()" formControlName="kartuIdentitas">
                 <kendo-fileselect-messages
                 dropFilesHere="Tidak ada file terpilih"
                 select="Pilih file"
@@ -136,7 +136,7 @@
           <div class="row">
             <kendo-label class="col">Kartu NPWP</kendo-label>
             <div class="col">
-              <kendo-fileselect [style.width]="'100%'" id="npwpPimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedNpwpFile" [ngModelOptions]="{standalone: true}" (change)="uploadNpwp()" formControlName="kartuNpwp">
+              <kendo-fileselect [style.width]="'100%'" id="npwpPimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedNpwpFile" (change)="uploadNpwp()" formControlName="kartuNpwp">
                 <kendo-fileselect-messages
                 dropFilesHere="Tidak ada file terpilih"
                 select="Pilih file"
