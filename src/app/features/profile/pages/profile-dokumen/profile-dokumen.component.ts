@@ -25,24 +25,11 @@ export class ProfileDokumenComponent implements OnInit {
   public listItems: Array<Item> = [];
   public selectedTipeDokumen: Item = this.listItems[0];
 
-  public tipeTipeDokumen: Array<any> = [
-    { name: "Dokumen Akta (Mandatory)", category: "Profil Perusahaan", id: "Dokumen Akta" },
-    { name: "Dokumen AD/ART (Mandatory)", category: "Profil Perusahaan", id: "Dokumen AD/ART" },
-    { name: "Dokumen Akta Perubahan (Optional)", category: "Profil Perusahaan", id: "Dokumen Akta Perubahan" },
-    { name: "Dokumen Surat Kuasa (Optional)", category: "Profil Perusahaan", id: "Dokumen Surat Kuasa" },
-    { name: "Dokumen NPWP Perusahaan (Mandatory)", category: "Profil Perusahaan", id: "Dokumen NPWP Perusahaan" },
-
-    { name: "Dokumen Perizinan (Mandatory)", category: "Legalitas Perusahaan", id: "Dokumen Perizinan" },
-    { name: "Dokumen Sertifikasi (Optional)", category: "Legalitas Perusahaan", id: "Dokumen Sertifikasi" },
-
-    { name: "Surat Pernyataan Pakta Integritas", category: "Dokumen Lainnya", id: "Surat Pernyataan Pakta Integritas" },
-    { name: "Dokumen HSE", category: "Dokumen Lainnya", id: "Dokumen HSE" },
-  ];
-
-
-  public groupedDataTipeDokumen: GroupResult[] = groupBy(this.tipeTipeDokumen, [
-    { field: "category" },
-  ]);
+  public tipeTipeDokumen: Array<any> = [{
+    name: null,
+    category: null,
+    id: null
+  }];
 
   public itemDisabled(itemArgs: { dataItem: any; index: number }) {
     return !itemArgs.dataItem.leaf;
@@ -76,7 +63,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public data: any = {
     id: "",
-    tipeDokumen:"",
+    tipeDokumen: "",
     nomorDokumen: "",
     namaDokumen: "",
     berlakuDari: "",
@@ -95,6 +82,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
+    this.getListTipeDokumen();
   }
 
   public close(): void {
@@ -194,6 +182,33 @@ export class ProfileDokumenComponent implements OnInit {
     );
   }
 
+  public mapDataListTipeDokumen(value: any) {
+    this.tipeTipeDokumen.push(
+      {
+        name: value.name,
+        category: null,
+        id: value.id
+      });
+  }
+
+  public getListTipeDokumen(): void {
+    this.profileDocumentService.getListTipeDokumen().subscribe(
+      (response) => {
+        this.tipeTipeDokumen = [];
+        for (const [key, value] of Object.entries(response.data.documentType)) {
+          this.mapDataListTipeDokumen(value);
+        }
+
+      },
+
+      (err) => {
+        console.log(err);
+        this.popUpMessage = err.error.message;
+        this.triggerPopUp();
+      }
+    );
+  }
+
   public submit(): void {
     if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
       this.popUpMessage = dictionary.invalid_file;
@@ -213,7 +228,7 @@ export class ProfileDokumenComponent implements OnInit {
 
   public save(): void {
     let params: ProfileDocumentInterface = {
-      tipeDokumen:this.form.value.tipeDokumen,
+      tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
       berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,

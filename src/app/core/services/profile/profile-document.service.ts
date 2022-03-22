@@ -31,10 +31,26 @@ export class ProfileDocumentService {
       return this.apiService.sendRequest(api_get_profile_doc);
     }
 
+
+    public getListTipeDokumen(): Observable<any> {
+      let token = this.authService.getLocalStorage('access_token')!;
+      let vendor_id = this.authService.getLocalStorage('vendor_id')!;
+      let api_get_list_tipe_doc: ApiInterface = {
+        method: ApiRouteMethods.get,
+        url: ApiRoutes.api_vendor_information_route.concat(vendor_id).concat("/document"),
+        options: {
+          headers: {
+            Authorization: token
+          }
+        }
+      };
+      return this.apiService.sendRequest(api_get_list_tipe_doc);
+    }
+
     public save(params: ProfileDocumentInterface): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let body: any = {
-        tipeDokumen:params.tipeDokumen,
+        tipeDokumen:`${params.tipeDokumen}`,
         nomorDokumen: params.nomorDokumen,
         namaDokumen: params.namaDokumen,
         submitDate: params.submitDate,
