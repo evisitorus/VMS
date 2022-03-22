@@ -133,14 +133,15 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
 
   public submitProfilPimpinanDanPengurus(): void {
-    const fileVar = [this.uploadedNpwpContentUrl,this.uploadedFileContentUrl,this.selectedFile, this.selectedNpwpFile];
+    let fileVar = [this.uploadedNpwpContentUrl,this.uploadedFileContentUrl,this.selectedFile, this.selectedNpwpFile];
 
-    fileVar.forEach(file => {
+    fileVar.every(file => {
       if( file === null || file === undefined ){
         console.log(file)
         this.popUpID = "popup-wrong-file";
         this.parent.popUpMessage = "Periksa kembali file Anda";
         this.parent.triggerPopUp();
+        return false;
       } else {
         this.pengurusFormGroup.markAllAsTouched();
         if (this.pengurusFormGroup.valid) {
@@ -150,6 +151,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
             this.update();
           }
         }
+        return true;
       }
     })
     
