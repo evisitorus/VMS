@@ -1,1 +1,17 @@
-<p>dokumen-legal works!</p>
+<div class="dokumen">
+  <div class="profile-content-grid my-3">
+    <kendo-grid [data]="gridData">
+      <kendo-grid-column field="no" title="No.">
+      </kendo-grid-column>
+      <kendo-grid-column field="nama" title="Nama Dokumen">
+      </kendo-grid-column>
+      <kendo-grid-column field="file" title="Nama File">
+      </kendo-grid-column>
+      <kendo-grid-column field="lampiran" title="Unggah Berkas">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a class="lampiran-url" (click)="this.parent.upload()">Pilih File</a>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>
