@@ -1,6 +1,6 @@
 <div class="profile-content-modal">
   <kendo-dialog title="Tambah Sertifikasi dan Dokumen Khusus" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
-    <!-- <form class="k-form">
+    <form class="k-form">
 
       <kendo-formfield [formGroup]="form">
         <kendo-label [for]="namaDokumen" text="Nama Dokumen"></kendo-label>
@@ -9,20 +9,21 @@
         <kendo-formerror>Nama Dokumen tidak boleh kosong</kendo-formerror>
       </kendo-formfield>
 
-      <kendo-formfield [formGroup]="form" *ngIf="!isLifeTime">
-        <kendo-label [for]="berlakuSampai" text="Berlaku Sampai"></kendo-label>
-        <kendo-datepicker id="input-berlaku-sampai" arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+      <kendo-formfield [formGroup]="form">
+        <kendo-label [for]="tanggalTerbit" text="Tanggal Terbit"></kendo-label>
+        <kendo-datepicker id="input-tanggal-terbit" tanggalTerbit formControlName="tanggalTerbit" #tanggalTerbit></kendo-datepicker>
         <kendo-formerror></kendo-formerror>
       </kendo-formfield>
 
-      <div class="k-checkbox-wrap">
-        <input type="checkbox" kendoCheckBox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}" (change)="setIsLifeTime()"/>
-        <kendo-label text="Seumur hidup" ></kendo-label>
-      </div>
+      <kendo-formfield [formGroup]="form">
+        <kendo-label [for]="tanggalExpired" text="Tanggal Expired"></kendo-label>
+        <kendo-datepicker id="input-tanggal-expired" tanggalExpired formControlName="tanggalExpired" #tanggalExpired></kendo-datepicker>
+        <kendo-formerror></kendo-formerror>
+      </kendo-formfield>
 
       <kendo-formfield [formGroup]="form">
         <kendo-label text="Lampiran File" ></kendo-label>
-        <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+        <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="parent.upload()"></kendo-fileselect>
         <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
         <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
         <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
@@ -41,7 +42,7 @@
         </div>
       </div>
 
-    </form> -->
+    </form>
   </kendo-dialog>
 
 </div>
