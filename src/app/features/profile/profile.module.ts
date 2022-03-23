@@ -70,6 +70,7 @@ import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/secti
     ProfileAlamatComponent,
     ProfileLaporanKeuanganComponent,
     ProfileDashboardComponent,
+    ProfileAspekLegalComponent,
     PemegangSahamComponent,
     DrawerComponent,
     ProfilKaryawanComponent,
