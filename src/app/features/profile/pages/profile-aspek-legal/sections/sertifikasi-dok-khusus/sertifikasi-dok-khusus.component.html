@@ -1,9 +1,7 @@
 <div class="dokumen">
-  <div class="profile-content-grid my-3">
+  <div class="profile-content-grid my-2">
     <div class="k-actions k-actions-end">
-      <div class="float-right profile-content-grid-button">
-        <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="k-button k-primary" look="flat"  style="color:#0193AC !important;" id="btn-tambah-dokumen">Tambah</button>
-      </div>
+      <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="k-button k-primary add-btn" id="btn-tambah-dokumen">Tambah</button>
     </div>
     <kendo-grid [data]="gridData">
         <kendo-grid-column field="no" title="No.">
