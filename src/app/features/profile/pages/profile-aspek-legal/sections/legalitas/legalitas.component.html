@@ -1,1 +1,180 @@
-<p>legalitas works!</p>
+<div class="container">
+  <div class="row mt-2">
+    <h5>Akta Pendirian</h5>
+    <div class="vstack">
+      <div class="row align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">No. Akta Pendirian</kendo-label>
+          <kendo-textbox id="noAktaPendirian" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitAktaPendirian"></kendo-datepicker>
+        </div>
+      </div>
+      <div class="row align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Notaris</kendo-label>
+          <kendo-textbox id="notarisAktaPendirian" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Notaris Pengganti</kendo-label>
+          <kendo-textbox id="notarisPenggantiAktaPendirian" class="col"></kendo-textbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2 align-items-center">
+    <h5>Akta Perubahan</h5>
+    <div class="vstack">
+      <div class="row align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">No. Akta Perubahan</kendo-label>
+          <kendo-textbox id="noAktaPerubahan" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitAktaPerubahan"></kendo-datepicker>
+        </div>
+      </div>
+      <div class="row align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Notaris</kendo-label>
+          <kendo-textbox id="notarisAktaPerubahan" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Notaris Pengganti</kendo-label>
+          <kendo-textbox id="notarisPenggantiAktaPerubahan" class="col"></kendo-textbox>
+        </div>
+      </div>
+      <div class="row align-items-center my-2">
+        <div class="col-6 hstack">
+          <kendo-label class="col">No. SK Pengesahan Menteri</kendo-label>
+          <kendo-textbox id="noSkPengesahanMenteri" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 hstack">
+          <kendo-label class="col mx-2">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitSkPengesahan"></kendo-datepicker>
+        </div>
+      </div>
+    </div>
+    <div class="hstack">
+      <div class="col-9 align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">NPWP</kendo-label>
+          <kendo-textbox id="npwpAktaPerubahan" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNpwp" class="col"></kendo-datepicker>
+        </div>
+      </div>
+      <div class="vr mx-2"></div>
+      <div class="col-1 vstack my-2">
+        <div class="col k-hstack align-items-center mb-2">
+          <kendo-label class="col mx-2">NPWP</kendo-label>
+          <button id="npwpButton" type="button" class="col btn btn-link" kendoButton icon="file" fillMode="link">NPWP</button>
+        </div>
+        <div class="col k-hstack align-items-center justify-content-center">
+          <input id="dataNpwpCbx" class="mx-2" type="checkbox" #dataNpwpCbx kendoCheckBox />
+          <kendo-label>Data Sesuai</kendo-label>
+        </div>
+      </div>
+    </div>
+    <div class="hstack">
+      <div class="col-9 h-stack align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">No. SIUP / Surat Izin Berusaha</kendo-label>
+          <kendo-textbox id="noSiup" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNoSiup" class="col"></kendo-datepicker>
+        </div>
+      </div>
+      <div class="vr mx-2"></div>
+      <div class="col-1 vstack my-2">
+        <div class="col k-hstack align-items-center mb-2">
+          <kendo-label class="col mx-2">SIUP</kendo-label>
+          <button id="siupButton" type="button" class="btn btn-link" kendoButton icon="file" fillMode="link">SIUP</button>
+        </div>
+        <div class="col k-hstack align-items-center justify-content-center">
+          <input id="dataSiupCbx" class="mx-2" type="checkbox" #dataSiupCbx kendoCheckBox />
+          <kendo-label>Data Sesuai</kendo-label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hstack">
+    <div class="col-9 mt-2 align-items-center">
+      <h5>NIB / TDP</h5>
+      <div class="row align-items-center my-2">
+        <div class="col k-hstack">
+          <kendo-label class="col">No. NIB / TDP</kendo-label>
+          <kendo-textbox id="noSiup" class="col"></kendo-textbox>
+        </div>
+        <div class="col k-hstack">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNoNib" class="col"></kendo-datepicker>
+        </div>
+      </div>
+      <div class="row align-items-center my-2">
+        <div class="col k-hstack">
+          <kendo-label class="col">Tanggal Expire</kendo-label>
+          <kendo-datepicker id="tanggalExpireNoNib" class="col"></kendo-datepicker>
+        </div>
+        <div class="col k-hstack align-items-center float-right">
+          <input class="mr-3" type="checkbox" #tanggalExpireNoNib kendoCheckBox />
+          <kendo-label>Seumur Hidup</kendo-label>
+        </div>
+      </div>
+    </div>
+    <div class="vr mx-2"></div>
+    <div class="col-1 vstack my-2">
+      <div class="col k-hstack align-items-center mb-2">
+        <kendo-label class="col mx-2">NIB / TDP</kendo-label>
+        <button id="nibButton" type="button" class="btn btn-link" kendoButton icon="file" fillMode="link"> NIB / TDP</button>
+      </div>
+      <div class="col k-hstack align-items-center justify-content-center">
+        <input id="dataNibCbx" class="mx-2" type="checkbox" #dataNibCbx kendoCheckBox />
+        <kendo-label>Data Sesuai</kendo-label>
+      </div>
+    </div>
+  </div>
+  <div class="hstack">
+    <div class="col-9 align-items-center">
+      <h5>IDP / SITU</h5>
+      <div class="row align-items-center my-2">
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">No.IDP / SITU</kendo-label>
+          <kendo-textbox id="noSiup" class="col"></kendo-textbox>
+        </div>
+        <div class="col-6 k-hstack">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNoIdp" class="col"></kendo-datepicker>
+        </div>
+        <div class="row align-items-center my-2">
+          <div class="col-6 k-hstack">
+            <kendo-label class="col">Tanggal Expire</kendo-label>
+            <kendo-datepicker id="tanggalExpireNoIdp" class="col"></kendo-datepicker>
+          </div>
+          <div class="col-6 k-hstack align-items-center float-right">
+            <input class="mr-3" type="checkbox" #tanggalExpireNoIdp kendoCheckBox />
+            <kendo-label>Seumur Hidup</kendo-label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="vr mx-2"></div>
+    <div class="col-1 vstack my-2">
+      <div class="col k-hstack align-items-center mb-2">
+        <kendo-label class="col mx-2">IDP / SITU</kendo-label>
+        <button id="idpButton" type="button" class="btn btn-link" kendoButton icon="file" fillMode="link"> IDP / SITU</button>
+      </div>
+      <div class="col k-hstack align-items-center justify-content-center">
+        <input id="dataIdpCbx" class="mx-2" type="checkbox" #dataIdpCbx kendoCheckBox />
+        <kendo-label>Data Sesuai</kendo-label>
+      </div>
+    </div>
+  </div>
+</div>
