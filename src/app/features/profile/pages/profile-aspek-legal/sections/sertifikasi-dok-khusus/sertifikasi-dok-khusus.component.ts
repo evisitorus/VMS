@@ -11,12 +11,17 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public form!: FormGroup;
   public gridData: any[] = [];
+  public opened: boolean = false;
 
   constructor(
     public parent: ProfileAspekLegalComponent,
   ) { }
 
   ngOnInit(): void {
+  }
+
+  public open(): void {
+    this.opened = true;
   }
 
 }
