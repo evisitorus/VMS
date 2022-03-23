@@ -1,3 +1,50 @@
+<div class="profile-content-modal">
+  <kendo-dialog title="Tambah Sertifikasi dan Dokumen Khusus" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+    <!-- <form class="k-form">
+
+      <kendo-formfield [formGroup]="form">
+        <kendo-label [for]="namaDokumen" text="Nama Dokumen"></kendo-label>
+        <kendo-textbox id="input-nama-dokumen" formControlName="namaDokumen" [clearButton]="true" #namaDokumen required></kendo-textbox>
+        <kendo-formhint></kendo-formhint>
+        <kendo-formerror>Nama Dokumen tidak boleh kosong</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield [formGroup]="form" *ngIf="!isLifeTime">
+        <kendo-label [for]="berlakuSampai" text="Berlaku Sampai"></kendo-label>
+        <kendo-datepicker id="input-berlaku-sampai" arrivalDate formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+        <kendo-formerror></kendo-formerror>
+      </kendo-formfield>
+
+      <div class="k-checkbox-wrap">
+        <input type="checkbox" kendoCheckBox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}" (change)="setIsLifeTime()"/>
+        <kendo-label text="Seumur hidup" ></kendo-label>
+      </div>
+
+      <kendo-formfield [formGroup]="form">
+        <kendo-label text="Lampiran File" ></kendo-label>
+        <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+        <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
+        <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+        <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+      </kendo-formfield>
+
+      <div class="k-actions k-actions-end">
+        <div class="profile-content-modal-btn">
+          <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan">
+            Simpan
+          </button>
+        </div>
+        <div class="profile-content-modal-btn">
+          <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal">
+            Batal
+          </button>
+        </div>
+      </div>
+
+    </form> -->
+  </kendo-dialog>
+
+</div>
 <div class="dokumen">
   <div class="profile-content-grid my-2">
     <div class="k-actions k-actions-end">
@@ -31,3 +78,7 @@
     </kendo-grid>
   </div>
 </div>
+
+<div kendoDialogContainer></div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

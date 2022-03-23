@@ -12,6 +12,10 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public form!: FormGroup;
   public gridData: any[] = [];
   public opened: boolean = false;
+  public isNewData: boolean = true;
+
+  public popUpTitle: string = "Profile Dokumen";
+  public popUpMessage: string = "";
 
   constructor(
     public parent: ProfileAspekLegalComponent,
@@ -22,6 +26,22 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public open(): void {
     this.opened = true;
+  }
+
+  public close(): void {
+    this.opened = false;
+    this.resetForm();
+    this.isNewData = true;
+  }
+
+  public resetForm(): void {
+    // this.data.id = "";
+    // this.data.nomorDokumen = "";
+    // this.data.namaDokumen = "";
+    // this.data.berlakuDari = "";
+    // this.data.berlakuSampai = "";
+    // this.data.lampiran = "";
+    // this.setForm();
   }
 
 }
