@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component';
 
 @Component({
   selector: 'app-sertifikasi-dok-khusus',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SertifikasiDokKhususComponent implements OnInit {
 
-  constructor() { }
+  public form!: FormGroup;
+  public gridData: any[] = [];
+
+  constructor(
+    public parent: ProfileAspekLegalComponent,
+  ) { }
 
   ngOnInit(): void {
   }
