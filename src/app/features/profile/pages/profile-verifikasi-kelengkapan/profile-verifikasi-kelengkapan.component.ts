@@ -109,23 +109,30 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public verify(): any {
     this.form.markAllAsTouched();
     if (this.form.valid) {
+      let confirmed = true; 
+      
       for (let d in this.data) {
-        if (!this.data[d]) {
-          this.popUpMessage = dictionary.incomplete_data;
-          this.triggerPopUp();
-          return false;
+        if (!this.data[d]['status']) {
+          confirmed = false;
         }
       }
-      this.service.verifikasiKelengkapan().subscribe(
-        () => {
-          this.popUpMessage = dictionary.verification_submited;
-          this.triggerPopUp();
-        },
-        () => {
-          this.popUpMessage = dictionary.verification_failed;
-          this.triggerPopUp();
-        }
-      );
+
+      if (confirmed) {
+        this.service.verifikasiKelengkapan().subscribe(
+          () => {
+            this.popUpMessage = dictionary.verification_submited;
+            this.triggerPopUp();
+          },
+          () => {
+            this.popUpMessage = dictionary.verification_failed;
+            this.triggerPopUp();
+          }
+        );
+      } else {
+        this.popUpMessage = dictionary.incomplete_data;
+        this.triggerPopUp();
+      }
+      
     }
   }
 
