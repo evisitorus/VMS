@@ -20,6 +20,7 @@ export class ProfileAspekLegalComponent implements OnInit {
   };
 
   public popUpID = "";
+  public popUpTitle: string = "";
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
