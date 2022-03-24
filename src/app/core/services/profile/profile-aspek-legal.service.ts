@@ -33,12 +33,12 @@ export class ProfileAspekLegalService {
 
   public getAspekLegal(){
     let token = this.authService.getLocalStorage('access_token')!;
-    let party_id = this.authService.getLocalStorage('party_id')!;
+    let party_id = this.authService.getLocalStorage('vendor_id')!;
     let route = [party_id,"aspek_legal"];
     
     let api_get_aspek_legal: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_vendor_route + route.join('/'),
+      url: ApiRoutes.api_vendor_route  + '/' + route.join('/'),
       options: {
         headers: {
           Authorization: token
@@ -50,7 +50,7 @@ export class ProfileAspekLegalService {
 
   public addAspekLegal(params: AspekLegalInterface): Observable<any>{
     let token = this.authService.getLocalStorage('access_token')!;
-    let party_id = this.authService.getLocalStorage('party_id')!;
+    let party_id = this.authService.getLocalStorage('vendor_id')!;
     let route = [party_id,"aspek_legal"];
     let body: any = {
       noAktaPendirian:params.noAktaPendirian,
@@ -79,7 +79,7 @@ export class ProfileAspekLegalService {
 
     let api_add_aspek_legal: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_vendor_route + route.join('/'),
+      url: ApiRoutes.api_vendor_route + '/' + route.join('/'),
       body: body,
       options: {
         headers: {
