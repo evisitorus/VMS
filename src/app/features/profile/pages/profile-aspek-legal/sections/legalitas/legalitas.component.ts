@@ -17,6 +17,8 @@ export class LegalitasComponent implements OnInit {
   public params!: AspekLegalInterface;
   public opened: boolean = false;
   public isNewData: boolean = true;
+  public nibExpireChecked: boolean = false;
+  public idpExpireChecked: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -54,8 +56,15 @@ export class LegalitasComponent implements OnInit {
     this.opened = true;
   }
 
+  public setNibLifeTime(): void {
+    if (this.nibExpireChecked) this.data.isNiBTdpSeumurHidup = this.nibExpireChecked;
+  }
+
+  public setIdpLifeTime(): void {
+    if (this.idpExpireChecked) this.data.isIdpSituSeumurHidup = this.idpExpireChecked;
+  }
+
   public setForm(data: any): void {
-    console.log(data)
     this.aspekLegalFromGroup = new FormGroup({
       noAktaPendirian: new FormControl(data.noAktaPendirian, Validators.required),
       tanggalTerbitAktaPendirian: new FormControl(new Date(data.tanggalTerbitAktaPendirian), Validators.required),
@@ -78,6 +87,8 @@ export class LegalitasComponent implements OnInit {
       tanggalTerbitIdpSitu: new FormControl(new Date(data.tanggalTerbitIdpSitu), Validators.required),
       tanggalExpireIdpSitu: new FormControl(new Date(data.tanggalExpireIdpSitu), Validators.required)
     });
+    this.nibExpireChecked = data.isNiBTdpSeumurHidup;
+    this.idpExpireChecked = data.isIdpSituSeumurHidup;
   }
 
   public resetForm(): void {
@@ -93,8 +104,6 @@ export class LegalitasComponent implements OnInit {
   }
 
   public submitForm(): void {
-    console.log(this.aspekLegalFromGroup.value)
-    console.log(this.aspekLegalFromGroup.valid)
     if (this.aspekLegalFromGroup.valid) {
       this.params = {
         noAktaPendirian:this.aspekLegalFromGroup.value.noAktaPendirian,
@@ -112,11 +121,11 @@ export class LegalitasComponent implements OnInit {
         noSiup: this.aspekLegalFromGroup.value.noSiup,
         tanggalTerbitSiup: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitSiup),
         noNibTdp: this.aspekLegalFromGroup.value.noNibTdp,
-        isNiBTdpSeumurHidup: this.aspekLegalFromGroup.value.isNiBTdpSeumurHidup ? this.aspekLegalFromGroup.value.isNiBTdpSeumurHidup  : false ,
+        isNiBTdpSeumurHidup: this.data.isNiBTdpSeumurHidup,
         tanggalTerbitNibTdp: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitNibTdp),
         tanggalExpireNibTdp: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireNibTdp),
         noIdpSitu: this.aspekLegalFromGroup.value.noIdpSitu,
-        isIdpSituSeumurHidup: this.aspekLegalFromGroup.value.isIdpSituSeumurHidup ? this.aspekLegalFromGroup.value.isIdpSituSeumurHidup : false,
+        isIdpSituSeumurHidup: this.data.isIdpSituSeumurHidup,
         tanggalTerbitIdpSitu: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitIdpSitu),
         tanggalExpireIdpSitu: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireIdpSitu)
       }

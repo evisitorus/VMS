@@ -85,7 +85,7 @@
         </kendo-formfield>
         <div class="col-6 k-hstack align-items-center">
           <kendo-label style="margin-right: 0.5em;">Seumur Hidup</kendo-label>
-          <input id="isNiBTdpSeumurHidup" type="checkbox" #tanggalExpireNoNib kendoCheckBox />
+          <input id="isNiBTdpSeumurHidup" type="checkbox" #tanggalExpireNoNib [(ngModel)]="nibExpireChecked" [ngModelOptions]="{standalone: true}" (change)="setNibLifeTime()" kendoCheckBox />
         </div>
       </div>
       <div class="row h-stack align-items-center my-2">
@@ -108,7 +108,7 @@
         </kendo-formfield>
         <div class="col-6 k-hstack align-items-center" >
           <kendo-label style="margin-right: 0.5em;">Seumur Hidup</kendo-label>
-          <input id="isIdpSituSeumurHidup" class="mr-3" type="checkbox" #tanggalExpireNoIdp kendoCheckBox />
+          <input id="isIdpSituSeumurHidup" class="mr-3" type="checkbox" #tanggalExpireNoIdp [(ngModel)]="idpExpireChecked" [ngModelOptions]="{standalone: true}" (change)="setIdpLifeTime()" kendoCheckBox />
         </div>
 
       </div>
