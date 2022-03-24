@@ -1,126 +1,129 @@
 <div class="container">
-  <div class="row mt-2">
-    <h5>Akta Pendirian</h5>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">No. Akta Pendirian</kendo-label>
-        <kendo-textbox id="noAktaPendirian" class="col"></kendo-textbox>
+  <form>
+    <div class="row mt-2">
+      <h5>Akta Pendirian</h5>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">No. Akta Pendirian</kendo-label>
+          <kendo-textbox id="noAktaPendirian" class="col" placeholder="Nama Perusahaan" [clearButton]="true" formControlName="noAktaPendirian"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitAktaPendirian" class="col" formControlName="tanggalTerbitAktaPendirian"></kendo-datepicker>
+        </kendo-formfield>
       </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitAktaPendirian"></kendo-datepicker>
-      </div>
-    </div>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Notaris</kendo-label>
-        <kendo-textbox id="notarisAktaPendirian" class="col"></kendo-textbox>
-      </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Notaris Pengganti</kendo-label>
-        <kendo-textbox id="notarisPenggantiAktaPendirian" class="col"></kendo-textbox>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-2 align-items-center">
-    <h5>Akta Perubahan</h5>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">No. Akta Perubahan</kendo-label>
-        <kendo-textbox id="noAktaPerubahan" class="col"></kendo-textbox>
-      </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitAktaPerubahan"></kendo-datepicker>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Notaris</kendo-label>
+          <kendo-textbox id="notarisAktaPendirian" class="col" placeholder="Notaris" [clearButton]="true" formControlName="notarisAktaPendirian"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Notaris Pengganti</kendo-label>
+          <kendo-textbox id="notarisPenggantiAktaPendirian" class="col" placeholder="Notaris Pengganti" [clearButton]="true" formControlName="notarisPenggantiAktaPendirian"></kendo-textbox>
+        </kendo-formfield>
       </div>
     </div>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Notaris</kendo-label>
-        <kendo-textbox id="notarisAktaPerubahan" class="col"></kendo-textbox>
+    <div class="row mt-2 align-items-center">
+      <h5>Akta Perubahan</h5>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">No. Akta Perubahan</kendo-label>
+          <kendo-textbox id="noAktaPerubahan" class="col" placeholder="Nomor Akta Perubahan" [clearButton]="true" formControlName="noAktaPerubahan"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitAktaPerubahan" formControlName="tanggalTerbitAktaPerubahan"></kendo-datepicker>
+        </kendo-formfield>
       </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Notaris Pengganti</kendo-label>
-        <kendo-textbox id="notarisPenggantiAktaPerubahan" class="col"></kendo-textbox>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Notaris</kendo-label>
+          <kendo-textbox id="notarisAktaPerubahan" class="col" placeholder="Notaris Akta Perubahan" [clearButton]="true" formControlName="notarisAktaPerubahan"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Notaris Pengganti</kendo-label>
+          <kendo-textbox id="notarisPenggantiAktaPerubahan" class="col" placeholder="Notaris Pengganti Akta Perubahan" [clearButton]="true" formControlName="notarisPenggantiAktaPerubahan"></kendo-textbox>
+        </kendo-formfield>
       </div>
-    </div>
-    <div class="row align-items-center my-2">
-      <div class="col-6 hstack">
-        <kendo-label class="col">No. SK Pengesahan Menteri</kendo-label>
-        <kendo-textbox id="noSkPengesahanMenteri" class="col"></kendo-textbox>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">No. SK Pengesahan Menteri</kendo-label>
+          <kendo-textbox id="noSkPengesahanMenteri" class="col" placeholder="No. SK Pengesahan Menteri" [clearButton]="true" formControlName="noSkPengesahanMenteri"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitSkPengesahan" formControlName="tanggalTerbitNoSkPengesahanMenteri"></kendo-datepicker>
+        </kendo-formfield>
       </div>
-      <div class="col-6 hstack">
-        <kendo-label class="col">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitSkPengesahan"></kendo-datepicker>
+      <div class="row align-items-center my-2">        
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">NPWP</kendo-label>
+          <kendo-textbox id="npwpAktaPerubahan" class="col" placeholder="NPWP" [clearButton]="true" formControlName="npwp"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNpwp" class="col" formControlName="tanggalTerbitNpwp"></kendo-datepicker>
+        </kendo-formfield>
       </div>
-    </div>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">NPWP</kendo-label>
-        <kendo-textbox id="npwpAktaPerubahan" class="col"></kendo-textbox>
-      </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitNpwp" class="col"></kendo-datepicker>
-      </div>
-    </div>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">No. SIUP / Surat Izin Berusaha</kendo-label>
-        <kendo-textbox id="noSiup" class="col"></kendo-textbox>
-      </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitNoSiup" class="col"></kendo-datepicker>
-      </div>
-    </div>
-  </div>
-  <div class="row align-items-center">
-    <h5>NIB / TDP</h5>
-    <div class="row h-stack align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">No. NIB / TDP</kendo-label>
-        <kendo-textbox id="noSiup" class="col"></kendo-textbox>
-      </div>
-      <div class="col-6 k-hstack align-items-center">
-        <input id="seumurHidupNib" type="checkbox" #tanggalExpireNoNib kendoCheckBox />
-        <kendo-label class="mx-2">Seumur Hidup</kendo-label>
-      </div>
-    </div>
-    <div class="row h-stack align-items-center my-2">
-      <div class="col-6 hstack">
-        <kendo-label class="col-6">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitNoNib" class="col-6"></kendo-datepicker>
-      </div>
-      <div class="col-6 hstack">
-        <kendo-label class="col-6">Tanggal Expire</kendo-label>
-        <kendo-datepicker id="tanggalExpireNoNib" class="col-6"></kendo-datepicker>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">No. SIUP / Surat Izin Berusaha</kendo-label>
+          <kendo-textbox id="noSiup" class="col" formControlName="noSiup" placeholder="No. SIUP / Surat Izin Berusaha" [clearButton]="true" ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitSiup" class="col" formControlName="tanggalTerbitSiup"></kendo-datepicker>
+        </kendo-formfield>
       </div>
     </div>
-  </div>
-  <div class="row align-items-center mb-3">
-    <h5>IDP / SITU</h5>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col">No.IDP / SITU</kendo-label>
-        <kendo-textbox id="noSiup" class="col"></kendo-textbox>
+    <div class="row align-items-center">
+      <h5>NIB / TDP</h5>
+      <div class="row h-stack align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">No. NIB / TDP</kendo-label>
+          <kendo-textbox id="noSiup" class="col" formControlName="noSiup" placeholder="No. NIB / TDP" [clearButton]="true" ></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <input id="seumurHidupNib" type="checkbox" #tanggalExpireNoNib kendoCheckBox formControlName="isNiBTdpSeumurHidup" />
+          <kendo-label class="mx-2">Seumur Hidup</kendo-label>
+        </kendo-formfield>
       </div>
-      <div class="col-6 k-hstack align-items-center float-right">
-        <input id="seumurHidupIdp" class="mr-3" type="checkbox" #tanggalExpireNoIdp kendoCheckBox />
-        <kendo-label class="mx-2">Seumur Hidup</kendo-label>
+      <div class="row h-stack align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col-6">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNoNib" class="col" formControlName="tanggalTerbitNibTdp"></kendo-datepicker>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col-6">Tanggal Expire</kendo-label>
+          <kendo-datepicker id="tanggalExpireNoNib" class="col" formControlName="tanggalExpireNibTdp"></kendo-datepicker>
+        </kendo-formfield>
       </div>
     </div>
-    <div class="row align-items-center my-2">
-      <div class="col-6 k-hstack">
-        <kendo-label class="col-6">Tanggal Terbit</kendo-label>
-        <kendo-datepicker id="tanggalTerbitNoIdp" class="col-6"></kendo-datepicker>
+    <div class="row align-items-center mb-3">
+      <h5>IDP / SITU</h5>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col">No.IDP / SITU</kendo-label>
+          <kendo-textbox id="noSiup" class="col"  placeholder="No. NIB / TDP" [clearButton]="true" formControlName="noIdpSitu"></kendo-textbox>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <input id="seumurHidupIdp" class="mr-3" type="checkbox" #tanggalExpireNoIdp kendoCheckBox formControlName="isIdpSituSeumurHidup"/>
+          <kendo-label class="mx-2">Seumur Hidup</kendo-label>
+        </kendo-formfield>
+
       </div>
-      <div class="col-6 k-hstack">
-        <kendo-label class="col-6">Tanggal Expire</kendo-label>
-        <kendo-datepicker id="tanggalExpireNoIdp" class="col-6"></kendo-datepicker>
+      <div class="row align-items-center my-2">
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col-6">Tanggal Terbit</kendo-label>
+          <kendo-datepicker id="tanggalTerbitNoIdp" class="col" formControlName="tanggalTerbitIdpSitu"></kendo-datepicker>
+        </kendo-formfield>
+        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
+          <kendo-label class="col-6">Tanggal Expire</kendo-label>
+          <kendo-datepicker id="tanggalExpireNoIdp" class="col" formControlName="tanggalExpireIdpSitu"></kendo-datepicker>
+        </kendo-formfield>
       </div>
     </div>
-  </div>
+  </form>
   <div style="float: right;">
     <button kendoButton id="simpanLegalitas" class="k-primary my-3 float-right">Simpan</button>
   </div>

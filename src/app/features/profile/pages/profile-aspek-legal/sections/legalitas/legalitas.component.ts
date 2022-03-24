@@ -10,7 +10,7 @@ import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component'
 })
 export class LegalitasComponent implements OnInit {
 
-  public profileInformationFormGroup!: FormGroup;
+  public aspekLegalFromGroup!: FormGroup;
   public data:any = {};
 
   constructor(
@@ -40,7 +40,7 @@ export class LegalitasComponent implements OnInit {
   }
 
   public setForm(data: any): void {
-    this.profileInformationFormGroup = this.fb.group({
+    this.aspekLegalFromGroup = this.fb.group({
       noAktaPendirian:new FormControl(data.noAktaPendirian, Validators.required),
       tanggalTerbitAktaPendirian: new FormControl(data.tanggalTerbitAktaPendirian, Validators.required),
       notarisAktaPendirian: new FormControl(data.notarisAktaPendirian, Validators.required),
