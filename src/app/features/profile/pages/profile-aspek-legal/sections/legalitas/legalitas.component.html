@@ -5,7 +5,7 @@
       <div class="row align-items-center my-2">
         <kendo-formfield class="col k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. Akta Pendirian</kendo-label>
-          <kendo-textbox id="noAktaPendirian" class="col" placeholder="Nama Perusahaan" [clearButton]="true" formControlName="noAktaPendirian"></kendo-textbox>
+          <kendo-textbox id="noAktaPendirian" class="col" placeholder="No Akta Pendirian" [clearButton]="true" formControlName="noAktaPendirian"></kendo-textbox>
         </kendo-formfield>
         <kendo-formfield class="col k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Tanggal Terbit</kendo-label>
@@ -52,13 +52,13 @@
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Tanggal Terbit</kendo-label>
-          <kendo-datepicker id="tanggalTerbitSkPengesahan" formControlName="tanggalTerbitNoSkPengesahanMenteri"></kendo-datepicker>
+          <kendo-datepicker id="tanggalTerbitNoSkPengesahanMenteri" formControlName="tanggalTerbitNoSkPengesahanMenteri"></kendo-datepicker>
         </kendo-formfield>
       </div>
       <div class="row align-items-center my-2">        
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">NPWP</kendo-label>
-          <kendo-textbox id="npwpAktaPerubahan" class="col" placeholder="NPWP" [clearButton]="true" formControlName="npwp"></kendo-textbox>
+          <kendo-textbox id="npwp" class="col" placeholder="NPWP" [clearButton]="true" formControlName="npwp"></kendo-textbox>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Tanggal Terbit</kendo-label>
@@ -81,21 +81,21 @@
       <div class="row h-stack align-items-center my-2">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. NIB / TDP</kendo-label>
-          <kendo-textbox id="noSiup" class="col" formControlName="noSiup" placeholder="No. NIB / TDP" [clearButton]="true" ></kendo-textbox>
+          <kendo-textbox id="noNibTdp" class="col" formControlName="noNibTdp" placeholder="No. NIB / TDP" [clearButton]="true" ></kendo-textbox>
         </kendo-formfield>
-        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
-          <input id="seumurHidupNib" type="checkbox" #tanggalExpireNoNib kendoCheckBox formControlName="isNiBTdpSeumurHidup" />
+        <div class="col-6 k-hstack align-items-center">
           <kendo-label style="margin-right: 0.5em;">Seumur Hidup</kendo-label>
-        </kendo-formfield>
+          <input id="isNiBTdpSeumurHidup" type="checkbox" #tanggalExpireNoNib kendoCheckBox />
+        </div>
       </div>
       <div class="row h-stack align-items-center my-2">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Terbit</kendo-label>
-          <kendo-datepicker id="tanggalTerbitNoNib" class="col w-100" formControlName="tanggalTerbitNibTdp"></kendo-datepicker>
+          <kendo-datepicker id="tanggalTerbitNibTdp" class="col w-100" formControlName="tanggalTerbitNibTdp"></kendo-datepicker>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Expire</kendo-label>
-          <kendo-datepicker id="tanggalExpireNoNib" class="col w-100" formControlName="tanggalExpireNibTdp"></kendo-datepicker>
+          <kendo-datepicker id="tanggalExpireNibTdp" class="col w-100" formControlName="tanggalExpireNibTdp"></kendo-datepicker>
         </kendo-formfield>
       </div>
     </div>
@@ -104,27 +104,27 @@
       <div class="row align-items-center my-2">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No.IDP / SITU</kendo-label>
-          <kendo-textbox id="noSiup" class="col"  placeholder="No. NIB / TDP" [clearButton]="true" formControlName="noIdpSitu"></kendo-textbox>
+          <kendo-textbox id="noIdpSitu" class="col"  placeholder="No. NIB / TDP" [clearButton]="true" formControlName="noIdpSitu"></kendo-textbox>
         </kendo-formfield>
-        <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
-          <input id="seumurHidupIdp" class="mr-3" type="checkbox" #tanggalExpireNoIdp kendoCheckBox formControlName="isIdpSituSeumurHidup"/>
+        <div class="col-6 k-hstack align-items-center" >
           <kendo-label style="margin-right: 0.5em;">Seumur Hidup</kendo-label>
-        </kendo-formfield>
+          <input id="isIdpSituSeumurHidup" class="mr-3" type="checkbox" #tanggalExpireNoIdp kendoCheckBox />
+        </div>
 
       </div>
       <div class="row align-items-center my-2">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Terbit</kendo-label>
-          <kendo-datepicker id="tanggalTerbitNoIdp" class="col w-100" formControlName="tanggalTerbitIdpSitu"></kendo-datepicker>
+          <kendo-datepicker id="tanggalTerbitIdpSitu" class="col w-100" formControlName="tanggalTerbitIdpSitu"></kendo-datepicker>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Expire</kendo-label>
-          <kendo-datepicker id="tanggalExpireNoIdp" class="col w-100" formControlName="tanggalExpireIdpSitu"></kendo-datepicker>
+          <kendo-datepicker id="tanggalExpireIdpSitu" class="col w-100" formControlName="tanggalExpireIdpSitu"></kendo-datepicker>
         </kendo-formfield>
       </div>
     </div>
   </form>
   <div style="float: right;">
-    <button kendoButton id="simpanLegalitas" class="k-primary my-3 float-right">Simpan</button>
+    <button kendoButton id="simpanLegalitas" class="k-primary my-3 float-right" (click)="submitForm()">Simpan</button>
   </div>
 </div>
