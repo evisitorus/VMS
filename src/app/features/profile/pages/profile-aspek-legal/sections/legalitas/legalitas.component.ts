@@ -30,6 +30,7 @@ export class LegalitasComponent implements OnInit {
         Object.keys(response).map((key, index) => {
           this.data[key] = response[key];
         });
+        this.setForm(this.data);
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
