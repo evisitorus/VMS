@@ -54,10 +54,6 @@ export class LegalitasComponent implements OnInit {
     this.opened = true;
   }
 
-  public convertDate(d: any) {
-    return (d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()
-  }
-
   public setForm(data: any): void {
     console.log(data)
     this.aspekLegalFromGroup = new FormGroup({
@@ -93,7 +89,7 @@ export class LegalitasComponent implements OnInit {
   public convertDateFormat(date: any){
     const offset = date.getTimezoneOffset();
     date = new Date(date.getTime() - (offset*60*1000));
-    return date.toISOString().split('T')[0];
+    return date.toISOString();
   }
 
   public submitForm(): void {
@@ -102,27 +98,27 @@ export class LegalitasComponent implements OnInit {
     if (this.aspekLegalFromGroup.valid) {
       this.params = {
         noAktaPendirian:this.aspekLegalFromGroup.value.noAktaPendirian,
-        tanggalTerbitAktaPendirian: this.aspekLegalFromGroup.value.tanggalTerbitAktaPendirian.toISOString(),
+        tanggalTerbitAktaPendirian: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitAktaPendirian),
         notarisAktaPendirian: this.aspekLegalFromGroup.value.notarisAktaPendirian,
         notarisPenggantiAktaPendirian: this.aspekLegalFromGroup.value.notarisPenggantiAktaPendirian,
         noAktaPerubahan: this.aspekLegalFromGroup.value.noAktaPerubahan,
-        tanggalTerbitAktaPerubahan: this.aspekLegalFromGroup.value.tanggalTerbitAktaPerubahan.toISOString(),
+        tanggalTerbitAktaPerubahan: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitAktaPerubahan),
         notarisAktaPerubahan: this.aspekLegalFromGroup.value.notarisAktaPerubahan,
         notarisPenggantiAktaPerubahan:this.aspekLegalFromGroup.value.notarisPenggantiAktaPerubahan,
         noSkPengesahanMenteri: this.aspekLegalFromGroup.value.noSkPengesahanMenteri,
-        tanggalTerbitNoSkPengesahanMenteri: this.aspekLegalFromGroup.value.tanggalTerbitNoSkPengesahanMenteri.toISOString(),
+        tanggalTerbitNoSkPengesahanMenteri: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitNoSkPengesahanMenteri),
         npwp: this.aspekLegalFromGroup.value.npwp,
-        tanggalTerbitNpwp: this.aspekLegalFromGroup.value.tanggalTerbitNpwp.toISOString(),
+        tanggalTerbitNpwp: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitNpwp),
         noSiup: this.aspekLegalFromGroup.value.noSiup,
-        tanggalTerbitSiup: this.aspekLegalFromGroup.value.tanggalTerbitSiup.toISOString(),
+        tanggalTerbitSiup: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitSiup),
         noNibTdp: this.aspekLegalFromGroup.value.noNibTdp,
         isNiBTdpSeumurHidup: this.aspekLegalFromGroup.value.isNiBTdpSeumurHidup ? this.aspekLegalFromGroup.value.isNiBTdpSeumurHidup  : false ,
-        tanggalTerbitNibTdp: this.aspekLegalFromGroup.value.tanggalTerbitNibTdp.toISOString(),
-        tanggalExpireNibTdp: this.aspekLegalFromGroup.value.tanggalExpireNibTdp.toISOString(),
+        tanggalTerbitNibTdp: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitNibTdp),
+        tanggalExpireNibTdp: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireNibTdp),
         noIdpSitu: this.aspekLegalFromGroup.value.noIdpSitu,
         isIdpSituSeumurHidup: this.aspekLegalFromGroup.value.isIdpSituSeumurHidup ? this.aspekLegalFromGroup.value.isIdpSituSeumurHidup : false,
-        tanggalTerbitIdpSitu: this.aspekLegalFromGroup.value.tanggalTerbitIdpSitu.toISOString(),
-        tanggalExpireIdpSitu: this.aspekLegalFromGroup.value.tanggalExpireIdpSitu.toISOString()
+        tanggalTerbitIdpSitu: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitIdpSitu),
+        tanggalExpireIdpSitu: this.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireIdpSitu)
       }
 
       this.profileAspekLegalService.addAspekLegal(this.params).subscribe(
