@@ -5,11 +5,15 @@
       </kendo-grid-column>
       <kendo-grid-column field="name" title="Nama Dokumen">
       </kendo-grid-column>
-      <kendo-grid-column field="file" title="Nama File">
+      <kendo-grid-column field="fileName" title="File">
       </kendo-grid-column>
       <kendo-grid-column field="lampiran" title="Unggah Berkas">
         <ng-template kendoGridCellTemplate let-dataItem>
-          <button kendoButton fill="flat" class="lampiran-url" (click)="this.parent.upload()">Pilih File</button>
+          <kendo-fileselect [multiple]="false" [restrictions]="fileRestrictions">
+            <kendo-fileselect-messages
+            select="Pilih file">
+            </kendo-fileselect-messages>
+          </kendo-fileselect>
         </ng-template>
       </kendo-grid-column>
     </kendo-grid>
