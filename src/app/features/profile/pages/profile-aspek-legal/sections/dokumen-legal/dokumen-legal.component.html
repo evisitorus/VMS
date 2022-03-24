@@ -6,6 +6,9 @@
       <kendo-grid-column field="name" title="Nama Dokumen">
       </kendo-grid-column>
       <kendo-grid-column field="fileName" title="File">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a>{{dataItem.namaDokumen}}</a>
+        </ng-template>
       </kendo-grid-column>
       <kendo-grid-column field="lampiran" title="Unggah Berkas">
         <ng-template kendoGridCellTemplate let-dataItem>

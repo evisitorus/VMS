@@ -43,7 +43,7 @@ export class LegalitasComponent implements OnInit {
         this.parent.popUpMessage = err.error.message;
         this.parent.triggerPopUp();
       }
-    )
+    );
   }
 
   public close(): void {
