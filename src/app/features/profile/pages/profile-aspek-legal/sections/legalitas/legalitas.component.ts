@@ -54,28 +54,33 @@ export class LegalitasComponent implements OnInit {
     this.opened = true;
   }
 
+  public convertDate(d: any) {
+    return (d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()
+  }
+
   public setForm(data: any): void {
+    console.log(data)
     this.aspekLegalFromGroup = new FormGroup({
       noAktaPendirian: new FormControl(data.noAktaPendirian, Validators.required),
-      tanggalTerbitAktaPendirian: new FormControl(data.tanggalTerbitAktaPendirian, Validators.required),
+      tanggalTerbitAktaPendirian: new FormControl(new Date(data.tanggalTerbitAktaPendirian), Validators.required),
       notarisAktaPendirian: new FormControl(data.notarisAktaPendirian, Validators.required),
       notarisPenggantiAktaPendirian: new FormControl(data.notarisPenggantiAktaPendirian, Validators.required),
       noAktaPerubahan: new FormControl(data.noAktaPerubahan, Validators.required),
-      tanggalTerbitAktaPerubahan: new FormControl(data.tanggalTerbitAktaPerubahan, Validators.required),
+      tanggalTerbitAktaPerubahan: new FormControl(new Date(data.tanggalTerbitAktaPerubahan), Validators.required),
       notarisAktaPerubahan: new FormControl(data.notarisAktaPerubahan, Validators.required),
       notarisPenggantiAktaPerubahan:new FormControl(data.notarisPenggantiAktaPerubahan, Validators.required),
       noSkPengesahanMenteri: new FormControl(data.noSkPengesahanMenteri, Validators.required),
-      tanggalTerbitNoSkPengesahanMenteri: new FormControl(data.tanggalTerbitNoSkPengesahanMenteri, Validators.required),
+      tanggalTerbitNoSkPengesahanMenteri: new FormControl(new Date(data.tanggalTerbitNoSkPengesahanMenteri), Validators.required),
       npwp: new FormControl(data.npwp, Validators.required),
-      tanggalTerbitNpwp: new FormControl(data.tanggalTerbitNpwp, Validators.required),
+      tanggalTerbitNpwp: new FormControl(new Date(data.tanggalTerbitNpwp), Validators.required),
       noSiup: new FormControl(data.noSiup, Validators.required),
-      tanggalTerbitSiup: new FormControl(data.tanggalTerbitSiup, Validators.required),
+      tanggalTerbitSiup: new FormControl(new Date(data.tanggalTerbitSiup), Validators.required),
       noNibTdp: new FormControl(data.noNibTdp, Validators.required),
-      tanggalTerbitNibTdp: new FormControl(data.tanggalTerbitNibTdp, Validators.required),
-      tanggalExpireNibTdp: new FormControl(data.tanggalExpireNibTdp, Validators.required),
+      tanggalTerbitNibTdp: new FormControl(new Date(data.tanggalTerbitNibTdp), Validators.required),
+      tanggalExpireNibTdp: new FormControl(new Date(data.tanggalExpireNibTdp), Validators.required),
       noIdpSitu: new FormControl(data.noIdpSitu, Validators.required),
-      tanggalTerbitIdpSitu: new FormControl(data.tanggalTerbitIdpSitu, Validators.required),
-      tanggalExpireIdpSitu: new FormControl(data.tanggalExpireIdpSitu, Validators.required)
+      tanggalTerbitIdpSitu: new FormControl(new Date(data.tanggalTerbitIdpSitu), Validators.required),
+      tanggalExpireIdpSitu: new FormControl(new Date(data.tanggalExpireIdpSitu), Validators.required)
     });
   }
 
