@@ -142,7 +142,10 @@ export class LegalitasComponent implements OnInit {
           this.parent.triggerPopUp();
           this.close();
         }
-      )
+      );
+    } else {
+      this.parent.popUpMessage = dictionary.incomplete_data;
+      this.parent.triggerPopUp();
     }
   }
 
