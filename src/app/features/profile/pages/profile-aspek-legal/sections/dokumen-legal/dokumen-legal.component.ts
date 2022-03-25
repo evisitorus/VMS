@@ -12,6 +12,7 @@ import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component'
 })
 export class DokumenLegalComponent implements OnInit {
 
+  public opened = false;
   public gridData: any[] = [];
   public checkboxOnly = false;
   public mode = "multiple";
@@ -27,6 +28,7 @@ export class DokumenLegalComponent implements OnInit {
   public uploadedFileId!: string;
   public invalidFileExtension!: boolean;
   public invalidMaxFileSize!: boolean;
+  public dokLegalName!: string;
 
   constructor(
     public parent: ProfileAspekLegalComponent,
@@ -120,14 +122,23 @@ export class DokumenLegalComponent implements OnInit {
     return file[doc_type];
   }
 
-  public upload(dataItem: any): void {
+  public openFileDialog(dataItem: any) {
+    this.dokLegalName = dataItem.name;
+    this.opened = true;
+  }
+
+  public close() {
+    this.opened = false;
+  }
+
+  public upload(): void {
     if (this.lampiranFiles !== null) {
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
           console.log(res)
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
-          this.uploadDokLegal(dataItem, this.uploadedFileContentUrl);
+          this.uploadDokLegal();
         },
         (err) => {
           this.parent.popUpMessage = err.error.message;
@@ -137,10 +148,11 @@ export class DokumenLegalComponent implements OnInit {
     }
   }
 
-  public uploadDokLegal(dataItem: any, dok: any) {
+  public uploadDokLegal() {
+    let docName = this.dokLegalName;
     //endpointnya media_object
     let params = {
-      // dataItem.name : this.getDataType(dataItem.name,dok)
+      docName: this.getDataType(docName,this.uploadedFileContentUrl)
     }
 
     this.profileAspekLegalService.addDokLegal(params).subscribe(
