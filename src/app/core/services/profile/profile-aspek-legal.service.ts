@@ -5,6 +5,7 @@ import { ApiRouteMethods, ApiRoutes } from '../api/api-routes';
 import { ApiInterface } from '../../interfaces/api-interface';
 import { AspekLegalInterface } from '../../interfaces/profile/aspek-legal-interface';
 import { Observable } from 'rxjs';
+import { ProfileDocumentInterface } from '../../interfaces/profile-document.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -115,5 +116,25 @@ export class ProfileAspekLegalService {
     };
 
     return this.apiService.sendRequest(api_add_dok_legal);
+  }
+
+  public addDokLainnya(params:ProfileDocumentInterface): Observable<any>{   
+    let token = this.authService.getLocalStorage('access_token')!;
+    let party_id = this.authService.getLocalStorage('vendor_id')!;
+    let route = [party_id,"aspek_legal"];
+
+
+    let api_add_dok_lainnya: ApiInterface = {
+      method: ApiRouteMethods.post,
+      url: ApiRoutes.api_vendor_route + '/' + route.join('/'),
+      body: params,
+      options: {
+        headers: {
+          Authorization: token,
+        }
+      }
+    };
+
+    return this.apiService.sendRequest(api_add_dok_lainnya);
   }
 }
