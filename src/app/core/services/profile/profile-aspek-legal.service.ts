@@ -93,26 +93,19 @@ export class ProfileAspekLegalService {
 
   public addDokLegal(params: any): Observable<any>{
     let token = this.authService.getLocalStorage('access_token')!;
-    let party_id = this.authService.getLocalStorage('vendor_id')!;
-    let route = [party_id,"aspek_legal"];
+    let vendor_id = this.authService.getLocalStorage('vendor_id')!;
     
     let body: any = {
-      companyProfile: params.companyProfile ? params.companyProfile : null,
-      aktaPendirian: params.aktaPendirian ? params.aktaPendirian : null,
-      siup: params.siup ? params.siup : null,
-      npwpPerusahaan: params.npwpPerusahaan ? params.npwpPerusahaan : null,
-      nibTdp: params.nibTdp ? params.nibTdp : null,
-      idpSitu: params.idpSitu ? params.idpSitu : null,
-      aktaPerubahan: params.aktaPerubahan ? params.aktaPerubahan : null,
-      skpMenteri: params.skpMenteri ? params.skpMenteri : null,
-      sertifikatAntiPenyuapan: params.sertifikatAntiPenyuapan ? params.sertifikatAntiPenyuapan : null,
-      suratKeteranganNonPkp: params.suratKeteranganNonPkp ? params.suratKeteranganNonPkp : null,
-      suratPengukuhanPkp: params.suratPengukuhanPkp ? params.suratPengukuhanPkp : null,
+      namaDokumen: params.namaDokumen,
+      file: params.file,
+      attachmentFilePath: params.attachmentFilePath,
+      owner: "/api/vendors/" + vendor_id,
+      documentType: params.documentType
     };
 
     let api_add_dok_legal: ApiInterface = {
       method: ApiRouteMethods.post,
-      url: ApiRoutes.api_vendor_route + '/' + route.join('/'),
+      url: ApiRoutes.api_doc_legal,
       body: body,
       options: {
         headers: {
