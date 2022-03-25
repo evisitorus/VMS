@@ -71,7 +71,6 @@ export class SertifikasiDokKhususComponent implements OnInit {
     this.profilApekLegalService.getAspekLegal().subscribe(
       (response) => {
         this.gridData = response.dokumenLain['hydra:member'];
-        console.log(response)
         this.gridData = this.mapData(this.gridData);
 
       },
@@ -97,7 +96,6 @@ export class SertifikasiDokKhususComponent implements OnInit {
         deletedAt: data[key]['deletedAt']
       };
     }
-    console.log(mappedData)
     return mappedData;
   }
 
