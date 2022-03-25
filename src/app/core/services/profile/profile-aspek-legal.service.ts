@@ -17,7 +17,7 @@ export class ProfileAspekLegalService {
     private authService: AuthService
   ) { }
 
-  public getDocType(){
+  public getDocType() {
     let token = this.authService.getLocalStorage('access_token')!;
 
     let api_get_doc_type: ApiInterface = {
@@ -32,36 +32,37 @@ export class ProfileAspekLegalService {
     return this.apiService.sendRequest(api_get_doc_type);
   }
 
-  public getAspekLegal(){
+  public getAspekLegal() {
     let token = this.authService.getLocalStorage('access_token')!;
     let party_id = this.authService.getLocalStorage('vendor_id')!;
-    let route = [party_id,"aspek_legal"];
-    
+    let route = [party_id, "aspek_legal"];
+
     let api_get_aspek_legal: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_vendor_route  + '/' + route.join('/'),
+      url: ApiRoutes.api_vendor_route + '/' + route.join('/'),
       options: {
         headers: {
           Authorization: token
         }
       }
     };
+    console.log(api_get_aspek_legal)
     return this.apiService.sendRequest(api_get_aspek_legal);
   }
 
-  public addAspekLegal(params: AspekLegalInterface): Observable<any>{
+  public addAspekLegal(params: AspekLegalInterface): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let party_id = this.authService.getLocalStorage('vendor_id')!;
-    let route = [party_id,"aspek_legal"];
+    let route = [party_id, "aspek_legal"];
     let body: any = {
-      noAktaPendirian:params.noAktaPendirian,
+      noAktaPendirian: params.noAktaPendirian,
       tanggalTerbitAktaPendirian: params.tanggalTerbitAktaPendirian,
       notarisAktaPendirian: params.notarisAktaPendirian,
       notarisPenggantiAktaPendirian: params.notarisPenggantiAktaPendirian,
       noAktaPerubahan: params.noAktaPerubahan,
       tanggalTerbitAktaPerubahan: params.tanggalTerbitAktaPerubahan,
       notarisAktaPerubahan: params.notarisAktaPerubahan,
-      notarisPenggantiAktaPerubahan:params.notarisPenggantiAktaPerubahan,
+      notarisPenggantiAktaPerubahan: params.notarisPenggantiAktaPerubahan,
       noSkPengesahanMenteri: params.noSkPengesahanMenteri,
       tanggalTerbitNoSkPengesahanMenteri: params.tanggalTerbitNoSkPengesahanMenteri,
       npwp: params.npwp,
@@ -92,16 +93,18 @@ export class ProfileAspekLegalService {
     return this.apiService.sendRequest(api_add_aspek_legal);
   }
 
-  public addDokLegal(params: any): Observable<any>{
+  public addDokLegal(params: any): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
     let vendor_id = this.authService.getLocalStorage('vendor_id')!;
-    
+
     let body: any = {
       namaDokumen: params.namaDokumen,
       file: params.file,
       attachmentFilePath: params.attachmentFilePath,
       owner: "/api/vendors/" + vendor_id,
-      documentType: params.documentType
+      documentType: params.documentType,
+      berlakuSampai: params.berlakuSampai ? params.berlakuSampai : null,
+      submitDate: params.submitDate ? params.submitDate : null
     };
 
     let api_add_dok_legal: ApiInterface = {
@@ -118,16 +121,24 @@ export class ProfileAspekLegalService {
     return this.apiService.sendRequest(api_add_dok_legal);
   }
 
-  public addDokLainnya(params:ProfileDocumentInterface): Observable<any>{   
+  public updateDokLegal(params: any): Observable<any> {
     let token = this.authService.getLocalStorage('access_token')!;
-    let party_id = this.authService.getLocalStorage('vendor_id')!;
-    let route = [party_id,"aspek_legal"];
+    let vendor_id = this.authService.getLocalStorage('vendor_id')!;
 
+    let body: any = {
+      namaDokumen: params.namaDokumen,
+      file: params.file,
+      attachmentFilePath: params.attachmentFilePath,
+      owner: "/api/vendors/" + vendor_id,
+      documentType: params.documentType,
+      berlakuSampai: params.berlakuSampai ? params.berlakuSampai : null,
+      submitDate: params.submitDate ? params.submitDate : null
+    };
 
-    let api_add_dok_lainnya: ApiInterface = {
-      method: ApiRouteMethods.post,
-      url: ApiRoutes.api_vendor_route + '/' + route.join('/'),
-      body: params,
+    let api_add_dok_legal: ApiInterface = {
+      method: ApiRouteMethods.put,
+      url: ApiRoutes.api_doc_legal,
+      body: body,
       options: {
         headers: {
           Authorization: token,
@@ -135,6 +146,6 @@ export class ProfileAspekLegalService {
       }
     };
 
-    return this.apiService.sendRequest(api_add_dok_lainnya);
+    return this.apiService.sendRequest(api_add_dok_legal);
   }
 }
