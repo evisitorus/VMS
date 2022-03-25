@@ -239,7 +239,8 @@ export class ProfileInformationService {
         jumlah_karyawan_total: 0,
         jumlah_karyawan_lokal: 0,
         jumlah_karyawan_asing: 0,
-        file: params.file
+        file: params.file,
+        emailPerusahaan: params.emailPerusahaan,
       },
       options: {
         headers: {

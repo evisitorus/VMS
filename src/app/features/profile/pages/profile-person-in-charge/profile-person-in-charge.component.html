@@ -1,11 +1,49 @@
 <div>
   <div>
     <div>
-      <div id="attention" *ngIf="!isDisabled">
+      <!-- <div id="attention" *ngIf="!isDisabled">
         <p id="verification-attention">Perhatian :<br>Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh
           VMS Verificator. Pastikan
           perubahan data perusahaan Anda sudah benar.</p>
-      </div>
+      </div> -->
+      <!-- <div class="profile-content-pic">
+        <ng-container
+            *ngIf="responseFile; then showPICPicture; else showDefaultPicture">
+          </ng-container>
+          <ng-template #showPICPicture>
+            <div class="row align-items-center k-justify-content-center">
+              <img id="pic-photo-showed-up" class="col-3" [src]="responseFile" alt="">
+            </div>
+          </ng-template>
+          <ng-template #showDefaultPicture>
+            <div class="row align-items-center k-justify-content-center">
+              <div class="row align-items-center k-justify-content-center">
+                <img id="pic-photo-hidden" class="col-3" src="/assets/images/nopic.png" style="width: 15%; height: 15%"
+                      alt="">
+              </div>
+              <div class="row align-items-center k-justify-content-center">
+                <kendo-formerror class="col-3" style="margin: 0 auto" id="error-pic-photo-required"
+                                  *ngIf="!responseFile">Mohon upload foto PIC
+                </kendo-formerror>
+              </div>
+            </div>
+          </ng-template>
+          <br>
+
+          <div class="row align-items-center k-justify-content-center" *ngIf="!isDisabled" style="padding-bottom: 15px">
+            <kendo-fileselect id="input-pic-avatar" [multiple]="false" [restrictions]="fileRestrictions"
+                              [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
+              <kendo-fileselect-messages id="file-upload-error-message"
+                                          dropFilesHere="Tidak ada gambar terpilih"
+                                          select="Pilih gambar"
+                                          invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
+                                          invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
+              </kendo-fileselect-messages>
+            </kendo-fileselect>
+            <p style="font-style: italic;font-size: small;">*Gambar dapat berupa .jpg, .jpeg, .png, maksimal 2 MB</p>
+          </div>
+        
+      </div> -->
       <form id="form-pic" class="k-form auth-form">
         <fieldset id="fieldset-pic" class="k-form-fieldset">
           <div>
@@ -110,7 +148,6 @@
             </button>
           </div>
         </ng-template>
-
         <kendo-dialog id="popup-confirm-save"
                       title="Konfirmasi"
                       *ngIf="opened"
