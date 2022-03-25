@@ -156,9 +156,9 @@ export class DokumenLegalComponent implements OnInit {
   public uploadDokLegal() {
     let params = {
       namaDokumen: this.dokLegalName,
-      file: this.uploadedFileContentUrl,
+      file: this.uploadedFileId,
       documentType: this.dokData.type,
-      attachmentFilePath: this.uploadedFileId
+      attachmentFilePath: this.uploadedFileContentUrl
     };
   
     this.profileAspekLegalService.addDokLegal(params).subscribe(
