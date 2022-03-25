@@ -12,11 +12,14 @@
       </kendo-grid-column>
       <kendo-grid-column field="lampiran" title="Unggah Berkas">
         <ng-template kendoGridCellTemplate let-dataItem>
-          <kendo-fileselect [multiple]="false" [restrictions]="fileRestrictions">
+          <kendo-fileselect [multiple]="false"  id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload(dataItem)">
             <kendo-fileselect-messages
-            select="Pilih file">
+            select="Pilih file" >
             </kendo-fileselect-messages>
           </kendo-fileselect>
+          <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
+          <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+          <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
         </ng-template>
       </kendo-grid-column>
     </kendo-grid>
