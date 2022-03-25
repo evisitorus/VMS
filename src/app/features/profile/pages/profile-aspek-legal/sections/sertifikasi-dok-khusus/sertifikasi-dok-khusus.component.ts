@@ -1,6 +1,8 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
+import { ProfileAspekLegalService } from 'src/app/core/services/profile/profile-aspek-legal.service';
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component';
 
@@ -40,11 +42,13 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   constructor(
     public parent: ProfileAspekLegalComponent,
+    public profilApekLegalService: ProfileAspekLegalService
   ) {
     this.setForm();
   }
 
   ngOnInit(): void {
+    this.fetchData();
   }
 
   public open(): void {
@@ -58,17 +62,36 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public fetchData(): void {
-    // this.profileDocumentService.get().subscribe(
-    //   (response) => {
-    //     this.gridData = response['hydra:member'];
-    //     this.gridData = this.mapData(this.gridData);
+    this.profilApekLegalService.getAspekLegal().subscribe(
+      (response) => {
+        this.gridData = response.dokumenLain['hydra:member'];
+        console.log(response)
+        this.gridData = this.mapData(this.gridData);
 
-    //   },
-    //   (err) => {
-    //     this.popUpMessage = err.error.message;
-    //     this.triggerPopUp();
-    //   }
-    // );
+      },
+      (err) => {
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
+  }
+
+  public mapData(data: any[]): any[] {
+    let mappedData: any[] = [];
+    for (const key in data) {
+      mappedData[key] = {
+        no: data[key]['nomorDokumen'],
+        namaDokumen: data[key]['namaDokumen'],
+        tipeDokumen: data[key]['tipeDokumen'],
+        tanggalTerbit: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
+        tanggalExpired: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "Seumur Hidup",
+        lampiran: data[key]['attachmentFilePath'],
+        file: data[key]['file'],
+        id: data[key]['id'],
+        deletedAt: data[key]['deletedAt']
+      };
+    }
+    return mappedData;
   }
 
   public setForm(): void {
