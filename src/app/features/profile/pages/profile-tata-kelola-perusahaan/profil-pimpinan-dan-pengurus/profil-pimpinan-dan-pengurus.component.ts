@@ -137,25 +137,32 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public submitProfilPimpinanDanPengurus(): void {
     let fileVar = [this.uploadedFileContentUrl, this.uploadedNpwpContentUrl, this.selectedFile, this.selectedNpwpFile];
 
+    console.log(fileVar);
+
+    let fileVar_status = true;
+    let fileVar_stat = true;
+    
     fileVar.every(file => {
       if( file === null || typeof file === 'undefined' ){
         this.popUpID = "popup-wrong-file";
         this.parent.popUpMessage = "Periksa kembali file Anda";
         this.parent.triggerPopUp();
-        return false;
-      } else {
+        fileVar_stat = false;
+      } 
+      fileVar_status = fileVar_status && fileVar_stat;
+      return fileVar_stat;
+    })
+    
+    if (fileVar_status){
         this.pengurusFormGroup.markAllAsTouched();
         if (this.pengurusFormGroup.valid) {
-          console.log(this.pengurusFormGroup.valid)
           if (this.isNewData) {
             this.save();
           } else {
             this.update();
           }
         }
-        return true;
-      }
-    })
+    }
     
 
   }
