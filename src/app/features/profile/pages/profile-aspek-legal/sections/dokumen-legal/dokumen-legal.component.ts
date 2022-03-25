@@ -64,7 +64,6 @@ export class DokumenLegalComponent implements OnInit {
         data.suratKeteranganNonPkp = response.suratKeteranganNonPkp;
         data.suratPengukuhanPkp = response.suratPengukuhanPkp;
 
-        console.log(response)
         grid_data.forEach(datum => {
           let name = datum.name;
           switch (name) {
@@ -103,7 +102,6 @@ export class DokumenLegalComponent implements OnInit {
               break;
           };
         });
-        console.log(grid_data)
 
         this.gridData = grid_data;
       },
