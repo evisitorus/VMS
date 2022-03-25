@@ -2,6 +2,9 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
+import { ProfileDocumentInterface } from 'src/app/core/interfaces/profile-document.interface';
+import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { FileService } from 'src/app/core/services/file.service';
 import { ProfileAspekLegalService } from 'src/app/core/services/profile/profile-aspek-legal.service';
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component';
@@ -42,7 +45,9 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   constructor(
     public parent: ProfileAspekLegalComponent,
-    public profilApekLegalService: ProfileAspekLegalService
+    public profilApekLegalService: ProfileAspekLegalService,
+    private eventEmitterService: EventEmitterService,
+    private fileService: FileService
   ) {
     this.setForm();
   }
@@ -125,6 +130,43 @@ export class SertifikasiDokKhususComponent implements OnInit {
     }
   }
 
+  public upload(): void {
+    if (this.lampiranFiles !== null) {
+      this.fileService.upload(this.lampiranFiles[0]).subscribe(
+        (res) => {
+          this.uploadedFileContentUrl = res.contentUrl;
+          this.uploadedFileId = res["@id"];
+        },
+        (err) => {
+          this.parent.popUpMessage = err.error.message;
+          this.parent.triggerPopUp();
+        }
+      );
+    }
+  }
+
+  public download(fileId: string, filename: string) {
+    let ids;
+    let longId = fileId.split("/");
+    if (longId.length > 0) {
+      ids = longId[longId.length - 1];
+    } else {
+      ids = fileId;
+    }
+
+    this.fileService.download(ids).subscribe(
+      (res) => {
+        let mime = this.fileService.getMimeType(filename);
+        let blob = new Blob([res], { type: mime });
+        let url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      (err) => {
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
+  }
 
   public submit(): void {
     if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
@@ -144,51 +186,51 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public save(): void {
-    // let params: ProfileDocumentInterface = {
-    //   tipeDokumen:this.form.value.tipeDokumen,
-    //   namaDokumen: this.form.value.namaDokumen,
-    //   nomorDokumen: this.form.value.nomorDokumen,
-    //   berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
-    //   submitDate: new Date(),
-    //   file: this.uploadedFileId,
-    //   attachmentFilePath: this.uploadedFileContentUrl
-    // };
+    let params: ProfileDocumentInterface = {
+      tipeDokumen:this.form.value.tipeDokumen,
+      namaDokumen: this.form.value.namaDokumen,
+      nomorDokumen: this.form.value.nomorDokumen,
+      berlakuSampai: this.form.value.berlakuSampai,
+      submitDate: new Date(),
+      file: this.uploadedFileId,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
 
-    // this.profileDocumentService.save(params).subscribe(
-    //   () => {
-    //     this.popUpMessage = dictionary.save_data_success;
-    //     this.triggerPopUp();
-    //     this.fetchData();
-    //     this.close();
-    //   },
-    //   (err) => {
-    //     this.popUpMessage = err.error.message;
-    //     this.triggerPopUp();
-    //     this.close();
-    //   }
-    // );
+    this.profilApekLegalService.addDokLainnya(params).subscribe(
+      () => {
+        this.popUpMessage = dictionary.save_data_success;
+        this.parent.triggerPopUp();
+        this.fetchData();
+        this.close();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+        this.close();
+      }
+    );
   }
 
   public update(): void {
-    // let params: ProfileDocumentInterface = {
-    //   tipeDokumen: this.form.value.tipeDokumen,
-    //   namaDokumen: this.form.value.namaDokumen,
-    //   nomorDokumen: this.form.value.nomorDokumen,
-    //   berlakuSampai: !this.isLifeTime ? this.form.value.berlakuSampai : null,
-    //   submitDate: new Date(),
-    //   file: this.uploadedFileId,
-    //   attachmentFilePath: this.uploadedFileContentUrl
-    // };
+    let params: ProfileDocumentInterface = {
+      tipeDokumen: this.form.value.tipeDokumen,
+      namaDokumen: this.form.value.namaDokumen,
+      nomorDokumen: this.form.value.nomorDokumen,
+      berlakuSampai: this.form.value.berlakuSampai,
+      submitDate: new Date(),
+      file: this.uploadedFileId,
+      attachmentFilePath: this.uploadedFileContentUrl
+    };
     // this.profileDocumentService.update(params, this.id).subscribe(
     //   () => {
     //     this.popUpMessage = dictionary.update_data_success;
-    //     this.triggerPopUp();
+    //     this.parent.triggerPopUp();
     //     this.fetchData();
     //     this.close();
     //   },
     //   (err) => {
     //     this.popUpMessage = err.error.message;
-    //     this.triggerPopUp();
+    //     this.parent.triggerPopUp();
     //     this.close();
     //   }
     // );
