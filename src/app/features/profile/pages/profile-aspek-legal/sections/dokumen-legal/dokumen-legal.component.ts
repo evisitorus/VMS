@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { FileService } from 'src/app/core/services/file.service';
 import { ProfileAspekLegalService } from 'src/app/core/services/profile/profile-aspek-legal.service';
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component';
@@ -22,10 +23,15 @@ export class DokumenLegalComponent implements OnInit {
     maxFileSize: 2097152
   };
   public lampiranFiles!: Array<any>;
+  public uploadedFileContentUrl!: string;
+  public uploadedFileId!: string;
+  public invalidFileExtension!: boolean;
+  public invalidMaxFileSize!: boolean;
 
   constructor(
     public parent: ProfileAspekLegalComponent,
     private profileAspekLegalService: ProfileAspekLegalService,
+    private fileService: FileService,
   ) { }
 
   ngOnInit(): void {
@@ -111,6 +117,24 @@ export class DokumenLegalComponent implements OnInit {
     };
 
     return { doc_type: file[doc_type] };
+  }
+
+  public upload(dataItem: any): void {
+    console.log(dataItem)
+    if (this.lampiranFiles !== null) {
+      this.fileService.upload(this.lampiranFiles[0]).subscribe(
+        (res) => {
+          console.log(res)
+          this.uploadedFileContentUrl = res.contentUrl;
+          this.uploadedFileId = res["@id"];
+          this.uploadDokLegal(dataItem, this.uploadedFileContentUrl);
+        },
+        (err) => {
+          this.parent.popUpMessage = err.error.message;
+          this.parent.triggerPopUp();
+        }
+      );
+    }
   }
 
   public uploadDokLegal(dataItem: any, dok: any) {
