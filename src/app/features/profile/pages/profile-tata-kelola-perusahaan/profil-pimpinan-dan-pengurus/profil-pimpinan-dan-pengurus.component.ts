@@ -93,19 +93,19 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public fetchData(): void {
     this.setForm();
 
-    // this.pimpinanDanPengurusService.getPimpinanDanPengurus().subscribe(
-    //   (response) => {
-    //     this.gridDataPengurus = response.data;
-    //     this.gridViewPengurus = {
-    //       data: this.gridDataPengurus.slice(this.skip, this.skip + this.pageSize),
-    //       total: this.gridDataPengurus.length,
-    //     }
-    //     return this.gridDataPengurus;
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this.pimpinanDanPengurusService.getPimpinanDanPengurus().subscribe(
+      (response) => {
+        this.gridDataPengurus = response.data;
+        this.gridViewPengurus = {
+          data: this.gridDataPengurus.slice(this.skip, this.skip + this.pageSize),
+          total: this.gridDataPengurus.length,
+        }
+        return this.gridDataPengurus;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
   }
 
