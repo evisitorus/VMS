@@ -65,6 +65,7 @@ export class DokumenLegalComponent implements OnInit {
         });
 
         this.gridData = grid_data;
+        console.log(this.gridData)
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
@@ -173,5 +174,21 @@ export class DokumenLegalComponent implements OnInit {
       }
     );
 
+  }
+
+  public download(fileId: string, filename: string) {
+    this.fileService.download(fileId).subscribe(
+      (res) => {
+        let mime = this.fileService.getMimeType(filename);
+        let blob = new Blob([res], { type: mime });
+        let url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+      (error) => {
+        this.parent.popUpID = "popup-failed-download";
+        this.parent.popUpMessage = dictionary.download_file_failed;
+        this.parent.triggerPopUp();
+      }
+    );
   }
 }

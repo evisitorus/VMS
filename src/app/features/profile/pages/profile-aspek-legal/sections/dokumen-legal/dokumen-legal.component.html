@@ -7,7 +7,7 @@
       </kendo-grid-column>
       <kendo-grid-column field="fileName" title="File">
         <ng-template kendoGridCellTemplate let-dataItem>
-          <a>{{dataItem.namaDokumen}}</a>
+          <a (click)="download(dataItem.file.id, dataItem.file.attachmentFilePath)">{{dataItem.file ? dataItem.file.namaDokumen : null}}</a>
         </ng-template>
       </kendo-grid-column>
       <kendo-grid-column field="lampiran" title="Unggah Berkas">
