@@ -13,7 +13,28 @@ import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component'
 export class LegalitasComponent implements OnInit {
 
   public aspekLegalFromGroup!: FormGroup;
-  public data:any = {};
+  public data:any = {
+    noAktaPendirian: "",
+    tanggalTerbitAktaPendirian: "",
+    notarisAktaPendirian: "",
+    notarisPenggantiAktaPendirian: "",
+    noAktaPerubahan: "",
+    tanggalTerbitAktaPerubahan: "",
+    notarisAktaPerubahan: "",
+    notarisPenggantiAktaPerubahan: '',
+    noSkPengesahanMenteri: "",
+    tanggalTerbitNoSkPengesahanMenteri:"",
+    npwp: "",
+    tanggalTerbitNpwp: "",
+    noSiup: "",
+    tanggalTerbitSiup: "",
+    noNibTdp: "",
+    tanggalTerbitNibTdp: "",
+    tanggalExpireNibTdp: "",
+    noIdpSitu: "",
+    tanggalTerbitIdpSitu: "",
+    tanggalExpireIdpSitu: ""
+  };
   public params!: AspekLegalInterface;
   public opened: boolean = false;
   public isNewData: boolean = true;
@@ -24,7 +45,9 @@ export class LegalitasComponent implements OnInit {
     public fb: FormBuilder,
     public parent: ProfileAspekLegalComponent,
     private profileAspekLegalService: ProfileAspekLegalService,
-  ) { }
+  ) { 
+    this.setForm();
+  }
 
   ngOnInit(): void {
     this.fetchData();
@@ -37,7 +60,7 @@ export class LegalitasComponent implements OnInit {
         Object.keys(response).map((key, index) => {
           this.data[key] = response[key];
         });
-        this.setForm(this.data);
+        this.setForm();
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
@@ -64,31 +87,31 @@ export class LegalitasComponent implements OnInit {
     if (this.idpExpireChecked) this.data.isIdpSituSeumurHidup = this.idpExpireChecked;
   }
 
-  public setForm(data: any): void {
+  public setForm(): void {
     this.aspekLegalFromGroup = new FormGroup({
-      noAktaPendirian: new FormControl(data.noAktaPendirian, Validators.required),
-      tanggalTerbitAktaPendirian: new FormControl(new Date(data.tanggalTerbitAktaPendirian), Validators.required),
-      notarisAktaPendirian: new FormControl(data.notarisAktaPendirian, Validators.required),
-      notarisPenggantiAktaPendirian: new FormControl(data.notarisPenggantiAktaPendirian, Validators.required),
-      noAktaPerubahan: new FormControl(data.noAktaPerubahan, Validators.required),
-      tanggalTerbitAktaPerubahan: new FormControl(new Date(data.tanggalTerbitAktaPerubahan), Validators.required),
-      notarisAktaPerubahan: new FormControl(data.notarisAktaPerubahan, Validators.required),
-      notarisPenggantiAktaPerubahan:new FormControl(data.notarisPenggantiAktaPerubahan, Validators.required),
-      noSkPengesahanMenteri: new FormControl(data.noSkPengesahanMenteri, Validators.required),
-      tanggalTerbitNoSkPengesahanMenteri: new FormControl(new Date(data.tanggalTerbitNoSkPengesahanMenteri), Validators.required),
-      npwp: new FormControl(data.npwp, Validators.required),
-      tanggalTerbitNpwp: new FormControl(new Date(data.tanggalTerbitNpwp), Validators.required),
-      noSiup: new FormControl(data.noSiup, Validators.required),
-      tanggalTerbitSiup: new FormControl(new Date(data.tanggalTerbitSiup), Validators.required),
-      noNibTdp: new FormControl(data.noNibTdp, Validators.required),
-      tanggalTerbitNibTdp: new FormControl(new Date(data.tanggalTerbitNibTdp), Validators.required),
-      tanggalExpireNibTdp: new FormControl(new Date(data.tanggalExpireNibTdp), Validators.required),
-      noIdpSitu: new FormControl(data.noIdpSitu, Validators.required),
-      tanggalTerbitIdpSitu: new FormControl(new Date(data.tanggalTerbitIdpSitu), Validators.required),
-      tanggalExpireIdpSitu: new FormControl(new Date(data.tanggalExpireIdpSitu), Validators.required)
+      noAktaPendirian: new FormControl(this.data.noAktaPendirian, Validators.required),
+      tanggalTerbitAktaPendirian: new FormControl(new Date(this.data.tanggalTerbitAktaPendirian), Validators.required),
+      notarisAktaPendirian: new FormControl(this.data.notarisAktaPendirian, Validators.required),
+      notarisPenggantiAktaPendirian: new FormControl(this.data.notarisPenggantiAktaPendirian, Validators.required),
+      noAktaPerubahan: new FormControl(this.data.noAktaPerubahan, Validators.required),
+      tanggalTerbitAktaPerubahan: new FormControl(new Date(this.data.tanggalTerbitAktaPerubahan), Validators.required),
+      notarisAktaPerubahan: new FormControl(this.data.notarisAktaPerubahan, Validators.required),
+      notarisPenggantiAktaPerubahan:new FormControl(this.data.notarisPenggantiAktaPerubahan, Validators.required),
+      noSkPengesahanMenteri: new FormControl(this.data.noSkPengesahanMenteri, Validators.required),
+      tanggalTerbitNoSkPengesahanMenteri: new FormControl(new Date(this.data.tanggalTerbitNoSkPengesahanMenteri), Validators.required),
+      npwp: new FormControl(this.data.npwp, Validators.required),
+      tanggalTerbitNpwp: new FormControl(new Date(this.data.tanggalTerbitNpwp), Validators.required),
+      noSiup: new FormControl(this.data.noSiup, Validators.required),
+      tanggalTerbitSiup: new FormControl(new Date(this.data.tanggalTerbitSiup), Validators.required),
+      noNibTdp: new FormControl(this.data.noNibTdp, Validators.required),
+      tanggalTerbitNibTdp: new FormControl(new Date(this.data.tanggalTerbitNibTdp), Validators.required),
+      tanggalExpireNibTdp: new FormControl(new Date(this.data.tanggalExpireNibTdp), Validators.required),
+      noIdpSitu: new FormControl(this.data.noIdpSitu, Validators.required),
+      tanggalTerbitIdpSitu: new FormControl(new Date(this.data.tanggalTerbitIdpSitu), Validators.required),
+      tanggalExpireIdpSitu: new FormControl(new Date(this.data.tanggalExpireIdpSitu), Validators.required)
     });
-    this.nibExpireChecked = data.isNiBTdpSeumurHidup;
-    this.idpExpireChecked = data.isIdpSituSeumurHidup;
+    this.nibExpireChecked = this.data.isNiBTdpSeumurHidup;
+    this.idpExpireChecked = this.data.isIdpSituSeumurHidup;
   }
 
   public resetForm(): void {
