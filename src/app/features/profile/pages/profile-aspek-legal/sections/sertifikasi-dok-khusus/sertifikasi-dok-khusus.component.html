@@ -52,9 +52,12 @@
       <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="k-button k-primary add-btn" id="btn-tambah-dokumen">Tambah</button>
     </div>
     <kendo-grid [data]="gridData">
-        <kendo-grid-column field="no" title="No.">
+        <kendo-grid-column field="no" title="No." [width]="60">
+          <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            {{rowIndex + 1}} 
+          </ng-template>
         </kendo-grid-column>
-        <kendo-grid-column field="nama" title="Nama Dokumen">
+        <kendo-grid-column field="namaDokumen" title="Nama Dokumen">
         </kendo-grid-column>
         <kendo-grid-column field="tanggalTerbit" title="Tanggal Terbit">
         </kendo-grid-column>

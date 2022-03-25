@@ -1,8 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
-import { ProfileDocumentInterface } from 'src/app/core/interfaces/profile-document.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileAspekLegalService } from 'src/app/core/services/profile/profile-aspek-legal.service';
@@ -47,7 +47,8 @@ export class SertifikasiDokKhususComponent implements OnInit {
     public parent: ProfileAspekLegalComponent,
     public profilApekLegalService: ProfileAspekLegalService,
     private eventEmitterService: EventEmitterService,
-    private fileService: FileService
+    private fileService: FileService,
+    private dialogService: DialogService
   ) {
     this.setForm();
   }
@@ -96,6 +97,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
         deletedAt: data[key]['deletedAt']
       };
     }
+    console.log(mappedData)
     return mappedData;
   }
 
@@ -210,6 +212,25 @@ export class SertifikasiDokKhususComponent implements OnInit {
     );
   }
 
+  mapDateFormat(date: string) {
+    let arr_date = date.split('-');
+    return arr_date[2].concat('-').concat(arr_date[1]).concat('-').concat(arr_date[0]);
+  }
+
+  public updateForm(data: any): void {
+    // this.id = data.id;
+    this.data.namaDokumen = data.namaDokumen;
+    this.data.berlakuSampai = data.berlakuSampai !== "Seumur Hidup" ? new Date(this.mapDateFormat(data.berlakuSampai)) : null;
+
+    this.isNewData = false;
+
+    this.setForm();
+    this.open();
+
+    this.popUpMessage = dictionary.update_data_notification;
+    this.parent.triggerPopUp();
+  }
+
   public update(): void {
     let params = {
       tipeDokumen: this.form.value.tipeDokumen,
@@ -235,18 +256,35 @@ export class SertifikasiDokKhususComponent implements OnInit {
     );
   }
 
+  public deleteConfirmation(id: string, name: string): void {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Konfirmasi",
+      content: "Apakah " + name + " akan dihapus dari sistem ?",
+      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    });
+
+    dialog.result.subscribe((result) => {
+      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+        this.delete(id);
+      }
+    });
+  }
+  
   public delete(id: string): void {
-    // this.profileDocumentService.delete(id).subscribe(
-    //   () => {
-    //     this.popUpMessage = dictionary.delete_data_success;
-    //     this.triggerPopUp();
-    //     this.fetchData();
-    //   },
-    //   (err) => {
-    //     this.popUpMessage = err.error.message;
-    //     this.triggerPopUp();
-    //   }
-    // );
+    this.profilApekLegalService.delete(id).subscribe(
+      () => {
+        this.popUpMessage = dictionary.delete_data_success;
+        this.parent.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
   }
 
 }
