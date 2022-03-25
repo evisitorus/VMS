@@ -148,4 +148,18 @@ export class ProfileAspekLegalService {
 
     return this.apiService.sendRequest(api_add_dok_legal);
   }
+
+  public delete(id: string): Observable<any> {
+    let token = this.authService.getLocalStorage('access_token')!;
+    let api_delete_doc: ApiInterface = {
+      method: ApiRouteMethods.delete,
+      url: ApiRoutes.api_doc_legal.concat('/').concat(id),
+      options: {
+        headers: {
+          Authorization: token
+        }
+      }
+    };
+    return this.apiService.sendRequest(api_delete_doc);
+  }
 }
