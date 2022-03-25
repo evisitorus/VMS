@@ -65,7 +65,6 @@ export class DokumenLegalComponent implements OnInit {
         });
 
         this.gridData = grid_data;
-        console.log(this.gridData)
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
@@ -125,7 +124,6 @@ export class DokumenLegalComponent implements OnInit {
   }
 
   public openFileDialog(dataItem: any) {
-    console.log(dataItem)
     this.dokData = dataItem;
     this.opened = true;
   }
@@ -137,11 +135,9 @@ export class DokumenLegalComponent implements OnInit {
   public upload(): void {
 
     if (this.lampiranFiles !== null) {
-      console.log(this.lampiranFiles)
       this.dokLegalName = this.lampiranFiles[0].name;
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
-          console.log(res)
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
           this.uploadDokLegal();
