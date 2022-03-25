@@ -52,41 +52,7 @@ export class DokumenLegalComponent implements OnInit {
 
         grid_data.forEach(datum => {
           let name = datum.name;
-          switch (name) {
-            case 'Company Profile':
-              datum.fileName = data.companyProfile;
-              break;
-            case 'Akta Pendirian':
-              datum.fileName = data.aktaPendirian;
-              break;
-            case 'SIUP / Surat Izin Berusaha':
-              datum.fileName = data.siup;
-              break;
-            case 'NPWP Perusahaan':
-              datum.fileName = data.npwpPerusahaan;
-              break;
-            case 'NIB / TDP':
-              datum.fileName = data.nibTdp;
-              break;
-            case 'IDP / SITU':
-              datum.fileName = data.idpSitu;
-              break;
-            case 'Akta Perubahan':
-              datum.fileName = data.aktaPerubahan;
-              break;
-            case 'SKP Menteri':
-              datum.fileName = data.skpMenteri;
-              break;
-            case 'Sert. Anti Penyuapan':
-              datum.fileName = data.sertifikatAntiPenyuapan;
-              break;
-            case 'Surat Keterangan Non PKP':
-              datum.fileName = data.suratKeteranganNonPkp;
-              break;
-            case 'Surat Pengukuhan PKP':
-              datum.fileName = data.suratPengukuhanPkp;
-              break;
-          };
+          datum.fileName = this.getDataType(name,data);
         });
 
         this.gridData = grid_data;
@@ -129,36 +95,40 @@ export class DokumenLegalComponent implements OnInit {
     return mappedData;
   }
 
-  public uploadForm() {
-    const file: any = [
-      'Company Profile',
-      'Akta Pendirian',
-      'SIUP / Surat Izin Berusaha',
-      'NPWP Perusahaan',
-      'NIB / TDP',
-      'IDP / SITU',
-      'Akta Perubahan',
-      'SKP Menteri',
-      'Sert. Anti Penyuapan',
-      'Surat Keterangan Non PKP',
-      'Surat Pengukuhan PKP'
-    ];
+  public getDataType(doc_type: any, data: any) {
+    let file: any = {
+      'Company Profile': data.companyProfile,
+      'Akta Pendirian': data.aktaPendirian,
+      'SIUP / Surat Izin Berusaha': data.siup,
+      'NPWP Perusahaan': data.npwp,
+      'NIB / TDP': data.nib,
+      'IDP / SITU': data.idpSitu,
+      'Akta Perubahan': data.aktaPerubahan,
+      'SKP Menteri': data.skpMenteri,
+      'Sert. Anti Penyuapan': data.sertifikatAntiPenyuapan,
+      'Surat Keterangan Non PKP': data.suratKeteranganNonPkp,
+      'Surat Pengukuhan PKP': data.suratPengukuhanPkp
+    };
 
-    let params = {
+    return { doc_type: file[doc_type] };
+  }
 
-    }
+  public uploadDokLegal(dataItem: any, dok: any) {
+    //endpointnya media_object
 
-    // this.profileAspekLegalService.addAspekLegal().subscribe(
-    //   () => {
-    //     this.parent.popUpMessage = dictionary.save_data_success;
-    //     this.parent.triggerPopUp();
-    //     this.fetchData();
-    //   },
-    //   (err) => {
-    //     this.parent.popUpMessage = err.error.message;
-    //     this.parent.triggerPopUp();
-    //   }
-    // );
+    let params = this.getDataType(dataItem.name,dok);
+
+    this.profileAspekLegalService.addDokLegal(params).subscribe(
+      () => {
+        this.parent.popUpMessage = dictionary.save_data_success;
+        this.parent.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
 
 
   }
