@@ -186,17 +186,16 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public save(): void {
-    let params: ProfileDocumentInterface = {
+    let params = {
       tipeDokumen:this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
-      nomorDokumen: this.form.value.nomorDokumen,
       berlakuSampai: this.form.value.berlakuSampai,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
 
-    this.profilApekLegalService.addDokLainnya(params).subscribe(
+    this.profilApekLegalService.addDokLegal(params).subscribe(
       () => {
         this.popUpMessage = dictionary.save_data_success;
         this.parent.triggerPopUp();
@@ -212,7 +211,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public update(): void {
-    let params: ProfileDocumentInterface = {
+    let params = {
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
@@ -221,19 +220,19 @@ export class SertifikasiDokKhususComponent implements OnInit {
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-    // this.profileDocumentService.update(params, this.id).subscribe(
-    //   () => {
-    //     this.popUpMessage = dictionary.update_data_success;
-    //     this.parent.triggerPopUp();
-    //     this.fetchData();
-    //     this.close();
-    //   },
-    //   (err) => {
-    //     this.popUpMessage = err.error.message;
-    //     this.parent.triggerPopUp();
-    //     this.close();
-    //   }
-    // );
+    this.profilApekLegalService.updateDokLegal(params).subscribe(
+      () => {
+        this.popUpMessage = dictionary.save_data_success;
+        this.parent.triggerPopUp();
+        this.fetchData();
+        this.close();
+      },
+      (err) => {
+        this.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+        this.close();
+      }
+    );
   }
 
   public delete(id: string): void {
