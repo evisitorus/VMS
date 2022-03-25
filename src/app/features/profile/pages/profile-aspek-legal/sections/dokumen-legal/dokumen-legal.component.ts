@@ -58,7 +58,7 @@ export class DokumenLegalComponent implements OnInit {
 
         grid_data.forEach(datum => {
           let name = datum.name;
-          datum.fileName = this.getDataType(name,data);
+          datum.file = this.getDataType(name,data);
         });
 
         this.gridData = grid_data;
@@ -75,6 +75,7 @@ export class DokumenLegalComponent implements OnInit {
       (response) => {
         let responseData = response['hydra:member'];
         let tempData = this.mapData(responseData);
+        console.log(tempData)
         this.getAspekLegal(tempData);
       },
       (err) => {
@@ -116,11 +117,10 @@ export class DokumenLegalComponent implements OnInit {
       'Surat Pengukuhan PKP': data.suratPengukuhanPkp
     };
 
-    return { doc_type: file[doc_type] };
+    return file[doc_type];
   }
 
   public upload(dataItem: any): void {
-    console.log(dataItem)
     if (this.lampiranFiles !== null) {
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
@@ -139,8 +139,9 @@ export class DokumenLegalComponent implements OnInit {
 
   public uploadDokLegal(dataItem: any, dok: any) {
     //endpointnya media_object
-
-    let params = this.getDataType(dataItem.name,dok);
+    let params = {
+      // dataItem.name : this.getDataType(dataItem.name,dok)
+    }
 
     this.profileAspekLegalService.addDokLegal(params).subscribe(
       () => {
