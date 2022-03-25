@@ -29,6 +29,7 @@ export class DokumenLegalComponent implements OnInit {
   public invalidFileExtension!: boolean;
   public invalidMaxFileSize!: boolean;
   public dokLegalName!: string;
+  public dokData : any = {};
 
   constructor(
     public parent: ProfileAspekLegalComponent,
@@ -93,7 +94,8 @@ export class DokumenLegalComponent implements OnInit {
       mappedData[key] = {
         id: data[key]['id'],
         name: data[key]['name'],
-        mandatory: data[key]['isMandatory']
+        mandatory: data[key]['isMandatory'],
+        type: data[key]['@id']
       };
     }
 
@@ -122,7 +124,8 @@ export class DokumenLegalComponent implements OnInit {
   }
 
   public openFileDialog(dataItem: any) {
-    this.dokLegalName = dataItem.name;
+    console.log(dataItem)
+    this.dokData = dataItem;
     this.opened = true;
   }
 
@@ -132,43 +135,15 @@ export class DokumenLegalComponent implements OnInit {
 
   public upload(): void {
 
-    let file: any = {
-      'Company Profile': "companyProfile",
-      'Akta Pendirian': "aktaPendirian",
-      'SIUP / Surat Izin Berusaha': "siup",
-      'NPWP Perusahaan': "npwp",
-      'NIB / TDP': "nib",
-      'IDP / SITU': "idpSitu",
-      'Akta Perubahan': "aktaPerubahan",
-      'SKP Menteri': "skpMenteri",
-      'Sert. Anti Penyuapan': "sertifikatAntiPenyuapan",
-      'Surat Keterangan Non PKP': "suratKeteranganNonPkp",
-      'Surat Pengukuhan PKP': "suratPengukuhanPkp"
-    };
-
     if (this.lampiranFiles !== null) {
+      console.log(this.lampiranFiles)
+      this.dokLegalName = this.lampiranFiles[0].name;
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
           console.log(res)
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
-          let docName = file[this.dokLegalName];
-          let params = {
-            [docName]:res.contentUrl
-          };
-        
-          // this.uploadDokLegal(res.contentUrl);
-          this.profileAspekLegalService.addDokLegal(params).subscribe(
-            () => {
-              this.parent.popUpMessage = dictionary.save_data_success;
-              this.parent.triggerPopUp();
-              this.fetchData();
-            },
-            (err) => {
-              this.parent.popUpMessage = err.error.message;
-              this.parent.triggerPopUp();
-            }
-          );
+          this.uploadDokLegal();
         },
         (err) => {
           this.parent.popUpMessage = err.error.message;
@@ -178,27 +153,25 @@ export class DokumenLegalComponent implements OnInit {
     }
   }
 
-  // public uploadDokLegal(file: any) {
-  //   let docName = this.dokLegalName;
-  //   console.log(docName)
-  //   //endpointnya media_object
-  //   let params = {
-  //     docName: this.getDataType(docName,file)
-  //   }
-  //   console.log(params)
+  public uploadDokLegal() {
+    let params = {
+      namaDokumen: this.dokLegalName,
+      file: this.uploadedFileContentUrl,
+      documentType: this.dokData.type,
+      attachmentFilePath: this.uploadedFileId
+    };
+  
+    this.profileAspekLegalService.addDokLegal(params).subscribe(
+      () => {
+        this.parent.popUpMessage = dictionary.save_data_success;
+        this.parent.triggerPopUp();
+        this.fetchData();
+      },
+      (err) => {
+        this.parent.popUpMessage = err.error.message;
+        this.parent.triggerPopUp();
+      }
+    );
 
-  //   this.profileAspekLegalService.addDokLegal(params).subscribe(
-  //     () => {
-  //       this.parent.popUpMessage = dictionary.save_data_success;
-  //       this.parent.triggerPopUp();
-  //       this.fetchData();
-  //     },
-  //     (err) => {
-  //       this.parent.popUpMessage = err.error.message;
-  //       this.parent.triggerPopUp();
-  //     }
-  //   );
-
-
-  // }
+  }
 }
