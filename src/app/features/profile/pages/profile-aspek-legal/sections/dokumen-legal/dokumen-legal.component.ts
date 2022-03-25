@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePickerMessages } from '@progress/kendo-angular-dateinputs';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { ProfileAspekLegalService } from 'src/app/core/services/profile/profile-aspek-legal.service';
-import { forEachChild } from 'typescript';
+import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileAspekLegalComponent } from '../../profile-aspek-legal.component';
 
 @Component({
@@ -35,19 +34,6 @@ export class DokumenLegalComponent implements OnInit {
 
   public getAspekLegal(grid_data: any[]) {
     let data: any = {};
-    let datums: any = {
-      'Company Profile': data.companyProfile,
-      'Akta Pendirian': data.aktaPendirian,
-      'SIUP / Surat Izin Berusaha': data.siup,
-      'NPWP Perusahaan': data.npwpPerusahaan,
-      'NIB / TDP': data.nibTdp,
-      'IDP / SITU': data.idpSitu,
-      'Akta Perubahan': data.aktaPerubahan,
-      'SKP Menteri': data.skpMenteri,
-      'Sert. Anti Penyuapan': data.sertifikatAntiPenyuapan,
-      'Surat Keterangan Non PKP': data.suratKeteranganNonPkp,
-      'Surat Pengukuhan PKP': data.suratPengukuhanPkp
-    }
 
     this.profileAspekLegalService.getAspekLegal().subscribe(
       (response) => {
@@ -143,71 +129,37 @@ export class DokumenLegalComponent implements OnInit {
     return mappedData;
   }
 
-  public getdatum(datum: any, data: any) {
-    // console.log(datum)
-    console.log(data.companyProfile)
-    let datums: any = {
-      'Company Profile': data.companyProfile,
-      'Akta Pendirian': data.aktaPendirian,
-      'SIUP / Surat Izin Berusaha': data.siup,
-      'NPWP Perusahaan': data.npwpPerusahaan,
-      'NIB / TDP': data.nibTdp,
-      'IDP / SITU': data.idpSitu,
-      'Akta Perubahan': data.aktaPerubahan,
-      'SKP Menteri': data.skpMenteri,
-      'Sert. Anti Penyuapan': data.sertifikatAntiPenyuapan,
-      'Surat Keterangan Non PKP': data.suratKeteranganNonPkp,
-      'Surat Pengukuhan PKP': data.suratPengukuhanPkp
+  public uploadForm() {
+    const file: any = [
+      'Company Profile',
+      'Akta Pendirian',
+      'SIUP / Surat Izin Berusaha',
+      'NPWP Perusahaan',
+      'NIB / TDP',
+      'IDP / SITU',
+      'Akta Perubahan',
+      'SKP Menteri',
+      'Sert. Anti Penyuapan',
+      'Surat Keterangan Non PKP',
+      'Surat Pengukuhan PKP'
+    ];
+
+    let params = {
+
     }
-    console.log(datums[datum])
 
-    return datums[datum];
+    // this.profileAspekLegalService.addAspekLegal().subscribe(
+    //   () => {
+    //     this.parent.popUpMessage = dictionary.save_data_success;
+    //     this.parent.triggerPopUp();
+    //     this.fetchData();
+    //   },
+    //   (err) => {
+    //     this.parent.popUpMessage = err.error.message;
+    //     this.parent.triggerPopUp();
+    //   }
+    // );
+
+
   }
-
-  // public attachFile(datums: any[]) {
-  //   let mappedData: any[] = [];
-  //   datums.forEach(datum => {
-  //     let name = datum.name;
-  //     // switch (name) {
-  //     //   case 'Company Profile':
-  //     //     console.log(data)
-  //     //     datum.fileName = data.companyProfile;
-  //     //     break;
-  //     //   case 'Akta Pendirian':
-  //     //     datum.fileName = data.aktaPendirian;
-  //     //     break;
-  //     //   case 'SIUP / Surat Izin Berusaha':
-  //     //     datum.fileName = data.siup;
-  //     //     break;
-  //     //   case 'NPWP Perusahaan':
-  //     //     datum.fileName = data.npwpPerusahaan;
-  //     //     break;
-  //     //   case 'NIB / TDP':
-  //     //     datum.fileName = data.nibTdp;
-  //     //     break;
-  //     //   case 'IDP / SITU':
-  //     //     datum.fileName = data.idpSitu;
-  //     //     break;          
-  //     //   case 'Akta Perubahan':
-  //     //     datum.fileName = data.aktaPerubahan;
-  //     //     break;
-  //     //   case 'SKP Menteri':
-  //     //     datum.fileName = data.skpMenteri;
-  //     //     break;
-  //     //   case 'Sert. Anti Penyuapan':
-  //     //     datum.fileName = data.sertifikatAntiPenyuapan;
-  //     //     break;
-  //     //   case 'Surat Keterangan Non PKP':
-  //     //     datum.fileName = data.suratKeteranganNonPkp;
-  //     //     break;
-  //     //   case 'Surat Pengukuhan PKP':
-  //     //     datum.fileName = data.suratPengukuhanPkp;
-  //     //     break;
-  //     // }
-  //     datum.fileName = this.getdatum(name);
-  //   });
-  //   console.log(mappedData)
-  //   return mappedData;
-  // }
-
 }
