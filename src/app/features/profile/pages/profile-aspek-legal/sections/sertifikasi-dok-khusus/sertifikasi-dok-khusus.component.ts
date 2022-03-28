@@ -89,7 +89,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
         namaDokumen: data[key]['namaDokumen'],
         tipeDokumen: data[key]['tipeDokumen'],
         tanggalTerbit: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
-        tanggalExpired: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "Seumur Hidup",
+        tanggalExpired: data[key]['tanggalExpired'] !== undefined ? formatDate(data[key]['tanggalExpired'], "dd-MM-YYYY", "en-US") : "",
         lampiran: data[key]['attachmentFilePath'],
         file: data[key]['file'],
         id: data[key]['id'],
@@ -170,7 +170,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public submit(): void {
     if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
-      this.popUpMessage = dictionary.invalid_file;
+      this.parent.popUpMessage = dictionary.invalid_file;
       this.close();
       this.parent.triggerPopUp();
     } else {
@@ -187,9 +187,9 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public save(): void {
     let params = {
-      tipeDokumen:this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
-      berlakuSampai: this.form.value.berlakuSampai,
+      tanggalTerbit: this.form.value.tanggalTerbit,
+      tanggalExpired: this.form.value.tanggalExpired,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
@@ -197,13 +197,13 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
     this.profilApekLegalService.addDokLegal(params).subscribe(
       () => {
-        this.popUpMessage = dictionary.save_data_success;
+        this.parent.popUpMessage = dictionary.save_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         this.close();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.parent.triggerPopUp();
         this.close();
       }
@@ -218,14 +218,15 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public updateForm(data: any): void {
     // this.id = data.id;
     this.data.namaDokumen = data.namaDokumen;
-    this.data.berlakuSampai = data.berlakuSampai !== "Seumur Hidup" ? new Date(this.mapDateFormat(data.berlakuSampai)) : null;
+    this.data.tanggalTerbit = data.tanggalTerbit;    
+    this.data.tanggalExpired = data.tanggalExpired;
 
     this.isNewData = false;
 
     this.setForm();
     this.open();
 
-    this.popUpMessage = dictionary.update_data_notification;
+    this.parent.popUpMessage = dictionary.update_data_notification;
     this.parent.triggerPopUp();
   }
 
@@ -233,21 +234,21 @@ export class SertifikasiDokKhususComponent implements OnInit {
     let params = {
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
-      nomorDokumen: this.form.value.nomorDokumen,
-      berlakuSampai: this.form.value.berlakuSampai,
+      tanggalTerbit: this.form.value.tanggalTerbit,
+      tanggalExpired: this.form.value.tanggalExpired,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
     this.profilApekLegalService.updateDokLegal(params).subscribe(
       () => {
-        this.popUpMessage = dictionary.save_data_success;
+        this.parent.popUpMessage = dictionary.save_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         this.close();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.parent.triggerPopUp();
         this.close();
       }
@@ -274,12 +275,12 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public delete(id: string): void {
     this.profilApekLegalService.delete(id).subscribe(
       () => {
-        this.popUpMessage = dictionary.delete_data_success;
+        this.parent.popUpMessage = dictionary.delete_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.parent.triggerPopUp();
       }
     );
