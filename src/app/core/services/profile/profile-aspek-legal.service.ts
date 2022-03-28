@@ -46,7 +46,6 @@ export class ProfileAspekLegalService {
         }
       }
     };
-    console.log(api_get_aspek_legal)
     return this.apiService.sendRequest(api_get_aspek_legal);
   }
 
