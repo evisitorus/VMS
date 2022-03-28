@@ -190,9 +190,8 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public save(): void {
     let params = {
       namaDokumen: this.form.value.namaDokumen,
-      tanggalTerbit: this.form.value.tanggalTerbit,
+      submitDate: this.form.value.tanggalTerbit,
       berlakuSampai: this.form.value.berlakuSampai,
-      submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
@@ -237,9 +236,8 @@ export class SertifikasiDokKhususComponent implements OnInit {
       id: this.id,
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
-      tanggalTerbit: this.form.value.tanggalTerbit,
+      submitDate: this.form.value.tanggalTerbit,
       berlakuSampai: this.form.value.berlakuSampai,
-      submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
     };
