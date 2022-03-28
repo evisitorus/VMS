@@ -39,7 +39,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
     id: "",
     namaDokumen: "",
     tanggalTerbit: "",
-    tanggalExpired: "",
+    berlakuSampai: "",
     lampiran: ""
   };
 
@@ -89,7 +89,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
         namaDokumen: data[key]['namaDokumen'],
         tipeDokumen: data[key]['tipeDokumen'],
         tanggalTerbit: formatDate(data[key]['submitDate'], "dd-MM-YYYY", "en-US"),
-        tanggalExpired: data[key]['tanggalExpired'] !== undefined ? formatDate(data[key]['tanggalExpired'], "dd-MM-YYYY", "en-US") : "",
+        berlakuSampai: data[key]['berlakuSampai'] !== undefined ? formatDate(data[key]['berlakuSampai'], "dd-MM-YYYY", "en-US") : "",
         lampiran: data[key]['attachmentFilePath'],
         file: data[key]['file'],
         id: data[key]['id'],
@@ -103,7 +103,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
     this.form = new FormGroup({
       namaDokumen: new FormControl(this.data.namaDokumen, Validators.required),
       tanggalTerbit: new FormControl(this.data.tanggalTerbit, Validators.required),
-      tanggalExpired: new FormControl(this.data.tanggalExpired, Validators.required),
+      berlakuSampai: new FormControl(this.data.berlakuSampai, Validators.required),
     });
   }
 
@@ -111,7 +111,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
     this.data.id = "";
     this.data.namaDokumen = "";
     this.data.tanggalTerbit = "";
-    this.data.tanggalExpired = "";
+    this.data.berlakuSampai = "";
     this.data.lampiran = "";
     this.setForm();
   }
@@ -189,7 +189,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
     let params = {
       namaDokumen: this.form.value.namaDokumen,
       tanggalTerbit: this.form.value.tanggalTerbit,
-      tanggalExpired: this.form.value.tanggalExpired,
+      berlakuSampai: this.form.value.berlakuSampai,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl
@@ -218,8 +218,8 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public updateForm(data: any): void {
     // this.id = data.id;
     this.data.namaDokumen = data.namaDokumen;
-    this.data.tanggalTerbit = data.tanggalTerbit;    
-    this.data.tanggalExpired = data.tanggalExpired;
+    this.data.tanggalTerbit = new Date(this.mapDateFormat(data.tanggalTerbit));    
+    this.data.berlakuSampai = new Date(this.mapDateFormat(data.berlakuSampai));
 
     this.isNewData = false;
 
@@ -235,7 +235,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       tanggalTerbit: this.form.value.tanggalTerbit,
-      tanggalExpired: this.form.value.tanggalExpired,
+      berlakuSampai: this.form.value.berlakuSampai,
       submitDate: new Date(),
       file: this.uploadedFileId,
       attachmentFilePath: this.uploadedFileContentUrl

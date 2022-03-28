@@ -130,6 +130,7 @@ export class ProfileAspekLegalService {
       attachmentFilePath: params.attachmentFilePath,
       owner: "/api/vendors/" + vendor_id,
       documentType: params.documentType,
+      tanggalTerbit: params.tanggalTerbit ? params.tanggalTerbit : null,
       berlakuSampai: params.berlakuSampai ? params.berlakuSampai : null,
       submitDate: params.submitDate ? params.submitDate : null
     };

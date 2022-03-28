@@ -16,8 +16,8 @@
       </kendo-formfield>
 
       <kendo-formfield [formGroup]="form">
-        <kendo-label [for]="tanggalExpired" text="Tanggal Expired"></kendo-label>
-        <kendo-datepicker id="input-tanggal-expired" tanggalExpired formControlName="tanggalExpired" #tanggalExpired></kendo-datepicker>
+        <kendo-label [for]="berlakuSampai" text="Tanggal Expired"></kendo-label>
+        <kendo-datepicker id="input-tanggal-expired" berlakuSampai formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
         <kendo-formerror></kendo-formerror>
       </kendo-formfield>
 
@@ -61,7 +61,7 @@
         </kendo-grid-column>
         <kendo-grid-column field="tanggalTerbit" title="Tanggal Terbit">
         </kendo-grid-column>
-        <kendo-grid-column field="tanggalExpired" title="Tanggal Expired">
+        <kendo-grid-column field="berlakuSampai" title="Tanggal Expired">
         </kendo-grid-column>
         <kendo-grid-column field="lampiran" title="Nama File">
           <ng-template kendoGridCellTemplate let-dataItem>
