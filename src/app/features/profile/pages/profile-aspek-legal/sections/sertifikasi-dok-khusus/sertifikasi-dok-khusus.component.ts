@@ -173,7 +173,6 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public submit(): void {
     if (this.lampiranFiles === null || this.lampiranFiles === undefined) {
       this.parent.popUpMessage = dictionary.invalid_file;
-      this.close();
       this.parent.triggerPopUp();
     } else {
       this.form.markAllAsTouched();
