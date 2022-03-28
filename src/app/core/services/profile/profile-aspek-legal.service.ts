@@ -102,8 +102,8 @@ export class ProfileAspekLegalService {
       attachmentFilePath: params.attachmentFilePath,
       owner: "/api/vendors/" + vendor_id,
       documentType: params.documentType,
-      berlakuSampai: params.berlakuSampai ? params.berlakuSampai : null,
-      submitDate: params.submitDate ? params.submitDate : null
+      berlakuSampai: params.berlakuSampai ? params.berlakuSampai : undefined,
+      submitDate: params.submitDate ? params.submitDate : undefined
     };
 
     let api_add_dok_legal: ApiInterface = {
@@ -130,7 +130,7 @@ export class ProfileAspekLegalService {
       attachmentFilePath: params.attachmentFilePath,
       owner: "/api/vendors/" + vendor_id,
       documentType: params.documentType,
-      submitDate: params.submitDate ? params.submitDate : null,
+      submitDate: params.submitDate ? params.submitDate : new Date(),
       berlakuSampai: params.berlakuSampai ? params.berlakuSampai : null
     };
 
