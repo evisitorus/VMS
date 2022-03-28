@@ -43,6 +43,8 @@ export class SertifikasiDokKhususComponent implements OnInit {
     lampiran: ""
   };
 
+  public id!: string;
+
   constructor(
     public parent: ProfileAspekLegalComponent,
     public profilApekLegalService: ProfileAspekLegalService,
@@ -216,7 +218,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public updateForm(data: any): void {
-    // this.id = data.id;
+    this.id = data.id;
     this.data.namaDokumen = data.namaDokumen;
     this.data.tanggalTerbit = new Date(this.mapDateFormat(data.tanggalTerbit));    
     this.data.berlakuSampai = new Date(this.mapDateFormat(data.berlakuSampai));
@@ -232,6 +234,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public update(): void {
     let params = {
+      id: this.id,
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       tanggalTerbit: this.form.value.tanggalTerbit,

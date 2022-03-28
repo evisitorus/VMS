@@ -137,7 +137,7 @@ export class ProfileAspekLegalService {
 
     let api_add_dok_legal: ApiInterface = {
       method: ApiRouteMethods.put,
-      url: ApiRoutes.api_doc_legal,
+      url: ApiRoutes.api_doc_legal.concat('/',params.id),
       body: body,
       options: {
         headers: {
