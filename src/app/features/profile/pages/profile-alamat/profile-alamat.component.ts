@@ -154,6 +154,7 @@ export class ProfileAlamatComponent implements OnInit {
         noTelponKodeArea: data[key]['telco_number'] ? data[key]['telco_number']['telco_areaCode'] : "",
         telcoId: data[key]['telco_number'] ? data[key]['telco_number']['telco_id'] : "",
         id: data[key]['address_id'],
+        deletedAt: data[key]['deletedAt']
       };
     }
     return mappedData;
