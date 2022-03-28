@@ -12,13 +12,13 @@
       <kendo-formfield [formGroup]="form">
         <kendo-label [for]="tanggalTerbit" text="Tanggal Terbit"></kendo-label>
         <kendo-datepicker id="input-tanggal-terbit" tanggalTerbit formControlName="tanggalTerbit" #tanggalTerbit></kendo-datepicker>
-        <kendo-formerror></kendo-formerror>
+        <kendo-formerror>Tanggal Terbit tidak boleh kosong</kendo-formerror>
       </kendo-formfield>
 
       <kendo-formfield [formGroup]="form">
         <kendo-label [for]="berlakuSampai" text="Tanggal Expired"></kendo-label>
         <kendo-datepicker id="input-tanggal-expired" berlakuSampai formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
-        <kendo-formerror></kendo-formerror>
+        <kendo-formerror>Tanggal Expired tidak boleh kosong</kendo-formerror>
       </kendo-formfield>
 
       <kendo-formfield [formGroup]="form">
