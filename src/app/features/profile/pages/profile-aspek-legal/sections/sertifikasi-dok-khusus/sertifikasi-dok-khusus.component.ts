@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
@@ -34,6 +35,10 @@ export class SertifikasiDokKhususComponent implements OnInit {
   public uploadedFileId!: string;
   public invalidFileExtension!: boolean;
   public invalidMaxFileSize!: boolean;
+
+  public gridView!: GridDataResult;
+  public pageSize = 5;
+  public skip = 0;
 
   public data: any = {
     id: "",
@@ -74,6 +79,12 @@ export class SertifikasiDokKhususComponent implements OnInit {
       (response) => {
         this.gridData = response.dokumenLain['hydra:member'];
         this.gridData = this.mapData(this.gridData);
+        this.gridView = {
+          data: this.gridData.slice(this.skip, this.skip + this.pageSize),
+          total: this.gridData.length,
+        };
+
+        return this.gridData;
 
       },
       (err) => {
@@ -284,6 +295,18 @@ export class SertifikasiDokKhususComponent implements OnInit {
         this.parent.triggerPopUp();
       }
     );
+  }
+
+  public pageChange(event: PageChangeEvent): void {
+    this.skip = event.skip;
+    this.loadItems();
+  }
+
+  private loadItems(): void {
+    this.gridView = {
+      data: this.gridData.slice(this.skip, this.skip + this.pageSize),
+      total: this.gridData.length,
+    };
   }
 
 }

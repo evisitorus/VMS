@@ -51,7 +51,7 @@
     <div class="k-actions k-actions-end">
       <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="k-button k-primary add-btn" id="btn-tambah-dokumen">Tambah</button>
     </div>
-    <kendo-grid [data]="gridData">
+    <kendo-grid [data]="gridView" [pageable]="true" [pageSize]="pageSize" [resizable]="true" (pageChange)="pageChange($event)">
         <kendo-grid-column field="no" title="No." [width]="60">
           <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
             {{rowIndex + 1}} 
