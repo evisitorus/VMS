@@ -57,6 +57,12 @@ export class ProfileAspekLegalComponent implements OnInit {
     );
   }
 
+  public convertDateFormat(date: any){
+    const offset = date.getTimezoneOffset();
+    date = new Date(date.getTime() - (offset*60*1000));
+    return date.toISOString();
+  }
+
   public triggerPopUp(): void {
     this.eventEmitterService.trigger();
   }
