@@ -5,6 +5,7 @@ import { ProfileAssetInterface } from 'src/app/core/interfaces/profile-asset.int
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileAssetService } from 'src/app/core/services/profile/profile-asset.service';
 import { dictionary } from 'src/app/dictionary/dictionary';
+import { ProfileLaporanKeuanganComponent } from '../profile-laporan-keuangan/profile-laporan-keuangan.component'
 
 @Component({
   selector: 'app-profile-aset',
@@ -17,23 +18,25 @@ export class ProfileAsetComponent implements OnInit {
   public gridData: any[] = [];
   public opened: boolean = false;
   public popUpTitle: string = "Profile Asset";
-  public popUpMessage: string = "";
   public id!: string;
   public isNewData: boolean = true;
   public isDelete!: boolean;
   public maxLengthNama = 100;
   public maxLengthJumlah = 9;
+  public maxLengthEstimasiNilai = 13;
 
   public data: any = {
     namaAsset: "",
     jumlah: 0,
-    tahunPembuatan: ""
+    tahunPembuatan: "",
+    estimasiNilaiAsset: 0
   };
 
   constructor(
     private profileAssetService: ProfileAssetService,
     private eventEmitterService: EventEmitterService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private parent: ProfileLaporanKeuanganComponent
   ){ 
     this.setFormValue();
   }
@@ -52,7 +55,8 @@ export class ProfileAsetComponent implements OnInit {
         jumlah: data[key]['jumlah'],
         tahunPembuatan: data[key]['tahunPembuatan'],
         id: data[key]['id'],
-        deletedAt: data[key]['deletedAt']
+        deletedAt: data[key]['deletedAt'],
+        estimasiNilaiAsset: data[key]['estimasiNilaiAsset'] ? data[key]['estimasiNilaiAsset'] : 0,
       };
     }
     return mappedData;
@@ -86,7 +90,7 @@ export class ProfileAsetComponent implements OnInit {
         this.gridData = this.mapData(this.gridData);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -97,6 +101,7 @@ export class ProfileAsetComponent implements OnInit {
     this.data.namaAsset = data.nama;
     this.data.jumlah = data.jumlah;
     this.data.tahunPembuatan = parseInt(data.tahunPembuatan);
+    this.data.estimasiNilaiAsset = data.estimasiNilaiAsset
     
     this.isNewData = false;
 
@@ -108,6 +113,7 @@ export class ProfileAsetComponent implements OnInit {
     this.data.namaAsset = "";
     this.data.jumlah = "";
     this.data.tahunPembuatan = "";
+    this.data.estimasiNilaiAsset = "";
     this.setFormValue();
   }
 
@@ -115,18 +121,19 @@ export class ProfileAsetComponent implements OnInit {
     let params: ProfileAssetInterface = {
       namaAsset: this.form.value.namaAsset,
       jumlah: this.form.value.jumlah,
-      tahunPembuatan: this.form.value.tahunPembuatan.toString()
+      tahunPembuatan: this.form.value.tahunPembuatan.toString(),
+      estimasiNilaiAsset: this.form.value.estimasiNilaiAsset.toString(),
     };
     this.profileAssetService.save(params).subscribe(
       () => {
-        this.popUpMessage = dictionary.save_data_success;
+        this.parent.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.getData();
         this.close();
         this.resetForm();
       }, 
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
         this.resetForm();
@@ -138,18 +145,19 @@ export class ProfileAsetComponent implements OnInit {
     let params: ProfileAssetInterface = {
       namaAsset: this.form.value.namaAsset,
       jumlah: this.form.value.jumlah,
-      tahunPembuatan: this.form.value.tahunPembuatan.toString()
+      tahunPembuatan: this.form.value.tahunPembuatan.toString(),
+      estimasiNilaiAsset: this.form.value.estimasiNilaiAsset.toString(),
     };
     this.profileAssetService.update(params, this.id).subscribe(
       () => {
-        this.popUpMessage = dictionary.update_data_success;
+        this.parent.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.getData();
         this.close();
         this.resetForm();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
         this.close();
         this.resetForm();
@@ -160,12 +168,12 @@ export class ProfileAsetComponent implements OnInit {
   public delete(id: string): void {
     this.profileAssetService.delete(id).subscribe(
       () => {
-        this.popUpMessage = dictionary.delete_data_success;
+        this.parent.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.getData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -192,7 +200,8 @@ export class ProfileAsetComponent implements OnInit {
     this.form = new FormGroup({
       namaAsset: new FormControl(this.data.namaAsset, [Validators.required]),
       jumlah: new FormControl(this.data.jumlah, [Validators.required]),
-      tahunPembuatan: new FormControl(this.data.tahunPembuatan, [Validators.required])
+      tahunPembuatan: new FormControl(this.data.tahunPembuatan, [Validators.required]),
+      estimasiNilaiAsset: new FormControl(this.data.estimasiNilaiAsset, [Validators.required]),
     });
   }
 

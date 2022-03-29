@@ -169,31 +169,36 @@ export class ProfileInformasiPerusahaanComponent {
 
   public getDataPerusahaan(): void {
     forkJoin({
-      responseVendorData: this.profileDashboardService.getVendor(),
+      // responseVendorData: this.profileDashboardService.getVendor(),
+      responseVendorData: this.profileInfoService.getVendorInformation(),
       responseHimpunan: this.profileInfoService.getPartyRole("Himpunan"),
       responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
       responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
       responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu"),
-      responseContactMechanism: this.profileInfoService.getContactMechanism(),
+      // responseContactMechanism: this.profileInfoService.getContactMechanism(),
       responseJenisPenyediaUsaha: this.profileInfoService.getJenisPenyediaUsaha(),
       responseJenisKegiatanUsaha: this.profileInfoService.getJenisKegiatanUsaha(),
       responseJenisVendor: this.profileInfoService.getJenisVendor(),
       responseBidangUsaha: this.profileInfoService.getBidangUsaha(),
       responseTipeVendor: this.profileInfoService.getTipeVendor(),
-      responseProvinces: this.profileInfoService.getProvinces(),
+      // responseProvinces: this.profileInfoService.getProvinces(),
     }).subscribe((response) => {
       this.setResponseVendorData(response.responseVendorData);
       this.setHimpunan(response.responseHimpunan);
       this.setPengampu(response.responsePengampu);
       this.setVendorHimpunan(response.responseVendorHimpunan);
       this.setVendorPengampu(response.responseVendorPengampu);
-      this.setResponseContactMechanism(response.responseContactMechanism);
+      // this.setResponseContactMechanism(response.responseContactMechanism);
       this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
       this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
       this.setJenisVendor(response.responseJenisVendor);
       this.setBidangUsaha(response.responseBidangUsaha);
       this.setTipeVendor(response.responseTipeVendor);
-      this.setProvinces(response.responseProvinces);
+      this.setFormPerusahaan(this.dataPerusahaan);
+      // this.setProvinces(response.responseProvinces);
+    }, (error) => {
+      this.popUpMessage = dictionary.fetch_data_failed + ' Perusahaan';
+      this.triggerPopUp();
     });
   }
 
@@ -205,13 +210,24 @@ export class ProfileInformasiPerusahaanComponent {
     this.getDataPerusahaan();
   }
 
-  public setResponseVendorData(resp: any) {
+  public setResponseVendorData(resp_: any) {
+    let resp = resp_.data
     if (resp.logo) {
-      this.logoImg = environment.api_base_path + resp.logo.concat('/file');
+      let logo = resp.logo
+      if (logo){
+        this.logoImg = environment.api_base_path.concat('/api/media_objects/').concat(logo.id).concat('/file');
+      }
     }
 
+    if (resp.pemilikNIB === undefined && resp.nomorIndukBerusaha === undefined) {
+      this.dataPerusahaan.pemilikNIB = null;
+    } else {
+      this.dataPerusahaan.pemilikNIB = resp.nomorIndukBerusaha ? true : false;
+    }
+    
     this.dataPerusahaan.namaPerusahaan = resp.name ? resp.name : "";
     this.dataPerusahaan.inisialPerusahaan = resp.altName ? resp.altName : "";
+    this.dataPerusahaan.emailPerusahaan = resp.contactMechanism? resp.contactMechanism.emailPerusahaan : "";
 
     if (resp.statusPerusahaanPkp === undefined) {
       this.dataPerusahaan.statusPerusahaanPkp = null;
@@ -248,7 +264,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.dataPerusahaan.bidangUsaha = resp.bidangUsaha ? resp.bidangUsaha : "";
     this.dataPerusahaan.jumlahKaryawanDomestik = resp.jumlahKaryawanDomestik ? resp.jumlahKaryawanDomestik : 0;
     this.dataPerusahaan.jumlahKaryawanAsing = resp.jumlahKaryawanAsing ? resp.jumlahKaryawanAsing : 0;
-
   }
 
   public setResponseContactMechanism(resp: any) {
@@ -391,6 +406,11 @@ export class ProfileInformasiPerusahaanComponent {
   public setBidangUsaha(resp: any) {
     //get kbli bidang usaha
     this.bidangUsahaKbli = resp["hydra:member"];
+    for (let index = 0; index < this.dataPerusahaan.bidangUsaha.length; index++) {
+      const element = this.dataPerusahaan.bidangUsaha[index];
+      let indexBadanUsaha = this.bidangUsahaKbli.findIndex((item:any) => item.id === element.id)
+      this.dataPerusahaan.bidangUsaha[index] = indexBadanUsaha > -1 ? this.bidangUsahaKbli[indexBadanUsaha] : this.dataPerusahaan.bidangUsaha[index];
+    }
   }
 
   public setTipeVendor(resp: any) {
@@ -426,13 +446,12 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public setVendorPengampu(resp: any) {
-    console.log(resp.data);
     this.dataPerusahaan.bumnPengampu = resp.data ? resp.data : "";
-    console.log(this.dataPerusahaan.bumnPengampu);
   }
 
   public setFormPerusahaan(data: any): void {
     this.profileInformationFormGroup = this.fb.group({
+      pemilikNIB: new FormControl(data.pemilikNIB, Validators.required),
       namaPerusahaan: new FormControl(data.namaPerusahaan, Validators.required),
       inisialPerusahaan: new FormControl(data.inisialPerusahaan, []),
       jenisBadanUsaha: new FormControl(data.jenisBadanUsaha, Validators.required),
@@ -447,13 +466,7 @@ export class ProfileInformasiPerusahaanComponent {
       bumnPengampu: new FormControl(data.bumnPengampu, Validators.required),
       organisasiHimpunan: new FormControl(data.organisasiHimpunan, []),
       websitePerusahaan: new FormControl(data.web, Validators.required),
-      noTeleponPerusahaan: new FormControl(data.noTelepon, Validators.required),
-      alamatPerusahaan: new FormControl(data.alamat, Validators.required),
-      provinsi: new FormControl(this.selectedProvince, Validators.required),
-      kota: new FormControl(this.selectedKota, Validators.required),
-      kecamatan: new FormControl(this.selectedKecamatan, Validators.required),
-      kelurahan: new FormControl(this.selectedKelurahan, Validators.required),
-      kodePos: new FormControl(this.selectedKodepos, Validators.required),
+      emailPerusahaan: new FormControl(data.emailPerusahaan, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
     });
   }
 
@@ -522,7 +535,6 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   upload(): void {
-    console.log(this.selectedFile);
     this.fileService.upload(this.selectedFile[0]).subscribe(
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
@@ -567,9 +579,9 @@ export class ProfileInformasiPerusahaanComponent {
       fileId = this.uploadedFileId.split("/");
       fileId = fileId[fileId.length - 1];
     }
-
-    if (this.profileInformationFormGroup.valid) {
+    if (this.profileInformationFormGroup.valid, this.profileInformationFormGroup.value) {
       this.params = {
+        pemilikNIB: this.profileInformationFormGroup.value.pemilikNIB,
         name: this.profileInformationFormGroup.value.namaPerusahaan,
         initial: this.profileInformationFormGroup.value.inisialPerusahaan,
         jenisBadanUsaha: this.profileInformationFormGroup.value.jenisBadanUsaha,
@@ -584,13 +596,7 @@ export class ProfileInformasiPerusahaanComponent {
         oragnisasiHimpunan: this.profileInformationFormGroup.value.organisasiHimpunan,
         bumnPengampu: this.profileInformationFormGroup.value.bumnPengampu,
         website: this.profileInformationFormGroup.value.websitePerusahaan,
-        phoneNumber: this.profileInformationFormGroup.value.noTeleponPerusahaan,
-        alamatPerusahaan: this.profileInformationFormGroup.value.alamatPerusahaan,
-        provinsi: this.profileInformationFormGroup.value.provinsi,
-        kota: this.profileInformationFormGroup.value.kota,
-        kecamatan: this.profileInformationFormGroup.value.kecamatan,
-        keluarahan: this.profileInformationFormGroup.value.kelurahan,
-        kodePos: this.profileInformationFormGroup.value.kodePos,
+        emailPerusahaan: this.profileInformationFormGroup.value.emailPerusahaan,
         file: fileId
       }
 
@@ -600,7 +606,8 @@ export class ProfileInformasiPerusahaanComponent {
         () => {
           this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
-          location.reload();
+          this.getDataPerusahaan();
+          // location.reload();
         },
         () => {
           this.popUpMessage = dictionary.update_data_failed;

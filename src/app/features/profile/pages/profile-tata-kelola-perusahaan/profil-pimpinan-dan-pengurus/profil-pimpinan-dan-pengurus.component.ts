@@ -6,7 +6,7 @@ import { FileService } from 'src/app/core/services/file.service';
 import { ProfilePimpinanDanPengurusInterface } from 'src/app/core/interfaces/profile/profile-pimpinan-dan-pengurus.interface';
 import { PimpinanDanPengurusService } from 'src/app/core/services/profile/profile-pic/pimpinan-dan-pengurus.service';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
-import { ProfilePersonInChargeComponent } from '../profile-person-in-charge.component';
+import { ProfileTataKelolaPerusahaanComponent } from '../profile-tata-kelola-perusahaan.component';
 
 interface Item {
   name: string;
@@ -50,6 +50,9 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public selectedFile!: Array<any>;
   public uploadedFileContentUrl!: string;
   public uploadedFileId!: string;
+  public selectedNpwpFile!: Array<any>;
+  public uploadedNpwpContentUrl!: string;
+  public uploadedNpwpId!: string;
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["pdf", "jpg", "png", "jpeg"],
@@ -62,6 +65,8 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     lastName: null,
     jabatan: null,
     kartuIdentitas: null,
+    npwp:null,
+    kartuNpwp: null
   };
 
   public bidangTemp: Array<Item> = [];
@@ -75,7 +80,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     private fileService: FileService,
     private pimpinanDanPengurusService: PimpinanDanPengurusService,
     private dialogService: DialogService,
-    private parent: ProfilePersonInChargeComponent
+    private parent: ProfileTataKelolaPerusahaanComponent
   ) {
     this.bidangTemp = this.bidangSource.slice(0);
   }
@@ -110,6 +115,8 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.data.lastName = null;
     this.data.jabatan = null;
     this.data.kartuIdentitas = null;
+    this.data.npwp = null;
+    this.data.kartuNpwp = null;
     this.setForm();
 
   }
@@ -117,27 +124,44 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public setForm(): void {
     this.pengurusFormGroup = new FormGroup({
       nik: new FormControl(this.data.nik ? parseInt(this.data.nik) : null, Validators.required),
+      npwp: new FormControl(this.data.npwp ? parseInt(this.data.npwp) : null, Validators.required),
       firstName: new FormControl(this.data.firstName, Validators.required),
       lastName: new FormControl(this.data.lastName, Validators.required),
-      jabatan: new FormControl(this.data.jabatan, Validators.required)
+      jabatan: new FormControl(this.data.jabatan, Validators.required),
+      kartuIdentitas: new FormControl(this.data.kartuIdentitas, Validators.required),
+      kartuNpwp: new FormControl(this.data.kartuNpwp, Validators.required)
     });
   }
 
 
   public submitProfilPimpinanDanPengurus(): void {
-    if( this.uploadedFileContentUrl === null || this.selectedFile === null){
-      this.popUpID = "popup-wrong-file";
-      this.parent.popUpMessage = "Periksa kembali file Anda";
-      this.parent.triggerPopUp();
-    } else {
-      this.pengurusFormGroup.markAllAsTouched();
-      if (this.pengurusFormGroup.valid) {
-        if (this.isNewData) {
-          this.save();
-        } else {
-          this.update();
+    let fileVar = [this.uploadedFileContentUrl, this.uploadedNpwpContentUrl, this.selectedFile, this.selectedNpwpFile];
+
+    console.log(fileVar);
+
+    let fileVar_status = true;
+    let fileVar_stat = true;
+    
+    fileVar.every(file => {
+      if( file === null || typeof file === 'undefined' ){
+        this.popUpID = "popup-wrong-file";
+        this.parent.popUpMessage = "Periksa kembali file Anda";
+        this.parent.triggerPopUp();
+        fileVar_stat = false;
+      } 
+      fileVar_status = fileVar_status && fileVar_stat;
+      return fileVar_stat;
+    })
+    
+    if (fileVar_status){
+        this.pengurusFormGroup.markAllAsTouched();
+        if (this.pengurusFormGroup.valid) {
+          if (this.isNewData) {
+            this.save();
+          } else {
+            this.update();
+          }
         }
-      }
     }
     
 
@@ -152,19 +176,24 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public save(): void {
     this.popUpTitle = "Tambah Pimpinan";
     let file_id = this.extractNumber(this.uploadedFileId);
+    let npwp_id = this.extractNumber(this.uploadedNpwpId);
     let params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
       lastName: this.pengurusFormGroup.value.lastName,
       jabatan:this.pengurusFormGroup.value.jabatan,
       file: file_id,
-      kartuIdentitas: this.uploadedFileContentUrl
+      kartuIdentitas: this.uploadedFileContentUrl,
+      npwp: this.pengurusFormGroup.value.npwp.toString(),
+      kartuNpwp: this.uploadedNpwpContentUrl,
+      fileNpwp: npwp_id
     };
     this.pimpinanDanPengurusService.addProfilPimpinanDanPengurus(params).subscribe(
       () => {
         this.parent.popUpMessage = "Berhasil menyimpan data, silakan ajukan verifikasi";
         this.parent.triggerPopUp();
         this.fetchData();
+        this.resetForm();
         this.close();
       },
       () => {
@@ -189,6 +218,21 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
       (res) => {
         this.uploadedFileContentUrl = res.contentUrl; // file url
         this.uploadedFileId = res["@id"]; //vendor :resume_id
+
+      },
+      (error) => {
+        this.popUpID = "popup-upload-file-failed";
+        this.parent.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.parent.triggerPopUp();
+      }
+    );
+  }
+
+  public uploadNpwp(): void {
+    this.fileService.upload(this.selectedNpwpFile[0]).subscribe(
+      (res) => {
+        this.uploadedNpwpContentUrl = res.contentUrl; // file url
+        this.uploadedNpwpId = res["@id"]; //vendor :resume_id
 
       },
       (error) => {
@@ -225,6 +269,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.data.lastName = data.fromParty.lastName;
     this.data.jabatan = data.jabatan;
     this.data.kartuIdentitas = data.kartuIdentitas;
+    this.data.npwp = data.npwp;
 
     this.isNewData = false;
 
@@ -244,18 +289,18 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   }
 
   public update(): void {
-    let file_id = "";
-    if(this.uploadedFileId){
-      file_id = this.extractNumber(this.uploadedFileId);
-    }
     let params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
       lastName: this.pengurusFormGroup.value.lastName,
       jabatan:this.pengurusFormGroup.value.jabatan,
-      file: file_id,
-      kartuIdentitas: this.uploadedFileContentUrl
+      file: this.uploadedFileId ? this.extractNumber(this.uploadedFileId) : "",
+      kartuIdentitas: this.uploadedFileContentUrl,
+      npwp: this.pengurusFormGroup.value.npwp.toString(),
+      kartuNpwp: this.uploadedNpwpContentUrl,
+      fileNpwp: this.uploadedNpwpId ? this.extractNumber(this.uploadedNpwpId) : ""
     };
+    
     //send pengurus ID and sdm relationship ID
     this.pimpinanDanPengurusService.update(params, this.id, this.pengurusId).subscribe(
       () => {

@@ -47,31 +47,44 @@ export class ProfileDashboardService {
     return this.apiService.sendRequest(api_get_vendor);
   }
  
-  getDashboard(): Observable<any> {
-    let api_get_users: ApiInterface = {
+  getTenders(): Observable<any> {
+    let api_get_vendor_tenders: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_users + "/dashboard/" + this.user_id,
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/tenders",
       options: {
         headers: {
-          Authorization: this.token
+          Authorization: this.token,
+          Accept: "application/json"
         }
       }
     }
-
-    return this.apiService.sendRequest(api_get_users);
+    return this.apiService.sendRequest(api_get_vendor_tenders);
   }
 
-  getVendorStatusData(): Observable<any> {
-    let api_get_vendor_status_data: ApiInterface = {
+  getVerificationStatus(): Observable<any> {
+    let api_get_vendor_verification_status: ApiInterface = {
       method: ApiRouteMethods.get,
-      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/status_data",
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/verification_status",
       options: {
         headers: {
-          Authorization: this.token
+          Authorization: this.token,
         }
       }
     }
-
-    return this.apiService.sendRequest(api_get_vendor_status_data);
+    return this.apiService.sendRequest(api_get_vendor_verification_status);
   }
+
+  getVerificationData(): Observable<any> {
+    let api_get_vendor_verification_data: ApiInterface = {
+      method: ApiRouteMethods.get,
+      url: ApiRoutes.api_get_vendor + "/" + this.vendor_id + "/verification",
+      options: {
+        headers: {
+          Authorization: this.token,
+        }
+      }
+    }
+    return this.apiService.sendRequest(api_get_vendor_verification_data);
+  }
+
 }

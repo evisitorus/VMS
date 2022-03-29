@@ -40,6 +40,7 @@ export class ProfileAssetService {
         name: params.namaAsset,
         jumlah: params.jumlah,
         tahunPembuatan: params.tahunPembuatan,
+        estimasiNilaiAsset: params.estimasiNilaiAsset,
         owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
       },
       options: {
@@ -59,6 +60,7 @@ export class ProfileAssetService {
       body: {
         name: params.namaAsset,
         jumlah: params.jumlah,
+        estimasiNilaiAsset: params.estimasiNilaiAsset,
         tahunPembuatan: params.tahunPembuatan,
         owner: "api/vendors/".concat(this.authService.getLocalStorage("vendor_id")!)
       },

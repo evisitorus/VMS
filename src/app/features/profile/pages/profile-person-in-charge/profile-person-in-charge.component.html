@@ -1,25 +1,13 @@
-<div class="row profile-section">
-
-  <div class="col-2 profile-menu">
-    <app-sidebar></app-sidebar>
-  </div>
-
-  <div class="col-10 profile-content-container">
-
-    <div class="profile-content">
-      <div class="profile-content-title">
-        <kendo-label id="pic-label">PIC</kendo-label>
-      </div>
-
-      <div id="attention" *ngIf="!isDisabled">
+<div>
+  <div>
+    <div>
+      <!-- <div id="attention" *ngIf="!isDisabled">
         <p id="verification-attention">Perhatian :<br>Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh
           VMS Verificator. Pastikan
           perubahan data perusahaan Anda sudah benar.</p>
-      </div>
-      <form id="form-pic" class="k-form auth-form">
-        <fieldset id="fieldset-pic" class="k-form-fieldset">
-          <div class="profile-content-pic">
-          <ng-container
+      </div> -->
+      <!-- <div class="profile-content-pic">
+        <ng-container
             *ngIf="responseFile; then showPICPicture; else showDefaultPicture">
           </ng-container>
           <ng-template #showPICPicture>
@@ -31,11 +19,11 @@
             <div class="row align-items-center k-justify-content-center">
               <div class="row align-items-center k-justify-content-center">
                 <img id="pic-photo-hidden" class="col-3" src="/assets/images/nopic.png" style="width: 15%; height: 15%"
-                     alt="">
+                      alt="">
               </div>
               <div class="row align-items-center k-justify-content-center">
                 <kendo-formerror class="col-3" style="margin: 0 auto" id="error-pic-photo-required"
-                                 *ngIf="!responseFile">Mohon upload foto PIC
+                                  *ngIf="!responseFile">Mohon upload foto PIC
                 </kendo-formerror>
               </div>
             </div>
@@ -46,21 +34,25 @@
             <kendo-fileselect id="input-pic-avatar" [multiple]="false" [restrictions]="fileRestrictions"
                               [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
               <kendo-fileselect-messages id="file-upload-error-message"
-                                         dropFilesHere="Tidak ada gambar terpilih"
-                                         select="Pilih gambar"
-                                         invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
-                                         invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
+                                          dropFilesHere="Tidak ada gambar terpilih"
+                                          select="Pilih gambar"
+                                          invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
+                                          invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
               </kendo-fileselect-messages>
             </kendo-fileselect>
             <p style="font-style: italic;font-size: small;">*Gambar dapat berupa .jpg, .jpeg, .png, maksimal 2 MB</p>
           </div>
-
+        
+      </div> -->
+      <form id="form-pic" class="k-form auth-form">
+        <fieldset id="fieldset-pic" class="k-form-fieldset">
+          <div>
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label id="label-name" class="col-12">Nama</kendo-label>
+              <kendo-label id="label-name" class="col-12">Nama Penanggung Jawab</kendo-label>
             </div>
             <div class="col-9 content-field">
-              <kendo-formfield id="formfield-name" [formGroup]="formPIC">
+              <kendo-formfield class="mt-0" id="formfield-name" [formGroup]="formPIC">
                 <kendo-textbox id="input-name" class="col-md" formControlName="name" placeholder="Nama Anda"
                                [clearButton]="true"
                                #name
@@ -86,10 +78,10 @@
 
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label id="label-email" class="col-12">Alamat Email</kendo-label>
+              <kendo-label id="label-email" class="col-12">Email Penanggung Jawab</kendo-label>
             </div>
             <div class="col-9 content-field">
-              <kendo-formfield id="formfield-email" [formGroup]="formPIC">
+              <kendo-formfield class="mt-0" id="formfield-email" [formGroup]="formPIC">
                 <kendo-textbox id="input-email" class="col-md" formControlName="email"
                                #email
                                [value]="responseEmail"
@@ -105,7 +97,7 @@
               <kendo-label id="label-phone-number" class="col-12">No. Handphone</kendo-label>
             </div>
             <div class="col-9 content-field">
-              <kendo-formfield id="formfield-phone-number" [formGroup]="formPIC">
+              <kendo-formfield class="mt-0" id="formfield-phone-number" [formGroup]="formPIC">
                 <kendo-textbox id="input-phone-number" class="col-md" formControlName="phoneNumber"
                                placeholder="No. Handphone Anda"
                                [clearButton]="true"
@@ -133,164 +125,29 @@
               </kendo-formfield>
             </div>
           </div>
-
-          <div class="row align-items-center" [hidden]="!isDisabled">
-            <kendo-label id="label-password" class="col-3">Kata Sandi</kendo-label>
-            <kendo-label id="label-advice-to-change-password" class="col-md">Harap ganti kata sandi secara berkala untuk
-              meningkatkan keamanan akun
-            </kendo-label>
-          </div>
-
-          <ng-container
-            *ngIf="!changePasswordTextboxEnabled; then showClickToChangePassword; else hideClickToChangePassword">
-          </ng-container>
-          <ng-template #showClickToChangePassword>
-            <div class="row align-items-center text-password" [hidden]="isDisabled">
-              <p class="col-3"></p>
-              <kendo-label id="label-click-to-change-password-showed-up" class="col-md"
-                           [hidden]="changePasswordTextboxEnabled" (click)="showChangePasswordTextbox()">
-                Klik di sini untuk mengganti kata sandi Anda
-              </kendo-label>
-            </div>
-          </ng-template>
-          <ng-template #hideClickToChangePassword>
-            <div class="row align-items-center" [hidden]="!isDisabled">
-              <p class="col-3"></p>
-              <kendo-label id="label-click-to-change-password-hidden" class="col-md"
-                           [hidden]="!changePasswordTextboxEnabled"
-                           (click)="showChangePasswordTextbox()">Klik di sini untuk mengganti kata sandi Anda
-              </kendo-label>
-            </div>
-          </ng-template>
-
-          <div class="row bank-field" [hidden]="!changePasswordTextboxEnabled">
-            <div class="col-3 content-label">
-              <kendo-label id="label-old-password" class="col-12">Kata Sandi Lama</kendo-label>
-            </div>
-            <div class="col-9 content-field">
-              <kendo-formfield id="formfield-old-password" [formGroup]="formPIC">
-                <kendo-textbox id="input-old-password" class="col-md" formControlName="oldPassword"
-                               placeholder="Kata sandi lama Anda"
-                               autocomplete="off"
-                               [clearButton]="true"
-                               #oldPassword
-                               [minlength]="8"
-                               [maxlength]="15"
-                               (keypress)="enablePasswordTextbox()"
-                               (keydown.space)="$event.preventDefault()">
-                  <ng-template kendoTextBoxSuffixTemplate>
-                    <button kendoButton id="btn-eye-old-password" look="clear" icon="eye"
-                            (click)="toggleVisibility('oldPassword')"></button>
-                  </ng-template>
-                </kendo-textbox>
-                <kendo-formerror id="error-old-password-less-than-8-characters"
-                                 *ngIf="formPIC.controls.oldPassword.errors?.minlength">Kata Sandi Lama tidak boleh
-                  kurang
-                  dari 8 karakter
-                </kendo-formerror>
-                <kendo-formerror id="error-old-password-greater-than-15-characters"
-                                 *ngIf="formPIC.controls.oldPassword.errors?.maxlength">Kata Sandi Lama tidak boleh
-                  lebih
-                  dari 15 karakter
-                </kendo-formerror>
-              </kendo-formfield>
-            </div>
-          </div>
-
-          <div class="row bank-field" [hidden]="!changePasswordTextboxEnabled">
-            <div class="col-3 content-label">
-              <kendo-label id="label-new-password" class="col-12">Kata Sandi Baru</kendo-label>
-            </div>
-            <div class="col-9 content-field">
-              <kendo-formfield id="formfield-new-password" [formGroup]="formPIC">
-                <kendo-textbox id="input-new-password" class="col-md" formControlName="newPassword"
-                               placeholder="Kata sandi baru Anda"
-                               autocomplete="off"
-                               [clearButton]="true"
-                               #newPassword
-                               [minlength]="8"
-                               [maxlength]="15"
-                               [disabled]="passwordTextbox"
-                               (keydown.space)="$event.preventDefault()">
-                  <ng-template kendoTextBoxSuffixTemplate>
-                    <button id="btn-eye-new-password" kendoButton look="clear" icon="eye"
-                            (click)="toggleVisibility('newPassword')"></button>
-                  </ng-template>
-                </kendo-textbox>
-                <kendo-formerror id="error-new-password-less-than-8-characters"
-                                 *ngIf="formPIC.controls.newPassword.errors?.minlength">Kata Sandi Baru tidak boleh
-                  kurang
-                  dari 8 karakter
-                </kendo-formerror>
-                <kendo-formerror id="error-new-password-greater-than-15-characters"
-                                 *ngIf="formPIC.controls.newPassword.errors?.maxlength">Kata Sandi Baru tidak boleh
-                  lebih
-                  dari 15 karakter
-                </kendo-formerror>
-              </kendo-formfield>
-            </div>
-          </div>
-
-          <div class="row bank-field" [hidden]="!changePasswordTextboxEnabled">
-            <div class="col-3 content-label">
-              <kendo-label id="label-confirm-new-password" class="col-12">Konfirmasi Kata Sandi Baru</kendo-label>
-            </div>
-            <div class="col-9 content-field">
-              <kendo-formfield id="formfield-confirm-new-password" [formGroup]="formPIC">
-                <kendo-textbox id="input-confirm-new-password" class="col-md" formControlName="confirmNewPassword"
-                               placeholder="Konfirmasi kata sandi baru Anda"
-                               autocomplete="off"
-                               [clearButton]="true"
-                               #confirmNewPassword
-                               [minlength]="8"
-                               [maxlength]="15"
-                               [disabled]="passwordTextbox"
-                               (keydown.space)="$event.preventDefault()">
-                  <ng-template kendoTextBoxSuffixTemplate>
-                    <button id="btn-eye-confirm-new-password" kendoButton look="clear" icon="eye"
-                            (click)="toggleVisibility('confirmNewPassword')"></button>
-                  </ng-template>
-                </kendo-textbox>
-                <kendo-formerror id="error-confirm-new-password-less-than-8-characters"
-                                 *ngIf="formPIC.controls.confirmNewPassword.errors?.minlength">Konfirmasi Kata Sandi
-                  Baru
-                  tidak boleh kurang dari 8 karakter
-                </kendo-formerror>
-                <kendo-formerror id="error-confirm-new-password-greater-than-15-characters"
-                                 *ngIf="formPIC.controls.confirmNewPassword.errors?.maxlength">Konfirmasi Kata Sandi
-                  Baru
-                  tidak boleh lebih dari 15 karakter
-                </kendo-formerror>
-              </kendo-formfield>
-            </div>
-          </div>
           </div>
           
 
         </fieldset>
       </form>
-      <div class="mb-5">
-        <app-profil-pimpinan-dan-pengurus></app-profil-pimpinan-dan-pengurus>
-      </div>
       <div class="pt-5 pb-5">
         <ng-container
           *ngIf="isDisabled; then showUpdateButton; else showSaveButton">
         </ng-container>
 
         <ng-template #showUpdateButton>
-          <div class="k-form-buttons k-float-right">
+          <div class="k-form-buttons k-float-right pe-0">
             <button id="btn-perbarui" class="k-button k-primary vms-btn" (click)="perbaruiClicked()"
                     *ngIf="isDisabled" [disabled]="disabledWhenError">Perbarui
             </button>
           </div>
         </ng-template>
         <ng-template #showSaveButton>
-          <div class="k-form-buttons k-float-right">
+          <div class="k-form-buttons k-float-right pe-0">
             <button id="btn-simpan" class="k-button k-primary vms-btn" (click)="open()" *ngIf="!isDisabled">Simpan
             </button>
           </div>
         </ng-template>
-
         <kendo-dialog id="popup-confirm-save"
                       title="Konfirmasi"
                       *ngIf="opened"
@@ -309,6 +166,3 @@
     </div>
   </div>
 </div>
-
-<app-popup-message [id]="popUpID" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"
-                   [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'#'"></app-popup-message>

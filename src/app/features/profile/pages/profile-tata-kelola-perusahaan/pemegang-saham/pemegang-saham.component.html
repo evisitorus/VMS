@@ -1,8 +1,11 @@
-<div>
-  <kendo-label>Pemegang Saham</kendo-label>
-  <br>
+<div class="k-vstack">
+  <div class="my-3">
+    <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" class="button-layout" look="flat" icon="k-icon k-i-plus-outline">
+      Tambah Pemegang Saham
+    </button>
+  </div>
 
-  <kendo-grid [data]="gridData" style="height: 240px;">
+  <kendo-grid [data]="gridData" style="height: 240px;margin-bottom: 2em;">
   <kendo-grid-column title="No." [width]="60" field="no" ></kendo-grid-column>
   <kendo-grid-column title="Nama Pemegang Saham" field="namaPemegangSaham"  [width]="250"></kendo-grid-column>
   <kendo-grid-column title="Jenis Pemegang Saham" field="pemegangSahamPerseorangan"></kendo-grid-column>
@@ -29,11 +32,6 @@
     </ng-template>
   </kendo-grid-column>
 </kendo-grid>
-
-  <br>
-  <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" style="float: right; color:#0193AC;" look="flat" icon="k-icon k-i-plus-outline">
-    Tambah Pemegang Saham
-  </button>
 
   <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
 

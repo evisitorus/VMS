@@ -15,3 +15,8 @@
 .formHint {
     width: 350px;
 }
+
+.button-layout {
+    float: right; 
+    color:#0193AC;
+  }

@@ -9,6 +9,7 @@ import { ProfileInformationService } from 'src/app/core/services/profile-informa
 import { ProfileAddressInterface } from 'src/app/core/interfaces/profile-address-interface';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { dictionary } from 'src/app/dictionary/dictionary';
+import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan/profile-informasi-perusahaan.component';
 
 const messages = {
   default: 'Data tidak boleh kosong.',
@@ -27,7 +28,6 @@ export class ProfileAlamatComponent implements OnInit {
   public gridData: any[] = [];
 
   public popUpTitle: string = "Profile Alamat";
-  public popUpMessage: string = "";
 
   public isDisabledKota: boolean = true;
   public isDisabledKecamatan: boolean = true;
@@ -54,6 +54,7 @@ export class ProfileAlamatComponent implements OnInit {
 
   public isNewData: boolean = true;
   public id!: string;
+  public telcoId!: string;
 
   public opened = false;
 
@@ -65,13 +66,15 @@ export class ProfileAlamatComponent implements OnInit {
     kecamatan: "",
     kelurahan: "",
     kodepos: "",
+    noTelepon: "",
   };
 
   constructor(
     private eventEmitterService: EventEmitterService,
     private service: ProfileAddressService,
     private addressService: ProfileInformationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private parent: ProfileInformasiPerusahaanComponent
   ) { }
 
   ngOnInit(): void {
@@ -135,20 +138,23 @@ export class ProfileAlamatComponent implements OnInit {
     for (const key in data) {
       mappedData[key] = {
         no: no++,
-        namaAlamat: data[key]['address2'],
+        namaAlamat: data[key]['korespondensi_name'],
         alamat: data[key]['address1'],
-        provinsiId: data[key]['province'] ? data[key]['province']['id'] : "",
-        provinsi: data[key]['province'] ? data[key]['province']['description'] : "",
-        kotaId: data[key]['city'] ? data[key]['city']['id'] : "",
-        kota: data[key]['city'] ? data[key]['city']['description'] : "",
-        kecamatanId: data[key]['district'] ? data[key]['district']['id'] : "",
-        kecamatan: data[key]['district'] ? data[key]['district']['description'] : "",
-        kelurahanId: data[key]['village'] ? data[key]['village']['id'] : "",
-        kelurahan: data[key]['village'] ? data[key]['village']['description'] : "",
-        kodeposId: data[key]['village'] ? data[key]['village']['postalCode']['id'] : "",
-        kodepos: data[key]['village'] ? data[key]['village']['postalCode']['postalCodeNum'] : "",
-        id: data[key]['id'],
-        deletedAt: data[key]['deletedAt'],
+        provinsiId: data[key]['province_id'] ? data[key]['province_id'] : "",
+        provinsi: data[key]['province_description'] ? data[key]['province_description'] : "",
+        kotaId: data[key]['city_id'] ? data[key]['city_id'] : "",
+        kota: data[key]['city_description'] ? data[key]['city_description'] : "",
+        kecamatanId: data[key]['district_id'] ? data[key]['district_id'] : "",
+        kecamatan: data[key]['district_description'] ? data[key]['district_description'] : "",
+        kelurahanId: data[key]['village_id'] ? data[key]['village_id'] : "",
+        kelurahan: data[key]['village_description'] ? data[key]['village_description'] : "",
+        kodeposId: data[key]['postalCode_id'] ? data[key]['postalCode_id'] : "",
+        kodepos: data[key]['postalCode_number'] ? data[key]['postalCode_number'] : "",
+        noTelepon: data[key]['telco_number'] ? data[key]['telco_number']['telco_number'] : "",
+        noTelponKodeArea: data[key]['telco_number'] ? data[key]['telco_number']['telco_areaCode'] : "",
+        telcoId: data[key]['telco_number'] ? data[key]['telco_number']['telco_id'] : "",
+        id: data[key]['address_id'],
+        deletedAt: data[key]['deletedAt']
       };
     }
     return mappedData;
@@ -195,7 +201,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.fetchDataProvince();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -208,7 +214,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listProvinsi = this.mapDataProvinsi(this.listProvinsi);       
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -221,7 +227,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKota = this.mapDataKKK(this.listKota);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -234,7 +240,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKecamatan = this.mapDataKKK(this.listKecamatan);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -247,7 +253,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKelurahan = this.mapDataKKK(this.listKelurahan);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -260,7 +266,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.listKodepos = this.mapDataKodepos(this.listKodepos);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -275,6 +281,8 @@ export class ProfileAlamatComponent implements OnInit {
       kecamatan: new FormControl(null, Validators.required),
       kelurahan: new FormControl(null, Validators.required),
       kodepos: new FormControl(null, Validators.required),
+      noTelepon: new FormControl(this.data.noTelepon, Validators.required),
+      noTelponKodeArea: new FormControl(this.data.noTelponKodeArea, Validators.required),
     });
   }
 
@@ -286,6 +294,8 @@ export class ProfileAlamatComponent implements OnInit {
     this.data.kecamatan = null;
     this.data.kelurahan = null;
     this.data.kodepos = null;
+    this.data.noTelepon = null;
+    this.data.noTelponKodeArea = null
 
     this.selectedProvinsi = null;
     this.selectedKota = null;
@@ -304,6 +314,8 @@ export class ProfileAlamatComponent implements OnInit {
   public updateForm(data: any): void {
     this.data.namaAlamat = data.namaAlamat;
     this.data.alamat = data.alamat;
+    this.data.noTelepon = data.noTelepon;
+    this.data.noTelponKodeArea = data.noTelponKodeArea;
     
     this.data.provinsi = data.provinsi;
     this.selectedProvinsi = data.provinsiId;
@@ -326,10 +338,11 @@ export class ProfileAlamatComponent implements OnInit {
 
     this.isNewData = false;
     this.id = data.id;
+    this.telcoId = data.telcoId;
     this.setForm();
     this.open();
     
-    this.popUpMessage = dictionary.update_data_notification;
+    this.parent.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
   }
 
@@ -349,12 +362,12 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.save(params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = dictionary.save_data_success;
+        this.parent.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
@@ -362,35 +375,36 @@ export class ProfileAlamatComponent implements OnInit {
 
   public update(): void {
     let params: ProfileAddressInterface = {...this.form.value};
-    this.service.update(this.id, params).subscribe(
+    this.service.update(this.id, params, this.telcoId).subscribe(
       () => {
         this.close();
-        this.popUpMessage = dictionary.update_data_success;
+        this.parent.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        console.log('err', err)
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
   }
 
-  public delete(id: string): void {
-    this.service.delete(id).subscribe(
+  public delete(id: string, telcoId:string): void {
+    this.service.delete(id, telcoId).subscribe(
       () => {
-        this.popUpMessage = dictionary.delete_data_success;
+        this.parent.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
       (err) => {
-        this.popUpMessage = err.error.message;
+        this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
     );
   }
 
-  public deleteConfirmation(id: string, name: string): void {
+  public deleteConfirmation(id: string, name: string, telcoId: string): void {
     const dialog: DialogRef = this.dialogService.open({
       title: "Konfirmasi",
       content: "Apakah " + name + " akan dihapus dari sistem ?",
@@ -402,7 +416,7 @@ export class ProfileAlamatComponent implements OnInit {
 
     dialog.result.subscribe((result) => {
       if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
-        this.delete(id);
+        this.delete(id, telcoId);
       } 
     });
   }
