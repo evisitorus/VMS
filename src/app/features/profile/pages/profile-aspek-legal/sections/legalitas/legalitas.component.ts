@@ -85,6 +85,7 @@ export class LegalitasComponent implements OnInit {
       this.aspekLegalFromGroup.controls.tanggalExpireNibTdp.disable();
     } else {
       this.nibExpireChecked = false;
+      this.data.isNiBTdpSeumurHidup = this.nibExpireChecked;
       this.aspekLegalFromGroup.controls.tanggalExpireNibTdp.enable();
     }
   }
@@ -95,6 +96,7 @@ export class LegalitasComponent implements OnInit {
       this.aspekLegalFromGroup.controls.tanggalExpireIdpSitu.disable();
     } else {
       this.idpExpireChecked = false;
+      this.data.isIdpSituSeumurHidup = this.idpExpireChecked;
       this.aspekLegalFromGroup.controls.tanggalExpireIdpSitu.enable();
     }
   }
