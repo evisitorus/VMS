@@ -80,11 +80,21 @@ export class LegalitasComponent implements OnInit {
   }
 
   public setNibLifeTime(): void {
-    if (this.nibExpireChecked) this.data.isNiBTdpSeumurHidup = this.nibExpireChecked;
+    if (this.nibExpireChecked) {
+      this.data.isNiBTdpSeumurHidup = this.nibExpireChecked;
+      this.aspekLegalFromGroup.controls.tanggalExpireNibTdp.disable();
+    } else {
+      this.aspekLegalFromGroup.controls.tanggalExpireNibTdp.enable();
+    }
   }
 
   public setIdpLifeTime(): void {
-    if (this.idpExpireChecked) this.data.isIdpSituSeumurHidup = this.idpExpireChecked;
+    if (this.idpExpireChecked) {
+      this.data.isIdpSituSeumurHidup = this.idpExpireChecked;
+      this.aspekLegalFromGroup.controls.tanggalExpireIdpSitu.disable();
+    } else {
+      this.aspekLegalFromGroup.controls.tanggalExpireIdpSitu.enable();
+    }
   }
 
   public setForm(): void {
@@ -140,11 +150,11 @@ export class LegalitasComponent implements OnInit {
         noNibTdp: this.aspekLegalFromGroup.value.noNibTdp,
         isNiBTdpSeumurHidup: this.data.isNiBTdpSeumurHidup,
         tanggalTerbitNibTdp: this.parent.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitNibTdp),
-        tanggalExpireNibTdp: this.parent.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireNibTdp),
+        tanggalExpireNibTdp: this.aspekLegalFromGroup.value.tanggalExpireNibTdp ? this.parent.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireNibTdp) : null,
         noIdpSitu: this.aspekLegalFromGroup.value.noIdpSitu,
         isIdpSituSeumurHidup: this.data.isIdpSituSeumurHidup,
         tanggalTerbitIdpSitu: this.parent.convertDateFormat(this.aspekLegalFromGroup.value.tanggalTerbitIdpSitu),
-        tanggalExpireIdpSitu: this.parent.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireIdpSitu)
+        tanggalExpireIdpSitu: this.aspekLegalFromGroup.value.tanggalExpireIdpSitu ? this.parent.convertDateFormat(this.aspekLegalFromGroup.value.tanggalExpireIdpSitu) : null
       }
 
       this.profileAspekLegalService.addAspekLegal(this.params).subscribe(
