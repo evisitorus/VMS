@@ -35,13 +35,6 @@ export class ProfileAspekLegalComponent implements OnInit {
   }
 
   public download(fileId: string, filename: string) {
-    // let ids;
-    // let longId = fileId.split("/");
-    // if (longId.length > 0) {
-    //   ids = longId[longId.length - 1];
-    // } else {
-    //   ids = fileId;
-    // }
     let ids = fileId;
 
     this.fileService.download(ids).subscribe(
