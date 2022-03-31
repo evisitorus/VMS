@@ -16,9 +16,6 @@ export class DokumenLegalComponent implements OnInit {
   public gridData: any[] = [];
   public checkboxOnly = false;
   public mode = "multiple";
-  private messages = {
-    failed: "Gagal menemukan data dokumen",
-  };
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
     maxFileSize: 2097152
@@ -30,6 +27,7 @@ export class DokumenLegalComponent implements OnInit {
   public invalidMaxFileSize!: boolean;
   public dokLegalName!: string;
   public dokData : any = {};
+  public isDokLegalEmpty: boolean = false;
 
   constructor(
     public parent: ProfileAspekLegalComponent,
@@ -130,6 +128,7 @@ export class DokumenLegalComponent implements OnInit {
 
   public close() {
     this.opened = false;
+    this.isDokLegalEmpty = false;
   }
 
   public upload(): void {
@@ -150,25 +149,52 @@ export class DokumenLegalComponent implements OnInit {
     }
   }
 
+  public cekDokumenLegal(name: string) {
+    const dokumen = this.gridData;
+    dokumen.forEach(dok => {
+      if (dok.name === name) {
+        if (dok.file) this.isDokLegalEmpty = true;
+      }
+    });
+
+  }
+
   public uploadDokLegal() {
     let params = {
+      id: this.dokData.id,
       namaDokumen: this.dokLegalName,
       file: this.uploadedFileId,
       documentType: this.dokData.type,
       attachmentFilePath: this.uploadedFileContentUrl
     };
-  
-    this.profileAspekLegalService.addDokLegal(params).subscribe(
-      () => {
-        this.parent.popUpMessage = dictionary.save_data_success;
-        this.parent.triggerPopUp();
-        this.fetchData();
-      },
-      (err) => {
-        this.parent.popUpMessage = err.error.message;
-        this.parent.triggerPopUp();
-      }
-    );
+
+    this.cekDokumenLegal(params.namaDokumen);
+    
+    if (this.isDokLegalEmpty) {
+      this.profileAspekLegalService.addDokLegal(params).subscribe(
+        () => {
+          this.parent.popUpMessage = dictionary.save_data_success;
+          this.parent.triggerPopUp();
+          this.fetchData();
+        },
+        (err) => {
+          this.parent.popUpMessage = err.error.message;
+          this.parent.triggerPopUp();
+        }
+      );
+    } else { 
+      this.profileAspekLegalService.updateDokLegal(params).subscribe(
+        () => {
+          this.parent.popUpMessage = dictionary.save_data_success;
+          this.parent.triggerPopUp();
+          this.fetchData();
+        },
+        (err) => {
+          this.parent.popUpMessage = err.error.message;
+          this.parent.triggerPopUp();
+        }
+      );
+    }
 
   }
 
