@@ -255,6 +255,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.isNewData = false;
     this.triggerModal('neraca');
     this.setFormNeraca();
+    this.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
   }
 
   public updateFormSPT(data: any): void {
@@ -266,6 +268,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.isNewData = false;
     this.triggerModal('spt');
     this.setFormSPT();
+    this.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
   }
 
   public fetchDataNeraca(): void {
