@@ -79,6 +79,10 @@ import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/secti
     ProfilKaryawanComponent,
     DrawerComponent,
     ProfilPimpinanDanPengurusComponent,
+    ProfileAspekLegalComponent,
+    LegalitasComponent,
+    DokumenLegalComponent,
+    SertifikasiDokKhususComponent
   ],
   imports: [
     CommonModule,
