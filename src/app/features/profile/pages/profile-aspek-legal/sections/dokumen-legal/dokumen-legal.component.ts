@@ -124,6 +124,7 @@ export class DokumenLegalComponent implements OnInit {
   public openFileDialog(dataItem: any) {
     this.dokData = dataItem;
     this.opened = true;
+    this.cekDokumenLegal(this.dokData.name);
   }
 
   public close() {
@@ -153,7 +154,7 @@ export class DokumenLegalComponent implements OnInit {
     const dokumen = this.gridData;
     dokumen.forEach(dok => {
       if (dok.name === name) {
-        if (dok.file) this.isDokLegalEmpty = true;
+        if (dok.file === null) this.isDokLegalEmpty = true;
       }
     });
 
@@ -168,8 +169,6 @@ export class DokumenLegalComponent implements OnInit {
       attachmentFilePath: this.uploadedFileContentUrl
     };
 
-    this.cekDokumenLegal(params.namaDokumen);
-    
     if (this.isDokLegalEmpty) {
       this.profileAspekLegalService.addDokLegal(params).subscribe(
         () => {
