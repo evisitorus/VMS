@@ -1,0 +1,35 @@
+<div class="dokumen">
+  <div class="profile-content-grid my-3">
+    <kendo-grid [data]="gridData">
+      <kendo-grid-column field="id" title="No.">
+      </kendo-grid-column>
+      <kendo-grid-column field="name" title="Nama Dokumen">
+      </kendo-grid-column>
+      <kendo-grid-column field="fileName" title="File">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <a (click)="download(dataItem.file.id, dataItem.file.attachmentFilePath)">{{dataItem.file ? dataItem.file.namaDokumen : null}}</a>
+        </ng-template>
+      </kendo-grid-column>
+      <kendo-grid-column field="lampiran" title="Unggah Berkas">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <button kendoButton *ngIf="!opened" (click)="openFileDialog(dataItem)">Pilih File</button>
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>
+
+<kendo-dialog title="Pilih file dokumen legal" *ngIf="opened" (close)="close()">
+  <kendo-fileselect [multiple]="false"  id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
+    <kendo-fileselect-messages
+    select="Pilih file" >
+    </kendo-fileselect-messages>
+  </kendo-fileselect>
+  <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
+  <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+  <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+
+  <kendo-dialog-actions>
+    <button kendoButton (click)="close()">Tutup</button>
+  </kendo-dialog-actions>
+</kendo-dialog>

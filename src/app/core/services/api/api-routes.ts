@@ -61,7 +61,9 @@ export const ApiRoutes = {
   api_delete_pemegang_saham: API_BASE_URL + "/pemegang_saham_relationships",
   api_get_party_role_route: API_BASE_URL + "/party_roles",
   api_get_kbli: API_BASE_URL + "/bidang_usahas",
-  api_pimpinan_dan_pengurus_route: API_BASE_URL + "/sdm_relationships/pimpinan"
+  api_pimpinan_dan_pengurus_route: API_BASE_URL + "/sdm_relationships/pimpinan",
+  api_doc_type: API_BASE_URL + "/document_types",
+  api_doc_legal: API_BASE_URL + "/dokumens"
 };
 
 export const ApiRouteMethods = {
