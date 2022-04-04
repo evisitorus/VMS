@@ -130,6 +130,9 @@ export class DokumenLegalComponent implements OnInit {
   public close() {
     this.opened = false;
     this.isDokLegalEmpty = false;
+    this.uploadedFileContentUrl = "";
+    this.uploadedFileId = "";
+    this.lampiranFiles = [];
   }
 
   public upload(): void {
