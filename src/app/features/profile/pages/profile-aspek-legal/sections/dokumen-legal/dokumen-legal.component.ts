@@ -165,7 +165,7 @@ export class DokumenLegalComponent implements OnInit {
 
   public uploadDokLegal() {
     let params = {
-      id: this.dokData.id,
+      id: this.dokData.file.id,
       namaDokumen: this.dokLegalName,
       file: this.uploadedFileId,
       documentType: this.dokData.type,
