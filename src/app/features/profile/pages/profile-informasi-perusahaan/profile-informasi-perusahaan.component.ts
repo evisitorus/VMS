@@ -247,17 +247,20 @@ export class ProfileInformasiPerusahaanComponent {
       this.dataPerusahaan.tipeBadanUsaha = resp.tipeVendor.id
     }
 
-    if (resp.jenisKegiatanUsaha.length === 0) {
-      this.dataPerusahaan.jenisKegiatanUsaha = null;
-    } else {
-      this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0].id
+    this.dataPerusahaan.jenisKegiatanUsaha = null;
+    if (resp.jenisKegiatanUsaha){
+      if (resp.jenisKegiatanUsaha.length > 0) {
+        this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0].id
+      }
+    } 
+    
+    this.dataPerusahaan.jenisPenyediaUsaha = null;
+    if (resp.jenisPenyediaUsaha){
+      if (resp.jenisPenyediaUsaha.length > 0) {
+        this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisPenyediaUsaha[0].id
+      }
     }
-
-    if (resp.jenisPenyediaUsaha.length === 0) {
-      this.dataPerusahaan.jenisPenyediaUsaha = null;
-    } else {
-      this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisPenyediaUsaha[0].id
-    }
+    
     this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
     this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
     this.dataPerusahaan.web = resp.website ? resp.website : "";
