@@ -1,0 +1,35 @@
+<div class="row profile-section">
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="col-10 profile-content-container">
+    <h5 class="text-bold">Aspek Legal</h5>
+    <div class="profile-content">
+      
+      <kendo-panelbar id="vendor-aspek-legal-panelbar">
+        <kendo-panelbar-item title="Legalitas" [expanded]="true">
+          <ng-template kendoPanelBarContent>
+            <app-legalitas></app-legalitas>
+          </ng-template>
+        </kendo-panelbar-item>
+        <kendo-panelbar-item title="Dokumen Legal" [expanded]="true">
+          <ng-template kendoPanelBarContent>
+            <app-dokumen-legal></app-dokumen-legal>
+          </ng-template>
+        </kendo-panelbar-item>
+        <kendo-panelbar-item title="Sertifikasi dan Dokumen Khusus" [expanded]="true">
+          <ng-template kendoPanelBarContent>
+            <app-sertifikasi-dok-khusus></app-sertifikasi-dok-khusus>
+          </ng-template>
+        </kendo-panelbar-item>
+      </kendo-panelbar>
+    </div>
+    
+  </div>
+
+</div>
+
+<div kendoDialogContainer></div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

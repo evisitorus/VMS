@@ -38,6 +38,10 @@ import { IndicatorsModule } from "@progress/kendo-angular-indicators";
 import { PemegangSahamComponent } from './pages/profile-tata-kelola-perusahaan/pemegang-saham/pemegang-saham.component';
 import { ProfilKaryawanComponent } from './pages/profile-tata-kelola-perusahaan/profil-karyawan/profil-karyawan.component';
 import { ProfilPimpinanDanPengurusComponent } from './pages/profile-tata-kelola-perusahaan/profil-pimpinan-dan-pengurus/profil-pimpinan-dan-pengurus.component';
+import { ProfileAspekLegalComponent } from './pages/profile-aspek-legal/profile-aspek-legal.component';
+import { LegalitasComponent } from './pages/profile-aspek-legal/sections/legalitas/legalitas.component';
+import { DokumenLegalComponent } from './pages/profile-aspek-legal/sections/dokumen-legal/dokumen-legal.component';
+import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/sections/sertifikasi-dok-khusus/sertifikasi-dok-khusus.component';
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
 //   { title: "Kelola Akun",
@@ -67,13 +71,18 @@ import { ProfilPimpinanDanPengurusComponent } from './pages/profile-tata-kelola-
     ProfileAlamatComponent,
     ProfileLaporanKeuanganComponent,
     ProfileDashboardComponent,
+    PemegangSahamComponent,
     DrawerComponent,
     DataPegawaiComponent,
     ProfileTataKelolaPerusahaanComponent,
     PemegangSahamComponent,
     ProfilKaryawanComponent,
     DrawerComponent,
-    ProfilPimpinanDanPengurusComponent
+    ProfilPimpinanDanPengurusComponent,
+    ProfileAspekLegalComponent,
+    LegalitasComponent,
+    DokumenLegalComponent,
+    SertifikasiDokKhususComponent
   ],
   imports: [
     CommonModule,
