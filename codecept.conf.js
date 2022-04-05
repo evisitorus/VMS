@@ -55,6 +55,7 @@ exports.config = {
           './tests/acceptance/step_definitions/ProfilPerusahaan.steps.js',
           './tests/acceptance/step_definitions/ProfilPegawai.steps.js',
           './tests/acceptance/step_definitions/ProfilPIC.steps.js',
+          './tests/acceptance/step_definitions/InformasiUmum.steps.js',
         ]
   },
   plugins: {
