@@ -96,6 +96,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
         this.popUpMessage = dictionary.incomplete_data;
         this.triggerPopUp();
         confirmed = false;
+        break;
       }
     }
 
