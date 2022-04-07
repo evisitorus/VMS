@@ -57,7 +57,12 @@ export class ProfileAlamatComponent implements OnInit {
   public telcoId!: string;
 
   public opened = false;
-
+  public deleteOpened = false;
+  public deleteData = {
+    id: '',
+    telcoId: '',
+    name: ''
+  }
   public data: any = {
     namaAlamat: "",
     alamat: "",
@@ -396,6 +401,7 @@ export class ProfileAlamatComponent implements OnInit {
         this.parent.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchData();
+        this.closeDeleteConfirmation();
       },
       (err) => {
         this.parent.popUpMessage = err.error.message;
@@ -404,21 +410,22 @@ export class ProfileAlamatComponent implements OnInit {
     );
   }
 
-  public deleteConfirmation(id: string, name: string, telcoId: string): void {
-    const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi",
-      content: "Apakah " + name + " akan dihapus dari sistem ?",
-      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
-      width: 450,
-      height: 200,
-      minWidth: 250,
-    });
+  closeDeleteConfirmation(){
+    this.deleteOpened = false;
+    this.deleteData = {
+      id: '',
+      telcoId: '',
+      name: ''
+  }
+  }
 
-    dialog.result.subscribe((result) => {
-      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
-        this.delete(id, telcoId);
-      } 
-    });
+  public deleteConfirmation(id: string, name: string, telcoId: string): void {
+    this.deleteOpened = true;
+    this.deleteData = {
+        id: id,
+        telcoId: telcoId,
+        name: name
+    }
   }
   
 }
