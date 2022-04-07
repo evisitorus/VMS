@@ -9,12 +9,12 @@ Feature: Vendor Basic - Completing vendor information
 
     #Alternative Scenario, NIB is Empty
     Scenario:
-        Given The Vendor (Basic) logged into VMS using his/her registered company information
-        When The Vendor (Basic) see dashboard page
-        And The Vendor (Basic) wants to complete his/her company profile
-        And The Vendor (Basic) must click "Informasi Umum" menu which found on "Sidebar Menu"
-        And The Vendor (Basic) will see "Data Perusahaan" form
-        And The Vendor (Basic) must complete following inputs where found on "Data Perusahaan" form
+        Given The Vendor logged into VMS using his or her registered company information
+        When The Vendor see dashboard page
+        And The Vendor wants to complete his or her company profile
+        And The Vendor must click "Informasi Umum" menu which found on "Sidebar Menu"
+        And The Vendor will see "Data Perusahaan" form
+        And The Vendor must complete following inputs where found on "Data Perusahaan" form without NIB
             """
             {
                 "companyLogo" 	: "browse",
@@ -47,14 +47,14 @@ Feature: Vendor Basic - Completing vendor information
                 "emailPerusahaan"	: "baja@yopmail.com"
             }
             """
-        When The Vendor (Basic) has fill all field And The Vendor (Basic) wants to save information of "Data Perusahaan"
-        Then The Vendor (Basic) must click "Simpan" button where found on the Right-bottom of "Data Perusahaan" form
-        And The Vendor (Basic) will see confirmation message
+        When The Vendor has fill all field And The Vendor wants to save information of "Data Perusahaan"
+        Then The Vendor must click "Simpan" button where found on the Right-bottom of "Data Perusahaan" form
+        And The Vendor will see confirmation message
             """
             {
                 "message": "Simpan profil perusahaan ?",
                 "option": "Ya/Tidak"
             }
             """
-        And The Vendor (Basic) must select "Ya" option
-        And The Vendor (Basic) will see "Data Perusahaan" in the form
+        And The Vendor must select "Ya" option
+        And The Vendor will see "Data Perusahaan" in the form

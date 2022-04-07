@@ -9,9 +9,9 @@ Feature: Vendor Basic - Completing vendor information
 
     #1 - Simpan Data Perusahaan; NIB not Empty
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to complete his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Informasi Umum" menu which found on "Sidebar Menu"
         And The Vendor will see "Data Perusahaan" form
         And The Vendor must complete following inputs where found on "Data Perusahaan" form
