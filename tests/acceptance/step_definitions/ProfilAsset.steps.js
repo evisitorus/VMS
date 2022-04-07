@@ -112,12 +112,12 @@ Given('The Vendor will see pop-up message', () => {
     I.see('Ya');
 });
 
-Given('The Vendor must select {string} option', () => {
-    I.click('Ya');
-    I.see(dictionary.delete_data_success);
-    I.waitForElement('#btn-popup-yes');
-    I.click('#btn-popup-yes');
-});
+// Given('The Vendor must select {string} option', () => {
+//     I.click('Ya');
+//     I.see(dictionary.delete_data_success);
+//     I.waitForElement('#btn-popup-yes');
+//     I.click('#btn-popup-yes');
+// });
 
 Given('The Vendor will see information changes from selected record from {string} on {string} and deleted record will be flag as {string}', () => {
     I.see('Terhapus');

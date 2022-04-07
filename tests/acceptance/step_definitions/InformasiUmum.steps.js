@@ -145,7 +145,11 @@ Given('The Vendor must complete following inputs where found on {string} form', 
     }
 });
 
-Given('The Vendor has fill all field And The Vendor wants to save information of {string}', () => {
+Given('The Vendor has fill all field', () => {
+
+});
+
+Given('The Vendor wants to save information of {string}', () => {
 
 });
 
@@ -157,8 +161,8 @@ Given('The Vendor must click "Simpan" button where found on the Right-bottom of 
         case "PIC":
             I.click('#btn-simpan');
             break;
-        case "":
-            I.click('');
+        case "Korespondensi":
+            I.click('#btn-submit-alamat');
             break;
         case "":
             I.click('');
@@ -186,7 +190,7 @@ Given('The Vendor will see confirmation message', (raw_data) => {
 Given('The Vendor must select "Ya" option for {string} form', (button) => {
     switch (button) {
         case "Data Perusahaan":
-            I.click('Yes');
+            I.click('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;
         case "PIC":
@@ -194,7 +198,7 @@ Given('The Vendor must select "Ya" option for {string} form', (button) => {
             I.click('#btn-popup-yes');
             break;
         case "Korespondensi":
-            I.see('');
+            I.click('#btn-popup-yes');
             break;
         default:
             I.click(button);
@@ -265,7 +269,7 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
             I.see('');
             break;
         default:
-            I.click(form1);
+            I.see(form1);
             break;
     }
 });
@@ -281,7 +285,163 @@ Given('the Vendor must fill', () => {
     I.fillField('#input-phone-number', '0813202381209');
 });
 
-Given('The Vendor wants to save information of "PIC"', () => {
+Given('The Vendor accessing "Korespondensi Section" in "Informasi Umum" page', () => {
+
+});
+
+Given('The Vendor can see the first five list of vendors in "Korespondensi Grid" at "Informasi Umum" page', () => {
+    I.see('No.');
+    I.see('Nama Alamat');
+    I.see('Alamat');
+    I.see('Kota');
+    I.see('No. Telepon');
+    I.see('Action');
+});
+
+Given('The Vendor can click "next" to see another five record after record of 5 from "Korespondensi" on "Korespondensi Grid"', () => {
+
+});
+
+Given('The Vendor see list of "Korespondensi" from "Korespondensi Grid"', () => {
+
+});
+
+Given('The Vendor must clicks button "Tambah" where found on the Right-bottom of "Korespondensi Grid"', () => {
+    I.click('#btn-tambah-alamat');
+});
+
+Given('The Vendor will see "Korespondensi" form to add records regarding to "Korespondensi"', () => {
+    I.fillField('#namaAlamat input[class=k-input]', 'Kantor BDV');
+    I.fillField('#alamat input[class=k-input]', 'Jl. Jenderal Ahmad Yani no. 19-65 A');
+    I.click('#provinsi.k-dropdown');
+    I.fillField('#provinsi.k-dropdown', 'Jawa Barat');
+    I.pressKey('Enter');
+    I.click('#kota.k-dropdown');
+    I.fillField('#kota.k-dropdown', 'Kota Bandung');
+    I.pressKey('Enter');
+    I.click('#kecamatan.k-dropdown');
+    I.fillField('#kecamatan.k-dropdown', 'Kiara Condong');
+    I.pressKey('Enter');
+    I.click('#kelurahan.k-dropdown');
+    I.fillField('#kelurahan.k-dropdown', 'Cicaheum');
+    I.pressKey('Enter');
+    I.click('#kodepos.k-dropdown');
+    I.fillField('#kodepos.k-dropdown', '00000');
+    I.pressKey('Enter');
+    I.click('#noTeleponKodeArea');
+    I.fillField('#noTeleponKodeArea', '021');
+    I.pressKey('Enter');
+    I.click('#noTelepon');
+    I.fillField('#noTelepon', '12345678');
+    I.pressKey('Enter');    
+});
+
+Given('The Vendor must click "Batal" button where found on the Right-bottom of {string} form', (form) => {
+    switch (form) {
+        case "Korespondensi":
+            I.click('#btn-batal-alamat');
+            break;
+        default:
+            break;
+    }
+});
+
+Given('The Vendor will be back to "Korespondensi Grid"', () => {
+
+});
+
+Given('The Vendor will not see the "Korespondensi" data in "Korespondensi Grid"', () => {
+
+});
+
+Given('The Vendor wants to edit information regarding to {string} on {string} which part of {string} page', () => {
+
+});
+
+Given('The Vendor must clicks button {string} where found on each row of records symbolize by {string}', (action, icon) => {
+    switch (action) {
+        case "Edit":
+            I.click('#btn-update');
+            break;
+        case "Delete":
+                I.click('#btn-delete');
+            break;    
+        default:
+            break;
+    }
+});
+
+Given('The Vendor see pop-up notification in front of {string} form', () => {
+    I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.');
+});
+
+Given('The Vendor must click button "Ya" to close the pop-up notification', () => {
+    I.click('#btn-popup-yes');
+});
+
+Given('The Vendor see "Korespondensi" form fill with data from chosen row', () => {
+    I.fillField('#namaAlamat input[class=k-input]', 'Kantor Bandung');
+    I.fillField('#alamat input[class=k-input]', 'Jl. Jenderal Ahmad Yani no. 19-65 A');
+    I.click('#provinsi.k-dropdown');
+    I.fillField('#provinsi.k-dropdown', 'Jawa Barat');
+    I.pressKey('Enter');
+    I.click('#kota.k-dropdown');
+    I.fillField('#kota.k-dropdown', 'Kota Bandung');
+    I.pressKey('Enter');
+    I.click('#kecamatan.k-dropdown');
+    I.fillField('#kecamatan.k-dropdown', 'Kiara Condong');
+    I.pressKey('Enter');
+    I.click('#kelurahan.k-dropdown');
+    I.fillField('#kelurahan.k-dropdown', 'Cicaheum');
+    I.pressKey('Enter');
+    I.click('#kodepos.k-dropdown');
+    I.fillField('#kodepos.k-dropdown', '00000');
+    I.pressKey('Enter');
+    I.click('#noTeleponKodeArea');
+    I.pressKey(['Control','A']);
+    I.pressKey('Backspace');
+    I.fillField('#noTeleponKodeArea', '001');
+    I.pressKey('Enter');
+    I.click('#noTelepon');
+    I.pressKey(['Control','A']);
+    I.pressKey('Backspace');
+    I.fillField('#noTelepon', '87654321');
+    I.pressKey('Enter');   
+});
+
+Given('The Vendor wants to delete information regarding to "Korespondensi" on "Korespondensi Grid" which part of "Informasi Umum" page', () => {
+
+});
+
+Given('The Vendor will see "Korespondensi" data status is "Terhapus" in the "Korespondensi Grid" on column "action"', () => {
+    I.see('Terhapus');
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
 
 });
 

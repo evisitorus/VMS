@@ -47,7 +47,8 @@ Feature: Vendor Basic - Completing vendor information
                 "emailPerusahaan"	: "baja@yopmail.com"
             }
             """
-        When The Vendor has fill all field And The Vendor wants to save information of "Data Perusahaan"
+        When The Vendor has fill all field 
+        And The Vendor wants to save information of "Data Perusahaan"
         Then The Vendor must click "Simpan" button where found on the Right-bottom of "Data Perusahaan" form
         And The Vendor will see confirmation message
             """

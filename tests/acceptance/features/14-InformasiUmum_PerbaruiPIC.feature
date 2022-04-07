@@ -24,15 +24,15 @@ Feature: Vendor Basic - Completing vendor information
                 #jumlah karakter maksimum 15 karakter numerik jika melebihi maka objek terkunci
             }
             """
-        When The Vendor has fill all field And The Vendor wants to save information of "PIC"
-        And The Vendor wants to save information of "PIC"
+        When The Vendor has fill all field 
+         And The Vendor wants to save information of "PIC"
         Then The Vendor must click "Simpan" button where found on the Right-bottom of "PIC" form
-        And The Vendor will see confirmation message
+         And The Vendor will see confirmation message
             """
             {
                 "message": "Simpan perubahan data PIC Perusahaan?",
                 "button" : "Ya"
             }
             """
-        And The Vendor must select "Ya" option for "PIC" form
-        And The Vendor will see "PIC" data in the form
+         And The Vendor must select "Ya" option for "PIC" form
+         And The Vendor will see "PIC" data in the form
