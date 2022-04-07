@@ -166,7 +166,7 @@ export class ProfileInformasiPerusahaanComponent {
   public vendorID = this.authService.getLocalStorage('vendor_id')!;
   public redirectOnClosePopUp: boolean = false;
   public popUpID = "";
-
+  
   public getDataPerusahaan(): void {
     forkJoin({
       // responseVendorData: this.profileDashboardService.getVendor(),
@@ -247,17 +247,20 @@ export class ProfileInformasiPerusahaanComponent {
       this.dataPerusahaan.tipeBadanUsaha = resp.tipeVendor.id
     }
 
-    if (resp.jenisKegiatanUsaha.length === 0) {
-      this.dataPerusahaan.jenisKegiatanUsaha = null;
-    } else {
-      this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0].id
+    this.dataPerusahaan.jenisKegiatanUsaha = null;
+    if (resp.jenisKegiatanUsaha){
+      if (resp.jenisKegiatanUsaha.length > 0) {
+        this.dataPerusahaan.jenisKegiatanUsaha = resp.jenisKegiatanUsaha[0].id
+      }
+    } 
+    
+    this.dataPerusahaan.jenisPenyediaUsaha = null;
+    if (resp.jenisPenyediaUsaha){
+      if (resp.jenisPenyediaUsaha.length > 0) {
+        this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisPenyediaUsaha[0].id
+      }
     }
-
-    if (resp.jenisPenyediaUsaha.length === 0) {
-      this.dataPerusahaan.jenisPenyediaUsaha = null;
-    } else {
-      this.dataPerusahaan.jenisPenyediaUsaha = resp.jenisPenyediaUsaha[0].id
-    }
+    
     this.dataPerusahaan.npwp = resp.npwp ? resp.npwp : "";
     this.dataPerusahaan.nib = resp.nomorIndukBerusaha ? resp.nomorIndukBerusaha : "";
     this.dataPerusahaan.web = resp.website ? resp.website : "";
@@ -556,20 +559,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public submitFormVendor(): void {
     if (this.profileInformationFormGroup.valid && this.logoImg) {
-      const dialog: DialogRef = this.dialogService.open({
-        title: "Konfirmasi",
-        content: "Simpan profil perusahaan ?",
-        actions: [{text: "Yes", primary: true}, {text: "No"}],
-        width: 450,
-        height: 200,
-        minWidth: 250,
-      });
-
-      dialog.result.subscribe((result) => {
-        if (!(result instanceof DialogCloseResult) && result.text === "Yes") {
-          this.save();
-        }
-      });
+      this.opened = true;
     }
   }
 
