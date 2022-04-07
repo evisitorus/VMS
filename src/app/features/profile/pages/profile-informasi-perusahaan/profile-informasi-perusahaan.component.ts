@@ -229,22 +229,22 @@ export class ProfileInformasiPerusahaanComponent {
     this.dataPerusahaan.inisialPerusahaan = resp.altName ? resp.altName : "";
     this.dataPerusahaan.emailPerusahaan = resp.contactMechanism? resp.contactMechanism.emailPerusahaan : "";
 
-    if (resp.statusPerusahaanPkp === undefined) {
+    if (resp.statusPerusahaanPkp == null || resp.statusPerusahaanPkp == undefined) {
       this.dataPerusahaan.statusPerusahaanPkp = null;
     } else {
       this.dataPerusahaan.statusPerusahaanPkp = resp.statusPerusahaanPkp ? "true" : "false";
     }
 
-    if (resp.jenisVendor === undefined) {
+    if (!resp.jenisVendor) {
       this.dataPerusahaan.jenisBadanUsaha = null;
     } else {
-      this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.id;
+      this.dataPerusahaan.jenisBadanUsaha = resp.jenisVendor.id ? resp.jenisVendor.id : null;
     }
 
-    if (resp.tipeVendor === undefined) {
+    if (!resp.tipeVendor) {
       this.dataPerusahaan.tipeBadanUsaha = null;
     } else {
-      this.dataPerusahaan.tipeBadanUsaha = resp.tipeVendor.id
+      this.dataPerusahaan.tipeBadanUsaha = resp.tipeVendor.id ? resp.tipeVendor.id: null
     }
 
     this.dataPerusahaan.jenisKegiatanUsaha = null;
