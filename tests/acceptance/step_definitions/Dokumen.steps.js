@@ -138,6 +138,9 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
 Given('The Vendor will see pop-up form of {string} which appear in front of {string} form', (form1, form2) => {
     switch (form2) {
         case "Dokumen":
+            I.click('#tipeDokumen.k-dropdown');
+            I.fillField('#tipeDokumen.k-dropdown', 'Dokumen Akta (Mandatory)');
+            I.pressKey('Enter');
             I.waitForElement('#input-nomor-dokumen input[class=k-input]');
             I.fillField('#input-nomor-dokumen input[class=k-input]', 'vms/1/11/21/bdg');
             I.waitForElement('#input-nama-dokumen input[class=k-input]');
@@ -232,6 +235,12 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
     }
 });
 
+Given('The Vendor input field "Tipe Dokumen" with "tipe dokumen"', () => {
+    I.click('#tipeDokumen.k-dropdown');
+    I.fillField('#tipeDokumen.k-dropdown', 'Dokumen Akta (Mandatory)');
+    I.pressKey('Enter');
+});
+
 Given('The Vendor must click {string} button to save information of {string}', (button1, button2) => {
     switch (button2) {
         case "Profil Perusahaan":
@@ -288,7 +297,7 @@ Given('The Vendor must click {string} button to save information of {string}', (
 });
 
 Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
-    I.see(dictionary.save_data_success);
+    I.see('Berhasil menyimpan data, silakan ajukan verifikasi');
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
@@ -359,7 +368,7 @@ Given('The Vendor warning message tooltip on lampiran {string}', () => {
 });
 
 Given('The Vendor can not continue to add document information', () => {
-    I.see('File tidak valid');
+    I.see('Periksa kembali file Anda');
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
@@ -372,7 +381,7 @@ Given('The Vendor can not continue to add document information {string}', (grid)
             I.click('#btn-popup-yes');
             break;
         case "Dokumen":
-            I.see('File tidak valid');
+            I.see('Periksa kembali file Anda');
             I.waitForElement('#btn-popup-yes');
             I.click('#btn-popup-yes');
             break;

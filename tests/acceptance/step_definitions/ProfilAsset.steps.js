@@ -42,7 +42,14 @@ Given('The Vendor must clicks button {string} button from selected record on {st
             I.click('#btn-delete-asset');
             break;
         case "Dokumen":
-            I.click('#btn-delete');
+            if(button==="Delete")
+            {
+                I.click('#btn-delete');
+            }
+            else
+            {
+                I.click("#btn-update")
+            }            
             break;
         case "PIC":
             I.click('#btn-perbarui');

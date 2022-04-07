@@ -15,7 +15,7 @@ export class ProfileDocumentService {
     private apiService: ApiService,
     private authService: AuthService
     ) {}
-    
+
     public get(): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let vendor_id = this.authService.getLocalStorage('vendor_id')!;
@@ -30,10 +30,11 @@ export class ProfileDocumentService {
       };
       return this.apiService.sendRequest(api_get_profile_doc);
     }
-    
+
     public save(params: ProfileDocumentInterface): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let body: any = {
+        tipeDokumen:params.tipeDokumen,
         nomorDokumen: params.nomorDokumen,
         namaDokumen: params.namaDokumen,
         submitDate: params.submitDate,
@@ -58,10 +59,11 @@ export class ProfileDocumentService {
       };
       return this.apiService.sendRequest(api_save_profile_doc);
     }
-    
+
     public update(params: ProfileDocumentInterface, id: string): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let body: any = {
+        tipeDokumen:params.tipeDokumen,
         nomorDokumen: params.nomorDokumen,
         namaDokumen: params.namaDokumen,
         submitDate: params.submitDate,
@@ -88,7 +90,7 @@ export class ProfileDocumentService {
       };
       return this.apiService.sendRequest(api_update_profile_doc);
     }
-    
+
     public delete(id: string): Observable<any> {
       let token = this.authService.getLocalStorage('access_token')!;
       let api_delete_profile_doc: ApiInterface = {
@@ -102,6 +104,5 @@ export class ProfileDocumentService {
       };
       return this.apiService.sendRequest(api_delete_profile_doc);
     }
-    
+
   }
-  
