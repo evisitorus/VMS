@@ -54,8 +54,8 @@ Feature: Vendor Basic - Completing vendor information
             """
             {
                 "message": "Simpan profil perusahaan ?",
-                "option": "Ya/Tidak"
+                "button": "Ya"
             }
             """
-        And The Vendor must select "Ya" option
-        And The Vendor will see "Data Perusahaan" in the form
+        And The Vendor must select "Ya" option for "Data Perusahaan" form
+        And The Vendor will see "Data Perusahaan" data in the form

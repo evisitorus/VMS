@@ -154,22 +154,46 @@ Given('The Vendor must click "Simpan" button where found on the Right-bottom of 
         case "Data Perusahaan":
             I.click('#saveInformasiPerusahaanBtn');
             break;
-        case "":
-            I.see('');
+        case "PIC":
+            I.click('#btn-simpan');
             break;
         case "":
-            I.see('');
+            I.click('');
             break;
         case "":
-            I.see('');
+            I.click('');
             break;
         case "":
-            I.see('');
+            I.click('');
             break;
         case "":
-            I.see('');
+            I.click('');
             break;
         case "":
+            I.click('');
+            break;
+        default:
+            I.click(button);
+            break;
+    }
+});
+
+Given('The Vendor will see confirmation message', (raw_data) => {
+    let data = JSON.parse(raw_data.content);
+    I.see(data.message);
+});
+
+Given('The Vendor must select "Ya" option for {string} form', (button) => {
+    switch (button) {
+        case "Data Perusahaan":
+            I.click('Yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "PIC":
+            I.click('#btn-popup-yes');
+            I.click('#btn-popup-yes');
+            break;
+        case "Korespondensi":
             I.see('');
             break;
         default:
@@ -178,17 +202,7 @@ Given('The Vendor must click "Simpan" button where found on the Right-bottom of 
     }
 });
 
-Given('The Vendor will see confirmation message', () => {
-    I.see('Konfirmasi');
-    I.see('Simpan profil perusahaan ?');
-});
-
-Given('The Vendor must select "Ya" option', () => {
-    I.click('Yes');
-    I.click('#btn-popup-yes');
-});
-
-Given('The Vendor will see {string} in the form', () => {
+Given('The Vendor will see {string} data in the form', () => {
 
 });
 
@@ -221,19 +235,53 @@ Given('The Vendor must complete following inputs where found on {string} form wi
     I.fillField('#websitePerusahaan input[class=k-input]', 'www.vms.com');
     I.fillField('#emailPerusahaan input[class=k-input]', 'vms@telkom.co.id');
 });
-Given('', () => {
+
+Given('The Vendor must click {string} to expand {string} form', () => {
 
 });
 
-Given('', () => {
-
+Given('The Vendor wants to add information in regards to {string} on {string} which part of "Informasi Umum" page', (form1,form2) => {
+    switch (form1) {
+        case "PIC":
+            I.click('#btn-perbarui');
+            I.click('#btn-popup-yes');
+            break;
+        case "Korespondensi":
+            I.see('');
+            break;
+        case "":
+            I.see('');
+            break;
+        case "":
+            I.see('');
+            break;
+        case "":
+            I.see('');
+            break;
+        case "":
+            I.see('');
+            break;
+        case "":
+            I.see('');
+            break;
+        default:
+            I.click(form1);
+            break;
+    }
 });
 
-Given('', () => {
-
+Given('the Vendor must fill', () => {
+    I.click('#input-name');
+    I.pressKey(['Control','A']);
+    I.pressKey('Backspace');
+    I.fillField('#input-name', 'Steven Rogers');
+    I.click('#input-phone-number');
+    I.pressKey(['Control','A']);
+    I.pressKey('Backspace');
+    I.fillField('#input-phone-number', '0813202381209');
 });
 
-Given('', () => {
+Given('The Vendor wants to save information of "PIC"', () => {
 
 });
 

@@ -8,9 +8,9 @@ Feature: Vendor Basic - Completing vendor information
 
     #2 - Perbarui PIC
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to complete his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Informasi Umum" menu which found on "Sidebar Menu"
         And The Vendor will see "Data Perusahaan" form
         And The Vendor must click "PIC section" to expand "PIC" form
@@ -24,15 +24,15 @@ Feature: Vendor Basic - Completing vendor information
                 #jumlah karakter maksimum 15 karakter numerik jika melebihi maka objek terkunci
             }
             """
-        When The Vendor has fill all field
+        When The Vendor has fill all field And The Vendor wants to save information of "PIC"
         And The Vendor wants to save information of "PIC"
-        Then The Vendor must click "Perbarui" button where found on the Right-bottom of "PIC" form
+        Then The Vendor must click "Simpan" button where found on the Right-bottom of "PIC" form
         And The Vendor will see confirmation message
             """
             {
-                "message": "Perbarui PIC?",
-                "option": "Ya/Tidak"
+                "message": "Simpan perubahan data PIC Perusahaan?",
+                "button" : "Ya"
             }
             """
-        And The Vendor must select "Ya" option
+        And The Vendor must select "Ya" option for "PIC" form
         And The Vendor will see "PIC" data in the form
