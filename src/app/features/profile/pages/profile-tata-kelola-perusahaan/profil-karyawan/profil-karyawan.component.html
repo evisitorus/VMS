@@ -67,11 +67,11 @@
       <ng-template kendoGridCellTemplate let-dataItem>
         <div *ngIf="!dataItem.deletedAt">
           <span>
-            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btn-update"
+            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btnUpdateKaryawan"
               (click)="updateForm(dataItem)">
           </span>
           <span>
-            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btn-delete"
+            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btnDeleteKaryawan"
               (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
           </span>
         </div>
