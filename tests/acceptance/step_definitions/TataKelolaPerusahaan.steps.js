@@ -1,19 +1,23 @@
 const { I } = inject();
 
-Given('', () => {
-
+Given('The Vendor must click "Simpan" button which symbolize by "Check Icon" where found on the Right-top of "Jumlah Pegawai" form', () => {
+    I.click('#submitJumlahPegawaiBtn');
 });
 
-Given('', () => {
-
+Given('The Vendor will see "Jumlah Pegawai" in the form', () => {
+    I.see('Jumlah Pegawai Domestik');
+    I.see('Jumlah Pegawai Asing');
 });
 
-Given('', () => {
-
+Given('The Vendor see the "Check Icon" change into "Pencil Icon"', () => {
+    I.seeElement('#editJumlahPegawaiBtn');
 });
 
-Given('', () => {
-
+Given('The Vendor can update total of employees of "Jumlah Pegawai" form', () => {
+    I.click('#pegawaiDomestikInput');
+    I.fillField('#pegawaiDomestikInput', '100');
+    I.click('#pegawaiAsingInput');
+    I.fillField('#pegawaiAsingInput', '100');
 });
 
 Given('', () => {

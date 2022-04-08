@@ -56,17 +56,17 @@ Given('The Vendor will see {string} form', (form) => {
             I.see('Tata Kelola Perusahaan');
             I.see('Pemegang Saham');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Pengurus Perusahaan":
+            I.see('Tata Kelola Perusahaan');
+            I.see('Pimpinan dan Pengurus Perusahaan');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Jumlah Pegawai":
+            I.see('Tata Kelola Perusahaan');
+            I.see('Pegawai');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Pegawai":
+            I.see('Tata Kelola Perusahaan');
+            I.see('Pegawai');
             break;
         case "":
             I.see('');
@@ -177,11 +177,11 @@ Given('The Vendor must click "Simpan" button where found on the {string} of {str
         case "Pemegang Saham":
             I.click('#submitPemegangSaham');
             break;
-        case "":
-            I.click('');
+        case "Pengurus Perusahaan":
+            I.click('#savePimpinanDanPengurusFormBtn');
             break;
-        case "":
-            I.click('');
+        case "Pegawai":
+            I.click('#saveKaryawanFormBtn');
             break;
         case "":
             I.click('');
@@ -213,8 +213,14 @@ Given('The Vendor must select "Ya" option for {string} form', (button) => {
         case "Pemegang Saham":
             I.click('#btn-popup-yes');
             break;
+        case "Jumlah Pegawai":
+            I.click('#btn-popup-yes');
+            break;
+        case "Pegawai":
+            I.click('#btn-popup-yes');
+            break;
         default:
-            I.click(button);
+            I.click('Ya');
             break;
     }
 });
@@ -267,7 +273,6 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
             I.see('');
             break;
         default:
-            I.see(form1);
             break;
     }
 });
@@ -305,6 +310,30 @@ Given('The Vendor can see the first five list of vendors in {string} at {string}
             I.see('% Kepemilikan');
             I.see('Action');
             break;
+        case "Pengurus Perusahaan Grid":
+            I.see('No.');
+            I.see('Nama Pengurus');
+            I.see('Jabatan');
+            I.see('No. Identitas');
+            I.see('Kartu Identitas');
+            I.see('NPWP');
+            I.see('Kartu NPWP');
+            I.see('Action');
+            break;
+        case "Jumlah Pegawai Grid":
+            I.see('Jumlah Pegawai Domestik');
+            I.see('Jumlah Pegawai Asing');
+            break;
+        case "Pegawai Grid":
+            I.see('No.');
+            I.see('NIK');
+            I.see('Nama Pegawai');
+            I.see('Tipe Karyawan');
+            I.see('Jabatan');
+            I.see('Bidang Pekerjaan');
+            I.see('Resume');
+            I.see('Action');
+            break;
         default:
             break;
     }    
@@ -320,14 +349,22 @@ Given('The Vendor see list of {string} from {string}', () => {
 
 Given('The Vendor must clicks button "Tambah" where found on the {string} of {string}', (form1,form2) => {
     switch (form2) {
-        case "Korespondensi":
+        case "Korespondensi Grid":
             I.click('#btn-tambah-alamat');
             break;
         case "Pemegang Saham Grid":
             I.click('#btn-addPemegangSaham');
             break;
+        case "Pengurus Perusahaan Grid":
+            I.click('#addPengurusBtn');
+            break;
+        case "Pegawai Grid":
+            I.click('#addPegawaiBtn');
+            break;
+        case "":
+            I.click('#');
+            break;
         default:
-            I.see(form2);
             break;
     }
 });
@@ -366,6 +403,31 @@ Given('The Vendor will see {string} form to add records regarding to {string}', 
             I.click('#kepemilikanSaham input[role=spinbutton]');
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '50');
             break;
+        case "Pengurus Perusahaan":
+            I.fillField('#firstName input[class=k-input]', 'evi');
+            I.fillField('#lastName input[class=k-input]', 'sitorus');
+            I.fillField('#jabatanPimpinanDanPengurusInput input[class=k-input]', 'CEO');
+            I.click('#noIdentitasPengurusInput input[role=spinbutton]');
+            I.fillField('#noIdentitasPengurusInput input[role=spinbutton]', '12345');
+            I.attachFile('#resumePimpinanDanPengurusUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            I.click('#npwpPengurusInput input[role=spinbutton]');
+            I.fillField('#npwpPengurusInput input[role=spinbutton]', '54321');
+            I.attachFile('#npwpPimpinanDanPengurusUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            break;
+        case "Pegawai":
+            I.click('#nikPegawaiInput input[role=spinbutton]');
+            I.fillField('#nikPegawaiInput input[role=spinbutton]', '1234567');
+            I.fillField('#firstName input[class=k-input]', 'Justin');
+            I.fillField('#lastName input[class=k-input]', 'Bieber');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CTO');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
         default:
             I.see(form1);
             break;
@@ -379,6 +441,15 @@ Given('The Vendor must click "Batal" button where found on the Right-bottom of {
             break;
         case "Pemegang Saham":
             I.click('#closePemegangSaham');
+            break;
+        case "Pengurus Perusahaan":
+            I.click('#closePimpinanDanPengurusFormBtn');
+            break;
+        case "Pegawai":
+            I.click('#closeKaryawanFormBtn');
+            break;
+        case "":
+            I.click('#');
             break;
         default:
             break;
@@ -406,21 +477,75 @@ Given('The Vendor wants to edit information regarding to {string} on {string} wh
 
 });
 
-Given('The Vendor must clicks button {string} where found on each row of records symbolize by {string}', (action, icon) => {
-    switch (action) {
-        case "Edit":
+Given('The Vendor must clicks button "Edit" where found on each row of records symbolize by {string} for {string}', (icon, form) => {
+    switch (form) {
+        case "Korespondensi":
             I.click('#btn-update');
             break;
-        case "Delete":
-                I.click('#btn-delete');
+        case "Pemegang Saham":
+            I.click('#btnUpdatePemegangSaham');
+            break;
+        case "Pengurus Perusahaan":
+            I.click('#btnUpdatePimpinan');
+            break;
+        case "Jumlah Pegawai":
+            I.click('#editJumlahPegawaiBtn');
+            break;
+        case "Pegawai":
+            I.click('#btnUpdateKaryawan');
+            break;
+        case "Neraca Keuangan":
+            I.click('#btn-update-neraca');
+            break;
+        case "SPT":
+            I.click('#btn-update-spt');
+            break;
+        case "Asset":
+            I.click('#btn-update-asset');
+            break;
+        case "Dokumen":
+            I.click('#btn-update');
+            break;
+        case "Riwayat Pekerjaan":
+            I.click('#btn-update');
             break;    
         default:
             break;
     }
 });
 
-Given('The Vendor see pop-up notification in front of {string} form', () => {
-    I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.');
+Given('The Vendor must clicks button "Delete" where found on each row of records symbolize by {string} for {string}', (icon, form) => {
+    switch (form) {
+        case "Korespondensi":
+            I.click('#btn-delete');
+            break;
+        case "Pemegang Saham":
+            I.click('#btnDeletePemegangSaham');
+            break;
+        case "Pengurus Perusahaan":
+            I.click('#btnDeletePimpinan');
+            break;
+        case "Pegawai":
+            I.click('#btnDeleteKaryawan');
+            break;
+        case "Neraca Keuangan":
+            I.click('#btn-delete-neraca');
+            break;
+        case "SPT":
+            I.click('#btn-delete-spt');
+            break;
+        case "Asset":
+            I.click('#btn-delete-asset');
+            break;
+        case "Dokumen":
+            I.click('#btn-delete');
+            break;
+        case "Riwayat Pekerjaan":
+            I.click('#btn-delete');
+            break;    
+        default:
+            break;
+    }
 });
 
 Given('The Vendor see pop-up notification in front of {string} form', () => {
@@ -468,7 +593,32 @@ Given('The Vendor see {string} form fill with data from chosen row', (form) => {
             I.click('#Asing');
             I.click('#kepemilikanSaham input[role=spinbutton]');
             I.fillField('#kepemilikanSaham input[role=spinbutton]', '25');
-            break;    
+            break;   
+        case "Pengurus Perusahaan":
+            I.fillField('#firstName input[class=k-input]', 'febiana');
+            I.fillField('#lastName input[class=k-input]', 'str');
+            I.fillField('#jabatanPimpinanDanPengurusInput input[class=k-input]', 'CMO');
+            I.click('#noIdentitasPengurusInput input[role=spinbutton]');
+            I.fillField('#noIdentitasPengurusInput input[role=spinbutton]', '111111');
+            I.attachFile('#resumePimpinanDanPengurusUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+            I.click('#npwpPengurusInput input[role=spinbutton]');
+            I.fillField('#npwpPengurusInput input[role=spinbutton]', '222222');
+            I.attachFile('#npwpPimpinanDanPengurusUpload input[type=file]', './tests/acceptance/_fixture/image_1mb.png'); 
+            break;
+        case "Pegawai":
+            I.click('#nikPegawaiInput input[role=spinbutton]');
+            I.fillField('#nikPegawaiInput input[role=spinbutton]', '7777777');
+            I.fillField('#firstName input[class=k-input]', 'Justin');
+            I.fillField('#lastName input[class=k-input]', 'Timberlake');
+            I.click('#tipeKaryawanDropdown.k-dropdown');
+            I.fillField('#tipeKaryawanDropdown.k-dropdown', 'Tenaga Ahli');
+            I.pressKey('Enter');
+            I.fillField('#jabatanKaryawanInput input[class=k-input]', 'CTO');
+            I.click('#bidangPekerjaan.k-dropdown');
+            I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
+            I.pressKey('Enter');
+            I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
         default:
             break;
     }
@@ -483,9 +633,9 @@ Given('The Vendor wants to delete information regarding to {string} on {string} 
 });
 
 Given('The Vendor will see delete confirmation message', () => {
-    I.see('Konfirmasi hapus data Pemegang Saham');
+    I.see('Konfirmasi');
 });
 
-Given('The Vendor will see "Korespondensi" data status is "Terhapus" in the "Korespondensi Grid" on column "action"', () => {
+Given('The Vendor will see {string} data status is "Terhapus" in the {string} on column "action"', () => {
     I.see('Terhapus');
 });

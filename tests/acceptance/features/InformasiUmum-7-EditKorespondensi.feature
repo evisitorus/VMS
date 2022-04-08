@@ -17,7 +17,7 @@ Feature: Vendor Basic - Completing vendor information
         When The Vendor accessing "Korespondensi Section" in "Informasi Umum" page
         Then The Vendor can see the first five list of vendors in "Korespondensi Grid" at "Informasi Umum" page
         When The Vendor wants to edit information regarding to "Korespondensi" on "Korespondensi Grid" which part of "Informasi Umum" page
-        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon"
+        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon" for "Korespondensi"
         And The Vendor see pop-up notification in front of "Korespondensi" form
             """
             {

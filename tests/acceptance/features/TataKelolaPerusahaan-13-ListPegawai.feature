@@ -8,13 +8,13 @@ Feature: Vendor Basic - Completing vendor information
 
     #10 - List Pegawai
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to completing his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Tata Kelola Perusahaan" menu which found on "Sidebar Menu"
-        And The Vendor will shown "Tata Kelola Perusahaan" page
+        And The Vendor will see "Pegawai" form
         When The Vendor accessing "Pegawai Section" in "Tata Kelola Perusahaan" page
-        And the Vendor can see the first ten list of data in "Pegawai Grid" at "Tata Kelola Perusahaan" page
+        And The Vendor can see the first five list of vendors in "Pegawai Grid" at "Tata Kelola Perusahaan" page
             """
             {
                 "No.   | Nama Pegawai | Tipe Karyawan | Jabatan | Bidang Pekerjaan | Resume | Action    "
@@ -22,5 +22,5 @@ Feature: Vendor Basic - Completing vendor information
                 "1.    | Nama Pegawai | Tipe Karyawan | Jabatan | Bidang Pekerjaan | Resume | Edit, Delete"
             }
             """
-        And the Vendor can click "next" to see another ten record after record of 10 from "Pegawai" on "Pegawai Grid"
-        And the Vendor already see list of "Pegawai" from "Pegawai Grid"
+        And The Vendor can click "next" to see another five record after record of 5 from "Pengurus" on "Pengurus Grid"
+        And The Vendor see list of "Pegawai" from "Pegawai Grid"

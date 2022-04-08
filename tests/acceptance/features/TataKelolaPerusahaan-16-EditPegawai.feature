@@ -8,23 +8,23 @@ Feature: Vendor Basic - Completing vendor information
 
     #12 - Edit Pegawai
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to completing his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Tata Kelola Perusahaan" menu which found on "Sidebar Menu"
-        And The Vendor will shown "Tata Kelola Perusahaan" page
+        And The Vendor will see "Pegawai" form
         When The Vendor accessing "Pegawai Section" in "Tata Kelola Perusahaan" page
-        And the Vendor can see the first ten list of data in "Pegawai Grid" at "Tata Kelola Perusahaan" page
+        And The Vendor can see the first five list of vendors in "Pegawai Grid" at "Tata Kelola Perusahaan" page
         When The Vendor wants to edit information regarding to "Pegawai" on "Pegawai Grid" which part of "Tata Kelola Perusahaan" page
-        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon"
-        And shown pop-up notification in front of "Pegawai" form
+        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon" for "Pegawai"
+        And The Vendor see pop-up notification in front of "Pegawai" form
             """
             {
                 "Perubahan yang anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan anda sudah benar"
             }
             """
-        And the Vendor must click button "Ya" to close the pop-up notification
-        And the Vendor see "Pegawai" form with data from chosen row
+        And The Vendor must click button "Ya" to close the pop-up notification
+        And The Vendor see "Pegawai" form fill with data from chosen row
             """
             {
                 "nik"		: "3453656787654355",
@@ -41,15 +41,8 @@ Feature: Vendor Basic - Completing vendor information
 
         When The Vendor has fill all field
         And The Vendor wants to save information of "Pegawai"
-        And The Vendor must click "Simpan" button where found on the Left-bottom of "Pegawai" form
-        And The Vendor will see confirmation message
-            """
-            {
-                "message": "Simpan Pegawai?",
-                "option": "Ya/Tidak"
-            }
-            """
-        And The Vendor must select "Ya" option
-        And The Vendor see updated "Pegawai" data in the "Pegawai grid"
+        And The Vendor must click "Simpan" button where found on the "Left-bottom" of "Pegawai" form
+        And The Vendor must select "Ya" option for "Pegawai" form
+        And The Vendor see updated "Pegawai" data in the form
 
 #repeat process 12 to edit another "Pegawai"

@@ -35,7 +35,7 @@ Feature: Vendor Basic - Completing vendor information
             }
             """
         When The Vendor has fill all field 
-        And The Vendor wants to save information of "Pemegang Saham"
+        And The Vendor wants to Cancel information of "Pemegang Saham"
         Then The Vendor must click "Batal" button where found on the Right-bottom of "Pemegang Saham" form
         And The Vendor will see "Pemegang Saham" data in the form
 

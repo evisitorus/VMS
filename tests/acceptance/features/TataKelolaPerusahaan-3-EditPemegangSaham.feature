@@ -16,7 +16,7 @@ Feature: Vendor Basic - Completing vendor information
         When The Vendor accessing "Pemegang Saham Section" in "Tata Kelola Perusahaan" page
         And The Vendor can see the first five list of vendors in "Pemegang Saham Grid" at "Tata Kelola Perusahaan" page
         When The Vendor wants to edit information regarding to "Pemegang Saham" on "Pemegang Saham Grid" which part of "Tata Kelola Perusahaan" page
-        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon"
+        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon" for "Pemegang Saham"
         And The Vendor see pop-up notification in front of "Pemegang Saham" form
             """
             {

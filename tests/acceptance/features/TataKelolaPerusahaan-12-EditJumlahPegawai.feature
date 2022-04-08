@@ -8,15 +8,16 @@ Feature: Vendor Basic - Completing vendor information
 
     #9 Edit Jumlah pegawai
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to completing his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Tata Kelola Perusahaan" menu which found on "Sidebar Menu"
-        And The Vendor will see "Tata Kelola Perusahaan" page
-        When The Vendor accessing "Pegawai Section" in "Tata Kelola Perusahaan" page
-
-        When the Vendor wants to edit information regarding to "Jumlah Pegawai Domestik" and "Jumlah Pegawai Asing" on "Jumlah Pegawai" form which part of "Tata Kelola Perusahaan" page
-        Then the Vendor must click button "Edit" which symbolize by "Pencil icon" where found on the right-top of "Jumlah Pegawai" form and change the icon to "Check icon"
+        And The Vendor will see "Jumlah Pegawai" form
+        When The Vendor accessing "Jumlah Pegawai Section" in "Tata Kelola Perusahaan" page
+        And The Vendor can see the first five list of vendors in "Jumlah Pegawai Grid" at "Tata Kelola Perusahaan" page
+        When The Vendor wants to edit information regarding to "Jumlah Pegawai" on "Jumlah Pegawai Grid" which part of "Tata Kelola Perusahaan" page
+        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon" for "Jumlah Pegawai"
+        And The Vendor can update total of employees of "Jumlah Pegawai" form
             """
             {
                 "jumlahPegawaiDomestik"	: "Active and can be filled"
@@ -27,13 +28,6 @@ Feature: Vendor Basic - Completing vendor information
         When The Vendor has fill all field
         And The Vendor wants to save information of "Jumlah Pegawai"
         And The Vendor must click "Simpan" button which symbolize by "Check Icon" where found on the Right-top of "Jumlah Pegawai" form
-        And The Vendor will see confirmation message
-            """
-            {
-                "message": "Apakah Jumlah Pegawai sudah sesuai?",
-                "option": "Ya/Tidak"
-            }
-            """
-        And The Vendor must select "Ya" option
+        And The Vendor must select "Ya" option for "Jumlah Pegawai" form
         And The Vendor will see "Jumlah Pegawai" in the form
         And The Vendor see the "Check Icon" change into "Pencil Icon"
