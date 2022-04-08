@@ -243,8 +243,8 @@ export class PemegangSahamComponent implements OnInit {
     this.deleteId = data.id;
   }
 
-  public deletePemegangSaham(id: string): void {
-    this.profileService.deletePemegangSaham(id).subscribe(
+  public deletePemegangSaham(): void {
+    this.profileService.deletePemegangSaham(this.deleteId).subscribe(
       () => {
         this.triggerSuccess(dictionary.delete_data_success);
         this.getPemegangSaham();
@@ -253,6 +253,7 @@ export class PemegangSahamComponent implements OnInit {
         this.triggerFailed(err);
       }
     );
+    this.opened = false;
   }
 
   public opened = false;
@@ -262,14 +263,6 @@ export class PemegangSahamComponent implements OnInit {
     { text: "No" },
     { text: "Yes", primary: true },
   ];
-
-  public onAction(action: DialogAction): void {
-    console.log(action);
-    if(action.text == "Yes"){
-      this.deletePemegangSaham(this.deleteId);
-    }
-    this.opened = false;
-  }
 
   public close(status: any) {
     this.opened = false;
