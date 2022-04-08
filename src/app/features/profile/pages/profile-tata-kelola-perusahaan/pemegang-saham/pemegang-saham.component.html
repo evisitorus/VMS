@@ -145,17 +145,12 @@
   </kendo-dialog-actions>
 </kendo-dialog>
 
-<kendo-dialog
-  *ngIf="opened"
-  [actions]="myActions"
-  [actionsLayout]="actionsLayout"
-  (action)="onAction($event)"
-  [title]="popUpConfirmationTitle"
-  (close)="close('cancel')"
-  [minWidth]="250"
-  [width]="450"
->
+<kendo-dialog title="{{ title }}" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450" [title]="popUpConfirmationTitle">
   <p style="margin: 30px; text-align: center;">
-    {{ popUpConfirmationMessage }}
+      {{ popUpConfirmationMessage }}
   </p>
+  <kendo-dialog-actions>
+      <button id="btn-popup-no" kendoButton (click)="close('cancel')">No</button>
+      <button id="btn-popup-yes" kendoButton (click) ="deletePemegangSaham()" class="k-primary">Yes</button>
+  </kendo-dialog-actions>
 </kendo-dialog>
