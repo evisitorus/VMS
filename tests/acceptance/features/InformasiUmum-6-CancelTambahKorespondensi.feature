@@ -33,7 +33,7 @@ Feature: Vendor Basic - Completing vendor information
             }
             """
         When The Vendor has fill all field
-        And The Vendor wants to save information of "Korespondensi"
+        And The Vendor wants to Cancel information of "Korespondensi"
         Then The Vendor must click "Batal" button where found on the Right-bottom of "Korespondensi" form
         And The Vendor will be back to "Korespondensi Grid"
         And The Vendor will not see the "Korespondensi" data in "Korespondensi Grid"

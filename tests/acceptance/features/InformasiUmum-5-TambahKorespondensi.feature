@@ -17,7 +17,7 @@ Feature: Vendor Basic - Completing vendor information
         When The Vendor accessing "Korespondensi Section" in "Informasi Umum" page
         Then The Vendor can see the first five list of vendors in "Korespondensi Grid" at "Informasi Umum" page
         When The Vendor wants to add information in regards to "Korespondensi" on "Korespondensi Grid" which part of "Informasi Umum" page
-        Then The Vendor must clicks button "Tambah" where found on the Right-bottom of "Korespondensi Grid"
+        Then The Vendor must clicks button "Tambah" where found on the "Right-bottom" of "Korespondensi Grid"
         And The Vendor will see "Korespondensi" form to add records regarding to "Korespondensi"
             """
             {
@@ -34,7 +34,7 @@ Feature: Vendor Basic - Completing vendor information
             """
         When The Vendor has fill all field
         And The Vendor wants to save information of "Korespondensi"
-        Then The Vendor must click "Simpan" button where found on the Right-bottom of "Korespondensi" form
+        Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "Korespondensi" form
         # And The Vendor will see confirmation message
         #     """
         #     {

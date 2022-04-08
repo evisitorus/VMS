@@ -21,7 +21,7 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor see pop-up notification in front of "Korespondensi" form
             """
             {
-                "message": "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar."
+                "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar."
             }
             """
         And The Vendor must click button "Ya" to close the pop-up notification
@@ -41,15 +41,8 @@ Feature: Vendor Basic - Completing vendor information
             """
         When The Vendor has fill all field 
         And The Vendor wants to save information of "Korespondensi"
-        Then The Vendor must click "Simpan" button where found on the Right-bottom of "Korespondensi" form
-        # And The Vendor will see confirmation message
-        #     """
-        #     {
-        #         "message": "Simpan Korespondensi?",
-        #         "button": "Ya"
-        #     }
-        #     """
+        Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "Korespondensi" form
         And The Vendor must select "Ya" option for "Korespondensi" form
-        And The Vendor will see "Korespondensi" data in the form
+        And The Vendor see updated "Korespondensi" data in the form
 
 #repeat process 5 to edit another "Korespondensi"

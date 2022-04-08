@@ -21,7 +21,7 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor will see confirmation message
             """
             {
-                "message": "Apakah Kantor BDV akan dihapus dari sistem ?",
+                "message": "Apakah 'Kantor BDV' akan dihapus dari sistem ?",
                 "button": "Ya"
             }
             """

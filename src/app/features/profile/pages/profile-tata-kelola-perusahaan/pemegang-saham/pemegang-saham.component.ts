@@ -197,7 +197,7 @@ export class PemegangSahamComponent implements OnInit {
     this.isNewData = false;
     this.disableNamaPemegangSaham = false;
 
-    this.triggerSuccess("Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.");
+    this.triggerSuccess("Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.");
     this.setUpdateForm();
     this.openSaham();
   }
