@@ -30,13 +30,6 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor has fill all field
         And The Vendor wants to save information of "Pemegang Saham"
         And The Vendor must click "Simpan" button where found on the "Left-bottom" of "Pemegang Saham" form
-        # And The Vendor will see confirmation message
-        #     """
-        #     {
-        #         "message": "Simpan Pemegang Saham?",
-        #         "option": "Ya/Tidak"
-        #     }
-        #     """
         And The Vendor must select "Ya" option for "Pemegang Saham" form
         And The Vendor will see "Pemegang Saham" data in the form
 

@@ -8,15 +8,14 @@ Feature: Vendor Basic - Completing vendor information
 
     #2 - Modal Dasar
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to completing his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Aspek Finansial" menu which found on "Sidebar Menu"
-        And The Vendor will see "Aspek Finansial" page
-        And The Vendor must click "Modal Dasar Section" to expand
+        And The Vendor must click "Modal Dasar Section" to expand "Aspek Finansial" form
         And The Vendor will see "Modal Dasar" form
         When The Vendor wants to add information in regards to "Modal Dasar" on "Modal Dasar Section" which part of "Aspek Finansial" page
-        And the Vendor must complete following inputs
+        And The Vendor must complete following inputs where found on "Modal Dasar" form
             """
             {
                 "modalDasarSesuaiAkta"  : "free text",
@@ -27,13 +26,6 @@ Feature: Vendor Basic - Completing vendor information
             """
         And The Vendor has fill all field
         And The Vendor wants to save information of "Modal Dasar"
-        And The Vendor must click "Simpan" button where found on the Right-bottom of "Modal Dasar" form
-        And The Vendor will see confirmation message
-            """
-            {
-                "message": "Simpan Modal Dasar?",
-                "option": "Ya/Tidak"
-            }
-            """
-        And The Vendor must select "Ya" option
-        And The Vendor will see "Modal Dasar" data in "Modal Dasar Form"
+        And The Vendor must click "Simpan" button where found on the "Right-bottom" of "Modal Dasar" form
+        And The Vendor must select "Ya" option for "Modal Dasar" form
+        And The Vendor will see "Modal Dasar" data in the form

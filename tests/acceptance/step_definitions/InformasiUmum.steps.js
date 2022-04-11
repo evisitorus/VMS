@@ -68,9 +68,25 @@ Given('The Vendor will see {string} form', (form) => {
             I.see('Tata Kelola Perusahaan');
             I.see('Pegawai');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Bank":
+            I.see('Aspek Finansial');
+            I.see('Bank');
+            break;
+        case "Modal Dasar":
+            I.see('Aspek Finansial');
+            I.see('Modal Dasar');
+            break;
+        case "Neraca Keuangan":
+            I.see('Aspek Finansial');
+            I.see('Neraca Keuangan');
+            break;
+        case "SPT":
+            I.see('Aspek Finansial');
+            I.see('SPT');
+            break;
+        case "Asset":
+            I.see('Aspek Finansial');
+            I.see('Asset');
             break;
         case "":
             I.see('');
@@ -121,32 +137,71 @@ Given('The Vendor must complete following inputs where found on {string} form', 
             I.fillField('#websitePerusahaan input[class=k-input]', 'www.vms.com');
             I.fillField('#emailPerusahaan input[class=k-input]', 'vms@telkom.co.id');
             break;
-        case "":
-            I.see('');
+        case "Bank":
+            I.click('#input-keuangan-nama-bank');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-nama-bank', 'Bank Mandiri');
+            I.click('#input-keuangan-cabang');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-cabang', 'Jakarta Selatan');
+            I.click('#input-keuangan-nomor-rekening');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-nomor-rekening', '12345678');
+            I.click('#input-keuangan-nama-pemilik-rekening');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-nama-pemilik-rekening', 'evi sitorus');
+            break;
+        case "Modal Dasar":
+            I.click('#input-keuangan-modal-dasar');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-modal-dasar', '12345678');
+            I.click('#input-keuangan-modal-ditempatkan');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-keuangan-modal-ditempatkan', '12345678');
             break;
         case "":
-                I.see('');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
             break;
         case "":
-                I.see('');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
             break;
         case "":
-                I.see('');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
             break;
         case "":
-                I.see('');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
             break;
         case "":
-                I.see('');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
             break;
         case "":
-                I.see('');
-            break;
-        case "":
-                I.see('');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
             break;
         default:
-            I.click(form);
             break;
     }
 });
@@ -183,6 +238,24 @@ Given('The Vendor must click "Simpan" button where found on the {string} of {str
         case "Pegawai":
             I.click('#saveKaryawanFormBtn');
             break;
+        case "Bank":
+            I.click('#btn-simpan-data-bank');
+            break;
+        case "Modal Dasar":
+            I.click('#btn-simpan-modal-dasar');
+            break;
+        case "Neraca Keuangan":
+            I.click('#btn-simpan-neraca');
+            break;
+        case "SPT":
+            I.click('#btn-simpan-spt');
+            break;
+        case "Asset":
+            I.click('#btn-simpan');
+            break;
+        case "":
+            I.click('');
+            break;
         case "":
             I.click('');
             break;
@@ -192,9 +265,8 @@ Given('The Vendor must click "Simpan" button where found on the {string} of {str
     }
 });
 
-Given('The Vendor will see confirmation message', (raw_data) => {
-    let data = JSON.parse(raw_data.content);
-    I.see(data.message);
+Given('The Vendor will see confirmation message', () => {
+    I.see('Konfirmasi');
 });
 
 Given('The Vendor must select "Ya" option for {string} form', (button) => {
@@ -217,6 +289,32 @@ Given('The Vendor must select "Ya" option for {string} form', (button) => {
             I.click('#btn-popup-yes');
             break;
         case "Pegawai":
+            I.click('#btn-popup-yes');
+            break;
+        case "Bank":
+            I.click('#btn-popup-yes');
+            break;
+        case "Modal Dasar":
+            I.click('#btn-popup-yes');
+            break;
+        case "SPT":
+            I.click('#btn-popup-yes');
+            break;
+        case "Asset":
+            I.click('#btn-popup-yes');
+            break;
+        default:
+            I.click('Ya');
+            break;
+    }
+});
+
+Given('The Vendor must select "Ya" option for delete {string} form', (button) => {
+    switch (button) {
+        case "Korespondensi":
+            I.click('#btn-popup-yes');
+            break;
+        case "Pemegang Saham":
             I.click('#btn-popup-yes');
             break;
         default:
@@ -334,6 +432,36 @@ Given('The Vendor can see the first five list of vendors in {string} at {string}
             I.see('Resume');
             I.see('Action');
             break;
+        case "Neraca Keuangan Grid":
+            I.see('Tahun');
+            I.see('Aktiva (Asset)');
+            I.see('Passiva (Liability)');
+            I.see('Ekuitas (Equity)');
+            I.see('Omzet Bersih');
+            I.see('Action');
+            break;
+        case "SPT Grid":
+            I.see('Tahun');
+            I.see('Nomor');
+            I.see('Lampiran');
+            I.see('Waktu Upload');
+            I.see('Action');
+            break;
+        case "Asset Grid":
+            I.see('No.');
+            I.see('Nama Asset');
+            I.see('Jumlah (Unit)');
+            I.see('Estimasi Nilai Aset');
+            I.see('Tahun Perolehan');
+            I.see('Action');
+            break;
+        case "":
+            I.see('');
+            I.see('');
+            I.see('');
+            I.see('');
+            I.see('');
+            break;
         default:
             break;
     }    
@@ -360,6 +488,21 @@ Given('The Vendor must clicks button "Tambah" where found on the {string} of {st
             break;
         case "Pegawai Grid":
             I.click('#addPegawaiBtn');
+            break;
+        case "Neraca Keuangan Grid":
+            I.click('#btn-tambah-neraca');
+            break;
+        case "SPT Grid":
+            I.click('#btn-tambah-spt');
+            break;
+        case "Asset Grid":
+            I.click('#btn-tambah-asset');
+            break;
+        case " Grid":
+            I.click('#');
+            break;
+        case "":
+            I.click('#');
             break;
         case "":
             I.click('#');
@@ -428,6 +571,39 @@ Given('The Vendor will see {string} form to add records regarding to {string}', 
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
+        case "Neraca Keuangan":
+            I.click('#input-neraca-tahun input[role=spinbutton]')
+            I.fillField('#input-neraca-tahun input[role=spinbutton]', '2020');
+            I.click('#input-neraca-aktiva input[role=spinbutton]')
+            I.fillField('#input-neraca-aktiva input[role=spinbutton]', '2500000');
+            I.click('#input-neraca-pasiva input[role=spinbutton]')
+            I.fillField('#input-neraca-pasiva input[role=spinbutton]', '2500000');
+            I.click('#input-neraca-ekuitas input[role=spinbutton]')
+            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', '2500000');
+            I.click('#input-neraca-omzet input[role=spinbutton]')
+            I.fillField('#input-neraca-omzet input[role=spinbutton]', '2500000');
+            break;
+        case "SPT":
+            I.click('#input-spt-tahun input[role=spinbutton]');
+            I.fillField('#input-spt-tahun input[role=spinbutton]', 2020);
+            I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
+        case "Asset":
+            I.fillField('#input-nama-asset input[class=k-input]', 'Crane');
+            I.click('#input-jumlah-asset input[role=spinbutton]');
+            I.fillField('#input-jumlah-asset input[role=spinbutton]', 100);
+            I.click('#input-estimasiNilaiAsset-asset input[role=spinbutton]');
+            I.fillField('#input-estimasiNilaiAsset-asset input[role=spinbutton]', 1500000);
+            I.click('#input-tahun-asset input[role=spinbutton]');
+            I.fillField('#input-tahun-asset input[role=spinbutton]', '2020');
+            break;
+        case "":
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            I.fillField('#', '');
+            break;
         default:
             I.see(form1);
             break;
@@ -447,6 +623,18 @@ Given('The Vendor must click "Batal" button where found on the Right-bottom of {
             break;
         case "Pegawai":
             I.click('#closeKaryawanFormBtn');
+            break;
+        case "Neraca Keuangan":
+            I.click('#btn-batal-neraca');
+            break;
+        case "SPT":
+            I.click('#btn-batal-spt');
+            break;
+        case "Asset":
+            I.click('#btn-batal');
+            break;
+        case "":
+            I.click('#');
             break;
         case "":
             I.click('#');
@@ -618,6 +806,52 @@ Given('The Vendor see {string} form fill with data from chosen row', (form) => {
             I.fillField('#bidangPekerjaan.k-dropdown', 'IT');
             I.pressKey('Enter');
             I.attachFile('#resumeKaryawanUpload input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
+        case "Neraca Keuangan":
+            I.click('#input-neraca-tahun input[role=spinbutton]')
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-neraca-tahun input[role=spinbutton]', '2021');
+            I.click('#input-neraca-aktiva input[role=spinbutton]')
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-neraca-aktiva input[role=spinbutton]', '1500000');
+            I.click('#input-neraca-pasiva input[role=spinbutton]')
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-neraca-pasiva input[role=spinbutton]', '1500000');
+            I.click('#input-neraca-ekuitas input[role=spinbutton]')
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-neraca-ekuitas input[role=spinbutton]', '1500000');
+            I.click('#input-neraca-omzet input[role=spinbutton]')
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-neraca-omzet input[role=spinbutton]', '1500000');
+            break;
+        case "SPT":
+            I.click('#input-spt-tahun input[role=spinbutton]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-spt-tahun input[role=spinbutton]', 2020);
+            I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
+            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
+        case "Asset":
+            I.fillField('#input-nama-asset input[class=k-input]', 'Komputer');
+            I.click('#input-jumlah-asset input[role=spinbutton]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-jumlah-asset input[role=spinbutton]', 55);
+            I.click('#input-estimasiNilaiAsset-asset input[role=spinbutton]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+
+            I.fillField('#input-estimasiNilaiAsset-asset input[role=spinbutton]', 752000);
+            I.click('#input-tahun-asset input[role=spinbutton]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');
+            I.fillField('#input-tahun-asset input[role=spinbutton]', '2015');
             break;
         default:
             break;

@@ -24,7 +24,7 @@ Feature: Vendor Basic - Completing vendor information
                 "option": "Ya/Tidak"
             }
             """
-        And The Vendor must select "Ya" option for "Pegawai Grid" form
+        And The Vendor must select "Ya" option for delete "Pegawai" form
         And The Vendor will see "Pegawai" data status is "Terhapus" in the "Pegawai Grid" on column "action"
 
 #repeat process 13 to delete another "Pegawai"

@@ -23,7 +23,7 @@ Feature: Vendor Basic - Completing vendor information
                 "message": " Apakah Pengurus Perusahaan atas nama "John" akan dihapus dari sistem ? ",
             }
             """
-        And The Vendor must select "Ya" option for "Pengurus Perusahaan" form
+        And The Vendor must select "Ya" option for delete "Pengurus Perusahaan" form
         And The Vendor will see "Pengurus Perusahaan" data status is "Terhapus" in the "Pengurus Perusahaan Grid" on column "action"
 
 #repeat process 4 to delete another "Pengurus Perusahaan"

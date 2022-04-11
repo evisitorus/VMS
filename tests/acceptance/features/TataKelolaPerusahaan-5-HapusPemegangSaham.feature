@@ -23,7 +23,7 @@ Feature: Vendor Basic - Completing vendor information
                 "message": " Apakah Pemegang Saham atas nama "John" akan dihapus dari sistem ? ",
             }
             """
-        And The Vendor must select "Ya" option for "Pemegang Saham" form
+        And The Vendor must select "Ya" option for delete "Pemegang Saham" form
         And The Vendor will see "Pemegang Saham" data status is "Terhapus" in the "Pemegang Saham Grid" on column "action"
 
 #repeat process 4 to delete another "Pemegang Saham"

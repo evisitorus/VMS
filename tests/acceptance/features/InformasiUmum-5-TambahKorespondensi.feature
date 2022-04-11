@@ -35,13 +35,6 @@ Feature: Vendor Basic - Completing vendor information
         When The Vendor has fill all field
         And The Vendor wants to save information of "Korespondensi"
         Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "Korespondensi" form
-        # And The Vendor will see confirmation message
-        #     """
-        #     {
-        #         "message": "Simpan Korespondensi?",
-        #         "button": "Ya"
-        #     }
-        #     """
         And The Vendor must select "Ya" option for "Korespondensi" form
         And The Vendor will see "Korespondensi" data in the form
 

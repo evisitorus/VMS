@@ -8,24 +8,23 @@ Feature: Vendor Basic - Completing vendor information
 
     #Alternative Scenario - Cancel Edit Neraca Keuangan
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to completing his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Aspek Finansial" menu which found on "Sidebar Menu"
-        And The Vendor will see "Aspek Finansial" page
-        And The Vendor must click "Neraca Keuangan Section" to expand
+        And The Vendor will see "Neraca Keuangan" form
         When The Vendor accessing "Neraca Keuangan Section" in "Aspek Finansial" page
-        And the Vendor can see the first five list of data starts with the latest in "Neraca Keuangan Grid" at "Aspek Finansial" page
-        When The Vendor wants to edit information in regarding to "Neraca Keuangan" on "Neraca Keuangan Grid" which part of "Aspek Finansial" page
-        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon"
-        And The Vendor will see pop-up notification in front of "Neraca Keuangan" form
+        And The Vendor can see the first five list of vendors in "Neraca Keuangan Grid" at "Aspek Finansial" page
+        When The Vendor wants to edit information regarding to "Neraca Keuangan" on "Neraca Keuangan Grid" which part of "Aspek Finansial" page
+        Then The Vendor must clicks button "Edit" where found on each row of records symbolize by "pencil icon" for "Neraca Keuangan"
+        And The Vendor see pop-up notification in front of "Neraca Keuangan" form
             """
             {
                 "Perubahan yang anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan anda sudah benar"
             }
             """
-        And the Vendor must click button "Ya" to close the pop-up notification
-        And The Vendor will see "Neraca Keuangan" form with data from chosen row
+        And The Vendor must click button "Ya" to close the pop-up notification
+        And The Vendor see "Neraca Keuangan" form fill with data from chosen row
             """
             {
                 "tahun"	: "free text",
@@ -43,15 +42,7 @@ Feature: Vendor Basic - Completing vendor information
             }
             """
 
-        When The Vendor has fill all field
-        And The Vendor wants to cancel the inputted form
+        When The Vendor has fill all field 
+        And The Vendor wants to save information of "Neraca Keuangan"
         Then The Vendor must click "Batal" button where found on the Right-bottom of "Neraca Keuangan" form
-        And The Vendor will see confirmation message
-            """
-            {
-                "message": "Batalkan Pengisian Neraca Keuangan?",
-                "option": "Ya/Tidak"
-            }
-            """
-        Then The Vendor must select "Ya" option
-        And The Vendor will not see "Neraca Keuangan" data in the "Neraca Keuangan grid"
+        And The Vendor will see "Neraca Keuangan" data in the form
