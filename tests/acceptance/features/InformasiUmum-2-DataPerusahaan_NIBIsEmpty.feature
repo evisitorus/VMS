@@ -49,7 +49,7 @@ Feature: Vendor Basic - Completing vendor information
             """
         When The Vendor has fill all field 
         And The Vendor wants to save information of "Data Perusahaan"
-        Then The Vendor must click "Simpan" button where found on the Right-bottom of "Data Perusahaan" form
+        Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "Data Perusahaan" form
         And The Vendor will see confirmation message
             """
             {
@@ -57,5 +57,5 @@ Feature: Vendor Basic - Completing vendor information
                 "option": "Ya/Tidak"
             }
             """
-        And The Vendor must select "Ya" option
-        And The Vendor will see "Data Perusahaan" in the form
+        And The Vendor must select "Ya" option for "Data Perusahaan" form
+        And The Vendor will see "Data Perusahaan" data in the form

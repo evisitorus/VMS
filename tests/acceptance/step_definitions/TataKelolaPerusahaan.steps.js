@@ -20,8 +20,13 @@ Given('The Vendor can update total of employees of "Jumlah Pegawai" form', () =>
     I.fillField('#pegawaiAsingInput', '100');
 });
 
-Given('', () => {
-
+Given('The Vendor can see the first five list of documents in {string} at {string} page', () => {
+    I.see('No.');
+    I.see('Nama Dokumen');
+    I.see('Tanggal Terbit');
+    I.see('Tanggal Expired');
+    I.see('Nama File');
+    I.see('Action');
 });
 
 Given('', () => {

@@ -14,9 +14,9 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor must click "Aspek Finansial" menu which found on "Sidebar Menu"
         And The Vendor will see "SPT" form
         And The Vendor must click "SPT" to expand "SPT section" form
-        When The Vendor accessing "SPT Section" in "Informasi Umum" page
-        Then The Vendor can see the first five list of vendors in "SPT Grid" at "Informasi Umum" page
-        When The Vendor wants to add information in regards to "SPT" on "SPT Grid" which part of "Informasi Umum" page
+        When The Vendor accessing "SPT Section" in "Aspek Finansial" page
+        Then The Vendor can see the first five list of vendors in "SPT Grid" at "Aspek Finansial" page
+        When The Vendor wants to add information in regards to "SPT" on "SPT Grid" which part of "Aspek Finansial" page
         Then The Vendor must clicks button "Tambah" where found on the "Right-bottom" of "SPT Grid"
         And The Vendor will see "SPT" form to add records regarding to "SPT"
             """

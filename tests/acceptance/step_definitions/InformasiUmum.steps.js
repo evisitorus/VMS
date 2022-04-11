@@ -88,17 +88,17 @@ Given('The Vendor will see {string} form', (form) => {
             I.see('Aspek Finansial');
             I.see('Asset');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Legalitas":
+            I.see('Aspek Legal');
+            I.see('Legalitas');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Dokumen Legal":
+            I.see('Aspek Legal');
+            I.see('Dokumen Legal');
             break;
-        case "":
-            I.see('');
-            I.see('');
+        case "Sertifikasi dan Dokumen Khusus":
+            I.see('Aspek Legal');
+            I.see('Sertifikasi dan Dokumen Khusus');
             break;
         default:
             break;
@@ -110,6 +110,7 @@ Given('The Vendor must complete following inputs where found on {string} form', 
         case "Data Perusahaan":
             I.attachFile('#imgPerusahaanUpload input[type=file]', './tests/acceptance/_fixture/logo_justin.jpg');
             I.checkOption('#NIBbtnTrue');
+            I.click('#nomorIndukBerusaha');
             I.fillField('#nomorIndukBerusaha', '12345678');
             I.fillField('#namaPerusahaan input[class=k-input]', 'PT. Megah VMS');
             I.fillField('#inisialPerusahaanInput input[class=k-input]', 'VMS');
@@ -165,11 +166,36 @@ Given('The Vendor must complete following inputs where found on {string} form', 
             I.pressKey('Backspace');
             I.fillField('#input-keuangan-modal-ditempatkan', '12345678');
             break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
+        case "Legalitas":
+            I.fillField('#noAktaPendirian input[class=k-input]', '66666');
+            I.click('#tanggalTerbitAktaPendirian');
+            I.fillField('#tanggalTerbitAktaPendirian input[class=k-input]', '04112022');
+            I.fillField('#notarisAktaPendirian input[class=k-input]', 'evi');
+            I.fillField('#notarisPenggantiAktaPendirian input[class=k-input]', 'sitorus');
+            I.fillField('#noAktaPerubahan input[class=k-input]', '5555');
+            I.click('#tanggalTerbitAktaPerubahan');
+            I.fillField('#tanggalTerbitAktaPerubahan input[class=k-input]', '04112022');
+            I.fillField('#notarisAktaPerubahan input[class=k-input]', 'evi');
+            I.fillField('#notarisPenggantiAktaPerubahan input[class=k-input]', 'sitorus');
+            I.fillField('#noSkPengesahanMenteri input[class=k-input]', '4444');
+            I.click('#tanggalTerbitNoSkPengesahanMenteri');
+            I.fillField('#tanggalTerbitNoSkPengesahanMenteri input[class=k-input]', '04112022');
+            I.fillField('#npwp input[class=k-input]', '111100002222');
+            I.click('#tanggalTerbitNpwp input[class=k-input]');
+            I.fillField('#tanggalTerbitNpwp input[class=k-input]', '04112022');
+            I.fillField('#noSiup input[class=k-input]', '33333');
+            I.click('#tanggalTerbitSiup input[class=k-input]');
+            I.fillField('#tanggalTerbitSiup input[class=k-input]', '04112022');
+            I.fillField('#noNibTdp input[class=k-input]', '222222');
+            I.click('#tanggalTerbitNibTdp input[class=k-input]');
+            I.fillField('#tanggalTerbitNibTdp input[class=k-input]', '04112022');
+            I.click('#tanggalExpireNibTdp input[class=k-input]');
+            I.fillField('#tanggalExpireNibTdp input[class=k-input]', '04112022');
+            I.fillField('#noIdpSitu input[class=k-input]', '11111');
+            I.click('#tanggalTerbitIdpSitu input[class=k-input]');
+            I.fillField('#tanggalTerbitIdpSitu input[class=k-input]', '04112022');
+            I.click('#tanggalExpireIdpSitu input[class=k-input]');
+            I.fillField('#tanggalExpireIdpSitu input[class=k-input]', '04112022');
             break;
         case "":
             I.fillField('#', '');
@@ -253,11 +279,11 @@ Given('The Vendor must click "Simpan" button where found on the {string} of {str
         case "Asset":
             I.click('#btn-simpan');
             break;
-        case "":
-            I.click('');
+        case "Legalitas":
+            I.click('#simpanLegalitas');
             break;
-        case "":
-            I.click('');
+        case "Sertifikasi dan Dokumen Khusus":
+            I.click('#btn-simpan');
             break;
         default:
             I.click(button);
@@ -303,6 +329,12 @@ Given('The Vendor must select "Ya" option for {string} form', (button) => {
         case "Asset":
             I.click('#btn-popup-yes');
             break;
+        case "Legalitas":
+            I.click('#btn-popup-yes');
+            break;
+        case "Sertifikasi dan Dokumen Khusus":
+            I.click('#btn-popup-yes');
+            break;
         default:
             I.click('Ya');
             break;
@@ -327,7 +359,7 @@ Given('The Vendor will see {string} data in the form', () => {
 
 });
 
-Given('The Vendor must complete following inputs where found on {string} form without NIB', (form) => {
+Given('The Vendor must complete following inputs where found on {string} form without NIB', () => {
     I.attachFile('#imgPerusahaanUpload input[type=file]', './tests/acceptance/_fixture/logo_justin.jpg');
     I.checkOption('#NIBbtnFalse');
     I.fillField('#namaPerusahaan input[class=k-input]', 'PT. Megah VMS');
@@ -498,8 +530,8 @@ Given('The Vendor must clicks button "Tambah" where found on the {string} of {st
         case "Asset Grid":
             I.click('#btn-tambah-asset');
             break;
-        case " Grid":
-            I.click('#');
+        case "Sertifikasi dan Dokumen Khusus Grid":
+            I.click('#btn-tambah-dokumen');
             break;
         case "":
             I.click('#');
@@ -598,6 +630,16 @@ Given('The Vendor will see {string} form to add records regarding to {string}', 
             I.click('#input-tahun-asset input[role=spinbutton]');
             I.fillField('#input-tahun-asset input[role=spinbutton]', '2020');
             break;
+        case "Sertifikasi dan Dokumen Khusus":
+            I.fillField('#input-nama-dokumen input[class=k-input]', 'Dokumen 1');
+            I.click('#input-tanggal-terbit input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.fillField('#input-tanggal-terbit input[class=k-input]', '04112022');
+            I.click('#input-tanggal-expired input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.fillField('#input-tanggal-expired input[class=k-input]', '04112022');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+            break;
         case "":
             I.fillField('#', '');
             I.fillField('#', '');
@@ -633,8 +675,8 @@ Given('The Vendor must click "Batal" button where found on the Right-bottom of {
         case "Asset":
             I.click('#btn-batal');
             break;
-        case "":
-            I.click('#');
+        case "Sertifikasi dan Dokumen Khusus":
+            I.click('#btn-batal');
             break;
         case "":
             I.click('#');
@@ -696,6 +738,9 @@ Given('The Vendor must clicks button "Edit" where found on each row of records s
             break;
         case "Riwayat Pekerjaan":
             I.click('#btn-update');
+            break;
+        case "Sertifikasi dan Dokumen Khusus":
+            I.click('#btn-update');
             break;    
         default:
             break;
@@ -729,6 +774,9 @@ Given('The Vendor must clicks button "Delete" where found on each row of records
             I.click('#btn-delete');
             break;
         case "Riwayat Pekerjaan":
+            I.click('#btn-delete');
+            break; 
+            case "Sertifikasi dan Dokumen Khusus":
             I.click('#btn-delete');
             break;    
         default:
@@ -846,12 +894,24 @@ Given('The Vendor see {string} form fill with data from chosen row', (form) => {
             I.click('#input-estimasiNilaiAsset-asset input[role=spinbutton]');
             I.pressKey(['Control','A']);
             I.pressKey('Backspace');
-
             I.fillField('#input-estimasiNilaiAsset-asset input[role=spinbutton]', 752000);
             I.click('#input-tahun-asset input[role=spinbutton]');
             I.pressKey(['Control','A']);
             I.pressKey('Backspace');
             I.fillField('#input-tahun-asset input[role=spinbutton]', '2015');
+            break;
+        case "Sertifikasi dan Dokumen Khusus":
+            I.click('#input-nama-dokumen input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.pressKey('Backspace');    
+            I.fillField('#input-nama-dokumen input[class=k-input]', 'Dokumen 1');
+            I.click('#input-tanggal-terbit input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.fillField('#input-tanggal-terbit input[class=k-input]', '04112022');
+            I.click('#input-tanggal-expired input[class=k-input]');
+            I.pressKey(['Control','A']);
+            I.fillField('#input-tanggal-expired input[class=k-input]', '04112022');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
             break;
         default:
             break;
@@ -872,4 +932,36 @@ Given('The Vendor will see delete confirmation message', () => {
 
 Given('The Vendor will see {string} data status is "Terhapus" in the {string} on column "action"', () => {
     I.see('Terhapus');
+});
+
+Given('The Vendor must complete following inputs where found on {string} form without NoNIB', () => {
+    I.fillField('#noAktaPendirian input[class=k-input]', '66666');
+    I.click('#tanggalTerbitAktaPendirian');
+    I.fillField('#tanggalTerbitAktaPendirian input[class=k-input]', '04112022');
+    I.fillField('#notarisAktaPendirian input[class=k-input]', 'evi');
+    I.fillField('#notarisPenggantiAktaPendirian input[class=k-input]', 'sitorus');
+    I.fillField('#noAktaPerubahan input[class=k-input]', '5555');
+    I.click('#tanggalTerbitAktaPerubahan');
+    I.fillField('#tanggalTerbitAktaPerubahan input[class=k-input]', '04112022');
+    I.fillField('#notarisAktaPerubahan input[class=k-input]', 'evi');
+    I.fillField('#notarisPenggantiAktaPerubahan input[class=k-input]', 'sitorus');
+    I.fillField('#noSkPengesahanMenteri input[class=k-input]', '4444');
+    I.click('#tanggalTerbitNoSkPengesahanMenteri');
+    I.fillField('#tanggalTerbitNoSkPengesahanMenteri input[class=k-input]', '04112022');
+    I.fillField('#npwp input[class=k-input]', '111100002222');
+    I.click('#tanggalTerbitNpwp input[class=k-input]');
+    I.fillField('#tanggalTerbitNpwp input[class=k-input]', '04112022');
+    I.fillField('#noSiup input[class=k-input]', '33333');
+    I.click('#tanggalTerbitSiup input[class=k-input]');
+    I.fillField('#tanggalTerbitSiup input[class=k-input]', '04112022');
+    I.fillField('#noNibTdp input[class=k-input]', '222222');
+    I.click('#tanggalTerbitNibTdp input[class=k-input]');
+    I.fillField('#tanggalTerbitNibTdp input[class=k-input]', '04112022');
+    I.click('#tanggalExpireNibTdp input[class=k-input]');
+    I.fillField('#tanggalExpireNibTdp input[class=k-input]', '04112022');
+    I.fillField('#noIdpSitu input[class=k-input]', '11111');
+    I.click('#tanggalTerbitIdpSitu input[class=k-input]');
+    I.fillField('#tanggalTerbitIdpSitu input[class=k-input]', '04112022');
+    I.click('#tanggalExpireIdpSitu input[class=k-input]');
+    I.fillField('#tanggalExpireIdpSitu input[class=k-input]', '04112022');
 });

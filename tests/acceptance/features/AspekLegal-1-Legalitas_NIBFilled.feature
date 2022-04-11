@@ -8,9 +8,9 @@ Feature: Vendor Basic - Completing vendor information
 
     #1 - Simpan Legalitas - NIB in Informasi Umum is Filled
     Scenario:
-        Given The Vendor logged into VMS using his/her registered company information
+        Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
-        And The Vendor wants to complete his/her company profile
+        And The Vendor wants to complete his or her company profile
         And The Vendor must click "Aspek Legal" menu which found on "Sidebar Menu"
         And The Vendor will see "Legalitas" form
         And The Vendor must complete following inputs where found on "Legalitas" form
@@ -51,13 +51,6 @@ Feature: Vendor Basic - Completing vendor information
             """
         When The Vendor has fill all field
         And The Vendor wants to save information of "Legalitas"
-        Then The Vendor must click "Simpan" button where found on the Right-bottom of "Legalitas" form
-        And The Vendor will see confirmation message
-            """
-            {
-                "message": "Simpan Legalitas ?",
-                "option": "Ya/Tidak"
-            }
-            """
-        Then The Vendor must select "Ya" option
-        And The Vendor will see "Legalitas" data in "Legalitas" form
+        Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "Legalitas" form
+        Then The Vendor must select "Ya" option for "Legalitas" form
+        And The Vendor will see "Legalitas" data in the form

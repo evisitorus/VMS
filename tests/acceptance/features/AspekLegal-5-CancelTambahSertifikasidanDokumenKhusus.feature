@@ -6,7 +6,7 @@ Feature: Vendor Basic - Completing vendor information
     I want to completing my company information
     So that I can upgrade my company level to vendor pro
 
-    #4 - Tambah Sertifikasi dan Dokumen Khusus
+    #Alternative Scenario - Tambah Sertifikasi dan Dokumen Khusus
     Scenario:
         Given The Vendor logged into VMS using his or her registered company information
         When The Vendor see dashboard page
@@ -29,10 +29,7 @@ Feature: Vendor Basic - Completing vendor information
             }
             """
 
-        When The Vendor has fill all field
-        And The Vendor wants to save information of "Aspek Legal"
-        Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "Sertifikasi dan Dokumen Khusus" form
-        And The Vendor must select "Ya" option for "Sertifikasi dan Dokumen Khusus" form
+        When The Vendor has fill all field 
+        And The Vendor wants to Cancel information of "Sertifikasi dan Dokumen Khusus"
+        Then The Vendor must click "Batal" button where found on the Right-bottom of "Sertifikasi dan Dokumen Khusus" form
         And The Vendor will see "Sertifikasi dan Dokumen Khusus" data in the form
-
-#repeat process 4 to add another "Sertifikasi dan Dokumen Khusus"
