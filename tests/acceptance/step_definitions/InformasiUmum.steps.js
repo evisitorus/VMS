@@ -37,7 +37,7 @@ Given('The Vendor must click {string} menu which found on "Sidebar Menu"', (side
         case "Riwayat Pekerjaan":
             I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
             break;
-        case "Verifikasi Kelengkapan":
+        case "Pengajuan Verifikasi":
             I.click('#k-panelbar-0-item-sidebar-verification');
             break;
         default:
@@ -99,6 +99,12 @@ Given('The Vendor will see {string} form', (form) => {
         case "Sertifikasi dan Dokumen Khusus":
             I.see('Aspek Legal');
             I.see('Sertifikasi dan Dokumen Khusus');
+            break;
+        case "Riwayat Pekerjaan":
+            I.see('Riwayat Pekerjaan');
+            break;
+        case "Pengajuan Verifikasi":
+            I.see('Pengajuan Verifikasi');
             break;
         default:
             break;
@@ -311,6 +317,9 @@ Given('The Vendor must select "Ya" option for {string} form', (button) => {
         case "Pemegang Saham":
             I.click('#btn-popup-yes');
             break;
+        case "Pengurus Perusahaan":
+            I.click('#btn-popup-yes');
+            break;
         case "Jumlah Pegawai":
             I.click('#btn-popup-yes');
             break;
@@ -321,6 +330,9 @@ Given('The Vendor must select "Ya" option for {string} form', (button) => {
             I.click('#btn-popup-yes');
             break;
         case "Modal Dasar":
+            I.click('#btn-popup-yes');
+            break;
+        case "Neraca Keuangan":
             I.click('#btn-popup-yes');
             break;
         case "SPT":

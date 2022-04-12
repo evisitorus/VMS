@@ -12,8 +12,8 @@ Feature: Vendor Basic - Completing vendor information
         When The Vendor see dashboard page
         And The Vendor wants to see his or her completion status on each aspect
         And The Vendor must click "Pengajuan Verifikasi" menu which found on "Sidebar Menu"
-        And The Vendor will see "Pengajuan Verifikasi" page
-        And the Vendor can see the aspect of verification process
+        And The Vendor will see "Pengajuan Verifikasi" form
+        And The Vendor can see the aspect of verification process
             """
             {
                 "Informasi Umum": "checked/unchecked with date",
@@ -23,4 +23,4 @@ Feature: Vendor Basic - Completing vendor information
                 "Riwayat Pekerjaan": "checked/unchecked with date"
             }
             """
-        And the Vendor can see the "Ajukan Verifikasi" button on the right-bottom of the page
+        And The Vendor can see the "Ajukan Verifikasi" button on the right-bottom of the page

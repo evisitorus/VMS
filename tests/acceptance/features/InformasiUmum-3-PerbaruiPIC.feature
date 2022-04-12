@@ -26,7 +26,7 @@ Feature: Vendor Basic - Completing vendor information
             """
         When The Vendor has fill all field 
          And The Vendor wants to save information of "PIC"
-        Then The Vendor must click "Simpan" button where found on the Right-bottom of "PIC" form
+        Then The Vendor must click "Simpan" button where found on the "Right-bottom" of "PIC" form
          And The Vendor will see confirmation message
             """
             {

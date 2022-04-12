@@ -8,8 +8,7 @@ Given('The Vendor wants manage {string} which needed for further verification fr
     
 });
 
-Given('The Vendor must click {string} menu where found on {string} of {string}', (button1, button2, button3) => {
-});
+
 
 Given('The Vendor must click {string} Tab', (sidebar) => {
     switch (sidebar) {
@@ -33,10 +32,10 @@ Given('The Vendor must click {string} Tab', (sidebar) => {
             I.waitForElement('#k-panelbar-0-item-sidebar-laporan-keuangan');
             I.click('#k-panelbar-0-item-sidebar-laporan-keuangan');
             break;
-        case "Riwayat Pekerjaan":
-            I.waitForElement('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
-            I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.waitForElement('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+        //     I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+        //     break;
         case "Asset":
             I.waitForElement('#k-panelbar-1-item-sidebar-aset');
             I.click('#k-panelbar-1-item-sidebar-aset');
@@ -60,9 +59,9 @@ Given('The Vendor will see {string} form', (form) => {
         case "Alamat":
             I.amOnPage('/profile-alamat');
             break;
-        case "Riwayat Pekerjaan":
-            I.amOnPage('/profile-riwayat-pekerjaan');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.amOnPage('/profile-riwayat-pekerjaan');
+        //     break;
         case "Informasi Perusahaan":
             I.amOnPage('/profile-information');
             break;
@@ -85,9 +84,9 @@ Given('The Vendor wants to add information in regards to {string} on {string} wh
         case "Data Perusahaan":
             I.click('.ng-tns-c66-1.k-link');
             break;
-        case "Riwayat Pekerjaan":
-            I.amOnPage('/profile-riwayat-pekerjaan');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.amOnPage('/profile-riwayat-pekerjaan');
+        //     break;
         case "Pimpinan Perusahaan":
             I.amOnPage('/profile-person-in-charge');
             break;
@@ -122,10 +121,10 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
             I.waitForElement('#btn-tambah-alamat');
             I.click('#btn-tambah-alamat');
             break;
-        case "Riwayat Pekerjaan":
-            I.waitForElement('#addPekerjaan');
-            I.click('#addPekerjaan');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.waitForElement('#addPekerjaan');
+        //     I.click('#addPekerjaan');
+        //     break;
         case "Pegawai":
             I.waitForElement('#addPegawaiBtn');
             I.click('#addPegawaiBtn');
@@ -200,15 +199,15 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.fillField('#input-spt-nomor-dokumen input[class=k-input]', '12340');
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
-        case "Riwayat Pekerjaan":
-            I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
-            I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
-            I.click('#nilaiPekerjaan input[role=spinbutton]');
-            I.fillField('#nilaiPekerjaan input[role=spinbutton]', '1000000000');
-            I.click('#tahunPekerjaan input[role=spinbutton]');
-            I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
-            I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
+        //     I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
+        //     I.click('#nilaiPekerjaan input[role=spinbutton]');
+        //     I.fillField('#nilaiPekerjaan input[role=spinbutton]', '1000000000');
+        //     I.click('#tahunPekerjaan input[role=spinbutton]');
+        //     I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
+        //     I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+        //     break;
         case "Pegawai":
             I.fillField('#nikPegawaiInput input[class=k-input]', '1234567');
             I.fillField('#firstName input[class=k-input]', 'Justin');
@@ -271,10 +270,10 @@ Given('The Vendor must click {string} button to save information of {string}', (
             I.waitForElement('#btn-simpan-spt');
             I.click('#btn-simpan-spt');
             break;
-        case "Riwayat Pekerjaan":
-            I.waitForElement('#submitPekerjaan');
-            I.click('#submitPekerjaan');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.waitForElement('#submitPekerjaan');
+        //     I.click('#submitPekerjaan');
+        //     break;
         case "Alamat":
             I.waitForElement('#btn-submit-alamat');
             I.click('#btn-submit-alamat');
@@ -296,11 +295,11 @@ Given('The Vendor must click {string} button to save information of {string}', (
     }    
 });
 
-Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
-    I.see('Berhasil menyimpan data, silakan ajukan verifikasi');
-    I.waitForElement('#btn-popup-yes');
-    I.click('#btn-popup-yes');
-});
+// Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
+//     I.see('Berhasil menyimpan data, silakan ajukan verifikasi');
+//     I.waitForElement('#btn-popup-yes');
+//     I.click('#btn-popup-yes');
+// });
 
 Given('The Vendor will see first 5 lists of {string} on {string}', (list1, list2) => {
     switch (list1) {
@@ -349,10 +348,6 @@ Given('The Vendor will get flag as {string} for checklist if already upload at l
 
 });
 
-Given('The Vendor will see progress of upgrade level on {string}', () => {
-
-});
-
 Given('The Vendor already manage her or his company information by uploading necessary documents', () => {
 
 });
@@ -375,11 +370,11 @@ Given('The Vendor can not continue to add document information', () => {
 
 Given('The Vendor can not continue to add document information {string}', (grid) => {
     switch (grid) {
-        case "Riwayat Pekerjaan":
-            I.see('Periksa kembali file Anda');
-            I.waitForElement('#btn-popup-yes');
-            I.click('#btn-popup-yes');
-            break;
+        // case "Riwayat Pekerjaan":
+        //     I.see('Periksa kembali file Anda');
+        //     I.waitForElement('#btn-popup-yes');
+        //     I.click('#btn-popup-yes');
+        //     break;
         case "Dokumen":
             I.see('Periksa kembali file Anda');
             I.waitForElement('#btn-popup-yes');

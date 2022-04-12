@@ -7,7 +7,7 @@ Feature: Vendor Basic - Completed vendor information
     So that I can upgrade my company level to vendor pro 
 
   Background: 
-    Given The Vendor already login to VMS Portal
+    Given The Vendor logged into VMS using his or her registered company information
 
  #manage Riwayat Pekerjaan
   Scenario: Positif Scenario for Riwayat Pekerjaan 
