@@ -107,6 +107,8 @@ export class ProfileAsetComponent implements OnInit {
 
     this.setFormValue();
     this.open();
+    this.parent.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
   }
 
   public resetForm(): void {

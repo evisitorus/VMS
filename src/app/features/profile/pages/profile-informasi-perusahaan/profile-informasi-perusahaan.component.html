@@ -349,5 +349,18 @@
   </div>
   <div kendoDialogContainer></div>
   <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
-
+  <kendo-dialog id="popup-confirm-save"
+                title="Konfirmasi"
+                *ngIf="opened"
+                (close)="close()"
+                [minWidth]="250"
+                [width]="450">
+    <p style="margin: 30px; text-align: center;">
+      Simpan data profil perusahaan ?
+    </p>
+    <kendo-dialog-actions id="popup-action-confirm-save">
+      <button kendoButton id="btn-popup-no" (click)="close()">Tidak</button>
+      <button kendoButton id="btn-popup-yes" (click)="save(); close()" [primary]="true">Ya</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
 </div>
