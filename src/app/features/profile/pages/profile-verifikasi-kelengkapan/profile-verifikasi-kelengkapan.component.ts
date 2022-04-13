@@ -1,5 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { ProfileKelengkapanService } from 'src/app/core/services/profile/profile-kelengkapan.service';
 import { dictionary } from 'src/app/dictionary/dictionary';
@@ -39,6 +40,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public role!: string;
   public isDisabled: boolean = false;
 
+  public popUpConfirmationMessage: string = "";
   public popUpTitle: string = "Pengajuan Verifikasi";
   public popUpMessage: string = "";
   public redirectOnClosePopUp: boolean = true;
@@ -53,6 +55,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   constructor(
     private service: ProfileKelengkapanService,
     private eventEmitterService: EventEmitterService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit(): void {
@@ -112,6 +115,36 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
         }
       );
     }
+  }
+
+  public cancelConfirmation() : any {
+    const dialog: DialogRef = this.dialogService.open({
+      title: "Konfirmasi Pembatalan",
+      content: "Anda akan membatalkan Pengajuan Verifikasi ?",
+      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      width: 450,
+      height: 200,
+      minWidth: 250,
+    });
+
+    dialog.result.subscribe((result) => {
+      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+        this.cancel();
+      } 
+    });
+  }
+
+  public cancel(): any {
+    this.service.batalVerifikasiKelengkapan().subscribe(
+      () => {
+        this.popUpMessage = dictionary.cancel_verification_submited;
+        this.triggerPopUp();
+      },
+      () => {
+        this.popUpMessage = dictionary.cancel_verification_failed;
+        this.triggerPopUp();
+      }
+    );
   }
 
   triggerPopUp():void  {
