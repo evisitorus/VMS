@@ -171,3 +171,17 @@
   </div>
 </div>
 <div kendoDialogContainer></div>
+<kendo-dialog id="popup-confirm-save"
+              title="Konfirmasi"
+              *ngIf="deleteOpened"
+              (close)="closeDeleteConfirmation()"
+              [minWidth]="250"
+              [width]="450">
+  <p style="margin: 30px; text-align: center;">
+    {{"Apakah '" + deleteData.name + "' akan dihapus dari sistem ?"}}
+  </p>
+  <kendo-dialog-actions id="popup-action-confirm-save">
+    <button kendoButton id="btn-popup-no" (click)="closeDeleteConfirmation()">Tidak</button>
+    <button kendoButton id="btn-popup-yes" (click)="delete(deleteData.id, deleteData.telcoId)" [primary]="true">Ya</button>
+  </kendo-dialog-actions>
+</kendo-dialog>
