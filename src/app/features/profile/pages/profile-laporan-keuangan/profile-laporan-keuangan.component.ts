@@ -63,6 +63,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public listNamaBank: Array<string> = [];
 
+  public disableSubmit: boolean = false;
+  public submitButtonText: string = "Simpan";
+
   public dataNeraca: any = {
     tahun: "",
     aktiva: "",
@@ -86,6 +89,10 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     modalDasar: "",
     modalDitempatkan: ""
   }
+
+  private messages: any = {
+    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
+  };
 
   public setAllForm(): void {
     this.setFormKeuangan();
@@ -232,6 +239,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateFormNeraca(data: any): void {
+    this.popUpMessage = this.messages.updateData;
+    this.triggerPopUp();
+
     this.id = data.id;
     this.dataNeraca.tahun = data.tahun;
     this.dataNeraca.aktiva = data.aktiva;
@@ -245,6 +255,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateFormSPT(data: any): void {
+    this.popUpMessage = this.messages.updateData;
+    this.triggerPopUp();
+    
     this.id = data.id;
     this.dataSPT.tahun = data.tahun;
     this.dataSPT.nomorDokumen = data.nomor;
@@ -541,16 +554,24 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public upload(): void {
-    this.fileService.upload(this.lampiranFiles[0]).subscribe(
-      (res) => {
-        this.uploadedFileContentUrl = res.contentUrl;
-        this.uploadedFileId = res["@id"];
-      },
-      (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
-      }
-    );
+    if (this.lampiranFiles !== null) {
+      this.disableSubmit = true;
+      this.submitButtonText = "Uploading...";
+      this.fileService.upload(this.lampiranFiles[0]).subscribe(
+        (res) => {
+          this.uploadedFileContentUrl = res.contentUrl;
+          this.uploadedFileId = res["@id"];
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
+        },
+        (err) => {
+          this.popUpMessage = err.error.message;
+          this.triggerPopUp();
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
+        }
+      );
+    }  
   }
 
   public download(fileId: string, filename: string) {

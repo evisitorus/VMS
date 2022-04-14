@@ -47,6 +47,10 @@ export class ProfileDokumenComponent implements OnInit {
     return !itemArgs.dataItem.leaf;
   }
 
+  private messages: any = {
+    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
+  };
+
   public form!: FormGroup;
   public gridData: any[] = [];
 
@@ -57,6 +61,9 @@ export class ProfileDokumenComponent implements OnInit {
 
   public value: Date = new Date();
   public checked: boolean = false;
+
+  public disableSubmit: boolean = false;
+  public submitButtonText: string = "Simpan";
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
@@ -167,6 +174,9 @@ export class ProfileDokumenComponent implements OnInit {
       this.checked = false;
       this.setIsLifeTime();
     }
+
+    this.popUpMessage = this.messages.updateData;
+    this.triggerPopUp();
   }
 
   public resetForm(): void {
@@ -308,14 +318,21 @@ export class ProfileDokumenComponent implements OnInit {
 
   public upload(): void {
     if (this.lampiranFiles !== null) {
+      this.disableSubmit = true;
+      this.submitButtonText = "Uploading...";
+
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
         },
         (err) => {
           this.popUpMessage = err.error.message;
           this.triggerPopUp();
+          this.disableSubmit = false;
+          this.submitButtonText = "Simpan";
         }
       );
     }

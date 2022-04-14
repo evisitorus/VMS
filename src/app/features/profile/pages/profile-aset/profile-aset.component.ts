@@ -13,6 +13,10 @@ import { dictionary } from 'src/app/dictionary/dictionary';
 })
 export class ProfileAsetComponent implements OnInit {
 
+  private messages: any = {
+    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
+  };
+
   public form!: FormGroup;
   public gridData: any[] = [];
   public opened: boolean = false;
@@ -102,6 +106,9 @@ export class ProfileAsetComponent implements OnInit {
 
     this.setFormValue();
     this.open();
+
+    this.popUpMessage = this.messages.updateData;
+    this.triggerPopUp();
   }
 
   public resetForm(): void {
