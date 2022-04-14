@@ -24,10 +24,6 @@ Given('The Vendor will get flag as {string} for checklist  if already upload at 
 
 });
 
-Given('The Vendor will see progress of upgrade level on {string}', () => {
-
-});
-
 Given('The Vendor already manage Asset from his or her company', () => {
 
 });
@@ -46,7 +42,14 @@ Given('The Vendor must clicks button {string} button from selected record on {st
             I.click('#btn-delete-asset');
             break;
         case "Dokumen":
-            I.click('#btn-delete');
+            if(button==="Delete")
+            {
+                I.click('#btn-delete');
+            }
+            else
+            {
+                I.click("#btn-update")
+            }            
             break;
         case "PIC":
             I.click('#btn-perbarui');
@@ -111,7 +114,7 @@ Given('The Vendor will see pop-up message', () => {
 
 Given('The Vendor must select {string} option', () => {
     I.click('Ya');
-    I.see('Berhasil menghapus data');
+    I.see(dictionary.delete_data_success);
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });

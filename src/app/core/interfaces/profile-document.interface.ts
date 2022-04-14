@@ -1,4 +1,5 @@
 export interface ProfileDocumentInterface {
+    tipeDokumen:string,
     nomorDokumen: string,
     namaDokumen: string,
     berlakuSampai: Date,

@@ -180,7 +180,7 @@ pipeline {
                         sh 'docker run --rm -i -v $(pwd)/devops/deploy:/root/.kube baskaraerbasakti/kubectl --kubeconfig /root/.kube/config apply -f /root/.kube/deployment.yaml'
                     }
                 }
-                sh 'docker rmi $REGISTRY_NAME:$BRANCH_NAME-$TAG'
+                sh 'docker rmi $REGISTRY_NAME:$BRANCH_NAME-$TAG --force'
                 sh 'sudo rm -rf docker'
             }
         }

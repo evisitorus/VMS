@@ -77,7 +77,7 @@
                 <div class="wrap">
                   <kendo-label class="labelForm">Nilai Pekerjaan</kendo-label>
                   <div>
-                    <kendo-numerictextbox class="formField" id="nilaiPekerjaan" formControlName="nilaiPekerjaan" format="Rp\ ##,#" [min]="0" [maxlength]="15" [spinners]="false"></kendo-numerictextbox>
+                    <kendo-numerictextbox class="formField" id="nilaiPekerjaan" formControlName="nilaiPekerjaan" format="Rp\ ##,#" [min]="0" [maxlength]="maxLength" [spinners]="false"></kendo-numerictextbox>
                     <kendo-formhint>satuan Rupiah</kendo-formhint>
                     <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.nilaiPekerjaan.errors?.required">Nilai Pekerjaan tidak boleh kosong</kendo-formerror>
                   </div>
@@ -86,7 +86,7 @@
                 <div class="wrap">
                   <kendo-label class="labelForm">Tahun</kendo-label>
                   <div>
-                    <kendo-numerictextbox class="formField"  id="tahunPekerjaan" formControlName="tahunPekerjaan" format="#" [maxlength]="4" [min]="1900" [spinners]="false"></kendo-numerictextbox>
+                    <kendo-numerictextbox class="formField"  id="tahunPekerjaan" formControlName="tahunPekerjaan" format="#" [maxlength]="4" [min]="1900" [spinners]="true"></kendo-numerictextbox>
                     <kendo-formerror class="formHint" *ngIf="pekerjaanForm.controls.tahunPekerjaan.errors?.required">Tahun tidak boleh kosong, pastikan benar</kendo-formerror>
                   </div>
                 </div>

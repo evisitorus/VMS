@@ -9,6 +9,7 @@ import {EventEmitterService} from "../../../../core/services/event-emitter.servi
 import {FileRestrictions, SelectEvent} from "@progress/kendo-angular-upload";
 import {environment} from "../../../../../environments/environment";
 import {UserFileInterface} from "../../../../core/interfaces/profile/user-file-interface";
+import { dictionary } from "src/app/dictionary/dictionary";
 
 @Component({
   selector: 'app-profile-person-in-charge',
@@ -39,6 +40,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   redirectOnClosePopUp: boolean = false;
   popUpID = "";
   person_id = this.authService.getLocalStorage('person_id')!;
+  disabledWhenError: boolean = false;
 
   public formPIC!: FormGroup;
 
@@ -114,7 +116,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
     this.redirectOnClosePopUp = false;
     this.popUpID = "popup-attention";
     this.popUpTitle = "Perhatian";
-    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
   }
 
@@ -172,7 +174,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
           this.responseEmail = response.data.email;
           this.redirectOnClosePopUp = false;
           this.popUpTitle = 'Informasi';
-          this.popUpMessage = 'Berhasil memperbarui data';
+          this.popUpMessage = dictionary.update_data_success;
           this.popUpID = "popup-update-pic-success";
           this.triggerPopUp();
           this.setForm();
@@ -198,6 +200,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.disabledWhenError = true;
     this.setForm();
 
     this.profilePICService.getProfilePIC(this.person_id).subscribe(
@@ -211,10 +214,11 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.responseName = response.data.name;
         this.responsePhoneNumber = response.data.phone_number;
         this.responseEmail = response.data.email;
-
         this.setForm();
+        this.disabledWhenError = false;
       },
       (error) => {
+        this.disabledWhenError = true;
         this.redirectOnClosePopUp = false;
         this.popUpTitle = 'Informasi';
         this.popUpMessage = 'Gagal menampilkan data PIC';
@@ -237,7 +241,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.saveFileIdToUser();
       },
       (err) => {
-        this.popUpMessage = "Gagal memroses berkas, Silakan coba lagi.";
+        this.popUpMessage = dictionary.invalid_file;
         this.redirectOnClosePopUp = false;
         this.popUpID = "popup-failed-to-upload";
         this.triggerPopUp();
@@ -293,11 +297,12 @@ export class ProfilePersonInChargeComponent implements OnInit {
   perbaruiClicked() {
     this.attention();
     this.changeIsDisabled();
+    this.responsePhoneNumber = ('No. Handphone tidak ditemukan' !== this.responsePhoneNumber) ? this.responsePhoneNumber : "";
   }
 
   public open() {
     if (this.uploadedFileContentUrl === null || this.lampiranFiles === null) {
-      this.popUpMessage = "Periksa kembali file Anda";
+      this.popUpMessage = dictionary.invalid_file;
       this.popUpID = "popup-check-your-file-again"
       this.triggerPopUp();
     } else if (this.formPIC.valid && this.responseFile) {

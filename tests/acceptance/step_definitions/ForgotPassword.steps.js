@@ -15,7 +15,7 @@ Given('The Vendor must clicks {string} Link', () => {
 Given('The Vendor will brings to {string} form to type his or her registered email', () => {
     I.amOnPage('/forgot-password');
     I.waitForElement('#input-email input[class=k-input]');
-    I.fillField('#input-email input[class=k-input]', 'register@tmpbox.net');
+    I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
 });
 
 Given('The Vendor clicks {string} button on Reset Password form', () => {
@@ -25,9 +25,9 @@ Given('The Vendor clicks {string} button on Reset Password form', () => {
 
 Given('The Vendor should be define his or her new password on {string} Form', () => {
     I.waitForElement('#input-new-password input[class=k-input]');
-    I.fillField('#input-new-password input[class=k-input]', 'W@rMachineX123');
+    I.fillField('#input-new-password input[class=k-input]', '12345678');
     I.waitForElement('#input-retype-password input[class=k-input]');
-    I.fillField('#input-retype-password input[class=k-input]', 'W@rMachineX123');
+    I.fillField('#input-retype-password input[class=k-input]', '12345678');
 });
 
 Given('The Vendor will brings to {string} Form', () => {

@@ -4,15 +4,7 @@ Given('The Vendor must clicks button {string} where found on the left-buttom of 
 
 });
 
-Given('The Vendor will see that pop-up form already closed when she or he clicks {string}', () => {
-
-});
-
 Given('The Vendor must click {string} button where found on the left-buttom of {string} form', () => {
-
-});
-
-Given('The Vendor will see progress of upgrade level on {string}', () => {
 
 });
 
@@ -40,7 +32,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_3mb.png');
             break;
         default:
-            I.click(form2);
             break;
     }
 });
@@ -57,7 +48,6 @@ Given('The Vendor will see pop-up form of {string} which appear in front of {str
             I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image.gif');
             break;
         default:
-            I.click(form2);
             break;
     }
 });
@@ -91,8 +81,20 @@ Given('The Vendor can modify data which displayed on {string} form with document
             I.fillField('#input-name.k-textbox', 'George Grey');
             I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
+        case "Dokumen":
+            I.click('#tipeDokumen.k-dropdown');
+            I.fillField('#tipeDokumen.k-dropdown', 'Dokumen Akta (Mandatory)');
+            I.pressKey('Enter');
+            I.waitForElement('#input-nomor-dokumen input[class=k-input]');
+            I.fillField('#input-nomor-dokumen input[class=k-input]', 'vms/1/11/21/bdg');
+            I.waitForElement('#input-nama-dokumen input[class=k-input]');
+            I.fillField('#input-nama-dokumen input[class=k-input]', 'Akta Pendirian Perusahaan');
+            I.waitForElement('#input-berlaku-sampai input[class=k-input]');
+            I.fillField('#input-berlaku-sampai input[class=k-input]', '11242025');
+            I.waitForElement('#input-lampiran-file input[type=file]');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+            break;
         default:
-            I.click(form1);
             break;
     }
 });
@@ -127,7 +129,6 @@ Given('The Vendor can modify data which displayed on {string} form with invalid 
             I.fillField('#input-phone-number.k-textbox', '08777777777');
             break;
         default:
-            I.click(form1);
             break;
     }
 });

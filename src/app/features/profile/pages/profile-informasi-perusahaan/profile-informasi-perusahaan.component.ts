@@ -14,6 +14,7 @@ import {ProfileAddressService} from 'src/app/core/services/profile/profile-addre
 import {DialogCloseResult, DialogRef, DialogService} from "@progress/kendo-angular-dialog";
 import {DropDownFilterSettings} from "@progress/kendo-angular-dropdowns";
 import {VendorLogoInterface} from "../../../../core/interfaces/profile/vendor-logo-interface";
+import { dictionary } from "src/app/dictionary/dictionary";
 
 interface Item {
   name: string;
@@ -109,7 +110,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public jenis_penyedia_usaha: Array<Hydra> = [];
   public jenis_kegiatan_usaha: Array<Hydra> = [];
-  public organizations: Array<Item> = [];
+  // public organizations: Array<Item> = [];
   public provinces: Array<any> = [];
   public cities: Array<any> = [];
   public districts: Array<any> = [];
@@ -169,32 +170,30 @@ export class ProfileInformasiPerusahaanComponent {
   public getDataPerusahaan(): void {
     forkJoin({
       responseVendorData: this.profileDashboardService.getVendor(),
+      responseHimpunan: this.profileInfoService.getPartyRole("Himpunan"),
+      responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
+      responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
+      responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu"),
       responseContactMechanism: this.profileInfoService.getContactMechanism(),
       responseJenisPenyediaUsaha: this.profileInfoService.getJenisPenyediaUsaha(),
       responseJenisKegiatanUsaha: this.profileInfoService.getJenisKegiatanUsaha(),
-      // responseOrganizations: this.profileInfoService.getOrganizations(),
       responseJenisVendor: this.profileInfoService.getJenisVendor(),
       responseBidangUsaha: this.profileInfoService.getBidangUsaha(),
       responseTipeVendor: this.profileInfoService.getTipeVendor(),
       responseProvinces: this.profileInfoService.getProvinces(),
-      responseHimpunan: this.profileInfoService.getPartyRole("Himpunan"),
-      responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
-      responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
-      responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu")
     }).subscribe((response) => {
       this.setResponseVendorData(response.responseVendorData);
-      this.setResponseContactMechanism(response.responseContactMechanism);
-      this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
-      this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
-      // this.setOrganizations(response.responseOrganizations);
-      this.setJenisVendor(response.responseJenisVendor);
-      this.setBidangUsaha(response.responseBidangUsaha);
-      this.setTipeVendor(response.responseTipeVendor);
-      this.setProvinces(response.responseProvinces);
       this.setHimpunan(response.responseHimpunan);
       this.setPengampu(response.responsePengampu);
       this.setVendorHimpunan(response.responseVendorHimpunan);
       this.setVendorPengampu(response.responseVendorPengampu);
+      this.setResponseContactMechanism(response.responseContactMechanism);
+      this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
+      this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
+      this.setJenisVendor(response.responseJenisVendor);
+      this.setBidangUsaha(response.responseBidangUsaha);
+      this.setTipeVendor(response.responseTipeVendor);
+      this.setProvinces(response.responseProvinces);
     });
   }
 
@@ -256,72 +255,93 @@ export class ProfileInformasiPerusahaanComponent {
     this.contact_mechanism = resp["hydra:member"];
     let isFirstAddress = false;
     this.contact_mechanism.forEach((value) => {
-      if (value.contactMechanism.number) {
+      if (value.contactMechanism.number !== undefined) {
         this.dataPerusahaan.noTelepon = value.contactMechanism.number;
       } else {
         this.dataPerusahaan.address = value.contactMechanism;
+        this.dataPerusahaan.alamat = value.contactMechanism.address1;
+
         // get list of provinces
         this.profileInfoService.getProvinces().subscribe(
           (resp) => {
             this.provinces = resp["hydra:member"];
-            const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
+
             if (value.contactMechanism.deletedAt === undefined && isFirstAddress === false) {
+              
               isFirstAddress = true;
-              this.dataPerusahaan.alamat = value.contactMechanism.address1;
+
+              const index = this.provinces.findIndex(x => x.id === this.dataPerusahaan.address.province.id);
               this.selectedProvince = this.provinces[index];
+
               this.profileInfoService.getKotaKabupaten(this.dataPerusahaan.address.province.id).subscribe(
                 (resp) => {
                   this.cities = resp["hydra:member"];
-                  const index = this.cities.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.city.id);
                   this.dataResultKota = this.cities;
-                  this.selectedKota = this.cities[index];
+                  this.setFormPerusahaan(this.dataPerusahaan);
 
-                  this.profileInfoService.getKecamatan(this.dataPerusahaan.address.city.id).subscribe(
-                    (resp) => {
-                      this.districts = resp["hydra:member"];
-                      const index = this.districts.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.district.id);
-                      this.dataResultKecamatan = this.districts;
-                      this.selectedKecamatan = this.districts[index];
+                  if (this.dataPerusahaan.address.city !== undefined) {
+                    const index = this.cities.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.city.id);
+                    this.selectedKota = this.cities[index];
 
-                      this.profileInfoService.getKelurahan(this.dataPerusahaan.address.district.id).subscribe(
-                        (resp) => {
-                          this.villages = resp["hydra:member"];
-                          const index = this.villages.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.village.id);
-                          this.dataResultKelurahan = this.villages;
-                          this.selectedKelurahan = this.villages[index];
+                    this.profileInfoService.getKecamatan(this.dataPerusahaan.address.city.id).subscribe(
+                      (resp) => {
+                        this.districts = resp["hydra:member"];
+                        this.dataResultKecamatan = this.districts;
+                        this.setFormPerusahaan(this.dataPerusahaan);
+  
+                        if (this.dataPerusahaan.address.district) {
+                          const index = this.districts.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.district.id);
+                          this.selectedKecamatan = this.districts[index];
 
-                          this.profileInfoService.getKodepos(this.dataPerusahaan.address.village.id).subscribe(
+                          this.profileInfoService.getKelurahan(this.dataPerusahaan.address.district.id).subscribe(
                             (resp) => {
-                              this.postalCodes = resp["hydra:member"];
-                              this.dataResultKodepos = this.postalCodes;
-                              this.selectedKodepos = this.postalCodes[0];
-
+                              this.villages = resp["hydra:member"];
+                              this.dataResultKelurahan = this.villages;
                               this.setFormPerusahaan(this.dataPerusahaan);
+    
+                              if (this.dataPerusahaan.address.village) {
+                                const index = this.villages.findIndex(x => x.toGeoLocation.id === this.dataPerusahaan.address.village.id);
+                                this.selectedKelurahan = this.villages[index];
 
+                                this.profileInfoService.getKodepos(this.dataPerusahaan.address.village.id).subscribe(
+                                  (resp) => {
+                                    this.postalCodes = resp["hydra:member"];
+                                    this.dataResultKodepos = this.postalCodes;
+      
+                                    if (this.dataPerusahaan.address.village) {
+                                      this.selectedKodepos = this.postalCodes[0];
+                                    }
+      
+                                    this.setFormPerusahaan(this.dataPerusahaan);
+      
+                                  },
+                                  (error) => {
+                                    console.log(error);
+                                  }
+                                );
+                              }
+    
                             },
                             (error) => {
                               console.log(error);
                             }
+    
                           );
-
-                        },
-                        (error) => {
-                          console.log(error);
                         }
-
-                      );
-
-                    },
-                    (error) => {
-                      console.log(error);
-                    }
-                  );
+  
+                      },
+                      (error) => {
+                        console.log(error);
+                      }
+                    );
+                  }
 
                 },
                 (error) => {
                   console.log(error);
                 }
               );
+
             }
 
           },
@@ -329,6 +349,7 @@ export class ProfileInformasiPerusahaanComponent {
             console.log(error);
           }
         );
+
       }
     });
     this.setFormPerusahaan(this.dataPerusahaan);
@@ -357,10 +378,10 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  public setOrganizations(resp: any) {
-    //get list of organizations
-    this.organizations = resp["hydra:member"];
-  }
+  // public setOrganizations(resp: any) {
+  //   //get list of organizations
+  //   this.organizations = resp["hydra:member"];
+  // }
 
   public setJenisVendor(resp: any) {
     //get jenis badan usaha
@@ -405,7 +426,9 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public setVendorPengampu(resp: any) {
+    console.log(resp.data);
     this.dataPerusahaan.bumnPengampu = resp.data ? resp.data : "";
+    console.log(this.dataPerusahaan.bumnPengampu);
   }
 
   public setFormPerusahaan(data: any): void {
@@ -508,7 +531,7 @@ export class ProfileInformasiPerusahaanComponent {
         this.saveLogoIdToVendor();
       },
       (error) => {
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.popUpMessage = dictionary.select_file_failed;
         this.triggerPopUp();
         console.log(error);
       }
@@ -575,18 +598,18 @@ export class ProfileInformasiPerusahaanComponent {
 
       this.profileInfoService.updateProfileInformation(this.params, this.vendorID).subscribe(
         () => {
-          this.popUpMessage = "Berhasil menyimpan data";
+          this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
           location.reload();
         },
         () => {
-          this.popUpMessage = "Gagal memperbarui data, Silakan Coba Lagi!";
+          this.popUpMessage = dictionary.update_data_failed;
           this.triggerPopUp();
           this.close();
         }
       )
     } else {
-      this.popUpMessage = "Mohon lengkapi Data Perusahaan Anda";
+      this.popUpMessage = dictionary.incomplete_data_company;
       this.triggerPopUp();
     }
   }
@@ -614,7 +637,7 @@ export class ProfileInformasiPerusahaanComponent {
         () => {
         },
         (error) => {
-          this.popUpMessage = "Mohon upload logo perusahaan";
+          this.popUpMessage = dictionary.incomplete_data_logo;
           this.redirectOnClosePopUp = false;
           this.popUpID = "popup-failed-save-upload-file-to-database";
           this.triggerPopUp();

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CoreModule } from 'src/app/core/core.module';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { TenderService } from 'src/app/core/services/tender.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { CardTenderComponent } from './card-tender.component';
@@ -62,7 +63,7 @@ describe('CardTenderComponent', () => {
 
     spyOn(service, "getListTender").and.returnValue(obs);
     component.ngOnInit();
-    expect(component.popUpMessage).toBe("Gagal menemukan data tender");
+    expect(component.popUpMessage).toBe(dictionary.fetch_data_tender_failed);
   });
 
   it('test triggerPopUp function', () => {

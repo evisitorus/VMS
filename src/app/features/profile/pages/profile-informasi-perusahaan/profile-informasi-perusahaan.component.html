@@ -35,9 +35,13 @@
                     </div>
                   </ng-template>
 
-                  <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false"
-                                    #files="ngModel" [restrictions]="imgRestrictions" [(ngModel)]="selectedFile"
-                                    [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+                  <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false" #files="ngModel"
+                    [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
+                    <kendo-fileselect-messages id="file-upload-error-message" dropFilesHere="Tidak ada gambar terpilih"
+                      select="Pilih gambar" invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
+                      invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
+                    </kendo-fileselect-messages>
+                  </kendo-fileselect>
                 </div>
               </ng-template>
             </kendo-panelbar-item>

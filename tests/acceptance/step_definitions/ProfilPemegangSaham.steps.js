@@ -12,8 +12,10 @@ Given('The Vendor already define information from {string}', (form) => {
             I.waitForElement('#input-keuangan-nama-bank input[class=k-input]');
             I.seeInField('#input-keuangan-nama-bank input[class=k-input]', 'Bank BRI');
             break;
+        case "Pimpinan dan Pengurus":
+            I.amOnPage('/profile-person-in-charge');
+            break;
         default:
-            I.waitForElement(form);
             break;
     }
 });
@@ -55,9 +57,9 @@ Given('The Vendor not define anything on {string} form only define several field
 });
 
 Given('The Vendor will get warning message tooltip on each mandatory fields as {string}', () => {
-    I.seeElement('.k-window');
-    I.see('Data tidak boleh kosong.');
-    I.click('#btn-popup-yes');
+    I.see('Nama Pemegang Saham tidak boleh kosong');
+    I.see('Jenis Pemegang Saham tidak boleh kosong');
+    I.see('Pemegang Saham Lokal/Asing tidak boleh kosong');
 });
 
 Given('The Vendor must define right information from {string} while can continue to next process to define {string}', () => {
@@ -72,15 +74,12 @@ Given('The Vendor will see pop-up message appear', () => {
 
 Given('The Vendor must select {string} option on pop-up message', () => {
     I.click('Yes');
-    I.see('Berhasil menghapus data');
+    I.see(dictionary.delete_data_success);
     I.waitForElement('#btn-popup-yes');
     I.click('#btn-popup-yes');
 });
 
 Given('The Vendor will see information which state for every changes should be re-check by verificator', () => {
-    // let data = JSON.parse(raw_data.content);
-    // I.see(data.message);
-    // I.see('Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verificator. Pastikan perubahan data perusahaan Anda sudah benar.');
     I.click('#btn-popup-yes');
 });
 
@@ -103,12 +102,25 @@ Given('The Vendor wants to edit one of record from {string} on {string} which pa
 
 Given('The Vendor can modify data which displayed on {string} form', (form1) => {
     switch (form1) {
+        case "Dokumen":
+            I.click('#tipeDokumen.k-dropdown');
+            I.fillField('#tipeDokumen.k-dropdown', 'Dokumen Akta (Mandatory)');
+            I.pressKey('Enter');
+            I.waitForElement('#input-nomor-dokumen input[class=k-input]');
+            I.fillField('#input-nomor-dokumen input[class=k-input]', '12345678');
+            I.waitForElement('#input-nama-dokumen input[class=k-input]');
+            I.fillField('#input-nama-dokumen input[class=k-input]', 'Akta Perusahaan');
+            I.waitForElement('#input-berlaku-sampai input[class=k-input]');
+            I.fillField('#input-berlaku-sampai input[class=k-input]', '11242025');
+            I.waitForElement('#input-lampiran-file input[type=file]');
+            I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_image.jpg');
+            break;
         case "Pemegang Saham":
             I.fillField('#namaPemegangSaham input[class=k-input]', 'Steven Rogers Barton');
             I.click('#BadanUsaha');
             I.click('#Asing');
             I.click('#kepemilikanSaham input[role=spinbutton]');
-            I.fillField('#kepemilikanSaham input[role=spinbutton]', '35');
+            I.fillField('#kepemilikanSaham input[role=spinbutton]', 35);
             break;
         case "Alamat":
             I.fillField('#namaAlamat input[class=k-input]', 'Kantor Operasional');
@@ -165,7 +177,7 @@ Given('The Vendor will see information changes from selected record from {string
 });
 
 Given('The Vendor will see that update pop-up form already closed when clicks {string}', () => {
-    I.see('Berhasil memperbarui data');
+    I.see('Berhasil memperbarui data, silakan ajukan verifikasi');
     I.click('#btn-popup-yes');
     I.dontSeeElement('.k-window');
 });

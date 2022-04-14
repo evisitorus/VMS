@@ -5,6 +5,7 @@ import { DialogAction, ActionsLayout } from "@progress/kendo-angular-dialog";
 
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { AddPemegangSahamInterface, UpdatePemegangSahamInterface } from 'src/app/core/interfaces/add-pemegang-saham-interface';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 
 const messages = {
@@ -88,14 +89,14 @@ export class PemegangSahamComponent implements OnInit {
   }
 
   getPemegangSaham(){
-    this.profileService.getPemegangSaham().subscribe(
+    this.profileService.getPemegangSahamVendor().subscribe(
       (resp) =>  {
-        this.gridData = resp['hydra:member'];
+        this.gridData = resp.data;
         this.gridData = this.mapData(this.gridData);
         return this.gridData;
       },
       (error) => {
-        this.triggerSuccess("Gagal mendapatkan data");
+        this.triggerSuccess(dictionary.fetch_data_failed);
       }
     );
   }
@@ -174,12 +175,12 @@ export class PemegangSahamComponent implements OnInit {
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.addPemegangSaham(params).subscribe(
       (resp) =>  {
-        this.triggerSuccess("Berhasil menyimpan data");
+        this.triggerSuccess(dictionary.save_data_success);
         this.getPemegangSaham();
         this.closeSaham();
       },
       (error) => {
-        this.triggerFailed("Gagal menyimpan data");
+        this.triggerFailed(dictionary.save_data_failed);
         this.closeSaham();
       }
     );
@@ -224,7 +225,7 @@ export class PemegangSahamComponent implements OnInit {
     let params: UpdatePemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.updatePemegangSaham(params).subscribe(
       () => {
-        this.triggerSuccess("Berhasil memperbarui data");
+        this.triggerSuccess(dictionary.update_data_success);
         this.getPemegangSaham();
         this.closeSaham();
       },
@@ -245,7 +246,7 @@ export class PemegangSahamComponent implements OnInit {
   public deletePemegangSaham(id: string): void {
     this.profileService.deletePemegangSaham(id).subscribe(
       () => {
-        this.triggerSuccess("Berhasil menghapus data");
+        this.triggerSuccess(dictionary.delete_data_success);
         this.getPemegangSaham();
       },
       (err) => {

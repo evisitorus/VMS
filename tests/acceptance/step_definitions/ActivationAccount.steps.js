@@ -4,12 +4,21 @@ Given('The Vendor already finished registration process', () => {
     I.amOnPage('/');
 });
 
-When('The Vendor clicks {string}', () => {
+When('The Vendor clicks link "linkActivation"', () => {
     I.amOnPage('/set-password?token=3a6c326de8b8a65efb646c667f426977');
 
 });
 
-When('The Vendor will bring to {string} form', () => {
+When('The Vendor clicks link "linkActivation Expired"', () => {
+    I.amOnPage('/set-password?token=3a6c326de8b8a65efb646c667f426977');
+
+});
+
+When('The Vendor will bring to "Define Password" form', () => {
+    I.seeInCurrentUrl('/set-password?token=3a6c326de8b8a65efb646c667f426977');
+});
+
+When('The Vendor will bring to "Activation Confirmation" form', () => {
     I.seeInCurrentUrl('/set-password?token=3a6c326de8b8a65efb646c667f426977');
 });
 
@@ -74,7 +83,7 @@ When('The Vendor must clicks {string} button', () => {
 When('The Vendor will see warning message which stated that activation failed', (raw_data) => {
     let data = JSON.parse(raw_data.content);
     I.see(data.message);
-    I.click('#popUpYes');
+    I.click('#btn-popup-yes');
     I.amOnPage('/register');
 });
 

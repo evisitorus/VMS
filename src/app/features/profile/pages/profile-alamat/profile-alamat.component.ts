@@ -8,6 +8,7 @@ import { ProfileAddressService } from 'src/app/core/services/profile/profile-add
 import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
 import { ProfileAddressInterface } from 'src/app/core/interfaces/profile-address-interface';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 const messages = {
   default: 'Data tidak boleh kosong.',
@@ -93,7 +94,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeProvinsi(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKota = false;
       this.fetchDataKota(value);
     } else {
@@ -102,7 +103,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeKota(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKecamatan = false;
       this.fetchDataKecamatan(value);
     } else {
@@ -111,7 +112,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeKecamatan(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKelurahan = false;
       this.fetchDataKelurahan(value);
     } else {
@@ -120,7 +121,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public onChangeKelurahan(value: any): void {
-    if (value !== 0) {
+    if (value !== "") {
       this.isDisabledKodepos = false;
       this.fetchDataKodepos(value);
     } else {
@@ -136,16 +137,16 @@ export class ProfileAlamatComponent implements OnInit {
         no: no++,
         namaAlamat: data[key]['address2'],
         alamat: data[key]['address1'],
-        provinsiId: data[key]['province']['id'],
-        provinsi: data[key]['province']['description'],
-        kotaId: data[key]['city']['id'],
-        kota: data[key]['city']['description'],
-        kecamatanId: data[key]['district']['id'],
-        kecamatan: data[key]['district']['description'],
-        kelurahanId: data[key]['village']['id'],
-        kelurahan: data[key]['village']['description'],
-        kodeposId: data[key]['village']['postalCode']['id'],
-        kodepos: data[key]['village']['postalCode']['postalCodeNum'],
+        provinsiId: data[key]['province'] ? data[key]['province']['id'] : "",
+        provinsi: data[key]['province'] ? data[key]['province']['description'] : "",
+        kotaId: data[key]['city'] ? data[key]['city']['id'] : "",
+        kota: data[key]['city'] ? data[key]['city']['description'] : "",
+        kecamatanId: data[key]['district'] ? data[key]['district']['id'] : "",
+        kecamatan: data[key]['district'] ? data[key]['district']['description'] : "",
+        kelurahanId: data[key]['village'] ? data[key]['village']['id'] : "",
+        kelurahan: data[key]['village'] ? data[key]['village']['description'] : "",
+        kodeposId: data[key]['village'] ? data[key]['village']['postalCode']['id'] : "",
+        kodepos: data[key]['village'] ? data[key]['village']['postalCode']['postalCodeNum'] : "",
         id: data[key]['id'],
         deletedAt: data[key]['deletedAt'],
       };
@@ -328,7 +329,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.setForm();
     this.open();
     
-    this.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
   }
 
@@ -348,7 +349,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.save(params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = "Berhasil Menyimpan Data";
+        this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
@@ -364,7 +365,7 @@ export class ProfileAlamatComponent implements OnInit {
     this.service.update(this.id, params).subscribe(
       () => {
         this.close();
-        this.popUpMessage = "Berhasil memperbarui data";
+        this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
@@ -378,7 +379,7 @@ export class ProfileAlamatComponent implements OnInit {
   public delete(id: string): void {
     this.service.delete(id).subscribe(
       () => {
-        this.popUpMessage = "Berhasil menghapus data";
+        this.popUpMessage = dictionary.delete_data_success;
         this.triggerPopUp();
         this.fetchData();
       },
