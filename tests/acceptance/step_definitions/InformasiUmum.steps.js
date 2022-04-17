@@ -3,7 +3,7 @@ const { I } = inject();
 Given('The Vendor logged into VMS using his or her registered company information', () => {
     I.amOnPage('/login');
     I.waitForElement('#input-email input[class=k-input]');
-    I.fillField('#input-email input[class=k-input]', 'evitest@yopmail.com');
+    I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
     I.waitForElement('#input-password input[class=k-input]');
     I.fillField('#input-password input[class=k-input]', '12345678');
     I.waitForElement('#btn-login');
@@ -102,9 +102,6 @@ Given('The Vendor will see {string} form', (form) => {
             break;
         case "Riwayat Pekerjaan":
             I.see('Riwayat Pekerjaan');
-            break;
-        case "Pengajuan Verifikasi":
-            I.see('Pengajuan Verifikasi');
             break;
         default:
             break;
