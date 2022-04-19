@@ -40,6 +40,8 @@ export class LegalitasComponent implements OnInit {
   public isNewData: boolean = true;
   public nibExpireChecked: boolean = false;
   public idpExpireChecked: boolean = false;
+  public disableNibCbx: boolean = false;
+  public disableIdpCbx: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -60,6 +62,7 @@ export class LegalitasComponent implements OnInit {
         Object.keys(response).map((key, index) => {
           this.data[key] = response[key];
         });
+        this.checkNib(response['isNibDiisi']);
         this.setForm();
       },
       (err) => {
@@ -67,6 +70,33 @@ export class LegalitasComponent implements OnInit {
         this.parent.triggerPopUp();
       }
     );
+  }
+
+  public checkNib(nib: any){
+    if (nib) {
+      this.disableIdpCbx = true;
+      this.disableNibCbx = true;
+      this.disableNibField();
+      this.disableIdpField();
+      this.disableSiup();
+    }
+  }
+
+  public disableNibField(){
+    this.aspekLegalFromGroup.controls.noNibTdp.disable();
+    this.aspekLegalFromGroup.controls.tanggalTerbitNibTdp.disable();
+    this.aspekLegalFromGroup.controls.tanggalExpireNibTdp.disable();
+    this.aspekLegalFromGroup.controls.noNibTdp.disable();
+  }
+
+  public disableIdpField(){
+    this.aspekLegalFromGroup.controls.noIdpSitu.disable();
+    this.aspekLegalFromGroup.controls.tanggalTerbitIdpSitu.disable();
+    this.aspekLegalFromGroup.controls.tanggalExpireIdpSitu.disable();
+  }
+
+  public disableSiup(){
+    this.aspekLegalFromGroup.controls.noIdpSitu.disable();
   }
 
   public close(): void {
