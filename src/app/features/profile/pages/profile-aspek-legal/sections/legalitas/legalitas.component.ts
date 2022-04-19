@@ -108,21 +108,21 @@ export class LegalitasComponent implements OnInit {
       notarisAktaPendirian: new FormControl(this.data.notarisAktaPendirian, Validators.required),
       notarisPenggantiAktaPendirian: new FormControl(this.data.notarisPenggantiAktaPendirian, Validators.required),
       noAktaPerubahan: new FormControl(this.data.noAktaPerubahan, Validators.required),
-      tanggalTerbitAktaPerubahan: new FormControl(new Date(this.data.tanggalTerbitAktaPerubahan), Validators.required),
-      notarisAktaPerubahan: new FormControl(this.data.notarisAktaPerubahan, Validators.required),
-      notarisPenggantiAktaPerubahan:new FormControl(this.data.notarisPenggantiAktaPerubahan, Validators.required),
-      noSkPengesahanMenteri: new FormControl(this.data.noSkPengesahanMenteri, Validators.required),
+      tanggalTerbitAktaPerubahan: new FormControl(new Date(this.data.tanggalTerbitAktaPerubahan)),
+      notarisAktaPerubahan: new FormControl(this.data.notarisAktaPerubahan),
+      notarisPenggantiAktaPerubahan:new FormControl(this.data.notarisPenggantiAktaPerubahan),
+      noSkPengesahanMenteri: new FormControl(this.data.noSkPengesahanMenteri),
       tanggalTerbitNoSkPengesahanMenteri: new FormControl(new Date(this.data.tanggalTerbitNoSkPengesahanMenteri), Validators.required),
       npwp: new FormControl(this.data.npwp, Validators.required),
       tanggalTerbitNpwp: new FormControl(new Date(this.data.tanggalTerbitNpwp), Validators.required),
-      noSiup: new FormControl(this.data.noSiup, Validators.required),
-      tanggalTerbitSiup: new FormControl(new Date(this.data.tanggalTerbitSiup), Validators.required),
-      noNibTdp: new FormControl(this.data.noNibTdp, Validators.required),
-      tanggalTerbitNibTdp: new FormControl(new Date(this.data.tanggalTerbitNibTdp), Validators.required),
-      tanggalExpireNibTdp: new FormControl(new Date(this.data.tanggalExpireNibTdp), Validators.required),
-      noIdpSitu: new FormControl(this.data.noIdpSitu, Validators.required),
-      tanggalTerbitIdpSitu: new FormControl(new Date(this.data.tanggalTerbitIdpSitu), Validators.required),
-      tanggalExpireIdpSitu: new FormControl(new Date(this.data.tanggalExpireIdpSitu), Validators.required)
+      noSiup: new FormControl(this.data.noSiup),
+      tanggalTerbitSiup: new FormControl(new Date(this.data.tanggalTerbitSiup)),
+      noNibTdp: new FormControl(this.data.noNibTdp),
+      tanggalTerbitNibTdp: new FormControl(new Date(this.data.tanggalTerbitNibTdp)),
+      tanggalExpireNibTdp: new FormControl(new Date(this.data.tanggalExpireNibTdp)),
+      noIdpSitu: new FormControl(this.data.noIdpSitu),
+      tanggalTerbitIdpSitu: new FormControl(new Date(this.data.tanggalTerbitIdpSitu)),
+      tanggalExpireIdpSitu: new FormControl(new Date(this.data.tanggalExpireIdpSitu))
     });
     this.nibExpireChecked = this.data.isNiBTdpSeumurHidup;
     this.idpExpireChecked = this.data.isIdpSituSeumurHidup;

@@ -45,36 +45,20 @@
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. Akta Perubahan</kendo-label>
           <kendo-textbox id="noAktaPerubahan" class="col" placeholder="Nomor Akta Perubahan" [clearButton]="true" formControlName="noAktaPerubahan"></kendo-textbox>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.noAktaPerubahan.errors?.required">
-            Nomor Akta Perubahan tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Tanggal Terbit</kendo-label>
           <kendo-datepicker id="tanggalTerbitAktaPerubahan" formControlName="tanggalTerbitAktaPerubahan"></kendo-datepicker>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.tanggalTerbitAktaPerubahan.errors?.required">
-            Tanggal terbit tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
       </div>
       <div class="row align-items-center my-2">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Notaris</kendo-label>
           <kendo-textbox id="notarisAktaPerubahan" class="col" placeholder="Notaris Akta Perubahan" [clearButton]="true" formControlName="notarisAktaPerubahan"></kendo-textbox>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.notarisAktaPerubahan.errors?.required">
-            Notaris tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Notaris Pengganti</kendo-label>
           <kendo-textbox id="notarisPenggantiAktaPerubahan" class="col" placeholder="Notaris Pengganti Akta Perubahan" [clearButton]="true" formControlName="notarisPenggantiAktaPerubahan"></kendo-textbox>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.notarisPenggantiAktaPerubahan.errors?.required">
-            Notaris Pengganti tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
       </div>
       <div class="row align-items-center my-2">
@@ -117,10 +101,6 @@
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Tanggal Terbit</kendo-label>
           <kendo-datepicker id="tanggalTerbitSiup" class="col" formControlName="tanggalTerbitSiup"></kendo-datepicker>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.tanggalTerbitAktaPendirian.errors?.required">
-            Tanggal terbit tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
       </div>
     </div>
@@ -130,10 +110,6 @@
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. NIB / TDP</kendo-label>
           <kendo-textbox id="noNibTdp" class="col" formControlName="noNibTdp" placeholder="No. NIB / TDP" [clearButton]="true" ></kendo-textbox>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.noNibTdp.errors?.required">
-            No NIB / TDP tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
         <div class="col-6 k-hstack align-items-center">
           <kendo-label style="margin-right: 0.5em;">Seumur Hidup</kendo-label>
@@ -144,10 +120,6 @@
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Terbit</kendo-label>
           <kendo-datepicker id="tanggalTerbitNibTdp" class="col w-100" formControlName="tanggalTerbitNibTdp"></kendo-datepicker>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.tanggalTerbitNibTdp.errors?.required">
-            Tanggal terbit tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Expire</kendo-label>
@@ -161,10 +133,6 @@
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No.IDP / SITU</kendo-label>
           <kendo-textbox id="noIdpSitu" class="col"  placeholder="No. NIB / TDP" [clearButton]="true" formControlName="noIdpSitu"></kendo-textbox>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.noIdpSitu.errors?.required">
-            No. IDP / SITU tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
         <div class="col-6 k-hstack align-items-center" >
           <kendo-label style="margin-right: 0.5em;">Seumur Hidup</kendo-label>
@@ -176,10 +144,6 @@
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Terbit</kendo-label>
           <kendo-datepicker id="tanggalTerbitIdpSitu" class="col w-100" formControlName="tanggalTerbitIdpSitu"></kendo-datepicker>
-          <kendo-formerror class="formHint"
-          *ngIf="aspekLegalFromGroup.controls.tanggalTerbitIdpSitu.errors?.required">
-            Tanggal terbit tidak boleh kosong
-          </kendo-formerror>
         </kendo-formfield>
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Expire</kendo-label>
