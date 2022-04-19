@@ -2,7 +2,7 @@
   <form [formGroup]="aspekLegalFromGroup">
     <div class="row mt-2">
       <h5>Akta Pendirian</h5>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. Akta Pendirian</kendo-label>
           <kendo-textbox id="noAktaPendirian" class="col" placeholder="No Akta Pendirian" [clearButton]="true" formControlName="noAktaPendirian"></kendo-textbox>
@@ -20,7 +20,7 @@
           </kendo-formerror>
         </kendo-formfield>
       </div>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Notaris</kendo-label>
           <kendo-textbox id="notarisAktaPendirian" class="col" placeholder="Notaris" [clearButton]="true" formControlName="notarisAktaPendirian"></kendo-textbox>
@@ -41,7 +41,7 @@
     </div>
     <div class="row mt-2 align-items-center">
       <h5>Akta Perubahan</h5>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. Akta Perubahan</kendo-label>
           <kendo-textbox id="noAktaPerubahan" class="col" placeholder="Nomor Akta Perubahan" [clearButton]="true" formControlName="noAktaPerubahan"></kendo-textbox>
@@ -51,7 +51,7 @@
           <kendo-datepicker id="tanggalTerbitAktaPerubahan" formControlName="tanggalTerbitAktaPerubahan"></kendo-datepicker>
         </kendo-formfield>
       </div>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">Notaris</kendo-label>
           <kendo-textbox id="notarisAktaPerubahan" class="col" placeholder="Notaris Akta Perubahan" [clearButton]="true" formControlName="notarisAktaPerubahan"></kendo-textbox>
@@ -61,7 +61,7 @@
           <kendo-textbox id="notarisPenggantiAktaPerubahan" class="col" placeholder="Notaris Pengganti Akta Perubahan" [clearButton]="true" formControlName="notarisPenggantiAktaPerubahan"></kendo-textbox>
         </kendo-formfield>
       </div>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. SK Pengesahan Menteri</kendo-label>
           <kendo-textbox id="noSkPengesahanMenteri" class="col" placeholder="No. SK Pengesahan Menteri" [clearButton]="true" formControlName="noSkPengesahanMenteri"></kendo-textbox>
@@ -79,7 +79,7 @@
           </kendo-formerror>
         </kendo-formfield>
       </div>
-      <div class="row align-items-center my-2">        
+      <div class="row align-items-center my-3">        
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">NPWP</kendo-label>
           <kendo-textbox id="npwp" class="col" placeholder="NPWP" [clearButton]="true" formControlName="npwp"></kendo-textbox>
@@ -93,7 +93,7 @@
           </kendo-formerror>
         </kendo-formfield>
       </div>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. SIUP / Surat Izin Berusaha</kendo-label>
           <kendo-textbox id="noSiup" class="col" formControlName="noSiup" placeholder="No. SIUP / Surat Izin Berusaha" [clearButton]="true" ></kendo-textbox>
@@ -106,7 +106,7 @@
     </div>
     <div class="row align-items-center">
       <h5>NIB / TDP</h5>
-      <div class="row h-stack align-items-center my-2">
+      <div class="row h-stack align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No. NIB / TDP</kendo-label>
           <kendo-textbox id="noNibTdp" class="col" formControlName="noNibTdp" placeholder="No. NIB / TDP" [clearButton]="true" ></kendo-textbox>
@@ -116,7 +116,7 @@
           <input id="isNiBTdpSeumurHidup" type="checkbox" #tanggalExpireNoNib [(ngModel)]="nibExpireChecked" [ngModelOptions]="{standalone: true}" (change)="setNibLifeTime()" kendoCheckBox [disabled]="disableNibCbx" />
         </div>
       </div>
-      <div class="row h-stack align-items-center my-2">
+      <div class="row h-stack align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Terbit</kendo-label>
           <kendo-datepicker id="tanggalTerbitNibTdp" class="col w-100" formControlName="tanggalTerbitNibTdp"></kendo-datepicker>
@@ -129,7 +129,7 @@
     </div>
     <div class="row align-items-center mb-3">
       <h5>IDP / SITU</h5>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col">No.IDP / SITU</kendo-label>
           <kendo-textbox id="noIdpSitu" class="col"  placeholder="No. NIB / TDP" [clearButton]="true" formControlName="noIdpSitu"></kendo-textbox>
@@ -140,7 +140,7 @@
         </div>
 
       </div>
-      <div class="row align-items-center my-2">
+      <div class="row align-items-center my-3">
         <kendo-formfield class="col-6 k-hstack" [formGroup]="aspekLegalFromGroup">
           <kendo-label class="col-7">Tanggal Terbit</kendo-label>
           <kendo-datepicker id="tanggalTerbitIdpSitu" class="col w-100" formControlName="tanggalTerbitIdpSitu"></kendo-datepicker>
