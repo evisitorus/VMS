@@ -96,7 +96,7 @@ export class LegalitasComponent implements OnInit {
   }
 
   public disableSiup(){
-    this.aspekLegalFromGroup.controls.noIdpSitu.disable();
+    this.aspekLegalFromGroup.controls.noSiup.disable();
   }
 
   public close(): void {
