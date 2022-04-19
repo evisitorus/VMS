@@ -159,213 +159,211 @@
     <div class="profile-content">
 
       <div class="profile-content-title">
-        <kendo-label>Bank</kendo-label>
+        <kendo-label>Aspek Finansial</kendo-label>
       </div>
-
-      <div class="profile-keuangan-field">
-        
-        <div class="row bank-field">
-          <div class="col-3 content-label">
-            <kendo-label>Nama Bank</kendo-label>
-          </div>
-          <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-autocomplete class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [data]="listNamaBank" [kendoDropDownFilter]="{ operator: 'contains' }" required></kendo-autocomplete>
-              <!-- <kendo-textbox class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [clearButton]="true" #namaBank required></kendo-textbox>                 -->
-              <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Nama Bank tidak boleh kosong</kendo-formerror>
-            </kendo-formfield>
-          </div>
-        </div>
-
-        <div class="row bank-field">
-          <div class="col-3 content-label">
-            <kendo-label>Cabang</kendo-label>
-          </div>
-          <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-cabang" formControlName="cabang" [clearButton]="true" #cabang required></kendo-textbox>                
-              <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
-            </kendo-formfield>
-          </div>
-        </div>
-
-        <div class="row bank-field">
-          <div class="col-3 content-label">
-            <kendo-label>Nomor Rekening</kendo-label>
-          </div>
-          <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-nomor-rekening" formControlName="nomorRekening" [clearButton]="true" #nomorRekening required></kendo-textbox>                
-              <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Nomor Rekening tidak boleh kosong</kendo-formerror>
-            </kendo-formfield>
-          </div>
-        </div>
-
-        <div class="row bank-field">
-          <div class="col-3 content-label">
-            <kendo-label>Nama Pemilik Rekening</kendo-label>
-          </div>
-          <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-textbox class="content-input-field" id="input-keuangan-nama-pemilik-rekening" formControlName="namaPemilikRekening" [clearButton]="true" #namaPemilikRekening required></kendo-textbox>                
-              <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
-            </kendo-formfield>
-          </div>
-        </div>
-        
-      </div>
-
-      <div class="profile-keuangan-table">
-        
-        <div class="profile-content-title">
-          <kendo-label>Neraca Keuangan</kendo-label>
-        </div>
-
-        <div class="profile-content-grid">
-          <kendo-grid [data]="gridViewNeraca" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeNeraca($event)">
-            <kendo-grid-column field="tahun" title="Tahun">
-            </kendo-grid-column>
-            <kendo-grid-column field="aktiva" title="Aktiva (Asset)">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                {{ dataItem.aktiva | currency:'Rp. ':'symbol':'4.0-2' }}
-              </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column field="pasiva" title="Passiva (Liability)">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                {{ dataItem.pasiva | currency:'Rp. ':'symbol':'4.0-2' }}
-              </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column field="equitas" title="Ekuitas (Equity)">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                {{ dataItem.equitas | currency:'Rp. ':'symbol':'4.0-2' }}
-              </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column field="omzet" title="Omzet Bersih">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                {{ dataItem.omzet | currency:'Rp. ':'symbol':'4.0-2' }}
-              </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column field="id" title="Action">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                <div *ngIf="!dataItem.deletedAt">
-                  <span>
-                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)" id="btn-update-neraca">
-                  </span>
-                  <span>
-                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)" id="btn-delete-neraca">
-                  </span>
-                </div>
-                <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
-              </ng-template>
-            </kendo-grid-column>
-          </kendo-grid>
-
-          <div class="k-actions k-actions-end">
-            <div class="col-2 profile-content-grid-button">
-              <button kendoButton *ngIf="!openNeraca" (click)="triggerModal('neraca')" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-neraca">
-                Tambah Neraca
-              </button>
+    <kendo-card orientation="vertical" style="width: 100%;">
+    <kendo-card-body class="k-vstack">
+    <kendo-panelbar id="aspek-finansial-panelbar" class="vms-panelbar">
+      <kendo-panelbar-item title="Bank" [expanded]="true">
+        <ng-template kendoPanelBarContent>
+          <div class="row bank-field">
+            <div class="col-3 content-label">
+              <kendo-label>Nama Bank</kendo-label>
             </div>
-          </div> 
-          
-        </div>
-
-      </div>
-
-      <div class="profile-keuangan-table">
-        
-        <div class="profile-content-title">
-          <kendo-label>SPT Tahunan</kendo-label>
-        </div>
-
-        <div class="profile-content-grid">
-          <kendo-grid [data]="gridViewSPT" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeSPT($event)">
-            <kendo-grid-column field="tahun" title="Tahun">
-            </kendo-grid-column>
-            <kendo-grid-column field="nomor" title="Nomor">
-            </kendo-grid-column>
-            <kendo-grid-column field="lampiran" title="Lampiran">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
-              </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column field="submitDate" title="Waktu Upload">
-            </kendo-grid-column>
-            <kendo-grid-column field="id" title="Action">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                <div *ngIf="!dataItem.deletedAt">
-                  <span>
-                    <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)" id="btn-update-spt">
-                  </span>
-                  <span>
-                    <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)" id="btn-delete-spt">
-                  </span>
-                </div>
-                <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>                
-              </ng-template>
-            </kendo-grid-column>
-          </kendo-grid>
-
-          <div class="k-actions k-actions-end">
-            <div class="col-2 profile-content-grid-button">
-              <button kendoButton *ngIf="!openSPT" (click)="triggerModal('spt')" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-spt">
-                Tambah SPT Tahunan
+            <div class="col-9 content-field">
+              <kendo-formfield [formGroup]="formKeuanganBank">
+                <kendo-autocomplete class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [data]="listNamaBank" [kendoDropDownFilter]="{ operator: 'contains' }" required></kendo-autocomplete>
+                <!-- <kendo-textbox class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [clearButton]="true" #namaBank required></kendo-textbox>                 -->
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Nama Bank tidak boleh kosong</kendo-formerror>
+              </kendo-formfield>
+            </div>
+          </div>
+  
+          <div class="row bank-field">
+            <div class="col-3 content-label">
+              <kendo-label>Cabang</kendo-label>
+            </div>
+            <div class="col-9 content-field">
+              <kendo-formfield [formGroup]="formKeuanganBank">
+                <kendo-textbox class="content-input-field" id="input-keuangan-cabang" formControlName="cabang" [clearButton]="true" #cabang required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
+              </kendo-formfield>
+            </div>
+          </div>
+  
+          <div class="row bank-field">
+            <div class="col-3 content-label">
+              <kendo-label>Nomor Rekening</kendo-label>
+            </div>
+            <div class="col-9 content-field">
+              <kendo-formfield [formGroup]="formKeuanganBank">
+                <kendo-textbox class="content-input-field" id="input-keuangan-nomor-rekening" formControlName="nomorRekening" [clearButton]="true" #nomorRekening required [maxlength]="maxLengthRekening"></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Nomor Rekening tidak boleh kosong</kendo-formerror>
+              </kendo-formfield>
+            </div>
+          </div>
+  
+          <div class="row bank-field">
+            <div class="col-3 content-label">
+              <kendo-label>Nama Pemilik Rekening</kendo-label>
+            </div>
+            <div class="col-9 content-field">
+              <kendo-formfield [formGroup]="formKeuanganBank">
+                <kendo-textbox class="content-input-field" id="input-keuangan-nama-pemilik-rekening" formControlName="namaPemilikRekening" [clearButton]="true" #namaPemilikRekening required></kendo-textbox>                
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
+              </kendo-formfield>
+            </div>
+          </div>
+          <div class="k-actions k-actions-end pe-0">
+            <div class="profile-content-grid-button mt-0">
+              <button kendoButton class="vms-btn vms-btn-primary" id="btn-simpan-data-bank" (click)="postDataKeuanganBank()">
+                Simpan
               </button>
             </div>
           </div>
-          
-        </div>
-
-      </div>
-
-      <div class="profile-content-title">
-        <kendo-label>Modal</kendo-label>
-      </div>
-      
-      <div class="profile-keuangan-field">
-
-        <div class="row bank-field">
-          <div class="col-3 content-label">
-            <kendo-label>Modal Dasar (Sesuai Akta)</kendo-label>
+        </ng-template>
+      </kendo-panelbar-item>
+      <kendo-panelbar-item title="Modal Dasar" [expanded]="true">
+        <ng-template kendoPanelBarContent>
+          <div class="row bank-field">
+            <div class="col-3 content-label">
+              <kendo-label>Modal Dasar (Sesuai Akta)</kendo-label>
+            </div>
+            <div class="col-9 content-field">
+              <kendo-formfield [formGroup]="formKeuanganModalDasar">              
+                <kendo-numerictextbox placeholder="Masukan Modal Dasar (Sesuai Akta)" class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
+              </kendo-formfield>
+            </div>
           </div>
-          <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">              
-              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
-              <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
-            </kendo-formfield>
+          <div class="row bank-field">
+            <div class="col-3 content-label">
+              <kendo-label>Modal Ditempatkan (Sesuai Akta)</kendo-label>
+            </div>
+            <div class="col-9 content-field">
+              <kendo-formfield [formGroup]="formKeuanganModalDasar">
+                <kendo-numerictextbox placeholder="Masukan Modal Ditempatkan (Sesuai Akta)" class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
+                <kendo-formhint></kendo-formhint>
+                <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
+              </kendo-formfield>
+            </div>
           </div>
-        </div>
-
-        <div class="row bank-field">
-          <div class="col-3 content-label">
-            <kendo-label>Modal Ditempatkan (Sesuai Akta)</kendo-label>
+          <div class="k-actions k-actions-end pe-0">
+            <div class="profile-content-grid-button mt-0">
+              <button kendoButton class="vms-btn vms-btn-primary" id="btn-simpan-modal-dasar" (click)="postDataKeuanganModalDasar()">
+                Simpan
+              </button>
+            </div>
           </div>
-          <div class="col-9 content-field">
-            <kendo-formfield [formGroup]="formKeuangan">
-              <kendo-numerictextbox class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
-              <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
-            </kendo-formfield>
+        </ng-template>
+      </kendo-panelbar-item>
+      <kendo-panelbar-item title="Neraca Keuangan" [expanded]="true">
+        <ng-template kendoPanelBarContent>
+          <div class="profile-content-grid">
+            <kendo-grid class="vms-kendo-grid" [data]="gridViewNeraca" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeNeraca($event)">
+              <kendo-grid-column field="tahun" title="Tahun">
+              </kendo-grid-column>
+              <kendo-grid-column field="aktiva" title="Aktiva (Asset)">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  {{ dataItem.aktiva | currency:'Rp. ':'symbol':'4.0-2' }}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="pasiva" title="Passiva (Liability)">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  {{ dataItem.pasiva | currency:'Rp. ':'symbol':'4.0-2' }}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="equitas" title="Ekuitas (Equity)">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  {{ dataItem.equitas | currency:'Rp. ':'symbol':'4.0-2' }}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="omzet" title="Omzet Bersih">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  {{ dataItem.omzet | currency:'Rp. ':'symbol':'4.0-2' }}
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="id" title="Action">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <div *ngIf="!dataItem.deletedAt">
+                    <span>
+                      <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormNeraca(dataItem)" id="btn-update-neraca">
+                    </span>
+                    <span>
+                      <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('neraca', dataItem.id, dataItem.tahun)" id="btn-delete-neraca">
+                    </span>
+                  </div>
+                  <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+                </ng-template>
+              </kendo-grid-column>
+            </kendo-grid>
+  
+            <div class="k-actions k-actions-end pe-0">
+              <div class="profile-content-grid-button">
+                <button kendoButton *ngIf="!openNeraca" (click)="triggerModal('neraca')" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-neraca">
+                  Tambah Neraca
+                </button>
+              </div>
+            </div> 
+            
           </div>
-        </div>
-        
-      </div>
-
-      <div class="k-actions k-actions-center">
-        <div class="col-2 profile-content-grid-button">
-          <button kendoButton class="vms-btn vms-btn-primary" id="btn-simpan-profile-keuangan" (click)="postDataKeuangan()">
-            Simpan
-          </button>
-        </div>
-      </div>
-
+        </ng-template>
+      </kendo-panelbar-item>
+      <kendo-panelbar-item title="SPT" [expanded]="true">
+        <ng-template kendoPanelBarContent>
+          <div class="profile-content-grid">
+            <kendo-grid class="vms-kendo-grid" [data]="gridViewSPT" [pageable]="true" [pageSize]="pageSize" [skip]="skip" (pageChange)="pageChangeSPT($event)">
+              <kendo-grid-column field="tahun" title="Tahun">
+              </kendo-grid-column>
+              <kendo-grid-column field="nomor" title="Nomor">
+              </kendo-grid-column>
+              <kendo-grid-column field="lampiran" title="Lampiran">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
+                </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column field="submitDate" title="Waktu Upload">
+              </kendo-grid-column>
+              <kendo-grid-column field="id" title="Action">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <div *ngIf="!dataItem.deletedAt">
+                    <span>
+                      <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateFormSPT(dataItem)" id="btn-update-spt">
+                    </span>
+                    <span>
+                      <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation('spt', dataItem.id, dataItem.tahun)" id="btn-delete-spt">
+                    </span>
+                  </div>
+                  <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>                
+                </ng-template>
+              </kendo-grid-column>
+            </kendo-grid>
+  
+            <div class="k-actions k-actions-end pe-0">
+              <div class="profile-content-grid-button">
+                <button kendoButton *ngIf="!openSPT" (click)="triggerModal('spt')" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-spt">
+                  Tambah SPT Tahunan
+                </button>
+              </div>
+            </div>
+            
+          </div>
+        </ng-template>
+      </kendo-panelbar-item>
+      <kendo-panelbar-item title="Asset" [expanded]="true">
+        <ng-template kendoPanelBarContent>
+          <app-profile-aset></app-profile-aset>
+        </ng-template>
+      </kendo-panelbar-item>
+    </kendo-panelbar>
+    </kendo-card-body>
+    </kendo-card>
     </div>
-
   </div>
 </div>
 

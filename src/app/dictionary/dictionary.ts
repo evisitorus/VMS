@@ -29,4 +29,7 @@ export const dictionary = {
 
     verification_submited: "Data anda sudah kami rekam dan sedang dalam tahap verifikasi",
     verification_failed: "Pengajuan Verifikasi Gagal",
+
+    cancel_verification_submited: "Pembatalan Pengajuan Verifikasi Berhasil",
+    cancel_verification_failed: "Pembatalan Pengajuan Verifikasi Gagal",
 };

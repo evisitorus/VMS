@@ -1,0 +1,13 @@
+.button-layout {
+  float: right; 
+  color:#0193AC;
+}
+
+.box {
+  padding: 1rem;
+  border-color: #0193AC;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  margin:2em 0 2em 0;
+}

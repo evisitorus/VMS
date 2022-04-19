@@ -1,13 +1,13 @@
 import {ProfileMenuComponent} from './pages/profile-menu/profile-menu.component';
 import {ProfileVerifikasiKelengkapanComponent} from './pages/profile-verifikasi-kelengkapan/profile-verifikasi-kelengkapan.component';
 import {ProfileInformasiPerusahaanComponent} from './pages/profile-informasi-perusahaan/profile-informasi-perusahaan.component';
+import { ProfileTataKelolaPerusahaanComponent } from './pages/profile-tata-kelola-perusahaan/profile-tata-kelola-perusahaan.component';
 import {ProfilePersonInChargeComponent} from "./pages/profile-person-in-charge/profile-person-in-charge.component";
 import {ProfileAsetComponent} from "./pages/profile-aset/profile-aset.component";
 import {ProfileDokumenComponent} from "./pages/profile-dokumen/profile-dokumen.component";
 import {ProfileRiwayatPekerjaanComponent} from "./pages/profile-riwayat-pekerjaan/profile-riwayat-pekerjaan.component";
 import {ProfileLaporanKeuanganComponent} from "./pages/profile-laporan-keuangan/profile-laporan-keuangan.component";
 import {ProfileDashboardComponent} from "./pages/profile-dashboard/profile-dashboard.component";
-import {PemegangSahamComponent} from "./pages/profile-informasi-perusahaan/pemegang-saham/pemegang-saham.component";
 import {ProfileAlamatComponent} from "./pages/profile-alamat/profile-alamat.component"
 
 import {NgModule} from '@angular/core';
@@ -33,10 +33,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
-import { ProfilKaryawanComponent } from './pages/profile-informasi-perusahaan/profil-karyawan/profil-karyawan.component';
 import { DataPegawaiComponent } from './pages/profile-informasi-perusahaan/data-pegawai/data-pegawai.component';
 import { IndicatorsModule } from "@progress/kendo-angular-indicators";
-import { ProfilPimpinanDanPengurusComponent } from './pages/profile-person-in-charge/profil-pimpinan-dan-pengurus/profil-pimpinan-dan-pengurus.component';
+import { PemegangSahamComponent } from './pages/profile-tata-kelola-perusahaan/pemegang-saham/pemegang-saham.component';
+import { ProfilKaryawanComponent } from './pages/profile-tata-kelola-perusahaan/profil-karyawan/profil-karyawan.component';
+import { ProfilPimpinanDanPengurusComponent } from './pages/profile-tata-kelola-perusahaan/profil-pimpinan-dan-pengurus/profil-pimpinan-dan-pengurus.component';
+import { ProfileAspekLegalComponent } from './pages/profile-aspek-legal/profile-aspek-legal.component';
+import { LegalitasComponent } from './pages/profile-aspek-legal/sections/legalitas/legalitas.component';
+import { DokumenLegalComponent } from './pages/profile-aspek-legal/sections/dokumen-legal/dokumen-legal.component';
+import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/sections/sertifikasi-dok-khusus/sertifikasi-dok-khusus.component';
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
 //   { title: "Kelola Akun",
@@ -68,9 +73,16 @@ import { ProfilPimpinanDanPengurusComponent } from './pages/profile-person-in-ch
     ProfileDashboardComponent,
     PemegangSahamComponent,
     DrawerComponent,
-    ProfilKaryawanComponent,
     DataPegawaiComponent,
-    ProfilPimpinanDanPengurusComponent
+    ProfileTataKelolaPerusahaanComponent,
+    PemegangSahamComponent,
+    ProfilKaryawanComponent,
+    DrawerComponent,
+    ProfilPimpinanDanPengurusComponent,
+    ProfileAspekLegalComponent,
+    LegalitasComponent,
+    DokumenLegalComponent,
+    SertifikasiDokKhususComponent
   ],
   imports: [
     CommonModule,

@@ -9,109 +9,74 @@
     <div class="profile-content">
 
       <div class="profile-content-title">
-        <kendo-label>Verifikasi Kelengkapan</kendo-label>
+        <kendo-label>Pengajuan Verifikasi</kendo-label>
       </div>
 
       <div class="profile-verifikasi-field">
         <form>
 
           <div class="row verifikasi-field">
-            <div class="col-2">
-              <kendo-label class="verifikasi-label">Profile Perusahaan</kendo-label>
+            <div class="col-3">
+              <kendo-label class="verifikasi-label">Informasi Umum</kendo-label>
             </div>
-            <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.profilePerusahaan.status" #profilePerusahaan kendoCheckBox/>
-              <label for="profilePerusahaan">{{data.profilePerusahaan.text}}</label>
-            </div>
-          </div>
-
-          <div class="row verifikasi-field">
-            <div class="col-2">
-              <kendo-label class="verifikasi-label">PIC Perusahaan</kendo-label>
-            </div>
-            <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.PICPerusahaan.status" #PICPerusahaan kendoCheckBox/>
-              <label for="PICPerusahaan">{{data.PICPerusahaan.text}}</label>
+            <div class="col-9">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.informasiUmum.status" #informasiUmum kendoCheckBox/>
+              <label for="informasiUmum">{{data.informasiUmum.text}} {{data.informasiUmum.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
           <div class="row verifikasi-field">
-            <div class="col-2">
-              <kendo-label class="verifikasi-label">Dokumen</kendo-label>
+            <div class="col-3">
+              <kendo-label class="verifikasi-label">Tata Kelola Perusahaan</kendo-label>
             </div>
-            <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.dokumen.status" #dokumen kendoCheckBox/>
-              <label for="dokumen">{{data.dokumen.text}}</label>
-            </div>
-          </div>
-
-          <div class="row verifikasi-field">
-            <div class="col-2">
-              <kendo-label class="verifikasi-label">Alamat</kendo-label>
-            </div>
-            <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.alamat.status" #alamat kendoCheckBox/>
-              <label for="alamat">{{data.alamat.text}}</label>
+            <div class="col-9">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.tataKelolaPerusahaan.status" #tataKelolaPerusahaan kendoCheckBox/>
+              <label for="tataKelolaPerusahaan">{{data.tataKelolaPerusahaan.text}} {{data.tataKelolaPerusahaan.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
           <div class="row verifikasi-field">
-            <div class="col-2">
-              <kendo-label class="verifikasi-label">Laporan Keuangan</kendo-label>
+            <div class="col-3">
+              <kendo-label class="verifikasi-label">Aspek Finansial</kendo-label>
             </div>
-            <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.laporanKeuangan.status" #laporanKeuangan kendoCheckBox/>
-              <label for="laporanKeuangan">{{data.laporanKeuangan.text}}</label>
+            <div class="col-9">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.aspekFinansial.status" #aspekFinansial kendoCheckBox/>
+              <label for="aspekFinansial">{{data.aspekFinansial.text}} {{data.aspekFinansial.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
           <div class="row verifikasi-field">
-            <div class="col-2">
+            <div class="col-3">
+              <kendo-label class="verifikasi-label">Aspek Legal</kendo-label>
+            </div>
+            <div class="col-9">
+              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.aspekLegal.status" #aspekLegal kendoCheckBox/>
+              <label for="aspekLegal">{{data.aspekLegal.text}} {{data.aspekLegal.status ? "on " + now : ""}}</label>
+            </div>
+          </div>
+
+          <div class="row verifikasi-field">
+            <div class="col-3">
               <kendo-label class="verifikasi-label">Riwayat Pekerjaan</kendo-label>
             </div>
-            <div class="col-10">
+            <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.riwayatPekerjaan.status" #riwayatPekerjaan kendoCheckBox/>
-              <label for="riwayatPekerjaan">{{data.riwayatPekerjaan.text}}</label>
-            </div>
-          </div>
-
-          <div class="row verifikasi-field">
-            <div class="col-2">
-              <kendo-label class="verifikasi-label">Asset</kendo-label>
-            </div>
-            <div class="col-10">
-              <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.asset.status"  #asset kendoCheckBox/>
-              <label for="asset">{{data.asset.text}}</label>
+              <label for="riwayatPekerjaan">{{data.riwayatPekerjaan.text}} {{data.riwayatPekerjaan.status ? "on " + now : ""}}</label>
             </div>
           </div>
 
         </form>
       </div>
 
-      <div class="profile-verifikasi-field" *ngIf="!isDisabled">
-        <kendo-label class="verifikasi-label">Disclaimer</kendo-label>
-        <div class="row">
-          <div class="col">
-            <form class="k-form" [formGroup]="form">
-              <kendo-formfield showHints="initial">
-                <div class="k-form-field-checkbox-wrap">
-                  <input *ngIf="isDisabled" kendoCheckBox id="disclaimer" type="checkbox" disabled [checked]="true"/>
-                  <input *ngIf="!isDisabled" kendoCheckBox id="disclaimer" type="checkbox" formControlName="disclaimer"/>
-                  <kendo-label class="k-checkbox-label" for="disclaimer" text="Dengan ini kami menyatakan bahwa informasi yang dikirim adalah BENAR"></kendo-label>
-                </div>
-                <kendo-formerror>This field is required</kendo-formerror>
-              </kendo-formfield>
-            </form>
-          </div>
-        </div>
-      </div>
-
       <div class="k-actions k-actions-end">
-        <div class="col-2 profile-content-grid-button">
-          <button kendoButton class="vms-btn vms-btn-primary" id="btn-tambah-dokumen" (click)="verify()" *ngIf="!isDisabled">
-            Rekam Data
+        <div class="col-3 profile-content-grid-button">
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-submit-verification" (click)="verify()" *ngIf="!isDisabled">
+            Ajukan Verifikasi
           </button>
-          <kendo-label class="verifikasi-label" *ngIf="isDisabled">{{verificationStatus}}</kendo-label>
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-cancel-verification" (click)="cancelConfirmation()" *ngIf="isDisabled">
+            Batalkan Pengajuan
+          </button>
+          <!-- <kendo-label class="verifikasi-label" *ngIf="isDisabled">{{verificationStatus}}</kendo-label> -->
         </div>
       </div>
 
@@ -121,3 +86,5 @@
 </div>
 
 <app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-verification'"></app-popup-message>
+
+<div kendoDialogContainer></div>

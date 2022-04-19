@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
-import { ProfileKeuanganInterface, ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
+import { ProfileKeuanganInterface, ProfileKeuanganBankInterface, ProfileKeuanganModalDasarInterface, ProfileKeuanganNeracaInterface, ProfileKeuanganSPTInterface } from 'src/app/core/interfaces/profile-keuangan.interface';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKeuanganService } from 'src/app/core/services/profile/profile-keuangan.service';
@@ -34,13 +34,15 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public maxLength = 13;
-
+  public maxLengthRekening = 20;
   public openNeraca = false;
   public openSPT = false;
 
   public formNeraca!: FormGroup;
   public formSPT!: FormGroup;
   public formKeuangan!: FormGroup;
+  public formKeuanganBank!: FormGroup;
+  public formKeuanganModalDasar!: FormGroup;
 
   public dataGridNeraca: any[] = [];
   public dataGridSPT: any[] = [];
@@ -99,6 +101,17 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       cabang: new FormControl(this.dataKeuangan.cabang, [Validators.required]),
       nomorRekening: new FormControl(this.dataKeuangan.nomorRekening, [Validators.required]),
       namaPemilikRekening: new FormControl(this.dataKeuangan.namaPemilikRekening, [Validators.required]),
+      modalDasar: new FormControl(this.dataKeuangan.modalDasar, [Validators.required]),
+      modalDitempatkan: new FormControl(this.dataKeuangan.modalDitempatkan, [Validators.required]),
+    });
+
+    this.formKeuanganBank = new FormGroup({
+      namaBank: new FormControl(this.dataKeuangan.namaBank, [Validators.required]),
+      cabang: new FormControl(this.dataKeuangan.cabang, [Validators.required]),
+      nomorRekening: new FormControl(this.dataKeuangan.nomorRekening, [Validators.required]),
+      namaPemilikRekening: new FormControl(this.dataKeuangan.namaPemilikRekening, [Validators.required]),
+    });
+    this.formKeuanganModalDasar = new FormGroup({
       modalDasar: new FormControl(this.dataKeuangan.modalDasar, [Validators.required]),
       modalDitempatkan: new FormControl(this.dataKeuangan.modalDitempatkan, [Validators.required]),
     });
@@ -242,6 +255,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.isNewData = false;
     this.triggerModal('neraca');
     this.setFormNeraca();
+    this.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
   }
 
   public updateFormSPT(data: any): void {
@@ -253,6 +268,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.isNewData = false;
     this.triggerModal('spt');
     this.setFormSPT();
+    this.popUpMessage = dictionary.update_data_notification;
+    this.triggerPopUp();
   }
 
   public fetchDataNeraca(): void {
@@ -292,8 +309,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
           this.dataKeuangan.cabang = data.cabang;
           this.dataKeuangan.nomorRekening = data.nomorRekening;
           this.dataKeuangan.namaPemilikRekening = data.namaPemilikRekening;
-          this.dataKeuangan.modalDasar = parseInt(data.toParty.modalDasar);
-          this.dataKeuangan.modalDitempatkan = parseInt(data.toParty.modalDitempatkan);
+          this.dataKeuangan.modalDasar = data.toParty.modalDasar? parseInt(data.toParty.modalDasar) : null;
+          this.dataKeuangan.modalDitempatkan = data.toParty.modalDitempatkan ? parseInt(data.toParty.modalDitempatkan) : null;
           this.setFormKeuangan();
         }
       },
@@ -513,6 +530,50 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
         modalDitempatkan: this.formKeuangan.value.modalDitempatkan.toString(),
       };
       this.service.postDataKeuangan(params).subscribe(
+        () => {
+          this.popUpMessage = dictionary.save_data_success;
+          this.triggerPopUp();
+          this.fetchDataKeuangan();
+        },
+        (err) => {
+          this.popUpMessage = err.error.message;
+          this.triggerPopUp();
+        }
+      );
+    }
+  }
+
+  public postDataKeuanganBank(): void {
+    this.formKeuanganBank.markAllAsTouched();
+    if (this.formKeuanganBank.valid) {
+      let params: ProfileKeuanganBankInterface = {
+        namaBank: this.formKeuanganBank.value.namaBank,
+        cabang: this.formKeuanganBank.value.cabang,
+        nomorRekening: this.formKeuanganBank.value.nomorRekening,
+        namaPemilikRekening: this.formKeuanganBank.value.namaPemilikRekening,
+      };
+      this.service.postDataKeuanganBank(params).subscribe(
+        () => {
+          this.popUpMessage = dictionary.save_data_success;
+          this.triggerPopUp();
+          this.fetchDataKeuangan();
+        },
+        (err) => {
+          this.popUpMessage = err.error.message;
+          this.triggerPopUp();
+        }
+      );
+    }
+  }
+
+  public postDataKeuanganModalDasar(): void {
+    this.formKeuanganModalDasar.markAllAsTouched();
+    if (this.formKeuanganModalDasar.valid) {
+      let params: ProfileKeuanganModalDasarInterface = {
+        modalDasar: this.formKeuanganModalDasar.value.modalDasar.toString(),
+        modalDitempatkan: this.formKeuanganModalDasar.value.modalDitempatkan.toString(),
+      };
+      this.service.postDataKeuanganModalDasar(params).subscribe(
         () => {
           this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
