@@ -3,7 +3,7 @@ const { I } = inject();
 Given('The Vendor logged into VMS using his or her registered company information', () => {
     I.amOnPage('/login');
     I.waitForElement('#input-email input[class=k-input]');
-    I.fillField('#input-email input[class=k-input]', 'admin@abadijaya.co.id');
+    I.fillField('#input-email input[class=k-input]', 'evitest@yopmail.com');
     I.waitForElement('#input-password input[class=k-input]');
     I.fillField('#input-password input[class=k-input]', '12345678');
     I.waitForElement('#btn-login');
@@ -102,6 +102,9 @@ Given('The Vendor will see {string} form', (form) => {
             break;
         case "Riwayat Pekerjaan":
             I.see('Riwayat Pekerjaan');
+            break;
+        case "Pilih Dokumen":
+            I.see('Piih File');
             break;
         default:
             break;
@@ -649,16 +652,29 @@ Given('The Vendor will see {string} form to add records regarding to {string}', 
             I.fillField('#input-tanggal-expired input[class=k-input]', '04112022');
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
+        case "Dokumen Legal Grid":
+            I.see('No.');
+            I.see('Nama Dokumen');
+            I.see('File');
+            I.see('Unggah Berkas');
             break;
         default:
-            I.see(form1);
             break;
     }  
+});
+
+Given('The Vendor must uploading document based on "Nama Dokumen"', () => {
+    I.see('Company Profile');
+    I.see('Akta Pendirian');
+    I.see('SIUP / Surat Izin Berusaha');
+    I.see('NPWP Perusahaan');
+    I.see('NIB / TDP');
+    I.see('IDP / SITU');
+    I.see('Akta Perubahan');
+    I.see('SKP Menteri');
+    I.see('Sert. Anti Penyuapan');
+    I.see('Surat Keterangan Non PKP');
+    I.see('Surat Pengukuhan PKP');
 });
 
 Given('The Vendor must click "Batal" button where found on the Right-bottom of {string} form', (form) => {
@@ -973,4 +989,74 @@ Given('The Vendor must complete following inputs where found on {string} form wi
     I.fillField('#tanggalTerbitIdpSitu input[class=k-input]', '04112022');
     I.click('#tanggalExpireIdpSitu input[class=k-input]');
     I.fillField('#tanggalExpireIdpSitu input[class=k-input]', '04112022');
+});
+
+Given('The Vendor wants to upload "Dokumen"', () => {
+
+});
+
+Given('The Vendor must click "Select File" button where found on the "Unggah Berkas" column in "Dokumen Legal" grid', () => {
+
+});
+
+Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form', () => {
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+});
+
+Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form with invalid size file', () => {
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+});
+
+Given('The Vendor can click "Tutup" button to upload the "Dokumen"', () => {
+    I.click('Tutup');
+});
+
+Given('The Vendor can see the "Dokumen" in "Dokumen Legal" grid', () => {
+    
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
 });
