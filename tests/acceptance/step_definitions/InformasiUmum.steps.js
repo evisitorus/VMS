@@ -104,7 +104,7 @@ Given('The Vendor will see {string} form', (form) => {
             I.see('Riwayat Pekerjaan');
             break;
         case "Pilih Dokumen":
-            I.see('Piih File');
+            I.see('Pilih File');
             break;
         default:
             break;
@@ -1000,18 +1000,18 @@ Given('The Vendor must click "Select File" button where found on the "Unggah Ber
 });
 
 Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form', () => {
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click(locate("#gridDokumen").withChild("tr").withText("Company Profile").find('#uploadBerkasBtn'));
+    I.attachFile('#uploadBerkasBtn', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
 });
 
 Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form with invalid size file', () => {

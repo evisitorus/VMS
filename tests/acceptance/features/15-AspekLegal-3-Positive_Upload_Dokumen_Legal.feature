@@ -13,7 +13,7 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor wants to complete his or her company profile
         And The Vendor must click "Aspek Legal" menu which found on "Sidebar Menu"
         And The Vendor must click "Dokumen Legal Section" to expand "Dokumen Legal" form
-        And The Vendor wants to add information regarding to "Dokumen Legal" on "Dokumen Legal Section" which part of "Aspek Legal" page
+        And The Vendor wants to add information in regards to "Dokumen Legal" on "Dokumen Legal Section" which part of "Aspek Legal" page
         Then The Vendor will see "Dokumen Legal Grid" form to add records regarding to "Dokumen Legal"
             """
             {
