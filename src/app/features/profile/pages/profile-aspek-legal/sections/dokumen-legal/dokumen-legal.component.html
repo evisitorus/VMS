@@ -15,7 +15,7 @@
       </kendo-grid-column>
       <kendo-grid-column field="lampiran" title="Unggah Berkas">
         <ng-template kendoGridCellTemplate let-dataItem>
-          <button kendoButton *ngIf="!opened" (click)="openFileDialog(dataItem)">Pilih File</button>
+          <button id="uploadBerkasBtn" kendoButton *ngIf="!opened" (click)="openFileDialog(dataItem)">Pilih File</button>
         </ng-template>
       </kendo-grid-column>
     </kendo-grid>
