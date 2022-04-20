@@ -1,6 +1,6 @@
 <div class="dokumen">
   <div class="profile-content-grid my-3">
-    <kendo-grid [data]="gridData">
+    <kendo-grid id="gridDokumen" [data]="gridData">
       <kendo-grid-column field="no" title="No." [width]="60" [filterable]="false">
         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
           {{rowIndex + 1}}
@@ -15,7 +15,7 @@
       </kendo-grid-column>
       <kendo-grid-column field="lampiran" title="Unggah Berkas">
         <ng-template kendoGridCellTemplate let-dataItem>
-          <button kendoButton *ngIf="!opened" (click)="openFileDialog(dataItem)">Pilih File</button>
+          <button id="uploadBerkasBtn" kendoButton *ngIf="!opened" (click)="openFileDialog(dataItem)">Pilih File</button>
         </ng-template>
       </kendo-grid-column>
     </kendo-grid>
