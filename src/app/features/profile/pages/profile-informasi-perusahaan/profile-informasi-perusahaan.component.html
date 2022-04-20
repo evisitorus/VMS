@@ -81,7 +81,7 @@
                       <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
                       <div class="col k-vstack">
                         <kendo-textbox id="nomorIndukBerusaha" [disabled]="!this.profileInformationFormGroup.get('pemilikNIB')?.value" class="col-md w-100" placeholder="Nomor Induk Berusaha (NIB)"
-                                       [clearButton]="true" [maxlength]="10"
+                                       [clearButton]="true" [maxlength]="13"
                                        formControlName="nomorIndukBerusaha"></kendo-textbox>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.nomorIndukBerusaha.errors?.required">

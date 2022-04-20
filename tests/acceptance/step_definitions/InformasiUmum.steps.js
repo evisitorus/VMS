@@ -103,8 +103,8 @@ Given('The Vendor will see {string} form', (form) => {
         case "Riwayat Pekerjaan":
             I.see('Riwayat Pekerjaan');
             break;
-        case "Pengajuan Verifikasi":
-            I.see('Pengajuan Verifikasi');
+        case "Pilih Dokumen":
+            I.see('Pilih File');
             break;
         default:
             break;
@@ -652,16 +652,29 @@ Given('The Vendor will see {string} form to add records regarding to {string}', 
             I.fillField('#input-tanggal-expired input[class=k-input]', '04112022');
             I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
             break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
+        case "Dokumen Legal Grid":
+            I.see('No.');
+            I.see('Nama Dokumen');
+            I.see('File');
+            I.see('Unggah Berkas');
             break;
         default:
-            I.see(form1);
             break;
     }  
+});
+
+Given('The Vendor must uploading document based on "Nama Dokumen"', () => {
+    I.see('Company Profile');
+    I.see('Akta Pendirian');
+    I.see('SIUP / Surat Izin Berusaha');
+    I.see('NPWP Perusahaan');
+    I.see('NIB / TDP');
+    I.see('IDP / SITU');
+    I.see('Akta Perubahan');
+    I.see('SKP Menteri');
+    I.see('Sert. Anti Penyuapan');
+    I.see('Surat Keterangan Non PKP');
+    I.see('Surat Pengukuhan PKP');
 });
 
 Given('The Vendor must click "Batal" button where found on the Right-bottom of {string} form', (form) => {
@@ -976,4 +989,161 @@ Given('The Vendor must complete following inputs where found on {string} form wi
     I.fillField('#tanggalTerbitIdpSitu input[class=k-input]', '04112022');
     I.click('#tanggalExpireIdpSitu input[class=k-input]');
     I.fillField('#tanggalExpireIdpSitu input[class=k-input]', '04112022');
+});
+
+Given('The Vendor wants to upload "Dokumen"', () => {
+
+});
+
+Given('The Vendor must click "Select File" button where found on the "Unggah Berkas" column in "Dokumen Legal" grid', () => {
+
+});
+
+Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form', () => {
+    I.waitForElement('#uploadBerkasBtn1');
+    I.click('#uploadBerkasBtn1');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn2');
+    I.click('#uploadBerkasBtn2');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn3');
+    I.click('#uploadBerkasBtn3');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn4');
+    I.click('#uploadBerkasBtn4');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn5');
+    I.click('#uploadBerkasBtn5');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn6');
+    I.click('#uploadBerkasBtn6');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn7');
+    I.click('#uploadBerkasBtn7');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn8');
+    I.click('#uploadBerkasBtn8');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn9');
+    I.click('#uploadBerkasBtn9');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn10');
+    I.click('#uploadBerkasBtn10');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn11');
+    I.click('#uploadBerkasBtn11');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+});
+
+Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form with invalid size file', () => {
+    // I.waitForElement('#uploadBerkasBtn1');
+    // I.click('#uploadBerkasBtn1');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn2');
+    // I.click('#uploadBerkasBtn2');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn3');
+    // I.click('#uploadBerkasBtn3');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn4');
+    // I.click('#uploadBerkasBtn4');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn5');
+    // I.click('#uploadBerkasBtn5');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn6');
+    // I.click('#uploadBerkasBtn6');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn7');
+    // I.click('#uploadBerkasBtn7');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn8');
+    // I.click('#uploadBerkasBtn8');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn9');
+    // I.click('#uploadBerkasBtn9');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn10');
+    I.click('#uploadBerkasBtn10');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.see('File size too large');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn11');
+    I.click('#uploadBerkasBtn11');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.see('File size too large');
+    I.click('Tutup');
+
+});  
+
+Given('The Vendor can click "Tutup" button to upload the "Dokumen"', () => {
+    
+});
+
+Given('The Vendor can see the "Dokumen" in "Dokumen Legal" grid', () => {
+    
+});
+
+Given('The Vendor will see warning on the field for "Maksimum Ukuran File 2 MB"', () => {
+
+});
+
+Given('The Vendor can remove the file', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
+
 });
