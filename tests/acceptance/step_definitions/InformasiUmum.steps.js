@@ -1000,48 +1000,135 @@ Given('The Vendor must click "Select File" button where found on the "Unggah Ber
 });
 
 Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form', () => {
-    I.click(locate("#gridDokumen").withChild("tr").withText("Company Profile").find('#uploadBerkasBtn'));
-    I.attachFile('#uploadBerkasBtn', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
-    // I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.waitForElement('#uploadBerkasBtn1');
+    I.click('#uploadBerkasBtn1');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn2');
+    I.click('#uploadBerkasBtn2');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn3');
+    I.click('#uploadBerkasBtn3');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn4');
+    I.click('#uploadBerkasBtn4');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn5');
+    I.click('#uploadBerkasBtn5');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn6');
+    I.click('#uploadBerkasBtn6');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn7');
+    I.click('#uploadBerkasBtn7');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn8');
+    I.click('#uploadBerkasBtn8');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn9');
+    I.click('#uploadBerkasBtn9');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn10');
+    I.click('#uploadBerkasBtn10');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn11');
+    I.click('#uploadBerkasBtn11');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf.pdf');
+    I.click('#btn-popup-yes');
+    I.click('Tutup');
 });
 
 Given('The Vendor must click "Select File" button where found on the "Pilih Dokumen" form with invalid size file', () => {
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-    I.attachFile('# input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
-});
+    // I.waitForElement('#uploadBerkasBtn1');
+    // I.click('#uploadBerkasBtn1');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn2');
+    // I.click('#uploadBerkasBtn2');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn3');
+    // I.click('#uploadBerkasBtn3');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn4');
+    // I.click('#uploadBerkasBtn4');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn5');
+    // I.click('#uploadBerkasBtn5');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn6');
+    // I.click('#uploadBerkasBtn6');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn7');
+    // I.click('#uploadBerkasBtn7');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn8');
+    // I.click('#uploadBerkasBtn8');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    // I.waitForElement('#uploadBerkasBtn9');
+    // I.click('#uploadBerkasBtn9');
+    // I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    // I.see('File size too large');
+    // I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn10');
+    I.click('#uploadBerkasBtn10');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.see('File size too large');
+    I.click('Tutup');
+    I.waitForElement('#uploadBerkasBtn11');
+    I.click('#uploadBerkasBtn11');
+    I.attachFile('#input-lampiran-file input[type=file]', './tests/acceptance/_fixture/sample_pdf_10mb.pdf');
+    I.see('File size too large');
+    I.click('Tutup');
+
+});  
 
 Given('The Vendor can click "Tutup" button to upload the "Dokumen"', () => {
-    I.click('Tutup');
+    
 });
 
 Given('The Vendor can see the "Dokumen" in "Dokumen Legal" grid', () => {
     
 });
 
-Given('', () => {
+Given('The Vendor will see warning on the field for "Maksimum Ukuran File 2 MB"', () => {
 
 });
 
-Given('', () => {
+Given('The Vendor can remove the file', () => {
 
 });
 

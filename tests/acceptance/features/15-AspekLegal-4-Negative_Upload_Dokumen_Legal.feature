@@ -13,7 +13,7 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor wants to complete his or her company profile
         And The Vendor must click "Aspek Legal" menu which found on "Sidebar Menu"
         And The Vendor must click "Dokumen Legal Section" to expand "Dokumen Legal" form
-        And The Vendor wants to add information regarding to "Dokumen Legal" on "Dokumen Legal Section" which part of "Aspek Legal" page
+        And The Vendor wants to add information in regards to "Dokumen Legal" on "Dokumen Legal Section" which part of "Aspek Legal" page
         Then The Vendor will see "Dokumen Legal Grid" form to add records regarding to "Dokumen Legal"
             """
             {
@@ -43,13 +43,8 @@ Feature: Vendor Basic - Completing vendor information
             """
 
         And The Vendor wants to upload "Dokumen"
-        And The Vendor must click "Select File" button where found on the "Unggah Berkas" column in "Dokumen Legal" grid with invalid size file
+        And The Vendor must click "Select File" button where found on the "Unggah Berkas" column in "Dokumen Legal" grid
         And The Vendor will see "Pilih Dokumen" form
-        And The Vendor must click "Select File" button where found on the "Pilih Dokumen" form
-        # And The Vendor can see file with pdf, png or jpg format
-        # And The Vendor can choose "Dokumen Legal" file
-
-        # When The Vendor click "Open" button on the browse window
-        # And The Vendor will see the file on "Pilih Dokumen" form
+        And The Vendor must click "Select File" button where found on the "Pilih Dokumen" form with invalid size file
         And The Vendor will see warning on the field for "Maksimum Ukuran File 2 MB"
         And The Vendor can remove the file

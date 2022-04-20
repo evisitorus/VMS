@@ -46,10 +46,5 @@ Feature: Vendor Basic - Completing vendor information
         And The Vendor must click "Select File" button where found on the "Unggah Berkas" column in "Dokumen Legal" grid
         And The Vendor will see "Pilih Dokumen" form
         And The Vendor must click "Select File" button where found on the "Pilih Dokumen" form
-        # And The Vendor can see file with pdf, png or jpg format
-        # And The Vendor can choose "Dokumen Legal" file
-
-        # When The Vendor click "Open" button on the browse window
-        # And The Vendor will see the file on "Pilih Dokumen" form
         And The Vendor can click "Tutup" button to upload the "Dokumen"
         And The Vendor can see the "Dokumen" in "Dokumen Legal" grid
