@@ -1,6 +1,6 @@
 <div class="dokumen">
   <div class="profile-content-grid my-3">
-    <kendo-grid [data]="gridData">
+    <kendo-grid id="gridDokumen" [data]="gridData">
       <kendo-grid-column field="no" title="No." [width]="60" [filterable]="false">
         <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
           {{rowIndex + 1}}
