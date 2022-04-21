@@ -1,0 +1,90 @@
+<div class="profile-content-modal">
+  <kendo-dialog title="Tambah Sertifikasi dan Dokumen Khusus" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+    <form class="k-form">
+
+      <kendo-formfield [formGroup]="form">
+        <kendo-label [for]="namaDokumen" text="Nama Dokumen"></kendo-label>
+        <kendo-textbox id="input-nama-dokumen" formControlName="namaDokumen" [clearButton]="true" #namaDokumen required></kendo-textbox>
+        <kendo-formhint></kendo-formhint>
+        <kendo-formerror>Nama Dokumen tidak boleh kosong</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield [formGroup]="form">
+        <kendo-label [for]="tanggalTerbit" text="Tanggal Terbit"></kendo-label>
+        <kendo-datepicker id="input-tanggal-terbit" tanggalTerbit formControlName="tanggalTerbit" #tanggalTerbit></kendo-datepicker>
+        <kendo-formerror>Tanggal Terbit tidak boleh kosong</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield [formGroup]="form">
+        <kendo-label [for]="berlakuSampai" text="Tanggal Expired"></kendo-label>
+        <kendo-datepicker id="input-tanggal-expired" berlakuSampai formControlName="berlakuSampai" #berlakuSampai></kendo-datepicker>
+        <kendo-formerror>Tanggal Expired tidak boleh kosong</kendo-formerror>
+      </kendo-formfield>
+
+      <kendo-formfield [formGroup]="form">
+        <kendo-label text="Lampiran File" ></kendo-label>
+        <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-lampiran-file" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
+        <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
+        <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
+        <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+      </kendo-formfield>
+
+      <div class="k-actions k-actions-end">
+        <div class="profile-content-modal-btn">
+          <button type="button" class="k-button k-primary vms-btn vms-btn-primary" (click)="submit()" id="btn-simpan">
+            Simpan
+          </button>
+        </div>
+        <div class="profile-content-modal-btn">
+          <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal">
+            Batal
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </kendo-dialog>
+
+</div>
+<div class="dokumen">
+  <div class="profile-content-grid my-2">
+    <div class="k-actions k-actions-end">
+      <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="k-button k-primary add-btn" id="btn-tambah-dokumen">Tambah</button>
+    </div>
+    <kendo-grid [data]="gridView" [pageable]="true" [pageSize]="pageSize" [resizable]="true" (pageChange)="pageChange($event)">
+        <kendo-grid-column field="no" title="No." [width]="60">
+          <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            {{rowIndex + 1}} 
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="namaDokumen" title="Nama Dokumen">
+        </kendo-grid-column>
+        <kendo-grid-column field="tanggalTerbit" title="Tanggal Terbit">
+        </kendo-grid-column>
+        <kendo-grid-column field="berlakuSampai" title="Tanggal Expired">
+        </kendo-grid-column>
+        <kendo-grid-column field="lampiran" title="Nama File">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <a class="lampiran-url" (click)="download(dataItem.file, dataItem.lampiran)">{{ dataItem.lampiran }}</a>
+          </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="id" title="Action">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <div *ngIf="!dataItem.deletedAt">
+              <span>
+                <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
+              </span>
+              <span>
+                <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaDokumen)" id="btn-delete">
+              </span>
+            </div>
+            <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+          </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>
+
+<div kendoDialogContainer></div>
+
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

@@ -52,8 +52,8 @@ const items = [
     children: [
       { title: "Informasi Umum", route:"/profile-information", id: "sidebar-profile-information"  },
       { title: "Tata Kelola Perusahaan", route:"/profile-tata-kelola-perusahaan", id: "sidebar-tata-kelola"  },
-      { title: "Dokumen", route:"/profile-dokumen", id: "sidebar-dokumen"  },
       { title: "Aspek Finansial", route:"/profile-laporan-keuangan", id: "sidebar-laporan-keuangan"  },
+      { title: "Aspek Legal", route:"/profile-aspek-legal", id: "sidebar-aspek-legal"  },
       { title: "Riwayat Pekerjaan" , route:"/profile-riwayat-pekerjaan", id: "sidebar-riwayat-pekerjaan"  },
       { title: "Verifikasi Kelengkapan", route:"/profile-verification", id: "sidebar-verification"  },
       { title: " ", id: ""}
