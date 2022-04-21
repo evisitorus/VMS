@@ -14,6 +14,10 @@ import { ProfileLaporanKeuanganComponent } from '../profile-laporan-keuangan/pro
 })
 export class ProfileAsetComponent implements OnInit {
 
+  private messages: any = {
+    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
+  };
+
   public form!: FormGroup;
   public gridData: any[] = [];
   public opened: boolean = false;
