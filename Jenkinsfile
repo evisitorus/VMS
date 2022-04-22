@@ -99,13 +99,13 @@ pipeline {
             steps {
                 script {
                     sh 'echo "test frontend"'
-                    try {
-                        sh 'docker rm -f vms-fe vms-test vms-unittest'
-                    } catch (err) {
-                        echo err.getMessage()
-                    }
-                    sh 'docker run -d --name vms-fe -p 4200:80 $REGISTRY_NAME:$BRANCH_NAME-$TAG'
-                    sh 'mkdir hasil'
+                    // try {
+                    //     sh 'docker rm -f vms-fe vms-test vms-unittest'
+                    // } catch (err) {
+                    //     echo err.getMessage()
+                    // }
+                    // sh 'docker run -d --name vms-fe -p 4200:80 $REGISTRY_NAME:$BRANCH_NAME-$TAG'
+                    // sh 'mkdir hasil'
                 }
             }
         }
@@ -117,17 +117,17 @@ pipeline {
                     }
                     steps {
                         echo 'unittest'
-                        script {
-                            try {
-                                sh 'docker run --name vms-unittest vms-acceptancetest npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage' 
-                            } catch (err) {
-                                echo err.getMessage()
-                            }
-                        }                         
-                        sh 'docker ps -a'
-                        sh 'docker cp vms-unittest:/app/coverage/eproc-fe hasil_test'   
-                        sh 'docker rm vms-unittest'   
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil_test', reportFiles: 'index.html', reportName: 'Unit Test Report', reportTitles: ''])
+                        // script {
+                        //     try {
+                        //         sh 'docker run --name vms-unittest vms-acceptancetest npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage' 
+                        //     } catch (err) {
+                        //         echo err.getMessage()
+                        //     }
+                        // }                         
+                        // sh 'docker ps -a'
+                        // sh 'docker cp vms-unittest:/app/coverage/eproc-fe hasil_test'   
+                        // sh 'docker rm vms-unittest'   
+                        // publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'hasil_test', reportFiles: 'index.html', reportName: 'Unit Test Report', reportTitles: ''])
                     }
                 }
                 stage ('Acceptance Test') {
