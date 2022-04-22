@@ -1,4 +1,5 @@
 export interface ProfileInformationInterface {
+  pemilikNIB: string;
   name: string;
   initial: string;
   jenisBadanUsaha: string;
@@ -16,14 +17,14 @@ export interface ProfileInformationInterface {
   // jumlahKaryawanTotal: string;
   // jumlahKaryawanLokal: string;
   // jumlahKaryawanAsing: string;
-  phoneNumber: string;
+  // phoneNumber: string;
 
-  alamatPerusahaan?: string;
-  provinsi?: string;
-  kota?: string;
-  kecamatan?: string;
-  keluarahan?: string;
-  kodePos?: string;
-
+  // alamatPerusahaan?: string;
+  // provinsi?: string;
+  // kota?: string;
+  // kecamatan?: string;
+  // keluarahan?: string;
+  // kodePos?: string;
+  emailPerusahaan?: string;
   file?: string;
 }

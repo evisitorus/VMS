@@ -1,0 +1,163 @@
+<div class="profile-content-title">
+</div>
+<div class="k-vstack">
+  <div class="my-3">
+    <button id="addPengurusBtn" kendoButton look="flat" *ngIf="!opened" (click)="addPengurus()" icon="k-icon k-i-plus-outline" class="button-layout">
+    Tambah
+  </button>
+  </div>
+  <kendo-grid [pageSize]="5" [skip]="skip" [data]="gridViewPengurus" [pageable]="true" [resizable]="true" (pageChange)="pageChange($event)" class="mb-2">
+    <kendo-grid-column field="no" title="No.">
+      <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+        {{rowIndex + 1}}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Nama Pengurus">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.fromParty.firstName + " " + dataItem.fromParty.lastName }}
+      </ng-template>
+    </kendo-grid-column> -->
+    <kendo-grid-column title="Jabatan">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.jabatan }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="No. Identitas">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.nik }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Kartu Identitas">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.cvFilePath }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="NPWP">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        {{ dataItem.npwp }}
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column title="Kartu NPWP">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a class="lampiran-url" (click)="download(dataItem.file.id, dataItem.file.filePath)">{{ dataItem.npwpFilePath }}</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-command-column field="action" title="Action">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div *ngIf="!dataItem.deletedAt">
+          <span>
+            <img src="/assets/icons/edit.png" alt="" class="action-button" id="btnUpdatePimpinan" (click)="updateForm(dataItem)">
+          </span>
+          <span>
+            <img src="/assets/icons/delete.png" alt="" class="action-button" id="btnDeletePimpinan" (click)="deleteConfirmation(dataItem.id, dataItem.fromParty.firstName + ' ' + dataItem.fromParty.lastName)">
+          </span>
+        </div>
+        <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
+      </ng-template>
+    </kendo-grid-command-column>
+  </kendo-grid>
+
+  <kendo-dialog id="addPengurusDialog" [title]="popUpTitle" *ngIf="opened" (close)="close()">
+    <div class="container">
+      <form [formGroup]="pengurusFormGroup">
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">Nama Depan</kendo-label>
+            <div class="col k-vstack">
+              <kendo-textbox [style.width]="'100%'" id="firstName" class="col-md" formControlName="firstName"
+              placeholder="Nama Depan" #namaPengurus [clearButton]="true">
+            </kendo-textbox>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.firstName.errors?.required">Nama Depan tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">Nama Belakang</kendo-label>
+            <div class="col k-vstack">
+              <kendo-textbox [style.width]="'100%'" id="lastName" class="col-md" formControlName="lastName"
+              placeholder="Nama Belakang" #namaPengurus [clearButton]="true">
+            </kendo-textbox>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.lastName.errors?.required">Nama Belakang tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">Jabatan</kendo-label>
+            <div class="col k-vstack">
+              <kendo-textbox [style.width]="'100%'" id="jabatanPimpinanDanPengurusInput" class="col-md" placeholder="Jabatan"
+              [maxlength]="25" [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
+              <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.jabatan.errors?.required">Jabatan tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">No. Identitas</kendo-label>
+            <div class="col k-vstack">
+              <kendo-numerictextbox [style.width]="'100%'" id="noIdentitasPengurusInput" formControlName="nik" class="col-md"
+              placeholder="No. Identitas" [maxlength]="16" [spinners]="false" format="d" #nik>
+            </kendo-numerictextbox>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">No. Identitas tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">Kartu Identitas</kendo-label>
+            <div class="col">
+              <kendo-fileselect [style.width]="'100%'" id="resumePimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" (change)="upload()" formControlName="kartuIdentitas">
+                <kendo-fileselect-messages
+                dropFilesHere="Tidak ada file terpilih"
+                select="Pilih file"
+                invalidFileExtension="Ekstensi file harus berformat jpg, png, atau pdf"
+                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                >
+                </kendo-fileselect-messages>
+              </kendo-fileselect>
+              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa jpg, png, PDF, maks 2MB</p>
+            </div>
+          </div>
+
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">No. NPWP</kendo-label>
+            <div class="col k-vstack">
+              <kendo-numerictextbox [style.width]="'100%'" id="npwpPengurusInput" formControlName="npwp" class="col-md"
+              placeholder="No. NPWP" [maxlength]="15" [spinners]="false" format="d" #npwp>
+            </kendo-numerictextbox>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">No. NPWP tidak boleh kosong</kendo-formerror>
+            </div>
+          </div>
+        </kendo-formfield>
+        <kendo-formfield [formGroup]="pengurusFormGroup">
+          <div class="row">
+            <kendo-label class="col">Kartu NPWP</kendo-label>
+            <div class="col">
+              <kendo-fileselect [style.width]="'100%'" id="npwpPimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedNpwpFile" (change)="uploadNpwp()" formControlName="kartuNpwp">
+                <kendo-fileselect-messages
+                dropFilesHere="Tidak ada file terpilih"
+                select="Pilih file"
+                invalidFileExtension="Ekstensi file harus berformat jpg, png, atau pdf"
+                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                >
+                </kendo-fileselect-messages>
+              </kendo-fileselect>
+              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa jpg, png, PDF, maks 2MB</p>
+            </div>
+          </div>
+
+        </kendo-formfield>
+      </form>
+    </div>
+
+    <kendo-dialog-actions>
+      <button kendoButton id="savePimpinanDanPengurusFormBtn" (click)="submitProfilPimpinanDanPengurus()" [primary]="true">Simpan</button>
+      <button kendoButton id="closePimpinanDanPengurusFormBtn" (click)="close()" [primary]="false">Batal</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+
+  <div kendoDialogContainer></div>
+</div>

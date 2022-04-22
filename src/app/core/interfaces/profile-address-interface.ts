@@ -5,5 +5,7 @@ export interface ProfileAddressInterface {
     kota: string,
     kecamatan: string,
     kelurahan: string,
-    kodepos: string
+    kodepos: string,
+    noTelepon: string,
+    noTelponKodeArea: string,
 }

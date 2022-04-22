@@ -1,6 +1,72 @@
 const { I } = inject();
 
-Given('The Vendor must clicks button {string} where found on the left-buttom of {string} to add records information in regards to {string}', () => {
+Given('The Vendor wants manage "Riwayat Pekerjaan" from the Company', () => {
+
+});
+
+Given('The Vendor must click {string} menu where found on {string} of {string}', () => {
+});
+
+Given('The Vendor must click "Riwayat Pekerjaan" Tab', () => {
+    I.waitForElement('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+    I.click('#k-panelbar-0-item-sidebar-riwayat-pekerjaan');
+});
+
+Given('The Vendor wants to add information in regards to "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid" which part of "Riwayat Pekerjaan" form', () => {
+
+});
+
+Given('The Vendor must clicks button "Tambah" where found on the left-buttom of "Riwayat Pekerjaan Grid" to add records information in regards to "Riwayat Pekerjaan"', () => {
+    I.waitForElement('#addPekerjaan');
+    I.click('#addPekerjaan');
+});
+
+Given('The Vendor will see pop-up form of "Tambah Riwayat Pekerjaan" which appear in front of "Riwayat Pekerjaan" form', () => {
+    I.fillField('#namaPekerjaan input[class=k-input]', 'Konstruksi Gedung Apartemen Untuk Anggota Avengers');
+    I.fillField('#pemberiPekerjaan input[class=k-input]', 'PT. Wijaya Karya (WIKA)');
+    I.click('#nilaiPekerjaan input[role=spinbutton]');
+    I.fillField('#nilaiPekerjaan input[role=spinbutton]', '1000000000');
+    I.click('#tahunPekerjaan input[role=spinbutton]');
+    I.fillField('#tahunPekerjaan input[role=spinbutton]', '2012');
+    I.attachFile('#input-spt-lampiran input[type=file]', './tests/acceptance/_fixture/image_1mb.png');
+});
+
+Given('The Vendor must click "Simpan" button to save information of "Riwayat Pekerjaan"', () => {
+    I.waitForElement('#submitPekerjaan');
+    I.click('#submitPekerjaan');
+});
+
+Given('The Vendor will see that pop-up form already closed when she or he clicks "Simpan"', () => {
+    I.see('Berhasil menyimpan data, silakan ajukan verifikasi');
+    I.waitForElement('#btn-popup-yes');
+    I.click('#btn-popup-yes');
+});
+
+Given('The Vendor will see list of "Riwayat Pekerjaan" on "Riwayat Pekerjaan Grid"', () => {
+    I.see('No.');
+    I.see('Nama Pekerjaan');
+    I.see('Pemberi Pekerjaan');
+    I.see('Nilai Pekerjaan');
+    I.see('Tahun');
+    I.see('Lampiran');
+    I.see('Action');
+});
+
+Given('The Vendor will see progress of upgrade level on {string}', () => {
+
+});
+
+Given('The Vendor can not continue to add document information "Riwayat Pekerjaan"', () => {
+    I.see('Periksa kembali file Anda');
+    I.waitForElement('#btn-popup-yes');
+    I.click('#btn-popup-yes');
+});
+
+Given('', () => {
+
+});
+
+Given('', () => {
 
 });
 
@@ -9,14 +75,6 @@ Given('The Vendor must click {string} button where found on the left-buttom of {
 });
 
 Given('The Vendor already manage her or his company information by adding Riwayat Pekerjaan from the company', () => {
-
-});
-
-Given('The Vendor upload document more than 2 MB', () => {
-
-});
-
-Given('The Vendor warning message tooltip on lampiran {string}', () => {
 
 });
 

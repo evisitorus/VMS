@@ -1,8 +1,8 @@
-<div class="row profile-section">
+<div>
 
   <div class="profile-content-modal">
 
-    <kendo-dialog title="Tambah Alamat" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
+    <kendo-dialog title="{{isNewData? 'Tambah Alamat' : 'Ubah Alamat'}}" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="600">
       <form  class="k-form modal-form">
 
         <div class="row">
@@ -11,7 +11,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Type your message here" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
+              <kendo-textbox class="formField" id ="namaAlamat" placeholder="Masukan Nama Alamat" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Nama Alamat tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -24,7 +24,7 @@
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
-              <kendo-textbox class="formField" id="alamat" placeholder="Type your message here" formControlName="alamat" [clearButton]="true" #alamat required></kendo-textbox>
+              <kendo-textbox class="formField" id="alamat" placeholder="Masukan Alamat" formControlName="alamat" [clearButton]="true" #alamat required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
               <kendo-formerror>Alamat tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
@@ -94,8 +94,25 @@
               <kendo-formerror>Kode Pos tidak boleh kosong</kendo-formerror>
             </kendo-formfield>
           </div>
-        </div>        
-
+        </div>   
+        <div class="row">
+          <div class="col-4 modal-label">
+            <p>No. Telepon</p>
+          </div>
+          <div class="col-2 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-textbox class="formField" [maxlength]="4" id="noTeleponKodeArea" placeholder="Kode Area" formControlName="noTelponKodeArea" #noTelponKodeArea required></kendo-textbox>
+              <kendo-formerror>Kode Area tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+          <div class="col-6 modal-field">
+            <kendo-formfield [formGroup]="form">
+              <kendo-textbox class="formField" [maxlength]="15" id="noTelepon" placeholder="Masukan No. Telepon" formControlName="noTelepon" [clearButton]="true" #noTelepon required></kendo-textbox>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>No. Telepon tidak boleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>  
         <div class="k-actions k-actions-end">
           <div class="profile-content-modal-btn">
             <button type="button" class="k-button vms-btn" (click)="close()" id="btn-batal-alamat">
@@ -108,34 +125,25 @@
             </button>
           </div>
         </div>
-
       </form>
     </kendo-dialog>
-
   </div>
-
-  <div class="col-2 profile-menu">
-    <app-sidebar></app-sidebar>
-  </div>
-
-  <div class="col-10 profile-content-container">
-    <div class="profile-content">
-      
-      <div class="profile-content-title">
-        <kendo-label>Alamat</kendo-label>
-      </div>
-  
+  <div>
+    <div>  
       <div>
         <kendo-grid [data]="gridData" class="vms-kendo-grid">
-          <kendo-grid-column field="no" title="No.">
+          <kendo-grid-column field="no" title="No." [width]="60">
           </kendo-grid-column>
           <kendo-grid-column field="namaAlamat" title="Nama Alamat">
           </kendo-grid-column>
           <kendo-grid-column field="alamat" title="Alamat">
           </kendo-grid-column>
-          <kendo-grid-column field="provinsi" title="Provinsi">
-          </kendo-grid-column>
           <kendo-grid-column field="kota" title="Kota">
+          </kendo-grid-column>
+          <kendo-grid-column field="noTelepon" title="No. Telepon">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              ({{dataItem.noTelponKodeArea}}) {{dataItem.noTelepon}}
+            </ng-template>
           </kendo-grid-column>
           <kendo-grid-column field="id" title="Action">
             <ng-template kendoGridCellTemplate let-dataItem>
@@ -144,29 +152,36 @@
                   <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)" id="btn-update">
                 </span>
                 <span>
-                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat)" id="btn-delete">
+                  <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="deleteConfirmation(dataItem.id, dataItem.namaAlamat, dataItem.telcoId)" id="btn-delete">
                 </span>
               </div>
               <kendo-label *ngIf="dataItem.deletedAt" class="text-deleted-at">Terhapus</kendo-label>
             </ng-template>
           </kendo-grid-column>
-        </kendo-grid>
-
-        <div class="k-actions k-actions-end">
-          <div class="col-2 profile-content-grid-button">
+        </kendo-grid> 
+        <div class="k-actions k-actions-end pe-0">
+          <div class="profile-content-grid-button">
             <button kendoButton *ngIf="!opened" (click)="open()" icon="k-icon k-i-plus-outline" class="vms-btn vms-btn-primary" id="btn-tambah-alamat">
-              Tambah Alamat
+              Tambah
             </button>
           </div>
-        </div>
-  
-      </div>
-  
+        </div> 
+      </div>  
     </div>
   </div>
-
 </div>
-
 <div kendoDialogContainer></div>
-
-<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>
+<kendo-dialog id="popup-confirm-save"
+              title="Konfirmasi"
+              *ngIf="deleteOpened"
+              (close)="closeDeleteConfirmation()"
+              [minWidth]="250"
+              [width]="450">
+  <p style="margin: 30px; text-align: center;">
+    {{"Apakah '" + deleteData.name + "' akan dihapus dari sistem ?"}}
+  </p>
+  <kendo-dialog-actions id="popup-action-confirm-save">
+    <button kendoButton id="btn-popup-no" (click)="closeDeleteConfirmation()">Tidak</button>
+    <button kendoButton id="btn-popup-yes" (click)="delete(deleteData.id, deleteData.telcoId)" [primary]="true">Ya</button>
+  </kendo-dialog-actions>
+</kendo-dialog>

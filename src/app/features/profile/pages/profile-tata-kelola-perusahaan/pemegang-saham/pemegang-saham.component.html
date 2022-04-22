@@ -1,0 +1,156 @@
+<div class="k-vstack">
+  <div class="my-3">
+    <button kendoButton *ngIf="!openedSaham" (click)="openSaham()" id="btn-addPemegangSaham" class="button-layout" look="flat" icon="k-icon k-i-plus-outline">
+      Tambah Pemegang Saham
+    </button>
+  </div>
+
+  <kendo-grid [data]="gridData" style="height: 240px;margin-bottom: 2em;">
+  <kendo-grid-column title="No." [width]="60" field="no" ></kendo-grid-column>
+  <kendo-grid-column title="Nama Pemegang Saham" field="namaPemegangSaham"  [width]="250"></kendo-grid-column>
+  <kendo-grid-column title="Jenis Pemegang Saham" field="pemegangSahamPerseorangan"></kendo-grid-column>
+  <kendo-grid-column title="Pemegang Saham Lokal/Asing" field="pemegangSahamLokal"   [width]="300"></kendo-grid-column>
+  <kendo-grid-column title="% Kepemilikan" field="persentaseKepemilikan" ></kendo-grid-column>
+  <kendo-grid-column field="id" title="Action">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <ng-container
+      *ngIf="dataItem.active; then active; else inactive">
+    </ng-container>
+      <ng-template #inactive>
+        <span>
+          <kendo-label class="labelForm">Terhapus</kendo-label>
+        </span>
+      </ng-template>
+      <ng-template #active>
+        <span>
+          <img src="/assets/icons/edit.png" alt="" class="action-button" (click)="updateForm(dataItem)"  id="btnUpdatePemegangSaham">
+        </span>
+        <span>
+          <img src="/assets/icons/delete.png" alt="" class="action-button" (click)="delete(dataItem)" id="btnDeletePemegangSaham">
+        </span>
+      </ng-template>
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>
+
+  <kendo-dialog title="Tambah Pemegang Saham" *ngIf="openedSaham" (close)="closeSaham()">
+
+  <form [formGroup]="pemegangSahamFormGroup">
+    <div>
+      <div class="wrap">
+        <kendo-label class="labelForm">Nama Pemegang Saham</kendo-label>
+        <div>
+        <kendo-textbox class="formField " id="namaPemegangSaham" placeholder="Type your message here" formControlName="namaPemegangSaham"></kendo-textbox>
+        <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.namaPemegangSaham.errors?.required">Nama Pemegang Saham tidak boleh kosong</kendo-formerror>
+        </div>
+      </div>
+      <div>
+        <div class="wrap">
+        <kendo-label class="labelForm">Jenis Pemegang Saham</kendo-label>
+        <div>
+          <input
+            id="Perseorangan"
+            type="radio"
+            required
+            [value]="true"
+            formControlName="perseorangan"
+            kendoRadioButton
+          />
+          <kendo-label class="k-radio-label"  for="Perseorangan">Perseorangan</kendo-label>
+          <input
+            id="BadanUsaha"
+            type="radio"
+            required
+            [value]="false"
+            formControlName="perseorangan"
+            kendoRadioButton
+          />
+          <kendo-label class="k-radio-label" for="BadanUsaha">Badan Usaha</kendo-label>
+          <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.perseorangan.errors?.required">Jenis Pemegang Saham tidak boleh kosong</kendo-formerror>
+        </div>
+      </div>
+      </div>
+      <div>
+      </div>
+      <div>
+        <div class="wrap">
+          <kendo-label class="labelForm">Pemegang Saham</kendo-label>
+          <div>
+            <input
+            id="Lokal"
+            type="radio"
+            required
+            [value]="true"
+            formControlName="lokal"
+            kendoRadioButton
+            />
+            <kendo-label class="k-radio-label"  for="Lokal">Lokal</kendo-label>
+            <input
+              id="Asing"
+              type="radio"
+              required
+              [value]="false"
+              formControlName="lokal"
+              kendoRadioButton
+            />
+            <kendo-label class="k-radio-label" for="Asing">Asing</kendo-label>
+            <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.lokal.errors?.required">Pemegang Saham Lokal/Asing tidak boleh kosong</kendo-formerror>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="wrap">
+          <kendo-label class="labelForm">% Kepemilikan Saham</kendo-label>
+          <div>
+            <kendo-numerictextbox 
+              id="kepemilikanSaham"
+              class="formField"
+              [decimals]="2" 
+              [format]="'# \\%'"
+              [min]="0"
+              [max]="100"
+              [autoCorrect]=true
+              [spinners]="false"
+              formControlName="persentaseKepemilikan"
+            >
+            </kendo-numerictextbox>
+            <kendo-formerror class="formHint" *ngIf="pemegangSahamFormGroup.controls.persentaseKepemilikan.errors?.required">Kepemilikan Saham tidak boleh kosong</kendo-formerror>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+    <kendo-dialog-actions>
+      <button id="submitPemegangSaham" kendoButton (click)="submit()" [primary]="true">
+        Simpan
+      </button>
+      <button id="closePemegangSaham" kendoButton (click)="closeSaham()" [primary]="false">
+        Batal
+      </button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+</div>
+
+
+<!-- <app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message> -->
+
+<kendo-dialog title="{{ title }}" *ngIf="openedPopUp" (close)="closePopUp()" [minWidth]="250" [width]="450" >
+  <p style="margin: 30px; text-align: center;">
+      {{ message }}
+  </p>
+  <kendo-dialog-actions *ngIf="noButton || yesButton">
+      <button id="btn-popup-no" *ngIf="noButton" kendoButton (click)="closePopUp()">No</button>
+      <button id="btn-popup-yes" *ngIf="yesButton" kendoButton (click)="closePopUp()">Yes</button>
+  </kendo-dialog-actions>
+</kendo-dialog>
+
+<kendo-dialog title="{{ title }}" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450" [title]="popUpConfirmationTitle">
+  <p style="margin: 30px; text-align: center;">
+      {{ popUpConfirmationMessage }}
+  </p>
+  <kendo-dialog-actions>
+      <button id="btn-popup-no" kendoButton (click)="close('cancel')">No</button>
+      <button id="btn-popup-yes" kendoButton (click) ="deletePemegangSaham()" class="k-primary">Yes</button>
+  </kendo-dialog-actions>
+</kendo-dialog>
