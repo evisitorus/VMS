@@ -375,7 +375,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setJenisPenyediaUsaha(resp: any) {
     //get jenis penyedia usaha
-    this.jenis_penyedia_usaha = resp["hydra:member"];
+    this.jenis_penyedia_usaha = resp.data.data;
 
     if (this.dataPerusahaan.jenisPenyediaUsaha == null) {
       this.selectedJenisPenyedia = this.jenis_penyedia_usaha[-1]
@@ -387,7 +387,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setJenisKegiatanUsaha(resp: any) {
     //get jenis kegiatan usaha
-    this.jenis_kegiatan_usaha = resp["hydra:member"];
+    this.jenis_kegiatan_usaha = resp.data.data;
     if (this.dataPerusahaan.jenisKegiatanUsaha == null) {
       this.selectedJenisKegiatan = this.jenis_kegiatan_usaha[-1]
     } else {
@@ -408,7 +408,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setBidangUsaha(resp: any) {
     //get kbli bidang usaha
-    this.bidangUsahaKbli = resp["hydra:member"];
+    this.bidangUsahaKbli = resp.data.data;
     for (let index = 0; index < this.dataPerusahaan.bidangUsaha.length; index++) {
       const element = this.dataPerusahaan.bidangUsaha[index];
       let indexBadanUsaha = this.bidangUsahaKbli.findIndex((item:any) => item.id === element.id)

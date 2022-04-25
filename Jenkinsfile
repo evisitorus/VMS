@@ -74,10 +74,9 @@ pipeline {
                     steps {
                         script {
                             if (env.BRANCH_NAME == 'release') {
-                                sh "sed -i 's/tenderbumn.id/dev.tenderbumn.id/g' src/environments/environment.prod.ts"
+                                sh "sed -i 's/tenderbumn.id/stage.tenderbumn.id/g' src/environments/environment.prod.ts"
                             } else if (env.BRANCH_NAME == 'develop') {
-                                sh "sed -i 's/tenderbumn.id/tenderbumn.my.id/g' src/environments/environment.prod.ts"
-                                sh "sed -i 's/https/http/g' src/environments/environment.prod.ts"
+                                sh "sed -i 's/tenderbumn.id/dev.tenderbumn.id/g' src/environments/environment.prod.ts"
                             }
                             sh 'docker build --target build-prod -t $REGISTRY_NAME:$BRANCH_NAME-$TAG .'
                             sh 'docker images'
