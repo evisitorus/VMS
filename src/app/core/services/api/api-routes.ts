@@ -19,7 +19,7 @@ export const ApiRoutes = {
   api_dashboard_vendor_route: API_BASE_URL + "/users/dashboard/1",
   api_profile_pic: API_BASE_URL + "/users/profile/pic",
   api_assets_route: API_BASE_URL + "/mesin_peralatans",
-  api_penyedia_usaha_route: API_BASE_URL + "/jenis_penyedia_usahas?page=1",
+  api_penyedia_usaha_route: API_BASE_URL + "/jenis_penyedia_usahas/list",
   api_tenders_route: API_BASE_URL + "/tenders",
   api_list_tender: API_BASE_URL + "/tenders/page/",
   api_list_bumn_tender: API_BASE_URL + "/tenders/company/list",

@@ -375,7 +375,7 @@ export class ProfileInformasiPerusahaanComponent {
 
   public setJenisPenyediaUsaha(resp: any) {
     //get jenis penyedia usaha
-    this.jenis_penyedia_usaha = resp["hydra:member"];
+    this.jenis_penyedia_usaha = resp.data.data;
 
     if (this.dataPerusahaan.jenisPenyediaUsaha == null) {
       this.selectedJenisPenyedia = this.jenis_penyedia_usaha[-1]
