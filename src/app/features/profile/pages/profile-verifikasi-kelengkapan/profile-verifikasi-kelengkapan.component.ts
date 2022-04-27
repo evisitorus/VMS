@@ -40,6 +40,10 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public role!: string;
   public isDisabled: boolean = false;
 
+  public isUnverified: boolean = false;
+  public isVerifying: boolean = false;
+  public isVerified: boolean = false;
+
   public popUpConfirmationMessage: string = "";
   public popUpTitle: string = "Pengajuan Verifikasi";
   public popUpMessage: string = "";
@@ -79,10 +83,25 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
         this.data.riwayatPekerjaan.text = kelengkapan.riwayat_pekerjaan.text;
         
         this.role = resp.data.role_vendor.roleType.name;
-        if (this.role === this.roles.vendorBasicVerifying || this.role === this.roles.vendorPro) {
-          this.isDisabled = true;
-          this.verificationStatus = this.role === this.roles.vendorBasicVerifying ? "Sedang dalam proses verifikasi" : "Terverifikasi";
+        switch (this.role) {
+          case this.roles.vendorBasicVerifying:
+            this.isUnverified = false;
+            this.isVerifying = true;
+            this.isVerified = false;
+            break;
+          case this.roles.vendorPro:
+            this.isUnverified = false;
+            this.isVerifying = false;
+            this.isVerified = true;
+            break;
+          case this.roles.vendorBasic:
+          default:
+            this.isUnverified = true;
+            this.isVerifying = false;
+            this.isVerified = false;
+            break;
         }
+        this.verificationStatus = this.role === this.roles.vendorBasicVerifying ? "Sedang dalam proses verifikasi" : "Terverifikasi";
       },
       () => {
         this.popUpMessage = dictionary.fetch_data_kelengkapan_failed;

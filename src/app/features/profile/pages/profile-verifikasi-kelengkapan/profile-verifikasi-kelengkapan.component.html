@@ -70,13 +70,15 @@
 
       <div class="k-actions k-actions-end">
         <div class="col-3 profile-content-grid-button">
-          <button kendoButton class="vms-btn vms-btn-primary" id="btn-submit-verification" (click)="verify()" *ngIf="!isDisabled">
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-submit-verification" (click)="verify()" *ngIf="isUnverified">
             Ajukan Verifikasi
           </button>
-          <button kendoButton class="vms-btn vms-btn-primary" id="btn-cancel-verification" (click)="cancelConfirmation()" *ngIf="isDisabled">
+          <button kendoButton class="vms-btn vms-btn-primary" id="btn-cancel-verification" (click)="cancelConfirmation()" *ngIf="isVerifying">
             Batalkan Pengajuan
           </button>
-          <!-- <kendo-label class="verifikasi-label" *ngIf="isDisabled">{{verificationStatus}}</kendo-label> -->
+          <div class="verifikasi-label-container">
+            <kendo-label class="verifikasi-label" *ngIf="isVerified">{{verificationStatus}}</kendo-label>
+          </div>
         </div>
       </div>
 
