@@ -18,6 +18,10 @@
   line-height: 16px; */
 }
 
+.verifikasi-label-container {
+  text-align: right;
+}
+
 .verifikasi-checkbox {
   margin-right: 1em;
 }
