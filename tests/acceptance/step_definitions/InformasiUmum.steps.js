@@ -117,7 +117,7 @@ Given('The Vendor must complete following inputs where found on {string} form', 
             I.attachFile('#imgPerusahaanUpload input[type=file]', './tests/acceptance/_fixture/logo_justin.jpg');
             I.checkOption('#NIBbtnTrue');
             I.click('#nomorIndukBerusaha');
-            I.fillField('#nomorIndukBerusaha', '12345678');
+            I.fillField('#nomorIndukBerusaha', '8120212093207');
             I.fillField('#namaPerusahaan input[class=k-input]', 'PT. Megah VMS');
             I.fillField('#inisialPerusahaanInput input[class=k-input]', 'VMS');
             I.checkOption('#ptRbtn');
@@ -189,49 +189,6 @@ Given('The Vendor must complete following inputs where found on {string} form', 
             I.fillField('#npwp input[class=k-input]', '111100002222');
             I.click('#tanggalTerbitNpwp input[class=k-input]');
             I.fillField('#tanggalTerbitNpwp input[class=k-input]', '04112022');
-            I.fillField('#noSiup input[class=k-input]', '33333');
-            I.click('#tanggalTerbitSiup input[class=k-input]');
-            I.fillField('#tanggalTerbitSiup input[class=k-input]', '04112022');
-            I.fillField('#noNibTdp input[class=k-input]', '222222');
-            I.click('#tanggalTerbitNibTdp input[class=k-input]');
-            I.fillField('#tanggalTerbitNibTdp input[class=k-input]', '04112022');
-            I.click('#tanggalExpireNibTdp input[class=k-input]');
-            I.fillField('#tanggalExpireNibTdp input[class=k-input]', '04112022');
-            I.fillField('#noIdpSitu input[class=k-input]', '11111');
-            I.click('#tanggalTerbitIdpSitu input[class=k-input]');
-            I.fillField('#tanggalTerbitIdpSitu input[class=k-input]', '04112022');
-            I.click('#tanggalExpireIdpSitu input[class=k-input]');
-            I.fillField('#tanggalExpireIdpSitu input[class=k-input]', '04112022');
-            break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            break;
-        case "":
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
-            I.fillField('#', '');
             break;
         default:
             break;
