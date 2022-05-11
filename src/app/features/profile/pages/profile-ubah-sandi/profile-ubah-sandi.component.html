@@ -1,0 +1,80 @@
+<div class="row profile-section">
+
+  <div class="col-2 profile-menu">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="col-10 profile-content-container">
+
+    <div class="profile-content">
+      <kendo-label id="tata-kelola-label" class="mb-5 text-bold h4">Ubah Kata Sandi</kendo-label>
+      <form class="k-form auth-form" [formGroup]="form">
+        <div class="row">
+          <div class="col-3 pt-3 pb-3">
+            <kendo-label id="label-name" [for]="password">Kata Sandi Lama</kendo-label>
+          </div>
+          <div class="col-9">
+            <kendo-formfield>
+              <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
+                <ng-template kendoTextBoxSuffixTemplate>
+                  <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
+                </ng-template>
+              </kendo-textbox>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Kata sandi lama tidak koleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 pt-3 pb-3">
+            <kendo-label id="label-name" [for]="password">Kata Sandi Baru</kendo-label>
+          </div>
+          <div class="col-9">
+            <kendo-formfield>
+              <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
+                <ng-template kendoTextBoxSuffixTemplate>
+                  <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
+                </ng-template>
+              </kendo-textbox>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Kata sandi baru tidak koleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3 pt-3 pb-3">
+            <kendo-label id="label-name" [for]="password">Konfirmasi Kata Sandi Baru</kendo-label>
+          </div>
+          <div class="col-9">
+            <kendo-formfield>
+              <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
+                <ng-template kendoTextBoxSuffixTemplate>
+                  <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
+                </ng-template>
+              </kendo-textbox>
+              <kendo-formhint></kendo-formhint>
+              <kendo-formerror>Konfirmasi kata sandi baru tidak koleh kosong</kendo-formerror>
+            </kendo-formfield>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="float-end">
+              <div class="k-form-buttons">
+                <button id="submitPassword" class="k-button k-primary vms-btn">Simpan Kata Sandi</button>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div kendoDialogContainer></div>
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true"></app-popup-message>

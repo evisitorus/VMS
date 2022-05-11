@@ -12,11 +12,13 @@ import {ProfileDashboardComponent} from "./pages/profile-dashboard/profile-dashb
 import { ProfileTataKelolaPerusahaanComponent } from './pages/profile-tata-kelola-perusahaan/profile-tata-kelola-perusahaan.component';
 import { ProfileAspekLegalComponent } from './pages/profile-aspek-legal/profile-aspek-legal.component';
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
+import { ProfileUbahSandiComponent } from './pages/profile-ubah-sandi/profile-ubah-sandi.component';
 
 const routes: Routes = [
   {path: 'profile-verification', component: ProfileVerifikasiKelengkapanComponent, canActivate: [AuthGuard]},
   {path: 'profile-information', component: ProfileInformasiPerusahaanComponent, canActivate: [AuthGuard]},
   {path: 'profile-tata-kelola-perusahaan', component: ProfileTataKelolaPerusahaanComponent, canActivate: [AuthGuard]},
+  {path: 'profile-ubah-sandi', component: ProfileUbahSandiComponent, canActivate: [AuthGuard]},
   {path: 'profile-person-in-charge', component: ProfilePersonInChargeComponent, canActivate: [AuthGuard]},
   {path: 'profile-aset', component: ProfileAsetComponent, canActivate: [AuthGuard]},
   {path: 'profile-dokumen', component: ProfileDokumenComponent, canActivate: [AuthGuard]},

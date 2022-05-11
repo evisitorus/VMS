@@ -42,6 +42,7 @@ import { ProfileAspekLegalComponent } from './pages/profile-aspek-legal/profile-
 import { LegalitasComponent } from './pages/profile-aspek-legal/sections/legalitas/legalitas.component';
 import { DokumenLegalComponent } from './pages/profile-aspek-legal/sections/dokumen-legal/dokumen-legal.component';
 import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/sections/sertifikasi-dok-khusus/sertifikasi-dok-khusus.component';
+import { ProfileUbahSandiComponent } from './pages/profile-ubah-sandi/profile-ubah-sandi.component';
 // const drawerRoutes = [
 //   { path: 'dashboard', component: ProfileDashboardComponent, text: 'Dashboard'},
 //   { title: "Kelola Akun",
@@ -75,6 +76,7 @@ import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/secti
     DrawerComponent,
     DataPegawaiComponent,
     ProfileTataKelolaPerusahaanComponent,
+    ProfileUbahSandiComponent,
     PemegangSahamComponent,
     ProfilKaryawanComponent,
     DrawerComponent,
@@ -82,7 +84,8 @@ import { SertifikasiDokKhususComponent } from './pages/profile-aspek-legal/secti
     ProfileAspekLegalComponent,
     LegalitasComponent,
     DokumenLegalComponent,
-    SertifikasiDokKhususComponent
+    SertifikasiDokKhususComponent,
+    ProfileUbahSandiComponent
   ],
   imports: [
     CommonModule,
