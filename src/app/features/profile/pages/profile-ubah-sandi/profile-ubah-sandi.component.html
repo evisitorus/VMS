@@ -11,11 +11,11 @@
       <form class="k-form auth-form" [formGroup]="form">
         <div class="row">
           <div class="col-3 pt-3 pb-3">
-            <kendo-label id="label-name" [for]="password">Kata Sandi Lama</kendo-label>
+            <kendo-label id="label-name" [for]="sandiLama">Kata Sandi Lama</kendo-label>
           </div>
           <div class="col-9">
             <kendo-formfield>
-              <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
+              <kendo-textbox id="input-password" formControlName="sandiLama" #sandiLama required [clearButton]="true">
                 <ng-template kendoTextBoxSuffixTemplate>
                   <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
                 </ng-template>
@@ -28,11 +28,11 @@
 
         <div class="row">
           <div class="col-3 pt-3 pb-3">
-            <kendo-label id="label-name" [for]="password">Kata Sandi Baru</kendo-label>
+            <kendo-label id="label-name" [for]="sandiBaru">Kata Sandi Baru</kendo-label>
           </div>
           <div class="col-9">
             <kendo-formfield>
-              <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
+              <kendo-textbox id="input-password" formControlName="sandiBaru" #sandiBaru required [clearButton]="true">
                 <ng-template kendoTextBoxSuffixTemplate>
                   <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
                 </ng-template>
@@ -45,11 +45,11 @@
 
         <div class="row">
           <div class="col-3 pt-3 pb-3">
-            <kendo-label id="label-name" [for]="password">Konfirmasi Kata Sandi Baru</kendo-label>
+            <kendo-label id="label-name" [for]="retypeSandiBaru">Konfirmasi Kata Sandi Baru</kendo-label>
           </div>
           <div class="col-9">
             <kendo-formfield>
-              <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
+              <kendo-textbox id="input-password" formControlName="retypeSandiBaru" #retypeSandiBaru required [clearButton]="true">
                 <ng-template kendoTextBoxSuffixTemplate>
                   <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
                 </ng-template>
@@ -64,7 +64,7 @@
           <div class="col-12">
             <div class="float-end">
               <div class="k-form-buttons">
-                <button id="submitPassword" class="k-button k-primary vms-btn">Simpan Kata Sandi</button>
+                <button id="submitPassword" (click)="ubahPassword()" class="k-button k-primary vms-btn">Simpan Kata Sandi</button>
             </div>
             </div>
           </div>
