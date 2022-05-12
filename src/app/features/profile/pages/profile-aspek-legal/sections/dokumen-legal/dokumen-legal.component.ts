@@ -98,7 +98,7 @@ export class DokumenLegalComponent implements OnInit {
     }
 
     // get data only unit PKP
-    mappedData.splice(mappedData.length - amount_to_remove, amount_to_remove);
+    // mappedData.splice(mappedData.length - amount_to_remove, amount_to_remove);
 
     return mappedData;
   }
