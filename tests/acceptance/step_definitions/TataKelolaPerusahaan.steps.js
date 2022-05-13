@@ -28,31 +28,3 @@ Given('The Vendor can see the first five list of documents in {string} at {strin
     I.see('Nama File');
     I.see('Action');
 });
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
-
-Given('', () => {
-
-});
