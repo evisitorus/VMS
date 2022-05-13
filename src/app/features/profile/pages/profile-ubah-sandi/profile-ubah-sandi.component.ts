@@ -14,7 +14,7 @@ import { dictionary } from 'src/app/dictionary/dictionary';
 export class ProfileUbahSandiComponent implements OnInit {
 
   @ViewChild("password") public textbox!: TextBoxComponent;
-  popUpTitle: string = "";
+  popUpTitle: string = "Ubah Kata Sandi";
   popUpMessage: string = "";
 
   constructor(
@@ -38,33 +38,36 @@ export class ProfileUbahSandiComponent implements OnInit {
   }
 
   public ubahPassword() {
-    const sandiLama = this.form.value.sandiLama;
-    const sandiBaru =  this.form.value.sandiBaru;
-    const retype_sandiBaru = this.form.value.retypeSandiBaru;
-    this.service.getUbahSandi(sandiLama, sandiBaru, retype_sandiBaru).subscribe(
-      (resp) => {
-        if (resp.status === true) {
-          this.popUpMessage = resp.message;
-          this.triggerPopUp();
-        } else {
-          this.popUpMessage = resp;
-          this.triggerPopUp();
+    this.form.markAllAsTouched()
+    if (this.form.valid) {
+      const sandiLama = this.form.value.sandiLama;
+      const sandiBaru = this.form.value.sandiBaru;
+      const retype_sandiBaru = this.form.value.retypeSandiBaru;
+      this.service.getUbahSandi(sandiLama, sandiBaru, retype_sandiBaru).subscribe(
+        (resp) => {
+          if (resp.status === true) {
+            this.popUpMessage = resp.message;
+            this.triggerPopUp();
+          } else {
+            this.popUpMessage = resp;
+            this.triggerPopUp();
+          }
+        },
+        (err) => {
+          console.log(err);
+          if (err.error.status === false) {
+            this.popUpMessage = err.error.message;
+            this.triggerPopUp();
+          } else {
+            this.popUpMessage = dictionary.update_data_failed;
+            this.triggerPopUp();
+          }
         }
-      },
-      (err) => {
-        console.log(err);
-        if (err.error.status === false) {
-          this.popUpMessage = err.error.message;
-          this.triggerPopUp();
-        } else {
-          this.popUpMessage = dictionary.update_data_failed;
-          this.triggerPopUp();
-        }
-      }
-    );
+      );
+    }
   }
 
-  triggerPopUp():void  {
+  triggerPopUp(): void {
     this.eventEmitterService.trigger();
   }
 

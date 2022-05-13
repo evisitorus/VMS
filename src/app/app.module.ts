@@ -26,6 +26,9 @@ import { IndicatorsModule } from '@progress/kendo-angular-indicators';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomHttpInterceptor } from './layouts/vms-loader/http-interceptor';
 import { VmsLoader } from './layouts/vms-loader/vms-loader.component';
+import { ButtonsModule, DropDownButton, DropDownButtonComponent } from '@progress/kendo-angular-buttons';
+import { GridComponent } from '@progress/kendo-angular-grid';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 
 
@@ -59,6 +62,8 @@ import { VmsLoader } from './layouts/vms-loader/vms-loader.component';
     ListViewModule,
     IconsModule,
     IndicatorsModule,
+
+    ButtonsModule
   ],
   providers: [
     {

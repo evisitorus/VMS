@@ -12,14 +12,16 @@
             <a class="nav-link" href="/tentang-kami">Tentang Kami</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
-            <a class="nav-link" href="/dashboard">Profil</a>
+              <kendo-dropdownbutton [data]="data" class="nav-link" fillMode="flat" (itemClick)="doClickProfileMenu($event)">
+                Profil
+              </kendo-dropdownbutton>
           </li>
         <li class="nav-item" *ngIf="!isLoggedIn">
             <a class="nav-link" href="/login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
+        <!-- <li class="nav-item" *ngIf="isLoggedIn">
             <a id="btn-logout" class="nav-link" href="#" (click)="logout()">Logout</a>
-        </li>
+        </li> -->
     </ul>
 
 </div>

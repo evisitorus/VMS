@@ -37,7 +37,27 @@ a:hover {
   color: #125699;
 }
 
+.nav-link.k-dropdown-button {
+  padding: 0 !important;
+}
+
+.nav-link.k-dropdown-button>button.k-button {
+  background: none;
+  border-style: none;
+  color: #0193AC !important;
+  font-size: medium !important;
+  margin: 2px 5px 2px 5px !important;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.k-popup.k-list-container.k-reset.k-group {
+  width: 10em;
+}
+
+.k-item.ng-star-inserted.k-state-focused {box-shadow: none;}
+
 /* Responsive Styles */
 @media screen and (max-width: 500px) {
-  
+
 }
