@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api_base_path: "http://localhost:8000",
-  login_as:"PIC Vendor",
+  login_as:"ROLE_PIC_VENDOR",
   acceptance_test : true
 };
 
