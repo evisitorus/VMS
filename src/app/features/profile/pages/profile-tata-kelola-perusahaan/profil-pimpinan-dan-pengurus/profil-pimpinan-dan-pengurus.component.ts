@@ -7,6 +7,7 @@ import { ProfilePimpinanDanPengurusInterface } from 'src/app/core/interfaces/pro
 import { PimpinanDanPengurusService } from 'src/app/core/services/profile/profile-pic/pimpinan-dan-pengurus.service';
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { ProfileTataKelolaPerusahaanComponent } from '../profile-tata-kelola-perusahaan.component';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 interface Item {
   name: string;
@@ -33,6 +34,15 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public id!: string;
   public pengurusId!: string;
   public isNewData: boolean = true;
+
+  public dict = dictionary;
+  public formField = {
+    firstName: "Nama Depan",
+    lastName: "Nama Belakang",
+    jabatan: "Jabatan",
+    noId: "No. Identitas",
+    npwp: "No. NPWP"
+  };
 
   popUpID: string = "";
   popUpTitle: string = "";
@@ -135,9 +145,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
 
   public submitProfilPimpinanDanPengurus(): void {
-    let fileVar = [this.uploadedFileContentUrl, this.uploadedNpwpContentUrl, this.selectedFile, this.selectedNpwpFile];
-
-    console.log(fileVar);
+    const fileVar = [this.uploadedFileContentUrl, this.uploadedNpwpContentUrl, this.selectedFile, this.selectedNpwpFile];
 
     let fileVar_status = true;
     let fileVar_stat = true;
@@ -145,7 +153,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     fileVar.every(file => {
       if( file === null || typeof file === 'undefined' ){
         this.popUpID = "popup-wrong-file";
-        this.parent.popUpMessage = "Periksa kembali file Anda";
+        this.parent.popUpMessage = dictionary.invalid_file;
         this.parent.triggerPopUp();
         fileVar_stat = false;
       } 
@@ -175,9 +183,9 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
   public save(): void {
     this.popUpTitle = "Tambah Pimpinan";
-    let file_id = this.extractNumber(this.uploadedFileId);
-    let npwp_id = this.extractNumber(this.uploadedNpwpId);
-    let params: ProfilePimpinanDanPengurusInterface = {
+    const file_id = this.extractNumber(this.uploadedFileId);
+    const npwp_id = this.extractNumber(this.uploadedNpwpId);
+    const params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
       lastName: this.pengurusFormGroup.value.lastName,
@@ -220,7 +228,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
         this.uploadedFileId = res["@id"]; //vendor :resume_id
 
       },
-      (error) => {
+      () => {
         this.popUpID = "popup-upload-file-failed";
         this.parent.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.parent.triggerPopUp();
@@ -235,7 +243,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
         this.uploadedNpwpId = res["@id"]; //vendor :resume_id
 
       },
-      (error) => {
+      () => {
         this.popUpID = "popup-upload-file-failed";
         this.parent.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
         this.parent.triggerPopUp();
@@ -246,12 +254,12 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public download(fileId: string, filename: string) {
     this.fileService.download(fileId).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url = window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url = window.URL.createObjectURL(blob);
         window.open(url);
       },
-      (error) => {
+      () => {
         this.popUpID = "popup-failed-download";
         this.parent.popUpMessage = "Gagal mengunduh file, Silakan Coba Lagi!";
         this.parent.triggerPopUp();
@@ -276,7 +284,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.setForm();
     this.open();
 
-    this.parent.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.parent.popUpMessage = dictionary.update_data_notification;
     this.parent.triggerPopUp();
   }
 
@@ -289,7 +297,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   }
 
   public update(): void {
-    let params: ProfilePimpinanDanPengurusInterface = {
+    const params: ProfilePimpinanDanPengurusInterface = {
       nik: this.pengurusFormGroup.value.nik.toString(),
       firstName: this.pengurusFormGroup.value.firstName,
       lastName: this.pengurusFormGroup.value.lastName,
@@ -305,7 +313,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
     this.pimpinanDanPengurusService.update(params, this.id, this.pengurusId).subscribe(
       () => {
         this.popUpID = "popup-success-update-pengurus";
-        this.parent.popUpMessage = "Berhasil memperbarui data, silakan ajukan verifikasi";
+        this.parent.popUpMessage = dictionary.update_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         this.resetForm();
@@ -322,7 +330,7 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
   public delete(id: string): void {
     this.pimpinanDanPengurusService.delete(id).subscribe(
       () => {
-        this.parent.popUpMessage = "Berhasil menghapus data";
+        this.parent.popUpMessage = dictionary.delete_data_success;
         this.parent.triggerPopUp();
         this.fetchData();
         window.location.reload();
@@ -336,8 +344,8 @@ export class ProfilPimpinanDanPengurusComponent implements OnInit {
 
   public deleteConfirmation(id: string, name: string): void {
     const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi",
-      content: "Apakah " + name + " akan dihapus dari sistem ?",
+      title: dictionary.confirm_delete_title,
+      content: dictionary.confirm_delete_message,
       actions: [{ text: "Ya" }, { text: "Tidak", primary: true }],
       width: 450,
       height: 200,

@@ -1,55 +1,12 @@
 <div>
   <div>
     <div>
-      <!-- <div id="attention" *ngIf="!isDisabled">
-        <p id="verification-attention">Perhatian :<br>Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh
-          VMS Verificator. Pastikan
-          perubahan data perusahaan Anda sudah benar.</p>
-      </div> -->
-      <!-- <div class="profile-content-pic">
-        <ng-container
-            *ngIf="responseFile; then showPICPicture; else showDefaultPicture">
-          </ng-container>
-          <ng-template #showPICPicture>
-            <div class="row align-items-center k-justify-content-center">
-              <img id="pic-photo-showed-up" class="col-3" [src]="responseFile" alt="">
-            </div>
-          </ng-template>
-          <ng-template #showDefaultPicture>
-            <div class="row align-items-center k-justify-content-center">
-              <div class="row align-items-center k-justify-content-center">
-                <img id="pic-photo-hidden" class="col-3" src="/assets/images/nopic.png" style="width: 15%; height: 15%"
-                      alt="">
-              </div>
-              <div class="row align-items-center k-justify-content-center">
-                <kendo-formerror class="col-3" style="margin: 0 auto" id="error-pic-photo-required"
-                                  *ngIf="!responseFile">Mohon upload foto PIC
-                </kendo-formerror>
-              </div>
-            </div>
-          </ng-template>
-          <br>
-
-          <div class="row align-items-center k-justify-content-center" *ngIf="!isDisabled" style="padding-bottom: 15px">
-            <kendo-fileselect id="input-pic-avatar" [multiple]="false" [restrictions]="fileRestrictions"
-                              [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()">
-              <kendo-fileselect-messages id="file-upload-error-message"
-                                          dropFilesHere="Tidak ada gambar terpilih"
-                                          select="Pilih gambar"
-                                          invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
-                                          invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
-              </kendo-fileselect-messages>
-            </kendo-fileselect>
-            <p style="font-style: italic;font-size: small;">*Gambar dapat berupa .jpg, .jpeg, .png, maksimal 2 MB</p>
-          </div>
-        
-      </div> -->
       <form id="form-pic" class="k-form auth-form">
         <fieldset id="fieldset-pic" class="k-form-fieldset">
-          <div>
+          <legend>PIC Perusahaan</legend>
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label id="label-name" class="col-12">Nama Penanggung Jawab</kendo-label>
+              <kendo-label id="label-name" class="col-12">{{formField.name}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield class="mt-0" id="formfield-name" [formGroup]="formPIC">
@@ -59,18 +16,17 @@
                                required
                                [readonly]=isDisabled
                                [value]=responseName
-                               [minlength]="3"
-                               [maxlength]="50"
+                               [minlength]="charLimit.minName"
+                               [maxlength]="charLimit.maxName"
                                (keypress)="keyPressAlphaSymbol($event)">
                 </kendo-textbox>
                 <kendo-formerror id="error-name-less-than-3-characters" *ngIf="formPIC.controls.name.errors?.minlength">
-                  Nama tidak boleh kurang dari 3 karakter
+                  {{formField.name}}  {{dict.warning.less_than}} {{charLimit.minName}} karakter
                 </kendo-formerror>
                 <kendo-formerror id="error-name-greater-than-50-characters"
-                                 *ngIf="formPIC.controls.name.errors?.maxlength">Nama tidak boleh lebih dari 50 karakter
+                                 *ngIf="formPIC.controls.name.errors?.maxlength">{{formField.name}}  {{dict.warning.more_than}} {{charLimit.maxName}} karakter
                 </kendo-formerror>
-                <kendo-formerror id="error-name-required" *ngIf="formPIC.controls.name.errors?.required">Nama tidak
-                  boleh kosong
+                <kendo-formerror id="error-name-required" *ngIf="formPIC.controls.name.errors?.required">{{formField.name}} {{dict.warning.empty_field}}
                 </kendo-formerror>
               </kendo-formfield>
             </div>
@@ -78,7 +34,7 @@
 
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label id="label-email" class="col-12">Email Penanggung Jawab</kendo-label>
+              <kendo-label id="label-email" class="col-12">{{formField.email}} </kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield class="mt-0" id="formfield-email" [formGroup]="formPIC">
@@ -94,40 +50,35 @@
 
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label id="label-phone-number" class="col-12">No. Handphone</kendo-label>
+              <kendo-label id="label-phone-number" class="col-12">{{formField.phone}} </kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield class="mt-0" id="formfield-phone-number" [formGroup]="formPIC">
                 <kendo-textbox id="input-phone-number" class="col-md" formControlName="phoneNumber"
-                               placeholder="No. Handphone Anda"
+                               placeholder="{{formField.phone}}  Anda"
                                [clearButton]="true"
                                #phoneNumber
                                required
                                [readonly]=isDisabled
                                [value]=responsePhoneNumber
-                               [minlength]="7"
-                               [maxlength]="20"
+                               [minlength]="charLimit.minPhone"
+                               [maxlength]="charLimit.maxPhone"
                                (keypress)="keyPressNumbers($event)">
                 </kendo-textbox>
                 <kendo-formerror id="error-phone-number-less-than-7-digits"
-                                 *ngIf="formPIC.controls.phoneNumber.errors?.minlength">No. Handphone tidak boleh kurang
-                  dari 7
+                                 *ngIf="formPIC.controls.phoneNumber.errors?.minlength">{{formField.phone}} {{dict.warning.less_than}} {{charLimit.minPhone}}
                   digit
                 </kendo-formerror>
                 <kendo-formerror id="error-phone-number-greater-than-20-digits"
-                                 *ngIf="formPIC.controls.phoneNumber.errors?.maxlength">No. Handphone tidak boleh lebih
-                  dari 20
+                                 *ngIf="formPIC.controls.phoneNumber.errors?.maxlength">{{formField.phone}} {{dict.warning.more_than}} {{charLimit.maxPhone}}
                   digit
                 </kendo-formerror>
                 <kendo-formerror id="error-phone-number-required" *ngIf="formPIC.controls.phoneNumber.errors?.required">
-                  No. Handphone tidak boleh kosong
+                  {{formField.phone}} {{dict.warning.empty}}
                 </kendo-formerror>
               </kendo-formfield>
             </div>
           </div>
-          </div>
-          
-
         </fieldset>
       </form>
       <div class="pt-5 pb-5">
@@ -151,15 +102,15 @@
         <kendo-dialog id="popup-confirm-save"
                       title="Konfirmasi"
                       *ngIf="opened"
-                      (close)="close('cancel')"
+                      (close)="close()"
                       [minWidth]="250"
                       [width]="450">
           <p style="margin: 30px; text-align: center;">
             Simpan perubahan data PIC Perusahaan?
           </p>
           <kendo-dialog-actions id="popup-action-confirm-save">
-            <button kendoButton id="btn-popup-no" (click)="close('no')">Tidak</button>
-            <button kendoButton id="btn-popup-yes" (click)="save(); close('yes')" [primary]="true">Ya</button>
+            <button kendoButton id="btn-popup-no" (click)="close()">Tidak</button>
+            <button kendoButton id="btn-popup-yes" (click)="save()" [primary]="true">Ya</button>
           </kendo-dialog-actions>
         </kendo-dialog>
       </div>

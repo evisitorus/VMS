@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { AddPegawaiInterface } from 'src/app/core/interfaces/add-pegawai-interface';
 
 import { TipeKaryawan } from "./tipeKaryawan.model";
 
@@ -39,9 +38,10 @@ export class DataPegawaiComponent implements OnInit {
     private eventEmitterService: EventEmitterService
     ) { }
 
-  ngOnInit(): void {
-    // this.tipeKaryawan = this.getTipeKaryawan();
-  }
+ ngOnInit(): void {
+    // TODO document why this method 'ngOnInit' is empty
+  
+  } 
 
   public isRequired = true;
   public opened = false;
@@ -49,7 +49,6 @@ export class DataPegawaiComponent implements OnInit {
 
 
   public close() {
-    console.log(`Dialog result: ${status}`);
     this.opened = false;
   }
 
@@ -58,7 +57,6 @@ export class DataPegawaiComponent implements OnInit {
   }
 
   public closeSaham() {
-    console.log(`Dialog result: ${status}`);
     this.openedSaham = false;
   }
 
@@ -70,19 +68,6 @@ export class DataPegawaiComponent implements OnInit {
     name: "Pilih Tipe Karyawan",
     id: 0,
   };
-
-  // getTipeKaryawan(){
-  //   this.profileService.getTipeKaryawan().subscribe(
-  //     (resp:any) =>  { 
-  //       this.tipeKaryawan = resp['hydra:member'];
-  //       // const results = resp.map(country => ({name: country.name, continent: country.region}));
-  //       return this.tipeKaryawan;
-  //     },
-  //     (error) => { 
-  //       return error;
-  //     }
-  //   );
-  // }
 
   public pegawaiFormGroup = new FormGroup({
     nikPegawaiInput: new FormControl(null),
@@ -101,30 +86,5 @@ export class DataPegawaiComponent implements OnInit {
     this.pegawaiFormGroup.markAllAsTouched();
     this.popUpMessage = messages.default;
 
-    const dataPemegangSaham = {
-      nik: this.pegawaiFormGroup.controls['nikPegawaiInput'].value,
-      namaKaryawan: this.pegawaiFormGroup.controls['namaKaryawanInput'].value,
-      tipeKaryawan: this.pegawaiFormGroup.controls['tipeKaryawanDropdown'].value,
-      jabatan: this.pegawaiFormGroup.controls['jabatanKaryawanInput'].value,
-      bidangPekerjaan: this.pegawaiFormGroup.controls['bidangPekerjaanKaryawanInput'].value,
-      resume: this.pegawaiFormGroup.controls['resumeKaryawanUpload'].value
-    }
-
-    console.log(dataPemegangSaham);
-    let params: AddPegawaiInterface= {...dataPemegangSaham}
-    // this.profileService.addPegawai(params).subscribe(
-    //   (resp) =>  { 
-    //     this.popUpMessage = messages.success;
-    //     this.triggerPopUp();
-    //     this.redirectOnClosePopUp = true;
-    //     this.closeSaham();
-    //     // this.panelbar.stateChange.next([{title: 'Saham', expanded: true, selected: true}])
-    //   },
-    //   (error) => { 
-    //     this.popUpMessage = error;
-    //     this.triggerPopUp();
-    //     this.redirectOnClosePopUp = true;
-    //   }
-    // );
   }
 }

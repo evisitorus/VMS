@@ -5,6 +5,7 @@ import { TextBoxComponent } from '@progress/kendo-angular-inputs';
 import { ResetPasswordInterface } from 'src/app/core/interfaces/reset-password-interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-reset-password',
@@ -19,7 +20,11 @@ export class ResetPasswordComponent implements OnInit {
   popUpTitle: string = "Reset Password";
   popUpMessage: string = "";
   redirectOnClosePopUp: boolean = false;
-
+  dict: any = dictionary;
+  labelName: any = {
+    newPassword: "Password Baru",
+    repeatNewPassword: "Ulangi Password Baru"
+  }
   form!: FormGroup;
   submitted: boolean = false;
   token!: string;

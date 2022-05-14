@@ -1,15 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tender-data',
   templateUrl: './tender-data.component.html',
   styleUrls: ['./tender-data.component.css']
 })
-export class TenderDataComponent implements OnInit {
-  constructor(){}
-
-  ngOnInit(): void {
-  }
+export class TenderDataComponent{
 
   @Input()
   tender!: {
@@ -45,13 +41,13 @@ export class TenderDataComponent implements OnInit {
   }
 
   getDiffDate(date:Date){
-    let fromDate = new Date(date);
-    let currentDate = new Date();
+    const fromDate = new Date(date);
+    const currentDate = new Date();
 
-    let days = Math.floor((currentDate.getTime() - fromDate.getTime()) / 1000 / 60 / 60 / 24);
-    let weeks = Math.floor(days/7);
-    let months = Math.floor(weeks/4);
-    let years = Math.floor(months/12);
+    const days = Math.floor((currentDate.getTime() - fromDate.getTime()) / 1000 / 60 / 60 / 24);
+    const weeks = Math.floor(days/7);
+    const months = Math.floor(weeks/4);
+    const years = Math.floor(months/12);
 
     let status = "";
 

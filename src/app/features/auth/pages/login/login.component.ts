@@ -5,6 +5,7 @@ import { TextBoxComponent } from "@progress/kendo-angular-inputs";
 import { LoginInterface } from 'src/app/core/interfaces/login-interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,12 @@ export class LoginComponent implements OnInit{
   popUpTitle: string = "Informasi Login";
   popUpMessage: string = "";
   redirectOnClosePopUp: boolean = true;
+  redirectToPage: string = '/dashboard';
+  dictionary: any = dictionary;
+  labelName: any = {
+    alamatEmail: "Alamat Email",
+    kataSandi: "Kata Sandi"
+  }
 
   constructor(
     private authService: AuthService,
@@ -47,7 +54,7 @@ export class LoginComponent implements OnInit{
 
   login(): void {
     this.form.markAllAsTouched();
-    let params: LoginInterface= {...this.form.value};
+    const params: LoginInterface= {...this.form.value};
     this.authService.login(params).subscribe(
       (resp) =>  { 
         this.isLoggedIn = true;
@@ -59,7 +66,7 @@ export class LoginComponent implements OnInit{
         this.authService.setLocalStorage('vendor_name', resp.data.vendor_name);
         this.authService.setLocalStorage('email', resp.data.email);
         
-        let message = resp.message;
+        const message = resp.message;
 
         this.popUpMessage = message.substring(0, 15) + resp.data.vendor_name.concat(" ") + message.substring(15, message.length);
         this.redirectOnClosePopUp = true;

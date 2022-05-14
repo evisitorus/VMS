@@ -17,7 +17,7 @@
 
           <div class="row verifikasi-field">
             <div class="col-3">
-              <kendo-label class="verifikasi-label">Informasi Umum</kendo-label>
+              <kendo-label class="verifikasi-label">{{labelVerifikasi.informasiUmum}}</kendo-label>
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.informasiUmum.status" #informasiUmum kendoCheckBox/>
@@ -27,7 +27,7 @@
 
           <div class="row verifikasi-field">
             <div class="col-3">
-              <kendo-label class="verifikasi-label">Tata Kelola Perusahaan</kendo-label>
+              <kendo-label class="verifikasi-label">{{labelVerifikasi.tataKelolaPerusahaan}}</kendo-label>
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.tataKelolaPerusahaan.status" #tataKelolaPerusahaan kendoCheckBox/>
@@ -37,7 +37,7 @@
 
           <div class="row verifikasi-field">
             <div class="col-3">
-              <kendo-label class="verifikasi-label">Aspek Finansial</kendo-label>
+              <kendo-label class="verifikasi-label">{{labelVerifikasi.aspekFinansial}}</kendo-label>
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.aspekFinansial.status" #aspekFinansial kendoCheckBox/>
@@ -47,7 +47,7 @@
 
           <div class="row verifikasi-field">
             <div class="col-3">
-              <kendo-label class="verifikasi-label">Aspek Legal</kendo-label>
+              <kendo-label class="verifikasi-label">{{labelVerifikasi.aspekLegal}}</kendo-label>
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.aspekLegal.status" #aspekLegal kendoCheckBox/>
@@ -57,7 +57,7 @@
 
           <div class="row verifikasi-field">
             <div class="col-3">
-              <kendo-label class="verifikasi-label">Riwayat Pekerjaan</kendo-label>
+              <kendo-label class="verifikasi-label">{{labelVerifikasi.riwayatPekerjaan}}</kendo-label>
             </div>
             <div class="col-9">
               <input class="verifikasi-checkbox" type="checkbox" disabled [checked]="data.riwayatPekerjaan.status" #riwayatPekerjaan kendoCheckBox/>

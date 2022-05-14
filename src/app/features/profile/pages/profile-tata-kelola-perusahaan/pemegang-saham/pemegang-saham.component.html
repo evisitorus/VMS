@@ -132,9 +132,6 @@
   </kendo-dialog>
 </div>
 
-
-<!-- <app-popup-message id="popUpMessage" [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/profile-information'"></app-popup-message> -->
-
 <kendo-dialog title="{{ title }}" *ngIf="openedPopUp" (close)="closePopUp()" [minWidth]="250" [width]="450" >
   <p style="margin: 30px; text-align: center;">
       {{ message }}
@@ -145,12 +142,12 @@
   </kendo-dialog-actions>
 </kendo-dialog>
 
-<kendo-dialog title="{{ title }}" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450" [title]="popUpConfirmationTitle">
+<kendo-dialog title="{{ title }}" *ngIf="opened" (close)="close()" [minWidth]="250" [width]="450" [title]="popUpConfirmationTitle">
   <p style="margin: 30px; text-align: center;">
       {{ popUpConfirmationMessage }}
   </p>
   <kendo-dialog-actions>
-      <button id="btn-popup-no" kendoButton (click)="close('cancel')">No</button>
+      <button id="btn-popup-no" kendoButton (click)="close()">No</button>
       <button id="btn-popup-yes" kendoButton (click) ="deletePemegangSaham()" class="k-primary">Yes</button>
   </kendo-dialog-actions>
 </kendo-dialog>

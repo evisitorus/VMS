@@ -62,44 +62,44 @@
       <form [formGroup]="pengurusFormGroup">
         <kendo-formfield [formGroup]="pengurusFormGroup">
           <div class="row">
-            <kendo-label class="col">Nama Depan</kendo-label>
+            <kendo-label class="col">{{formField.firstName}}</kendo-label>
             <div class="col k-vstack">
               <kendo-textbox [style.width]="'100%'" id="firstName" class="col-md" formControlName="firstName"
-              placeholder="Nama Depan" #namaPengurus [clearButton]="true">
+              placeholder="{{formField.firstName}}" #namaPengurus [clearButton]="true">
             </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.firstName.errors?.required">Nama Depan tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.firstName.errors?.required">{{formField.firstName}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]="pengurusFormGroup">
           <div class="row">
-            <kendo-label class="col">Nama Belakang</kendo-label>
+            <kendo-label class="col">{{formField.lastName}}</kendo-label>
             <div class="col k-vstack">
               <kendo-textbox [style.width]="'100%'" id="lastName" class="col-md" formControlName="lastName"
-              placeholder="Nama Belakang" #namaPengurus [clearButton]="true">
+              placeholder="{{formField.lastName}}" #namaPengurus [clearButton]="true">
             </kendo-textbox>
-            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.lastName.errors?.required">Nama Belakang tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.lastName.errors?.required">{{formField.lastName}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]="pengurusFormGroup">
           <div class="row">
-            <kendo-label class="col">Jabatan</kendo-label>
+            <kendo-label class="col">{{formField.jabatan}}</kendo-label>
             <div class="col k-vstack">
-              <kendo-textbox [style.width]="'100%'" id="jabatanPimpinanDanPengurusInput" class="col-md" placeholder="Jabatan"
+              <kendo-textbox [style.width]="'100%'" id="jabatanPimpinanDanPengurusInput" class="col-md" placeholder="{{formField.jabatan}}"
               [maxlength]="25" [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
-              <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.jabatan.errors?.required">Jabatan tidak boleh kosong</kendo-formerror>
+              <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.jabatan.errors?.required">{{formField.jabatan}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]="pengurusFormGroup">
           <div class="row">
-            <kendo-label class="col">No. Identitas</kendo-label>
+            <kendo-label class="col">{{formField.noId}}</kendo-label>
             <div class="col k-vstack">
               <kendo-numerictextbox [style.width]="'100%'" id="noIdentitasPengurusInput" formControlName="nik" class="col-md"
-              placeholder="No. Identitas" [maxlength]="16" [spinners]="false" format="d" #nik>
+              placeholder="{{formField.noId}}" [maxlength]="16" [spinners]="false" format="d" #nik>
             </kendo-numerictextbox>
-            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">No. Identitas tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">{{formField.noId}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -109,26 +109,26 @@
             <div class="col">
               <kendo-fileselect [style.width]="'100%'" id="resumePimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedFile" (change)="upload()" formControlName="kartuIdentitas">
                 <kendo-fileselect-messages
-                dropFilesHere="Tidak ada file terpilih"
+                dropFilesHere="{{dict.no_file}}"
                 select="Pilih file"
-                invalidFileExtension="Ekstensi file harus berformat jpg, png, atau pdf"
-                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                invalidFileExtension="{{dict.invalid_file_format.resume_extension}}"
+                invalidMaxFileSize="{{dict.invalid_file_format.doc_max_size}}"
                 >
                 </kendo-fileselect-messages>
               </kendo-fileselect>
-              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa jpg, png, PDF, maks 2MB</p>
+              <p style="font-style: italic;font-size: small;">{{dict.invalid_file}}</p>
             </div>
           </div>
 
         </kendo-formfield>
         <kendo-formfield [formGroup]="pengurusFormGroup">
           <div class="row">
-            <kendo-label class="col">No. NPWP</kendo-label>
+            <kendo-label class="col">{{formField.npwp}}</kendo-label>
             <div class="col k-vstack">
               <kendo-numerictextbox [style.width]="'100%'" id="npwpPengurusInput" formControlName="npwp" class="col-md"
-              placeholder="No. NPWP" [maxlength]="15" [spinners]="false" format="d" #npwp>
+              placeholder="{{formField.npwp}}" [maxlength]="15" [spinners]="false" format="d" #npwp>
             </kendo-numerictextbox>
-            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">No. NPWP tidak boleh kosong</kendo-formerror>
+            <kendo-formerror class="col formHint" *ngIf="pengurusFormGroup.controls.nik.errors?.required">{{formField.npwp}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -138,14 +138,14 @@
             <div class="col">
               <kendo-fileselect [style.width]="'100%'" id="npwpPimpinanDanPengurusUpload" [multiple]="false" [restrictions]="fileRestrictions" [(ngModel)]="selectedNpwpFile" (change)="uploadNpwp()" formControlName="kartuNpwp">
                 <kendo-fileselect-messages
-                dropFilesHere="Tidak ada file terpilih"
+                dropFilesHere="{{dict.no_file}}"
                 select="Pilih file"
-                invalidFileExtension="Ekstensi file harus berformat jpg, png, atau pdf"
-                invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB"
+                invalidFileExtension="{{dict.invalid_file_format.resume_extension}}"
+                invalidMaxFileSize="{{dict.invalid_file_format.doc_max_size}}"
                 >
                 </kendo-fileselect-messages>
               </kendo-fileselect>
-              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa jpg, png, PDF, maks 2MB</p>
+              <p style="font-style: italic;font-size: small;">{{dict.hint_resume_extension}}</p>
             </div>
           </div>
 

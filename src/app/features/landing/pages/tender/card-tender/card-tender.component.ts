@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, ViewEncapsulation, OnDestroy } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from "@angular/core";
 import { finalize, delay } from "rxjs/operators";
 import { Subscription, Observable, of } from 'rxjs';
 import { ListViewDataResult, PageChangeEvent, PagerSettings } from "@progress/kendo-angular-listview";
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { TenderService } from 'src/app/core/services/tender.service';
-import { FormControl, FormGroup } from "@angular/forms";
 import { dictionary } from "src/app/dictionary/dictionary";
   
 @Component({
@@ -63,7 +62,13 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public selectedFilterRegisterEndItem: any = this.listFilterRegisterEnd[0];
 
   private productsSubscription = new Subscription();
-
+  public filterType: any = {
+    category: "category",
+    bumn: "bumn",
+    order: "order",
+    register: "register",
+    status: "status"
+  }
   constructor(
     private tenderService: TenderService,
     private eventEmitterService: EventEmitterService
@@ -137,31 +142,31 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public handleFilter(value: any, type?: string): void {
     switch (type) {
       
-      case "category":
+      case this.filterType.category:
         this.filterCategory = this.listFilterCategory.filter(
           (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
         );
         break;
 
-      case "bumn":
+      case this.filterType.bumn:
         this.filterBUMN = this.listFilterBUMN.filter(
           (s) => s.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
         );
         break;
 
-      case "order":
+      case this.filterType.order:
         this.orderBy = this.listOrderBy.filter(
           (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
         );
         break;
 
-      case "register":
+      case this.filterType.register:
         this.filterRegisterEnd = this.listFilterRegisterEnd.filter(
           (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
         );
         break;
 
-      case "status":
+      case this.filterType.status:
         this.filterStatus = this.listFilterStatus.filter(
           (s) => s.text.toLowerCase().indexOf(value.toLowerCase()) !== -1
         );
@@ -214,9 +219,9 @@ export class CardTenderComponent implements OnInit, OnDestroy {
   public fetchListBUMN(): void {
     this.tenderService.getListBUMN().subscribe(
       (resp) =>  {      
-          let data = resp.data;
-
+          const data = resp.data;
           let arr: any[] = [];
+
           Object.keys(data).map(function(key){  
             arr.push(data[key])  
             return arr;  

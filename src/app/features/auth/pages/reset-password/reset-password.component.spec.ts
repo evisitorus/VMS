@@ -67,8 +67,6 @@ describe('ResetPasswordComponent', () => {
         subscriber.complete();
     });
 
-    console.log(component.form.value);
-
     spyOn(authService, 'resetPassword').and.returnValue(res);
 
     component.onSubmit();

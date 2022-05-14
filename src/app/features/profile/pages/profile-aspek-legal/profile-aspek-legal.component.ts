@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
 import { FileService } from 'src/app/core/services/file.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-profile-aspek-legal',
@@ -8,16 +9,6 @@ import { FileService } from 'src/app/core/services/file.service';
   styleUrls: ['./profile-aspek-legal.component.css']
 })
 export class ProfileAspekLegalComponent implements OnInit {
-
-  private messages = {
-    success: "Berhasil menyimpan data",
-    failed: "Gagal menyimpan data",
-    failed_verification_data: "Gagal menemukan data tipe verifikasi",
-    failed_relationship_data: "Gagal menemukan data relasi verifikasi",
-    failed_status_vendor: "Gagal menemukan data status verifikasi",
-    download_failed: "Gagal mengunduh file",
-    reverification: "Vendor tidak dapat diverifikasi. Vendor hanya dapat diverifikasi setelah mengajukan verifikasi kelengkapan"
-  };
 
   public popUpID = "";
   public popUpTitle: string = "";
@@ -35,17 +26,19 @@ export class ProfileAspekLegalComponent implements OnInit {
   }
 
   public download(fileId: string, filename: string) {
-    let ids = fileId;
+    const ids = fileId;
 
     this.fileService.download(ids).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url= window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url= window.URL.createObjectURL(blob);
         window.open(url,"","width=500,height=600")
       },
       () => {
-        // this.notification.show(this.messages.download_failed, "error");
+        this.popUpID = "popup-download-file-failed";
+        this.popUpMessage = dictionary.download_file_failed;
+        this.triggerPopUp();
       }
     );
   }
@@ -69,7 +62,7 @@ export class ProfileAspekLegalComponent implements OnInit {
       },
       (error) => {
         this.popUpID = "popup-upload-file-failed";
-        this.popUpMessage = "Gagal memilih file, Silakan Coba Lagi!";
+        this.popUpMessage = dictionary.select_file_failed;
         this.triggerPopUp();
       }
     );

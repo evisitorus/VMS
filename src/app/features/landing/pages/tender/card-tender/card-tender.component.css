@@ -18,6 +18,7 @@
   padding: 20px 0;
   justify-content: center !important;
   border-color: #EBEBEB !important;
+  min-height: 100px;
 }
 
 .k-listview-item:hover {
@@ -162,8 +163,4 @@
 
 #input-hps-begin, #input-hps-end {
   width: 50%;
-}
-
-#input-hps-begin, #input-register-begin {
-  /* margin-right: 1em !important; */
 }
