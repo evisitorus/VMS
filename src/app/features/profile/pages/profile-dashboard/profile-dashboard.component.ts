@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { ProfileDashboardService } from 'src/app/core/services/profile-dashboard.service';
+import { dictionary } from 'src/app/dictionary/dictionary';
 
 @Component({
   selector: 'app-profile-dashboard',
@@ -35,28 +36,28 @@ export class ProfileDashboardComponent implements OnInit {
   public verification: any = {
     informasi_umum: {
       status: false,
-      text: "Belum Diisi",
-      submission_status: "Belum Diisi"
+      text: dictionary.undefined_data,
+      submission_status: dictionary.undefined_data
     },
     tata_kelola_perusahaan: {
       status: false,
-      text: "Belum Diisi",
-      submission_status: "Belum Diisi"
+      text: dictionary.undefined_data,
+      submission_status: dictionary.undefined_data
     },
     aspek_finansial: {
       status: false,
-      text: "Belum Diisi",
-      submission_status: "Belum Diisi"
+      text: dictionary.undefined_data,
+      submission_status: dictionary.undefined_data
     },
     aspek_legal: {
       status: false,
-      text: "Belum Diisi",
-      submission_status: "Belum Diisi"
+      text: dictionary.undefined_data,
+      submission_status: dictionary.undefined_data
     },
     riwayat_pekerjaan: {
       status: false,
-      text: "Belum Diisi",
-      submission_status: "Belum Diisi"
+      text: dictionary.undefined_data,
+      submission_status: dictionary.undefined_data
     }
   };
 
@@ -72,7 +73,7 @@ export class ProfileDashboardComponent implements OnInit {
         this.tenders = resp;
       },
       () => {
-        this.showNotification("error", "Gagal mendapatkan data tender");
+        this.showNotification("error", dictionary.error_get_tender_data);
       }
     );
   }
@@ -82,7 +83,7 @@ export class ProfileDashboardComponent implements OnInit {
       (resp) => {
         let data = resp.data;
         this.vendor.type = data.vendor_type;
-        this.vendor.status = data.verified_at !== null ? "Terverifikasi" : data.vendor_type === VENDOR_IS_VERIFYING ? "Menunggu Verifikasi" : "Belum Terverifikasi";
+        this.vendor.status = data.verified_at !== null ? VERIFIED : data.vendor_type === VENDOR_IS_VERIFYING ? VERIFICATION_ONGOING : UNVERIFIED;
         this.vendor.registeredDate = data.registered_at ? formatDate(data.registered_at.date, "dd MMMM YYYY", "en-US") : "-";
         this.vendor.lastUpdatedDate = data.updated_at ? formatDate(data.updated_at.date, "dd MMMM YYYY", "en-US") : "-";
         this.vendor.verifiedDate = data.verified_at ? formatDate(data.verified_at.date, "dd MMMM YYYY", "en-US") : "-"
@@ -100,7 +101,7 @@ export class ProfileDashboardComponent implements OnInit {
         }
       },
       () => {
-        this.showNotification("error", "Gagal mendapatkan data status verifikasi");
+        this.showNotification("error", dictionary.error_get_status_verification);
       }
     );
   }
@@ -112,7 +113,7 @@ export class ProfileDashboardComponent implements OnInit {
         this.verification = resp.data.kelengkapan;
       },
       () => {
-        this.showNotification("error", "Gagal mendapatkan data verifikasi kelengkapan");
+        this.showNotification("error", dictionary.error_get_verification_data);
       }
     );
   }
@@ -130,5 +131,8 @@ export class ProfileDashboardComponent implements OnInit {
 
 }
 
-const VENDOR_PRO = "Vendor Pro";
-const VENDOR_IS_VERIFYING = "Vendor Basic (sedang diverifikasi)";
+const VENDOR_PRO = dictionary.vendor_pro;
+const VENDOR_IS_VERIFYING = dictionary.vendor_is_verifying;
+const VERIFIED = dictionary.verified;
+const VERIFICATION_ONGOING = dictionary.verification_ongoing;
+const UNVERIFIED = dictionary.unverified;

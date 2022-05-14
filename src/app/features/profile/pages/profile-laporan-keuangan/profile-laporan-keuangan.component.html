@@ -7,65 +7,65 @@
 
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Tahun</p>
+            <p>{{formField.tahun}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
               <kendo-numerictextbox class="content-input-field" id="input-neraca-tahun" formControlName="tahun" format="#" [min]="0" [maxlength]="4" #tahun required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Tahun tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.tahun}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Aktiva (Asset)</p>
+            <p>{{formField.dataNeraca.aktiva}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
               <kendo-numerictextbox class="content-input-field" id="input-neraca-aktiva" formControlName="aktiva" format="Rp\ ##,#" [maxlength]="maxLength" #aktiva required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Aktiva (Asset) tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.dataNeraca.aktiva}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Pasiva (Liability)</p>
+            <p>{{formField.dataNeraca.pasiva}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
               <kendo-numerictextbox class="content-input-field" id="input-neraca-pasiva" formControlName="pasiva" format="Rp\ ##,#" #pasiva [maxlength]="maxLength" required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Passiva (Liability) tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.dataNeraca.pasiva}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Ekuitas (Equity)</p>
+            <p>{{formField.dataNeraca.equitas}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
               <kendo-numerictextbox class="content-input-field" id="input-neraca-ekuitas" formControlName="equitas" format="Rp\ ##,#" #equitas [maxlength]="maxLength" required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Ekuitas (Equity) tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.dataNeraca.equitas}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Omzet Bersih</p>
+            <p>{{formField.dataNeraca.omzet}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formNeraca">
               <kendo-numerictextbox class="content-input-field" id="input-neraca-omzet" formControlName="omzet" format="Rp\ ##,#" [maxlength]="maxLength" #omzet required></kendo-numerictextbox>                
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Omzet Bersih tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.dataNeraca.omzet}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
@@ -95,26 +95,26 @@
         
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Tahun</p>
+            <p>{{formField.tahun}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formSPT">
               <kendo-numerictextbox class="content-input-field" id="input-spt-tahun" formControlName="tahunSPT" format="#" [maxlength]="4" #tahunSPT required></kendo-numerictextbox>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Tahun tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.tahun}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-3 modal-label">
-            <p>Nomor Dokumen</p>
+            <p>{{formField.dataSPT.nomorDokumen}}</p>
           </div>
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formSPT">
               <kendo-textbox class="content-input-field" id="input-spt-nomor-dokumen" formControlName="nomorDokumen" [clearButton]="true" #nomorDokumen required></kendo-textbox>                
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Nomor Dokumen tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.dataSPT.nomorDokumen}} {{dict.warning.empty}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
@@ -126,9 +126,9 @@
           <div class="col-9 modal-field">
             <kendo-formfield [formGroup]="formSPT">
               <kendo-fileselect (select)="selectEventHandler($event)" [multiple]="false" id="input-spt-lampiran" required name="lampiran" #lampiran="ngModel" [restrictions]="fileRestrictions" [(ngModel)]="lampiranFiles" [ngModelOptions]="{standalone: true}" (change)="upload()"></kendo-fileselect>
-              <kendo-formhint>Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formhint>
-              <kendo-formerror *ngIf="invalidMaxFileSize">Maksimum ukuran file adalah 2MB</kendo-formerror>
-              <kendo-formerror *ngIf="invalidFileExtension">Dokumen harus berupa JPG / PNG / PDF dengan maksimum size 2MB</kendo-formerror>
+              <kendo-formhint>{{dict.hint_resume_extension}}</kendo-formhint>
+              <kendo-formerror *ngIf="invalidMaxFileSize">{{dict.invalid_file_format.doc_max_size}}</kendo-formerror>
+              <kendo-formerror *ngIf="invalidFileExtension">{{dict.hint_resume_extension}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
@@ -168,53 +168,52 @@
         <ng-template kendoPanelBarContent>
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label>Nama Bank</kendo-label>
+              <kendo-label>{{formField.dataKeuangan.namaBank}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganBank">
                 <kendo-autocomplete class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [data]="listNamaBank" [kendoDropDownFilter]="{ operator: 'contains' }" required></kendo-autocomplete>
-                <!-- <kendo-textbox class="content-input-field" id="input-keuangan-nama-bank" formControlName="namaBank" [clearButton]="true" #namaBank required></kendo-textbox>                 -->
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Nama Bank tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{formField.dataKeuangan.namaBank}} {{dict.warning.empty}}</kendo-formerror>
               </kendo-formfield>
             </div>
           </div>
   
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label>Cabang</kendo-label>
+              <kendo-label>{{formField.dataKeuangan.cabang}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganBank">
                 <kendo-textbox class="content-input-field" id="input-keuangan-cabang" formControlName="cabang" [clearButton]="true" #cabang required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{formField.dataKeuangan.cabang}} {{dict.warning.empty}}</kendo-formerror>
               </kendo-formfield>
             </div>
           </div>
   
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label>Nomor Rekening</kendo-label>
+              <kendo-label>{{formField.dataKeuangan.nomorRekening}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganBank">
                 <kendo-textbox class="content-input-field" id="input-keuangan-nomor-rekening" formControlName="nomorRekening" [clearButton]="true" #nomorRekening required [maxlength]="maxLengthRekening"></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Nomor Rekening tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{formField.dataKeuangan.nomorRekening}} {{dict.warning.empty}}</kendo-formerror>
               </kendo-formfield>
             </div>
           </div>
   
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label>Nama Pemilik Rekening</kendo-label>
+              <kendo-label>{{formField.dataKeuangan.namaPemilikRekening}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganBank">
                 <kendo-textbox class="content-input-field" id="input-keuangan-nama-pemilik-rekening" formControlName="namaPemilikRekening" [clearButton]="true" #namaPemilikRekening required></kendo-textbox>                
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Cabang tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{formField.dataKeuangan.namaPemilikRekening}} {{dict.warning.empty}}</kendo-formerror>
               </kendo-formfield>
             </div>
           </div>
@@ -231,25 +230,25 @@
         <ng-template kendoPanelBarContent>
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label>Modal Dasar (Sesuai Akta)</kendo-label>
+              <kendo-label>{{formField.dataKeuangan.modalDasar}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganModalDasar">              
-                <kendo-numerictextbox placeholder="Masukan Modal Dasar (Sesuai Akta)" class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
+                <kendo-numerictextbox placeholder="Masukan {{formField.dataKeuangan.modalDasar}}" class="content-input-field" id="input-keuangan-modal-dasar" formControlName="modalDasar" format="Rp\ ##,#" [maxlength]="maxLength" #modalDasar required></kendo-numerictextbox> 
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Modal Dasar tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{formField.dataKeuangan.modalDasar}} {{dict.warning.empty}}</kendo-formerror>
               </kendo-formfield>
             </div>
           </div>
           <div class="row bank-field">
             <div class="col-3 content-label">
-              <kendo-label>Modal Ditempatkan (Sesuai Akta)</kendo-label>
+              <kendo-label>{{formField.dataKeuangan.modalDitempatkan}}</kendo-label>
             </div>
             <div class="col-9 content-field">
               <kendo-formfield [formGroup]="formKeuanganModalDasar">
-                <kendo-numerictextbox placeholder="Masukan Modal Ditempatkan (Sesuai Akta)" class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
+                <kendo-numerictextbox placeholder="Masukan {{formField.dataKeuangan.modalDitempatkan}}" class="content-input-field" id="input-keuangan-modal-ditempatkan" formControlName="modalDitempatkan" format="Rp\ ##,#" [maxlength]="maxLength" #modalDitempatkan required></kendo-numerictextbox>               
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Modal Ditempatkan tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{formField.dataKeuangan.modalDitempatkan}} {{dict.warning.empty}}</kendo-formerror>
               </kendo-formfield>
             </div>
           </div>

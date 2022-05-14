@@ -59,7 +59,8 @@ export class DokumenLegalComponent implements OnInit {
 
         grid_data.forEach(datum => {
           let name = datum.name;
-          datum.file = this.getDataType(name,data);
+          //set files by type
+          datum.file = this.setDataByType(name,data);
         });
 
         this.gridData = grid_data;
@@ -74,8 +75,8 @@ export class DokumenLegalComponent implements OnInit {
   public fetchData(): void {
     this.profileAspekLegalService.getDocType().subscribe(
       (response) => {
-        let responseData = response['hydra:member'];
-        let tempData = this.mapData(responseData);
+        const responseData = response['hydra:member'];
+        const tempData = this.mapData(responseData);
         this.getAspekLegal(tempData);
       },
       (err) => {
@@ -87,7 +88,7 @@ export class DokumenLegalComponent implements OnInit {
 
   public mapData(data: any[]): any[] {
     let mappedData: any[] = [];
-    const amount_to_remove = 2;
+    const AMOUNT_TO_REMOVE = 2;
     for (const key in data) {
       mappedData[key] = {
         id: data[key]['id'],
@@ -98,13 +99,14 @@ export class DokumenLegalComponent implements OnInit {
     }
 
     // get data only unit PKP
-    mappedData.splice(mappedData.length - amount_to_remove, amount_to_remove);
+    mappedData.splice(mappedData.length - AMOUNT_TO_REMOVE, AMOUNT_TO_REMOVE);
 
     return mappedData;
   }
 
-  public getDataType(doc_type: any, data: any) {
-    let file: any = {
+  public setDataByType(doc_type: any, data: any) {
+
+    const file: any = {
       'Company Profile': data.companyProfile,
       'Akta Pendirian': data.aktaPendirian,
       'SIUP / Surat Izin Berusaha': data.siup,
@@ -164,7 +166,7 @@ export class DokumenLegalComponent implements OnInit {
   }
 
   public uploadDokLegal() {
-    let params = {
+    const params = {
       id: this.dokData.file ? this.dokData.file.id : null ,
       namaDokumen: this.dokLegalName,
       file: this.uploadedFileId,
@@ -203,9 +205,9 @@ export class DokumenLegalComponent implements OnInit {
   public download(fileId: string, filename: string) {
     this.fileService.download(fileId).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url = window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url = window.URL.createObjectURL(blob);
         window.open(url);
       },
       (error) => {

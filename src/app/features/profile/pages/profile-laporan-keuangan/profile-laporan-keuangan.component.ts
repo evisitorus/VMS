@@ -33,6 +33,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.fetchDataKeuangan();
   }
 
+  public dict = dictionary;
+
   public maxLength = 13;
   public maxLengthRekening = 20;
   public openNeraca = false;
@@ -92,8 +94,26 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     modalDitempatkan: ""
   }
 
-  private messages: any = {
-    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
+  public formField = {
+    tahun: "Tahun",
+    dataNeraca : {
+      aktiva: "Aktiva (Asset)",
+      pasiva: "Passiva (Liability)",
+      equitas: "Ekuitas (Equity)",
+      omzet: "Omzet Bersih"
+    },
+    dataSPT: {
+      nomorDokumen: "Nomor Dokumen"
+    },
+    dataKeuangan: {
+      namaBank: "Nama Bank",
+      cabang: "Cabang",
+      nomorRekening: "Nomor Rekening",
+      namaPemilikRekening: "Nama Pemilik Rekening",
+  
+      modalDasar: "Modal Dasar (Sesuai Akta)",
+      modalDitempatkan: "Modal Ditempatkan (Sesuai Akta)"
+    }
   };
 
   public setAllForm(): void {
@@ -137,8 +157,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public setFormSPT(): void {
     this.formSPT = new FormGroup({
       tahunSPT: new FormControl(this.dataSPT.tahun, [Validators.required]),
-      nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required]),
-      // lampiran: new FormControl(this.dataSPT.lampiran, [Validators.required]),
+      nomorDokumen: new FormControl(this.dataSPT.nomorDokumen, [Validators.required])
     });
 
   }
@@ -219,8 +238,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public mapDataNeraca(data: any[]): any[] {
-    let mappedData:any[] = [];
-    for (const key in data) {
+    const mappedData:any[] = [];
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         id: data[key]['id'],
         tahun: parseInt(data[key]['year']),
@@ -236,8 +255,8 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public mapDataSPT(data: any[]): any[] {
-    let mappedData:any[] = [];
-    for (const key in data) {
+    const mappedData:any[] = [];
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         id: data[key]['id'],
         tahun: parseInt(data[key]['year']),
@@ -252,7 +271,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateFormNeraca(data: any): void {
-    this.popUpMessage = this.messages.updateData;
+    this.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
 
     this.id = data.id;
@@ -270,7 +289,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   }
 
   public updateFormSPT(data: any): void {
-    this.popUpMessage = this.messages.updateData;
+    this.popUpMessage = dictionary.update_data_notification;
     this.triggerPopUp();
     
     this.id = data.id;
@@ -317,7 +336,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.service.fetchDataKeuangan().subscribe(
       (resp) => {
         if (resp.data) {
-          let data = resp.data[0];
+          const data = resp.data[0];
           this.dataKeuangan.namaBank = data.fromParty.name;
           this.dataKeuangan.cabang = data.cabang;
           this.dataKeuangan.nomorRekening = data.nomorRekening;
@@ -338,7 +357,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     this.service.fetchListBank().subscribe(
       (resp) => {
         const data = resp.data;
-        for (let key in data) {
+        for (const key in data) {
           this.listNamaBank.push(data[key]['name']);
         }
       },
@@ -377,94 +396,100 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     }
   }
 
+  public triggerErrorPopUp(err:any, modal:string){
+    this.popUpMessage = err.error.message;
+    this.triggerPopUp();
+    this.triggerModal(modal);
+  }
+
   public saveNeraca(): void {
-    let params: ProfileKeuanganNeracaInterface = {
+    const params: ProfileKeuanganNeracaInterface = {
       tahun: this.formNeraca.value.tahun.toString(),
       aktiva: this.formNeraca.value.aktiva.toString(),
       pasiva: this.formNeraca.value.pasiva.toString(),
       equitas: this.formNeraca.value.equitas.toString(),
       omzet: this.formNeraca.value.omzet.toString(),
     };
+    const modal = "neraca";
+
     this.service.saveDataNeraca(params).subscribe(
       () => {
         this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchDataNeraca();
-        this.triggerModal('neraca');
+        this.triggerModal(modal);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
-        this.triggerModal('neraca');
+        this.triggerErrorPopUp(err, modal);
       }
     );
   }
 
   public saveSPT(): void {
-    let params: ProfileKeuanganSPTInterface = {
+    const params: ProfileKeuanganSPTInterface = {
       tahunSPT: this.formSPT.value.tahunSPT.toString(),
       nomorDokumen: this.formSPT.value.nomorDokumen,
       lampiran: this.uploadedFileId,
       filename: this.uploadedFileContentUrl,
       submitDate: new Date()
     };
+    const modal = "spt";
+
     this.service.saveDataSPT(params).subscribe(
       () => {
         this.popUpMessage = dictionary.save_data_success;
         this.triggerPopUp();
         this.fetchDataSPT();
-        this.triggerModal('spt');
+        this.triggerModal(modal);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
-        this.triggerModal('spt');
+        this.triggerErrorPopUp(err, modal);
       }
     );
   }
 
   public updateNeraca(): void {
-    let params : ProfileKeuanganNeracaInterface = {
+    const params : ProfileKeuanganNeracaInterface = {
       tahun: this.formNeraca.value.tahun.toString(),
       aktiva: this.formNeraca.value.aktiva.toString(),
       pasiva: this.formNeraca.value.pasiva.toString(),
       equitas: this.formNeraca.value.equitas.toString(),
       omzet: this.formNeraca.value.omzet.toString()
     };
+    const modal = "neraca";
+
     this.service.updateDataNeraca(params, this.id).subscribe(
       () => {
         this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchDataNeraca();
-        this.triggerModal('neraca');
+        this.triggerModal(modal);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
-        this.triggerModal('neraca');
+        this.triggerErrorPopUp(err, modal);
       }
     );
   }
 
   public updateSPT(): void {
-    let params : ProfileKeuanganSPTInterface = {
+    const params : ProfileKeuanganSPTInterface = {
       tahunSPT: this.formSPT.value.tahunSPT.toString(),
       nomorDokumen: this.formSPT.value.nomorDokumen,
       lampiran: this.uploadedFileId,
       filename: this.uploadedFileContentUrl,
       submitDate: new Date()
     };
+    const modal = "spt";
+
     this.service.updateDataSPT(params, this.id).subscribe(
       () => {
         this.popUpMessage = dictionary.update_data_success;
         this.triggerPopUp();
         this.fetchDataSPT();
-        this.triggerModal('spt');
+        this.triggerModal(modal);
       },
       (err) => {
-        this.popUpMessage = err.error.message;
-        this.triggerPopUp();
-        this.triggerModal('spt');
+        this.triggerErrorPopUp(err, modal);
       }
     );
   }
@@ -531,10 +556,21 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
     }
   }
 
+  public postDataKeuanganSuccess() {
+    this.popUpMessage = dictionary.save_data_success;
+    this.triggerPopUp();
+    this.fetchDataKeuangan();
+  }
+
+  public postDataFailed(err: any) {
+    this.popUpMessage = err.error.message;
+    this.triggerPopUp();
+  }
+
   public postDataKeuangan(): void {
     this.formKeuangan.markAllAsTouched();
     if (this.formKeuangan.valid) {
-      let params: ProfileKeuanganInterface = {
+      const params: ProfileKeuanganInterface = {
         namaBank: this.formKeuangan.value.namaBank,
         cabang: this.formKeuangan.value.cabang,
         nomorRekening: this.formKeuangan.value.nomorRekening,
@@ -544,13 +580,10 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       };
       this.service.postDataKeuangan(params).subscribe(
         () => {
-          this.popUpMessage = dictionary.save_data_success;
-          this.triggerPopUp();
-          this.fetchDataKeuangan();
+          this.postDataKeuanganSuccess();
         },
         (err) => {
-          this.popUpMessage = err.error.message;
-          this.triggerPopUp();
+          this.postDataFailed(err);
         }
       );
     }
@@ -559,7 +592,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public postDataKeuanganBank(): void {
     this.formKeuanganBank.markAllAsTouched();
     if (this.formKeuanganBank.valid) {
-      let params: ProfileKeuanganBankInterface = {
+      const params: ProfileKeuanganBankInterface = {
         namaBank: this.formKeuanganBank.value.namaBank,
         cabang: this.formKeuanganBank.value.cabang,
         nomorRekening: this.formKeuanganBank.value.nomorRekening,
@@ -567,13 +600,10 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
       };
       this.service.postDataKeuanganBank(params).subscribe(
         () => {
-          this.popUpMessage = dictionary.save_data_success;
-          this.triggerPopUp();
-          this.fetchDataKeuangan();
+          this.postDataKeuanganSuccess();
         },
         (err) => {
-          this.popUpMessage = err.error.message;
-          this.triggerPopUp();
+          this.postDataFailed(err);
         }
       );
     }
@@ -582,26 +612,23 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
   public postDataKeuanganModalDasar(): void {
     this.formKeuanganModalDasar.markAllAsTouched();
     if (this.formKeuanganModalDasar.valid) {
-      let params: ProfileKeuanganModalDasarInterface = {
+      const params: ProfileKeuanganModalDasarInterface = {
         modalDasar: this.formKeuanganModalDasar.value.modalDasar.toString(),
         modalDitempatkan: this.formKeuanganModalDasar.value.modalDitempatkan.toString(),
       };
       this.service.postDataKeuanganModalDasar(params).subscribe(
         () => {
-          this.popUpMessage = dictionary.save_data_success;
-          this.triggerPopUp();
-          this.fetchDataKeuangan();
+          this.postDataKeuanganSuccess();
         },
         (err) => {
-          this.popUpMessage = err.error.message;
-          this.triggerPopUp();
+          this.postDataFailed(err);
         }
       );
     }
   }
 
   public selectEventHandler(e: SelectEvent): void {
-    let errors = e.files[0].validationErrors;
+    const errors = e.files[0].validationErrors;
     if (errors?.includes("invalidMaxFileSize")) {
       this.invalidMaxFileSize = true;
     } else {
@@ -637,7 +664,7 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
   public download(fileId: string, filename: string) {
     let ids;
-    let longId = fileId.split("/");
+    const longId = fileId.split("/");
     if (longId.length > 0) {
       ids = longId[longId.length - 1];
     } else {
@@ -646,9 +673,9 @@ export class ProfileLaporanKeuanganComponent implements OnInit {
 
     this.fileService.download(ids).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url= window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url= window.URL.createObjectURL(blob);
         window.open(url);
       },
       (err) => {

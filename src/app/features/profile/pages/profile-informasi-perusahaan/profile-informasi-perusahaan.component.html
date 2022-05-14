@@ -20,17 +20,16 @@
 
               <ng-template #showLogo>
                 <div class="row align-items-center k-justify-content-center">
-                  <img class="col-3" [src]="logoImg"/>
+                  <img class="col-3" alt="logoimg" [src]="logoImg"/>
                 </div>
               </ng-template>
               <ng-template #showDefaultLogo>
                 <div class="row align-items-center k-justify-content-center">
                   <div class="row align-items-center k-justify-content-center">
-                    <img class="col-3" src="/assets/images/nologo.png" style="width: 15%; height: 15%"/>
+                    <img class="col-3" alt="nopic" src="/assets/images/nologo.png" style="width: 15%; height: 15%"/>
                   </div>
                   <div class="row align-items-center k-justify-content-center">
-                    <kendo-formerror *ngIf="!logoImg" class="col-3" style="text-align: center">Mohon upload logo
-                      perusahaan
+                    <kendo-formerror *ngIf="!logoImg" class="col-3" style="text-align: center">{{dict.incomplete_data_logo}}
                     </kendo-formerror>
                   </div>
                 </div>
@@ -38,22 +37,19 @@
 
               <kendo-fileselect id="imgPerusahaanUpload" class="col-md-auto mt-2" name="files" [multiple]="false" #files="ngModel"
                 [restrictions]="imgRestrictions" [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
-                <kendo-fileselect-messages id="file-upload-error-message" dropFilesHere="Tidak ada gambar terpilih"
-                  select="Pilih gambar" invalidFileExtension="Ekstensi gambar harus berformat .jpg, .jpeg, .png"
-                  invalidMaxFileSize="Maksimum ukuran gambar adalah 2 MB">
+                <kendo-fileselect-messages id="file-upload-error-message" dropFilesHere="{{errorMessage.invalidPict}}"
+                  select="{{dict.select_img}}" invalidFileExtension="{{errorMessage.extension}}"
+                  invalidMaxFileSize="{{errorMessage.maxSize}}">
                 </kendo-fileselect-messages>
               </kendo-fileselect>
             </div>
           <kendo-panelbar id="profile-information-panelbar">
-            <!-- <kendo-panelbar-item title="Overview" [expanded]="true">
-              
-            </kendo-panelbar-item> -->
             <kendo-panelbar-item title="Data Perusahaan" [expanded]="true">
               <ng-template kendoPanelBarContent *ngIf="profileInformationFormGroup">
                 <form>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Apakah memiliki NIB</kendo-label>
+                      <kendo-label class="col-3">{{formField.nibQuestion}}</kendo-label>
                       <div class="col">
                         <ul class="k-radio-list k-list-horizontal">
                           <li class="k-radio-item">
@@ -70,7 +66,7 @@
                         </ul>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.pemilikNIB.errors?.required">
-                          Field ini tidak boleh kosong
+                          {{formField.nib}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
@@ -78,15 +74,14 @@
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
 
-                      <kendo-label class="col-3">Nomor Induk Berusaha (NIB)</kendo-label>
+                      <kendo-label class="col-3">{{formField.nib}}</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-textbox id="nomorIndukBerusaha" [disabled]="!this.profileInformationFormGroup.get('pemilikNIB')?.value" class="col-md w-100" placeholder="Nomor Induk Berusaha (NIB)"
+                        <kendo-textbox id="nomorIndukBerusaha" [disabled]="!this.profileInformationFormGroup.get('pemilikNIB')?.value" class="col-md w-100" placeholder="{{formField.nib}}"
                                        [clearButton]="true" [maxlength]="13"
                                        formControlName="nomorIndukBerusaha"></kendo-textbox>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.nomorIndukBerusaha.errors?.required">
-                          Nomor Induk
-                          Berusaha tidak boleh kosong
+                                         {{formField.nib}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
 
@@ -94,22 +89,22 @@
                   </kendo-formfield>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Nama Perusahaan</kendo-label>
+                      <kendo-label class="col-3">{{formField.namaPerusahaan}}</kendo-label>
                       <div class="col-md k-vstack">
-                        <kendo-textbox id="namaPerusahaan" class="col-md w-100" placeholder="Nama Perusahaan"
+                        <kendo-textbox id="namaPerusahaan" class="col-md w-100" placeholder="{{formField.namaPerusahaan}}"
                                        [clearButton]="true" formControlName="namaPerusahaan"></kendo-textbox>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.namaPerusahaan.errors?.required">
-                          Nama Perusahaan tidak boleh kosong
+                                         {{formField.namaPerusahaan}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Inisial Perusahaan</kendo-label>
+                      <kendo-label class="col-3">{{formField.inisialPerusahaan}}</kendo-label>
                       <div class="col-md k-vstack">
-                        <kendo-textbox id="inisialPerusahaanInput" class="col-md w-100" placeholder="Inisial perusahaan"
+                        <kendo-textbox id="inisialPerusahaanInput" class="col-md w-100" placeholder="{{formField.inisialPerusahaan}}"
                                        [clearButton]="true" [maxlength]="10"
                                        formControlName="inisialPerusahaan"></kendo-textbox>
                       </div>
@@ -118,7 +113,7 @@
 
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Jenis Badan Usaha</kendo-label>
+                      <kendo-label class="col-3">{{formField.jenisBadanUsaha}}</kendo-label>
                       <div class="col">
                         <ul class="k-radio-list k-list-horizontal">
                           <li class="k-radio-item">
@@ -141,7 +136,7 @@
                         </ul>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.jenisBadanUsaha.errors?.required">
-                          Jenis Badan Usaha tidak boleh kosong
+                                         {{formField.jenisBadanUsaha}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
@@ -171,7 +166,7 @@
                         <kendo-label class="k-radio-label" for="nonpkp">Non PKP</kendo-label>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.statusBadanUsaha.errors?.required">
-                          Status Badan Usaha tidak boleh kosong
+                                         {{formField.statusBadanUsaha}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
 
@@ -180,7 +175,7 @@
 
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Tipe Badan Usaha</kendo-label>
+                      <kendo-label class="col-3">{{formField.tipeBadanUsaha}}</kendo-label>
                       <div class="col-md k-vstack">
                         <kendo-dropdownlist id="tipeBadanUsaha" class="col-md w-100"
                                             [defaultItem]="{ name: 'Pilih Tipe Badan Usaha', id: null }"
@@ -192,14 +187,14 @@
                         </kendo-dropdownlist>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.tipeBadanUsaha.errors?.required">
-                          Tipe Badan Usaha tidak boleh kosong
+                                         {{formField.tipeBadanUsaha}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Jenis Kegiatan Usaha Utama</kendo-label>
+                      <kendo-label class="col-3">{{formField.jenisKegiatanUsaha}}</kendo-label>
                       <div class="col k-vstack">
                         <kendo-dropdownlist id="jenisKegiatanUsahaUtama" class="col-md w-100"
                                             formControlName="jenisKegiatanUsahaUtama"
@@ -209,7 +204,7 @@
                         </kendo-dropdownlist>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.jenisKegiatanUsahaUtama.errors?.required">
-                          Jenis Kegiatan Usaha Utama tidak boleh kosong
+                                         {{formField.jenisKegiatanUsaha}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
@@ -217,7 +212,7 @@
 
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Jenis Penyedia Usaha</kendo-label>
+                      <kendo-label class="col-3">{{formField.jenisPenyediaUsaha}}</kendo-label>
                       <div class="col k-vstack">
                         <kendo-dropdownlist id="jenisPenyediaUsaha" class="col-md w-100"
                                             formControlName="jenisPenyediaUsaha"
@@ -227,7 +222,7 @@
                         </kendo-dropdownlist>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.jenisPenyediaUsaha.errors?.required">
-                          Jenis Penyedia Usaha tidak boleh kosong
+                                         {{formField.jenisPenyediaUsaha}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
@@ -235,13 +230,13 @@
 
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">NPWP Perusahaan</kendo-label>
+                      <kendo-label class="col-3">{{formField.npwpPerusahaan}} </kendo-label>
                       <div class="col k-vstack">
                         <kendo-textbox id="npwpPerusahaan" class="col-md w-100" placeholder="Type your message here"
                                        formControlName="npwpPerusahaan" [clearButton]="true"></kendo-textbox>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.npwpPerusahaan.errors?.required">
-                          NPWP tidak boleh kosong
+                                         {{formField.npwpPerusahaan}}  {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
@@ -292,30 +287,30 @@
 
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Website Perusahaan</kendo-label>
+                      <kendo-label class="col-3">{{formField.website}}</kendo-label>
                       <div class="col k-vstack">
                         <kendo-textbox id="websitePerusahaan" class="col w-100" placeholder="Website Perusahaan"
                                        [clearButton]="true" formControlName="websitePerusahaan"></kendo-textbox>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.websitePerusahaan.errors?.required">
-                          Website Perusahaan tidak boleh kosong
+                                         {{formField.website}} {{dict.warning.empty_field}}
                         </kendo-formerror>
                       </div>
                     </div>
                   </kendo-formfield>
                   <kendo-formfield [formGroup]="profileInformationFormGroup">
                     <div class="row align-items-center">
-                      <kendo-label class="col-3">Email Perusahaan</kendo-label>
+                      <kendo-label class="col-3">{{formField.email}}</kendo-label>
                       <div class="col k-vstack">
-                        <kendo-textbox id="emailPerusahaan" class="col w-100" placeholder="Email Perusahaan"
+                        <kendo-textbox id="emailPerusahaan" class="col w-100" placeholder="{{formField.email}}"
                                        [clearButton]="true" formControlName="emailPerusahaan"></kendo-textbox>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.emailPerusahaan.errors?.required">
-                          Email Perusahaan tidak boleh kosong
+                          {{formField.email}} {{dict.warning.empty}}
                         </kendo-formerror>
                         <kendo-formerror class="formHint"
                                          *ngIf="profileInformationFormGroup.controls.emailPerusahaan.errors?.pattern">
-                          Format email salah
+                          {{dict.invalid_email}}
                         </kendo-formerror>
                       </div>
                     </div>

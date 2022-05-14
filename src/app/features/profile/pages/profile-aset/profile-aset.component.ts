@@ -14,14 +14,9 @@ import { ProfileLaporanKeuanganComponent } from '../profile-laporan-keuangan/pro
 })
 export class ProfileAsetComponent implements OnInit {
 
-  private messages: any = {
-    updateData: "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar." 
-  };
-
   public form!: FormGroup;
   public gridData: any[] = [];
   public opened: boolean = false;
-  public popUpTitle: string = "Profile Asset";
   public id!: string;
   public isNewData: boolean = true;
   public isDelete!: boolean;
@@ -34,6 +29,14 @@ export class ProfileAsetComponent implements OnInit {
     jumlah: 0,
     tahunPembuatan: "",
     estimasiNilaiAsset: 0
+  };
+
+  public dict = dictionary;
+  public formField: any = {
+    namaAsset: "Nama Asset",
+    jumlah: "Jumlah",
+    estimasiNilaiAsset: "Estimasi Nilai Aset",
+    tahunPembuatan: "Tahun Pembuatan"
   };
 
   constructor(
@@ -52,7 +55,7 @@ export class ProfileAsetComponent implements OnInit {
   public mapData(data:any[]) {
     let mappedData:any[] = [];
     let no = 1;
-    for (const key in data) {
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         no: no++,
         nama: data[key]['name'],
@@ -123,8 +126,22 @@ export class ProfileAsetComponent implements OnInit {
     this.setFormValue();
   }
 
+  public triggerSuccessPopUp() {
+    this.triggerPopUp();
+    this.getData();
+    this.close();
+    this.resetForm();
+  }
+
+  public triggerFailedPopUp(err: any) {
+    this.parent.popUpMessage = err.error.message;
+    this.triggerPopUp();
+    this.close();
+    this.resetForm();
+  }
+
   public save(): void {
-    let params: ProfileAssetInterface = {
+    const params: ProfileAssetInterface = {
       namaAsset: this.form.value.namaAsset,
       jumlah: this.form.value.jumlah,
       tahunPembuatan: this.form.value.tahunPembuatan.toString(),
@@ -133,22 +150,16 @@ export class ProfileAsetComponent implements OnInit {
     this.profileAssetService.save(params).subscribe(
       () => {
         this.parent.popUpMessage = dictionary.save_data_success;
-        this.triggerPopUp();
-        this.getData();
-        this.close();
-        this.resetForm();
+        this.triggerSuccessPopUp();
       }, 
       (err) => {
-        this.parent.popUpMessage = err.error.message;
-        this.triggerPopUp();
-        this.close();
-        this.resetForm();
+        this.triggerFailedPopUp(err);
       }
     );
   }
 
   public update(): void {
-    let params: ProfileAssetInterface = {
+    const params: ProfileAssetInterface = {
       namaAsset: this.form.value.namaAsset,
       jumlah: this.form.value.jumlah,
       tahunPembuatan: this.form.value.tahunPembuatan.toString(),
@@ -157,16 +168,10 @@ export class ProfileAsetComponent implements OnInit {
     this.profileAssetService.update(params, this.id).subscribe(
       () => {
         this.parent.popUpMessage = dictionary.update_data_success;
-        this.triggerPopUp();
-        this.getData();
-        this.close();
-        this.resetForm();
+        this.triggerSuccessPopUp();
       },
       (err) => {
-        this.parent.popUpMessage = err.error.message;
-        this.triggerPopUp();
-        this.close();
-        this.resetForm();
+        this.triggerFailedPopUp(err);
       }
     );
   }
@@ -175,28 +180,26 @@ export class ProfileAsetComponent implements OnInit {
     this.profileAssetService.delete(id).subscribe(
       () => {
         this.parent.popUpMessage = dictionary.delete_data_success;
-        this.triggerPopUp();
-        this.getData();
+        this.triggerSuccessPopUp();
       },
       (err) => {
-        this.parent.popUpMessage = err.error.message;
-        this.triggerPopUp();
+        this.triggerFailedPopUp(err);
       }
     );
   }
 
   public deleteConfirmation(id: string, name: string): void {
     const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi",
-      content: "Apakah " + name + " akan dihapus dari sistem ?",
-      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      title: dictionary.confirm_delete_title,
+      content: dictionary.confirm_delete_message.concat(" ",name," ?"),
+      actions: [{ text: dictionary.confirm_no }, { text: dictionary.confirm_yes, primary: true }],
       width: 450,
       height: 200,
       minWidth: 250,
     });
 
     dialog.result.subscribe((result) => {
-      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+      if (!(result instanceof DialogCloseResult) && result.text === dictionary.confirm_yes) {
         this.delete(id);
       } 
     });

@@ -106,7 +106,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public mapData(data: any[]): any[] {
     let mappedData:any[] = [];
-    for (const key in data) {
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         namaPekerjaan: data[key]['namaPekerjaan'],
         pemberiPekerjaan: data[key]['pemberiPekerjaan'],
@@ -123,7 +123,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
   public download(fileId: string, filename: string) {
     let ids;
-    let longId = fileId.split("/");
+    const longId = fileId.split("/");
     if (longId.length > 0) {
       ids = longId[longId.length - 1];
     } else {
@@ -206,18 +206,14 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       lampiran: this.uploadedFileId,
     };
     this.profileService.addPekerjaan(params).subscribe(
-      (resp) =>  { 
+      () =>  { 
         this.popUpMessage = messages.success;
         this.triggerPopUp();
         this.getPekerjaan();
         this.closePekerjaan();
       },
       (error) => { 
-        console.log(params);
-        console.log(console.error());
-        // if(error.error.message){
-          this.popUpMessage = error;
-        // }
+        this.popUpMessage = error;
         this.triggerPopUp();
         this.redirectOnClosePopUp = false;
       }
@@ -226,7 +222,7 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
 
 
   public selectEventHandler(e: SelectEvent): void {
-    let errors = e.files[0].validationErrors;
+    const errors = e.files[0].validationErrors;
     if (errors?.includes("invalidMaxFileSize")) {
       this.invalidMaxFileSize = true;
     } else {
@@ -292,7 +288,6 @@ export class ProfileRiwayatPekerjaanComponent implements OnInit {
       lampiran: new FormControl(this.data.lampiran ? this.data.lampiran : "" , Validators.required),
     });
     this.lampiranFiles = [];
-    console.log(this.pekerjaanForm.value);
   }
 
   public updateRiwayatPekerjaan(): void {

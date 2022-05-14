@@ -23,7 +23,7 @@ export class ProfileService {
   user_id = this.authService.getLocalStorage('person_id')!;
   
   addPekerjaan(params: AddPekerjaanInterface): Observable<any> {    
-    let api_add_pekerjaan: ApiInterface = {
+    const api_add_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_post_pengalaman_kerja,
       options: {
@@ -47,7 +47,7 @@ export class ProfileService {
   }
 
   getPekerjaan(): Observable<any> {    
-    let api_get_pekerjaan: ApiInterface = {
+    const api_get_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pengalaman_kerja,
       options: {
@@ -64,7 +64,7 @@ export class ProfileService {
   }
 
   updatePekerjaan(params: UpdateRiwayatPekerjaanInterface): Observable<any> {    
-    let api_update_pengalaman_kerja: ApiInterface = {
+    const api_update_pengalaman_kerja: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_post_pengalaman_kerja  + "/" + params.id,
       options: {
@@ -86,8 +86,7 @@ export class ProfileService {
   }
 
   deletePekerjaan(id: string): Observable<any> {    
-    console.log(id);
-    let api_delete_pekerjaan: ApiInterface = {
+    const api_delete_pekerjaan: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_delete_pekerjaan + "/" + id,
       options: {
@@ -104,7 +103,7 @@ export class ProfileService {
   }
 
   addPemegangSaham(params: AddPemegangSahamInterface): Observable<any> {    
-    let api_add_pemegang_saham: ApiInterface = {
+    const api_add_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_add_pemegang_saham + "/" + this.vendor_id + "/pemegang_saham",
       options: {
@@ -126,7 +125,7 @@ export class ProfileService {
 
 
   getPemegangSaham(): Observable<any> {    
-    let api_get_pemegang_saham: ApiInterface = {
+    const api_get_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_get_pemegang_saham_route,
       options: {
@@ -143,7 +142,7 @@ export class ProfileService {
   }
 
   getPemegangSahamVendor(): Observable<any> {    
-    let api_get_pemegang_saham: ApiInterface = {
+    const api_get_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.get,
       url: ApiRoutes.api_vendor_information_route + this.vendor_id + "/pemegang_saham",
       options: {
@@ -157,7 +156,7 @@ export class ProfileService {
   }
 
   updatePemegangSaham(params: UpdatePemegangSahamInterface): Observable<any> {    
-    let api_update_pemegang_saham: ApiInterface = {
+    const api_update_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.post,
       url: ApiRoutes.api_base_pemegang_saham + "/" + params.id + "/update" ,
       options: {
@@ -178,7 +177,7 @@ export class ProfileService {
   }
 
   deletePemegangSaham(id: string): Observable<any> {    
-    let api_delete_pemegang_saham: ApiInterface = {
+    const api_delete_pemegang_saham: ApiInterface = {
       method: ApiRouteMethods.put,
       url: ApiRoutes.api_delete_pemegang_saham + "/" + id,
       options: {

@@ -45,7 +45,19 @@ export class ProfilePersonInChargeComponent implements OnInit {
   person_id = this.authService.getLocalStorage('person_id')!;
   disabledWhenError: boolean = false;
 
+  public dict = dictionary;
   public formPIC!: FormGroup;
+  public formField = {
+    name: "Nama Penanggung Jawab",
+    email: "Email Penanggung Jawab",
+    phone: "No. Handphone"
+  };
+  public charLimit = {
+    minName: 3,
+    maxName: 50,
+    minPhone: 7,
+    maxPhone: 20
+  };
 
   public setForm(): void {
     this.formPIC = new FormGroup({
@@ -57,12 +69,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
       confirmNewPassword: new FormControl(null),
       fileId: new FormControl(null),
     });
-  }
-
-  public ngAfterViewInit(): void {
-    // this.oldPasswordTextbox.input.nativeElement.type = "password";
-    // this.newPasswordTextbox.input.nativeElement.type = "password";
-    // this.confirmNewPasswordTextbox.input.nativeElement.type = "password";
   }
 
   public toggleVisibility(name: string): void {
@@ -102,11 +108,11 @@ export class ProfilePersonInChargeComponent implements OnInit {
 
   enablePasswordTextbox() {
     this.passwordTextbox = false;
-  };
+  }
 
   public opened = false;
 
-  public close(status: any) {
+  public close() {
     this.opened = false;
   }
 
@@ -130,8 +136,6 @@ export class ProfilePersonInChargeComponent implements OnInit {
       }
 
       this.profilePICService.updateUserFile(this.userFileParam, this.person_id).subscribe(
-        () => {
-        },
         (error) => {
           this.parent.popUpMessage = error.error.message;
           this.parent.redirectOnClosePopUp = false;
@@ -220,7 +224,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.setForm();
         this.disabledWhenError = false;
       },
-      (error) => {
+      () => {
         this.disabledWhenError = true;
         this.parent.redirectOnClosePopUp = false;
         this.parent.popUpTitle = 'Informasi';
@@ -243,7 +247,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
         this.responseFile = environment.api_base_path + res["@id"] + "/file";
         this.saveFileIdToUser();
       },
-      (err) => {
+      () => {
         this.parent.popUpMessage = dictionary.invalid_file;
         this.parent.redirectOnClosePopUp = false;
         this.parent.popUpID = "popup-failed-to-upload";
@@ -257,13 +261,13 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   public selectEventHandler(e: SelectEvent): void {
-    let errors = e.files[0].validationErrors;
+    const errors = e.files[0].validationErrors;
     this.invalidMaxFileSize = !!errors?.includes("invalidMaxFileSize");
     this.invalidFileExtension = !!errors?.includes("invalidFileExtension");
   }
 
   keyPressAlphaSymbol(event: { keyCode: number; preventDefault: () => void; }) {
-    let input = String.fromCharCode(event.keyCode);
+    const input = String.fromCharCode(event.keyCode);
 
     if (/[a-zA-Z\- ']/.test(input)) {
       return true;
@@ -274,7 +278,7 @@ export class ProfilePersonInChargeComponent implements OnInit {
   }
 
   keyPressNumbers(event: { which: any; keyCode: any; preventDefault: () => void; }) {
-    let charCode = (event.which) ? event.which : event.keyCode;
+    const charCode = (event.which) ? event.which : event.keyCode;
 
     if ((charCode < 48 || charCode > 57)) {
       event.preventDefault();

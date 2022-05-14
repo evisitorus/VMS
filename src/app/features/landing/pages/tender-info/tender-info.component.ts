@@ -14,6 +14,27 @@ export class TenderInfoComponent implements OnInit {
   public data: any = {};
   public popUpTitle: string = "Info Tender";
   public popUpMessage: string = "";
+  public labelName: any = {
+    tenderUmum: "Tender Umum",
+    namaTender: "Nama Tender",
+    nomorTender: "Nomor Tender",
+    metodeTender: "Metode Tender",
+    kategoriBidangUsaha: "Kategori Bidang Usaha",
+    waktuAkhirPendaftaran: "Waktu Akhir Pendaftaran",
+    waktuAkhirKirimPenawaran: "Waktu Akhir Kirim Penawaran",
+    lokasiTender: "Lokasi Tender",
+    catatanUntukPenyedia: "Catatan Untuk Penyedia",
+    targetCapaianTKDN : "Target Capaian TKDN",
+    tanggalDiterbitkanTender : "Tanggal diterbitkan Tender",
+    informasiPICPengadaan: "Informasi PIC Pengadaan",
+    namaPICPengadaan: "Nama PIC Pengadaan",
+    email: "Email",
+    phone: "Phone",
+    handphone: "Handphone",
+    informasiBUMNPenyelenggara: "Informasi BUMN Penyelenggara",
+    namaBUMN: "Nama BUMN",
+    portalPengadaan: "Portal Pengadaan",
+  }
   
   id!: string | null;
 

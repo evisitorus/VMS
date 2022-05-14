@@ -7,109 +7,109 @@
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Nama Alamat</p>
+            <p>{{formField.namaAlamat}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-textbox class="formField" id ="namaAlamat" placeholder="Masukan Nama Alamat" formControlName="namaAlamat" [clearButton]="true" #namaAlamat required></kendo-textbox>         
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Nama Alamat tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.namaAlamat}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Alamat</p>
+            <p>{{formField.alamat}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-textbox class="formField" id="alamat" placeholder="Masukan Alamat" formControlName="alamat" [clearButton]="true" #alamat required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Alamat tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.alamat}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Provinsi</p>
+            <p>{{formField.provinsi}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-dropdownlist id ="provinsi" class="formField" [defaultItem]="defaultItemProvinsi" [data]="listProvinsi" textField="description" valueField="id" [(ngModel)]="selectedProvinsi" formControlName="provinsi" [valuePrimitive]="true" (valueChange)="onChangeProvinsi($event)" #provinsi></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Provinsi tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.provinsi}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Kota / Kabupaten</p>
+            <p>{{formField.kota}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-dropdownlist id ="kota" class="formField" [defaultItem]="defaultItemKota" [data]="listKota" textField="description" valueField="id" [(ngModel)]="selectedKota" formControlName="kota" [valuePrimitive]="true" [disabled]="isDisabledKota" [valuePrimitive]="true" (valueChange)="onChangeKota($event)" #kota></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Kota / Kabupaten tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.kota}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Kecamatan</p>
+            <p>{{formField.kecamatan}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-dropdownlist id ="kecamatan" class="formField" [defaultItem]="defaultItemKecamatan" [data]="listKecamatan" textField="description" valueField="id" [(ngModel)]="selectedKecamatan" formControlName="kecamatan" [valuePrimitive]="true" [disabled]="isDisabledKecamatan" [valuePrimitive]="true" (valueChange)="onChangeKecamatan($event)" #kecamatan></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Kecamatan tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.kecamatan}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Kelurahan</p>
+            <p>{{formField.kelurahan}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-dropdownlist id ="kelurahan" class="formField" [defaultItem]="defaultItemKelurahan" [data]="listKelurahan" textField="description" valueField="id" [(ngModel)]="selectedKelurahan" formControlName="kelurahan" [valuePrimitive]="true" [disabled]="isDisabledKelurahan" [valuePrimitive]="true" (valueChange)="onChangeKelurahan($event)" #kelurahan></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Kelurahan tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.kelurahan}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>
 
         <div class="row">
           <div class="col-4 modal-label">
-            <p>Kode Pos</p>
+            <p>K{{formField.kodepos}}</p>
           </div>
           <div class="col-8 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-dropdownlist id ="kodepos" class="formField" [defaultItem]="defaultItemKodepos" [data]="listKodepos" textField="description" valueField="id" [(ngModel)]="selectedKodepos" formControlName="kodepos" [valuePrimitive]="true" [disabled]="isDisabledKodepos" [valuePrimitive]="true" #kodepos></kendo-dropdownlist>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>Kode Pos tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.kodepos}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>   
         <div class="row">
           <div class="col-4 modal-label">
-            <p>No. Telepon</p>
+            <p>{{formField.noTelepon}}</p>
           </div>
           <div class="col-2 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-textbox class="formField" [maxlength]="4" id="noTeleponKodeArea" placeholder="Kode Area" formControlName="noTelponKodeArea" #noTelponKodeArea required></kendo-textbox>
-              <kendo-formerror>Kode Area tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>Kode Area {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
           <div class="col-6 modal-field">
             <kendo-formfield [formGroup]="form">
               <kendo-textbox class="formField" [maxlength]="15" id="noTelepon" placeholder="Masukan No. Telepon" formControlName="noTelepon" [clearButton]="true" #noTelepon required></kendo-textbox>
               <kendo-formhint></kendo-formhint>
-              <kendo-formerror>No. Telepon tidak boleh kosong</kendo-formerror>
+              <kendo-formerror>{{formField.noTelepon}} {{dict.warning.empty_field}}</kendo-formerror>
             </kendo-formfield>
           </div>
         </div>  

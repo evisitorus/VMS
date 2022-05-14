@@ -130,7 +130,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public selectEventHandler(e: SelectEvent): void {
-    let errors = e.files[0].validationErrors;
+    const errors = e.files[0].validationErrors;
     if (errors?.includes("invalidMaxFileSize")) {
       this.invalidMaxFileSize = true;
     } else {
@@ -160,7 +160,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public download(fileId: string, filename: string) {
     let ids;
-    let longId = fileId.split("/");
+    const longId = fileId.split("/");
     if (longId.length > 0) {
       ids = longId[longId.length - 1];
     } else {
@@ -169,9 +169,9 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
     this.fileService.download(ids).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url = window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url = window.URL.createObjectURL(blob);
         window.open(url);
       },
       (err) => {
@@ -198,7 +198,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public save(): void {
-    let params = {
+    const params = {
       namaDokumen: this.form.value.namaDokumen,
       submitDate: this.parent.convertDateFormat(this.form.value.tanggalTerbit),
       berlakuSampai: this.parent.convertDateFormat(this.form.value.berlakuSampai),
@@ -222,7 +222,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   mapDateFormat(date: string) {
-    let arr_date = date.split('-');
+    const arr_date = date.split('-');
     return arr_date[2].concat('-').concat(arr_date[1]).concat('-').concat(arr_date[0]);
   }
 
@@ -242,7 +242,7 @@ export class SertifikasiDokKhususComponent implements OnInit {
   }
 
   public update(): void {
-    let params = {
+    const params = {
       id: this.id,
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
@@ -268,9 +268,9 @@ export class SertifikasiDokKhususComponent implements OnInit {
 
   public deleteConfirmation(id: string, name: string): void {
     const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi",
-      content: "Apakah " + name + " akan dihapus dari sistem ?",
-      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      title: dictionary.confirm_delete_title,
+      content: dictionary.confirm_delete_message.concat(" ",name," ?"),
+      actions: [{ text: dictionary.confirm_no }, { text: dictionary.confirm_yes, primary: true }],
       width: 450,
       height: 200,
       minWidth: 250,

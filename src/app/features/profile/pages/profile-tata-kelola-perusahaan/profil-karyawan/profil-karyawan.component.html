@@ -86,13 +86,13 @@
       <form [formGroup]="pegawaiFormGroup">
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">NIK</kendo-label>
+            <kendo-label class="col">{{formField.nik}}</kendo-label>
             <div class="col k-vstack">
               <kendo-numerictextbox id="nikPegawaiInput" formControlName="nik" class="col-md" placeholder="NIK"
                 [maxlength]="16" [spinners]="false" format="d" #nik>
               </kendo-numerictextbox>
-              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">NIK Karyawan
-                harus diisi</kendo-formerror>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.required">{{formField.nik}} Karyawan
+                {{dict.warning.empty}}</kendo-formerror>
               <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.nik.errors?.max">NIK Karyawan
                 maksimal 16 digit</kendo-formerror>
             </div>
@@ -105,8 +105,7 @@
               <kendo-textbox id="firstName" class="col-md" formControlName="firstName" placeholder="Nama Depan"
                 #namaPegawai [clearButton]="true">
               </kendo-textbox>
-              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">Nama
-                Karyawan harus diisi</kendo-formerror>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.firstName.errors?.required">{{formField.name}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -117,14 +116,13 @@
               <kendo-textbox id="lastName" class="col-md" formControlName="lastName" placeholder="Nama Belakang"
                 #namaPegawai [clearButton]="true">
               </kendo-textbox>
-              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">Nama
-                Karyawan harus diisi</kendo-formerror>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.lastName.errors?.required">{{formField.name}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">Tipe Karyawan</kendo-label>
+            <kendo-label class="col">{{formField.tipeKaryawan}}</kendo-label>
             <div class="col k-vstack">
               <kendo-dropdownlist id="tipeKaryawanDropdown" formControlName="tipeKaryawan" class="col-md"
                 [defaultItem]="{ name: 'Pilih Tipe Karyawan', id: null }" textField="name" valueField="id"
@@ -137,18 +135,18 @@
         </kendo-formfield>
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">Jabatan</kendo-label>
+            <kendo-label class="col">{{formField.jabatan}}</kendo-label>
             <div class="col k-vstack">
               <kendo-textbox id="jabatanKaryawanInput" class="col-md" placeholder="Jabatan" [maxlength]="25"
                 [clearButton]="true" formControlName="jabatan" #jabatan></kendo-textbox>
-              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.jabatan.errors?.required">Jabatan
-                tidak boleh kosong</kendo-formerror>
+              <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.jabatan.errors?.required">{{formField.jabatan}}
+                {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
         <kendo-formfield [formGroup]="pegawaiFormGroup">
           <div class="row">
-            <kendo-label class="col">Bidang Pekerjaan</kendo-label>
+            <kendo-label class="col">{{formField.bidangPekerjaan}}</kendo-label>
             <div class="col k-vstack">
               <kendo-dropdownlist id="bidangPekerjaan" formControlName="bidangPekerjaan" [filterable]="true" class="col"
                 textField="name" valueField="@id" [data]="bidangTemp" (filterChange)="handleFilter($event)"
@@ -156,7 +154,7 @@
                 [(ngModel)]="selectedBidang">
                 <ng-template kendoDropDownListNoDataTemplate>
                   <div>
-                    Data bidang pekerjaan tidak ditemukan
+                    Data bidang pekerjaan {{dict.warning.not_found}}
                     <ng-container *ngIf="filter">Apakah anda mau menambahkan - "{{ filter }}" ?</ng-container>
                     <br />
                     <button *ngIf="filter" class="k-button" (click)="addNewBidang()">
@@ -166,7 +164,7 @@
                 </ng-template>
               </kendo-dropdownlist>
               <kendo-formerror class="col formHint" *ngIf="pegawaiFormGroup.controls.bidangPekerjaan.errors?.required">
-                Bidang Pekerjaan tidak boleh kosong</kendo-formerror>
+                {{formField.bidangPekerjaan}} {{dict.warning.empty}}</kendo-formerror>
             </div>
           </div>
         </kendo-formfield>
@@ -176,12 +174,12 @@
             <div class="col">
               <kendo-fileselect id="resumeKaryawanUpload" [multiple]="false" [restrictions]="fileRestrictions"
                 [(ngModel)]="selectedFile" [ngModelOptions]="{standalone: true}" (change)="upload()">
-                <kendo-fileselect-messages dropFilesHere="Tidak ada file terpilih" select="Pilih file"
-                  invalidFileExtension="Ekstensi file harus berformat pdf, doc, docx"
-                  invalidMaxFileSize="Maksimum Ukuran File adalah 2 MB">
+                <kendo-fileselect-messages dropFilesHere="{{dict.no_file}}" select="Pilih file"
+                  invalidFileExtension="{{dict.invalid_file_format.doc_extension}}"
+                  invalidMaxFileSize="{{dict.invalid_file_format.max_size}}">
                 </kendo-fileselect-messages>
               </kendo-fileselect>
-              <p style="font-style: italic;font-size: small;">*Dokumen dapat berupa doc, docx, PDF, maks 2MB</p>
+              <p style="font-style: italic;font-size: small;">{{dict.hint_file_extension}}</p>
             </div>
           </div>
 

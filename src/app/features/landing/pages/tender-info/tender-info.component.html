@@ -29,13 +29,13 @@
                     <div class="col tender-content">
                         <div class="row">
                             <div class="col tender-content-title">
-                                <p>Tender Umum</p>
+                                <p>{{labelName.tenderUmum}}</p>
                             </div>
                         </div>
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Nama Tender</p>
+                                <p>{{labelName.namaTender}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.name ? data.name : "-" }}</p>
@@ -44,7 +44,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Nomor Tender</p>
+                                <p>{{labelName.nomorTender}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.code ? data.code : "-" }}</p>
@@ -53,7 +53,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Metode Tender</p>
+                                <p>{{labelName.metodeTender}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.method && data.method.name ? "Tender " + data.method.name : "-" }}</p>
@@ -62,7 +62,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Kategori Bidang Usaha</p>
+                                <p>{{labelName.kategoriBidangUsaha}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.category && data.category.name ? data.category.name : "-" }}</p>
@@ -71,7 +71,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Waktu Akhir Pendaftaran</p>
+                                <p>{{labelName.waktuAkhirPendaftaran}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.registration_end ? (data.registration_end | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
@@ -80,7 +80,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Waktu Akhir Kirim Penawaran</p>
+                                <p>{{labelName.waktuAkhirKirimPenawaran}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.bid_end ? (data.bid_end | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
@@ -89,7 +89,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Lokasi Tender</p>
+                                <p>{{labelName.lokasiTender}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.province && data.province.name ? data.province.name : "-" }}</p>
@@ -98,7 +98,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Catatan Untuk Penyedia</p>
+                                <p>{{labelName.catatanUntukPenyedia}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.vendor_note ? data.vendor_note : "-" }}</p>
@@ -107,7 +107,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Target Capaian TKDN</p>
+                                <p>{{labelName.targetCapaianTKDN}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.tkdn_target ? data.tkdn_target + "%" : "-" }}</p>
@@ -116,7 +116,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Tanggal diterbitkan Tender</p>
+                                <p>{{labelName.tanggalDiterbitkanTender}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.publish_at ? (data.publish_at | date:'d MMMM y hh:mm') + " WIB" : "-" }}</p>
@@ -130,13 +130,13 @@
                     <div class="col tender-content">
                         <div class="row">
                             <div class="col tender-content-title">
-                                <p>Informasi PIC Pengadaan</p>
+                                <p>{{labelName.informasiPICPengadaan}}</p>
                             </div>
                         </div>
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Nama PIC Pengadaan</p>
+                                <p>{{labelName.namaPICPengadaan}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.pic && data.pic.name ? data.pic.name : "-"}}</p>
@@ -145,7 +145,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Email</p>
+                                <p>{{labelName.email}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.pic && data.pic.email ? data.pic.email : "-" }}</p>
@@ -154,7 +154,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Phone</p>
+                                <p>{{labelName.phone}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.pic && data.pic.phone ? data.pic.phone : "-" }}</p>
@@ -163,7 +163,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Handphone</p>
+                                <p>{{labelName.handphone}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.pic && data.pic.mobile ? data.pic.mobile : "-" }}</p>
@@ -177,13 +177,13 @@
                     <div class="col tender-content">
                         <div class="row">
                             <div class="col tender-content-title">
-                                <p>Informasi BUMN Penyelenggara</p>
+                                <p>{{labelName.informasiBUMNPenyelenggara}}</p>
                             </div>
                         </div>
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Nama BUMN</p>
+                                <p>{{labelName.namaBUMN}}</p>
                             </div>
                             <div class="col-8">
                                 <p>{{ data.cparent && data.cparent.name ? data.cparent.name : "-" }}</p>
@@ -192,7 +192,7 @@
     
                         <div class="row">
                             <div class="col-4 tender-content-list">
-                                <p>Portal Pengadaan</p>
+                                <p>{{labelName.portalPengadaan}}</p>
                             </div>
                             <div class="col-8 tender-content-portal">
                                 <a href="{{ data.url ? data.url : '#' }}"> {{ data.url ? data.url : "-" }} </a>

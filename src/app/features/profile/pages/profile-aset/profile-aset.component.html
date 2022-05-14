@@ -5,32 +5,31 @@
       <form class="k-form">
 
         <kendo-formfield [formGroup]="form">
-          <kendo-label [for]="namaAsset" text="Nama Asset"></kendo-label>
+          <kendo-label [for]="namaAsset" text="{{formField.namaAsset}}"></kendo-label>
           <kendo-textbox id="input-nama-asset" formControlName="namaAsset" [clearButton]="true" [maxlength]="maxLengthNama" #namaAsset required></kendo-textbox>
           <kendo-formhint></kendo-formhint>
-          <kendo-formerror>Nama Asset tidak boleh kosong</kendo-formerror>
+          <kendo-formerror>{{formField.namaAsset}} {{dict.warning.empty}}</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield [formGroup]="form">
-          <kendo-label [for]="jumlah" text="Jumlah"></kendo-label>
+          <kendo-label [for]="jumlah" text="{{formField.jumlah}}"></kendo-label>
           <kendo-numerictextbox id="input-jumlah-asset" formControlName="jumlah" [min]="0" format="n0" [maxlength]="maxLengthJumlah" #jumlah required></kendo-numerictextbox>
           <kendo-formhint></kendo-formhint>
-          <kendo-formerror>Jumlah tidak boleh kosong</kendo-formerror>
+          <kendo-formerror>{{formField.jumlah}} {{dict.warning.empty}}</kendo-formerror>
         </kendo-formfield>
 
         <kendo-formfield [formGroup]="form">
-          <kendo-label [for]="estimasiNilaiAsset" text="Estimasi Nilai Aset"></kendo-label>
+          <kendo-label [for]="estimasiNilaiAsset" text="{{formField.estimasiNilaiAsset}}"></kendo-label>
           <kendo-numerictextbox [maxlength]="maxLengthEstimasiNilai" id="input-estimasiNilaiAsset-asset" formControlName="estimasiNilaiAsset" [min]="0" format="n0" #estimasiNilaiAsset required></kendo-numerictextbox>
           <kendo-formhint></kendo-formhint>
-          <kendo-formerror>Estimasi Nilai Aset tidak boleh kosong</kendo-formerror>
+          <kendo-formerror>{{formField.estimasiNilaiAsset}} {{dict.warning.empty}}</kendo-formerror>
         </kendo-formfield>
         
         <kendo-formfield [formGroup]="form">
-          <kendo-label [for]="tahunPembuatan" text="Tahun Pembuatan"></kendo-label>
+          <kendo-label [for]="tahunPembuatan" text="{{formField.tahunPembuatan}}"></kendo-label>
           <kendo-numerictextbox id="input-tahun-asset" formControlName="tahunPembuatan" [maxlength]="4" format="#" #tahunPembuatan required></kendo-numerictextbox>
-          <!-- <kendo-textbox id="input-tahun-asset" formControlName="tahunPembuatan" [clearButton]="true" #tahunPembuatan required></kendo-textbox> -->
           <kendo-formhint></kendo-formhint>
-          <kendo-formerror>Tahun Pembuatan tidak boleh kosong</kendo-formerror>
+          <kendo-formerror>{{formField.tahunPembuatan}} {{dict.warning.empty}}</kendo-formerror>
         </kendo-formfield>
 
         <div class="k-actions k-actions-end">

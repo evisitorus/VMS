@@ -1,17 +1,13 @@
-import {Component, Injectable, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation} from "@angular/core";
 import {FormGroup, FormControl, FormBuilder, Validators} from "@angular/forms";
 import {FileRestrictions} from "@progress/kendo-angular-upload";
-import {forkJoin, from} from "rxjs";
-import {ApiRoutes} from "src/app/core/services/api/api-routes";
+import {forkJoin} from "rxjs";
 import {EventEmitterService} from "src/app/core/services/event-emitter.service";
 import {FileService} from "src/app/core/services/file.service";
 import {ProfileInformationService} from "src/app/core/services/profile-information.service";
 import {environment as env, environment} from "src/environments/environment";
 import {ProfileInformationInterface} from "../../../../core/interfaces/profile/profile-information-interface";
 import {AuthService} from "../../../../core/services/auth.service";
-import {ProfileDashboardService} from "src/app/core/services/profile-dashboard.service";
-import {ProfileAddressService} from 'src/app/core/services/profile/profile-address.service';
-import {DialogCloseResult, DialogRef, DialogService} from "@progress/kendo-angular-dialog";
 import {DropDownFilterSettings} from "@progress/kendo-angular-dropdowns";
 import {VendorLogoInterface} from "../../../../core/interfaces/profile/vendor-logo-interface";
 import { dictionary } from "src/app/dictionary/dictionary";
@@ -50,10 +46,7 @@ export class ProfileInformasiPerusahaanComponent {
     private profileInfoService: ProfileInformationService,
     private fileService: FileService,
     private authService: AuthService,
-    private profileDashboardService: ProfileDashboardService,
-    public fb: FormBuilder,
-    private addressService: ProfileAddressService,
-    private dialogService: DialogService
+    public fb: FormBuilder
   ) {
   }
 
@@ -68,6 +61,13 @@ export class ProfileInformasiPerusahaanComponent {
   public popUpMessage: string = "";
   public opened = false;
   public popUpTitle: string = "";
+  public errorMessage = {
+    extension : dictionary.invalid_file_format.extension,
+    maxSize: dictionary.invalid_file_format.max_size,
+    invalidPict: dictionary.invalid_pict,
+    invalidDocs: dictionary.invalid_file
+  };
+  public dict = dictionary;
 
   public imgRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png"],
@@ -166,16 +166,29 @@ export class ProfileInformasiPerusahaanComponent {
   public vendorID = this.authService.getLocalStorage('vendor_id')!;
   public redirectOnClosePopUp: boolean = false;
   public popUpID = "";
+
+  public formField = {
+    nibQuestion: "Apakah Anda memiliki NIB?",
+    nib: "Nomor Induk Berusaha (NIB)",
+    namaPerusahaan: "Nama Perusahaan",
+    inisialPerusahaan: "Inisial Perusahaan",
+    jenisBadanUsaha: "Jenis Badan Usaha",
+    statusBadanUsaha: "Status Badan Usaha",
+    tipeBadanUsaha: "Tipe Badan Usaha",
+    jenisKegiatanUsaha: "Jenis Kegiatan Usaha Utama",
+    jenisPenyediaUsaha: "Jenis Penyedia Usaha",
+    npwpPerusahaan: "NPWP Perusahaan",
+    website: "Website Perusahaan",
+    email: "Email Perusahaan"
+  };
   
   public getDataPerusahaan(): void {
     forkJoin({
-      // responseVendorData: this.profileDashboardService.getVendor(),
       responseVendorData: this.profileInfoService.getVendorInformation(),
       responseHimpunan: this.profileInfoService.getPartyRole("Himpunan"),
       responsePengampu: this.profileInfoService.getPartyRole("Pengampu"),
       responseVendorHimpunan: this.profileInfoService.getVendorsOrganization("Himpunan"),
       responseVendorPengampu: this.profileInfoService.getVendorsOrganization("Pengampu"),
-      // responseContactMechanism: this.profileInfoService.getContactMechanism(),
       responseJenisPenyediaUsaha: this.profileInfoService.getJenisPenyediaUsaha(),
       responseJenisKegiatanUsaha: this.profileInfoService.getJenisKegiatanUsaha(),
       responseJenisVendor: this.profileInfoService.getJenisVendor(),
@@ -188,15 +201,13 @@ export class ProfileInformasiPerusahaanComponent {
       this.setPengampu(response.responsePengampu);
       this.setVendorHimpunan(response.responseVendorHimpunan);
       this.setVendorPengampu(response.responseVendorPengampu);
-      // this.setResponseContactMechanism(response.responseContactMechanism);
       this.setJenisPenyediaUsaha(response.responseJenisPenyediaUsaha);
       this.setJenisKegiatanUsaha(response.responseJenisKegiatanUsaha);
       this.setJenisVendor(response.responseJenisVendor);
       this.setBidangUsaha(response.responseBidangUsaha);
       this.setTipeVendor(response.responseTipeVendor);
-      this.setFormPerusahaan(this.dataPerusahaan);
-      // this.setProvinces(response.responseProvinces);
-    }, (error) => {
+      this.setFormPerusahaan(this.dataPerusahaan); 
+    }, () => {
       this.popUpMessage = dictionary.fetch_data_failed + ' Perusahaan';
       this.triggerPopUp();
     });
@@ -211,9 +222,9 @@ export class ProfileInformasiPerusahaanComponent {
   }
 
   public setResponseVendorData(resp_: any) {
-    let resp = resp_.data
+    const resp = resp_.data
     if (resp.logo) {
-      let logo = resp.logo
+      const logo = resp.logo
       if (logo){
         this.logoImg = environment.api_base_path.concat('/api/media_objects/').concat(logo.id).concat('/file');
       }
@@ -332,39 +343,24 @@ export class ProfileInformasiPerusahaanComponent {
       
                                     this.setFormPerusahaan(this.dataPerusahaan);
       
-                                  },
-                                  (error) => {
-                                    console.log(error);
                                   }
                                 );
                               }
     
-                            },
-                            (error) => {
-                              console.log(error);
                             }
     
                           );
                         }
   
-                      },
-                      (error) => {
-                        console.log(error);
                       }
                     );
                   }
 
-                },
-                (error) => {
-                  console.log(error);
                 }
               );
 
             }
 
-          },
-          (error) => {
-            console.log(error);
           }
         );
 
@@ -396,11 +392,6 @@ export class ProfileInformasiPerusahaanComponent {
     }
   }
 
-  // public setOrganizations(resp: any) {
-  //   //get list of organizations
-  //   this.organizations = resp["hydra:member"];
-  // }
-
   public setJenisVendor(resp: any) {
     //get jenis badan usaha
     this.jenisBadanUsahaItems = resp["hydra:member"];
@@ -411,7 +402,7 @@ export class ProfileInformasiPerusahaanComponent {
     this.bidangUsahaKbli = resp.data.data;
     for (let index = 0; index < this.dataPerusahaan.bidangUsaha.length; index++) {
       const element = this.dataPerusahaan.bidangUsaha[index];
-      let indexBadanUsaha = this.bidangUsahaKbli.findIndex((item:any) => item.id === element.id)
+      const indexBadanUsaha = this.bidangUsahaKbli.findIndex((item:any) => item.id === element.id)
       this.dataPerusahaan.bidangUsaha[index] = indexBadanUsaha > -1 ? this.bidangUsahaKbli[indexBadanUsaha] : this.dataPerusahaan.bidangUsaha[index];
     }
   }
@@ -469,16 +460,14 @@ export class ProfileInformasiPerusahaanComponent {
       bumnPengampu: new FormControl(data.bumnPengampu, Validators.required),
       organisasiHimpunan: new FormControl(data.organisasiHimpunan, []),
       websitePerusahaan: new FormControl(data.web, Validators.required),
-      emailPerusahaan: new FormControl(data.emailPerusahaan, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
+      emailPerusahaan: new FormControl(data.emailPerusahaan, [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
     });
   }
 
   public saveImage(value: any, valid: boolean): void {
     this.submitted = true;
 
-    if (valid) {
-      console.log("File uploaded");
-    } else {
+    if (!valid) {
       this.logoForm.markAllAsTouched();
     }
   }
@@ -496,9 +485,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getKotaKabupaten(value.id).subscribe(
       (resp) => {
         this.dataResultKota = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -507,9 +493,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getKecamatan(value.toGeoLocation.id).subscribe(
       (resp) => {
         this.dataResultKecamatan = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
       }
     );
 
@@ -519,9 +502,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getKelurahan(value.toGeoLocation.id).subscribe(
       (resp) => {
         this.dataResultKelurahan = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -530,9 +510,6 @@ export class ProfileInformasiPerusahaanComponent {
     this.profileInfoService.getKodepos(value.toGeoLocation.id).subscribe(
       (resp) => {
         this.dataResultKodepos = resp["hydra:member"];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -545,10 +522,9 @@ export class ProfileInformasiPerusahaanComponent {
         this.logoImg = env.api_base_path + res["@id"] + "/file";
         this.saveLogoIdToVendor();
       },
-      (error) => {
+      () => {
         this.popUpMessage = dictionary.select_file_failed;
         this.triggerPopUp();
-        console.log(error);
       }
     );
   }
@@ -569,7 +545,7 @@ export class ProfileInformasiPerusahaanComponent {
       fileId = this.uploadedFileId.split("/");
       fileId = fileId[fileId.length - 1];
     }
-    if (this.profileInformationFormGroup.valid, this.profileInformationFormGroup.value) {
+    if (this.profileInformationFormGroup.valid || this.profileInformationFormGroup.value) {
       this.params = {
         pemilikNIB: this.profileInformationFormGroup.value.pemilikNIB,
         name: this.profileInformationFormGroup.value.namaPerusahaan,
@@ -597,7 +573,6 @@ export class ProfileInformasiPerusahaanComponent {
           this.popUpMessage = dictionary.save_data_success;
           this.triggerPopUp();
           this.getDataPerusahaan();
-          // location.reload();
         },
         () => {
           this.popUpMessage = dictionary.update_data_failed;
@@ -632,8 +607,6 @@ export class ProfileInformasiPerusahaanComponent {
 
       this.profileInfoService.updateVendorLogo(this.vendorLogoParam, this.vendorID).subscribe(
         () => {
-        },
-        (error) => {
           this.popUpMessage = dictionary.incomplete_data_logo;
           this.redirectOnClosePopUp = false;
           this.popUpID = "popup-failed-save-upload-file-to-database";

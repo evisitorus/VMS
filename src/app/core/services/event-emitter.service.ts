@@ -9,8 +9,6 @@ export class EventEmitterService {
   invokeFunction = new EventEmitter();
   subsVar!: Subscription;
 
-  constructor() { }
-
   trigger() {
     this.invokeFunction.emit();
   }

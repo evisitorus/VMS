@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataBindingDirective, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import { FileService } from 'src/app/core/services/file.service';
 import { ProfileKaryawanInterface } from 'src/app/core/interfaces/profile-karyawan.interface';
 import { ProfileInformationService } from 'src/app/core/services/profile/profile-information.service';
-import { ApiRoutes } from "src/app/core/services/api/api-routes";
 import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileTataKelolaPerusahaanComponent } from '../profile-tata-kelola-perusahaan.component';
@@ -33,6 +32,16 @@ export class ProfilKaryawanComponent implements OnInit {
   public gridViewPegawai!: GridDataResult;
   public pageSize = 5;
   public skip = 0;
+
+  public dict = dictionary;
+  public formField = {
+    nik: "NIK",
+    name: "Nama Pegawai",
+    tipeKaryawan: "Tipe Karyawan",
+    jabatan: "Jabatan",
+    bidangPekerjaan: "Bidang Pekerjaan",
+    resume: "Resume"
+  };
 
   public id!: string;
   public pegawaiId!: string;
@@ -178,7 +187,7 @@ export class ProfilKaryawanComponent implements OnInit {
   public submitProfilKaryawan(): void {
     if( this.uploadedFileContentUrl === null || this.selectedFile === null){
       this.popUpID = "popup-wrong-file";
-      this.parent.popUpMessage = "Periksa kembali file Anda";
+      this.parent.popUpMessage = dictionary.invalid_file;
       this.parent.triggerPopUp();
     } else {
       this.pegawaiFormGroup.markAllAsTouched();
@@ -212,11 +221,10 @@ export class ProfilKaryawanComponent implements OnInit {
         this.selectedBidang = this.bidangSource[this.bidangSource.length-1];
         // get selected bidang id as in the id in the db
         this.selectedBidangId = res["@id"];
-        // this.popUpID = "popup-bidang-pekerjaan-success";
         this.parent.popUpMessage = dictionary.save_data_bidang_success;
         this.parent.triggerPopUp();
       },
-      (error) => {
+      () => {
         this.popUpID = "popup-bidang-pekerjaan-failed";
         this.parent.popUpMessage = dictionary.save_data_bidang_failed;
         this.parent.triggerPopUp();
@@ -243,13 +251,23 @@ export class ProfilKaryawanComponent implements OnInit {
   public selectionChange(value: any): void {
     this.selectedBidang = value;
     this.selectedBidangId = value["@id"];
-}
+  }
+
+  public checkBidangId() {
+    if (this.selectedBidangId) {
+      return this.extractNumber(this.selectedBidangId);
+    } else if (this.pegawaiFormGroup.value.bidangPekerjaan.id) {
+      return this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id);
+    } else {
+      return "";
+    }
+  }
 
   public save(): void {
     this.popUpTitle = "Tambah Pegawai";
-    let file_id = this.extractNumber(this.uploadedFileId);
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
-    let params: ProfileKaryawanInterface = {
+    const file_id = this.extractNumber(this.uploadedFileId);
+    const bidang_id = this.checkBidangId();
+    const params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik.toString(),
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
@@ -296,7 +314,7 @@ export class ProfilKaryawanComponent implements OnInit {
         this.uploadedFileId = res["@id"]; //vendor :resume_id
 
       },
-      (error) => {
+      () => {
         this.popUpID = "popup-upload-file-failed";
         this.parent.popUpMessage = dictionary.select_file_failed;
         this.parent.triggerPopUp();
@@ -307,12 +325,12 @@ export class ProfilKaryawanComponent implements OnInit {
   public download(fileId: string, filename: string) {
     this.fileService.download(fileId).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url = window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url = window.URL.createObjectURL(blob);
         window.open(url);
       },
-      (error) => {
+      () => {
         this.popUpID = "popup-failed-download";
         this.parent.popUpMessage = dictionary.download_file_failed;
         this.parent.triggerPopUp();
@@ -339,7 +357,7 @@ export class ProfilKaryawanComponent implements OnInit {
     this.setForm();
     this.open();
 
-    this.parent.popUpMessage = "Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.";
+    this.parent.popUpMessage = dictionary.update_data_notification;
     this.parent.triggerPopUp();
   }
 
@@ -353,11 +371,9 @@ export class ProfilKaryawanComponent implements OnInit {
 
   public update(): void {
     let file_id = "";
-    if(this.uploadedFileId){
-      file_id = this.extractNumber(this.uploadedFileId);
-    }
-    let bidang_id = this.selectedBidangId ? this.extractNumber(this.selectedBidangId) : this.pegawaiFormGroup.value.bidangPekerjaan.id ? this.extractNumber(this.pegawaiFormGroup.value.bidangPekerjaan.id) : "";
-    let params: ProfileKaryawanInterface = {
+    if(this.uploadedFileId) file_id = this.extractNumber(this.uploadedFileId);
+    const bidang_id = this.checkBidangId();
+    const params: ProfileKaryawanInterface = {
       nik: this.pegawaiFormGroup.value.nik.toString(),
       firstName: this.pegawaiFormGroup.value.firstName,
       lastName: this.pegawaiFormGroup.value.lastName,
@@ -434,7 +450,7 @@ export class ProfilKaryawanComponent implements OnInit {
   }
 
   public updateJumlahPegawai(){
-    let params = {
+    const params = {
       jumlahKaryawanDomestik: this.jumlahPegawai.domestik,
       jumlahKaryawanAsing: this.jumlahPegawai.asing
     };

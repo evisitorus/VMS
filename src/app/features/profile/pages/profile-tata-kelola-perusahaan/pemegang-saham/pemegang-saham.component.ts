@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { DialogAction, ActionsLayout } from "@progress/kendo-angular-dialog";
 
@@ -95,7 +95,7 @@ export class PemegangSahamComponent implements OnInit {
         this.gridData = this.mapData(this.gridData);
         return this.gridData;
       },
-      (error) => {
+      () => {
         this.triggerSuccess(dictionary.fetch_data_failed);
       }
     );
@@ -104,7 +104,7 @@ export class PemegangSahamComponent implements OnInit {
   public mapData(data:any[]) {
     let mappedData:any[] = [];
     let no = 1;
-    for (const key in data) {
+    for (let key=0; key < data.length; key++) {
       mappedData[key] = {
         no: no++,
         namaPemegangSaham: data[key]['toParty']['firstName'] ? data[key]['toParty']['firstName'] : data[key]['toParty']['name'],
@@ -174,12 +174,12 @@ export class PemegangSahamComponent implements OnInit {
 
     let params: AddPemegangSahamInterface= {...dataPemegangSaham}
     this.profileService.addPemegangSaham(params).subscribe(
-      (resp) =>  {
+      () =>  {
         this.triggerSuccess(dictionary.save_data_success);
         this.getPemegangSaham();
         this.closeSaham();
       },
-      (error) => {
+      () => {
         this.triggerFailed(dictionary.save_data_failed);
         this.closeSaham();
       }
@@ -197,7 +197,7 @@ export class PemegangSahamComponent implements OnInit {
     this.isNewData = false;
     this.disableNamaPemegangSaham = false;
 
-    this.triggerSuccess("Perubahan yang Anda lakukan belum aktif hingga diverifikasi oleh VMS Verifikator. Pastikan perubahan data perusahaan Anda sudah benar.");
+    this.triggerSuccess(dictionary.update_data_notification);
     this.setUpdateForm();
     this.openSaham();
   }
@@ -264,7 +264,7 @@ export class PemegangSahamComponent implements OnInit {
     { text: "Yes", primary: true },
   ];
 
-  public close(status: any) {
+  public close() {
     this.opened = false;
   }
 

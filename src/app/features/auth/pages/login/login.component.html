@@ -1,58 +1,41 @@
 <div class="auth-section">
     <form class="k-form auth-form" [formGroup]="form">
-
         <div class="auth-form-title text-center">
             <label class="welcome-text">Masuk ke Portal Vendor</label>
         </div>
-
         <fieldset class="k-form-fieldset">
-
             <kendo-formfield>
-                <kendo-label [for]="email" text="Alamat Email"></kendo-label>
+                <kendo-label [for]="email" text="{{labelName.alamatEmail}}"></kendo-label>
                 <kendo-textbox id="input-email" formControlName="email" [clearButton]="true" #email required></kendo-textbox>
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Email tidak boleh kosong</kendo-formerror>
+                <kendo-formerror>{{dictionary.warning.empty_email}}</kendo-formerror>
             </kendo-formfield>
-
             <kendo-formfield>
-                <kendo-label [for]="password" text="Kata Sandi"> </kendo-label>
+                <kendo-label [for]="password" text="{{labelName.kataSandi}}"> </kendo-label>
                 <kendo-textbox id="input-password" formControlName="password" #password required [clearButton]="true">
                     <ng-template kendoTextBoxSuffixTemplate>
                         <button kendoButton look="clear" icon="eye" (click)="toggleVisibility()"></button>
                     </ng-template>
                 </kendo-textbox>
                 <kendo-formhint></kendo-formhint>
-                <kendo-formerror>Password tidak koleh kosong</kendo-formerror>
+                <kendo-formerror>{{dictionary.warning.empty_password}}</kendo-formerror>
             </kendo-formfield>
-
             <div class="login-forgot-password">
                 <a href="forgot-password" id="btn-forgot-password">
                     <kendo-formhint>Lupa Kata Sandi?</kendo-formhint>
                 </a>
             </div>
-
-            <!-- <kendo-formfield>
-                <div class="k-checkbox-wrap">
-                    <input #loggedin type="checkbox" kendoCheckBox formControlName="loggedin"/>
-                    <kendo-label [for]="loggedin" class="k-checkbox-label" text="Keep me logged in"></kendo-label>
-                    <kendo-formhint> Next time, you will be logged in automatically </kendo-formhint>
-                </div>
-            </kendo-formfield> -->
-
             <div class="k-form-buttons my-3">
                 <button class="k-button k-primary vms-btn" (click)="login()" id="btn-login">Login</button>
             </div>
-
         </fieldset>
-
         <div class="reg">
             Belum punya akun? <a href="register" id="btn-register"> Daftar sebagai Vendor</a>
         </div>
         <div class="reg">
             Bukan Vendor? <a href="https://web.tenderbumn.id" id="btn-register-bumn">Klik di sini</a>
         </div>
-
     </form>
 </div>
 
-<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="'/dashboard'"></app-popup-message>
+<app-popup-message [title]="popUpTitle" [message]="popUpMessage" [yesButton]="true" [redirectOnClose]="redirectOnClosePopUp" [redirectUrl]="redirectToPage"></app-popup-message>

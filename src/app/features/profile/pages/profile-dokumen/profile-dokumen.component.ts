@@ -23,19 +23,21 @@ interface Item {
 export class ProfileDokumenComponent implements OnInit {
   public listItems: Array<Item> = [];
   public selectedTipeDokumen: Item = this.listItems[0];
+  public doc_type = dictionary.doc_type;
+  public doc_category = dictionary.doc_category;
 
   public tipeTipeDokumen: Array<any> = [
-    { name: "Dokumen Akta (Mandatory)", category: "Profil Perusahaan", id: "Dokumen Akta" },
-    { name: "Dokumen AD/ART (Mandatory)", category: "Profil Perusahaan", id: "Dokumen AD/ART" },
-    { name: "Dokumen Akta Perubahan (Optional)", category: "Profil Perusahaan", id: "Dokumen Akta Perubahan" },
-    { name: "Dokumen Surat Kuasa (Optional)", category: "Profil Perusahaan", id: "Dokumen Surat Kuasa" },
-    { name: "Dokumen NPWP Perusahaan (Mandatory)", category: "Profil Perusahaan", id: "Dokumen NPWP Perusahaan" },
+    { name:  `' '.join(this.doc_type.dok_akta,dictionary.mandatory)`, category: dictionary.doc_category.profil_perusahaan, id: this.doc_type.dok_akta },
+    { name: `' '.join(this.doc_type.dok_ad_art,dictionary.mandatory)`, category:  dictionary.doc_category.profil_perusahaan, id: this.doc_type.dok_ad_art },
+    { name: `' '.join(this.doc_type.dok_akta_perubahan,dictionary.optional)`, category:  dictionary.doc_category.profil_perusahaan, id: this.doc_type.dok_akta_perubahan },
+    { name: `' '.join(this.doc_type.dok_surat_kuasa,dictionary.optional)`, category:  dictionary.doc_category.profil_perusahaan, id: this.doc_type.dok_surat_kuasa },
+    { name: `' '.join(this.doc_type.dok_npwp,dictionary.mandatory)`, category:  dictionary.doc_category.profil_perusahaan, id: this.doc_type.dok_npwp },
 
-    { name: "Dokumen Perizinan (Mandatory)", category: "Legalitas Perusahaan", id: "Dokumen Perizinan" },
-    { name: "Dokumen Sertifikasi (Optional)", category: "Legalitas Perusahaan", id: "Dokumen Sertifikasi" },
+    { name: `' '.join(this.doc_type.dok_perizinan,dictionary.mandatory)`, category: dictionary.doc_category.legalitas_perusahaan, id: this.doc_type.dok_perizinan },
+    { name: `' '.join(this.doc_type.dok_sertifikasi,dictionary.optional)`, category: dictionary.doc_category.legalitas_perusahaan, id: this.doc_type.dok_sertifikasi },
 
-    { name: "Surat Pernyataan Pakta Integritas", category: "Dokumen Lainnya", id: "Surat Pernyataan Pakta Integritas" },
-    { name: "Dokumen HSE", category: "Dokumen Lainnya", id: "Dokumen HSE" },
+    { name: this.doc_type.dok_pakta_integritas, category: dictionary.doc_category.dokumen_lainnya, id: this.doc_type.dok_pakta_integritas },
+    { name:  this.doc_type.dok_hse, category: dictionary.doc_category.dokumen_lainnya, id: this.doc_type.dok_hse },
   ];
 
 
@@ -63,7 +65,7 @@ export class ProfileDokumenComponent implements OnInit {
   public checked: boolean = false;
 
   public disableSubmit: boolean = false;
-  public submitButtonText: string = "Simpan";
+  public submitButtonText: string = dictionary.save;
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ["jpg", "jpeg", "png", "pdf"],
@@ -130,7 +132,7 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public mapData(data: any[]): any[] {
-    let mappedData: any[] = [];
+    const mappedData: any[] = [];
     for (const key in data) {
       mappedData[key] = {
         no: data[key]['nomorDokumen'],
@@ -148,7 +150,7 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   mapDateFormat(date: string) {
-    let arr_date = date.split('-');
+    const arr_date = date.split('-');
     return arr_date[2].concat('-').concat(arr_date[1]).concat('-').concat(arr_date[0]);
   }
 
@@ -157,7 +159,7 @@ export class ProfileDokumenComponent implements OnInit {
     this.data.nomorDokumen = data.no;
     this.selectedTipeDokumen = data.tipeDokumen;
     this.data.namaDokumen = data.namaDokumen;
-    this.data.berlakuSampai = data.berlakuSampai !== "Seumur Hidup" ? new Date(this.mapDateFormat(data.berlakuSampai)) : null;
+    this.data.berlakuSampai = data.berlakuSampai !== dictionary.forever ? new Date(this.mapDateFormat(data.berlakuSampai)) : null;
 
     this.isNewData = false;
 
@@ -221,7 +223,7 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public save(): void {
-    let params: ProfileDocumentInterface = {
+    const params: ProfileDocumentInterface = {
       tipeDokumen:this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
@@ -247,7 +249,7 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public update(): void {
-    let params: ProfileDocumentInterface = {
+    const params: ProfileDocumentInterface = {
       tipeDokumen: this.form.value.tipeDokumen,
       namaDokumen: this.form.value.namaDokumen,
       nomorDokumen: this.form.value.nomorDokumen,
@@ -287,9 +289,9 @@ export class ProfileDokumenComponent implements OnInit {
 
   public deleteConfirmation(id: string, name: string): void {
     const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi",
-      content: "Apakah " + name + " akan dihapus dari sistem ?",
-      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      title: dictionary.confirm_delete_title,
+      content:dictionary.confirm_delete_message.concat(" ",name," ?"),
+      actions: [{ text: dictionary.confirm_no}, { text: dictionary.confirm_yes, primary: true }],
       width: 450,
       height: 200,
       minWidth: 250,
@@ -303,7 +305,7 @@ export class ProfileDokumenComponent implements OnInit {
   }
 
   public selectEventHandler(e: SelectEvent): void {
-    let errors = e.files[0].validationErrors;
+    const errors = e.files[0].validationErrors;
     if (errors?.includes("invalidMaxFileSize")) {
       this.invalidMaxFileSize = true;
     } else {
@@ -319,20 +321,20 @@ export class ProfileDokumenComponent implements OnInit {
   public upload(): void {
     if (this.lampiranFiles !== null) {
       this.disableSubmit = true;
-      this.submitButtonText = "Uploading...";
+      this.submitButtonText = dictionary.uploading;
 
       this.fileService.upload(this.lampiranFiles[0]).subscribe(
         (res) => {
           this.uploadedFileContentUrl = res.contentUrl;
           this.uploadedFileId = res["@id"];
           this.disableSubmit = false;
-          this.submitButtonText = "Simpan";
+          this.submitButtonText = dictionary.save;
         },
         (err) => {
           this.popUpMessage = err.error.message;
           this.triggerPopUp();
           this.disableSubmit = false;
-          this.submitButtonText = "Simpan";
+          this.submitButtonText = dictionary.save;
         }
       );
     }
@@ -349,9 +351,9 @@ export class ProfileDokumenComponent implements OnInit {
 
     this.fileService.download(ids).subscribe(
       (res) => {
-        let mime = this.fileService.getMimeType(filename);
-        let blob = new Blob([res], { type: mime });
-        let url = window.URL.createObjectURL(blob);
+        const mime = this.fileService.getMimeType(filename);
+        const blob = new Blob([res], { type: mime });
+        const url = window.URL.createObjectURL(blob);
         window.open(url);
       },
       (err) => {

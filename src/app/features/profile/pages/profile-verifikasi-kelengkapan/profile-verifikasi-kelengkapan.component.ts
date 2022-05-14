@@ -56,6 +56,14 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
     vendorPro : "Vendor Pro"
   };
 
+  public dict: any = dictionary;
+  public labelVerifikasi: any = {
+    informasiUmum: "Informasi Umum",
+    tataKelolaPerusahaan: "Tata Kelola Perusahaan",
+    aspekFinansial: "Aspek Finansial",
+    aspekLegal: "Aspek Legal",
+    riwayatPekerjaan: "Riwayat Pekerjaan"
+  }
   constructor(
     private service: ProfileKelengkapanService,
     private eventEmitterService: EventEmitterService,
@@ -69,7 +77,7 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
   public getDataKelengkapan(): void {
     this.service.getDataKelengkapan().subscribe(
       (resp) => {
-        let kelengkapan = resp.data.kelengkapan;
+        const kelengkapan = resp.data.kelengkapan;
 
         this.data.informasiUmum.status = kelengkapan.informasi_umum.status;
         this.data.informasiUmum.text = kelengkapan.informasi_umum.text;
@@ -138,16 +146,16 @@ export class ProfileVerifikasiKelengkapanComponent implements OnInit {
 
   public cancelConfirmation() : any {
     const dialog: DialogRef = this.dialogService.open({
-      title: "Konfirmasi Pembatalan",
+      title: this.dict.confirm_cancelation_title,
       content: "Anda akan membatalkan Pengajuan Verifikasi ?",
-      actions: [{ text: "Tidak" }, { text: "Ya", primary: true }],
+      actions: [{ text: this.dict.confirm_no }, { text: this.dict.confirm_yes, primary: true }],
       width: 450,
       height: 200,
       minWidth: 250,
     });
 
     dialog.result.subscribe((result) => {
-      if (!(result instanceof DialogCloseResult) && result.text === "Ya") {
+      if (!(result instanceof DialogCloseResult) && result.text === this.dict.confirm_yes) {
         this.cancel();
       } 
     });

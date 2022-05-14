@@ -1,20 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from "@angular/forms";
-import { CompanyAddressService } from 'src/app/core/services/profile.companyAddress.service';
-import { AddCompanyAddressInterface } from 'src/app/core/interfaces/add-companyAddress-interface';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { EventEmitterService } from 'src/app/core/services/event-emitter.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileAddressService } from 'src/app/core/services/profile/profile-address.service';
 import { ProfileInformationService } from 'src/app/core/services/profile-information.service';
 import { ProfileAddressInterface } from 'src/app/core/interfaces/profile-address-interface';
-import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { DialogService } from '@progress/kendo-angular-dialog';
 import { dictionary } from 'src/app/dictionary/dictionary';
 import { ProfileInformasiPerusahaanComponent } from '../profile-informasi-perusahaan/profile-informasi-perusahaan.component';
-
-const messages = {
-  default: 'Data tidak boleh kosong.',
-  success: 'Sukses'
-};
 
 @Component({
   selector: 'app-profile-alamat',
@@ -27,8 +19,6 @@ export class ProfileAlamatComponent implements OnInit {
   public form!: FormGroup;
   public gridData: any[] = [];
 
-  public popUpTitle: string = "Profile Alamat";
-
   public isDisabledKota: boolean = true;
   public isDisabledKecamatan: boolean = true;
   public isDisabledKelurahan: boolean = true;
@@ -40,11 +30,11 @@ export class ProfileAlamatComponent implements OnInit {
   public listKelurahan: Array<{ description: string, id: any }> = [];
   public listKodepos: Array<{ description: string, id: any }> = [];
 
-  public defaultItemProvinsi: { description: string, id: any } = { description: 'Pilih provinsi', id: null };
-  public defaultItemKota:{ description: string, id: any, provinceId: number } = { description: 'Pilih kota', id: null , provinceId: 0};
-  public defaultItemKecamatan: { description: string, id: any, kotaId: number} = { description: 'Pilih Kecamatan', id: null, kotaId: 0 };
-  public defaultItemKelurahan: { description: string, id: any } = { description: 'Pilih Kelurahan', id: null };
-  public defaultItemKodepos: { description: string, id: any } = { description: 'Pilih Kodepos', id: null };
+  public defaultItemProvinsi: { description: string, id: any } = { description: dictionary.select_provinsi, id: null };
+  public defaultItemKota:{ description: string, id: any, provinceId: number } = { description: dictionary.select_kota, id: null , provinceId: 0};
+  public defaultItemKecamatan: { description: string, id: any, kotaId: number} = { description: dictionary.select_kecamatan, id: null, kotaId: 0 };
+  public defaultItemKelurahan: { description: string, id: any } = { description: dictionary.select_kelurahan, id: null };
+  public defaultItemKodepos: { description: string, id: any } = { description: dictionary.select_kodepos, id: null };
 
   public selectedProvinsi!: any;
   public selectedKota!: any;
@@ -72,6 +62,17 @@ export class ProfileAlamatComponent implements OnInit {
     kelurahan: "",
     kodepos: "",
     noTelepon: "",
+  };
+  public dict = dictionary;
+  public formField: any = {
+    namaAlamat: "Nama Alamat",
+    alamat: "Alamat",
+    provinsi: "Provinsi",
+    kota: "Kota / Kabupaten",
+    kecamatan: "Kecamatan",
+    kelurahan: "Kelurahan",
+    kodepos: "Kode Pos",
+    noTelepon: "No. Telepon"
   };
 
   constructor(
@@ -140,7 +141,7 @@ export class ProfileAlamatComponent implements OnInit {
   public mapData(data: any[]): any[] {
     let mappedData:any[] = [];
     let no = 1;
-    for (const key in data) {
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         no: no++,
         namaAlamat: data[key]['korespondensi_name'],
@@ -167,7 +168,7 @@ export class ProfileAlamatComponent implements OnInit {
 
   public mapDataProvinsi(data: any[]): any[] {
     let mappedData:any[] = [];
-    for (const key in data) {
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         description: data[key]['description'],
         id: data[key]['id']
@@ -178,7 +179,7 @@ export class ProfileAlamatComponent implements OnInit {
 
   public mapDataKKK(data: any[]): any[] {
     let mappedData:any[] = [];
-    for (const key in data) {
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         description: data[key]['toGeoLocation']['description'],
         id: data[key]['toGeoLocation']['id']
@@ -188,8 +189,8 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public mapDataKodepos(data: any[]): any[] {
-    let mappedData:any[] = [];
-    for (const key in data) {
+    let mappedData: any[] = [];
+    for (let key = 0; key < data.length; key++) {
       mappedData[key] = {
         description: data[key]['postalCode']['postalCodeNum'],
         id: data[key]['postalCode']['id']
@@ -363,7 +364,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public save(): void {
-    let params: ProfileAddressInterface = {...this.form.value};
+    const params: ProfileAddressInterface = {...this.form.value};
     this.service.save(params).subscribe(
       () => {
         this.close();
@@ -379,7 +380,7 @@ export class ProfileAlamatComponent implements OnInit {
   }
 
   public update(): void {
-    let params: ProfileAddressInterface = {...this.form.value};
+    const params: ProfileAddressInterface = {...this.form.value};
     this.service.update(this.id, params, this.telcoId).subscribe(
       () => {
         this.close();
@@ -388,7 +389,6 @@ export class ProfileAlamatComponent implements OnInit {
         this.fetchData();
       },
       (err) => {
-        console.log('err', err)
         this.parent.popUpMessage = err.error.message;
         this.triggerPopUp();
       }
